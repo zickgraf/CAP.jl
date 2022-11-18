@@ -1,0 +1,1517 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# CAP: Categories, Algorithms, Programming
+#
+# Declarations
+#
+#! @Chapter Morphisms
+#!  Any GAP object satisfying <C>IsCapCategoryMorphism</C> can be added to a category
+#!  && then becomes a morphism ⥉ this category.
+#!  Any morphism can belong to one || no category.
+#!  After a GAP object is added to the category, it knows which things can be
+#!  computed ⥉ its category && to which category it belongs.
+#!  It knows categorical properties && attributes, && the functions for existential quantifiers
+#!  can be applied to the morphism.
+
+###################################
+##
+#! @Section Attributes for the Type of Morphisms
+##
+###################################
+
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is the category  \mathbf[C] 
+#! to which  \alpha  was added.
+#! @Returns a category
+#! @Arguments alpha
+DeclareAttribute( "CapCategory",
+                  IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha: a \rightarrow b .
+#! The output is its source  a .
+#! @Returns an object
+#! @Arguments alpha
+DeclareAttribute( "Source",
+                  IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha: a \rightarrow b .
+#! The output is its range  b .
+#! @Returns an object
+#! @Arguments alpha
+DeclareAttribute( "Range",
+                  IsCapCategoryMorphism );
+
+# this attribute is also an implied operation
+
+###################################
+##
+#! @Section Technical stuff
+##
+###################################
+
+DeclareGlobalFunction( "CAP_INTERNAL_CREATE_MORPHISM_PRINT" );
+
+DeclareGlobalFunction( "INSTALL_TODO_LIST_FOR_EQUAL_MORPHISMS" );
+
+DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
+
+###################################
+##
+#! @Section Morphism constructors
+##
+###################################
+
+#! @Description
+#! The arguments are two objects  S  &&  T  ⥉ a category,
+#! && a morphism datum  a  (type && semantics of the morphism datum depend on the category).
+#! The output is a morphism ⥉  \mathrm[Hom](S,T)  defined by  a .
+#! Note that by default this CAP operation is !cached. You can change this behaviour
+#! by calling `SetCachingToWeak( C, "MorphismConstructor" )` resp. `SetCachingToCrisp( C, "MorphismConstructor" )`.
+#! @Returns a morphism ⥉  \mathrm[Hom](S,T) 
+#! @Arguments S, a, T
+DeclareOperation( "MorphismConstructor",
+                  [ IsCapCategoryObject, IsObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The argument is a CAP category morphism <A>mor</A>.
+#! The output is a datum which can be used to construct <A>mor</A>, that is,
+#! `IsEqualForMorphisms( `<A>mor</A>`, MorphismConstructor( Source( `<A>mor</A>` ), MorphismDatum( `<A>mor</A>` ), Range( `<A>mor</A>` ) ) )`.
+#! Note that by default this CAP operation is !cached. You can change this behaviour
+#! by calling `SetCachingToWeak( C, "MorphismDatum" )` resp. `SetCachingToCrisp( C, "MorphismDatum" )`.
+#! @Returns depends on the category
+#! @Arguments mor
+DeclareAttribute( "MorphismDatum",
+                  IsCapCategoryMorphism );
+
+###################################
+##
+#! @Section Categorical Properties of Morphisms
+##
+###################################
+
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is <C>true</C> if  \alpha  is a monomorphism,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsMonomorphism",
+                 IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is <C>true</C> if  \alpha  is an epimorphism,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsEpimorphism",
+                 IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is <C>true</C> if  \alpha  is an isomorphism,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsIsomorphism",
+                 IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is <C>true</C> if  \alpha  is a split monomorphism,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsSplitMonomorphism",
+                 IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is <C>true</C> if  \alpha  is a split epimorphism,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsSplitEpimorphism",
+                 IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha: a \rightarrow a .
+#! The output is <C>true</C> if  \alpha  is congruent to the identity of  a ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsOne",
+                 IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha: a \rightarrow a .
+#! The output is <C>true</C> if  \alpha^2 \sim_[a,a] \alpha ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsIdempotent",
+                 IsCapCategoryMorphism );
+
+###################################
+##
+#! @Section Random Morphisms
+##
+###################################
+
+#! CAP provides two principal methods to generate random morphisms with || without fixed source && range:
+#!  * <E>By integers</E>: The integer is simply a parameter that can be used to create a random morphism.
+#!  * <E>By lists</E>: The list is used when creating a random morphism would need more than one parameter. Lists offer more
+#!    flexibility at the expense of the genericity of the methods. This happens because lists that are valid as input in
+#!    some category may be !valid for other categories. Hence, these operations are !thought to be used in
+#!    generic categorical algorithms.
+
+#! @Description
+#! The arguments are an object  a  ⥉ a category  C  && an integer  n .
+#! The output is a random morphism  \alpha: a \rightarrow b  for some object  b  in  C .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments a, n
+DeclareOperation( "RandomMorphismWithFixedSourceByInteger",
+                  [ IsCapCategoryObject, IsInt ] );
+
+#! @Description
+#! The arguments are an object  a  ⥉ a category  C  && a list  L .
+#! The output is a random morphism  \alpha: a \rightarrow b  for some object  b  in  C .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments a, L
+DeclareOperation( "RandomMorphismWithFixedSourceByList",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are an object  b  ⥉ a category  C  && an integer  n .
+#! The output is a random morphism  \alpha: a \rightarrow b  for some object  a  in  C .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments b, n
+DeclareOperation( "RandomMorphismWithFixedRangeByInteger",
+                  [ IsCapCategoryObject, IsInt ] );
+
+#! @Description
+#! The arguments are an object  b  ⥉ a category  C  && a list  L .
+#! The output is a random morphism  \alpha: a \rightarrow b  for some object  a  in  C .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments b, L
+DeclareOperation( "RandomMorphismWithFixedRangeByList",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are two objects  a  &&  b  ⥉ a category  C  && an integer  n .
+#! The output is a random morphism  \alpha: a \rightarrow b  ⥉  C .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments a, b, n
+DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByInteger",
+                  [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
+
+#! @Description
+#! This operation is !a CAP basic operation
+#! The arguments are two objects  a  &&  b  ⥉ a category  C  && a list  L .
+#! The output is a random morphism  \alpha: a \rightarrow b  ⥉  C .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments a, b, L
+DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByList",
+                  [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && an integer  n .
+#! The output is a random morphism ⥉  C  || <C>fail</C>.
+#! If the methods <C>RandomObjectByInteger</C> &&
+#! <C>RandomMorphismWithFixedSourceByInteger</C>(<C>RandomMorphismWithFixedRangeByInteger</C>)
+#! are added to the category  C , then <C>RandomMorphismByInteger</C> can be
+#! derived to return a random morphism of complexity  n  with random
+#! source(range) of complexity  n .
+#! @Returns a morphism ⥉  C 
+#! @Arguments C, n
+DeclareOperation( "RandomMorphismByInteger",
+                  [ IsCapCategory, IsInt ] );
+
+#! @Description
+#! The arguments are a category  C  && a list  L .
+#! The output is a random morphism ⥉  C .
+#! @Returns a morphism ⥉  C 
+#! @Arguments C, L
+DeclareOperation( "RandomMorphismByList",
+                  [ IsCapCategory, IsList ] );
+
+#! @BeginGroup
+#! @Description
+#! These are convenient methods && they, depending on the input, delegate to one of the above methods.
+# @Returns an object, morphism ⥉  C 
+#! @Arguments a, n
+DeclareOperation( "RandomMorphismWithFixedSource", [ IsCapCategoryObject, IsInt ] );
+#! @Arguments a, L
+DeclareOperation( "RandomMorphismWithFixedSource", [ IsCapCategoryObject, IsList ] );
+#! @Arguments b, n
+DeclareOperation( "RandomMorphismWithFixedRange", [ IsCapCategoryObject, IsInt ] );
+#! @Arguments b, L
+DeclareOperation( "RandomMorphismWithFixedRange", [ IsCapCategoryObject, IsList ] );
+#! @Arguments a, b, n
+DeclareOperation( "RandomMorphismWithFixedSourceAndRange", [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
+#! @Arguments a, b, L
+DeclareOperation( "RandomMorphismWithFixedSourceAndRange", [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
+#! @Arguments a, b, n
+DeclareOperation( "RandomMorphism", [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
+#! @Arguments a, b, L
+DeclareOperation( "RandomMorphism", [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
+#! @Arguments C, n
+DeclareOperation( "RandomMorphism", [ IsCapCategory, IsInt ] );
+#! @Arguments C, L
+DeclareOperation( "RandomMorphism", [ IsCapCategory, IsList ] );
+#! @EndGroup
+
+###################################
+##
+#! @Section Non-Categorical Properties of Morphisms
+##
+###################################
+
+#! Non-categorical properties are !stable under equivalences of categories.
+
+#! @Description
+#! The argument is a morphism  \alpha: a \rightarrow b .
+#! The output is <C>true</C> if  \alpha == \mathrm[id]_a ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsEqualToIdentityMorphism",
+                 IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha: a \rightarrow b .
+#! The output is <C>true</C> if  \alpha == 0 ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsEqualToZeroMorphism",
+                 IsCapCategoryMorphism );
+
+## This is !a categorical property because non-endomorphisms 
+## can be mapped to endomorphisms under equivalences of categories.
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is <C>true</C> if  \alpha  is an endomorphism,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsEndomorphism",
+                 IsCapCategoryMorphism );
+
+## This is !a categorical property because non-endomorphisms 
+## can be mapped to endomorphisms under equivalences of categories.
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is <C>true</C> if  \alpha  is an automorphism,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsAutomorphism",
+                 IsCapCategoryMorphism );
+
+
+###################################
+##
+#! @Section Adding Morphisms to a Category
+#! @SectionLabel Adding_Morphisms_to_a_Category
+##
+###################################
+
+#! @Description
+#!  Adds <A>morphism</A> as a morphism to <A>category</A>.
+#! @Arguments category, morphism
+DeclareOperation( "Add",
+                  [ IsCapCategory, IsCapCategoryMorphism ] );
+
+#! @Description
+#!  Adds <A>morphism</A> as a morphism to <A>category</A>.
+#!  If <A>morphism</A> already lies ⥉ the filter <C>IsCapCategoryMorphism</C>,
+#!  the operation <Ref Oper="Add" Label="for IsCapCategory, IsCapCategoryMorphism" />
+#!  can be used instead.
+#! @Arguments category, morphism
+DeclareOperation( "AddMorphism",
+                  [ IsCapCategory, IsAttributeStoringRep ] );
+
+#! @Arguments category, filter
+#! @Description
+#!  The argument <A>filter</A> is used to create a morphism type for the
+#!  category <A>category</A>, which is then used ⥉ <C>ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes</C>
+#!  to objectify morphisms for this category. <A>filter</A> must imply `IsCapCategoryMorphism`.
+DeclareOperation( "AddMorphismRepresentation",
+                  [ IsCapCategory, IsObject ] );
+
+#! @Arguments morphism, category, source, range[, attr1, val1, attr2, val2, ...]
+#! @Description
+#!  Objectifies the morphism <A>morphism</A> with the type created
+#!  for morphisms in the category <A>category</A>. The type
+#!  is created by passing a representation to <C>AddMorphismRepresentation</C>.
+#!  Morphisms which are objectified using this method do !have to be passed
+#!  to the <C>AddMorphism</C> function.
+#!  The arguments <C>source</C> && <C>range</C> are assumed to be objectified.
+#!  The optional arguments behave like the corresponding arguments ⥉ <C>ObjectifyWithAttributes</C>.
+#!  Also returns the objectified morphism.
+#! @Returns a morphism
+DeclareGlobalFunction( "ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes" );
+
+#! @Arguments morphism, category, source, range[, attr1, val1, attr2, val2, ...]
+#! @Description
+#!  Shorthand for `ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( rec( ), category, source, range[, attr1, val1, attr2, val2, ...] )`.
+#! @Returns a morphism
+DeclareGlobalFunction( "CreateCapCategoryMorphismWithAttributes" );
+
+###################################
+##
+#! @Section Equality && Congruence for Morphisms
+##
+###################################
+
+
+#! @Description
+#! The arguments are two morphisms  \alpha, \beta: a \rightarrow b .
+#! The output is <C>true</C> if  \alpha \sim_[a,b] \beta ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsCongruentForMorphisms",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+#! @Description
+#! The arguments are two morphisms  \alpha, \beta: a \rightarrow b .
+#! The output is <C>true</C> if  \alpha == \beta ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsEqualForMorphisms",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow b, \beta: c \rightarrow d .
+#! The output is <C>true</C> if  \alpha == \beta ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsEqualForMorphismsOnMor",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+## adds the given string to PROPAGATION_LIST_FOR_EQUAL_MORPHISMS
+DeclareOperation( "AddPropertyToMatchAtIsCongruentForMorphisms",
+                  [ IsCapCategory, IsString ] );
+
+###################################
+##
+#! @Section Basic Operations for Morphisms in Ab-Categories
+##
+###################################
+
+#! @Description
+#! The argument is a morphism  \alpha: a \rightarrow b .
+#! The output is <C>true</C> if  \alpha \sim_[a,b] 0 ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareProperty( "IsZeroForMorphisms",
+                 IsCapCategoryMorphism );
+
+DeclareProperty( "IsZero", IsCapCategoryMorphism );
+
+DeclareOperation( "+", [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+DeclareOperation( "-", [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are two morphisms  \alpha, \beta: a \rightarrow b .
+#! The output is the addition  \alpha + \beta .
+#! Note: The addition has to be compatible with the congruence of morphisms.
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments alpha, beta
+DeclareOperation( "AdditionForMorphisms",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are two morphisms  \alpha, \beta: a \rightarrow b .
+#! The output is the addition  \alpha - \beta .
+#! Note: The addition has to be compatible with the congruence of morphisms.
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments alpha, beta
+DeclareOperation( "SubtractionForMorphisms",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The argument is a morphism  \alpha: a \rightarrow b .
+#! The output is its additive inverse  -\alpha .
+#! Note: The addition has to be compatible with the congruence of morphisms.
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments alpha
+DeclareAttribute( "AdditiveInverseForMorphisms",
+                  IsCapCategoryMorphism );
+
+DeclareAttribute( "AdditiveInverse",
+                  IsCapCategoryMorphism );
+
+#! @Description
+#! The arguments are an element  r  of a commutative ring
+#! && a morphism  \alpha: a \rightarrow b .
+#! The output is the multiplication with the ring element  r \cdot \alpha .
+#! Note: The multiplication has to be compatible with the congruence of morphisms.
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments r, alpha
+DeclareOperation( "MultiplyWithElementOfCommutativeRingForMorphisms",
+                  [ IsRingElement, IsCapCategoryMorphism ] );
+
+#! @Description
+#! This is a convenience method. It has two arguments.
+#! The first argument is either a rational number  q 
+#! || an element  r  of a commutative ring  R .
+#! The second argument is a morphism  \alpha: a \rightarrow b  ⥉ a linear category
+#! over the commutative ring  R .
+#! In the case where the first element is a rational number, this method tries to interpret  q  as an element  r  of  R  via
+#! <C>R.interpret_rationals_func</C>. If no such interpretation
+#! exists, this method throws an error.
+#! The output is the multiplication with the ring element  r \cdot \alpha .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments r, alpha
+DeclareOperation( "*",
+                  [ IsRingElement, IsCapCategoryMorphism ] );
+
+DeclareOperation( "*",
+                  [ IsCapCategoryMorphism, IsRingElement ] );
+
+
+###################################
+##
+## Zero Morphism
+##
+###################################
+
+#! @Description
+#! The arguments are two objects  a  &&  b .
+#! The output is the zero morphism  0: a \rightarrow b .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments a, b
+DeclareOperation( "ZeroMorphism",
+                  [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+
+###################################
+##
+#! @Section Subobject && Factorobject Operations
+##
+###################################
+
+#! Subobjects of an object  c  are monomorphisms
+#! with range  c  && a special function for comparision.
+#! Similarly, factorobjects of an object  c  are epimorphisms
+#! with source  c  && a special function for comparision.
+
+## TODO
+# @Description
+# This is a synonym for <C>IsMonomorphism</C>.
+DeclareSynonymAttr( "IsSubobject",
+                    IsMonomorphism );
+
+## TODO
+# @Description
+# This is a synonym for <C>IsEpimorphism</C>.
+DeclareSynonymAttr( "IsFactorobject",
+                    IsEpimorphism );
+
+#! @Description
+#! The arguments are two subobjects  \alpha: a \rightarrow c ,  \beta: b \rightarrow c .
+#! The output is <C>true</C> if there exists an isomorphism  \iota: a \rightarrow b 
+#! such that  \beta \circ \iota \sim_[a,c] \alpha ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsEqualAsSubobjects",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are two factorobjects  \alpha: c \rightarrow a ,  \beta: c \rightarrow b .
+#! The output is <C>true</C> if there exists an isomorphism  \iota: b \rightarrow a 
+#! such that  \iota \circ \beta \sim_[c,a] \alpha ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsEqualAsFactorobjects",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+#! @Description
+#! @BeginLatexOnly
+#! \begin[center]
+#! \begin[tikzpicture]
+#! \def\w[2];
+#! \def\h[1];
+#! \node (a) at (0,\h) [ a ];
+#! \node (b) at (0,-\h) [ b ];
+#! \node (c) at (\w,0) [ c ];
+#! \draw[right hook-latex] (a) to node[pos=0.45, above] [ \alpha ] (c);
+#! \draw[right hook-latex] (b) to node[pos=0.45, below] [ \beta ] (c);
+#! \draw[-latex, dashed] (a) to node[pos=0.45, left] [ \exists \iota ] (b);
+#! \end[tikzpicture]
+#! \end[center]
+#! @EndLatexOnly
+#! In short: Returns <C>true</C> iff  \alpha  is smaller than  \beta .
+#! Full description: The arguments are two subobjects  \alpha: a \rightarrow c ,  \beta: b \rightarrow c .
+#! The output is <C>true</C> if there exists a morphism  \iota: a \rightarrow b 
+#! such that  \beta \circ \iota \sim_[a,c] \alpha ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsDominating",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+#! @Description
+#! @BeginLatexOnly
+#! \begin[center]
+#! \begin[tikzpicture]
+#! \def\w[2];
+#! \def\h[1];
+#! \node (c) at (0,0) [ c ];
+#! \node (a) at (\w,\h) [ a ];
+#! \node (b) at (\w,-\h) [ b ];
+#! \draw[-twohead] (c) to node[pos=0.45, above] [ \alpha ] (a);
+#! \draw[-twohead] (c) to node[pos=0.45, below] [ \beta ] (b);
+#! \draw[-latex, dashed] (b) to node[pos=0.45, right] [ \exists \iota ] (a);
+#! \end[tikzpicture]
+#! \end[center]
+#! @EndLatexOnly
+#! In short: Returns <C>true</C> iff  \alpha  is smaller than  \beta .
+#! Full description: 
+#! The arguments are two factorobjects  \alpha: c \rightarrow a ,  \beta: c \rightarrow b .
+#! The output is <C>true</C> if there exists a morphism  \iota: b \rightarrow a 
+#! such that  \iota \circ \beta \sim_[c,a] \alpha ,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsCodominating",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+###################################
+##
+#! @Section Identity Morphism && Composition of Morphisms
+##
+###################################
+
+#! @Description
+#! The argument is an object  a .
+#! The output is its identity morphism  \mathrm[id]_a .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,a) 
+#! @Arguments a
+DeclareAttribute( "IdentityMorphism",
+                                          IsCapCategoryObject );
+
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow b ,  \beta: b \rightarrow c .
+#! The output is the composition  \beta \circ \alpha: a \rightarrow c .
+#! @Returns a morphism ⥉  \mathrm[Hom]( a, c ) 
+#! @Arguments alpha, beta
+DeclareOperation( "PreCompose",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! This is a convenience method.
+#! The argument is a list of morphisms
+#!  L == ( \alpha_1: a_1 \rightarrow a_2, \alpha_2: a_2 \rightarrow a_3, \dots, \alpha_n: a_n \rightarrow a_[n+1] ) .
+#! The output is the composition
+#!  \alpha_[n] \circ ( \alpha_[n-1] \circ ( \dots ( \alpha_2 \circ \alpha_1 ) ) ) .
+#! @Returns a morphism ⥉  \mathrm[Hom](a_1, a_[n+1]) 
+#! @Arguments L
+DeclareOperation( "PreCompose",
+                  [ IsList ] );
+
+#! @Description
+#! The argument is a list of morphisms
+#!  L == ( \alpha_1: a_1 \rightarrow a_2, \alpha_2: a_2 \rightarrow a_3, \dots, \alpha_n: a_n \rightarrow a_[n+1] )  ⥉  C .
+#! The output is the composition
+#!  \alpha_[n] \circ ( \alpha_[n-1] \circ ( \dots ( \alpha_2 \circ \alpha_1 ) ) ) .
+#! @Returns a morphism ⥉  \mathrm[Hom](a_1, a_[n+1]) 
+#! @Arguments C, L
+DeclareOperation( "PreComposeList",
+                  [ IsList ] );
+
+
+#! @Description
+#! The arguments are two morphisms  \beta: b \rightarrow c ,  \alpha: a \rightarrow b .
+#! The output is the composition  \beta \circ \alpha: a \rightarrow c .
+#! @Returns a morphism ⥉  \mathrm[Hom]( a, c ) 
+#! @Arguments beta, alpha
+DeclareOperation( "PostCompose",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! This is a convenience method.
+#! The argument is a list of morphisms
+#!  L == ( \alpha_n: a_n \rightarrow a_[n+1], \alpha_[n-1]: a_[n-1] \rightarrow a_n, \dots, \alpha_1: a_1 \rightarrow a_2 ) .
+#! The output is the composition
+#!  ((\alpha_[n] \circ  \alpha_[n-1]) \circ \dots  \alpha_2) \circ \alpha_1 .
+#! @Returns a morphism ⥉  \mathrm[Hom](a_1, a_[n+1]) 
+#! @Arguments L
+DeclareOperation( "PostCompose",
+                  [ IsList ] );
+
+#! @Description
+#! The argument is a list of morphisms
+#!  L == ( \alpha_n: a_n \rightarrow a_[n+1], \alpha_[n-1]: a_[n-1] \rightarrow a_n, \dots, \alpha_1: a_1 \rightarrow a_2 ) .
+#! The output is the composition
+#!  ((\alpha_[n] \circ  \alpha_[n-1]) \circ \dots  \alpha_2) \circ \alpha_1 .
+#! @Returns a morphism ⥉  \mathrm[Hom](a_1, a_[n+1]) 
+#! @Arguments C, L
+DeclareOperation( "PostComposeList",
+                  [ IsList ] );
+
+#! @Description
+#! The arguments are two objects <A>s</A>, <A>r</A> && a list <A>morphisms</A> of morphisms from <A>s</A> to <A>r</A>.
+#! The output is the sum of all elements ⥉ <A>morphisms</A>, || the zero-morphism from <A>s</A> to <A>r</A> 
+#! if <A>morphisms</A> is empty.
+#! @Returns a morphism ⥉  \mathrm[Hom](s,r) 
+#! @Arguments s, morphisms, r
+DeclareOperation( "SumOfMorphisms",
+                  [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
+
+###################################
+##
+#! @Section Well-Definedness of Morphisms
+##
+###################################
+
+#! @Description
+#! The argument is a morphism  \alpha .
+#! The output is <C>true</C> if  \alpha  is well-defined,
+#! otherwise the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha
+DeclareOperation( "IsWellDefinedForMorphisms",
+                  [ IsCapCategoryMorphism ] );
+
+###################################
+##
+#! @Section Lift/Colift
+##
+###################################
+
+#! * For any pair of morphisms  \alpha: a \rightarrow c ,  \beta: b \rightarrow c ,
+#!  we call each morphism  \alpha / \beta: a \rightarrow b  such that
+#!   \beta \circ (\alpha / \beta) \sim_[a,c] \alpha  a <Emph>lift of  \alpha  along  \beta </Emph>.
+#! @BeginLatexOnly
+#! \begin[center]
+#! \begin[tikzpicture]
+#! \def\w[2];
+#! \def\h[1];
+#! \node (a) at (0,\h) [ a ];
+#! \node (b) at (0,-\h) [ b ];
+#! \node (c) at (\w,0) [ c ];
+#! \draw[-latex] (a) to node[pos=0.45, above] [ \alpha ] (c);
+#! \draw[-latex] (b) to node[pos=0.45, below] [ \beta ] (c);
+#! \draw[-latex, dashed] (a) to node[pos=0.45, left] [ \alpha/\beta ] (b);
+#! \end[tikzpicture]
+#! \end[center]
+#! @EndLatexOnly
+#! * For any pair of morphisms  \alpha: a \rightarrow c ,  \beta: a \rightarrow b ,
+#!  we call each morphism  \alpha \backslash \beta: c \rightarrow b  such that
+#!   (\alpha \backslash \beta) \circ \alpha \sim_[a,b] \beta  a <Emph> colift of  \beta  along  \alpha </Emph>.
+#! @BeginLatexOnly
+#! \begin[center]
+#! \begin[tikzpicture]
+#! \def\w[2];
+#! \def\h[1];
+#! \node (a) at (0,0) [ a ];
+#! \node (c) at (\w,\h) [ c ];
+#! \node (b) at (\w,-\h) [ b ];
+#! \draw[-latex] (a) to node[pos=0.45, above] [ \alpha ] (c);
+#! \draw[-latex] (a) to node[pos=0.45, below] [ \beta ] (b);
+#! \draw[-latex, dashed] (c) to node[pos=0.45, right] [ \alpha \backslash \beta ] (b);
+#! \end[tikzpicture]
+#! \end[center]
+#! @EndLatexOnly
+
+#! Note that such lifts (or colifts) do !have to be unique. So ⥉ general,
+#! we do !expect that algorithms computing lifts (or colifts) do this ⥉ a functorial way.
+#! Thus the operations  \\mathtt[Lift]  &&  \\mathtt[Colift]  are !regarded as 
+#! categorical operations, but only as set-theoretic operations.
+
+#! @Description
+#! The arguments are a monomorphism  \iota: k \hookrightarrow a 
+#! && a morphism  \tau: t \rightarrow a 
+#! such that there is a morphism  u: t \rightarrow k  with
+#!  \iota \circ u \sim_[t,a] \tau .
+#! The output is such a  u .
+#! @Returns a morphism ⥉  \mathrm[Hom](t,k) 
+#! @Arguments iota, tau
+DeclareOperation( "LiftAlongMonomorphism",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are an epimorphism  \epsilon: a \rightarrow c 
+#! && a morphism  \tau: a \rightarrow t 
+#! such that there is a morphism  u: c \rightarrow t  with
+#!  u \circ \epsilon \sim_[a,t] \tau .
+#! The output is such a  u .
+#! @Returns a morphism ⥉  \mathrm[Hom](c,t) 
+#! @Arguments epsilon, tau
+DeclareOperation( "ColiftAlongEpimorphism",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are a monomorphism  \iota: k \hookrightarrow a 
+#! && a morphism  \tau: t \rightarrow a .
+#! The output is <C>true</C> if there exists
+#! a morphism  u: t \rightarrow k  with
+#!  \iota \circ u \sim_[t,a] \tau .
+#! Otherwise, the output is  <C>false</C>.
+#! @Returns a boolean
+#! @Arguments iota, tau
+DeclareOperation( "IsLiftableAlongMonomorphism",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are an epimorphism  \epsilon: a \rightarrow c 
+#! && a morphism  \tau: a \rightarrow t .
+#! The output is <C>true</C> if there exists
+#! a morphism  u: c \rightarrow t  with
+#!  u \circ \epsilon \sim_[a,t] \tau .
+#! Otherwise, the output is  <C>false</C>.
+#! @Returns a boolean
+#! @Arguments epsilon, tau
+DeclareOperation( "IsColiftableAlongEpimorphism",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow c ,  \beta: b \rightarrow c 
+#! such that a lift  \alpha / \beta: a \rightarrow b  of  \alpha  along  \beta  exists.
+#! The output is such a lift  \alpha / \beta: a \rightarrow b .
+#! Recall that a lift  \alpha / \beta: a \rightarrow b  of  \alpha  along  \beta  is
+#! a morphism such that  \beta \circ (\alpha / \beta) \sim_[a,c] \alpha .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
+#! @Arguments alpha, beta
+DeclareOperation( "Lift",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow c ,  \beta: b \rightarrow c .
+#! The output is a lift  \alpha / \beta: a \rightarrow b  of  \alpha  along  \beta 
+#! if such a lift exists ||  \\mathtt[fail]  if it doesn't.
+#! Recall that a lift  \alpha / \beta: a \rightarrow b  of  \alpha  along  \beta  is
+#! a morphism such that  \beta \circ (\alpha / \beta) \sim_[a,c] \alpha .
+#! @Returns a morphism ⥉  \mathrm[Hom](a,b) + \[ \\mathtt[fail] \] 
+#! @Arguments alpha, beta
+DeclareOperation( "LiftOrFail",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow c ,  \beta: b \rightarrow c .
+#! The output is <C>true</C> if there exists
+#!  a lift  \alpha / \beta: a \rightarrow b  of  \alpha  along  \beta , i.e.,
+#! a morphism such that  \beta \circ (\alpha / \beta) \sim_[a,c] \alpha .
+#! Otherwise, the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsLiftable",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow c ,  \beta: a \rightarrow b 
+#! such that a colift  \alpha \backslash \beta: c \rightarrow b  of  \beta  along  \alpha  exists.
+#! The output is such a colift  \alpha \backslash \beta: c \rightarrow b .
+#! Recall that a colift  \alpha \backslash \beta: c \rightarrow b  of  \beta  along  \alpha  is
+#! a morphism such that  (\alpha \backslash \beta) \circ \alpha \sim_[a,b] \beta .
+#! @Returns a morphism ⥉  \mathrm[Hom](c,b) 
+#! @Arguments alpha, beta
+DeclareOperation( "Colift",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow c ,  \beta: a \rightarrow b .
+#! The output is a colift  \alpha \backslash \beta: c \rightarrow b  of  \beta  along  \alpha 
+#! if such a colift exists ||  \\mathtt[fail]  if it doesn't.
+#! Recall that a colift  \alpha \backslash \beta: c \rightarrow b  of  \beta  along  \alpha  is
+#! a morphism such that  (\alpha \backslash \beta) \circ \alpha \sim_[a,b] \beta .
+#! @Returns a morphism ⥉  \mathrm[Hom](c,b) + \[ \\mathtt[fail] \] 
+#! @Arguments alpha, beta
+DeclareOperation( "ColiftOrFail",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow c ,  \beta: a \rightarrow b .
+#! The output is <C>true</C> if there exists
+#! a colift  \alpha \backslash \beta: c \rightarrow b  of  \beta  along  \alpha ., i.e.,
+#! a morphism such that  (\alpha \backslash \beta) \circ \alpha \sim_[a,b] \beta .
+#! Otherwise, the output is <C>false</C>.
+#! @Returns a boolean
+#! @Arguments alpha, beta
+DeclareOperation( "IsColiftable",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+####################################
+##
+#! @Section Inverses
+##
+####################################
+
+#! Let  \alpha: a \rightarrow b  be a morphism. An inverse of  \alpha 
+#! is a morphism  \alpha^[-1]: b \rightarrow a  such that
+#!  \alpha \circ \alpha^[-1] \sim_[b,b] \mathrm[id]_b 
+#! &&  \alpha^[-1] \circ \alpha \sim_[a,a] \mathrm[id]_a .
+
+#! @BeginLatexOnly
+#! \begin[center]
+#! \begin[tikzpicture]
+#! \def\w[2];
+#! \def\h[1];
+#! \node (a) at (0,0) [ a ];
+#! \node (b) at (\w,0) [ b ];
+#! \draw[-latex] (a) to node[pos=0.45, above] [ \alpha ] (b);
+#! \draw[-latex] (b) to [out == -135, ⥉ == -45] node[pos=0.45, below] [ \alpha^[-1] ] (a);
+#! \draw [-latex] (a.135) arc (45:45+280:4mm) node[pos=0.5,left] [ \mathrm[id]_a ] (a);
+#! \draw [-latex] (b.45) arc (-240:-240-280:4mm) node[pos=0.5,right] [ \mathrm[id]_b ] (b);
+#! \end[tikzpicture]
+#! \end[center]
+#! @EndLatexOnly
+
+#! @Description
+#! The argument is an isomorphism  \alpha: a \rightarrow b .
+#! The output is its inverse  \alpha^[-1]: b \rightarrow a .
+#! @Returns a morphism ⥉  \mathrm[Hom](b,a) 
+#! @Arguments alpha
+DeclareOperation( "InverseForMorphisms",
+                  [ IsCapCategoryMorphism ] );
+
+#! @Description
+#! The argument is a split-epimorphism  \alpha: a \rightarrow b .
+#! The output is a pre-inverse  \iota: b \rightarrow a  of  \alpha ,
+#! i.e.,  \iota  satisfies  \alpha \circ \iota \sim_[b,b] \mathrm[id]_b .
+#! The morphism  \iota  is also known as a section || a right-inverse of  \alpha .
+#! @Returns a morphism ⥉  \mathrm[Hom](b,a) 
+#! @Arguments alpha
+DeclareOperation( "PreInverseForMorphisms",
+                  [ IsCapCategoryMorphism ] );
+
+#! @Description
+#! The argument is a split-monomorphism  \alpha: a \rightarrow b .
+#! The output is a post-inverse  \pi: b \rightarrow a  of  \alpha ,
+#! i.e.,  \pi  satisfies  \pi \circ \alpha \sim_[a,a] \mathrm[id]_a .
+#! The morphism  \pi  is also known as a contraction || a left-inverse of  \alpha .
+#! @Returns a morphism ⥉  \mathrm[Hom](b,a) 
+#! @Arguments alpha
+DeclareOperation( "PostInverseForMorphisms",
+                  [ IsCapCategoryMorphism ] );
+
+###################################
+##
+#! @Section Tool functions for caches
+##
+###################################
+
+#! @Description
+#!  By default, CAP uses caches to store the values of Categorical operations.
+#!  To get a value out of the cache, one needs to compare the input of a basic operation
+#!  with its previous input. To compare morphisms ⥉ the category, IsEqualForCacheForMorphisms is
+#!  used. By default, IsEqualForCacheForMorphisms falls back to IsEqualForCache (see ToolsForHomalg),
+#!  which ⥉ turn defaults to recursive comparison for lists && `IsIdenticalObj` in all other cases.
+#!  If you add a function via `AddIsEqualForCacheForMorphisms`, that function is used instead.
+#!  A function  F: a,b \\mapsto bool  is expected there. The output has to be
+#!  true || false. Fail is !allowed ⥉ this context.
+#! @Arguments phi, psi
+#! @Returns true || false
+DeclareOperation( "IsEqualForCacheForMorphisms",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+###################################
+##
+#! @Section Transport Operations
+##
+###################################
+
+## mor: x -> y
+## equality_source: x -> x'
+## equality_range: y -> y'
+## TransportHom( mor, equality_source, equality_range ): x' -> y'
+DeclareOperation( "TransportHom",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+###################################
+##
+#! @Section IsHomSetInhabited
+##
+###################################
+
+#! @Description
+#!  The arguments are two objects <A>A</A> && <A>B</A>.
+#!  The output is <C>true</C> if there exists a morphism from <A>A</A> to <A>B</A>,
+#!  otherwise the output is <C>false</C>.
+#! @Arguments A, B
+#! @Returns a boolean
+DeclareOperation( "IsHomSetInhabited",
+        [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+###################################
+##
+#! @Section Homomorphism structures
+##
+###################################
+
+#! Homomorphism structures are way to "oversee" the homomorphisms between two given objects.
+#! Let  C ,  D  be categories.
+#! A  D -homomorphism structure for  C  consists of the following data:
+#! * a functor  H: C^[\mathrm[op]] \times C \rightarrow D  (when  C  &&  D  are Ab-categories,  H  is assumed to be bilinear).
+#! * an object  1 \in D , called the distinguished object,
+#! * a bijection  \nu: \mathrm[Hom]_[C](a,b) \simeq \mathrm[Hom]_[D](1, H(a,b))  natural ⥉  a,b \in C .
+
+#! @Description
+#! The arguments are two objects  a, b  ⥉  C .
+#! The output is the value of the homomorphism structure on objects  H(a,b) .
+#! @Returns an object ⥉  D 
+#! @Arguments a,b
+DeclareOperation( "HomomorphismStructureOnObjects",
+                  [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are two morphisms  \alpha: a \rightarrow a', \beta: b \rightarrow b'  ⥉  C .
+#! The output is the value of the homomorphism structure on morphisms  H(\alpha, \beta ) .
+#! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a',b), H(a,b')) 
+#! @Arguments alpha, beta
+DeclareOperation( "HomomorphismStructureOnMorphisms",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are an object  s == H(a',b)  ⥉  D ,
+#! two morphisms  \alpha: a \rightarrow a', \beta: b \rightarrow b'  ⥉  C ,
+#! && an object  r == H(a,b')  ⥉  D .
+#! The output is the value of the homomorphism structure on morphisms  H(\alpha, \beta ) .
+#! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a',b), H(a,b')) 
+#! @Arguments s, alpha, beta, r
+DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjects",
+                  [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Description
+#! The argument is a category  C .
+#! The output is the distinguished object  1  ⥉  D  of the homomorphism structure.
+#! @Returns an object ⥉  D 
+#! @Arguments C
+DeclareAttribute( "DistinguishedObjectOfHomomorphismStructure",
+                  IsCapCategory );
+
+#! @Description
+#! The argument is a morphism   \alpha: a \rightarrow a'  ⥉  C .
+#! The output is the corresponding morphism
+#!  \nu( \alpha ): 1 \rightarrow H(a,a')  ⥉  D  of the homomorphism structure.
+#! @Returns a morphism ⥉  \mathrm[Hom]_[D](1, H(a,a')) 
+#! @Arguments alpha
+DeclareAttribute( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+                  IsCapCategoryMorphism );
+
+#! @Description
+#! The arguments are the distinguished object  1 , a morphism   \alpha: a \rightarrow a' , && the object  r == H(a,a') .
+#! The output is the corresponding morphism
+#!  \nu( \alpha ): 1 \rightarrow r  ⥉  D  of the homomorphism structure.
+#! @Returns a morphism ⥉  \mathrm[Hom]_[D](1, r) 
+#! @Arguments distinguished_object, alpha, r
+DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+                  [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are
+#! objects  a,a'  ⥉  C 
+#! && a morphism  \iota: 1 \rightarrow H(a,a')  ⥉  D .
+#! The output is the corresponding morphism
+#!  \nu^[-1](\iota): a \rightarrow a'  ⥉  C  of the homomorphism structure.
+#! @Returns a morphism ⥉  \mathrm[Hom]_[C](a,a') 
+#! @Arguments a,a',iota
+DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+                  [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are three lists  \alpha ,  \beta , &&  \gamma .
+#! The first list  \alpha  (the left coefficients) is a list of list of morphisms  \alpha_[ij]: A_i \rightarrow B_j ,
+#! where  i == 1 \dots m  &&  j == 1 \dots n  for integers  m,n \geq 1 .
+#! The second list  \beta  (the right coefficients) is a list of list of morphisms  \beta_[ij]: C_j \rightarrow D_i ,
+#! where  i == 1 \dots m  &&  j == 1 \dots n .
+#! The third list  \gamma  (the right side) is a list of morphisms  \gamma_i: A_i \rightarrow D_i ,
+#! where  i == 1, \dots, m .
+#! Assumes that a solution to the linear system defined by  \alpha ,  \beta ,  \gamma  exists, i.e.,
+#! there exist morphisms  X_j: B_j \rightarrow C_j  for  j=1\dots n  such that
+#!  \sum_[j == 1]^n \alpha_[ij]\cdot X_j \cdot \beta_[ij] == \gamma_i 
+#! for all  i == 1 \dots m .
+#! The output is list of such morphisms  X_j: B_j \rightarrow C_j  for  j=1\dots n .
+#! @Returns a list of morphisms  [X_1, \dots, X_n] 
+#! @Arguments alpha, beta, gamma
+DeclareOperation( "SolveLinearSystemInAbCategory",
+                   [ IsList, IsList, IsList ] );
+
+#! @Description
+#! Like <C>SolveLinearSystemInAbCategory</C>,
+#! but without the assumption that a solution exists.
+#! If no solution exists, `fail` is returned.
+#! @Returns a list of morphisms  [X_1, \dots, X_n]  || `fail`
+#! @Arguments alpha, beta, gamma
+DeclareOperation( "SolveLinearSystemInAbCategoryOrFail",
+                   [ IsList, IsList, IsList ] );
+
+#! @Description
+#! Like <C>SolveLinearSystemInAbCategory</C>,
+#! but the output is simply <C>true</C> if a solution exists,
+#! <C>false</C> otherwise.
+#! @Returns a boolean
+#! @Arguments alpha, beta, gamma
+DeclareOperation( "MereExistenceOfSolutionOfLinearSystemInAbCategory",
+                   [ IsList, IsList, IsList ] );
+
+#! @Description
+#! This is a convenience method.
+#! The arguments are two morphisms  \alpha: a \rightarrow a', \beta: b \rightarrow b'  ⥉  C .
+#! The output is <C>HomomorphismStructureOnMorphisms</C> called on  \alpha ,  \beta .
+#! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a',b), H(a,b')) 
+#! @Arguments alpha, beta
+DeclareOperation( "HomStructure",
+                  [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! This is a convenience method.
+#! The arguments are a morphism  \alpha: a \rightarrow a'  && an object  b  ⥉  C .
+#! The output is <C>HomomorphismStructureOnMorphisms</C> called on  \alpha ,  \mathrm[id]_b .
+#! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a',b), H(a,b)) 
+#! @Arguments alpha, b
+DeclareOperation( "HomStructure",
+                  [ IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Description
+#! This is a convenience method.
+#! The arguments are an object  a  && a morphism  \beta: b \rightarrow b'  ⥉  C .
+#! The output is <C>HomomorphismStructureOnMorphisms</C> called on  \mathrm[id]_a ,  \beta .
+#! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a,b), H(a,b')) 
+#! @Arguments a, beta
+DeclareOperation( "HomStructure",
+                  [ IsCapCategoryObject, IsCapCategoryMorphism ] );
+
+#! @Description
+#! This is a convenience method.
+#! The arguments are two objects  a  &&  b  ⥉  C .
+#! The output is <C>HomomorphismStructureOnObjects</C> called on  a,b .
+#! @Returns an object
+#! @Arguments a, b
+DeclareOperation( "HomStructure",
+                  [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! This is a convenience method for
+#! <C>InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure</C>.
+DeclareOperation( "HomStructure",
+                  [ IsCapCategoryMorphism ] );
+
+#! @Description
+#! This is a convenience method for
+#! <C>InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism</C>.
+DeclareOperation( "HomStructure",
+                  [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ] );
+
+#! @Description
+#! This is a convenience method for
+#! <C>DistinguishedObjectOfHomomorphismStructure</C>.
+DeclareOperation( "HomStructure",
+                  [ IsCapCategory ] );
+
+#! @BeginGroup
+#! @Description
+#! If  \iota\colon D \to E  is a full embedding of categories, every  D -homomorphism structure for a category  C 
+#! extends to a  E -homomorphism structure for  C . This operations accepts four functions
+#! && installs operations `DistinguishedObjectOfHomomorphismStructureExtendedByFullEmbedding`,
+#! `HomomorphismStructureOnObjectsExtendedByFullEmbedding` etc. which correspond to the  E -homomorphism structure for  C .
+#! Note: To distinguish embeddings ⥉ different categories, ⥉ addition to  C  also  E  is passed to the operations.
+#! When using this with different embeddings with the range category  E , only the last embedding will be used.
+#! The arguments are:
+#! * `object_function` gets the categories  C  &&  E  && an object ⥉  D .
+#! * `morphism_function` gets the categories  C  &&  E , an object ⥉  E , a morphism ⥉  D  && another object ⥉  E .
+#!   The objects are the results of `object_function` applied to the source && range of the morphism.
+#! * `object_function_inverse` gets the categories  C  &&  E  && a morphism ⥉  E .
+#! * `morphism_function_inverse` gets the categories  C  &&  E , an object ⥉  D , a morphism ⥉  E  && another object ⥉  D .
+#!   The objects are the results of `object_function_inverse` applied to the source && range of the morphism.
+#! `object_function` && `morphism_function` define the embedding. `object_function_inverse` && `morphism_function_inverse` define
+#! the inverse of the embedding on its image.
+#! @Returns nothing
+#! @Arguments C, E, object_function, morphism_function, object_function_inverse, morphism_function_inverse
+DeclareOperation( "ExtendRangeOfHomomorphismStructureByFullEmbedding",
+                  [ IsCapCategory, IsCapCategory, IsFunction, IsFunction, IsFunction, IsFunction ] );
+
+#! @Arguments C, E, a, b
+DeclareOperation( "HomomorphismStructureOnObjectsExtendedByFullEmbedding",
+                  [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Arguments C, E, alpha, beta
+DeclareOperation( "HomomorphismStructureOnMorphismsExtendedByFullEmbedding",
+                  [ IsCapCategory, IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Arguments C, E, s, alpha, beta, r
+DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjectsExtendedByFullEmbedding",
+                  [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Arguments C, E
+DeclareOperation( "DistinguishedObjectOfHomomorphismStructureExtendedByFullEmbedding",
+                  [ IsCapCategory, IsCapCategory ] );
+
+#! @Arguments C, E, alpha
+DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureExtendedByFullEmbedding",
+                  [ IsCapCategory, IsCapCategory, IsCapCategoryMorphism ] );
+
+#! @Arguments C, E, distinguished_object, alpha, r
+DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjectsExtendedByFullEmbedding",
+                  [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Arguments C, E, a, a', iota
+DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphismExtendedByFullEmbedding",
+                  [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ] );
+#! @EndGroup
+
+#! @Description
+#! Chooses the identity on  D  as the full embedding in
+#! <Ref Oper="ExtendRangeOfHomomorphismStructureByFullEmbedding" Label="for IsCapCategory, IsCapCategory, IsFunction, IsFunction, IsFunction, IsFunction" />.
+#! This is useful to handle this case as a degenerate case of
+#! <Ref Oper="ExtendRangeOfHomomorphismStructureByFullEmbedding" Label="for IsCapCategory, IsCapCategory, IsFunction, IsFunction, IsFunction, IsFunction" />.
+#! @Returns nothing
+#! @Arguments C
+DeclareOperation( "ExtendRangeOfHomomorphismStructureByIdentityAsFullEmbedding",
+                  [ IsCapCategory ] );
+
+
+#! @Description
+#! The arguments are objects  a,b  ⥉ a  k -linear category  C .
+#! The output is a list  L  of morphisms which is a basis of  \mathrm[Hom]_[C](a,b)  in
+#! the sense that any given morphism  \alpha: a \to b  can uniquely be written as a
+#! linear combination of  L  with the coefficients in
+#! <C>CoefficientsOfMorphismWithGivenBasisOfExternalHom</C>( \alpha,L ).
+#! @Returns a list of morphisms ⥉  \mathrm[Hom]_[C](a,b) 
+#! @Arguments a, b
+DeclareOperation( "BasisOfExternalHom",
+                  [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are a morphism   \alpha: a \to b  ⥉ a  k -linear category  C  &&
+#! a list <A>L</A><C>=BasisOfExternalHom</C>( a,b ).
+#! The output is a list of coefficients of  \alpha  with respect to  L .
+#! @Returns a list of elements ⥉  k 
+#! @Arguments alpha, L
+DeclareOperation( "CoefficientsOfMorphismWithGivenBasisOfExternalHom",
+                  [ IsCapCategoryMorphism, IsList ] );
+
+#! @Description
+#! This is a convenience method.
+#! The argument is a morphism   \alpha: a \to b  ⥉ a  k -linear category  C .
+#! The output is a list of coefficients of  \alpha  with respect to the list
+#! <C>BasisOfExternalHom</C>(<A>a</A>,<A>b</A>).
+#! @Returns a list of elements ⥉  k 
+#! @Arguments alpha
+DeclareAttribute( "CoefficientsOfMorphism",
+                  IsCapCategoryMorphism );
+
+
+###################################
+##
+#! @Section Simplified Morphisms
+##
+###################################
+
+#! Let  \phi: A \rightarrow B  be a morphism.
+#! There are several different natural ways to look at  \phi  as an object ⥉ an ambient category:
+
+#! -  \mathrm[Hom]( A, B ) , the set of homomorphisms with the equivalence relation  \\mathtt[IsCongruentForMorphisms]  regarded as a category,
+#! -  \sum_[A]\mathrm[Hom]( A, B ) , the category of morphisms where the range is fixed,
+#! -  \sum_[B]\mathrm[Hom]( A, B ) , the category of morphisms where the source is fixed,
+#! -  \sum_[A,B]\mathrm[Hom]( A, B ) , the category of morphisms where neither source nor range is fixed,
+
+#! && furthermore, if  \phi  happens to be an endomorphism  A \rightarrow A ,
+#! we also have
+
+#! -  \sum_[A]\mathrm[Hom](A,A) , the category of endomorphisms.
+
+#! Let  \mathbf[C]  be one of the categories above ⥉ which  \phi  may reside as an object,
+#! && let  i  be a non-negative integer ||  \infty .
+#! CAP provides commands for passing from  \phi  to  \phi_i , where  \phi_i  is isomorphic to  \phi 
+#! ⥉  \mathbf[C] , but "simpler".
+#! The idea is that the greater the  i , the "simpler" the  \phi_i  (but this could mean the harder the computation),
+#! with  \infty  as a possible value.
+#! The case  i == 0  defaults to the identity operator for all simplifications.
+#! For the Add-operatations, only the cases  i \geq 1  have to be given as functions.
+#! 
+#! 
+#!  \  
+#!
+#!
+#! If we regard  \phi  as an object ⥉ the category  \mathrm[Hom]( A, B ) ,
+#!  \phi_i  is again ⥉  \mathrm[Hom]( A, B )  such that  \phi \sim_[A,B] \phi_i .
+#! This case is handled by the following commands:
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is a simplified morphism  \phi_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](A,B) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifyMorphism",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#!  \  
+#!
+#! If we regard  \phi  as an object ⥉ the category  \sum_[A]\mathrm[Hom]( A, B ) ,
+#! then  \phi_i  is a morphism of type  A_i \rightarrow B  && there is an isomorphism
+#!  \sigma_i: A \rightarrow A_i  such that
+#!  \phi_i \circ \sigma_i \sim_[A,B] \phi .
+#! This case is handled by the following commands:
+
+## SimplifySource
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is a simplified morphism with simplified source  \phi_i: A_i \rightarrow B .
+#! @Returns a morphism ⥉  \mathrm[Hom](A_i,B) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifySource",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  (\sigma_i)^[-1]: A_i \rightarrow A .
+#! @Returns a morphism ⥉  \mathrm[Hom](A_i,A) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifySource_IsoToInputObject",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  \sigma_i: A \rightarrow A_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](A,A_i) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifySource_IsoFromInputObject",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+## SimplifyRange
+#!  \  
+#!
+#! If we regard  \phi  as an object ⥉ the category  \sum_[B]\mathrm[Hom]( A, B ) ,
+#! then  \phi_i  is a morphism of type  A \rightarrow B_i  && there is an isomorphism
+#!  \rho_i: B \rightarrow B_i  such that
+#!   \rho_i^[-1] \circ \phi_i\sim_[A,B] \phi .
+#! This case is handled by the following commands:
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is a simplified morphism with simplified range  \phi_i: A \rightarrow B_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](A,B_i) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifyRange",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  (\rho_i)^[-1]: B_i \rightarrow B .
+#! @Returns a morphism ⥉  \mathrm[Hom](B_i,B) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifyRange_IsoToInputObject",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  \rho_i: B \rightarrow B_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](B,B_i) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifyRange_IsoFromInputObject",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+## SimplifySourceAndRange*
+#!  \  
+#!
+#! If we regard  \phi  as an object ⥉ the category  \sum_[A, B]\mathrm[Hom]( A, B ) ,
+#! then  \phi_i  is a morphism of type  A_i \rightarrow B_i  && there is are isomorphisms
+#!  \sigma_i: A \rightarrow A_i  &&
+#!  \rho_i: B \rightarrow B_i  such that
+#!   \rho_i^[-1] \circ \phi_i \circ \sigma_i \sim_[A,B] \phi .
+#! This case is handled by the following commands:
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is a simplified morphism with simplified source && range  \phi_i: A_i \rightarrow B_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](A_i,B_i) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifySourceAndRange",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  (\rho_i)^[-1]: B_i \rightarrow B .
+#! @Returns a morphism ⥉  \mathrm[Hom](B_i,B) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifySourceAndRange_IsoToInputRange",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  \rho_i: B \rightarrow B_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](B,B_i) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifySourceAndRange_IsoFromInputRange",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  (\sigma_i)^[-1]: A_i \rightarrow A .
+#! @Returns a morphism ⥉  \mathrm[Hom](A_i,A) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifySourceAndRange_IsoToInputSource",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are a morphism  \phi: A \rightarrow B  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  \sigma_i: A \rightarrow A_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](A,A_i) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifySourceAndRange_IsoFromInputSource",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+## SimplifyEndo*
+#!  \  
+#!
+#! If  \phi:A \rightarrow A  is an endomorphism, we may regard it as an object ⥉ the category  \sum_[A]\mathrm[Hom]( A, A ) .
+#! In this case
+#!  \phi_i  is a morphism of type  A_i \rightarrow A_i  && there is an isomorphism
+#!  \sigma_i: A \rightarrow A_i  such that
+#!   \sigma_i^[-1] \circ \phi_i \circ \sigma_i \sim_[A,A] \phi .
+#! This case is handled by the following commands:
+
+#! @Description
+#! The arguments are an endomorphism  \phi: A \rightarrow A  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is a simplified endomorphism  \phi_i: A_i \rightarrow A_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](A_i,A_i) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifyEndo",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are an endomorphism  \phi: A \rightarrow A  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  (\sigma_i)^[-1]: A_i \rightarrow A .
+#! @Returns a morphism ⥉  \mathrm[Hom](A_i,A) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifyEndo_IsoToInputObject",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+#! @Description
+#! The arguments are an endomorphism  \phi: A \rightarrow A  && a non-negative integer  i  || <C>Inf</C>.
+#! The output is the isomorphism  \sigma_i: A \rightarrow A_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](A,A_i) 
+#! @Arguments phi, i
+DeclareOperation( "SimplifyEndo_IsoFromInputObject",
+                  [ IsCapCategoryMorphism, IsObject ] );
+
+
+#! @Description
+#! This is a convenient method.
+#! The argument is a morphism  \phi: A \rightarrow B .
+#! The output is a "simplified" version of  \phi  that may change the
+#! source && range of  \phi  (up to isomorphism).
+#! To be precise, the output is an  \infty -th simplified morphism
+#! of  (\iota_A^[\infty])^[-1]\circ \phi \circ \iota_A^[\infty] .
+#! @Returns a morphism ⥉  \mathrm[Hom](A_[\infty],B_[\infty]) 
+#! @Arguments phi
+DeclareAttribute( "Simplify",
+                  IsCapCategoryMorphism );
+
+###################################
+##
+#! @Section Reduction by split epi summands
+##
+###################################
+
+#! Let  \alpha: A \rightarrow B  be a morphism ⥉ an additive category.
+#! Suppose we are given direct sum decompositions
+#! of  A \simeq A' \oplus A''  &&  B \simeq B' \oplus B'' 
+#! such that
+
+#! @BeginLatexOnly
+#! \begin[center]
+#! \begin[tikzpicture]
+#! \def\w[4];
+#! \def\h[2];
+#! \node (A) at (0,0) [ A ];
+#! \node (B) at (\w,0) [ B ];
+#! \node (Ap) at (0,\h) [ A' \oplus A'' ];
+#! \node (Bp) at (\w,\h) [ B' \oplus B'' ];
+#! \draw[-latex] (A) to node[pos=0.45, above] [ \alpha ] (B);
+#! \draw[-latex] (Ap) to node[pos=0.45, above] [ \alpha' \oplus \alpha'' ] (Bp);
+#! \draw[-latex] (A) to (Ap);
+#! \draw[-latex] (B) to (Bp);
+#! \end[tikzpicture]
+#! \end[center]
+#! @EndLatexOnly
+
+#! If  \alpha''  is a split epimorphism, then we call  \alpha': A' \rightarrow B' 
+#! <Emph>some reduction of  \alpha  by split epi summands</Emph>.
+
+#! The inclusions/projections of the decompositions into direct sums
+#! induce commutative diagrams
+
+#! @BeginLatexOnly
+#! \begin[center]
+#! \begin[tikzpicture]
+#! \def\w[4];
+#! \def\h[2];
+#! \node (A) at (0,0) [ A ];
+#! \node (B) at (\w,0) [ B ];
+#! \node (Ap) at (0,\h) [ A' ];
+#! \node (Bp) at (\w,\h) [ B' ];
+#! \draw[-latex] (A) to node[pos=0.45, above] [ \alpha ] (B);
+#! \draw[-latex] (Ap) to node[pos=0.45, above] [ \alpha' ] (Bp);
+#! \draw[-latex] (A) to (Ap);
+#! \draw[-latex] (B) to node[pos=0.45, right] [ \beta ] (Bp);
+#! \end[tikzpicture]
+#! \end[center]
+#! @EndLatexOnly
+
+#! &&
+
+#! @BeginLatexOnly
+#! \begin[center]
+#! \begin[tikzpicture]
+#! \def\w[4];
+#! \def\h[2];
+#! \node (A) at (0,0) [ A ];
+#! \node (B) at (\w,0) [ B ];
+#! \node (Ap) at (0,\h) [ A' ];
+#! \node (Bp) at (\w,\h) [ B' ];
+#! \draw[-latex] (A) to node[pos=0.45, above] [ \alpha ] (B);
+#! \draw[-latex] (Ap) to node[pos=0.45, above] [ \alpha' ] (Bp);
+#! \draw[-latex] (Ap) to (A);
+#! \draw[-latex] (Bp) to node[pos=0.45, right] [ \beta' ] (B);
+#! \end[tikzpicture]
+#! \end[center]
+#! @EndLatexOnly
+
+#! @Description
+#! The argument is a morphism  \alpha: A \rightarrow B .
+#! The output is some reduction of  \alpha  by split epi summands  \alpha': A' \rightarrow B' .
+#! @Returns a morphism ⥉  \mathrm[Hom](A',B') 
+#! @Arguments alpha
+DeclareAttribute( "SomeReductionBySplitEpiSummand",
+                  IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha: A \rightarrow B .
+#! The output is the morphism  \beta': B' \rightarrow B 
+#! linking  \alpha  with some reduction by split epi summands.
+#! @Returns a morphism ⥉  \mathrm[Hom](B',B) 
+#! @Arguments alpha
+DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismToInputRange",
+                  IsCapCategoryMorphism );
+
+#! @Description
+#! The argument is a morphism  \alpha: A \rightarrow B .
+#! The output is the morphism  \beta: B \rightarrow B' 
+#! linking  \alpha  with some reduction by split epi summands.
+#! @Returns a morphism ⥉  \mathrm[Hom](B,B') 
+#! @Arguments alpha
+DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismFromInputRange",
+                  IsCapCategoryMorphism );
