@@ -1566,7 +1566,7 @@ AddDerivationToCAP( RandomMorphismByInteger,
 
   function( cat, n )
     
-    return RandomMorphismWithFixedSourceByInteger( cat, RandomObjectByInteger( cat, n ), n );
+    return RandomMorphismWithFixedSourceByInteger( cat, RandomObjectByInteger( cat, n ), 1 + Log2Int( n ) );
     
 end; Description = "RandomMorphismByInteger using RandomObjectByInteger && RandomMorphismWithFixedSourceByInteger" );
 
@@ -1579,7 +1579,7 @@ AddDerivationToCAP( RandomMorphismByInteger,
 
   function( cat, n )
     
-    return RandomMorphismWithFixedRangeByInteger( cat, RandomObjectByInteger( cat, n ), n );
+    return RandomMorphismWithFixedRangeByInteger( cat, RandomObjectByInteger( cat, n ),  1 + Log2Int( n ) );
     
 end; Description = "RandomMorphismByInteger using RandomObjectByInteger && RandomMorphismWithFixedRangeByInteger" );
 
@@ -1592,7 +1592,7 @@ AddDerivationToCAP( RandomMorphismWithFixedSourceByInteger,
 
   function( cat, S, n )
     
-    return RandomMorphismWithFixedSourceAndRangeByInteger( cat, S, RandomObjectByInteger( cat, n ), n );
+    return RandomMorphismWithFixedSourceAndRangeByInteger( cat, S, RandomObjectByInteger( cat, n ), 1 + Log2Int( n ) );
     
 end; CategoryFilter = IsAbCategory,
 Description = "RandomMorphismWithFixedSourceByInteger using RandomObjectByInteger && RandomMorphismWithFixedSourceAndRangeByInteger" );
@@ -1606,7 +1606,7 @@ AddDerivationToCAP( RandomMorphismWithFixedRangeByInteger,
 
   function( cat, R, n )
     
-    return RandomMorphismWithFixedSourceAndRangeByInteger( cat, RandomObjectByInteger( cat, n ), R, n );
+    return RandomMorphismWithFixedSourceAndRangeByInteger( cat, RandomObjectByInteger( cat, n ), R, 1 + Log2Int( n ) );
     
 end; CategoryFilter = IsAbCategory,
 Description = "RandomMorphismWithFixedRangeByInteger using RandomObjectByInteger && RandomMorphismWithFixedSourceAndRangeByInteger" );
@@ -1620,10 +1620,99 @@ AddDerivationToCAP( RandomMorphismByInteger,
 
   function( cat, n )
     
-    return RandomMorphismWithFixedSourceAndRangeByInteger( cat, RandomObjectByInteger( cat, n ), RandomObjectByInteger( cat, n ), n );
+    return RandomMorphismWithFixedSourceAndRangeByInteger( cat, RandomObjectByInteger( cat, n ), RandomObjectByInteger( cat, n ), 1 + Log2Int( n ) );
     
 end; CategoryFilter = IsAbCategory,
 Description = "RandomMorphismByInteger using RandomObjectByInteger && RandomMorphismWithFixedSourceAndRangeByInteger" );
+
+##
+AddDerivationToCAP( RandomMorphismByList,
+                    [
+                      [ RandomObjectByList, 1 ],
+                      [ RandomMorphismWithFixedSourceByList, 1 ]
+                    ],
+
+  function( cat, L )
+    
+    if Length( L ) != 2 || !ForAll( L, IsList )
+        Error( "the list passed to 'RandomMorphismByList' ⥉ ", Name( cat ), " must be a list consisting of two lists!\n" );
+    end;
+    
+    return RandomMorphismWithFixedSourceByList( cat, RandomObjectByList( cat, L[1] ), L[2] );
+    
+end; Description = "RandomMorphismByList using RandomObjectByList && RandomMorphismWithFixedSourceByList" );
+
+##
+AddDerivationToCAP( RandomMorphismByList,
+                    [
+                      [ RandomObjectByList, 1 ],
+                      [ RandomMorphismWithFixedRangeByList, 1 ]
+                    ],
+
+  function( cat, L )
+    
+    if Length( L ) != 2 || !ForAll( L, IsList )
+        Error( "the list passed to 'RandomMorphismByList' ⥉ ", Name( cat ), " must be a list consisting of two lists!\n" );
+    end;
+    
+    return RandomMorphismWithFixedRangeByList( cat, RandomObjectByList( cat, L[1] ), L[2] );
+    
+end; Description = "RandomMorphismByList using RandomObjectByList && RandomMorphismWithFixedRangeByList" );
+
+##
+AddDerivationToCAP( RandomMorphismWithFixedSourceByList,
+                    [
+                      [ RandomObjectByList, 1 ],
+                      [ RandomMorphismWithFixedSourceAndRangeByList, 1 ]
+                    ],
+  
+  function( cat, S, L )
+    
+    if Length( L ) != 2 || !ForAll( L, IsList )
+        Error( "the list passed to 'RandomMorphismWithFixedSourceByList' ⥉ ", Name( cat ), " must be a list consisting of two lists!\n" );
+    end;
+    
+    return RandomMorphismWithFixedSourceAndRangeByList( cat, S, RandomObjectByList( cat, L[1] ), L[2] );
+    
+end; CategoryFilter = IsAbCategory,
+Description = "RandomMorphismWithFixedSourceByList using RandomObjectByList && RandomMorphismWithFixedSourceAndRangeByList" );
+
+##
+AddDerivationToCAP( RandomMorphismWithFixedRangeByList,
+                    [
+                      [ RandomObjectByList, 1 ],
+                      [ RandomMorphismWithFixedSourceAndRangeByList, 1 ]
+                    ],
+  
+  function( cat, R, L )
+    
+    if Length( L ) != 2 || !ForAll( L, IsList )
+        Error( "the list passed to 'RandomMorphismWithFixedRangeByList' ⥉ ", Name( cat ), " must be a list consisting of two lists!\n" );
+    end;
+    
+    return RandomMorphismWithFixedSourceAndRangeByList( cat, RandomObjectByList( cat, L[1] ), R, L[2] );
+
+end; CategoryFilter = IsAbCategory,
+Description = "RandomMorphismWithFixedRangeByList using RandomObjectByList && RandomMorphismWithFixedSourceAndRangeByList" );
+
+##
+AddDerivationToCAP( RandomMorphismByList,
+                    [
+                      [ RandomObjectByList, 2 ],
+                      [ RandomMorphismWithFixedSourceAndRangeByList, 1 ]
+                    ],
+  
+  function( cat, L )
+    
+    if Length( L ) != 3 || !ForAll( L, IsList )
+        Error( "the list passed to 'RandomMorphismByList' ⥉ ", Name( cat ), " must be a list consisting of three lists!\n" );
+    end;
+    
+    return RandomMorphismWithFixedSourceAndRangeByList( cat, RandomObjectByList( cat, L[1] ), RandomObjectByList( cat, L[2] ), L[3] );
+    
+end; CategoryFilter = IsAbCategory,
+Description = "RandomMorphismByList using RandomObjectByList && RandomMorphismWithFixedSourceAndRangeByList"  );
+
 
 ##
 AddDerivationToCAP( IsomorphismFromKernelOfCokernelToImageObject,

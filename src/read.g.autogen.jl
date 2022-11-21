@@ -55,3 +55,5 @@ include( "gap/WrapperCategory.gi.autogen.jl" );
 include( "gap/DummyCategory.gi.autogen.jl" );
 
 include( "gap/ToolsForCategories_AfterLoading.gi.autogen.jl" );
+
+include( "gap/init.gi.autogen.jl" );

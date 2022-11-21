@@ -19,16 +19,11 @@
 ##
 ####################################
 
-# CapCat must be installed with BindGlobal because InstallValue creates a partial copy which makes things inconsistent
-if false
-
 #! @Description
 #!  This variable stores the category of categories. Every category object is
 #!  constructed as an object ⥉ this category, so Cat is constructed when loading
 #!  the package. 
-DeclareGlobalVariable( "CapCat" );
-
-end;
+DeclareGlobalName( "CapCat" );
 
 ####################################
 ##
@@ -36,7 +31,9 @@ end;
 ##
 ####################################
 
-DeclareGlobalFunction( "CAP_INTERNAL_CREATE_Cat" );
+DeclareGlobalName( "CAP_INTERNAL_CREATE_Cat" );
+
+DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 
 ####################################
 ##
