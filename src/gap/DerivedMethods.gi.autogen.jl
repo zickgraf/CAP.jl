@@ -3718,6 +3718,89 @@ AddFinalDerivationBundle( # IsomorphismFromCoproductToDirectSum,
   end,
 ]; Description = "IsomorphismFromCoproductToDirectSum as the identity of the direct sum" );
 
+################
+
+## Final methods for random methods by lists
+
+##
+AddFinalDerivationBundle( # RandomObjectByList,
+                    [ [ RandomObjectByInteger, 1 ],
+                      [ RandomMorphismWithFixedSourceAndRangeByInteger, 1 ],
+                      [ RandomMorphismWithFixedSourceByInteger, 1 ],
+                      [ RandomMorphismWithFixedRangeByInteger, 1 ],
+                      [ RandomMorphismByInteger, 1 ],
+                    ],
+                    [ RandomObjectByList,
+                      RandomMorphismWithFixedSourceAndRangeByList,
+                      RandomMorphismWithFixedSourceByList,
+                      RandomMorphismWithFixedRangeByList,
+                      RandomMorphismByList ],
+[
+  RandomObjectByList,
+  [ [ RandomObjectByInteger, 1 ] ],
+  function( cat, L )
+    
+    if Length( L ) != 1 || !IsInt( L[1] )
+        Error( "the list passed to 'RandomObjectByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+    end;
+    
+    return RandomObjectByInteger( cat, L[1] );
+    
+  end
+],
+[
+  RandomMorphismWithFixedSourceAndRangeByList,
+  [ [ RandomMorphismWithFixedSourceAndRangeByInteger, 1 ] ],
+  function( cat, S, R, L )
+    
+    if Length( L ) != 1 || !IsInt( L[1] )
+        Error( "the list passed to 'RandomMorphismWithFixedSourceAndRangeByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+    end;
+    
+    return RandomMorphismWithFixedSourceAndRangeByInteger( cat, S, R, L[1] );
+    
+  end
+],
+[
+  RandomMorphismWithFixedSourceByList,
+  [ [ RandomMorphismWithFixedSourceByInteger, 1 ] ],
+  function( cat, S, L )
+    
+    if Length( L ) != 1 || !IsInt( L[1] )
+        Error( "the list passed to 'RandomMorphismWithFixedSourceByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+    end;
+    
+    return RandomMorphismWithFixedSourceByInteger( cat, S, L[1] );
+    
+  end
+],
+[
+  RandomMorphismWithFixedRangeByList,
+  [ [ RandomMorphismWithFixedRangeByInteger, 1 ] ],
+  function( cat, R, L )
+    
+    if Length( L ) != 1 || !IsInt( L[1] )
+        Error( "the list passed to 'RandomMorphismWithFixedRangeByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+    end;
+    
+    return RandomMorphismWithFixedRangeByInteger( cat, R, L[1] );
+    
+  end
+],
+[
+  RandomMorphismByList,
+  [ [ RandomMorphismByInteger, 1 ] ],
+  function( cat, L )
+    
+    if Length( L ) != 1 || !IsInt( L[1] )
+        Error( "the list passed to 'RandomMorphismByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+    end;
+    
+    return RandomMorphismByInteger( cat, L[1] );
+    
+  end
+]; Description = "Derive all <ByList> random methods from <ByInteger> random methods" );
+
 ## Final methods for homology object
 
 ##

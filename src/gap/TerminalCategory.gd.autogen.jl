@@ -5,51 +5,90 @@
 #
 #! @Chapter Terminal category
 
-#########################################
-##
-## Setup for terminal category
-##
-#########################################
+########################################
+#
+#! @Section &GAP; Categories
+#
+########################################
 
-DeclareGlobalName( "CAP_INTERNAL_TERMINAL_CATEGORY" );
+#! @Description
+#!  The &GAP; type of a terminal category with a single object.
+#! @Arguments T
+DeclareCategory( "IsCapTerminalCategoryWithSingleObject",
+        IsCapCategory );
 
-DeclareGlobalName( "CAP_INTERNAL_TERMINAL_CATEGORY_AS_CAT_OBJECT" );
+#! @Description
+#!  The &GAP; type of an object ⥉ a terminal category with a single object.
+#! @Arguments T
+DeclareCategory( "IsObjectInCapTerminalCategoryWithSingleObject",
+        IsCapCategoryObject );
 
-####################################
-##
-## Constructor
-##
-####################################
+#! @Description
+#!  The &GAP; type of a morphism ⥉ a terminal category with a single object.
+#! @Arguments T
+DeclareCategory( "IsMorphismInCapTerminalCategoryWithSingleObject",
+        IsCapCategoryMorphism );
 
-DeclareGlobalName( "CAP_INTERNAL_CREATE_TerminalCategory" );
+#! @Description
+#!  The &GAP; type of a terminal category with multiple objects.
+#! @Arguments T
+DeclareCategory( "IsCapTerminalCategoryWithMultipleObjects",
+        IsCapCategory );
 
-DeclareGlobalName( "INSTALL_TERMINAL_CATEGORY_FUNCTIONS" );
+#! @Description
+#!  The &GAP; type of an object ⥉ a terminal category with multiple objects.
+#! @Arguments T
+DeclareCategory( "IsObjectInCapTerminalCategoryWithMultipleObjects",
+        IsCapCategoryObject );
 
-#########################################
-##
-## Filter
-##
-#########################################
-
-DeclareFilter( "IsCapTerminalCategory", IsCapCategory );
-
-DeclareFilter( "IsCapTerminalCategoryObject", IsCapCategoryObject );
-
-DeclareFilter( "IsCapTerminalCategoryMorphism", IsCapCategoryMorphism );
+#! @Description
+#!  The &GAP; type of a morphism ⥉ a terminal category with multiple objects.
+#! @Arguments T
+DeclareCategory( "IsMorphismInCapTerminalCategoryWithMultipleObjects",
+        IsCapCategoryMorphism );
 
 AddCategoricalProperty( [ "IsTerminalCategory", "IsTerminalCategory" ] );
 
+########################################
+#
+#! @Section Constructors
+#
+########################################
+
+#! @Description
+#!  Construct a terminal category with a single object.
+DeclareGlobalFunction( "TerminalCategoryWithSingleObject" );
+
+#! @Description
+#!  Construct a terminal category with multiple objects.
+DeclareGlobalFunction( "TerminalCategoryWithMultipleObjects" );
+
+#! @Description
+#!  This function takes a record of options suited for CategoryConstructor. 
+#!  It makes common adjustments for TerminalCategoryWithSingleObject && TerminalCategoryWithMultipleObjects
+#!  to the list of operations to install && the categorical properties of the given record,
+#!  before passing it on to CategoryConstructor.
+#! @Arguments options
+#! @Returns a &CAP; category
+DeclareGlobalFunction( "CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY" );
+
 #########################################
-##
-## Attributes
-##
+#
+#! @Section Attributes
+#
 #########################################
 
+#! @Description
+#!  The unique object ⥉ a terminal category with a single object.
+#! @Returns a &CAP; object
 DeclareAttribute( "UniqueObject",
-                  IsCapTerminalCategory );
+                  IsCapTerminalCategoryWithSingleObject );
 
+#! @Description
+#!  The unique morphism ⥉ a terminal category with a single object.
+#! @Returns a &CAP; morphism
 DeclareAttribute( "UniqueMorphism",
-                  IsCapTerminalCategory );
+                  IsCapTerminalCategoryWithSingleObject );
 
 #########################################
 ##
@@ -57,7 +96,9 @@ DeclareAttribute( "UniqueMorphism",
 ##
 #########################################
 
+#! @Description
+#!  A functor from `AsCapCategory( TerminalObject( CapCat ) )` mapping the unique object to <A>object</A>.
+#! @Arguments object
+#! @Returns a &CAP; functor
 DeclareAttribute( "FunctorFromTerminalCategory",
-                  IsCapCategoryCell );
-
-
+                  IsCapCategoryObject );

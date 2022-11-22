@@ -46,9 +46,9 @@ include( "gap/ProductCategory.gd.autogen.jl" );
 
 include( "gap/CategoriesCategory.gd.autogen.jl" );
 
-include( "gap/TerminalCategory.gd.autogen.jl" );
-
 include( "gap/CategoryConstructor.gd.autogen.jl" );
+
+include( "gap/TerminalCategory.gd.autogen.jl" );
 
 include( "gap/WrapperCategory.gd.autogen.jl" );
 

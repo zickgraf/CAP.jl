@@ -40,8 +40,6 @@ include( "gap/ProductCategory.gi.autogen.jl" );
 
 include( "gap/CategoriesCategory.gi.autogen.jl" );
 
-include( "gap/TerminalCategory.gi.autogen.jl" );
-
 include( "gap/PrintingFunctions.gi.autogen.jl" );
 
 include( "gap/PrepareFunctions.gi.autogen.jl" );
@@ -49,6 +47,8 @@ include( "gap/PrepareFunctions.gi.autogen.jl" );
 include( "gap/PreFunctions.gi.autogen.jl" );
 
 include( "gap/CategoryConstructor.gi.autogen.jl" );
+
+include( "gap/TerminalCategory.gi.autogen.jl" );
 
 include( "gap/WrapperCategory.gi.autogen.jl" );
 
