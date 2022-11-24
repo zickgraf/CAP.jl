@@ -27,7 +27,7 @@
 #! to which  a  was added.
 #! @Returns a category
 #! @Arguments a
-DeclareAttribute( "CapCategory",
+@DeclareAttribute( "CapCategory",
                   IsCapCategoryObject );
 
 ###################################
@@ -73,7 +73,7 @@ DeclareOperation( "AddPropertyToMatchAtIsEqualForObjects",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
-DeclareProperty( "IsBijectiveObject",
+@DeclareProperty( "IsBijectiveObject",
                  IsCapCategoryObject );
 
 #! @Description
@@ -82,7 +82,7 @@ DeclareProperty( "IsBijectiveObject",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
-DeclareProperty( "IsProjective",
+@DeclareProperty( "IsProjective",
                  IsCapCategoryObject );
 
 #! @Description
@@ -91,7 +91,7 @@ DeclareProperty( "IsProjective",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
-DeclareProperty( "IsInjective",
+@DeclareProperty( "IsInjective",
                  IsCapCategoryObject );
 
 #! @Description
@@ -100,7 +100,7 @@ DeclareProperty( "IsInjective",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
-DeclareProperty( "IsTerminal",
+@DeclareProperty( "IsTerminal",
                  IsCapCategoryObject );
 
 #! @Description
@@ -109,7 +109,7 @@ DeclareProperty( "IsTerminal",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
-DeclareProperty( "IsInitial",
+@DeclareProperty( "IsInitial",
                  IsCapCategoryObject );
 
 #! @Description
@@ -118,7 +118,7 @@ DeclareProperty( "IsInitial",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
-DeclareProperty( "IsZeroForObjects",
+@DeclareProperty( "IsZeroForObjects",
                  IsCapCategoryObject );
 
 #! @Description
@@ -127,7 +127,7 @@ DeclareProperty( "IsZeroForObjects",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
-DeclareProperty( "IsZero",
+@DeclareProperty( "IsZero",
                  IsCapCategoryObject );
 
 ###################################
@@ -268,7 +268,7 @@ DeclareOperation( "/",
 #! by calling `SetCachingToWeak( C, "ObjectDatum" )` resp. `SetCachingToCrisp( C, "ObjectDatum" )`.
 #! @Returns depends on the category
 #! @Arguments obj
-DeclareAttribute( "ObjectDatum",
+@DeclareAttribute( "ObjectDatum",
                   IsCapCategoryObject );
 
 ###################################
@@ -304,7 +304,7 @@ DeclareOperation( "IsWellDefinedForObjects",
 #! for which there exists an epimorphism  \pi: P \rightarrow A .
 #! @Returns an object
 #! @Arguments A
-DeclareAttribute( "SomeProjectiveObject",
+@DeclareAttribute( "SomeProjectiveObject",
                   IsCapCategoryObject );
 
 #! @Description
@@ -313,7 +313,7 @@ DeclareAttribute( "SomeProjectiveObject",
 #! with  P  a projective object that equals the output of  \mathrm[SomeProjectiveObject](A) .
 #! @Returns a morphism ⥉  \mathrm[Hom](P,A) 
 #! @Arguments A
-DeclareAttribute( "EpimorphismFromSomeProjectiveObject",
+@DeclareAttribute( "EpimorphismFromSomeProjectiveObject",
                   IsCapCategoryObject );
 
 #! @Description
@@ -352,7 +352,7 @@ DeclareOperation( "ProjectiveLift",
 #! for which there exists a monomorphism  \iota: A \rightarrow I .
 #! @Returns an object
 #! @Arguments A
-DeclareAttribute( "SomeInjectiveObject",
+@DeclareAttribute( "SomeInjectiveObject",
                   IsCapCategoryObject );
 
 #! @Description
@@ -361,7 +361,7 @@ DeclareAttribute( "SomeInjectiveObject",
 #! with  I  an injective object that equals the output of  \mathrm[SomeInjectiveObject](A) .
 #! @Returns a morphism ⥉  \mathrm[Hom](I,A) 
 #! @Arguments A
-DeclareAttribute( "MonomorphismIntoSomeInjectiveObject",
+@DeclareAttribute( "MonomorphismIntoSomeInjectiveObject",
                   IsCapCategoryObject );
 
 #! @Description
@@ -402,7 +402,7 @@ DeclareOperation( "InjectiveColift",
 #! The output is a simplified object  A_[\infty] .
 #! @Returns an object
 #! @Arguments A
-DeclareAttribute( "Simplify",
+@DeclareAttribute( "Simplify",
                   IsCapCategoryObject );
 
 #! @Description
@@ -441,7 +441,7 @@ DeclareOperation( "SimplifyObject_IsoToInputObject",
 #! The output is a the projective dimension of  A .
 #! @Returns a nonnegative integer || Inf
 #! @Arguments A
-DeclareAttribute( "ProjectiveDimension",
+@DeclareAttribute( "ProjectiveDimension",
                   IsCapCategoryObject );
 
 #! @Description
@@ -449,5 +449,5 @@ DeclareAttribute( "ProjectiveDimension",
 #! The output is a the injective dimension of  A .
 #! @Returns a nonnegative integer || Inf
 #! @Arguments A
-DeclareAttribute( "InjectiveDimension",
+@DeclareAttribute( "InjectiveDimension",
                   IsCapCategoryObject );

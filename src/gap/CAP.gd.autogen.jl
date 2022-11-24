@@ -178,7 +178,7 @@ Perform(
     ],
     AddCategoricalProperty );
 
-DeclareAttribute( "TheoremRecord",
+@DeclareAttribute( "TheoremRecord",
                   IsCapCategory, "mutable" );
 
 DeclareOperation( "AddCategoryToFamily",
@@ -233,7 +233,7 @@ DeclareOperation( "CreateCapCategory",
 #! The output is its name.
 #! @Arguments C
 #! @Returns a string
-DeclareAttribute( "Name", IsCapCategory );
+@DeclareAttribute( "Name", IsCapCategory );
 
 #! Each category  C  stores various filters.
 #! They are used to apply the right functions ⥉ the method selection.
@@ -245,10 +245,10 @@ DeclareAttribute( "Name", IsCapCategory );
 #! The output is a filter ⥉ which  C  lies.
 #! @Arguments C
 #! @Returns a filter
-DeclareAttribute( "CategoryFilter",
+@DeclareAttribute( "CategoryFilter",
                   IsCapCategory );
 
-DeclareAttribute( "CellFilter",
+@DeclareAttribute( "CellFilter",
                   IsCapCategory );
 
 #! @Description
@@ -257,7 +257,7 @@ DeclareAttribute( "CellFilter",
 #! of  C  shall lie.
 #! @Arguments C
 #! @Returns a filter
-DeclareAttribute( "ObjectFilter",
+@DeclareAttribute( "ObjectFilter",
                   IsCapCategory );
 
 #! @Description
@@ -266,7 +266,7 @@ DeclareAttribute( "ObjectFilter",
 #! of  C  shall lie.
 #! @Arguments C
 #! @Returns a filter
-DeclareAttribute( "MorphismFilter",
+@DeclareAttribute( "MorphismFilter",
                   IsCapCategory );
 
 #! @Description
@@ -275,7 +275,7 @@ DeclareAttribute( "MorphismFilter",
 #! of  C  shall lie.
 #! @Arguments C
 #! @Returns a filter
-DeclareAttribute( "TwoCellFilter",
+@DeclareAttribute( "TwoCellFilter",
                   IsCapCategory );
 
 #! @Description
@@ -284,7 +284,7 @@ DeclareAttribute( "TwoCellFilter",
 #! The output is a commutative ring over which the category is linear.
 #! @Arguments C
 #! @Returns a ring
-DeclareAttribute( "CommutativeRingOfLinearCategory",
+@DeclareAttribute( "CommutativeRingOfLinearCategory",
                   IsCapCategory );
 
 #! @Description
@@ -294,7 +294,7 @@ DeclareAttribute( "CommutativeRingOfLinearCategory",
 #!  H: C^[\mathrm[op]] \times C \rightarrow D  of the homomorphism structure.
 #! @Arguments C
 #! @Returns a category
-DeclareAttribute( "RangeCategoryOfHomomorphismStructure",
+@DeclareAttribute( "RangeCategoryOfHomomorphismStructure",
                   IsCapCategory );
 
 #! @Description
@@ -302,7 +302,7 @@ DeclareAttribute( "RangeCategoryOfHomomorphismStructure",
 #! The output is a list  L  of objects ⥉  C  such that every object ⥉  C  is a finite direct sum of objects ⥉  L .
 #! @Arguments C
 #! @Returns a list of objects
-DeclareAttribute( "AdditiveGenerators",
+@DeclareAttribute( "AdditiveGenerators",
                   IsCapCategory );
 
 #! @Description
@@ -311,7 +311,7 @@ DeclareAttribute( "AdditiveGenerators",
 #!  That is every projective object ⥉  C  is isomorphic to a finite direct sum over these objects.
 #! @Arguments C
 #! @Returns a list of objects
-DeclareAttribute( "IndecomposableProjectiveObjects",
+@DeclareAttribute( "IndecomposableProjectiveObjects",
                   IsCapCategory );
 
 #! @Description
@@ -320,7 +320,7 @@ DeclareAttribute( "IndecomposableProjectiveObjects",
 #!  That is every injective object ⥉  C  is isomorphic to a finite direct sum over these objects.
 #! @Arguments C
 #! @Returns a list of objects
-DeclareAttribute( "IndecomposableInjectiveObjects",
+@DeclareAttribute( "IndecomposableInjectiveObjects",
                   IsCapCategory );
 
 #############################################
@@ -416,7 +416,7 @@ DeclareOperation( "CheckConstructivenessOfCategory",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments c
-DeclareProperty( "IsWellDefined",
+@DeclareProperty( "IsWellDefined",
                  IsCapCategoryCell );
 
 #############################################
@@ -435,7 +435,7 @@ DeclareProperty( "IsWellDefined",
 #! (e.g., by passing them to an appropriate constructor, possibly together with the source && range of  x ).
 #! @Returns a GAP object
 #! @Arguments x
-DeclareAttribute( "Down",
+@DeclareAttribute( "Down",
                   IsObject );
 
 #! @Description
@@ -443,15 +443,15 @@ DeclareAttribute( "Down",
 #! (e.g., by passing it to an appropriate constructor, possibly together with its source && range).
 #! @Returns a GAP object
 #! @Arguments x
-DeclareAttribute( "DownOnlyMorphismData",
+@DeclareAttribute( "DownOnlyMorphismData",
                   IsCapCategoryMorphism );
 
 ##
-DeclareAttribute( "Down2",
+@DeclareAttribute( "Down2",
                   IsObject );
 
 ##
-DeclareAttribute( "Down3",
+@DeclareAttribute( "Down3",
                   IsObject );
 
 #! @Description
@@ -459,7 +459,7 @@ DeclareAttribute( "Down3",
 #! This function iteratively calls <C>Down</C> until it becomes stable.
 #! @Returns a GAP object
 #! @Arguments x
-DeclareAttribute( "DownToBottom",
+@DeclareAttribute( "DownToBottom",
                   IsObject );
 
 ####################################

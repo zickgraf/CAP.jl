@@ -5,7 +5,7 @@
 #
 DeclareGlobalVariable( "CATEGORIES_LOGIC_FILES" );
 
-DeclareInfoClass( "CapLogicInfo" );
+@DeclareInfoClass( "CapLogicInfo" );
 
 DeclareGlobalFunction( "SetCapLogicInfo" );
 
@@ -53,5 +53,5 @@ DeclareGlobalFunction( "ADD_EVAL_RULES_TO_CATEGORY" );
 
 DeclareGlobalFunction( "INSTALL_LOGICAL_IMPLICATIONS_HELPER" );
 
-DeclareAttribute( "CAP_CATEGORY_SOURCE_RANGE_THEOREM_INSTALL_HELPER",
+@DeclareAttribute( "CAP_CATEGORY_SOURCE_RANGE_THEOREM_INSTALL_HELPER",
                   IsCapCategoryMorphism );

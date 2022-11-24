@@ -283,19 +283,19 @@ DeclareOperation( "SafeFirst", [ IsList, IsFunction ] );
 #!   Returns <A>args</A> while asserting that its length is <A>n</A>.
 #! @Arguments n, args...
 #! @Returns a list
-DeclareGlobalFunction( "NTuple" );
+DeclareGlobalFunction( "nTuple" );
 
 # this filter is only used for the type system in CompilerForCAP
-DeclareFilter( "IsNTuple" );
+DeclareFilter( "IsnTuple" );
 
 #! @Description
-#!   Alias for `NTuple( 2, <A>first</A>, <A>second</A> )`.
+#!   Alias for `nTuple( 2, <A>first</A>, <A>second</A> )`.
 #! @Arguments first, second
 #! @Returns a list
 DeclareGlobalFunction( "Pair" );
 
 #! @Description
-#!   Alias for `NTuple( 3, <A>first</A>, <A>second</A>, <A>third</A> )`.
+#!   Alias for `nTuple( 3, <A>first</A>, <A>second</A>, <A>third</A> )`.
 #! @Arguments first, second, third
 #! @Returns a list
 DeclareGlobalFunction( "Triple" );

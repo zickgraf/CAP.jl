@@ -14,7 +14,7 @@
 
 #! @Description
 #!  Info class controlling the debugging output of <Ref Oper="CategoryConstructor" Label="for IsRecord" />.
-DeclareInfoClass( "InfoCategoryConstructor" );
+@DeclareInfoClass( "InfoCategoryConstructor" );
 
 ####################################
 #

@@ -28,16 +28,16 @@ DeclareOperationWithCache( "CoproductFunctor",
 DeclareFilter( "IsCapProductCategory", IsCapCategory );
 
 
-DeclareAttribute( "Components",
+@DeclareAttribute( "Components",
                   IsCapProductCategory );
 
-DeclareAttribute( "Components",
+@DeclareAttribute( "Components",
                   IsCapCategoryProductObject );
 
-DeclareAttribute( "Components",
+@DeclareAttribute( "Components",
                   IsCapCategoryProductMorphism );
 
-DeclareAttribute( "Components",
+@DeclareAttribute( "Components",
                   IsCapCategoryProductTwoCell );
 
 DeclareOperation( "[]",
@@ -83,11 +83,11 @@ DeclareOperation( "ProductOp",
 ##
 ############################
 
-DeclareAttribute( "Length",
+@DeclareAttribute( "Length",
                   IsCapProductCategory );
 
-DeclareAttribute( "Length",
+@DeclareAttribute( "Length",
                   IsCapCategoryProductObject );
 
-DeclareAttribute( "Length",
+@DeclareAttribute( "Length",
                   IsCapCategoryProductMorphism );

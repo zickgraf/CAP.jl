@@ -13,7 +13,7 @@ DeclareGlobalFunction( "AddFinalDerivation" );
 DeclareGlobalFunction( "AddFinalDerivationBundle" );
 
 
-DeclareAttribute( "IsFinalized",
+@DeclareAttribute( "IsFinalized",
                   IsCapCategory,
                   "mutable" );
 

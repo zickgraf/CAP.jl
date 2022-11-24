@@ -24,7 +24,7 @@
 #! to which  \alpha  was added.
 #! @Returns a category
 #! @Arguments alpha
-DeclareAttribute( "CapCategory",
+@DeclareAttribute( "CapCategory",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -32,7 +32,7 @@ DeclareAttribute( "CapCategory",
 #! The output is its source  a .
 #! @Returns an object
 #! @Arguments alpha
-DeclareAttribute( "Source",
+@DeclareAttribute( "Source",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -40,7 +40,7 @@ DeclareAttribute( "Source",
 #! The output is its range  b .
 #! @Returns an object
 #! @Arguments alpha
-DeclareAttribute( "Range",
+@DeclareAttribute( "Range",
                   IsCapCategoryMorphism );
 
 # this attribute is also an implied operation
@@ -82,7 +82,7 @@ DeclareOperation( "MorphismConstructor",
 #! by calling `SetCachingToWeak( C, "MorphismDatum" )` resp. `SetCachingToCrisp( C, "MorphismDatum" )`.
 #! @Returns depends on the category
 #! @Arguments mor
-DeclareAttribute( "MorphismDatum",
+@DeclareAttribute( "MorphismDatum",
                   IsCapCategoryMorphism );
 
 ###################################
@@ -97,7 +97,7 @@ DeclareAttribute( "MorphismDatum",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsMonomorphism",
+@DeclareProperty( "IsMonomorphism",
                  IsCapCategoryMorphism );
 
 #! @Description
@@ -106,7 +106,7 @@ DeclareProperty( "IsMonomorphism",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsEpimorphism",
+@DeclareProperty( "IsEpimorphism",
                  IsCapCategoryMorphism );
 
 #! @Description
@@ -115,7 +115,7 @@ DeclareProperty( "IsEpimorphism",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsIsomorphism",
+@DeclareProperty( "IsIsomorphism",
                  IsCapCategoryMorphism );
 
 #! @Description
@@ -124,7 +124,7 @@ DeclareProperty( "IsIsomorphism",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsSplitMonomorphism",
+@DeclareProperty( "IsSplitMonomorphism",
                  IsCapCategoryMorphism );
 
 #! @Description
@@ -133,7 +133,7 @@ DeclareProperty( "IsSplitMonomorphism",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsSplitEpimorphism",
+@DeclareProperty( "IsSplitEpimorphism",
                  IsCapCategoryMorphism );
 
 #! @Description
@@ -142,7 +142,7 @@ DeclareProperty( "IsSplitEpimorphism",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsOne",
+@DeclareProperty( "IsOne",
                  IsCapCategoryMorphism );
 
 #! @Description
@@ -151,7 +151,7 @@ DeclareProperty( "IsOne",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsIdempotent",
+@DeclareProperty( "IsIdempotent",
                  IsCapCategoryMorphism );
 
 ###################################
@@ -314,7 +314,7 @@ DeclareOperation( "RandomMorphism", [ IsCapCategory, IsList ] );
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsEqualToIdentityMorphism",
+@DeclareProperty( "IsEqualToIdentityMorphism",
                  IsCapCategoryMorphism );
 
 #! @Description
@@ -323,7 +323,7 @@ DeclareProperty( "IsEqualToIdentityMorphism",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsEqualToZeroMorphism",
+@DeclareProperty( "IsEqualToZeroMorphism",
                  IsCapCategoryMorphism );
 
 ## This is !a categorical property because non-endomorphisms 
@@ -334,7 +334,7 @@ DeclareProperty( "IsEqualToZeroMorphism",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsEndomorphism",
+@DeclareProperty( "IsEndomorphism",
                  IsCapCategoryMorphism );
 
 ## This is !a categorical property because non-endomorphisms 
@@ -345,7 +345,7 @@ DeclareProperty( "IsEndomorphism",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsAutomorphism",
+@DeclareProperty( "IsAutomorphism",
                  IsCapCategoryMorphism );
 
 
@@ -451,10 +451,10 @@ DeclareOperation( "AddPropertyToMatchAtIsCongruentForMorphisms",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareProperty( "IsZeroForMorphisms",
+@DeclareProperty( "IsZeroForMorphisms",
                  IsCapCategoryMorphism );
 
-DeclareProperty( "IsZero", IsCapCategoryMorphism );
+@DeclareProperty( "IsZero", IsCapCategoryMorphism );
 
 DeclareOperation( "+", [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
@@ -484,10 +484,10 @@ DeclareOperation( "SubtractionForMorphisms",
 #! Note: The addition has to be compatible with the congruence of morphisms.
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments alpha
-DeclareAttribute( "AdditiveInverseForMorphisms",
+@DeclareAttribute( "AdditiveInverseForMorphisms",
                   IsCapCategoryMorphism );
 
-DeclareAttribute( "AdditiveInverse",
+@DeclareAttribute( "AdditiveInverse",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -642,7 +642,7 @@ DeclareOperation( "IsCodominating",
 #! The output is its identity morphism  \mathrm[id]_a .
 #! @Returns a morphism ⥉  \mathrm[Hom](a,a) 
 #! @Arguments a
-DeclareAttribute( "IdentityMorphism",
+@DeclareAttribute( "IdentityMorphism",
                                           IsCapCategoryObject );
 
 
@@ -1035,7 +1035,7 @@ DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjects",
 #! The output is the distinguished object  1  ⥉  D  of the homomorphism structure.
 #! @Returns an object ⥉  D 
 #! @Arguments C
-DeclareAttribute( "DistinguishedObjectOfHomomorphismStructure",
+@DeclareAttribute( "DistinguishedObjectOfHomomorphismStructure",
                   IsCapCategory );
 
 #! @Description
@@ -1044,7 +1044,7 @@ DeclareAttribute( "DistinguishedObjectOfHomomorphismStructure",
 #!  \nu( \alpha ): 1 \rightarrow H(a,a')  ⥉  D  of the homomorphism structure.
 #! @Returns a morphism ⥉  \mathrm[Hom]_[D](1, H(a,a')) 
 #! @Arguments alpha
-DeclareAttribute( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+@DeclareAttribute( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -1246,7 +1246,7 @@ DeclareOperation( "CoefficientsOfMorphismWithGivenBasisOfExternalHom",
 #! <C>BasisOfExternalHom</C>(<A>a</A>,<A>b</A>).
 #! @Returns a list of elements ⥉  k 
 #! @Arguments alpha
-DeclareAttribute( "CoefficientsOfMorphism",
+@DeclareAttribute( "CoefficientsOfMorphism",
                   IsCapCategoryMorphism );
 
 
@@ -1454,7 +1454,7 @@ DeclareOperation( "SimplifyEndo_IsoFromInputObject",
 #! of  (\iota_A^[\infty])^[-1]\circ \phi \circ \iota_A^[\infty] .
 #! @Returns a morphism ⥉  \mathrm[Hom](A_[\infty],B_[\infty]) 
 #! @Arguments phi
-DeclareAttribute( "Simplify",
+@DeclareAttribute( "Simplify",
                   IsCapCategoryMorphism );
 
 ###################################
@@ -1532,7 +1532,7 @@ DeclareAttribute( "Simplify",
 #! The output is some reduction of  \alpha  by split epi summands  \alpha': A' \rightarrow B' .
 #! @Returns a morphism ⥉  \mathrm[Hom](A',B') 
 #! @Arguments alpha
-DeclareAttribute( "SomeReductionBySplitEpiSummand",
+@DeclareAttribute( "SomeReductionBySplitEpiSummand",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -1541,7 +1541,7 @@ DeclareAttribute( "SomeReductionBySplitEpiSummand",
 #! linking  \alpha  with some reduction by split epi summands.
 #! @Returns a morphism ⥉  \mathrm[Hom](B',B) 
 #! @Arguments alpha
-DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismToInputRange",
+@DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismToInputRange",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -1550,5 +1550,5 @@ DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismToInputRange",
 #! linking  \alpha  with some reduction by split epi summands.
 #! @Returns a morphism ⥉  \mathrm[Hom](B,B') 
 #! @Arguments alpha
-DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismFromInputRange",
+@DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismFromInputRange",
                   IsCapCategoryMorphism );

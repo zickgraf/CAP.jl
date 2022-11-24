@@ -1427,7 +1427,7 @@ InstallMethod( SafeFirst,
 end );
 
 ##
-InstallGlobalFunction( NTuple, function ( n, args... )
+InstallGlobalFunction( nTuple, function ( n, args... )
     
     Assert( 0, Length( args ) == n );
     
@@ -1439,7 +1439,7 @@ end );
 InstallGlobalFunction( Pair, function ( first, second )
     #% CAP_JIT_RESOLVE_FUNCTION
     
-    return NTuple( 2, first, second );
+    return nTuple( 2, first, second );
     
 end );
 
@@ -1447,7 +1447,7 @@ end );
 InstallGlobalFunction( Triple, function ( first, second, third )
     #% CAP_JIT_RESOLVE_FUNCTION
     
-    return NTuple( 3, first, second, third );
+    return nTuple( 3, first, second, third );
     
 end );
 

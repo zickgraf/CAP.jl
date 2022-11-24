@@ -81,13 +81,13 @@ DeclareGlobalFunction( "CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY" );
 #! @Description
 #!  The unique object ⥉ a terminal category with a single object.
 #! @Returns a &CAP; object
-DeclareAttribute( "UniqueObject",
+@DeclareAttribute( "UniqueObject",
                   IsCapTerminalCategoryWithSingleObject );
 
 #! @Description
 #!  The unique morphism ⥉ a terminal category with a single object.
 #! @Returns a &CAP; morphism
-DeclareAttribute( "UniqueMorphism",
+@DeclareAttribute( "UniqueMorphism",
                   IsCapTerminalCategoryWithSingleObject );
 
 #########################################
@@ -100,5 +100,5 @@ DeclareAttribute( "UniqueMorphism",
 #!  A functor from `AsCapCategory( TerminalObject( CapCat ) )` mapping the unique object to <A>object</A>.
 #! @Arguments object
 #! @Returns a &CAP; functor
-DeclareAttribute( "FunctorFromTerminalCategory",
+@DeclareAttribute( "FunctorFromTerminalCategory",
                   IsCapCategoryObject );

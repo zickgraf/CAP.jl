@@ -13,7 +13,7 @@
 
 #! @Description
 #!  Info class for derivations.
-DeclareInfoClass( "DerivationInfo" );
+@DeclareInfoClass( "DerivationInfo" );
 
 #!
 DeclareGlobalFunction( "ActivateDerivationInfo" );
@@ -73,22 +73,22 @@ DeclareOperation( "MakeDerivation",
 #!  particular derivation, && normally !the same as the name
 #!  of the operation implemented by the derivation.
 #! @Arguments d
-DeclareAttribute( "DerivationName", IsDerivedMethod );
+@DeclareAttribute( "DerivationName", IsDerivedMethod );
 
 #! @Description
 #!  Extra weight for the derivation.
 #! @Arguments d
-DeclareAttribute( "DerivationWeight", IsDerivedMethod );
+@DeclareAttribute( "DerivationWeight", IsDerivedMethod );
 
 #! @Description
 #!  The implementation of the derivation.
 #! @Arguments d
-DeclareAttribute( "DerivationFunction", IsDerivedMethod );
+@DeclareAttribute( "DerivationFunction", IsDerivedMethod );
 
 #! @Description
 #!  Filter describing which categories the derivation is valid for.
 #! @Arguments d
-DeclareAttribute( "CategoryFilter", IsDerivedMethod );
+@DeclareAttribute( "CategoryFilter", IsDerivedMethod );
 
 #! @Description
 #!  Checks if the derivation is known to be valid for a given category.
@@ -101,7 +101,7 @@ DeclareOperation( "IsApplicableToCategory", [ IsDerivedMethod, IsCapCategory ] )
 #! @Returns
 #!  The name (as a string) of the operation implemented
 #!  by the derivation <A>d</A>
-DeclareAttribute( "TargetOperation", IsDerivedMethod );
+@DeclareAttribute( "TargetOperation", IsDerivedMethod );
 
 #! @Arguments d
 #! @Returns
@@ -110,7 +110,7 @@ DeclareAttribute( "TargetOperation", IsDerivedMethod );
 #!  The result is a list consisting of lists of the form
 #!  `[op_name, mult, getter]`, where `op_name` is a string,
 #!  `mult` a positive integer && `getter` is a function || `fail`.
-DeclareAttribute( "UsedOperationsWithMultiplesAndCategoryGetters", IsDerivedMethod );
+@DeclareAttribute( "UsedOperationsWithMultiplesAndCategoryGetters", IsDerivedMethod );
 
 #! @Description
 #!  Install the derived method <A>d</A> for the category <A>C</A>.
@@ -129,7 +129,7 @@ DeclareOperation( "DerivationResultWeight",
 #! a category && does !output anything. This function is always called before
 #! the installation of the derived method for a concrete instance of a category.
 #! @Arguments d
-DeclareAttribute( "FunctionCalledBeforeInstallation", IsDerivedMethod );
+@DeclareAttribute( "FunctionCalledBeforeInstallation", IsDerivedMethod );
 
 ####################################
 ##
@@ -179,7 +179,7 @@ DeclareGlobalFunction( "AddWithGivenDerivationPairToCAP" );
 #! @Description
 #!  Gives the operations ⥉ the graph <A>G</A>, as a list of strings.
 #! @Arguments G
-DeclareAttribute( "Operations", IsDerivedMethodGraph, "mutable" );
+@DeclareAttribute( "Operations", IsDerivedMethodGraph, "mutable" );
 
 #! @Description
 #!  Finds all the derivations ⥉ the graph <A>G</A> that use the operation named
@@ -224,12 +224,12 @@ DeclareOperation( "MakeOperationWeightList", [ IsCapCategory, IsDerivedMethodGra
 #! @Description
 #!  Returns the derivation graph used by the operation weight list <A>owl</A>.
 #! @Arguments owl
-DeclareAttribute( "DerivationGraph", IsOperationWeightList );
+@DeclareAttribute( "DerivationGraph", IsOperationWeightList );
 
 #! @Description
 #!  Returns the CAP category associated to the operation weight list <A>owl</A>.
 #! @Arguments owl
-DeclareAttribute( "CategoryOfOperationWeightList", IsOperationWeightList );
+@DeclareAttribute( "CategoryOfOperationWeightList", IsOperationWeightList );
 
 #! @Description
 #!  Returns the current weight of the operation named <A>op_name</A>.

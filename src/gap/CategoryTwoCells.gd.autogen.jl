@@ -16,7 +16,7 @@
 #! The output is its source  \alpha .
 #! @Returns a morphism
 #! @Arguments c
-DeclareAttribute( "Source",
+@DeclareAttribute( "Source",
                   IsCapCategoryTwoCell );
 
 #! @Description
@@ -24,7 +24,7 @@ DeclareAttribute( "Source",
 #! The output is its range  \beta .
 #! @Returns a morphism
 #! @Arguments c
-DeclareAttribute( "Range",
+@DeclareAttribute( "Range",
                   IsCapCategoryTwoCell );
 
 ###################################
@@ -85,7 +85,7 @@ DeclareOperation( "AddTwoCell",
 #! The output is its identity  2 -cell  \mathrm[id]_[\alpha]: \alpha \rightarrow \alpha .
 #! @Returns a  2 -cell
 #! @Arguments alpha
-DeclareAttribute( "IdentityTwoCell",
+@DeclareAttribute( "IdentityTwoCell",
                                           IsCapCategoryMorphism );
 
 #! @Description

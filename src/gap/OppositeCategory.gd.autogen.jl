@@ -40,7 +40,7 @@ DeclareGlobalFunction( "CAP_INTERNAL_OPPOSITE_RECURSIVE" );
 ##
 ###################################
 
-DeclareAttribute( "Opposite",
+@DeclareAttribute( "Opposite",
                   IsCapCategory );
 
 CapJitAddTypeSignature( "Opposite", [ IsCapCategory ], function ( input_types )
@@ -49,7 +49,7 @@ CapJitAddTypeSignature( "Opposite", [ IsCapCategory ], function ( input_types )
     
 end );
 
-DeclareAttribute( "OppositeCategory",
+@DeclareAttribute( "OppositeCategory",
                   WasCreatedAsOppositeCategory );
 
 CapJitAddTypeSignature( "OppositeCategory", [ WasCreatedAsOppositeCategory ], function ( input_types )
@@ -62,7 +62,7 @@ DeclareOperation( "Opposite",
                   [ IsCapCategory, IsString ] );
 
 # FIXME: Usage of DeclareAttribute leads to recursion error
-DeclareAttribute( "Opposite",
+@DeclareAttribute( "Opposite",
                   IsCapCategoryObject );
 
 CapJitAddTypeSignature( "Opposite", [ IsCapCategoryObject ], function ( input_types )
@@ -71,7 +71,7 @@ CapJitAddTypeSignature( "Opposite", [ IsCapCategoryObject ], function ( input_ty
     
 end );
 
-DeclareAttribute( "Opposite",
+@DeclareAttribute( "Opposite",
                   IsCapCategoryMorphism );
 
 CapJitAddTypeSignature( "Opposite", [ IsCapCategoryMorphism ], function ( input_types )

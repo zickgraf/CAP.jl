@@ -82,7 +82,7 @@ function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_
 	for i in 1:2:length(attributes_and_values)-1
 		symbol_setter = Setter(attributes_and_values[i])
 		value = attributes_and_values[i + 1]
-		eval(:($symbol_setter($obj, $value)))
+		symbol_setter(obj, value)
 	end
 	obj
 end
@@ -123,7 +123,7 @@ IsStringRep = IsString
 IsList = function( obj )
 	isa(obj, Vector)
 end
-filters_to_types[IsList] = Union{Vector,UnitRange,StepRange}
+filters_to_types[IsList] = Union{Vector,UnitRange,StepRange,Set}
 
 IsDenseList = IsList
 
@@ -310,10 +310,15 @@ function InstallMethod( operation, filter_list, func )
 		end, 1:length(filter_list))
 	end
 	if IsAttribute( operation )
-		symbol = Symbol(string(operation) * "Operation")
+		symbol = Symbol(operation.name * "Operation")
 	else
 		symbol = Symbol(string(operation))
 	end
+	
+	if !isdefined(@__MODULE__, symbol)
+		print("WARNING: installing method in module ", @__MODULE__, " for undefined symbol ", symbol, "\n")
+	end
+	
 	eval(:(
 		function $symbol($(vars_with_types...); keywords...)
 			if length(keywords) > 0
@@ -403,37 +408,31 @@ function (attr::Attribute)(obj::CAPDict)
 end
 
 function (attr::Attribute)(args...)
-	attr.operation(obj)
+	attr.operation(args...)
 end
 
-function declare_attribute_or_property(name::String, is_property::Bool)
+function declare_attribute_or_property(name::String, is_property::Bool, esc)
 	# attributes and properties might be installed for different parent filters
 	# since we do not take the parent filter into account here, we only have to install
 	# the attribute or property once
 	if isdefined(@__MODULE__, Symbol(name))
-		return
+		return nothing
 	end
-	symbol = Symbol(name)
-	symbol_op = Symbol(name * "Operation")
-	symbol_tester = Symbol("Has" * name)
-	symbol_getter = Symbol("Get" * name)
-	symbol_setter = Symbol("Set" * name)
-	eval(:(
+	symbol = esc(Symbol(name))
+	symbol_op = esc(Symbol(name * "Operation"))
+	symbol_tester = esc(Symbol("Has" * name))
+	symbol_getter = esc(Symbol("Get" * name))
+	symbol_setter = esc(Symbol("Set" * name))
+	quote
 		function $symbol_op end
-	))
-	eval(:(
 		function $symbol_tester(obj::CAPDict)
 			dict = getfield(obj, :dict)
 			haskey(dict, Symbol($name))
 		end
-	))
-	eval(:(
 		function $symbol_getter(obj::CAPDict)
 			dict = getfield(obj, :dict)
 			dict[Symbol($name)]
 		end
-	))
-	eval(:(
 		function $symbol_setter(obj::CAPDict, value)
 			dict = getfield(obj, :dict)
 			dict[Symbol($name)] = value
@@ -443,18 +442,15 @@ function declare_attribute_or_property(name::String, is_property::Bool)
 				end
 			end
 		end
-	))
-	eval(:(
 		$symbol = Attribute($name, $symbol_op, $symbol_tester, $symbol_getter, $symbol_setter, $is_property, [])
-	))
-	eval(:(export $symbol))
-	eval(:(export $symbol_tester))
-	eval(:(export $symbol_setter))
+	end
 end
 
-function DeclareAttribute( name, parent_filter, mutability=missing )
-	declare_attribute_or_property(name, false)
+macro DeclareAttribute(name::String, parent_filter, mutability = missing)
+	declare_attribute_or_property(name, false, esc)
 end
+
+export @DeclareAttribute
 
 IsAttribute = function( obj )
 	obj isa Attribute
@@ -472,8 +468,14 @@ DeclareSynonymAttr = function( name, attr )
 	# TODO
 end
 
-DeclareProperty = function( name, parent_filter )
-	declare_attribute_or_property(name, true)
+macro DeclareProperty(name::String, parent_filter)
+	declare_attribute_or_property(name, true, esc)
+end
+
+export @DeclareProperty
+
+function DeclareProperty(name::String, parent_filter)
+	eval(declare_attribute_or_property(name, true, identity))
 end
 
 IsProperty = function( obj )
@@ -502,11 +504,12 @@ mutable struct InfoClass
 	level::Int
 end
 
-function DeclareInfoClass(name::String)
+macro DeclareInfoClass(name::String)
 	symbol = Symbol(name)
-	eval(:(global $symbol = InfoClass($name, 0)))
-	eval(:(export $symbol))
+	:(global const $symbol = InfoClass($name, 0))
 end
+
+export @DeclareInfoClass
 
 function InfoLevel(infoclass::InfoClass)
 	infoclass.level
@@ -543,23 +546,25 @@ Perform = function( list, func )
 	end
 end
 
-function Length(list::Vector)
+@DeclareAttribute("Length", IsAttributeStoringRep)
+
+function LengthOperation(list::Vector)
 	length(list)
 end
 
-function Length(list::UnitRange)
+function LengthOperation(list::UnitRange)
 	length(list)
 end
 
-function Length(list::StepRange)
+function LengthOperation(list::StepRange)
 	length(list)
 end
 
-function Length(list::Tuple)
+function LengthOperation(list::Tuple)
 	length(list)
 end
 
-function Length(list::Set)
+function LengthOperation(list::Set)
 	length(list)
 end
 

@@ -51,7 +51,7 @@
 #! The output is the kernel  K  of  \alpha .
 #! @Returns an object
 #! @Arguments alpha
-DeclareAttribute( "KernelObject",
+@DeclareAttribute( "KernelObject",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -59,7 +59,7 @@ DeclareAttribute( "KernelObject",
 #! The output is the kernel embedding  \iota: \mathrm[KernelObject](\alpha) \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[KernelObject](\alpha),A) 
 #! @Arguments alpha
-DeclareAttribute( "KernelEmbedding",
+@DeclareAttribute( "KernelEmbedding",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -209,7 +209,7 @@ DeclareOperation( "KernelObjectFunctorialWithGivenKernelObjects",
 #! The output is the cokernel  K  of  \alpha .
 #! @Returns an object
 #! @Arguments alpha
-DeclareAttribute( "CokernelObject",
+@DeclareAttribute( "CokernelObject",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -217,7 +217,7 @@ DeclareAttribute( "CokernelObject",
 #! The output is the cokernel projection  \epsilon: B \rightarrow \mathrm[CokernelObject]( \alpha ) .
 #! @Returns a morphism ⥉  \mathrm[Hom](B, \mathrm[CokernelObject]( \alpha )) 
 #! @Arguments alpha
-DeclareAttribute( "CokernelProjection",
+@DeclareAttribute( "CokernelProjection",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -343,7 +343,7 @@ DeclareOperation( "CokernelObjectFunctorialWithGivenCokernelObjects",
 #! The output is a zero object  Z  of  C .
 #! @Returns an object
 #! @Arguments C
-DeclareAttribute( "ZeroObject",
+@DeclareAttribute( "ZeroObject",
                   IsCapCategory );
 
 #! @Description
@@ -353,7 +353,7 @@ DeclareAttribute( "ZeroObject",
 #! category  C  for which  c \in C .
 #! @Returns an object
 #! @Arguments c
-DeclareAttribute( "ZeroObject",
+@DeclareAttribute( "ZeroObject",
                   IsCapCategoryCell );
 
 #! @Description
@@ -361,7 +361,7 @@ DeclareAttribute( "ZeroObject",
 #! The output is the universal morphism  u_[\mathrm[out]]: \mathrm[ZeroObject] \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[ZeroObject], A) 
 #! @Arguments A
-DeclareAttribute( "UniversalMorphismFromZeroObject",
+@DeclareAttribute( "UniversalMorphismFromZeroObject",
                   IsCapCategoryObject );
 
 #! @Description
@@ -378,7 +378,7 @@ DeclareOperation( "UniversalMorphismFromZeroObjectWithGivenZeroObject",
 #! The output is the universal morphism  u_[\mathrm[in]]: A \rightarrow \mathrm[ZeroObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom](A, \mathrm[ZeroObject]) 
 #! @Arguments A
-DeclareAttribute( "UniversalMorphismIntoZeroObject",
+@DeclareAttribute( "UniversalMorphismIntoZeroObject",
                   IsCapCategoryObject );
 
 #! @Description
@@ -413,7 +413,7 @@ DeclareSynonymAttr( "MorphismIntoZeroObject",
 #! The output is the unique isomorphism  \mathrm[ZeroObject] \rightarrow \mathrm[InitialObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[ZeroObject], \mathrm[InitialObject]) 
 #! @Arguments C
-DeclareAttribute( "IsomorphismFromZeroObjectToInitialObject",
+@DeclareAttribute( "IsomorphismFromZeroObjectToInitialObject",
                   IsCapCategory );
 
 #! @Description
@@ -421,7 +421,7 @@ DeclareAttribute( "IsomorphismFromZeroObjectToInitialObject",
 #! The output is the unique isomorphism  \mathrm[InitialObject] \rightarrow \mathrm[ZeroObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[InitialObject], \mathrm[ZeroObject]) 
 #! @Arguments C
-DeclareAttribute( "IsomorphismFromInitialObjectToZeroObject",
+@DeclareAttribute( "IsomorphismFromInitialObjectToZeroObject",
                   IsCapCategory );
 
 #! @Description
@@ -429,7 +429,7 @@ DeclareAttribute( "IsomorphismFromInitialObjectToZeroObject",
 #! The output is the unique isomorphism  \mathrm[ZeroObject] \rightarrow \mathrm[TerminalObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[ZeroObject], \mathrm[TerminalObject]) 
 #! @Arguments C
-DeclareAttribute( "IsomorphismFromZeroObjectToTerminalObject",
+@DeclareAttribute( "IsomorphismFromZeroObjectToTerminalObject",
                   IsCapCategory );
 
 #! @Description
@@ -437,7 +437,7 @@ DeclareAttribute( "IsomorphismFromZeroObjectToTerminalObject",
 #! The output is the unique isomorphism  \mathrm[TerminalObject] \rightarrow \mathrm[ZeroObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[TerminalObject], \mathrm[ZeroObject]) 
 #! @Arguments C
-DeclareAttribute( "IsomorphismFromTerminalObjectToZeroObject",
+@DeclareAttribute( "IsomorphismFromTerminalObjectToZeroObject",
                   IsCapCategory );
 
 #! @Description
@@ -445,7 +445,7 @@ DeclareAttribute( "IsomorphismFromTerminalObjectToZeroObject",
 #! The output is the unique morphism  \mathrm[ZeroObject] \rightarrow \mathrm[ZeroObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[ZeroObject], \mathrm[ZeroObject] ) 
 #! @Arguments C
-DeclareAttribute( "ZeroObjectFunctorial",
+@DeclareAttribute( "ZeroObjectFunctorial",
                   IsCapCategory );
 
 #! @Description
@@ -483,7 +483,7 @@ DeclareOperation( "ZeroObjectFunctorialWithGivenZeroObjects",
 #! The output is a terminal object  T  of  C .
 #! @Returns an object
 #! @Arguments C
-DeclareAttribute( "TerminalObject",
+@DeclareAttribute( "TerminalObject",
                   IsCapCategory );
 
 #! @Description
@@ -493,7 +493,7 @@ DeclareAttribute( "TerminalObject",
 #! category  C  for which  c \in C .
 #! @Returns an object
 #! @Arguments c
-DeclareAttribute( "TerminalObject",
+@DeclareAttribute( "TerminalObject",
                   IsCapCategoryCell );
 
 
@@ -502,7 +502,7 @@ DeclareAttribute( "TerminalObject",
 #! The output is the universal morphism  u(A): A \rightarrow \mathrm[TerminalObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom]( A, \mathrm[TerminalObject] ) 
 #! @Arguments A
-DeclareAttribute( "UniversalMorphismIntoTerminalObject",
+@DeclareAttribute( "UniversalMorphismIntoTerminalObject",
                   IsCapCategoryObject );
 
 #! @Description
@@ -519,7 +519,7 @@ DeclareOperation( "UniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
 #! The output is the unique morphism  \mathrm[TerminalObject] \rightarrow \mathrm[TerminalObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[TerminalObject], \mathrm[TerminalObject] ) 
 #! @Arguments C
-DeclareAttribute( "TerminalObjectFunctorial",
+@DeclareAttribute( "TerminalObjectFunctorial",
                   IsCapCategory );
 
 #! @Description
@@ -558,7 +558,7 @@ DeclareOperation( "TerminalObjectFunctorialWithGivenTerminalObjects",
 #! The output is an initial object  I  of  C .
 #! @Returns an object
 #! @Arguments C
-DeclareAttribute( "InitialObject",
+@DeclareAttribute( "InitialObject",
                   IsCapCategory );
 
 #! @Description
@@ -568,7 +568,7 @@ DeclareAttribute( "InitialObject",
 #! for which  c \in C .
 #! @Returns an object
 #! @Arguments c
-DeclareAttribute( "InitialObject",
+@DeclareAttribute( "InitialObject",
                   IsCapCategoryCell );
 
 
@@ -577,7 +577,7 @@ DeclareAttribute( "InitialObject",
 #! The output is the universal morphism  u(A): \mathrm[InitialObject] \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[InitialObject] \rightarrow A) .
 #! @Arguments A
-DeclareAttribute( "UniversalMorphismFromInitialObject",
+@DeclareAttribute( "UniversalMorphismFromInitialObject",
                   IsCapCategoryObject );
 
 #! @Description
@@ -594,7 +594,7 @@ DeclareOperation( "UniversalMorphismFromInitialObjectWithGivenInitialObject",
 #! The output is the unique morphism  \mathrm[InitialObject] \rightarrow \mathrm[InitialObject] .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[InitialObject], \mathrm[InitialObject] ) 
 #! @Arguments C
-DeclareAttribute( "InitialObjectFunctorial",
+@DeclareAttribute( "InitialObjectFunctorial",
                   IsCapCategory );
 
 #! @Description
@@ -995,7 +995,7 @@ DeclareOperation( "DirectSumFunctorialWithGivenDirectSums",
 #! The output is the coproduct  \bigsqcup_[i=1]^n I_i .
 #! @Returns an object
 #! @Arguments D
-DeclareAttribute( "Coproduct",
+@DeclareAttribute( "Coproduct",
                   IsList );
 
 #! @Description
@@ -2113,7 +2113,7 @@ DeclareOperation( "PushoutFunctorialWithGivenPushouts",
 #!  \mathrm[im](\alpha) \rightarrow \mathrm[KernelObject]( \mathrm[CokernelProjection]( \alpha ) ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[im](\alpha), \mathrm[KernelObject]( \mathrm[CokernelProjection]( \alpha ) ) ) 
 #! @Arguments alpha
-DeclareAttribute( "IsomorphismFromImageObjectToKernelOfCokernel",
+@DeclareAttribute( "IsomorphismFromImageObjectToKernelOfCokernel",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2122,7 +2122,7 @@ DeclareAttribute( "IsomorphismFromImageObjectToKernelOfCokernel",
 #!  \mathrm[KernelObject]( \mathrm[CokernelProjection]( \alpha ) ) \rightarrow \mathrm[im](\alpha) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[KernelObject]( \mathrm[CokernelProjection]( \alpha ) ), \mathrm[im](\alpha) ) 
 #! @Arguments alpha
-DeclareAttribute( "IsomorphismFromKernelOfCokernelToImageObject",
+@DeclareAttribute( "IsomorphismFromKernelOfCokernelToImageObject",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2130,7 +2130,7 @@ DeclareAttribute( "IsomorphismFromKernelOfCokernelToImageObject",
 #! The output is the image  \mathrm[im]( \alpha ) .
 #! @Returns an object
 #! @Arguments alpha
-DeclareAttribute( "ImageObject",
+@DeclareAttribute( "ImageObject",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2139,7 +2139,7 @@ DeclareAttribute( "ImageObject",
 #!  \iota: \mathrm[im](\alpha) \hookrightarrow B .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[im](\alpha), B) 
 #! @Arguments alpha
-DeclareAttribute( "ImageEmbedding",
+@DeclareAttribute( "ImageEmbedding",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2159,7 +2159,7 @@ DeclareOperation( "ImageEmbeddingWithGivenImageObject",
 #!  c: A \rightarrow \mathrm[im]( \alpha ) .
 #! @Returns a morphism ⥉  \mathrm[Hom](A, \mathrm[im]( \alpha )) 
 #! @Arguments alpha
-DeclareAttribute( "CoastrictionToImage",
+@DeclareAttribute( "CoastrictionToImage",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2248,7 +2248,7 @@ DeclareOperation( "UniversalMorphismFromImageWithGivenImageObject",
 #!  \mathrm[coim](\alpha) \rightarrow \mathrm[im](\alpha) .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[coim](\alpha), \mathrm[im](\alpha)) 
 #! @Arguments alpha
-DeclareAttribute( "MorphismFromCoimageToImage",
+@DeclareAttribute( "MorphismFromCoimageToImage",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2268,7 +2268,7 @@ DeclareOperation( "MorphismFromCoimageToImageWithGivenObjects",
 #!  \mathrm[im](\alpha) \rightarrow \mathrm[coim](\alpha) .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[im](\alpha), \mathrm[coim](\alpha)) 
 #! @Arguments alpha
-DeclareAttribute( "InverseMorphismFromCoimageToImage",
+@DeclareAttribute( "InverseMorphismFromCoimageToImage",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2288,7 +2288,7 @@ DeclareOperation( "InverseMorphismFromCoimageToImageWithGivenObjects",
 #!  \mathrm[coim]( \alpha ) \rightarrow \mathrm[CokernelObject]( \mathrm[KernelEmbedding]( \alpha ) ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[coim]( \alpha ), \mathrm[CokernelObject]( \mathrm[KernelEmbedding]( \alpha ) ) ) .
 #! @Arguments alpha
-DeclareAttribute( "IsomorphismFromCoimageToCokernelOfKernel",
+@DeclareAttribute( "IsomorphismFromCoimageToCokernelOfKernel",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2297,7 +2297,7 @@ DeclareAttribute( "IsomorphismFromCoimageToCokernelOfKernel",
 #!  \mathrm[CokernelObject]( \mathrm[KernelEmbedding]( \alpha ) ) \rightarrow \mathrm[coim]( \alpha ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[CokernelObject]( \mathrm[KernelEmbedding]( \alpha ) ), \mathrm[coim]( \alpha ) ) .
 #! @Arguments alpha
-DeclareAttribute( "IsomorphismFromCokernelOfKernelToCoimage",
+@DeclareAttribute( "IsomorphismFromCokernelOfKernelToCoimage",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2305,7 +2305,7 @@ DeclareAttribute( "IsomorphismFromCokernelOfKernelToCoimage",
 #! The output is the coimage  \mathrm[coim]( \alpha ) .
 #! @Returns an object
 #! @Arguments alpha
-DeclareAttribute( "CoimageObject",
+@DeclareAttribute( "CoimageObject",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2314,7 +2314,7 @@ DeclareAttribute( "CoimageObject",
 #!  \pi: A \twoheadrightarrow \mathrm[coim]( \alpha ) .
 #! @Returns a morphism ⥉  \mathrm[Hom](A, \mathrm[coim]( \alpha )) 
 #! @Arguments alpha
-DeclareAttribute( "CoimageProjection",
+@DeclareAttribute( "CoimageProjection",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2333,7 +2333,7 @@ DeclareOperation( "CoimageProjectionWithGivenCoimageObject",
 #!  a: \mathrm[coim]( \alpha ) \rightarrow B .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[coim]( \alpha ),B) 
 #! @Arguments alpha
-DeclareAttribute( "AstrictionToCoimage",
+@DeclareAttribute( "AstrictionToCoimage",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2388,7 +2388,7 @@ DeclareOperation( "UniversalMorphismIntoCoimageWithGivenCoimageObject",
 #!  c: \mathrm[im]( \alpha ) \rightarrow \mathrm[coim]( \alpha ) .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[im]( \alpha ), \mathrm[coim]( \alpha ) ) 
 #! @Arguments alpha
-DeclareAttribute( "CanonicalIdentificationFromImageObjectToCoimage",
+@DeclareAttribute( "CanonicalIdentificationFromImageObjectToCoimage",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2397,7 +2397,7 @@ DeclareAttribute( "CanonicalIdentificationFromImageObjectToCoimage",
 #!  c: \mathrm[coim]( \alpha ) \rightarrow \mathrm[im]( \alpha ) .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[coim]( \alpha ), \mathrm[im]( \alpha ) ) 
 #! @Arguments alpha
-DeclareAttribute( "CanonicalIdentificationFromCoimageToImageObject",
+@DeclareAttribute( "CanonicalIdentificationFromCoimageToImageObject",
                   IsCapCategoryMorphism );
 
 #! @Chapter Universal Objects

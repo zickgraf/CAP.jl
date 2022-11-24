@@ -74,14 +74,14 @@ DeclareCategory( "IsCapNaturalTransformation",
 #!  So categories must be wrapped ⥉ a CatObject to be an object ⥉ Cat.
 #!  This method returns the wrapper object. The category can be reobtained by <C>AsCapCategory</C>.
 #! @Arguments C
-DeclareAttribute( "AsCatObject",
+@DeclareAttribute( "AsCatObject",
                   IsCapCategory );
 
 #! @Description
 #!  For an object  C  ⥉ Cat, this method returns the underlying CAP category. This method is inverse to <C>AsCatObject</C>, i.e.
 #!  AsCapCategory( AsCatObject( A ) ) == A.
 #! @Arguments C
-DeclareAttribute( "AsCapCategory",
+@DeclareAttribute( "AsCapCategory",
                   IsCapCategoryAsCatObject );
 
 ####################################
@@ -160,12 +160,12 @@ DeclareOperation( "CapFunctor",
 #! @Description
 #! The argument is a functor  F . The output is its source as CAP category.
 #! @Arguments F
-DeclareAttribute( "SourceOfFunctor", IsCapFunctor );
+@DeclareAttribute( "SourceOfFunctor", IsCapFunctor );
 
 #! @Description
 #! The argument is a functor  F . The output is its range as CAP category.
 #! @Arguments F
-DeclareAttribute( "RangeOfFunctor", IsCapFunctor );
+@DeclareAttribute( "RangeOfFunctor", IsCapFunctor );
 
 ####################################
 ##
@@ -199,7 +199,7 @@ DeclareOperation( "AddObjectFunction",
 #! realizing the action of  F  on objects.
 #! @Arguments F
 #! @Returns a GAP operation
-DeclareAttribute( "FunctorObjectOperation",
+@DeclareAttribute( "FunctorObjectOperation",
                   IsCapFunctor );
 
 
@@ -236,7 +236,7 @@ DeclareOperation( "AddMorphismFunction",
 #! realizing the action of  F  on morphisms.
 #! @Arguments F
 #! @Returns a GAP operation
-DeclareAttribute( "FunctorMorphismOperation",
+@DeclareAttribute( "FunctorMorphismOperation",
                   IsCapFunctor );
 
 
@@ -275,7 +275,7 @@ DeclareGlobalFunction( "ApplyFunctor" );
 #!  where  D_i == A_i  if  b_i == \\mathtt[false] , &&  D_i == A_i^[\mathrm[op]]  otherwise.
 #! @Returns IsList
 #! @Arguments F
-DeclareAttribute( "InputSignature",
+@DeclareAttribute( "InputSignature",
                   IsCapFunctor );
 
 ####################################
@@ -310,10 +310,10 @@ DeclareAttribute( "InputSignature",
 DeclareOperation( "InstallFunctor",
                   [ IsCapFunctor, IsString ] );
 
-DeclareAttribute( "ObjectFunctionName",
+@DeclareAttribute( "ObjectFunctionName",
                   IsCapFunctor );
 
-DeclareAttribute( "MorphismFunctionName",
+@DeclareAttribute( "MorphismFunctionName",
                   IsCapFunctor );
 
 
@@ -324,7 +324,7 @@ DeclareAttribute( "MorphismFunctionName",
 #!  ⥉ the category of categories.
 #! @Arguments cat
 #! @Returns a functor
-DeclareAttribute( "IdentityFunctor",
+@DeclareAttribute( "IdentityFunctor",
                   IsCapCategory );
 
 #! @Description
@@ -335,7 +335,7 @@ DeclareAttribute( "IdentityFunctor",
 #!  This functor is equivalent to the identity functor.
 #! @Arguments cat
 #! @Returns a functor
-DeclareAttribute( "FunctorCanonicalizeZeroObjects",
+@DeclareAttribute( "FunctorCanonicalizeZeroObjects",
                   IsCapCategory );
 
 #! @Description
@@ -343,7 +343,7 @@ DeclareAttribute( "FunctorCanonicalizeZeroObjects",
 #!  to <C>FunctorCanonicalizeZeroObjects</C>(<A>cat</A>).
 #! @Arguments cat
 #! @Returns a natural transformation
-DeclareAttribute( "NaturalIsomorphismFromIdentityToCanonicalizeZeroObjects",
+@DeclareAttribute( "NaturalIsomorphismFromIdentityToCanonicalizeZeroObjects",
                   IsCapCategory );
 
 #! @Description
@@ -355,7 +355,7 @@ DeclareAttribute( "NaturalIsomorphismFromIdentityToCanonicalizeZeroObjects",
 #!  This functor is equivalent to the identity functor.
 #! @Arguments cat
 #! @Returns a functor
-DeclareAttribute( "FunctorCanonicalizeZeroMorphisms",
+@DeclareAttribute( "FunctorCanonicalizeZeroMorphisms",
                   IsCapCategory );
 
 #! @Description
@@ -363,7 +363,7 @@ DeclareAttribute( "FunctorCanonicalizeZeroMorphisms",
 #!  to <C>FunctorCanonicalizeZeroMorphisms</C>(<A>cat</A>).
 #! @Arguments cat
 #! @Returns a natural transformation
-DeclareAttribute( "NaturalIsomorphismFromIdentityToCanonicalizeZeroMorphisms",
+@DeclareAttribute( "NaturalIsomorphismFromIdentityToCanonicalizeZeroMorphisms",
                   IsCapCategory );
 
 
@@ -382,7 +382,7 @@ DeclareAttribute( "NaturalIsomorphismFromIdentityToCanonicalizeZeroMorphisms",
 #!  As every functor, every natural transformation has a name attribute.
 #!  It has to be a string && will be set by the Constructor.
 #! @Returns a string
-DeclareAttribute( "Name",
+@DeclareAttribute( "Name",
                   IsCapNaturalTransformation );
 
 #! @BeginGroup
@@ -400,13 +400,13 @@ DeclareOperation( "NaturalTransformation",
                   [ IsString, IsCapFunctor, IsCapFunctor ] );
 #! @EndGroup
 
-DeclareAttribute( "NaturalTransformationCache",
+@DeclareAttribute( "NaturalTransformationCache",
                   IsCapNaturalTransformation );
 
-DeclareAttribute( "NaturalTransformationFunction",
+@DeclareAttribute( "NaturalTransformationFunction",
                   IsCapNaturalTransformation );
 
-DeclareAttribute( "NaturalTransformationOperation",
+@DeclareAttribute( "NaturalTransformationOperation",
                   IsCapNaturalTransformation );
 
 #! @BeginGroup
@@ -467,12 +467,12 @@ DeclareOperationWithCache( "HorizontalPreComposeFunctorWithNaturalTransformation
 #!  Retuns the caching object which stores the results of the functor <A>functor</A> applied to objects.
 #! @Arguments functor
 #! @Returns IsCachingObject
-DeclareAttribute( "ObjectCache",
+@DeclareAttribute( "ObjectCache",
                   IsCapFunctor );
 
 #! @Description
 #!  Retuns the caching object which stores the results of the functor <A>functor</A> applied to morphisms.
 #! @Arguments functor
 #! @Returns IsCachingObject
-DeclareAttribute( "MorphismCache",
+@DeclareAttribute( "MorphismCache",
                   IsCapFunctor );

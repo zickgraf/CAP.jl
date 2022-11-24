@@ -3318,7 +3318,7 @@ MorphismBetweenDirectSums = rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return NTuple( 4, list[1], list[4], TransposedMat( list[3] ), list[2] );
+      return nTuple( 4, list[1], list[4], TransposedMat( list[3] ), list[2] );
   end
 ),
 
@@ -3330,7 +3330,7 @@ MorphismBetweenDirectSumsWithGivenDirectSums = rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return NTuple( 6, list[1], list[6], list[5], TransposedMat( list[4] ), list[3], list[2] );
+      return nTuple( 6, list[1], list[6], list[5], TransposedMat( list[4] ), list[3], list[2] );
   end
 ),
 
@@ -3371,7 +3371,7 @@ HomomorphismStructureOnMorphismsWithGivenObjects = rec(
   return_type = "morphism_in_range_category_of_homomorphism_structure",
   dual_operation = "HomomorphismStructureOnMorphismsWithGivenObjects",
   dual_preprocessor_func = function( cat, source, alpha, beta, range )
-    return NTuple( 5, OppositeCategory( cat ), source, Opposite( beta ), Opposite( alpha ), range );
+    return nTuple( 5, OppositeCategory( cat ), source, Opposite( beta ), Opposite( alpha ), range );
   end,
   dual_postprocessor_func = IdFunc,
 ),
@@ -3401,7 +3401,7 @@ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGiv
   return_type = "morphism_in_range_category_of_homomorphism_structure",
   dual_operation = "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
   dual_preprocessor_func = function( cat, distinguished_object, alpha, hom_source_range )
-    return NTuple( 4, OppositeCategory( cat ), distinguished_object, Opposite( alpha ), hom_source_range );
+    return nTuple( 4, OppositeCategory( cat ), distinguished_object, Opposite( alpha ), hom_source_range );
   end,
   dual_postprocessor_func = IdFunc
 ),
@@ -3411,7 +3411,7 @@ InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism = rec(
   return_type = "morphism",
   dual_operation = "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
   dual_preprocessor_func = function( cat, A, B, morphism )
-    return NTuple( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), morphism );
+    return nTuple( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), morphism );
   end
 ),
 
@@ -3529,7 +3529,7 @@ RandomMorphismWithFixedSourceAndRangeByInteger = rec(
   return_type = "morphism",
   dual_operation = "RandomMorphismWithFixedSourceAndRangeByInteger",
   dual_preprocessor_func = function( cat, A, B, n )
-      return NTuple( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), n );
+      return nTuple( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), n );
   end
 ),
 
@@ -3629,7 +3629,7 @@ HomologyObjectFunctorialWithGivenHomologyObjects = rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return NTuple( 4, list[1], list[4], Reversed( list[3] ), list[2] );
+      return nTuple( 4, list[1], list[4], Reversed( list[3] ), list[2] );
   end
 ),
 

@@ -79,7 +79,7 @@ DeclareCategory( "IsWrapperCapCategoryMorphism",
 #!  The category used to model the wrapper category <A>category</A>.
 #! @Arguments category
 #! @Returns a category
-DeclareAttribute( "ModelingCategory",
+@DeclareAttribute( "ModelingCategory",
         IsCapCategory );
 
 ##
@@ -92,14 +92,14 @@ CapJitAddTypeSignature( "ModelingCategory",
 end );
 
 
-DeclareAttribute( "UnderlyingCategory",
+@DeclareAttribute( "UnderlyingCategory",
         IsWrapperCapCategory );
 
 #! @Description
 #!  The cell underlying the wrapper category object <A>object</A>.
 #! @Arguments object
 #! @Returns a category object
-DeclareAttribute( "UnderlyingCell",
+@DeclareAttribute( "UnderlyingCell",
         IsWrapperCapCategoryObject );
 
 ##
@@ -115,7 +115,7 @@ end );
 #!  The cell underlying the wrapper category morphism <A>morphism</A>.
 #! @Arguments morphism
 #! @Returns a category morphism
-DeclareAttribute( "UnderlyingCell",
+@DeclareAttribute( "UnderlyingCell",
         IsWrapperCapCategoryMorphism );
 
 ##
@@ -205,7 +205,7 @@ DeclareOperation( "WrapperCategory",
 #!  The functor maps each wrapped object/morphism to its wrapping object/morphism.
 #! @Arguments W
 #! @Returns a functor
-DeclareAttribute( "WrappingFunctor",
+@DeclareAttribute( "WrappingFunctor",
                   IsWrapperCapCategory );
 
 #! @Description
