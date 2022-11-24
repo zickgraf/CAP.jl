@@ -105,20 +105,16 @@ function IsFilter( obj )
 	obj isa Filter
 end
 
-function DeclareFilter( name, parent_filter )
+macro DeclareFilter(name::String, parent_filter::Union{Symbol,Expr} = :IsObject)
 	filter_symbol = Symbol(name)
-	type_symbol = Symbol("TheJuliaAbstractType" * string(filter_symbol))
-	eval(:(abstract type $type_symbol <: $(parent_filter.data_type) end))
-	eval(:(global const $filter_symbol = Filter($name, $type_symbol)))
-	eval(:(export $type_symbol))
-	eval(:(export $filter_symbol))
+	type_symbol = Symbol("TheJuliaAbstractType" * name)
+	quote
+		abstract type $type_symbol <: $parent_filter.data_type end
+		global const $filter_symbol = Filter($name, $(esc(type_symbol)))
+	end
 end
 
-function DeclareFilter( name )
-	DeclareFilter(name, IsObject)
-end
-
-DeclareCategory = DeclareFilter
+export @DeclareFilter
 
 function NewFilter( name, parent_filter )
 	type_symbol = Symbol("TheJuliaAbstractType" * name * string(gensym()))

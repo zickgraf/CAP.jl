@@ -17,17 +17,17 @@
 
 #! @Description
 #!  The &GAP; category of a dummy CAP category.
-DeclareCategory( "IsDummyCategory",
+@DeclareFilter( "IsDummyCategory",
         IsCapCategory );
 
 #! @Description
 #!  The &GAP; category of objects ⥉ a dummy CAP category.
-DeclareCategory( "IsDummyCategoryObject",
+@DeclareFilter( "IsDummyCategoryObject",
         IsCapCategoryObject );
 
 #! @Description
 #!  The &GAP; category of morphisms ⥉ a dummy CAP category.
-DeclareCategory( "IsDummyCategoryMorphism",
+@DeclareFilter( "IsDummyCategoryMorphism",
         IsCapCategoryMorphism );
 
 ####################################

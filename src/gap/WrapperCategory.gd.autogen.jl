@@ -56,17 +56,17 @@
 
 #! @Description
 #!  The &GAP; category of a wrapper CAP category (using the default data structure).
-DeclareCategory( "IsWrapperCapCategory",
+@DeclareFilter( "IsWrapperCapCategory",
         IsCapCategory );
 
 #! @Description
 #!  The &GAP; category of objects ⥉ a wrapper CAP category.
-DeclareCategory( "IsWrapperCapCategoryObject",
+@DeclareFilter( "IsWrapperCapCategoryObject",
         IsCapCategoryObject );
 
 #! @Description
 #!  The &GAP; category of morphisms ⥉ a wrapper CAP category.
-DeclareCategory( "IsWrapperCapCategoryMorphism",
+@DeclareFilter( "IsWrapperCapCategoryMorphism",
         IsCapCategoryMorphism );
 
 ####################################

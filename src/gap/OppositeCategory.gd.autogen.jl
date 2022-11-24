@@ -11,10 +11,10 @@
 ##
 ###################################
 
-DeclareCategory( "IsCapCategoryOppositeObject",
+@DeclareFilter( "IsCapCategoryOppositeObject",
                  IsCapCategoryObject );
 
-DeclareCategory( "IsCapCategoryOppositeMorphism",
+@DeclareFilter( "IsCapCategoryOppositeMorphism",
                  IsCapCategoryMorphism );
 
 ###################################
@@ -23,7 +23,7 @@ DeclareCategory( "IsCapCategoryOppositeMorphism",
 ##
 ###################################
 
-DeclareFilter( "WasCreatedAsOppositeCategory",
+@DeclareFilter( "WasCreatedAsOppositeCategory",
                IsCapCategory );
 
 DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_CATEGORY" );

@@ -44,19 +44,19 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 #! @Description
 #!  The GAP category of CAP categories seen as object ⥉ Cat.
 #! @Arguments object
-DeclareCategory( "IsCapCategoryAsCatObject",
+@DeclareFilter( "IsCapCategoryAsCatObject",
                  IsCapCategoryObject );
 
 #! @Description
 #!  The GAP category of functors.
 #! @Arguments object
-DeclareCategory( "IsCapFunctor",
+@DeclareFilter( "IsCapFunctor",
                  IsCapCategoryMorphism );
 
 #! @Description
 #! The GAP category of natural transformations.
 #! @Arguments object
-DeclareCategory( "IsCapNaturalTransformation",
+@DeclareFilter( "IsCapNaturalTransformation",
                  IsCapCategoryTwoCell );
 
 ####################################

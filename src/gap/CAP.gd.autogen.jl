@@ -90,7 +90,7 @@ InstallValue( CATEGORIES_FAMILY_PROPERTIES,
 #!  Please note that the object itself is !related to methods, you only need it
 #!  as a handler && a presentation of the CAP category.
 #! @Arguments object
-DeclareCategory( "IsCapCategory",
+@DeclareFilter( "IsCapCategory",
                  IsAttributeStoringRep );
 
 #! @Description
@@ -98,7 +98,7 @@ DeclareCategory( "IsCapCategory",
 #! Every object, morphism, &&  2 -cell
 #! of a CAP category lies ⥉ this GAP category.
 #! @Arguments object
-DeclareCategory( "IsCapCategoryCell",
+@DeclareFilter( "IsCapCategoryCell",
                  IsAttributeStoringRep );
 
 #! @Description
@@ -106,7 +106,7 @@ DeclareCategory( "IsCapCategoryCell",
 #! Every object of a CAP category lies in
 #! this GAP category.
 #! @Arguments object
-DeclareCategory( "IsCapCategoryObject",
+@DeclareFilter( "IsCapCategoryObject",
                  IsCapCategoryCell );
 
 #! @Description
@@ -114,7 +114,7 @@ DeclareCategory( "IsCapCategoryObject",
 #! Every morphism of a CAP category lies in
 #! this GAP category.
 #! @Arguments object
-DeclareCategory( "IsCapCategoryMorphism",
+@DeclareFilter( "IsCapCategoryMorphism",
                  IsCapCategoryCell  );
 
 #! @Description
@@ -122,10 +122,10 @@ DeclareCategory( "IsCapCategoryMorphism",
 #! Every  2 -cell of a CAP category lies in
 #! this GAP category.
 #! @Arguments object
-DeclareCategory( "IsCapCategoryTwoCell",
+@DeclareFilter( "IsCapCategoryTwoCell",
                  IsCapCategoryCell );
 
-DeclareCategory( "IsCellOfSkeletalCategory",
+@DeclareFilter( "IsCellOfSkeletalCategory",
                  IsCapCategoryCell );
 
 #! @Description

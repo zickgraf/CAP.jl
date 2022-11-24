@@ -14,37 +14,37 @@
 #! @Description
 #!  The &GAP; type of a terminal category with a single object.
 #! @Arguments T
-DeclareCategory( "IsCapTerminalCategoryWithSingleObject",
+@DeclareFilter( "IsCapTerminalCategoryWithSingleObject",
         IsCapCategory );
 
 #! @Description
 #!  The &GAP; type of an object ⥉ a terminal category with a single object.
 #! @Arguments T
-DeclareCategory( "IsObjectInCapTerminalCategoryWithSingleObject",
+@DeclareFilter( "IsObjectInCapTerminalCategoryWithSingleObject",
         IsCapCategoryObject );
 
 #! @Description
 #!  The &GAP; type of a morphism ⥉ a terminal category with a single object.
 #! @Arguments T
-DeclareCategory( "IsMorphismInCapTerminalCategoryWithSingleObject",
+@DeclareFilter( "IsMorphismInCapTerminalCategoryWithSingleObject",
         IsCapCategoryMorphism );
 
 #! @Description
 #!  The &GAP; type of a terminal category with multiple objects.
 #! @Arguments T
-DeclareCategory( "IsCapTerminalCategoryWithMultipleObjects",
+@DeclareFilter( "IsCapTerminalCategoryWithMultipleObjects",
         IsCapCategory );
 
 #! @Description
 #!  The &GAP; type of an object ⥉ a terminal category with multiple objects.
 #! @Arguments T
-DeclareCategory( "IsObjectInCapTerminalCategoryWithMultipleObjects",
+@DeclareFilter( "IsObjectInCapTerminalCategoryWithMultipleObjects",
         IsCapCategoryObject );
 
 #! @Description
 #!  The &GAP; type of a morphism ⥉ a terminal category with multiple objects.
 #! @Arguments T
-DeclareCategory( "IsMorphismInCapTerminalCategoryWithMultipleObjects",
+@DeclareFilter( "IsMorphismInCapTerminalCategoryWithMultipleObjects",
         IsCapCategoryMorphism );
 
 AddCategoricalProperty( [ "IsTerminalCategory", "IsTerminalCategory" ] );

@@ -286,7 +286,7 @@ DeclareOperation( "SafeFirst", [ IsList, IsFunction ] );
 DeclareGlobalFunction( "nTuple" );
 
 # this filter is only used for the type system in CompilerForCAP
-DeclareFilter( "IsnTuple" );
+@DeclareFilter( "IsnTuple" );
 
 #! @Description
 #!   Alias for `nTuple( 2, <A>first</A>, <A>second</A> )`.

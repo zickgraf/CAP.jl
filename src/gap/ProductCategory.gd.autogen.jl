@@ -10,13 +10,13 @@
 ##
 #############################################################################
 
-DeclareCategory( "IsCapCategoryProductObject",
+@DeclareFilter( "IsCapCategoryProductObject",
                  IsCapCategoryObject );
 
-DeclareCategory( "IsCapCategoryProductMorphism",
+@DeclareFilter( "IsCapCategoryProductMorphism",
                  IsCapCategoryMorphism );
 
-DeclareCategory( "IsCapCategoryProductTwoCell",
+@DeclareFilter( "IsCapCategoryProductTwoCell",
                  IsCapCategoryTwoCell );
 
 DeclareOperationWithCache( "DirectProductFunctor",
@@ -25,7 +25,7 @@ DeclareOperationWithCache( "DirectProductFunctor",
 DeclareOperationWithCache( "CoproductFunctor",
                            [ IsCapCategory, IsInt ] );
 
-DeclareFilter( "IsCapProductCategory", IsCapCategory );
+@DeclareFilter( "IsCapProductCategory", IsCapCategory );
 
 
 @DeclareAttribute( "Components",
