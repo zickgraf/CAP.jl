@@ -479,25 +479,27 @@ end
 
 # info classes
 
-info_levels = Dict()
+mutable struct InfoClass
+	name::String
+	level::Int
+end
 
-function DeclareInfoClass( name )
+function DeclareInfoClass(name::String)
 	symbol = Symbol(name)
-	eval(:(global $symbol = $name))
-	info_levels[name] = 0
+	eval(:(global $symbol = InfoClass($name, 0)))
 	eval(:(export $symbol))
 end
 
-function InfoLevel( infoclass )
-	info_levels[infoclass]
+function InfoLevel(infoclass::InfoClass)
+	infoclass.level
 end
 
-function SetInfoLevel( infoclass, level )
-	info_levels[infoclass] = level
+function SetInfoLevel(infoclass::InfoClass, level::Int)
+	infoclass.level = level
 end
 
-function Info(infoclass, level, args...)
-	if InfoLevel( infoclass ) >= level
+function Info(infoclass::InfoClass, required_level::Int, args...)
+	if InfoLevel( infoclass ) >= required_level
 		Print("#I  ", args..., "\n")
 	end
 end
