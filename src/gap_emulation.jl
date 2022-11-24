@@ -9,18 +9,6 @@ import Base.show
 import Base.copy
 import Base.in
 
-filters_to_types = Dict()
-filters_to_types[IO] = IO
-
-function get_type_from_filter(filter)
-	if haskey(filters_to_types, filter)
-		return filters_to_types[filter]
-	else
-		display(String(Symbol(filter)))
-		display("unkown filter " * string(filter))
-		throw("error")
-	end
-end
 
 function PrintString end
 function DirectSum end
@@ -90,7 +78,7 @@ end
 function NewType( family, filter )
 	type_symbol = Symbol("TheJuliaConcreteType" * string(filter) * string(gensym()))
 	eval(:(
-		struct $type_symbol <: $(get_type_from_filter(filter))
+		struct $type_symbol <: $(filter.data_type)
 			dict::Dict
 		end
 	))
@@ -102,91 +90,75 @@ function Objectify(type, record)
 	ObjectifyWithAttributes( record, type )
 end
 
-# GAP types
-abstract type AttributeStoringRep <: CAPDict end
-abstract type RingElement end
-abstract type CachingObject end
+# filters
+
+struct Filter <: Function
+	name::String
+	data_type::Type
+end
+
+function (filter::Filter)(obj)
+	isa(obj, filter.data_type)
+end
+
+function IsFilter( obj )
+	obj isa Filter
+end
+
+function DeclareFilter( name, parent_filter )
+	filter_symbol = Symbol(name)
+	type_symbol = Symbol("TheJuliaAbstractType" * string(filter_symbol))
+	eval(:(abstract type $type_symbol <: $(parent_filter.data_type) end))
+	eval(:(global const $filter_symbol = Filter($name, $type_symbol)))
+	eval(:(export $type_symbol))
+	eval(:(export $filter_symbol))
+end
+
+function DeclareFilter( name )
+	DeclareFilter(name, IsObject)
+end
+
+DeclareCategory = DeclareFilter
+
+function NewFilter( name, parent_filter )
+	type_symbol = Symbol("TheJuliaAbstractType" * name * string(gensym()))
+	eval(:(abstract type $type_symbol <: $(parent_filter.data_type) end))
+	type = eval(type_symbol)
+	filter = Filter(name, type)
+	eval(:(export $type_symbol))
+	filter
+end
+
+function NewFilter( name )
+	NewFilter(name, IsObject)
+end
+
+const NewCategory = NewFilter
 
 # GAP filters
-IsObject = function( obj )
-	true
-end
-filters_to_types[IsObject] = Any
+abstract type AttributeStoringRep <: CAPDict end
+const IsAttributeStoringRep = Filter("IsAttributeStoringRep", AttributeStoringRep)
 
-IsString = function( obj )
-	isa(obj, String)
-end
-filters_to_types[IsString] = String
+abstract type CachingObject end
+const IsCachingObject = Filter("IsCachingObject", CachingObject )
 
-IsStringRep = IsString
-
-IsList = function( obj )
-	isa(obj, Vector)
-end
-filters_to_types[IsList] = Union{Vector,UnitRange,StepRange,Set}
-
-IsDenseList = IsList
-
-IsFunction = function( obj )
-	# TODO
-	isa(obj, Function) || isa(obj, String)
-end
-filters_to_types[IsFunction] = Function
-
-IsOperation = IsFunction
-
-IsAttributeStoringRep = function( obj )
-	isa(obj, AttributeStoringRep)
-end
-filters_to_types[IsAttributeStoringRep] = AttributeStoringRep
-
-IsCachingObject = function( obj )
-	isa(obj, CachingObject)
-end
-filters_to_types[IsCachingObject] = CachingObject
-
-IsChar = function( obj )
-	isa(obj, Char)
-end
-filters_to_types[IsChar] = Char
-
-IsInt = function( obj )
-	isa(obj, Int)
-end
-filters_to_types[IsInt] = Int
-
-IsRat = function( obj )
-	isa(obj, Rational)
-end
-filters_to_types[IsRat] = Rational
-
-IsBool = function( obj )
-	isa(obj, Bool)
-end
-filters_to_types[IsBool] = Bool
-
-IsPosInt = function( obj )
-	IsInt(obj) && obj > 0
-end
-# TODO
-filters_to_types[IsPosInt] = Int
-
-IsRingElement = function( obj )
-	isa(obj, RingElement) || IsInt(obj)
-end
-# TODO
-filters_to_types[IsRingElement] = Int
-
-IsRecord = function( obj )
-	isa(obj, CAPRecord)
-end
-filters_to_types[IsRecord] = CAPRecord
-
-# integer of infinity (a float)
-IsCyclotomic = function( obj )
-	isa(obj, Int) || obj === Inf64
-end
-filters_to_types[IsCyclotomic] = Union{Int,Float64}
+const IsIO = Filter("IsIO", IO)
+const IsObject = Filter("IsObject", Any)
+const IsString = Filter("IsString", String)
+const IsStringRep = IsString
+const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Set})
+const IsDenseList = IsList
+const IsFunction = Filter("IsFunction", Function)
+const IsOperation = IsFunction
+const IsChar = Filter("IsChar", Char)
+const IsInt = Filter("IsInt", Int)
+const IsRat = Filter("IsRat", Rational)
+const IsBool = Filter("IsBool", Bool)
+const IsPosInt = Filter("IsPosInt", Int) # TODO
+const IsRingElement = Filter("IsRingElement", Int) # TODO
+const IsRecord = Filter("IsRecord", CAPRecord)
+# integer or infinity (a float)
+const IsCyclotomic = Filter("IsCyclotomic", Union{Int,Float64}) # TODO
 
 # global functions
 DeclareGlobalFunction = function( name )
@@ -279,7 +251,7 @@ function InstallMethod( operation, filter_list, func )
 	elseif operation == ViewObj
 		operation = show
 		@assert length(filter_list) == 1
-		filter_list = [IO, filter_list[1]]
+		filter_list = [IsIO, filter_list[1]]
 		func = eval(:((io, obj) -> $func(obj)))
 	end
 	
@@ -305,7 +277,7 @@ function InstallMethod( operation, filter_list, func )
 	else
 		vars_with_types = map(function(i)
 			arg_symbol = vars[i]
-			type = get_type_from_filter(filter_list[i])
+			type = filter_list[i].data_type
 			:($arg_symbol::$type)
 		end, 1:length(filter_list))
 	end
@@ -349,40 +321,6 @@ function InstallMethodWithCache( operation, description, filter_list, func; Cach
 	InstallMethod( operation, filter_list, func )
 end
 InstallMethodWithCrispCache = InstallMethod
-
-# filters
-function DeclareFilter( name, parent_filter )
-	filter_symbol = Symbol(name)
-	type_symbol = Symbol("TheJuliaAbstractType" * string(filter_symbol))
-	eval(:(abstract type $type_symbol <: $(get_type_from_filter(parent_filter)) end))
-	eval(:($filter_symbol(obj) = isa(obj, $type_symbol)))
-	filters_to_types[eval(filter_symbol)] = eval(type_symbol)
-	eval(:(export $type_symbol))
-	eval(:(export $filter_symbol))
-end
-
-function DeclareFilter( name )
-	DeclareFilter(name, IsObject)
-end
-
-DeclareCategory = DeclareFilter
-
-function NewFilter( name, parent_filter )
-	filter_symbol = Symbol(name * string(gensym()))
-	type_symbol = Symbol("TheJuliaAbstractType" * string(filter_symbol))
-	eval(:(abstract type $type_symbol <: $(get_type_from_filter(parent_filter)) end))
-	type = eval(type_symbol)
-	filter = x -> isa(x, type)
-	filters_to_types[filter] = type
-	eval(:(export $type_symbol))
-	filter
-end
-
-function NewFilter( name )
-	NewFilter(name, IsObject)
-end
-
-NewCategory = NewFilter
 
 # attributes
 
@@ -876,11 +814,7 @@ function WITH_IMPS_FLAGS(filter)
 end
 
 function IS_SUBSET_FLAGS( filter1, filter2 )
-	get_type_from_filter(filter1) <: get_type_from_filter(filter2)
-end
-
-IsFilter = function( obj )
-	haskey(filters_to_types, obj) || obj == IsRingElement
+	filter1.data_type <: filter2.data_type
 end
 
 StableSortBy = function( list, func )
