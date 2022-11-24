@@ -80,7 +80,7 @@ function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_
 	# https://docs.julialang.org/en/v1/manual/methods/#Redefining-Methods
 	obj = Base.invokelatest(type, getfield(record, :dict))
 	for i in 1:2:length(attributes_and_values)-1
-		symbol_setter = Symbol("Set" * string(attributes_and_values[i]))
+		symbol_setter = Setter(attributes_and_values[i])
 		value = attributes_and_values[i + 1]
 		eval(:($symbol_setter($obj, $value)))
 	end
@@ -249,6 +249,9 @@ end
 
 # operations
 function DeclareOperation( name )
+	if isdefined(@__MODULE__, Symbol(name))
+		return
+	end
 	symbol = Symbol(name)
 	eval(:(function $symbol end))
 	eval(:(export $symbol))
@@ -260,8 +263,6 @@ end
 
 DeclareOperationWithCache = DeclareOperation
 
-key_dependent_operations = []
-
 function KeyDependentOperation( name, filter1, filter2, func )
 	DeclareOperation( name )
 	symbol = Symbol(name)
@@ -271,7 +272,9 @@ function KeyDependentOperation( name, filter1, filter2, func )
 end
 
 function InstallMethod( operation, filter_list, func )
-	if operation == String
+	if operation == Pair
+		return
+	elseif operation == String
 		operation = string
 	elseif operation == ViewObj
 		operation = show
@@ -306,7 +309,7 @@ function InstallMethod( operation, filter_list, func )
 			:($arg_symbol::$type)
 		end, 1:length(filter_list))
 	end
-	if nargs == 1 && (operation in attributes || operation in properties)
+	if IsAttribute( operation )
 		symbol = Symbol(string(operation) * "Operation")
 	else
 		symbol = Symbol(string(operation))
@@ -378,27 +381,45 @@ NewCategory = NewFilter
 
 # attributes
 
-declared_attributes_and_properties_names = []
+mutable struct Attribute <: Function
+	name::String
+	operation::Function
+	tester::Function
+	getter::Function
+	setter::Function
+	is_property::Bool
+	implied_properties::Vector{Attribute}
+end
 
-function declare_attribute_or_property(name, parent_filter)
+function ==(attr1::Attribute, attr2::Attribute)
+	isequal(attr1.name, attr2.name)
+end
+
+function (attr::Attribute)(obj::CAPDict)
+	if !Tester(attr)(obj)
+		Setter(attr)(obj, attr.operation(obj))
+	end
+	attr.getter(obj)
+end
+
+function (attr::Attribute)(args...)
+	attr.operation(obj)
+end
+
+function declare_attribute_or_property(name::String, is_property::Bool)
 	# attributes and properties might be installed for different parent filters
 	# since we do not take the parent filter into account here, we only have to install
 	# the attribute or property once
-	if name in declared_attributes_and_properties_names
+	if isdefined(@__MODULE__, Symbol(name))
 		return
 	end
 	symbol = Symbol(name)
 	symbol_op = Symbol(name * "Operation")
 	symbol_tester = Symbol("Has" * name)
+	symbol_getter = Symbol("Get" * name)
 	symbol_setter = Symbol("Set" * name)
 	eval(:(
-		function $symbol(obj::CAPDict)
-			dict = getfield(obj, :dict)
-			if !haskey(dict, Symbol($name))
-				dict[Symbol($name)] = $symbol_op(obj)
-			end
-			dict[Symbol($name)]
-		end
+		function $symbol_op end
 	))
 	eval(:(
 		function $symbol_tester(obj::CAPDict)
@@ -407,69 +428,66 @@ function declare_attribute_or_property(name, parent_filter)
 		end
 	))
 	eval(:(
+		function $symbol_getter(obj::CAPDict)
+			dict = getfield(obj, :dict)
+			dict[Symbol($name)]
+		end
+	))
+	eval(:(
 		function $symbol_setter(obj::CAPDict, value)
 			dict = getfield(obj, :dict)
 			dict[Symbol($name)] = value
-			if $symbol in properties && value === true
-				for implied in implications[$symbol]
-					Setter(implied)(obj, true)
+			if IsProperty( $symbol ) && value === true
+				for implied_property in $symbol.implied_properties
+					Setter(implied_property)(obj, true)
 				end
 			end
 		end
 	))
-	push!(declared_attributes_and_properties_names, name)
+	eval(:(
+		$symbol = Attribute($name, $symbol_op, $symbol_tester, $symbol_getter, $symbol_setter, $is_property, [])
+	))
 	eval(:(export $symbol))
 	eval(:(export $symbol_tester))
 	eval(:(export $symbol_setter))
 end
 
-attributes = [ ]
-
 function DeclareAttribute( name, parent_filter, mutability=missing )
-	declare_attribute_or_property(name, parent_filter)
-	push!(attributes, eval(Symbol(name)))
+	declare_attribute_or_property(name, false)
 end
 
 IsAttribute = function( obj )
-	obj in attributes
+	obj isa Attribute
 end
 
-function Tester( attribute )
-	@assert attribute in attributes || attribute in properties
-	eval(Symbol("Has" * string(attribute)))
+function Tester( attribute::Attribute )
+	attribute.tester
 end
 
-function Setter( attribute )
-	@assert attribute in attributes || attribute in properties
-	eval(Symbol("Set" * string(attribute)))
+function Setter(attribute::Attribute)
+	attribute.setter
 end
 
 DeclareSynonymAttr = function( name, attr )
 	# TODO
 end
 
-properties = [ ]
-implications = Dict()
-
 DeclareProperty = function( name, parent_filter )
-	declare_attribute_or_property(name, parent_filter)
-	prop = eval(Symbol(name))
-	push!(properties, prop)
-	implications[prop] = []
+	declare_attribute_or_property(name, true)
 end
 
 IsProperty = function( obj )
-	obj in properties
+	obj isa Attribute && obj.is_property
 end
 
 function InstallTrueMethod(prop1, prop2)
-	@assert prop1 in properties and prop2 in properties
-	push!(implications[prop2], prop1)
+	@assert IsProperty( prop1 ) && IsProperty( prop2 )
+	push!(prop2.implied_properties, prop1)
 end
 
 function ListImpliedFilters(prop)
-	@assert prop in properties
-	implications[prop]
+	@assert IsProperty( prop )
+	prop.implied_properties
 end
 
 # families
@@ -653,6 +671,10 @@ Print = print
 
 Reversed = reverse
 
+function NumberArgumentsFunction(attr::Attribute)
+	1
+end
+
 function NumberArgumentsFunction(func::Function)
 	m = methods(func)
 	if isempty(m)
@@ -770,7 +792,13 @@ end
 
 IsEmpty = isempty
 
-NameFunction = string
+function NameFunction(attr::Attribute)
+	attr.name
+end
+
+function NameFunction(f::Function)
+	string(f)
+end
 
 IsIdenticalObj = ===
 
