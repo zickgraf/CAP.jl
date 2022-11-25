@@ -3,286 +3,6 @@
 #
 # Implementations
 #
-InstallGlobalFunction( InstallMethodWithToDoForIsWellDefined,
-                       
-  function( arg... )
-    local orig_func, new_func, name, install_func;
-    
-    orig_func = arg[ Length( arg ) ];
-    
-    name = NameFunction( arg[ 1 ] );
-    
-    new_func = function( arg... )
-        local val, entry, i, filtered_arg, list_args;
-        
-        ## ToDo: This can be improved
-        filtered_arg = Filtered( arg, IsCapCategoryCell );
-        
-        list_args = Flat( Filtered( arg, IsList ) );
-        
-        list_args = Filtered( list_args, IsCapCategoryCell );
-        
-        filtered_arg = Concatenation( filtered_arg, list_args );
-        
-        val = CallFuncList( orig_func, arg );
-        
-        entry = ToDoListEntry( List( filtered_arg, i -> [ i, "IsWellDefined", true ] ), val, "IsWellDefined", true );
-        
-        SetDescriptionOfImplication( entry, Concatenation( "Well defined propagation from ", name ) );
-        
-        AddToToDoList( entry );
-        
-        for i in filtered_arg
-            
-            entry = ToDoListEntry( [ [ i, "IsWellDefined", false ] ], val, "IsWellDefined", false );
-            
-            SetDescriptionOfImplication( entry, Concatenation( "Well defined propagation from ", name ) );
-            
-            AddToToDoList( entry );
-            
-        end;
-        
-        return val;
-        
-    end;
-    
-    arg[ Length( arg ) ] = new_func;
-    
-    install_func = ValueOption( "InstallMethod" );
-    
-    if install_func == fail
-        
-        install_func = InstallMethend;
-        
-    end;
-    
-    CallFuncList( install_func, arg; InstallMethod = InstallMethod, InstallSet = InstallSetWithToDoForIsWellDefined );
-    
-end );
-
-##
-InstallGlobalFunction( "ToDoForIsWellDefinedWrapper",
-  
-  function( orig_func )
-    local new_func;
-    
-    new_func = function( arg... )
-        local val, entry, i, filtered_arg, list_args;
-        
-        ## ToDo: This can be improved
-        filtered_arg = Filtered( arg, IsCapCategoryCell );
-        
-        list_args = Flat( Filtered( arg, IsList ) );
-        
-        list_args = Filtered( list_args, IsCapCategoryCell );
-        
-        filtered_arg = Concatenation( filtered_arg, list_args );
-        
-        val = CallFuncList( orig_func, arg );
-        
-        entry = ToDoListEntry( List( filtered_arg, i -> [ i, "IsWellDefined", true ] ), val, "IsWellDefined", true );
-        
-        SetDescriptionOfImplication( entry, "Well defined propagation" );
-        
-        AddToToDoList( entry );
-        
-        for i in filtered_arg
-            
-            entry = ToDoListEntry( [ [ i, "IsWellDefined", false ] ], val, "IsWellDefined", false );
-            
-            SetDescriptionOfImplication( entry, "Well defined propagation" );
-            
-            AddToToDoList( entry );
-            
-        end;
-        
-        return val;
-        
-    end;
-    
-    return new_func;
-    
-end );
-
-##
-InstallMethod( InstallSetWithToDoForIsWellDefined,
-               [ IsCachingObject, IsString, IsList ],
-               
-  function( cache, name, filter )
-    local set_name, install_func;
-    
-    set_name = Concatenation( "Set", name );
-    
-    if !IsBoundGlobal( set_name )
-        
-        DeclareOperation( set_name, Concatenation( filter, [ IsObject ] ) );
-        
-    end;
-    
-    InstallOtherMethod( ValueGlobal( set_name ),
-                        Concatenation( filter, [ IsObject ] ),
-                        
-      function( arg... )
-        local cache_return, cache_key, entry, i, filtered_cache_key, list_cache_key;
-        
-        cache_key = arg[(1):(Length( arg ) - 1)];
-        
-        filtered_cache_key = Filtered( cache_key, IsCapCategoryCell );
-        
-        list_cache_key = Flat( Filtered( cache_key, IsList ) );
-        
-        list_cache_key = Filtered( list_cache_key, IsCapCategoryCell );
-        
-        filtered_cache_key = Concatenation( filtered_cache_key, list_cache_key );
-        
-        cache_return = CacheValue( cache, cache_key );
-        
-        if cache_return == [ ]
-            
-            CallFuncList( SetCacheValue, [ cache, cache_key, arg[ Length( arg ) ] ] );
-            
-            entry = ToDoListEntry( List( filtered_cache_key, i -> [ i, "IsWellDefined", true ] ), arg[ Length( arg ) ], "IsWellDefined", true );
-            
-            SetDescriptionOfImplication( entry, Concatenation( "Well defined propagation from ", name ) );
-            
-            AddToToDoList( entry );
-            
-            for i in filtered_cache_key
-                
-                entry = ToDoListEntry( [ [ i, "IsWellDefined", false ] ], arg[ Length( arg ) ], "IsWellDefined", false );
-                
-                SetDescriptionOfImplication( entry, Concatenation( "Well defined propagation from ", name ) );
-                
-                AddToToDoList( entry );
-                
-            end;
-        
-        end;
-        
-    end );
-    
-end );
-
-##
-InstallMethod( InstallSetWithToDoForIsWellDefined,
-               [ IsInt, IsString, IsList ],
-               
-  function( cache_number, name, filter )
-    local set_name;
-    
-    set_name = Concatenation( "Set", name );
-    
-    if !IsBoundGlobal( set_name )
-        
-        DeclareOperation( set_name, Concatenation( filter, [ IsObject ] ) );
-        
-    end;
-    
-    InstallOtherMethod( ValueGlobal( set_name ),
-                        Concatenation( filter, [ IsObject ] ),
-                        
-      function( arg... )
-        local cache, cache_key, cache_return, entry, i, filtered_cache_key, list_cache_key;
-        
-        cache = CachingObject( arg[ cache_number ], name, Length( arg ) - 1 );
-        
-        cache_key = arg[(1):(Length( arg ) - 1)];
-        
-        filtered_cache_key = Filtered( cache_key, IsCapCategoryCell );
-        
-        list_cache_key = Flat( Filtered( cache_key, IsList ) );
-        
-        list_cache_key = Filtered( list_cache_key, IsCapCategoryCell );
-        
-        filtered_cache_key = Concatenation( filtered_cache_key, list_cache_key );
-        
-        cache_return = CacheValue( cache, cache_key );
-        
-        if cache_return == [ ]
-            
-            CallFuncList( SetCacheValue, [ cache, cache_key, arg[ Length( arg ) ] ] );
-            
-            entry = ToDoListEntry( List( filtered_cache_key, i -> [ i, "IsWellDefined", true ] ), arg[ Length( arg ) ], "IsWellDefined", true );
-            
-            SetDescriptionOfImplication( entry, Concatenation( "Well defined propagation from ", name ) );
-            
-            AddToToDoList( entry );
-            
-            for i in filtered_cache_key
-                
-                entry = ToDoListEntry( [ [ i, "IsWellDefined", false ] ], arg[ Length( arg ) ], "IsWellDefined", false );
-                
-                SetDescriptionOfImplication( entry, Concatenation( "Well defined propagation from ", name ) );
-                
-                AddToToDoList( entry );
-                
-            end;
-            
-        end;
-        
-    end );
-    
-end );
-
-##
-InstallMethod( InstallSetWithToDoForIsWellDefined,
-               [ IsBool, IsString, IsList ],
-               
-  function( cache, name, filter )
-    local has_name, set_name;
-    
-    set_name = Concatenation( "Set", name );
-    
-    if !IsBoundGlobal( set_name )
-        
-        DeclareOperation( set_name,
-                          Concatenation( filter, [ IsObject ] ) );
-        
-    end;
-    
-    InstallOtherMethod( ValueGlobal( set_name ),
-                        Concatenation( filter, [ IsObject ] ),
-                        
-      function( arg... )
-        
-        return;
-        
-    end );
-    
-end );
-
-##
-InstallGlobalFunction( DeclareAttributeWithToDoForIsWellDefined,
-                       
-  function( arg... )
-    local name;
-    
-    name = arg[ 1 ];
-    
-    CallFuncList( DeclareAttribute, arg );
-    
-    name = Concatenation( "Set", name );
-    
-    InstallMethod( ValueGlobal( name ),
-                   [ arg[ 2 ], IsObject ],
-                   10000, #FIXME: Method rank
-                   
-      function( obj, value )
-        local entry;
-        
-        # If you set something wrong, it is your fault.
-        # FIXME: Is this a good idea?
-        entry = ToDoListEntryWithContraposition( obj, "IsWellDefined", true, value, "IsWellDefined", true );
-        
-        SetDescriptionOfImplication( entry, "Propagation of IsWellDefined" );
-        
-        AddToToDoList( entry );
-        
-        TryNextMethod();
-        
-    end );
-    
-end );
 
 ##########################################
 ##
@@ -290,7 +10,7 @@ end );
 ##
 ##########################################
 
-InstallGlobalFunction( DeclareFamilyProperty,
+@InstallGlobalFunction( DeclareFamilyProperty,
                        
   function( arg... )
     local name, filter, family, cell_type, reinstall;
@@ -369,7 +89,7 @@ end );
 ##
 #####################################
 
-InstallGlobalFunction( CAP_INTERNAL_REPLACE_STRING_WITH_FILTER,
+@InstallGlobalFunction( CAP_INTERNAL_REPLACE_STRING_WITH_FILTER,
   
   function( filter_or_string, args... )
     local category;
@@ -463,7 +183,7 @@ InstallGlobalFunction( CAP_INTERNAL_REPLACE_STRING_WITH_FILTER,
     
 end );
 
-InstallGlobalFunction( CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS,
+@InstallGlobalFunction( CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS,
   
   function( list, args... )
       local category;
@@ -480,7 +200,7 @@ InstallGlobalFunction( CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS,
       
 end );
 
-InstallGlobalFunction( "CAP_INTERNAL_MERGE_FILTER_LISTS",
+@InstallGlobalFunction( "CAP_INTERNAL_MERGE_FILTER_LISTS",
   
   function( filter_list, additional_filters )
     local i;
@@ -500,7 +220,7 @@ InstallGlobalFunction( "CAP_INTERNAL_MERGE_FILTER_LISTS",
 end );
 
 
-InstallGlobalFunction( CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT,
+@InstallGlobalFunction( CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT,
     
   function( option_name, default )
     local value;
@@ -515,7 +235,7 @@ InstallGlobalFunction( CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT,
 end );
 
 ##
-BindGlobal( "CAP_INTERNAL_MAKE_LOOP_SYMBOL_LOOK_LIKE_LOOP",
+@BindGlobal( "CAP_INTERNAL_MAKE_LOOP_SYMBOL_LOOK_LIKE_LOOP",
   
   function( function_string, loop_symbol )
     local current_position, current_scan_position, bracket_count;
@@ -554,7 +274,7 @@ BindGlobal( "CAP_INTERNAL_MAKE_LOOP_SYMBOL_LOOK_LIKE_LOOP",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_REPLACE_ADDITIONAL_SYMBOL_APPEARANCE",
+@BindGlobal( "CAP_INTERNAL_REPLACE_ADDITIONAL_SYMBOL_APPEARANCE",
   
   function( appearance_list, replacement_record )
     local remove_list, new_appearances, current_appearance, pos, current_appearance_nr, current_replacement, i;
@@ -603,7 +323,7 @@ BindGlobal( "CAP_INTERNAL_REPLACE_ADDITIONAL_SYMBOL_APPEARANCE",
 end );
 
 ##
-InstallGlobalFunction( "CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION",
+@InstallGlobalFunction( "CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION",
   
   function( func, symbol_list, loop_multiple, replacement_record, category_getters )
     local func_as_string, func_stream, func_as_list, loop_power, symbol_appearance_list, current_symbol, category_getter, pos, i;
@@ -703,7 +423,7 @@ InstallGlobalFunction( "CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION",
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_MERGE_PRECONDITIONS_LIST,
+@InstallGlobalFunction( CAP_INTERNAL_MERGE_PRECONDITIONS_LIST,
   
   function( list1, list2 )
     local pos, current_precondition;
@@ -730,7 +450,7 @@ InstallGlobalFunction( CAP_INTERNAL_MERGE_PRECONDITIONS_LIST,
     
 end );
 
-InstallGlobalFunction( CAP_INTERNAL_GET_CORRESPONDING_OUTPUT_OBJECTS,
+@InstallGlobalFunction( CAP_INTERNAL_GET_CORRESPONDING_OUTPUT_OBJECTS,
   
   function( translation_list, function_input )
     local input_list, output_list, current_output, return_list, input_position, list_position, i;
@@ -814,7 +534,7 @@ InstallGlobalFunction( CAP_INTERNAL_GET_CORRESPONDING_OUTPUT_OBJECTS,
 end );
 
 ##
-InstallGlobalFunction( ListKnownCategoricalProperties,
+@InstallGlobalFunction( ListKnownCategoricalProperties,
                       
   function( category )
     local list, name;
@@ -841,7 +561,7 @@ InstallGlobalFunction( ListKnownCategoricalProperties,
     
 end );
 
-InstallGlobalFunction( HelpForCAP,
+@InstallGlobalFunction( HelpForCAP,
   
   function()
     local filename, stream, string;
@@ -858,7 +578,7 @@ InstallGlobalFunction( HelpForCAP,
     
 end );
 
-InstallGlobalFunction( CachingStatistic,
+@InstallGlobalFunction( CachingStatistic,
   
   function( category, arg... )
     local operations, current_cache_name, current_cache;
@@ -897,11 +617,12 @@ InstallGlobalFunction( CachingStatistic,
     
 end );
 
-InstallGlobalFunction( InstallDeprecatedAlias,
+@InstallGlobalFunction( InstallDeprecatedAlias,
   
   function( alias_name, function_name, deprecation_date )
     
-    BindGlobal( alias_name, function ( args... )
+    #= comment for Julia
+    @BindGlobal( alias_name, function ( args... )
       local result;
         
         Print(
@@ -919,11 +640,12 @@ InstallGlobalFunction( InstallDeprecatedAlias,
         end;
         
     end );
+    # =#
     
 end );
 
 ##
-InstallGlobalFunction( "IsSpecializationOfFilter", function ( filter1, filter2 )
+@InstallGlobalFunction( "IsSpecializationOfFilter", function ( filter1, filter2 )
     
     filter1 = CAP_INTERNAL_REPLACE_STRING_WITH_FILTER( filter1 );
     filter2 = CAP_INTERNAL_REPLACE_STRING_WITH_FILTER( filter2 );
@@ -933,7 +655,7 @@ InstallGlobalFunction( "IsSpecializationOfFilter", function ( filter1, filter2 )
 end );
 
 ##
-InstallGlobalFunction( "IsSpecializationOfFilterList", function ( filter_list1, filter_list2 )
+@InstallGlobalFunction( "IsSpecializationOfFilterList", function ( filter_list1, filter_list2 )
     
     if filter_list1 == "any"
         
@@ -950,7 +672,7 @@ InstallGlobalFunction( "IsSpecializationOfFilterList", function ( filter_list1, 
 end );
 
 ##
-InstallGlobalFunction( InstallMethodForCompilerForCAP,
+@InstallGlobalFunction( InstallMethodForCompilerForCAP,
   
   function( args... )
     local operation, method, filters;
@@ -981,7 +703,7 @@ InstallGlobalFunction( InstallMethodForCompilerForCAP,
 end );
 
 ##
-InstallGlobalFunction( InstallOtherMethodForCompilerForCAP,
+@InstallGlobalFunction( InstallOtherMethodForCompilerForCAP,
   
   function( args... )
     local operation, method, filters;
@@ -1012,9 +734,9 @@ InstallGlobalFunction( InstallOtherMethodForCompilerForCAP,
 end );
 
 ##
-BindGlobal( "CAP_JIT_INTERNAL_KNOWN_METHODS", rec( ) );
+@BindGlobal( "CAP_JIT_INTERNAL_KNOWN_METHODS", rec( ) );
 
-InstallGlobalFunction( CapJitAddKnownMethod,
+@InstallGlobalFunction( CapJitAddKnownMethod,
   
   function( operation, filters, method )
     local operation_name, wrapper_operation_name, known_methods;
@@ -1082,9 +804,9 @@ InstallGlobalFunction( CapJitAddKnownMethod,
 end );
 
 ##
-BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES", rec( ) );
+@BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES", rec( ) );
 
-InstallGlobalFunction( "CapJitAddTypeSignature", function ( name, input_filters, output_data_type )
+@InstallGlobalFunction( "CapJitAddTypeSignature", function ( name, input_filters, output_data_type )
     
     #= comment for Julia
     if IsCategory( ValueGlobal( name ) ) && Length( input_filters ) == 1
@@ -1159,9 +881,9 @@ InstallGlobalFunction( "CapJitAddTypeSignature", function ( name, input_filters,
 end );
 
 ##
-BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED", rec( ) );
+@BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED", rec( ) );
 
-InstallGlobalFunction( "CapJitAddTypeSignatureDeferred", function ( package_name, name, input_filters, output_data_type )
+@InstallGlobalFunction( "CapJitAddTypeSignatureDeferred", function ( package_name, name, input_filters, output_data_type )
     
     if input_filters != "any"
         
@@ -1199,7 +921,7 @@ InstallGlobalFunction( "CapJitAddTypeSignatureDeferred", function ( package_name
 end );
 
 ##
-InstallGlobalFunction( CapJitDataTypeOfCategory, function ( cat )
+@InstallGlobalFunction( CapJitDataTypeOfCategory, function ( cat )
   local type;
     
     if !IsBound( cat.compiler_hints ) || !IsBound( cat.compiler_hints.category_filter )
@@ -1231,7 +953,7 @@ InstallGlobalFunction( CapJitDataTypeOfCategory, function ( cat )
 end );
 
 ##
-InstallGlobalFunction( CapJitDataTypeOfObjectOfCategory, function ( cat )
+@InstallGlobalFunction( CapJitDataTypeOfObjectOfCategory, function ( cat )
   local type;
     
     if !IsBound( cat.compiler_hints ) || !IsBound( cat.compiler_hints.object_filter )
@@ -1276,7 +998,7 @@ InstallGlobalFunction( CapJitDataTypeOfObjectOfCategory, function ( cat )
 end );
 
 ##
-InstallGlobalFunction( CapJitDataTypeOfMorphismOfCategory, function ( cat )
+@InstallGlobalFunction( CapJitDataTypeOfMorphismOfCategory, function ( cat )
   local type;
     
     if !IsBound( cat.compiler_hints ) || !IsBound( cat.compiler_hints.morphism_filter )
@@ -1321,7 +1043,7 @@ InstallGlobalFunction( CapJitDataTypeOfMorphismOfCategory, function ( cat )
 end );
 
 ##
-InstallGlobalFunction( CapFixpoint, function ( predicate, func, initial_value )
+@InstallGlobalFunction( CapFixpoint, function ( predicate, func, initial_value )
   local x, y;
     
     y = initial_value;
@@ -1339,7 +1061,7 @@ InstallGlobalFunction( CapFixpoint, function ( predicate, func, initial_value )
 end );
 
 ##
-InstallMethod( Iterated,
+InstallMethod( @__MODULE__,  Iterated,
                [ IsList, IsFunction, IsObject ],
                
   function( list, func, initial_value )
@@ -1349,7 +1071,7 @@ InstallMethod( Iterated,
 end );
 
 ##
-InstallGlobalFunction( TransitivelyNeededOtherPackages, function ( package_name )
+@InstallGlobalFunction( TransitivelyNeededOtherPackages, function ( package_name )
   local collected_dependencies, package_info, dep, p;
     
     collected_dependencies = [ package_name ];
@@ -1382,7 +1104,7 @@ InstallGlobalFunction( TransitivelyNeededOtherPackages, function ( package_name 
 end );
 
 ##
-InstallMethod( SafePosition,
+InstallMethod( @__MODULE__,  SafePosition,
                [ IsList, IsObject ],
                
   function( list, obj )
@@ -1397,7 +1119,7 @@ InstallMethod( SafePosition,
 end );
 
 ##
-InstallMethod( SafePositionProperty,
+InstallMethod( @__MODULE__,  SafePositionProperty,
                [ IsList, IsFunction ],
                
   function( list, func )
@@ -1412,7 +1134,7 @@ InstallMethod( SafePositionProperty,
 end );
 
 ##
-InstallMethod( SafeFirst,
+InstallMethod( @__MODULE__,  SafeFirst,
                [ IsList, IsFunction ],
                
   function( list, func )
@@ -1427,7 +1149,7 @@ InstallMethod( SafeFirst,
 end );
 
 ##
-InstallGlobalFunction( nTuple, function ( n, args... )
+@InstallGlobalFunction( nTuple, function ( n, args... )
     
     Assert( 0, Length( args ) == n );
     
@@ -1436,7 +1158,7 @@ InstallGlobalFunction( nTuple, function ( n, args... )
 end );
 
 ##
-InstallGlobalFunction( Pair, function ( first, second )
+@InstallGlobalFunction( Pair, function ( first, second )
     #% CAP_JIT_RESOLVE_FUNCTION
     
     return nTuple( 2, first, second );
@@ -1444,7 +1166,7 @@ InstallGlobalFunction( Pair, function ( first, second )
 end );
 
 ##
-InstallGlobalFunction( Triple, function ( first, second, third )
+@InstallGlobalFunction( Triple, function ( first, second, third )
     #% CAP_JIT_RESOLVE_FUNCTION
     
     return nTuple( 3, first, second, third );
@@ -1452,7 +1174,7 @@ InstallGlobalFunction( Triple, function ( first, second, third )
 end );
 
 ##
-InstallGlobalFunction( HandlePrecompiledTowers, function ( category, underlying_category, constructor_name )
+@InstallGlobalFunction( HandlePrecompiledTowers, function ( category, underlying_category, constructor_name )
   local precompiled_towers, remaining_constructors_in_tower, precompiled_functions_adder, info;
     
     if !IsBound( underlying_category.compiler_hints ) || !IsBound( underlying_category.compiler_hints.precompiled_towers )
@@ -1541,10 +1263,10 @@ InstallGlobalFunction( HandlePrecompiledTowers, function ( category, underlying_
     
 end );
 
-InstallGlobalFunction( CAP_JIT_INCOMPLETE_LOGIC, IdFunc );
+@InstallGlobalFunction( CAP_JIT_INCOMPLETE_LOGIC, IdFunc );
 
 ##
-InstallGlobalFunction( ListWithKeys, function ( list, func )
+@InstallGlobalFunction( ListWithKeys, function ( list, func )
   local res, i;
     
     # see implementation of `List`
@@ -1569,7 +1291,7 @@ InstallGlobalFunction( ListWithKeys, function ( list, func )
 end );
 
 ##
-InstallGlobalFunction( SumWithKeys, function ( list, func )
+@InstallGlobalFunction( SumWithKeys, function ( list, func )
   local sum, i;
     
     # see implementation of `Sum`
@@ -1595,7 +1317,7 @@ InstallGlobalFunction( SumWithKeys, function ( list, func )
 end );
 
 ##
-InstallGlobalFunction( ProductWithKeys, function ( list, func )
+@InstallGlobalFunction( ProductWithKeys, function ( list, func )
   local product, i;
     
     # adapted implementation of `Product`
@@ -1621,7 +1343,7 @@ InstallGlobalFunction( ProductWithKeys, function ( list, func )
 end );
 
 ##
-InstallGlobalFunction( ForAllWithKeys, function ( list, func )
+@InstallGlobalFunction( ForAllWithKeys, function ( list, func )
   local i;
     
     # adapted implementation of `ForAll`
@@ -1641,7 +1363,7 @@ InstallGlobalFunction( ForAllWithKeys, function ( list, func )
 end );
 
 ##
-InstallGlobalFunction( ForAnyWithKeys, function ( list, func )
+@InstallGlobalFunction( ForAnyWithKeys, function ( list, func )
   local i;
     
     # adapted implementation of `ForAny`
@@ -1661,7 +1383,7 @@ InstallGlobalFunction( ForAnyWithKeys, function ( list, func )
 end );
 
 ##
-InstallGlobalFunction( NumberWithKeys, function ( list, func )
+@InstallGlobalFunction( NumberWithKeys, function ( list, func )
   local nr, i;
     
     # adapted implementation of `Number`
@@ -1683,7 +1405,7 @@ InstallGlobalFunction( NumberWithKeys, function ( list, func )
 end );
 
 ##
-InstallGlobalFunction( FilteredWithKeys, function ( list, func )
+@InstallGlobalFunction( FilteredWithKeys, function ( list, func )
   local res, i, elm, j;
     
     # adapted implementation of `Filtered`
@@ -1711,7 +1433,7 @@ InstallGlobalFunction( FilteredWithKeys, function ( list, func )
 end );
 
 ##
-InstallGlobalFunction( FirstWithKeys, function ( list, func )
+@InstallGlobalFunction( FirstWithKeys, function ( list, func )
   local elm, i;
     
     # adapted implementation of `First`
@@ -1733,7 +1455,7 @@ InstallGlobalFunction( FirstWithKeys, function ( list, func )
 end );
 
 ##
-InstallGlobalFunction( LastWithKeys, function ( list, func )
+@InstallGlobalFunction( LastWithKeys, function ( list, func )
   local elm, i;
     
     # adapted implementation of `Last`

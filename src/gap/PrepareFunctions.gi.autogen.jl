@@ -7,9 +7,9 @@
 
 #! @Section Prepare functions
 
-InstallValue( CAP_PREPARE_FUNCTION_RECORD, rec( ) );
+@InstallValueConst( CAP_PREPARE_FUNCTION_RECORD, rec( ) );
 
-InstallGlobalFunction( CAPOperationPrepareFunction,
+@InstallGlobalFunction( CAPOperationPrepareFunction,
   function( prepare_function, category, func )
     local current_prepare_function, prepare_function_symbol_list, current_operation;
     
@@ -48,7 +48,7 @@ InstallGlobalFunction( CAPOperationPrepareFunction,
     
 end );
 
-InstallGlobalFunction( CAPAddPrepareFunction,
+@InstallGlobalFunction( CAPAddPrepareFunction,
   function( prepare_function, name, doc_string, arg... )
     local precondition_list, operation_names, used_symbol_list, current_precondition;
     
@@ -82,7 +82,7 @@ InstallGlobalFunction( CAPAddPrepareFunction,
     
 end );
 
-InstallGlobalFunction( ListCAPPrepareFunctions,
+@InstallGlobalFunction( ListCAPPrepareFunctions,
   function( )
     local rec_names, current_entry, current_rec_name, current_precondition;
     

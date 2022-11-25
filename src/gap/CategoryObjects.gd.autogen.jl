@@ -36,9 +36,9 @@
 ##
 ###################################
 
-DeclareGlobalFunction( "CAP_INTERNAL_CREATE_OBJECT_PRINT" );
+@DeclareGlobalFunction( "CAP_INTERNAL_CREATE_OBJECT_PRINT" );
 
-DeclareGlobalFunction( "INSTALL_TODO_LIST_FOR_EQUAL_OBJECTS" );
+@DeclareGlobalFunction( "INSTALL_TODO_LIST_FOR_EQUAL_OBJECTS" );
 
 DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 
@@ -54,11 +54,11 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a,b
-DeclareOperation( "IsEqualForObjects",
+@DeclareOperation( "IsEqualForObjects",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 ## adds the given string to PROPAGATION_LIST_FOR_EQUAL_OBJECTS
-DeclareOperation( "AddPropertyToMatchAtIsEqualForObjects",
+@DeclareOperation( "AddPropertyToMatchAtIsEqualForObjects",
                   [ IsCapCategory, IsString ] );
 
 ###################################
@@ -149,7 +149,7 @@ DeclareOperation( "AddPropertyToMatchAtIsEqualForObjects",
 #! The output is a random object ⥉  C .
 #! @Returns an object ⥉  C 
 #! @Arguments C, n
-DeclareOperation( "RandomObjectByInteger",
+@DeclareOperation( "RandomObjectByInteger",
                   [ IsCapCategory, IsInt ] );
 
 #! @Description
@@ -157,15 +157,15 @@ DeclareOperation( "RandomObjectByInteger",
 #! The output is a random object ⥉  C .
 #! @Returns an object ⥉  C 
 #! @Arguments C, L
-DeclareOperation( "RandomObjectByList",
+@DeclareOperation( "RandomObjectByList",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
 #! These are convenient methods && they, depending on the input, delegate to one of the above methods.
 #! @Arguments C, n
-DeclareOperation( "RandomObject", [ IsCapCategory, IsInt ] );
+@DeclareOperation( "RandomObject", [ IsCapCategory, IsInt ] );
 #! @Arguments C, L
-DeclareOperation( "RandomObject", [ IsCapCategory, IsList ] );
+@DeclareOperation( "RandomObject", [ IsCapCategory, IsList ] );
 #! @EndGroup
 
 ###################################
@@ -185,7 +185,7 @@ DeclareOperation( "RandomObject", [ IsCapCategory, IsList ] );
 #!  true || false. Fail is !allowed ⥉ this context.
 #! @Arguments phi, psi
 #! @Returns true || false
-DeclareOperation( "IsEqualForCacheForObjects",
+@DeclareOperation( "IsEqualForCacheForObjects",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 ###################################
@@ -198,7 +198,7 @@ DeclareOperation( "IsEqualForCacheForObjects",
 #! @Description
 #!  Adds <A>object</A> as an object to <A>category</A>.
 #! @Arguments category, object
-DeclareOperation( "Add",
+@DeclareOperation( "Add",
                   [ IsCapCategory, IsCapCategoryObject ] );
 
 #! @Description
@@ -207,7 +207,7 @@ DeclareOperation( "Add",
 #!  the operation <Ref Oper="Add" Label="for IsCapCategory, IsCapCategoryObject" />
 #!  can be used instead.
 #! @Arguments category, object
-DeclareOperation( "AddObject",
+@DeclareOperation( "AddObject",
                   [ IsCapCategory, IsAttributeStoringRep ] );
 
 #! @Arguments category, filter
@@ -215,7 +215,7 @@ DeclareOperation( "AddObject",
 #!  The argument <A>filter</A> is used to create an object type for the
 #!  category <A>category</A>, which is then used ⥉ <C>ObjectifyObjectForCAPWithAttributes</C>
 #!  to objectify objects for this category. <A>filter</A> must imply `IsCapCategoryObject`.
-DeclareOperation( "AddObjectRepresentation",
+@DeclareOperation( "AddObjectRepresentation",
                   [ IsCapCategory, IsObject ] );
 
 #! @Arguments object, category[, attribute1, value1, ...]
@@ -228,13 +228,13 @@ DeclareOperation( "AddObjectRepresentation",
 #!  The optional arguments behave like the corresponding arguments ⥉ <C>ObjectifyWithAttributes</C>.
 #!  Also returns the objectified object.
 #! @Returns an object
-DeclareGlobalFunction( "ObjectifyObjectForCAPWithAttributes" );
+@DeclareGlobalFunction( "ObjectifyObjectForCAPWithAttributes" );
 
 #! @Arguments category, [attribute1, value1, ...]
 #! @Description
 #!  Shorthand for `ObjectifyObjectForCAPWithAttributes( rec( ), category[, attribute1, value1, ...] )`.
 #! @Returns an object
-DeclareGlobalFunction( "CreateCapCategoryObjectWithAttributes" );
+@DeclareGlobalFunction( "CreateCapCategoryObjectWithAttributes" );
 
 ###################################
 ##
@@ -250,14 +250,14 @@ DeclareGlobalFunction( "CreateCapCategoryObjectWithAttributes" );
 #! by calling `SetCachingToWeak( C, "ObjectConstructor" )` resp. `SetCachingToCrisp( C, "ObjectConstructor" )`.
 #! @Returns an object
 #! @Arguments C, a
-DeclareOperation( "ObjectConstructor",
+@DeclareOperation( "ObjectConstructor",
                   [ IsCapCategory, IsObject ] );
 
 #! @Description
 #!   Shorthand for `ObjectConstructor( C, a )`.
 #! @Returns an object
 #! @Arguments a, C
-DeclareOperation( "/",
+@DeclareOperation( "/",
                   [ IsObject, IsCapCategory ] );
 
 #! @Description
@@ -283,7 +283,7 @@ DeclareOperation( "/",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
-DeclareOperation( "IsWellDefinedForObjects",
+@DeclareOperation( "IsWellDefinedForObjects",
                   [ IsCapCategoryObject ] );
 
 
@@ -322,7 +322,7 @@ DeclareOperation( "IsWellDefinedForObjects",
 #! The output is an epimorphism  \pi: P \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](P,A) 
 #! @Arguments A, P
-DeclareOperation( "EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
+@DeclareOperation( "EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -332,7 +332,7 @@ DeclareOperation( "EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObj
 #!  \epsilon \circ \lambda == \pi .
 #! @Returns a morphism ⥉  \mathrm[Hom](P,B) 
 #! @Arguments pi, epsilon
-DeclareOperation( "ProjectiveLift",
+@DeclareOperation( "ProjectiveLift",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 ###################################
@@ -370,7 +370,7 @@ DeclareOperation( "ProjectiveLift",
 #! The output is a monomorphism  \iota: A \rightarrow I .
 #! @Returns a morphism ⥉  \mathrm[Hom](I,A) 
 #! @Arguments A, I
-DeclareOperation( "MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
+@DeclareOperation( "MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 ##
@@ -381,7 +381,7 @@ DeclareOperation( "MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObje
 #!  \lambda \circ \iota == \beta .
 #! @Returns a morphism ⥉  \mathrm[Hom](A,I) 
 #! @Arguments iota, beta
-DeclareOperation( "InjectiveColift",
+@DeclareOperation( "InjectiveColift",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 ###################################
@@ -410,7 +410,7 @@ DeclareOperation( "InjectiveColift",
 #! The output is a simplified object  A_i .
 #! @Returns an object
 #! @Arguments A, i
-DeclareOperation( "SimplifyObject",
+@DeclareOperation( "SimplifyObject",
                   [ IsCapCategoryObject, IsObject ] );
 
 #! @Description
@@ -418,7 +418,7 @@ DeclareOperation( "SimplifyObject",
 #! The output is an isomorphism to a simplified object  \iota_A^i: A \rightarrow A_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](A,A_i) 
 #! @Arguments A, i
-DeclareOperation( "SimplifyObject_IsoFromInputObject",
+@DeclareOperation( "SimplifyObject_IsoFromInputObject",
                   [ IsCapCategoryObject, IsObject ] );
 
 #! @Description
@@ -427,7 +427,7 @@ DeclareOperation( "SimplifyObject_IsoFromInputObject",
 #! which is the inverse of the output of <C>SimplifyObject_IsoFromInputObject</C>.
 #! @Returns a morphism ⥉  \mathrm[Hom](A_i,A) 
 #! @Arguments A, i
-DeclareOperation( "SimplifyObject_IsoToInputObject",
+@DeclareOperation( "SimplifyObject_IsoToInputObject",
                   [ IsCapCategoryObject, IsObject ] );
 
 ###################################

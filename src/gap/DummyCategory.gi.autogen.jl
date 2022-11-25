@@ -5,7 +5,7 @@
 #
 
 ##
-InstallMethod( DummyCategory,
+InstallMethod( @__MODULE__,  DummyCategory,
         "for a record of options",
         [ IsRecord ],
         

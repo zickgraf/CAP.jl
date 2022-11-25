@@ -8,15 +8,15 @@
 DeclareGlobalVariable( "CAP_INTERNAL_FINAL_DERIVATION_LIST" );
 
 
-DeclareGlobalFunction( "AddFinalDerivation" );
+@DeclareGlobalFunction( "AddFinalDerivation" );
 
-DeclareGlobalFunction( "AddFinalDerivationBundle" );
+@DeclareGlobalFunction( "AddFinalDerivationBundle" );
 
 
 @DeclareAttribute( "IsFinalized",
                   IsCapCategory,
                   "mutable" );
 
-DeclareOperation( "Finalize",
+@DeclareOperation( "Finalize",
                   [ IsCapCategory ] );
 

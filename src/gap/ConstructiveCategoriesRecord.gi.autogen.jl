@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-InstallValue( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD, rec( ) );
+@InstallValueConst( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD, rec( ) );
 
 CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory = [
     "PreCompose",
@@ -22,6 +22,22 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsEquippedWithHomomorphismStructure 
         "HomomorphismStructureOnMorphisms",
         "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
         "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+    ]
+);
+
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithDecidableLifts = Concatenation(
+    CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory,
+    [
+        "IsLiftable",
+        "Lift",
+    ]
+);
+
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithDecidableColifts = Concatenation(
+    CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory,
+    [
+        "IsColiftable",
+        "Colift",
     ]
 );
 

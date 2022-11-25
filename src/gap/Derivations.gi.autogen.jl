@@ -5,25 +5,31 @@
 #
 #! @Chapter Managing Derived Methods
 
-BindGlobal( "TheFamilyOfDerivations",
+@BindGlobal( "TheFamilyOfDerivations",
             NewFamily( "TheFamilyOfDerivations" ) );
-BindGlobal( "TheFamilyOfDerivationGraphs",
+@BindGlobal( "TheFamilyOfDerivationGraphs",
             NewFamily( "TheFamilyOfDerivationGraphs" ) );
-BindGlobal( "TheFamilyOfOperationWeightLists",
+@BindGlobal( "TheFamilyOfOperationWeightLists",
             NewFamily( "TheFamilyOfOperationWeightLists" ) );
+@BindGlobal( "TheFamilyOfStringMinHeaps",
+            NewFamily( "TheFamilyOfStringMinHeaps" ) );
 
+@BindGlobal( "TheTypeOfDerivedMethods", NewType( TheFamilyOfDerivations, IsDerivedMethod ) );
+@BindGlobal( "TheTypeOfDerivationsGraphs", NewType( TheFamilyOfDerivationGraphs, IsDerivedMethodGraph ) );
+@BindGlobal( "TheTypeOfOperationWeightLists", NewType( TheFamilyOfOperationWeightLists, IsOperationWeightList ) );
+@BindGlobal( "TheTypeOfStringMinHeaps", NewType( TheFamilyOfStringMinHeaps, IsStringMinHeap ) );
 
-InstallGlobalFunction( "ActivateDerivationInfo",
+@InstallGlobalFunction( "ActivateDerivationInfo",
   function( )
     SetInfoLevel( DerivationInfo, 1 );
 end );
 
-InstallGlobalFunction( "DeactivateDerivationInfo",
+@InstallGlobalFunction( "DeactivateDerivationInfo",
   function( )
     SetInfoLevel( DerivationInfo, 0 );
 end );
 
-InstallMethod( MakeDerivation,
+InstallMethod( @__MODULE__,  MakeDerivation,
                [ IsString, IsFunction, IsDenseList, IsPosInt, IsFunction, IsFunction ],
                
 function( name, target_op, used_op_names_with_multiples_and_category_getters, weight, func, category_filter )
@@ -41,7 +47,7 @@ function( name, target_op, used_op_names_with_multiples_and_category_getters, we
     end;
     
     return ObjectifyWithAttributes(
-        rec( ), NewType( TheFamilyOfDerivations, IsDerivedMethod ),
+        rec( ), TheTypeOfDerivedMethods,
         DerivationName, name,
         DerivationWeight, weight,
         DerivationFunction, func,
@@ -52,20 +58,20 @@ function( name, target_op, used_op_names_with_multiples_and_category_getters, we
     
 end );
 
-InstallMethod( String,
+InstallMethod( @__MODULE__,  String,
                [ IsDerivedMethod ],
 function( d )
   return Concatenation( "derivation ", DerivationName( d ),
                         " of operation ", TargetOperation( d ) );
 end );
 
-InstallMethod( ViewObj,
+InstallMethod( @__MODULE__,  ViewObj,
                [ IsDerivedMethod ],
 function( d )
   Print( "<", string( d ), ">" );
 end );
 
-InstallMethod( IsApplicableToCategory,
+InstallMethod( @__MODULE__,  IsApplicableToCategory,
                [ IsDerivedMethod, IsCapCategory ],
 function( d, C )
   local filter;
@@ -79,7 +85,7 @@ function( d, C )
   end;
 end );
 
-InstallMethod( InstallDerivationForCategory,
+InstallMethod( @__MODULE__,  InstallDerivationForCategory,
                [ IsDerivedMethod, IsPosInt, IsCapCategory ],
 function( d, weight, C )
   local method_name, func, add_method, add_name, general_filter_list,
@@ -110,7 +116,7 @@ function( d, weight, C )
   
 end );
 
-InstallMethod( DerivationResultWeight,
+InstallMethod( @__MODULE__,  DerivationResultWeight,
                [ IsDerivedMethod, IsDenseList ],
 function( d, op_weights )
   local w, used_op_multiples, i, op_w, mult;
@@ -128,15 +134,13 @@ function( d, op_weights )
   return w;
 end );
 
-InstallMethod( MakeDerivationGraph,
+InstallMethod( @__MODULE__,  MakeDerivationGraph,
                [ IsDenseList ],
 function( operations )
   local G, op_name;
   G = rec( derivations_by_target = rec(),
               derivations_by_used_ops = rec() );
-  G = ObjectifyWithAttributes( G,
-      NewType( TheFamilyOfDerivationGraphs,
-               IsDerivedMethodGraph ) );
+  G = ObjectifyWithAttributes( G, TheTypeOfDerivationsGraphs );
   
   SetOperations( G, operations );
   
@@ -151,7 +155,7 @@ function( operations )
   return G;
 end );
 
-InstallMethod( AddOperationsToDerivationGraph,
+InstallMethod( @__MODULE__,  AddOperationsToDerivationGraph,
                [ IsDerivedMethodGraph, IsDenseList ],
                
   function( graph, operations )
@@ -168,19 +172,19 @@ InstallMethod( AddOperationsToDerivationGraph,
     
 end );
 
-InstallMethod( String,
+InstallMethod( @__MODULE__,  String,
                [ IsDerivedMethodGraph ],
 function( G )
   return "derivation graph";
 end );
 
-InstallMethod( ViewObj,
+InstallMethod( @__MODULE__,  ViewObj,
                [ IsDerivedMethodGraph ],
 function( G )
   Print( "<", string( G ), ">" );
 end );
 
-InstallMethod( AddDerivation,
+InstallMethod( @__MODULE__,  AddDerivation,
                [ IsDerivedMethodGraph, IsDerivedMethod ],
 function( G, d )
   local method_name, filter_list, number_of_proposed_arguments, current_function_argument_number, target_op, x;
@@ -225,7 +229,7 @@ function( G, d )
   
 end );
 
-InstallMethod( AddDerivation,
+InstallMethod( @__MODULE__,  AddDerivation,
                [ IsDerivedMethodGraph, IsFunction, IsFunction ],
                
   function( graph, target_op, func )
@@ -346,7 +350,7 @@ InstallOtherMethod( AddDerivation,
     
 end );
 
-InstallMethod( AddDerivation,
+InstallMethod( @__MODULE__,  AddDerivation,
                [ IsDerivedMethodGraph, IsFunction, IsDenseList ],
                
   function( graph, target_op, implementations_with_extra_filters )
@@ -355,7 +359,7 @@ InstallMethod( AddDerivation,
     
 end );
 
-InstallMethod( AddDerivation,
+InstallMethod( @__MODULE__,  AddDerivation,
                [ IsDerivedMethodGraph, IsFunction, IsDenseList, IsDenseList ],
                
   function( graph, target_op, used_ops_with_multiples, implementations_with_extra_filters )
@@ -364,7 +368,7 @@ InstallMethod( AddDerivation,
     
 end );
 
-InstallGlobalFunction( AddDerivationToCAP,
+@InstallGlobalFunction( AddDerivationToCAP,
   
   function( arg... )
     local list;
@@ -375,7 +379,7 @@ InstallGlobalFunction( AddDerivationToCAP,
     
 end );
 
-InstallGlobalFunction( AddWithGivenDerivationPairToCAP,
+@InstallGlobalFunction( AddWithGivenDerivationPairToCAP,
   
   function( target_op, without_given_func, with_given_func )
     local without_given_name, with_given_name;
@@ -389,19 +393,19 @@ InstallGlobalFunction( AddWithGivenDerivationPairToCAP,
     
 end );
 
-InstallMethod( DerivationsUsingOperation,
+InstallMethod( @__MODULE__,  DerivationsUsingOperation,
                [ IsDerivedMethodGraph, IsString ],
 function( G, op_name )
   return G.derivations_by_used_ops[op_name];
 end );
 
-InstallMethod( DerivationsOfOperation,
+InstallMethod( @__MODULE__,  DerivationsOfOperation,
                [ IsDerivedMethodGraph, IsString ],
 function( G, op_name )
   return G.derivations_by_target[op_name];
 end );
 
-InstallMethod( MakeOperationWeightList,
+InstallMethod( @__MODULE__,  MakeOperationWeightList,
                [ IsCapCategory, IsDerivedMethodGraph ],
 function( C, G )
   local operation_weights, operation_derivations, owl, op_name;
@@ -415,7 +419,7 @@ function( C, G )
     end;
     
     owl = ObjectifyWithAttributes(
-        rec( operation_weights = operation_weights, operation_derivations = operation_derivations ), NewType( TheFamilyOfOperationWeightLists, IsOperationWeightList ),
+        rec( operation_weights = operation_weights, operation_derivations = operation_derivations ), TheTypeOfOperationWeightLists,
         DerivationGraph, G,
         CategoryOfOperationWeightList, C
     );
@@ -424,20 +428,20 @@ function( C, G )
     
 end );
 
-InstallMethod( String,
+InstallMethod( @__MODULE__,  String,
                [ IsOperationWeightList ],
 function( owl )
   return Concatenation( "operation weight list for ",
                         string( CategoryOfOperationWeightList( owl ) ) );
 end );
 
-InstallMethod( ViewObj,
+InstallMethod( @__MODULE__,  ViewObj,
                [ IsOperationWeightList ],
 function( owl )
   Print( "<", string( owl ), ">" );
 end );
 
-InstallMethod( CurrentOperationWeight,
+InstallMethod( @__MODULE__,  CurrentOperationWeight,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
   if IsBound( owl.operation_weights[op_name] )
@@ -446,7 +450,7 @@ function( owl, op_name )
   return Inf;
 end );
 
-InstallMethod( OperationWeightUsingDerivation,
+InstallMethod( @__MODULE__,  OperationWeightUsingDerivation,
                [ IsOperationWeightList, IsDerivedMethod ],
 function( owl, d )
   local category, category_operation_weights, weight, operation_weights, operation_name, operation_weight, x;
@@ -492,13 +496,13 @@ function( owl, d )
     
 end );
 
-InstallMethod( DerivationOfOperation,
+InstallMethod( @__MODULE__,  DerivationOfOperation,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
   return owl.operation_derivations[op_name];
 end );
 
-BindGlobal( "TryToInstallDerivation", function ( owl, d )
+@BindGlobal( "TryToInstallDerivation", function ( owl, d )
   local new_weight, target, current_weight, current_derivation, derivations_of_target, new_pos, current_pos;
     
     if !IsApplicableToCategory( d, CategoryOfOperationWeightList( owl ) )
@@ -549,7 +553,7 @@ BindGlobal( "TryToInstallDerivation", function ( owl, d )
     
 end );
 
-InstallMethod( InstallDerivationsUsingOperation,
+InstallMethod( @__MODULE__,  InstallDerivationsUsingOperation,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
   local Q, derivations_to_install, node, new_weight, target, d;
@@ -589,7 +593,7 @@ function( owl, op_name )
     
 end );  
 
-InstallMethod( Reevaluate,
+InstallMethod( @__MODULE__,  Reevaluate,
                [ IsOperationWeightList ],
 function( owl )
   local new_weight, op_name, d;
@@ -612,7 +616,7 @@ function( owl )
     
 end );
 
-InstallMethod( Saturate,
+InstallMethod( @__MODULE__,  Saturate,
                [ IsOperationWeightList ],
   function( owl )
     local current_weight_list;
@@ -627,7 +631,7 @@ InstallMethod( Saturate,
 
 end );
 
-InstallMethod( AddPrimitiveOperation,
+InstallMethod( @__MODULE__,  AddPrimitiveOperation,
                [ IsOperationWeightList, IsString, IsInt ],
 function( owl, op_name, weight )
     
@@ -644,7 +648,7 @@ function( owl, op_name, weight )
     
 end );
 
-InstallMethod( PrintDerivationTree,
+InstallMethod( @__MODULE__,  PrintDerivationTree,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
   local print_node, get_children;
@@ -696,39 +700,35 @@ function( owl, op_name )
 end );
 
 
-BindGlobal( "TheFamilyOfStringMinHeaps",
-            NewFamily( "TheFamilyOfStringMinHeaps" ) );
-
-InstallGlobalFunction( StringMinHeap,
+@InstallGlobalFunction( StringMinHeap,
 function()
-  return Objectify( NewType( TheFamilyOfStringMinHeaps,
-                             IsStringMinHeap ),
+  return Objectify( TheTypeOfStringMinHeaps,
                     rec( key = function(n) return n[2]; end,
                          str = function(n) return n[1]; end,
                          array = [],
                          node_indices = rec() ) );
 end );
 
-InstallMethod( String,
+InstallMethod( @__MODULE__,  String,
                [ IsStringMinHeap ],
 function( H )
   return Concatenation( "min heap for strings, with size ",
                         string( HeapSize( H ) ) );
 end );
 
-InstallMethod( ViewObj,
+InstallMethod( @__MODULE__,  ViewObj,
                [ IsStringMinHeap ],
 function( H )
   Print( "<", string( H ), ">" );
 end );
 
-InstallMethod( HeapSize,
+InstallMethod( @__MODULE__,  HeapSize,
                [ IsStringMinHeap ],
 function( H )
   return Length( H.array );
 end );
 
-InstallMethod( Add,
+InstallMethod( @__MODULE__,  Add,
                [ IsStringMinHeap, IsString, IsInt ],
 function( H, string, key )
   local array;
@@ -738,13 +738,13 @@ function( H, string, key )
   DecreaseKey( H, string, key );
 end );
 
-InstallMethod( IsEmptyHeap,
+InstallMethod( @__MODULE__,  IsEmptyHeap,
                [ IsStringMinHeap ],
 function( H )
   return IsEmpty( H.array );
 end );
 
-InstallMethod( ExtractMin,
+InstallMethod( @__MODULE__,  ExtractMin,
                [ IsStringMinHeap ],
 function( H )
   local array, node, key;
@@ -760,7 +760,7 @@ function( H )
   return node;
 end );
 
-InstallMethod( DecreaseKey,
+InstallMethod( @__MODULE__,  DecreaseKey,
                [ IsStringMinHeap, IsString, IsInt ],
 function( H, string, key )
   local array, i, parent;
@@ -775,7 +775,7 @@ function( H, string, key )
   end;
 end );
 
-InstallMethod( Swap,
+InstallMethod( @__MODULE__,  Swap,
                [ IsStringMinHeap, IsPosInt, IsPosInt ],
 function( H, i, j )
   local array, node_indices, str, tmp, key;
@@ -791,13 +791,13 @@ function( H, i, j )
   node_indices[key] = j;
 end );
 
-InstallMethod( Contains,
+InstallMethod( @__MODULE__,  Contains,
                [ IsStringMinHeap, IsString ],
 function( H, string )
   return IsBound( H.node_indices[string] );
 end );
 
-InstallMethod( Heapify,
+InstallMethod( @__MODULE__,  Heapify,
                [ IsStringMinHeap, IsPosInt ],
 function( H, i )
   local key, array, left, right, smallest;
@@ -819,13 +819,13 @@ function( H, i )
 end );
 
 
-InstallMethod( PrintTree,
+InstallMethod( @__MODULE__,  PrintTree,
                [ IsObject, IsFunction, IsFunction ],
 function( root, print_node, get_children )
   PrintTreeRec( root, print_node, get_children, 0 );
 end );
 
-InstallMethod( PrintTreeRec,
+InstallMethod( @__MODULE__,  PrintTreeRec,
                [ IsObject, IsFunction, IsFunction, IsInt ],
 function( node, print_node, get_children, level )
   local i, child;
@@ -846,7 +846,7 @@ end );
 #################################
 
 ##
-InstallGlobalFunction( InstalledMethodsOfCategory,
+@InstallGlobalFunction( InstalledMethodsOfCategory,
   
   function( cell )
     local weight_list, list_of_methods, i, current_weight, can_compute, cannot_compute;
@@ -896,7 +896,7 @@ InstallGlobalFunction( InstalledMethodsOfCategory,
 end );
 
 ##
-InstallGlobalFunction( DerivationsOfMethodByCategory,
+@InstallGlobalFunction( DerivationsOfMethodByCategory,
   
   function( category, name )
     local category_weight_list, current_weight, current_derivation, currently_installed_funcs, to_delete, weight_list, category_getter_string, possible_derivations, category_filter, weight, i, x;
@@ -1063,7 +1063,7 @@ InstallGlobalFunction( DerivationsOfMethodByCategory,
     
 end );
 
-InstallGlobalFunction( ListPrimitivelyInstalledOperationsOfCategory,
+@InstallGlobalFunction( ListPrimitivelyInstalledOperationsOfCategory,
   
   function( arg... )
     local cat, filter, names;
@@ -1098,7 +1098,7 @@ InstallGlobalFunction( ListPrimitivelyInstalledOperationsOfCategory,
     
 end );
 
-InstallGlobalFunction( ListInstalledOperationsOfCategory,
+@InstallGlobalFunction( ListInstalledOperationsOfCategory,
   
   function( arg... )
     local category, filter, weight_list, list_of_methods, list_of_installed_methods;

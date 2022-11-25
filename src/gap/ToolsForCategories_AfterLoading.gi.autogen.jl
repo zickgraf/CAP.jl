@@ -9,7 +9,7 @@
 
 if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound( NCurses.BrowseDenseList )
 
-    InstallGlobalFunction( BrowseCachingStatistic,
+    @InstallGlobalFunction( BrowseCachingStatistic,
       
       function( category )
         local operations, current_cache_name, current_cache, value_matrix, names, cols, current_list;
@@ -50,7 +50,7 @@ if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound
 end;
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY,
+@InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY,
   
   function( cell, category, human_readable_identifier_getter )
     local generic_help_string;
@@ -72,7 +72,7 @@ InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY,
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY,
+@InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY,
   
   function( object, category, human_readable_identifier_getter )
     local generic_help_string;
@@ -98,7 +98,7 @@ InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY,
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY,
+@InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY,
   
   function( morphism, category, human_readable_identifier_getter )
     local generic_help_string;
@@ -136,7 +136,7 @@ InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY,
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY,
+@InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY,
   
   function( two_cell, category, human_readable_identifier_getter )
     local generic_help_string;
@@ -174,7 +174,7 @@ InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY,
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_OBJECTS_OF_CATEGORY,
+@InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_OBJECTS_OF_CATEGORY,
   
   function( list_of_objects, category, human_readable_identifier_getter )
     local generic_help_string, list_entry_human_readable_identifier_getter, i;
@@ -204,7 +204,7 @@ InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_OBJECTS_OF_CATEGORY,
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_MORPHISMS_OF_CATEGORY,
+@InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_MORPHISMS_OF_CATEGORY,
   
   function( list_of_morphisms, category, human_readable_identifier_getter )
     local generic_help_string, list_entry_human_readable_identifier_getter, i;
@@ -234,7 +234,7 @@ InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_MORPHISMS_OF_CATEGORY,
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_TWO_CELLS_OF_CATEGORY,
+@InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_TWO_CELLS_OF_CATEGORY,
   
   function( list_of_twocells, category, human_readable_identifier_getter )
     local generic_help_string, list_entry_human_readable_identifier_getter, i;
@@ -264,7 +264,7 @@ InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_LIST_OF_TWO_CELLS_OF_CATEGORY,
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_NON_NEGATIVE_INTEGER_OR_INFINITY,
+@InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_NON_NEGATIVE_INTEGER_OR_INFINITY,
   
   function( nnintorinf, human_readable_identifier_getter )
     local generic_help_string;
@@ -278,7 +278,7 @@ InstallGlobalFunction( CAP_INTERNAL_ASSERT_IS_NON_NEGATIVE_INTEGER_OR_INFINITY,
 end );
 
 ##
-InstallGlobalFunction( PackageOfCAPOperation, function ( operation_name )
+@InstallGlobalFunction( PackageOfCAPOperation, function ( operation_name )
   local packages;
     
     if !IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name] )

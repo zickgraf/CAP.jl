@@ -72,5 +72,5 @@
 #!  Note that the category is created with `category_as_first_argument` set to `true` (see <Ref Sect="Section_CapInternalInstallAdd" />).
 #! @Arguments options
 #! @Returns a &CAP; category
-DeclareOperation( "CategoryConstructor",
+@DeclareOperation( "CategoryConstructor",
                   [ IsRecord ] );

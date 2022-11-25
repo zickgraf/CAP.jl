@@ -4,7 +4,7 @@
 # Implementations
 #
 # backwards compatibility
-BindGlobal( "IsCapCategoryTwoCellRep", IsCapCategoryTwoCell );
+@BindGlobal( "IsCapCategoryTwoCellRep", IsCapCategoryTwoCell );
 
 ####################################
 ##
@@ -13,7 +13,7 @@ BindGlobal( "IsCapCategoryTwoCellRep", IsCapCategoryTwoCell );
 ####################################
 
 ##
-InstallMethod( Add,
+InstallMethod( @__MODULE__,  Add,
                [ IsCapCategory, IsCapCategoryTwoCell ],
                
   function( category, twocell )
@@ -46,7 +46,7 @@ InstallMethod( Add,
 end );
 
 ##
-InstallMethod( AddTwoCell,
+InstallMethod( @__MODULE__,  AddTwoCell,
                [ IsCapCategory, IsObject ],
                
   function( category, twocell )
@@ -64,7 +64,7 @@ end );
 ###########################
 
 ##
-InstallMethod( IsWellDefined,
+InstallMethod( @__MODULE__,  IsWellDefined,
                [ IsCapCategoryTwoCell ],
                
   IsWellDefinedForTwoCells

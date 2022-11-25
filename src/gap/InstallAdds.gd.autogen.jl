@@ -11,6 +11,6 @@
 #! @Description
 #!   See <Ref Sect="Section_CapInternalInstallAdd" />.
 #! @Arguments record
-DeclareGlobalFunction( "CapInternalInstallAdd" );
+@DeclareGlobalFunction( "CapInternalInstallAdd" );
 
-DeclareGlobalFunction( "CAP_INTERNAL_INSTALL_ADDS_FROM_RECORD" );
+@DeclareGlobalFunction( "CAP_INTERNAL_INSTALL_ADDS_FROM_RECORD" );

@@ -16,10 +16,10 @@
 @DeclareInfoClass( "DerivationInfo" );
 
 #!
-DeclareGlobalFunction( "ActivateDerivationInfo" );
+@DeclareGlobalFunction( "ActivateDerivationInfo" );
 
 #!
-DeclareGlobalFunction( "DeactivateDerivationInfo" );
+@DeclareGlobalFunction( "DeactivateDerivationInfo" );
 
 
 ####################################
@@ -64,7 +64,7 @@ DeclareGlobalFunction( "DeactivateDerivationInfo" );
 #!  change during the installation of operations. In particular, it must
 #!  !rely on `CanCompute` to check conditions.
 #! @Arguments name, target_op, used_ops_with_multiples, weight, func, category_filter
-DeclareOperation( "MakeDerivation",
+@DeclareOperation( "MakeDerivation",
                   [ IsString, IsFunction, IsDenseList,
                     IsPosInt, IsFunction, IsFunction ] );
 
@@ -95,7 +95,7 @@ DeclareOperation( "MakeDerivation",
 #! @Arguments d, C
 #! @Returns <C>true</C> if the category <A>C</A> is known to satisfy
 #!          the category filter of the derivation <A>d</A>.
-DeclareOperation( "IsApplicableToCategory", [ IsDerivedMethod, IsCapCategory ] );
+@DeclareOperation( "IsApplicableToCategory", [ IsDerivedMethod, IsCapCategory ] );
 
 #! @Arguments d
 #! @Returns
@@ -117,11 +117,11 @@ DeclareOperation( "IsApplicableToCategory", [ IsDerivedMethod, IsCapCategory ] )
 #!  The integer <A>weight</A> is the computed weight of the operation
 #!  implemented by this derivation.
 #! @Arguments d, weight, C
-DeclareOperation( "InstallDerivationForCategory",
+@DeclareOperation( "InstallDerivationForCategory",
                   [ IsDerivedMethod, IsPosInt, IsCapCategory ] );
 
 # deprecated
-DeclareOperation( "DerivationResultWeight",
+@DeclareOperation( "DerivationResultWeight",
                   [ IsDerivedMethod, IsDenseList ] );
 
 #! @Description
@@ -148,7 +148,7 @@ DeclareOperation( "DerivationResultWeight",
 #!  operations.  The set of operations is fixed once the graph is created.
 #!  Derivations can be added to the graph by calling <C>AddDerivation</C>.
 #! @Arguments operations
-DeclareOperation( "MakeDerivationGraph", [ IsDenseList ] );
+@DeclareOperation( "MakeDerivationGraph", [ IsDenseList ] );
 
 
 #! @Description Adds a list of operation names <A>operations</A> to a given derivation graph <A>graph</A>.
@@ -156,25 +156,25 @@ DeclareOperation( "MakeDerivationGraph", [ IsDenseList ] );
 #!  but do !want to pollute the CAP kernel any more. Please use it with caution. If
 #!  a weight list/category was created before it will !be aware of the operations.
 #! @Arguments graph, operations
-DeclareOperation( "AddOperationsToDerivationGraph", [ IsDerivedMethodGraph, IsDenseList ] );
+@DeclareOperation( "AddOperationsToDerivationGraph", [ IsDerivedMethodGraph, IsDenseList ] );
 
 #! @Description
 #!  Add a derivation to a derivation graph.
 #! @Arguments G, d
-DeclareOperation( "AddDerivation", [ IsDerivedMethodGraph, IsDerivedMethod ] );
+@DeclareOperation( "AddDerivation", [ IsDerivedMethodGraph, IsDerivedMethod ] );
 
 #!
-DeclareOperation( "AddDerivation", [ IsDerivedMethodGraph, IsFunction, IsDenseList, IsObject ] );
+@DeclareOperation( "AddDerivation", [ IsDerivedMethodGraph, IsFunction, IsDenseList, IsObject ] );
 #!
-DeclareOperation( "AddDerivation", [ IsDerivedMethodGraph, IsFunction, IsDenseList ] );
+@DeclareOperation( "AddDerivation", [ IsDerivedMethodGraph, IsFunction, IsDenseList ] );
 #!
-DeclareOperation( "AddDerivation", [ IsDerivedMethodGraph, IsFunction, IsFunction ] );
+@DeclareOperation( "AddDerivation", [ IsDerivedMethodGraph, IsFunction, IsFunction ] );
 
 #!
-DeclareGlobalFunction( "AddDerivationToCAP" );
+@DeclareGlobalFunction( "AddDerivationToCAP" );
 
 #!
-DeclareGlobalFunction( "AddWithGivenDerivationPairToCAP" );
+@DeclareGlobalFunction( "AddWithGivenDerivationPairToCAP" );
 
 #! @Description
 #!  Gives the operations ⥉ the graph <A>G</A>, as a list of strings.
@@ -185,14 +185,14 @@ DeclareGlobalFunction( "AddWithGivenDerivationPairToCAP" );
 #!  Finds all the derivations ⥉ the graph <A>G</A> that use the operation named
 #!  <A>op_name</A>, && returns them as a list.
 #! @Arguments G, op_name
-DeclareOperation( "DerivationsUsingOperation", [ IsDerivedMethodGraph, IsString ] );
+@DeclareOperation( "DerivationsUsingOperation", [ IsDerivedMethodGraph, IsString ] );
 
 #! @Description
 #!  Finds all the derivations ⥉ the graph <A>G</A> targeting the operation named
 #!  <A>op_name</A> (that is, the derivations that provide implementations of this
 #!  operation), && returns them as a list.
 #! @Arguments G, op_name
-DeclareOperation( "DerivationsOfOperation", [ IsDerivedMethodGraph, IsString ] );
+@DeclareOperation( "DerivationsOfOperation", [ IsDerivedMethodGraph, IsString ] );
 
 
 ####################################
@@ -219,7 +219,7 @@ DeclareOperation( "DerivationsOfOperation", [ IsDerivedMethodGraph, IsString ] )
 #!  The argument <A>C</A> is the CAP category this operation weight list is associated to,
 #!  && the argument <A>G</A> is a derivation graph containing operation names && derivations.
 #! @Arguments C, G
-DeclareOperation( "MakeOperationWeightList", [ IsCapCategory, IsDerivedMethodGraph ] );
+@DeclareOperation( "MakeOperationWeightList", [ IsCapCategory, IsDerivedMethodGraph ] );
 
 #! @Description
 #!  Returns the derivation graph used by the operation weight list <A>owl</A>.
@@ -234,13 +234,13 @@ DeclareOperation( "MakeOperationWeightList", [ IsCapCategory, IsDerivedMethodGra
 #! @Description
 #!  Returns the current weight of the operation named <A>op_name</A>.
 #! @Arguments owl, op_name
-DeclareOperation( "CurrentOperationWeight", [ IsOperationWeightList, IsString ] );
+@DeclareOperation( "CurrentOperationWeight", [ IsOperationWeightList, IsString ] );
 
 #! @Description
 #!  Finds out what the weight of the operation implemented by the derivation <A>d</A>
 #!  would be if we had used that derivation.
 #! @Arguments owl, d
-DeclareOperation( "OperationWeightUsingDerivation",
+@DeclareOperation( "OperationWeightUsingDerivation",
                   [ IsOperationWeightList, IsDerivedMethod ] );
 
 #! @Description
@@ -249,7 +249,7 @@ DeclareOperation( "OperationWeightUsingDerivation",
 #!  If the operation is !implemented by a derivation (that is, either implemented
 #!  directly || !implemented at all), then <C>fail</C> is returned.
 #! @Arguments owl, op_name
-DeclareOperation( "DerivationOfOperation", [ IsOperationWeightList, IsString ] );
+@DeclareOperation( "DerivationOfOperation", [ IsOperationWeightList, IsString ] );
 
 #! @Description
 #!  Performs a search from the operation <A>op_name</A>, && installs all derivations
@@ -257,7 +257,7 @@ DeclareOperation( "DerivationOfOperation", [ IsOperationWeightList, IsString ] )
 #!  This is used internally by <C>AddPrimitiveOperation</C> && <C>Reevaluate</C>.
 #!  It should normally !be necessary to call this function directly.
 #! @Arguments owl, op_name
-DeclareOperation( "InstallDerivationsUsingOperation",
+@DeclareOperation( "InstallDerivationsUsingOperation",
                   [ IsOperationWeightList, IsString ] );
 
 #! @Description
@@ -267,13 +267,13 @@ DeclareOperation( "InstallDerivationsUsingOperation",
 #!  (e.g. it is told that it is abelian)
 #!  || because new derivations have been added to the graph.
 #! @Arguments owl
-DeclareOperation( "Reevaluate", [ IsOperationWeightList ] );
+@DeclareOperation( "Reevaluate", [ IsOperationWeightList ] );
 
 #! @Description
 #!  Saturates the derivation graph, i.e., calls reevaluate until
 #!  no more changes ⥉ the derivation graph occur.
 #! @Arguments owl
-DeclareOperation( "Saturate", [ IsOperationWeightList ] );
+@DeclareOperation( "Saturate", [ IsOperationWeightList ] );
 
 #! @Description
 #!  Add the operation named <A>op_name</A> to the operation weight list <A>owl</A>
@@ -282,19 +282,19 @@ DeclareOperation( "Saturate", [ IsOperationWeightList ] );
 #!  from the newly added operation to be installed as well
 #!  (unless they are already installed with the same || lower weight).
 #! @Arguments owl, op_name, weight
-DeclareOperation( "AddPrimitiveOperation", [ IsOperationWeightList, IsString, IsInt ] );
+@DeclareOperation( "AddPrimitiveOperation", [ IsOperationWeightList, IsString, IsInt ] );
 
 #! @Description
 #!  Print a tree representation of the way the operation named <A>op_name</A>
 #!  is implemented ⥉ the category of the operation weight list <A>owl</A>.
 #! @Arguments owl, op_name
-DeclareOperation( "PrintDerivationTree",
+@DeclareOperation( "PrintDerivationTree",
                   [ IsOperationWeightList, IsString ] );
 
 #! @Description
 #!  Prints a tree structure.
-DeclareOperation( "PrintTree", [ IsObject, IsFunction, IsFunction ] );
-DeclareOperation( "PrintTreeRec",
+@DeclareOperation( "PrintTree", [ IsObject, IsFunction, IsFunction ] );
+@DeclareOperation( "PrintTreeRec",
                   [ IsObject, IsFunction, IsFunction, IsInt ] );
 
 ####################################
@@ -313,13 +313,13 @@ DeclareOperation( "PrintTreeRec",
 
 #! @Description
 #!  Create an empty string min heap.
-DeclareGlobalFunction( "StringMinHeap" );
+@DeclareGlobalFunction( "StringMinHeap" );
 
 #! @Description
 #!  Add a new node containing the label <A>string</A> && the key <A>key</A>
 #!  to the heap <A>H</A>.
 #! @Arguments H, string, key
-DeclareOperation( "Add", [ IsStringMinHeap, IsString, IsInt ] );
+@DeclareOperation( "Add", [ IsStringMinHeap, IsString, IsInt ] );
 
 #! @Description
 #!  Remove a node with minimal key value from the heap <A>H</A>, && return it.
@@ -327,30 +327,30 @@ DeclareOperation( "Add", [ IsStringMinHeap, IsString, IsInt ] );
 #!  is the extracted node's label (a string) && <C>key</C> is the
 #!  node's key (an integer).
 #! @Arguments H
-DeclareOperation( "ExtractMin", [ IsStringMinHeap ] );
+@DeclareOperation( "ExtractMin", [ IsStringMinHeap ] );
 
 #! @Description
 #!  Decrease the key value for the node with label <A>string</A> in the
 #!  heap <A>H</A>.  The new key value is given by <A>key</A> && must be
 #!  smaller than the node's current value.
 #! @Arguments H, string, key
-DeclareOperation( "DecreaseKey", [ IsStringMinHeap, IsString, IsInt ] );
+@DeclareOperation( "DecreaseKey", [ IsStringMinHeap, IsString, IsInt ] );
 
 #! @Description
 #!  Returns <C>true</C> if the heap <A>H</A> is empty, <C>false</C> otherwise.
 #! @Arguments H
-DeclareOperation( "IsEmptyHeap", [ IsStringMinHeap ] );
+@DeclareOperation( "IsEmptyHeap", [ IsStringMinHeap ] );
 
 #! @Description
 #!  Returns the number of nodes ⥉ the heap <A>H</A>.
 #! @Arguments H
-DeclareOperation( "HeapSize", [ IsStringMinHeap ] );
+@DeclareOperation( "HeapSize", [ IsStringMinHeap ] );
 
 #! @Description
 #!  Returns <C>true</C> if the heap <A>H</A> contains a node with
 #!  label <A>string</A>, && <C>false</C> otherwise.
 #! @Arguments H, string
-DeclareOperation( "Contains", [ IsStringMinHeap, IsString ] );
+@DeclareOperation( "Contains", [ IsStringMinHeap, IsString ] );
 
 #! @Description
 #!  Swaps two elements ⥉ the list used to implement the heap,
@@ -358,13 +358,13 @@ DeclareOperation( "Contains", [ IsStringMinHeap, IsString ] );
 #!  This is an internal function which should only be called from the
 #!  functions that implement the heap functionality.
 #! @Arguments H, i, j
-DeclareOperation( "Swap", [ IsStringMinHeap, IsPosInt, IsPosInt ] );
+@DeclareOperation( "Swap", [ IsStringMinHeap, IsPosInt, IsPosInt ] );
 
 #! @Description
 #!  Heapify the heap <A>H</A>, starting from index <A>i</A>.
 #!  This is an internal function.
 #! @Arguments H, i
-DeclareOperation( "Heapify", [ IsStringMinHeap, IsPosInt ] );
+@DeclareOperation( "Heapify", [ IsStringMinHeap, IsPosInt ] );
 
 
 #################################
@@ -373,8 +373,8 @@ DeclareOperation( "Heapify", [ IsStringMinHeap, IsPosInt ] );
 ##
 #################################
 
-DeclareGlobalFunction( "InstalledMethodsOfCategory" );
-DeclareGlobalFunction( "DerivationsOfMethodByCategory" );
+@DeclareGlobalFunction( "InstalledMethodsOfCategory" );
+@DeclareGlobalFunction( "DerivationsOfMethodByCategory" );
 
-DeclareGlobalFunction( "ListInstalledOperationsOfCategory" );
-DeclareGlobalFunction( "ListPrimitivelyInstalledOperationsOfCategory" );
+@DeclareGlobalFunction( "ListInstalledOperationsOfCategory" );
+@DeclareGlobalFunction( "ListPrimitivelyInstalledOperationsOfCategory" );

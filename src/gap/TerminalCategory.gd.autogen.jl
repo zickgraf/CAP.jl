@@ -47,6 +47,11 @@
 @DeclareFilter( "IsMorphismInCapTerminalCategoryWithMultipleObjects",
         IsCapCategoryMorphism );
 
+#! @Description
+#!  The property of the category <A>C</A> being terminal.
+#! @Arguments C
+@DeclareProperty( "IsTerminalCategory", IsCapCategory );
+
 AddCategoricalProperty( [ "IsTerminalCategory", "IsTerminalCategory" ] );
 
 ########################################
@@ -57,11 +62,11 @@ AddCategoricalProperty( [ "IsTerminalCategory", "IsTerminalCategory" ] );
 
 #! @Description
 #!  Construct a terminal category with a single object.
-DeclareGlobalFunction( "TerminalCategoryWithSingleObject" );
+@DeclareGlobalFunction( "TerminalCategoryWithSingleObject" );
 
 #! @Description
 #!  Construct a terminal category with multiple objects.
-DeclareGlobalFunction( "TerminalCategoryWithMultipleObjects" );
+@DeclareGlobalFunction( "TerminalCategoryWithMultipleObjects" );
 
 #! @Description
 #!  This function takes a record of options suited for CategoryConstructor. 
@@ -70,7 +75,7 @@ DeclareGlobalFunction( "TerminalCategoryWithMultipleObjects" );
 #!  before passing it on to CategoryConstructor.
 #! @Arguments options
 #! @Returns a &CAP; category
-DeclareGlobalFunction( "CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY" );
+@DeclareGlobalFunction( "CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY" );
 
 #########################################
 #

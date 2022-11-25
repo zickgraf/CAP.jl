@@ -19,7 +19,7 @@
 ##################################
 
 ##
-InstallMethod( Opposite,
+InstallMethod( @__MODULE__,  Opposite,
                [ IsCapCategoryObject ],
                
   function( object )
@@ -29,7 +29,7 @@ InstallMethod( Opposite,
 end );
 
 ##
-InstallMethod( Opposite,
+InstallMethod( @__MODULE__,  Opposite,
                [ IsCapCategoryMorphism ],
                
   function( morphism )
@@ -38,7 +38,7 @@ InstallMethod( Opposite,
     
 end );
 
-InstallGlobalFunction( CAP_INTERNAL_OPPOSITE_RECURSIVE,
+@InstallGlobalFunction( CAP_INTERNAL_OPPOSITE_RECURSIVE,
   
   function( obj )
     
@@ -56,7 +56,7 @@ InstallGlobalFunction( CAP_INTERNAL_OPPOSITE_RECURSIVE,
     
 end );
 
-BindGlobal( "CAP_INTERNAL_INSTALL_OPPOSITE_ADDS_FROM_CATEGORY",
+@BindGlobal( "CAP_INTERNAL_INSTALL_OPPOSITE_ADDS_FROM_CATEGORY",
   
   function( opposite_category, category )
     local only_primitive_operations, recnames, current_recname, current_entry, dual_operation_name,
@@ -342,7 +342,7 @@ end );
 
 
 ##
-InstallMethod( Opposite,
+InstallMethod( @__MODULE__,  Opposite,
                [ IsCapCategory, IsString ],
                
   function( category, name )
@@ -503,7 +503,7 @@ InstallMethod( Opposite,
 end );
 
 ##
-InstallMethod( Opposite,
+InstallMethod( @__MODULE__,  Opposite,
                [ IsCapCategory ],
                
   function( category )
@@ -521,7 +521,7 @@ end );
 ##
 ##################################
 
-InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_CATEGORY,
+@InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_CATEGORY,
                        
   function( category )
     local opposite_property_pairs, entry, pair;
@@ -545,7 +545,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_CATEGORY,
     
 end );
 
-InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_MORPHISM,
+@InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_MORPHISM,
                        
   function( morphism )
     local entry;
@@ -564,7 +564,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_MORPHISM,
     
 end );
 
-InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_OBJECT,
+@InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_OBJECT,
                        
   function( object )
     local entry_list, entry;
@@ -584,7 +584,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_OBJECT,
 end );
 
 ##
-InstallMethod( Display,
+InstallMethod( @__MODULE__,  Display,
         [ IsCapCategoryOppositeObject ],
         
   function( object )
@@ -596,7 +596,7 @@ InstallMethod( Display,
 end );
 
 ##
-InstallMethod( Display,
+InstallMethod( @__MODULE__,  Display,
         [ IsCapCategoryOppositeMorphism ],
         
   function( morphism )

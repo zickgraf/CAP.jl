@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-InstallValue( CAP_INTERNAL_VALID_RETURN_TYPES,
+@InstallValueConst( CAP_INTERNAL_VALID_RETURN_TYPES,
 #! @BeginCode CAP_INTERNAL_VALID_RETURN_TYPES
     [
         "object",
@@ -25,7 +25,7 @@ InstallValue( CAP_INTERNAL_VALID_RETURN_TYPES,
 );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
+@InstallGlobalFunction( CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
   function( args... )
     local list;
       
@@ -41,7 +41,7 @@ InstallGlobalFunction( CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
 
 end );
 
-InstallValue( CAP_INTERNAL_METHOD_NAME_RECORD, rec(
+@InstallValueConst( CAP_INTERNAL_METHOD_NAME_RECORD, rec(
 ObjectConstructor = rec(
   filter_list = [ "category", IsObject ],
   return_type = "object",
@@ -3913,7 +3913,7 @@ IndecomposableInjectiveObjects = rec(
 
 ) );
 
-InstallValue( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS, [
+@InstallValueConst( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS, [
 rec(
   object_specification = [ "varobject" ],
   morphism_specification = [  ],
@@ -3971,7 +3971,7 @@ rec(
 
 ] );
 
-InstallGlobalFunction( "CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS",
+@InstallGlobalFunction( "CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS",
   function ( limits )
     local object_specification, morphism_specification, source_position, type, range_position, unbound_morphism_positions, number_of_unbound_morphisms, unbound_objects, morphism, unbound_object_positions, number_of_unbound_objects, targets, target_positions, nontarget_positions, number_of_targets, number_of_nontargets, diagram_filter_list, diagram_input_type, limit, position;
     
@@ -4171,7 +4171,7 @@ end );
 CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS );
 
 
-BindGlobal( "CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES", function ( method_record, entry_name, generated_entry )
+@BindGlobal( "CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES", function ( method_record, entry_name, generated_entry )
   local excluded_names, subset_only, method_record_entry, name;
     
     excluded_names = [ "function_name", "pre_function", "pre_function_full", "post_function" ];
@@ -4209,7 +4209,7 @@ BindGlobal( "CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES", function ( method
     end;
 end );
 
-InstallGlobalFunction( CAP_INTERNAL_VALIDATE_LIMITS_IN_NAME_RECORD,
+@InstallGlobalFunction( CAP_INTERNAL_VALIDATE_LIMITS_IN_NAME_RECORD,
   function ( method_name_record, limits )
     local make_record_with_given, make_colimit, object_filter_list, projection_filter_list, projection_io_type, morphism_to_sink_filter_list, morphism_to_sink_io_type, universal_morphism_filter_list, universal_morphism_io_type, object_record, projection_record, morphism_to_sink_record, filter_list, io_type, with_given_object_position, return_type, dual_operation, universal_morphism_record, functorial_record, functorial_with_given_record, limit;
     
@@ -4487,9 +4487,9 @@ end );
 CAP_INTERNAL_VALIDATE_LIMITS_IN_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD, CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS );
 
 
-InstallValue( CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS, rec() );
+@InstallValueConst( CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS, rec() );
 
-InstallGlobalFunction( CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD,
+@InstallGlobalFunction( CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD,
   function( replacement_data )
     local current_name;
 
@@ -4502,11 +4502,11 @@ InstallGlobalFunction( CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD,
     
 end );
 
-InstallValue( CAP_INTERNAL_OPPOSITE_PROPERTY_PAIRS_FOR_OBJECTS, [ ] );
+@InstallValueConst( CAP_INTERNAL_OPPOSITE_PROPERTY_PAIRS_FOR_OBJECTS, [ ] );
 
-InstallValue( CAP_INTERNAL_OPPOSITE_PROPERTY_PAIRS_FOR_MORPHISMS, [ ] );
+@InstallValueConst( CAP_INTERNAL_OPPOSITE_PROPERTY_PAIRS_FOR_MORPHISMS, [ ] );
 
-InstallValue( CAP_INTERNAL_FIND_OPPOSITE_PROPERTY_PAIRS_IN_METHOD_NAME_RECORD,
+@InstallValueConst( CAP_INTERNAL_FIND_OPPOSITE_PROPERTY_PAIRS_IN_METHOD_NAME_RECORD,
   function( method_name_record )
     local recnames, current_recname, current_entry, current_rec, category_property_list, elem;
     
@@ -4557,7 +4557,7 @@ InstallValue( CAP_INTERNAL_FIND_OPPOSITE_PROPERTY_PAIRS_IN_METHOD_NAME_RECORD,
     
 end );
 
-BindGlobal( "CAP_INTERNAL_PREPARE_INHERITED_PRE_FUNCTION",
+@BindGlobal( "CAP_INTERNAL_PREPARE_INHERITED_PRE_FUNCTION",
   function( func, drop_both )
     
     if drop_both
@@ -4578,7 +4578,7 @@ BindGlobal( "CAP_INTERNAL_PREPARE_INHERITED_PRE_FUNCTION",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_CREATE_REDIRECTION",
+@BindGlobal( "CAP_INTERNAL_CREATE_REDIRECTION",
   
   function( without_given_name, with_given_name, object_function_name, object_arguments_positions )
     local object_function, with_given_name_function, record, attribute_tester;
@@ -4675,7 +4675,7 @@ BindGlobal( "CAP_INTERNAL_CREATE_REDIRECTION",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_CREATE_POST_FUNCTION",
+@BindGlobal( "CAP_INTERNAL_CREATE_POST_FUNCTION",
   
   function( source_range_object, object_function_name, object_arguments_positions )
     local object_getter, object_function, setter_function, cache_key_length;
@@ -4737,7 +4737,7 @@ BindGlobal( "CAP_INTERNAL_CREATE_POST_FUNCTION",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_CREATE_NEW_FUNC_WITH_ONE_MORE_ARGUMENT_WITH_RETURN",
+@BindGlobal( "CAP_INTERNAL_CREATE_NEW_FUNC_WITH_ONE_MORE_ARGUMENT_WITH_RETURN",
   
   function( func )
     
@@ -4745,7 +4745,7 @@ BindGlobal( "CAP_INTERNAL_CREATE_NEW_FUNC_WITH_ONE_MORE_ARGUMENT_WITH_RETURN",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_CREATE_NEW_FUNC_WITH_ONE_MORE_ARGUMENT_WITHOUT_RETURN",
+@BindGlobal( "CAP_INTERNAL_CREATE_NEW_FUNC_WITH_ONE_MORE_ARGUMENT_WITHOUT_RETURN",
   
   function( func )
     
@@ -4753,7 +4753,7 @@ BindGlobal( "CAP_INTERNAL_CREATE_NEW_FUNC_WITH_ONE_MORE_ARGUMENT_WITHOUT_RETURN"
     
 end );
 
-InstallGlobalFunction( CAP_INTERNAL_ENHANCE_NAME_RECORD,
+@InstallGlobalFunction( CAP_INTERNAL_ENHANCE_NAME_RECORD,
   function( record )
     local recnames, current_recname, current_rec, io_type, number_of_arguments, func_string,
           installation_name, output_list, input_list, argument_names, return_list, current_output, input_position, list_position,
@@ -5567,10 +5567,10 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
 # TODO
 # CAP_INTERNAL_METHOD_NAME_RECORD above should be renamed to CAP_INTERNAL_CORE_METHOD_NAME_RECORD.
 # CAP_INTERNAL_METHOD_NAME_RECORD should be an empty record at the beginning, which is populated ⥉ CAP_INTERNAL_INSTALL_ADDS_FROM_RECORD
-BindGlobal( "CAP_INTERNAL_CORE_METHOD_NAME_RECORD", StructuralCopy( CAP_INTERNAL_METHOD_NAME_RECORD ) );
+@BindGlobal( "CAP_INTERNAL_CORE_METHOD_NAME_RECORD", StructuralCopy( CAP_INTERNAL_METHOD_NAME_RECORD ) );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_GENERATE_DOCUMENTATION_FROM_METHOD_NAME_RECORD,
+@InstallGlobalFunction( CAP_INTERNAL_GENERATE_DOCUMENTATION_FROM_METHOD_NAME_RECORD,
   function ( record, package_name, filename, chapter_name, section_name )
     local recnames, output_string, package_info, current_string, current_recname, current_rec, output_path;
     
@@ -5627,16 +5627,16 @@ InstallGlobalFunction( CAP_INTERNAL_GENERATE_DOCUMENTATION_FROM_METHOD_NAME_RECO
 #  F: ( input_arguments... ) \\mapsto \\mathtt[function_name](input_arguments...) .
 # @Returns nothing
 # @Arguments C, F
-DeclareOperation( "Addfunction_name",
+@DeclareOperation( "Addfunction_name",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "Addfunction_name",
+@DeclareOperation( "Addfunction_name",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "Addfunction_name",
+@DeclareOperation( "Addfunction_name",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "Addfunction_name",
+@DeclareOperation( "Addfunction_name",
                   [ IsCapCategory, IsList ] );
 """,
             rec(
@@ -5677,10 +5677,10 @@ CAP_INTERNAL_GENERATE_DOCUMENTATION_FROM_METHOD_NAME_RECORD(
     "Available Add functions"
 );
 
-BindGlobal( "CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE", rec( ) );
+@BindGlobal( "CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE", rec( ) );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE,
+@InstallGlobalFunction( CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE,
   function ( record, package_name )
     local recname;
     
@@ -5707,7 +5707,7 @@ end );
 CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RECORD, "CAP" );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_GENERATE_DOCUMENTATION_FOR_CATEGORY_INSTANCES,
+@InstallGlobalFunction( CAP_INTERNAL_GENERATE_DOCUMENTATION_FOR_CATEGORY_INSTANCES,
   function ( subsections, package_name, filename, chapter_name, section_name )
     local output_string, package_info, current_string, transitively_needed_other_packages, previous_operations, subsection, category, subsection_title, operations, bookname, info, label, match, nr, res, test_string, test_string_legacy, output_path, i, name;
     

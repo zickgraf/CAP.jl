@@ -3,10 +3,10 @@
 #
 # Implementations
 #
-InstallValue( CAP_INTERNAL_FINAL_DERIVATION_LIST,
+@InstallValueConst( CAP_INTERNAL_FINAL_DERIVATION_LIST,
               rec( final_derivation_list = [ ] ) );
 
-BindGlobal( "CAP_INTERNAL_FINAL_DERIVATION_SANITY_CHECK",
+@BindGlobal( "CAP_INTERNAL_FINAL_DERIVATION_SANITY_CHECK",
   
   function( final_derivation )
     local method_name, filter_list, number_of_proposed_arguments, current_function_argument_number, derivation;
@@ -55,7 +55,7 @@ BindGlobal( "CAP_INTERNAL_FINAL_DERIVATION_SANITY_CHECK",
     
 end );
 
-InstallGlobalFunction( AddFinalDerivation,
+@InstallGlobalFunction( AddFinalDerivation,
                
   function( target_op, can_compute, cannot_compute, func, additional_functions... )
     
@@ -69,7 +69,7 @@ InstallGlobalFunction( AddFinalDerivation,
     
 end );
 
-InstallGlobalFunction( AddFinalDerivationBundle,
+@InstallGlobalFunction( AddFinalDerivationBundle,
                
   function( can_compute, cannot_compute, additional_functions... )
     local weight, description, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, operations_to_install, union_of_collected_lists, derivations, collected_list, used_op_names_with_multiples_and_category_getters, dummy_derivation, final_derivation, i, current_additional_func, x;
@@ -287,7 +287,7 @@ InstallGlobalFunction( AddFinalDerivationBundle,
     
 end );
 
-InstallMethod( Finalize,
+InstallMethod( @__MODULE__,  Finalize,
                [ IsCapCategory ],
   
   function( category )

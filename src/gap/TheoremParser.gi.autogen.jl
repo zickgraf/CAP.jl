@@ -12,7 +12,7 @@
 
 ## Returns true if string represents an integer &&
 ## converting is save, false otherwise.
-InstallGlobalFunction( STRING_REPRESENTS_INTEGER,
+@InstallGlobalFunction( STRING_REPRESENTS_INTEGER,
             
   i -> ForAll( i, j -> j ⥉ "0123456789" )
   
@@ -20,7 +20,7 @@ InstallGlobalFunction( STRING_REPRESENTS_INTEGER,
 
 ## Converts to int if string is an int,
 ## returns fail otherwise
-InstallGlobalFunction( Int_SAVE,
+@InstallGlobalFunction( Int_SAVE,
             
   function( string )
     
@@ -37,7 +37,7 @@ InstallGlobalFunction( Int_SAVE,
 end );
 
 ##Splits string at occourences of substring
-BindGlobal( "SPLIT_STRING_MULTIPLE",
+@BindGlobal( "SPLIT_STRING_MULTIPLE",
             
   function( string, substring )
     local list, lenght_substring, current_pos;
@@ -73,7 +73,7 @@ end );
 ## If string is true || false, method returns
 ## the corresponding bool. If string represents an int,
 ## method returns this int. Fail otherwise.
-BindGlobal( "CONVERT_STRING_TO_BOOL_OR_INT",
+@BindGlobal( "CONVERT_STRING_TO_BOOL_OR_INT",
             
   function( string )
     
@@ -98,7 +98,7 @@ end );
 ## Splits theorem at | && vdash,
 ## returns a list with three entries,
 ## && throws an error otherwise.
-BindGlobal( "SPLIT_THEOREM",
+@BindGlobal( "SPLIT_THEOREM",
             
   function( theorem_string )
     local return_rec;
@@ -133,7 +133,7 @@ end );
 
 ## Returns an empty list if string is empty.
 ## Splits string at ',' if !in ( ) || [ ].
-BindGlobal( "SPLIT_KOMMAS_NOT_IN_BRACKETS",
+@BindGlobal( "SPLIT_KOMMAS_NOT_IN_BRACKETS",
             
   function( string )
     local positions, bracket_count, return_list, first, last, i;
@@ -186,7 +186,7 @@ end );
 ## If string is of form command( some ) it returns
 ## a record with command entry is the command string
 ## && arguments is the list of arguments
-BindGlobal( "COMMAND_AND_ARGUMENTS",
+@BindGlobal( "COMMAND_AND_ARGUMENTS",
             
   function( command_string )
     local command, arguments, first_pos, i;
@@ -216,7 +216,7 @@ BindGlobal( "COMMAND_AND_ARGUMENTS",
 end );
 
 ## If string is [ some ] then it returns the corresponding list. Fail otherwise
-BindGlobal( "FIND_LISTING",
+@BindGlobal( "FIND_LISTING",
             
   function( string )
     
@@ -232,7 +232,7 @@ BindGlobal( "FIND_LISTING",
     
 end );
 
-InstallGlobalFunction( "SPLIT_SINGLE_PART_RECURSIVE",
+@InstallGlobalFunction( "SPLIT_SINGLE_PART_RECURSIVE",
                        
   function( single_part )
     local listing;
@@ -269,7 +269,7 @@ InstallGlobalFunction( "SPLIT_SINGLE_PART_RECURSIVE",
     
 end );
 
-BindGlobal( "SPLIT_SINGLE_PART",
+@BindGlobal( "SPLIT_SINGLE_PART",
             
   function( part )
     local return_rec, temp_rec;
@@ -304,7 +304,7 @@ BindGlobal( "SPLIT_SINGLE_PART",
     
 end );
 
-BindGlobal( "SANITIZE_ARGUMENT_LIST",
+@BindGlobal( "SANITIZE_ARGUMENT_LIST",
             
   function( string )
     local list, arg, tmp_list, new_list, position;
@@ -363,7 +363,7 @@ end );
 
 ## Returns the part of string before the first occourence of substring.
 ## If substring is !present, the whole string is returned
-BindGlobal( "REMOVE_PART_AFTER_FIRST_SUBSTRING",
+@BindGlobal( "REMOVE_PART_AFTER_FIRST_SUBSTRING",
             
   function( string, substring )
     local position;
@@ -383,7 +383,7 @@ BindGlobal( "REMOVE_PART_AFTER_FIRST_SUBSTRING",
 end );
 
 ## Returns the number of occourences of substring ⥉ string
-BindGlobal( "COUNT_SUBSTRING_APPEARANCE",
+@BindGlobal( "COUNT_SUBSTRING_APPEARANCE",
             
   function( string, substring )
     
@@ -393,7 +393,7 @@ BindGlobal( "COUNT_SUBSTRING_APPEARANCE",
     
 end );
 
-BindGlobal( "FIND_PART_WHICH_CONTAINS_FUNCTION",
+@BindGlobal( "FIND_PART_WHICH_CONTAINS_FUNCTION",
             
   function( part )
     local nr_substring_close_bracket, return_record, splitted_part, predicate, func, variables, position_equal, value, position_close_bracket;
@@ -464,7 +464,7 @@ BindGlobal( "FIND_PART_WHICH_CONTAINS_FUNCTION",
     
 end );
 
-BindGlobal( "FIND_PREDICATE_VARIABLES",
+@BindGlobal( "FIND_PREDICATE_VARIABLES",
             
   function( source_part, range_variables )
     local split_source_part, func, predicate, variables, source_rec, first, bound_variable, value,
@@ -581,7 +581,7 @@ BindGlobal( "FIND_PREDICATE_VARIABLES",
     
 end );
 
-InstallGlobalFunction( PARSE_THEOREM_FROM_LATEX,
+@InstallGlobalFunction( PARSE_THEOREM_FROM_LATEX,
                        
   function( theorem_string )
     local variable_part, source_part, range_part, range_value, range_command,
@@ -783,7 +783,7 @@ InstallGlobalFunction( PARSE_THEOREM_FROM_LATEX,
     
 end );
 
-BindGlobal( "RETURN_STRING_BETWEEN_SUBSTRINGS",
+@BindGlobal( "RETURN_STRING_BETWEEN_SUBSTRINGS",
             
   function( string, substring_begin, substring_end )
     local substring, rest_of_string, position_begin, position_end;
@@ -806,7 +806,7 @@ BindGlobal( "RETURN_STRING_BETWEEN_SUBSTRINGS",
     
 end );
 
-BindGlobal( "REMOVE_CHARACTERS_FROM_LATEX",
+@BindGlobal( "REMOVE_CHARACTERS_FROM_LATEX",
             
   function( string )
     local i;
@@ -821,7 +821,7 @@ BindGlobal( "REMOVE_CHARACTERS_FROM_LATEX",
     
 end );
 
-InstallGlobalFunction( "READ_LOGIC_FILE",
+@InstallGlobalFunction( "READ_LOGIC_FILE",
                        
   function( filename, type )
     local parser, file, lines, theorem_list, substring, without_align;
@@ -890,7 +890,7 @@ InstallGlobalFunction( "READ_LOGIC_FILE",
     
 end );
 
-InstallGlobalFunction( READ_THEOREM_FILE,
+@InstallGlobalFunction( READ_THEOREM_FILE,
                        
   function( theorem_file )
     
@@ -904,7 +904,7 @@ end );
 ##
 ##############################
 
-InstallGlobalFunction( "PARSE_PREDICATE_IMPLICATION_FROM_LATEX",
+@InstallGlobalFunction( "PARSE_PREDICATE_IMPLICATION_FROM_LATEX",
                        
   function( theorem_string )
     local variable_part, source_part, range_part, source_filter, range_filter, i;
@@ -949,7 +949,7 @@ InstallGlobalFunction( "PARSE_PREDICATE_IMPLICATION_FROM_LATEX",
     
 end );
 
-InstallGlobalFunction( READ_PREDICATE_IMPLICATION_FILE,
+@InstallGlobalFunction( READ_PREDICATE_IMPLICATION_FILE,
                        
   function( predicate_file )
     
@@ -959,7 +959,7 @@ end );
 
 ## PARSE_THEOREM_FROM_LATEX( "A:\Obj ~|~ \IsZero( A ) \vdash \IsProjective( A )" );
 
-InstallGlobalFunction( SEARCH_FOR_VARIABLE_NAME_APPEARANCE,
+@InstallGlobalFunction( SEARCH_FOR_VARIABLE_NAME_APPEARANCE,
             
   function( tree, names )
     local appearance_list, current_result, i, j, name_position, return_list;
@@ -1012,7 +1012,7 @@ InstallGlobalFunction( SEARCH_FOR_VARIABLE_NAME_APPEARANCE,
 end );
 
 ##
-InstallGlobalFunction( REPLACE_VARIABLE,
+@InstallGlobalFunction( REPLACE_VARIABLE,
                        
   function( tree, names, replacements )
     local return_rec, entry;
@@ -1043,7 +1043,7 @@ InstallGlobalFunction( REPLACE_VARIABLE,
     
 end );
 
-InstallGlobalFunction( REPLACE_INTEGER_VARIABLE,
+@InstallGlobalFunction( REPLACE_INTEGER_VARIABLE,
                        
   function( tree )
     local int;
@@ -1084,7 +1084,7 @@ InstallGlobalFunction( REPLACE_INTEGER_VARIABLE,
     
 end );
 
-InstallGlobalFunction( SEARCH_FOR_INT_VARIABLE_APPEARANCE,
+@InstallGlobalFunction( SEARCH_FOR_INT_VARIABLE_APPEARANCE,
             
   function( tree )
     local appearance_list, current_result, i, j, int;
@@ -1132,7 +1132,7 @@ InstallGlobalFunction( SEARCH_FOR_INT_VARIABLE_APPEARANCE,
 end );
 
 ##
-InstallGlobalFunction( FIND_COMMAND_POSITIONS,
+@InstallGlobalFunction( FIND_COMMAND_POSITIONS,
                        
   function( tree, variable_names )
     local current_command, command_list, i, current_return, j, return_list;
@@ -1167,7 +1167,7 @@ InstallGlobalFunction( FIND_COMMAND_POSITIONS,
     
 end );
 
-BindGlobal( "FIND_VARIABLE_TYPES",
+@BindGlobal( "FIND_VARIABLE_TYPES",
             
   function( var_list )
     local i, j, next_type;
@@ -1210,7 +1210,7 @@ BindGlobal( "FIND_VARIABLE_TYPES",
     
 end );
 
-InstallGlobalFunction( GIVE_VARIABLE_NAMES_WITH_POSITIONS_RECURSIVE,
+@InstallGlobalFunction( GIVE_VARIABLE_NAMES_WITH_POSITIONS_RECURSIVE,
                        
   function( tree )
     local i, var_list, current_var;
@@ -1245,7 +1245,7 @@ InstallGlobalFunction( GIVE_VARIABLE_NAMES_WITH_POSITIONS_RECURSIVE,
     
 end );
 
-InstallGlobalFunction( "IS_LIST_WITH_INDEX",
+@InstallGlobalFunction( "IS_LIST_WITH_INDEX",
             
   function( variable_name )
     
@@ -1259,7 +1259,7 @@ InstallGlobalFunction( "IS_LIST_WITH_INDEX",
     
 end );
 
-InstallGlobalFunction( "SPLIT_INTO_LIST_NAME_AND_INDEX",
+@InstallGlobalFunction( "SPLIT_INTO_LIST_NAME_AND_INDEX",
             
   function( variable_name )
     local length;
@@ -1282,7 +1282,7 @@ InstallGlobalFunction( "SPLIT_INTO_LIST_NAME_AND_INDEX",
     
 end );
 
-InstallGlobalFunction( REPLACE_INTEGER_STRINGS_BY_INTS_AND_VARIABLES_BY_FAIL_RECURSIVE,
+@InstallGlobalFunction( REPLACE_INTEGER_STRINGS_BY_INTS_AND_VARIABLES_BY_FAIL_RECURSIVE,
             
   function( record )
     
@@ -1306,7 +1306,7 @@ end );
 
 
 ##
-InstallGlobalFunction( PARSE_EVAL_RULE_FROM_LATEX,
+@InstallGlobalFunction( PARSE_EVAL_RULE_FROM_LATEX,
                        
   function( rule )
     local split_record, variables, source, range, object_variables, list_variables, int_variables,
@@ -1543,7 +1543,7 @@ InstallGlobalFunction( PARSE_EVAL_RULE_FROM_LATEX,
     
 end );
 
-InstallGlobalFunction( READ_EVAL_RULE_FILE,
+@InstallGlobalFunction( READ_EVAL_RULE_FILE,
                        
   function( eval_rule_file )
     

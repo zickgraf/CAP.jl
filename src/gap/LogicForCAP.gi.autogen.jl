@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-InstallValue( CATEGORIES_LOGIC_FILES,
+@InstallValueConst( CATEGORIES_LOGIC_FILES,
               
   rec(
       
@@ -75,7 +75,7 @@ InstallValue( CATEGORIES_LOGIC_FILES,
         ),
      ) );
 
-InstallGlobalFunction( SetCapLogicInfo,
+@InstallGlobalFunction( SetCapLogicInfo,
   
   function( arg... )
     local level;
@@ -97,7 +97,7 @@ end );
 ###################################
 
 
-InstallGlobalFunction( AddTheoremFileToCategory,
+@InstallGlobalFunction( AddTheoremFileToCategory,
                        
   function( category, filename )
     local theorem_list, i;
@@ -112,7 +112,7 @@ InstallGlobalFunction( AddTheoremFileToCategory,
     
 end );
 
-InstallGlobalFunction( ADD_THEOREM_TO_CATEGORY,
+@InstallGlobalFunction( ADD_THEOREM_TO_CATEGORY,
                        
   function( category, implication_record )
     local theorem_record, name;
@@ -133,7 +133,7 @@ InstallGlobalFunction( ADD_THEOREM_TO_CATEGORY,
     
 end );
 
-InstallGlobalFunction( SANITIZE_RECORD,
+@InstallGlobalFunction( SANITIZE_RECORD,
                        
   function( record, arguments, result_object )
     local object, index_list, i, value_function, value;
@@ -222,7 +222,7 @@ InstallGlobalFunction( SANITIZE_RECORD,
     
 end );
 
-InstallGlobalFunction( INSTALL_TODO_FOR_LOGICAL_THEOREMS,
+@InstallGlobalFunction( INSTALL_TODO_FOR_LOGICAL_THEOREMS,
                        
   function( method_name, arguments, result_object, category )
     local current_argument, crisp_category, deductive_category, theorem_list,
@@ -345,7 +345,7 @@ end );
 ##
 ##############################
 
-InstallGlobalFunction( AddPredicateImplicationFileToCategory,
+@InstallGlobalFunction( AddPredicateImplicationFileToCategory,
                        
   function( category, filename )
     local theorem_list, i;
@@ -365,7 +365,7 @@ InstallGlobalFunction( AddPredicateImplicationFileToCategory,
 end );
 
 ##
-InstallGlobalFunction( ADD_PREDICATE_IMPLICATIONS_TO_CATEGORY,
+@InstallGlobalFunction( ADD_PREDICATE_IMPLICATIONS_TO_CATEGORY,
                        
   function( category, immediate_record )
     
@@ -382,7 +382,7 @@ InstallGlobalFunction( ADD_PREDICATE_IMPLICATIONS_TO_CATEGORY,
 end );
 
 ##
-InstallGlobalFunction( INSTALL_PREDICATE_IMPLICATION,
+@InstallGlobalFunction( INSTALL_PREDICATE_IMPLICATION,
                        
   function( category, immediate_record )
     local cell_filter;
@@ -412,7 +412,7 @@ end );
 ###############################
 
 ##
-InstallGlobalFunction( AddEvalRuleFileToCategory,
+@InstallGlobalFunction( AddEvalRuleFileToCategory,
                        
   function( category, filename )
     local theorem_list, i;
@@ -435,7 +435,7 @@ InstallGlobalFunction( AddEvalRuleFileToCategory,
 end );
 
 ##
-InstallGlobalFunction( ADD_EVAL_RULES_TO_CATEGORY,
+@InstallGlobalFunction( ADD_EVAL_RULES_TO_CATEGORY,
                        
   function( category, rule_record )
     local command;
@@ -470,7 +470,7 @@ end );
 ##
 ###############################
 
-InstallGlobalFunction( INSTALL_LOGICAL_IMPLICATIONS_HELPER,
+@InstallGlobalFunction( INSTALL_LOGICAL_IMPLICATIONS_HELPER,
                        
   function( category, current_filter )
     local i, theorem_list, current_theorem;

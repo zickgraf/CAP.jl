@@ -51,9 +51,9 @@
 ##
 ###################################
 
-DeclareGlobalFunction( "CAP_INTERNAL_CREATE_MORPHISM_PRINT" );
+@DeclareGlobalFunction( "CAP_INTERNAL_CREATE_MORPHISM_PRINT" );
 
-DeclareGlobalFunction( "INSTALL_TODO_LIST_FOR_EQUAL_MORPHISMS" );
+@DeclareGlobalFunction( "INSTALL_TODO_LIST_FOR_EQUAL_MORPHISMS" );
 
 DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
@@ -71,7 +71,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! by calling `SetCachingToWeak( C, "MorphismConstructor" )` resp. `SetCachingToCrisp( C, "MorphismConstructor" )`.
 #! @Returns a morphism ⥉  \mathrm[Hom](S,T) 
 #! @Arguments S, a, T
-DeclareOperation( "MorphismConstructor",
+@DeclareOperation( "MorphismConstructor",
                   [ IsCapCategoryObject, IsObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -176,7 +176,7 @@ DeclareOperation( "MorphismConstructor",
 #!  b  is computed via <C>RandomObjectByInteger</C>( C , n ).
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments a, n
-DeclareOperation( "RandomMorphismWithFixedSourceByInteger",
+@DeclareOperation( "RandomMorphismWithFixedSourceByInteger",
                   [ IsCapCategoryObject, IsInt ] );
 
 #! @Description
@@ -188,7 +188,7 @@ DeclareOperation( "RandomMorphismWithFixedSourceByInteger",
 #!  b  is computed via <C>RandomObjectByList</C>( C,L[1] ).
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments a, L
-DeclareOperation( "RandomMorphismWithFixedSourceByList",
+@DeclareOperation( "RandomMorphismWithFixedSourceByList",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -200,7 +200,7 @@ DeclareOperation( "RandomMorphismWithFixedSourceByList",
 #!  a  is computed via <C>RandomObjectByInteger</C>( C , n ).
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments b, n
-DeclareOperation( "RandomMorphismWithFixedRangeByInteger",
+@DeclareOperation( "RandomMorphismWithFixedRangeByInteger",
                   [ IsCapCategoryObject, IsInt ] );
 
 #! @Description
@@ -212,7 +212,7 @@ DeclareOperation( "RandomMorphismWithFixedRangeByInteger",
 #!  a  is computed via <C>RandomObjectByList</C>( C,L[1] ).
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments b, L
-DeclareOperation( "RandomMorphismWithFixedRangeByList",
+@DeclareOperation( "RandomMorphismWithFixedRangeByList",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -220,7 +220,7 @@ DeclareOperation( "RandomMorphismWithFixedRangeByList",
 #! The output is a random morphism  \alpha: a \rightarrow b  ⥉  C .
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments a, b, n
-DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByInteger",
+@DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByInteger",
                   [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
 
 #! @Description
@@ -229,7 +229,7 @@ DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByInteger",
 #! The output is a random morphism  \alpha: a \rightarrow b  ⥉  C .
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments a, b, L
-DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByList",
+@DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByList",
                   [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -250,7 +250,7 @@ DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByList",
 #!    b  is computed via <C>RandomObjectByInteger</C>( C,n ).
 #! @Returns a morphism ⥉  C 
 #! @Arguments C, n
-DeclareOperation( "RandomMorphismByInteger",
+@DeclareOperation( "RandomMorphismByInteger",
                   [ IsCapCategory, IsInt ] );
 
 #! @Description
@@ -271,7 +271,7 @@ DeclareOperation( "RandomMorphismByInteger",
 #!    b  is computed via <C>RandomObjectByList</C>( C,L[1] ).
 #! @Returns a morphism ⥉  C 
 #! @Arguments C, L
-DeclareOperation( "RandomMorphismByList",
+@DeclareOperation( "RandomMorphismByList",
                   [ IsCapCategory, IsList ] );
 
 #! @BeginGroup
@@ -279,25 +279,25 @@ DeclareOperation( "RandomMorphismByList",
 #! These are convenient methods && they, depending on the input, delegate to one of the above methods.
 # @Returns an object, morphism ⥉  C 
 #! @Arguments a, n
-DeclareOperation( "RandomMorphismWithFixedSource", [ IsCapCategoryObject, IsInt ] );
+@DeclareOperation( "RandomMorphismWithFixedSource", [ IsCapCategoryObject, IsInt ] );
 #! @Arguments a, L
-DeclareOperation( "RandomMorphismWithFixedSource", [ IsCapCategoryObject, IsList ] );
+@DeclareOperation( "RandomMorphismWithFixedSource", [ IsCapCategoryObject, IsList ] );
 #! @Arguments b, n
-DeclareOperation( "RandomMorphismWithFixedRange", [ IsCapCategoryObject, IsInt ] );
+@DeclareOperation( "RandomMorphismWithFixedRange", [ IsCapCategoryObject, IsInt ] );
 #! @Arguments b, L
-DeclareOperation( "RandomMorphismWithFixedRange", [ IsCapCategoryObject, IsList ] );
+@DeclareOperation( "RandomMorphismWithFixedRange", [ IsCapCategoryObject, IsList ] );
 #! @Arguments a, b, n
-DeclareOperation( "RandomMorphismWithFixedSourceAndRange", [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
+@DeclareOperation( "RandomMorphismWithFixedSourceAndRange", [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
 #! @Arguments a, b, L
-DeclareOperation( "RandomMorphismWithFixedSourceAndRange", [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
+@DeclareOperation( "RandomMorphismWithFixedSourceAndRange", [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
 #! @Arguments a, b, n
-DeclareOperation( "RandomMorphism", [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
+@DeclareOperation( "RandomMorphism", [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
 #! @Arguments a, b, L
-DeclareOperation( "RandomMorphism", [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
+@DeclareOperation( "RandomMorphism", [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
 #! @Arguments C, n
-DeclareOperation( "RandomMorphism", [ IsCapCategory, IsInt ] );
+@DeclareOperation( "RandomMorphism", [ IsCapCategory, IsInt ] );
 #! @Arguments C, L
-DeclareOperation( "RandomMorphism", [ IsCapCategory, IsList ] );
+@DeclareOperation( "RandomMorphism", [ IsCapCategory, IsList ] );
 #! @EndGroup
 
 ###################################
@@ -359,7 +359,7 @@ DeclareOperation( "RandomMorphism", [ IsCapCategory, IsList ] );
 #! @Description
 #!  Adds <A>morphism</A> as a morphism to <A>category</A>.
 #! @Arguments category, morphism
-DeclareOperation( "Add",
+@DeclareOperation( "Add",
                   [ IsCapCategory, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -368,7 +368,7 @@ DeclareOperation( "Add",
 #!  the operation <Ref Oper="Add" Label="for IsCapCategory, IsCapCategoryMorphism" />
 #!  can be used instead.
 #! @Arguments category, morphism
-DeclareOperation( "AddMorphism",
+@DeclareOperation( "AddMorphism",
                   [ IsCapCategory, IsAttributeStoringRep ] );
 
 #! @Arguments category, filter
@@ -376,7 +376,7 @@ DeclareOperation( "AddMorphism",
 #!  The argument <A>filter</A> is used to create a morphism type for the
 #!  category <A>category</A>, which is then used ⥉ <C>ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes</C>
 #!  to objectify morphisms for this category. <A>filter</A> must imply `IsCapCategoryMorphism`.
-DeclareOperation( "AddMorphismRepresentation",
+@DeclareOperation( "AddMorphismRepresentation",
                   [ IsCapCategory, IsObject ] );
 
 #! @Arguments morphism, category, source, range[, attr1, val1, attr2, val2, ...]
@@ -390,13 +390,13 @@ DeclareOperation( "AddMorphismRepresentation",
 #!  The optional arguments behave like the corresponding arguments ⥉ <C>ObjectifyWithAttributes</C>.
 #!  Also returns the objectified morphism.
 #! @Returns a morphism
-DeclareGlobalFunction( "ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes" );
+@DeclareGlobalFunction( "ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes" );
 
 #! @Arguments morphism, category, source, range[, attr1, val1, attr2, val2, ...]
 #! @Description
 #!  Shorthand for `ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( rec( ), category, source, range[, attr1, val1, attr2, val2, ...] )`.
 #! @Returns a morphism
-DeclareGlobalFunction( "CreateCapCategoryMorphismWithAttributes" );
+@DeclareGlobalFunction( "CreateCapCategoryMorphismWithAttributes" );
 
 ###################################
 ##
@@ -411,7 +411,7 @@ DeclareGlobalFunction( "CreateCapCategoryMorphismWithAttributes" );
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsCongruentForMorphisms",
+@DeclareOperation( "IsCongruentForMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 
@@ -421,7 +421,7 @@ DeclareOperation( "IsCongruentForMorphisms",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsEqualForMorphisms",
+@DeclareOperation( "IsEqualForMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 
@@ -431,12 +431,12 @@ DeclareOperation( "IsEqualForMorphisms",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsEqualForMorphismsOnMor",
+@DeclareOperation( "IsEqualForMorphismsOnMor",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 
 ## adds the given string to PROPAGATION_LIST_FOR_EQUAL_MORPHISMS
-DeclareOperation( "AddPropertyToMatchAtIsCongruentForMorphisms",
+@DeclareOperation( "AddPropertyToMatchAtIsCongruentForMorphisms",
                   [ IsCapCategory, IsString ] );
 
 ###################################
@@ -456,9 +456,9 @@ DeclareOperation( "AddPropertyToMatchAtIsCongruentForMorphisms",
 
 @DeclareProperty( "IsZero", IsCapCategoryMorphism );
 
-DeclareOperation( "+", [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+@DeclareOperation( "+", [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
-DeclareOperation( "-", [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+@DeclareOperation( "-", [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
 #! The arguments are two morphisms  \alpha, \beta: a \rightarrow b .
@@ -466,7 +466,7 @@ DeclareOperation( "-", [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 #! Note: The addition has to be compatible with the congruence of morphisms.
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments alpha, beta
-DeclareOperation( "AdditionForMorphisms",
+@DeclareOperation( "AdditionForMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -475,7 +475,7 @@ DeclareOperation( "AdditionForMorphisms",
 #! Note: The addition has to be compatible with the congruence of morphisms.
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments alpha, beta
-DeclareOperation( "SubtractionForMorphisms",
+@DeclareOperation( "SubtractionForMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -497,7 +497,7 @@ DeclareOperation( "SubtractionForMorphisms",
 #! Note: The multiplication has to be compatible with the congruence of morphisms.
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments r, alpha
-DeclareOperation( "MultiplyWithElementOfCommutativeRingForMorphisms",
+@DeclareOperation( "MultiplyWithElementOfCommutativeRingForMorphisms",
                   [ IsRingElement, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -512,10 +512,10 @@ DeclareOperation( "MultiplyWithElementOfCommutativeRingForMorphisms",
 #! The output is the multiplication with the ring element  r \cdot \alpha .
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments r, alpha
-DeclareOperation( "*",
+@DeclareOperation( "*",
                   [ IsRingElement, IsCapCategoryMorphism ] );
 
-DeclareOperation( "*",
+@DeclareOperation( "*",
                   [ IsCapCategoryMorphism, IsRingElement ] );
 
 
@@ -530,7 +530,7 @@ DeclareOperation( "*",
 #! The output is the zero morphism  0: a \rightarrow b .
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments a, b
-DeclareOperation( "ZeroMorphism",
+@DeclareOperation( "ZeroMorphism",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 
@@ -548,13 +548,13 @@ DeclareOperation( "ZeroMorphism",
 ## TODO
 # @Description
 # This is a synonym for <C>IsMonomorphism</C>.
-DeclareSynonymAttr( "IsSubobject",
+@DeclareSynonymAttr( "IsSubobject",
                     IsMonomorphism );
 
 ## TODO
 # @Description
 # This is a synonym for <C>IsEpimorphism</C>.
-DeclareSynonymAttr( "IsFactorobject",
+@DeclareSynonymAttr( "IsFactorobject",
                     IsEpimorphism );
 
 #! @Description
@@ -564,7 +564,7 @@ DeclareSynonymAttr( "IsFactorobject",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsEqualAsSubobjects",
+@DeclareOperation( "IsEqualAsSubobjects",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -574,7 +574,7 @@ DeclareOperation( "IsEqualAsSubobjects",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsEqualAsFactorobjects",
+@DeclareOperation( "IsEqualAsFactorobjects",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 
@@ -600,7 +600,7 @@ DeclareOperation( "IsEqualAsFactorobjects",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsDominating",
+@DeclareOperation( "IsDominating",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 
@@ -627,7 +627,7 @@ DeclareOperation( "IsDominating",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsCodominating",
+@DeclareOperation( "IsCodominating",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 
@@ -651,7 +651,7 @@ DeclareOperation( "IsCodominating",
 #! The output is the composition  \beta \circ \alpha: a \rightarrow c .
 #! @Returns a morphism ⥉  \mathrm[Hom]( a, c ) 
 #! @Arguments alpha, beta
-DeclareOperation( "PreCompose",
+@DeclareOperation( "PreCompose",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -662,7 +662,7 @@ DeclareOperation( "PreCompose",
 #!  \alpha_[n] \circ ( \alpha_[n-1] \circ ( \dots ( \alpha_2 \circ \alpha_1 ) ) ) .
 #! @Returns a morphism ⥉  \mathrm[Hom](a_1, a_[n+1]) 
 #! @Arguments L
-DeclareOperation( "PreCompose",
+@DeclareOperation( "PreCompose",
                   [ IsList ] );
 
 #! @Description
@@ -672,7 +672,7 @@ DeclareOperation( "PreCompose",
 #!  \alpha_[n] \circ ( \alpha_[n-1] \circ ( \dots ( \alpha_2 \circ \alpha_1 ) ) ) .
 #! @Returns a morphism ⥉  \mathrm[Hom](a_1, a_[n+1]) 
 #! @Arguments C, L
-DeclareOperation( "PreComposeList",
+@DeclareOperation( "PreComposeList",
                   [ IsList ] );
 
 
@@ -681,7 +681,7 @@ DeclareOperation( "PreComposeList",
 #! The output is the composition  \beta \circ \alpha: a \rightarrow c .
 #! @Returns a morphism ⥉  \mathrm[Hom]( a, c ) 
 #! @Arguments beta, alpha
-DeclareOperation( "PostCompose",
+@DeclareOperation( "PostCompose",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -692,7 +692,7 @@ DeclareOperation( "PostCompose",
 #!  ((\alpha_[n] \circ  \alpha_[n-1]) \circ \dots  \alpha_2) \circ \alpha_1 .
 #! @Returns a morphism ⥉  \mathrm[Hom](a_1, a_[n+1]) 
 #! @Arguments L
-DeclareOperation( "PostCompose",
+@DeclareOperation( "PostCompose",
                   [ IsList ] );
 
 #! @Description
@@ -702,7 +702,7 @@ DeclareOperation( "PostCompose",
 #!  ((\alpha_[n] \circ  \alpha_[n-1]) \circ \dots  \alpha_2) \circ \alpha_1 .
 #! @Returns a morphism ⥉  \mathrm[Hom](a_1, a_[n+1]) 
 #! @Arguments C, L
-DeclareOperation( "PostComposeList",
+@DeclareOperation( "PostComposeList",
                   [ IsList ] );
 
 #! @Description
@@ -711,7 +711,7 @@ DeclareOperation( "PostComposeList",
 #! if <A>morphisms</A> is empty.
 #! @Returns a morphism ⥉  \mathrm[Hom](s,r) 
 #! @Arguments s, morphisms, r
-DeclareOperation( "SumOfMorphisms",
+@DeclareOperation( "SumOfMorphisms",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 ###################################
@@ -726,7 +726,7 @@ DeclareOperation( "SumOfMorphisms",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha
-DeclareOperation( "IsWellDefinedForMorphisms",
+@DeclareOperation( "IsWellDefinedForMorphisms",
                   [ IsCapCategoryMorphism ] );
 
 ###################################
@@ -783,7 +783,7 @@ DeclareOperation( "IsWellDefinedForMorphisms",
 #! The output is such a  u .
 #! @Returns a morphism ⥉  \mathrm[Hom](t,k) 
 #! @Arguments iota, tau
-DeclareOperation( "LiftAlongMonomorphism",
+@DeclareOperation( "LiftAlongMonomorphism",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -794,7 +794,7 @@ DeclareOperation( "LiftAlongMonomorphism",
 #! The output is such a  u .
 #! @Returns a morphism ⥉  \mathrm[Hom](c,t) 
 #! @Arguments epsilon, tau
-DeclareOperation( "ColiftAlongEpimorphism",
+@DeclareOperation( "ColiftAlongEpimorphism",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -806,7 +806,7 @@ DeclareOperation( "ColiftAlongEpimorphism",
 #! Otherwise, the output is  <C>false</C>.
 #! @Returns a boolean
 #! @Arguments iota, tau
-DeclareOperation( "IsLiftableAlongMonomorphism",
+@DeclareOperation( "IsLiftableAlongMonomorphism",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -818,7 +818,7 @@ DeclareOperation( "IsLiftableAlongMonomorphism",
 #! Otherwise, the output is  <C>false</C>.
 #! @Returns a boolean
 #! @Arguments epsilon, tau
-DeclareOperation( "IsColiftableAlongEpimorphism",
+@DeclareOperation( "IsColiftableAlongEpimorphism",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -829,7 +829,7 @@ DeclareOperation( "IsColiftableAlongEpimorphism",
 #! a morphism such that  \beta \circ (\alpha / \beta) \sim_[a,c] \alpha .
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) 
 #! @Arguments alpha, beta
-DeclareOperation( "Lift",
+@DeclareOperation( "Lift",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -840,7 +840,7 @@ DeclareOperation( "Lift",
 #! a morphism such that  \beta \circ (\alpha / \beta) \sim_[a,c] \alpha .
 #! @Returns a morphism ⥉  \mathrm[Hom](a,b) + \[ \\mathtt[fail] \] 
 #! @Arguments alpha, beta
-DeclareOperation( "LiftOrFail",
+@DeclareOperation( "LiftOrFail",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -851,7 +851,7 @@ DeclareOperation( "LiftOrFail",
 #! Otherwise, the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsLiftable",
+@DeclareOperation( "IsLiftable",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -862,7 +862,7 @@ DeclareOperation( "IsLiftable",
 #! a morphism such that  (\alpha \backslash \beta) \circ \alpha \sim_[a,b] \beta .
 #! @Returns a morphism ⥉  \mathrm[Hom](c,b) 
 #! @Arguments alpha, beta
-DeclareOperation( "Colift",
+@DeclareOperation( "Colift",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 
@@ -874,7 +874,7 @@ DeclareOperation( "Colift",
 #! a morphism such that  (\alpha \backslash \beta) \circ \alpha \sim_[a,b] \beta .
 #! @Returns a morphism ⥉  \mathrm[Hom](c,b) + \[ \\mathtt[fail] \] 
 #! @Arguments alpha, beta
-DeclareOperation( "ColiftOrFail",
+@DeclareOperation( "ColiftOrFail",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 
@@ -886,7 +886,7 @@ DeclareOperation( "ColiftOrFail",
 #! Otherwise, the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments alpha, beta
-DeclareOperation( "IsColiftable",
+@DeclareOperation( "IsColiftable",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 ####################################
@@ -920,7 +920,7 @@ DeclareOperation( "IsColiftable",
 #! The output is its inverse  \alpha^[-1]: b \rightarrow a .
 #! @Returns a morphism ⥉  \mathrm[Hom](b,a) 
 #! @Arguments alpha
-DeclareOperation( "InverseForMorphisms",
+@DeclareOperation( "InverseForMorphisms",
                   [ IsCapCategoryMorphism ] );
 
 #! @Description
@@ -930,7 +930,7 @@ DeclareOperation( "InverseForMorphisms",
 #! The morphism  \iota  is also known as a section || a right-inverse of  \alpha .
 #! @Returns a morphism ⥉  \mathrm[Hom](b,a) 
 #! @Arguments alpha
-DeclareOperation( "PreInverseForMorphisms",
+@DeclareOperation( "PreInverseForMorphisms",
                   [ IsCapCategoryMorphism ] );
 
 #! @Description
@@ -940,7 +940,7 @@ DeclareOperation( "PreInverseForMorphisms",
 #! The morphism  \pi  is also known as a contraction || a left-inverse of  \alpha .
 #! @Returns a morphism ⥉  \mathrm[Hom](b,a) 
 #! @Arguments alpha
-DeclareOperation( "PostInverseForMorphisms",
+@DeclareOperation( "PostInverseForMorphisms",
                   [ IsCapCategoryMorphism ] );
 
 ###################################
@@ -960,7 +960,7 @@ DeclareOperation( "PostInverseForMorphisms",
 #!  true || false. Fail is !allowed ⥉ this context.
 #! @Arguments phi, psi
 #! @Returns true || false
-DeclareOperation( "IsEqualForCacheForMorphisms",
+@DeclareOperation( "IsEqualForCacheForMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 ###################################
@@ -973,7 +973,7 @@ DeclareOperation( "IsEqualForCacheForMorphisms",
 ## equality_source: x -> x'
 ## equality_range: y -> y'
 ## TransportHom( mor, equality_source, equality_range ): x' -> y'
-DeclareOperation( "TransportHom",
+@DeclareOperation( "TransportHom",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 ###################################
@@ -988,7 +988,7 @@ DeclareOperation( "TransportHom",
 #!  otherwise the output is <C>false</C>.
 #! @Arguments A, B
 #! @Returns a boolean
-DeclareOperation( "IsHomSetInhabited",
+@DeclareOperation( "IsHomSetInhabited",
         [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 ###################################
@@ -1009,7 +1009,7 @@ DeclareOperation( "IsHomSetInhabited",
 #! The output is the value of the homomorphism structure on objects  H(a,b) .
 #! @Returns an object ⥉  D 
 #! @Arguments a,b
-DeclareOperation( "HomomorphismStructureOnObjects",
+@DeclareOperation( "HomomorphismStructureOnObjects",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -1017,7 +1017,7 @@ DeclareOperation( "HomomorphismStructureOnObjects",
 #! The output is the value of the homomorphism structure on morphisms  H(\alpha, \beta ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a',b), H(a,b')) 
 #! @Arguments alpha, beta
-DeclareOperation( "HomomorphismStructureOnMorphisms",
+@DeclareOperation( "HomomorphismStructureOnMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -1027,7 +1027,7 @@ DeclareOperation( "HomomorphismStructureOnMorphisms",
 #! The output is the value of the homomorphism structure on morphisms  H(\alpha, \beta ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a',b), H(a,b')) 
 #! @Arguments s, alpha, beta, r
-DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjects",
+@DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -1053,7 +1053,7 @@ DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjects",
 #!  \nu( \alpha ): 1 \rightarrow r  ⥉  D  of the homomorphism structure.
 #! @Returns a morphism ⥉  \mathrm[Hom]_[D](1, r) 
 #! @Arguments distinguished_object, alpha, r
-DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+@DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -1064,7 +1064,7 @@ DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorph
 #!  \nu^[-1](\iota): a \rightarrow a'  ⥉  C  of the homomorphism structure.
 #! @Returns a morphism ⥉  \mathrm[Hom]_[C](a,a') 
 #! @Arguments a,a',iota
-DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+@DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
                   [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -1082,7 +1082,7 @@ DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructu
 #! The output is list of such morphisms  X_j: B_j \rightarrow C_j  for  j=1\dots n .
 #! @Returns a list of morphisms  [X_1, \dots, X_n] 
 #! @Arguments alpha, beta, gamma
-DeclareOperation( "SolveLinearSystemInAbCategory",
+@DeclareOperation( "SolveLinearSystemInAbCategory",
                    [ IsList, IsList, IsList ] );
 
 #! @Description
@@ -1091,7 +1091,7 @@ DeclareOperation( "SolveLinearSystemInAbCategory",
 #! If no solution exists, `fail` is returned.
 #! @Returns a list of morphisms  [X_1, \dots, X_n]  || `fail`
 #! @Arguments alpha, beta, gamma
-DeclareOperation( "SolveLinearSystemInAbCategoryOrFail",
+@DeclareOperation( "SolveLinearSystemInAbCategoryOrFail",
                    [ IsList, IsList, IsList ] );
 
 #! @Description
@@ -1100,7 +1100,7 @@ DeclareOperation( "SolveLinearSystemInAbCategoryOrFail",
 #! <C>false</C> otherwise.
 #! @Returns a boolean
 #! @Arguments alpha, beta, gamma
-DeclareOperation( "MereExistenceOfSolutionOfLinearSystemInAbCategory",
+@DeclareOperation( "MereExistenceOfSolutionOfLinearSystemInAbCategory",
                    [ IsList, IsList, IsList ] );
 
 #! @Description
@@ -1109,7 +1109,7 @@ DeclareOperation( "MereExistenceOfSolutionOfLinearSystemInAbCategory",
 #! The output is <C>HomomorphismStructureOnMorphisms</C> called on  \alpha ,  \beta .
 #! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a',b), H(a,b')) 
 #! @Arguments alpha, beta
-DeclareOperation( "HomStructure",
+@DeclareOperation( "HomStructure",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -1118,7 +1118,7 @@ DeclareOperation( "HomStructure",
 #! The output is <C>HomomorphismStructureOnMorphisms</C> called on  \alpha ,  \mathrm[id]_b .
 #! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a',b), H(a,b)) 
 #! @Arguments alpha, b
-DeclareOperation( "HomStructure",
+@DeclareOperation( "HomStructure",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -1127,7 +1127,7 @@ DeclareOperation( "HomStructure",
 #! The output is <C>HomomorphismStructureOnMorphisms</C> called on  \mathrm[id]_a ,  \beta .
 #! @Returns a morphism ⥉  \mathrm[Hom]_[D](H(a,b), H(a,b')) 
 #! @Arguments a, beta
-DeclareOperation( "HomStructure",
+@DeclareOperation( "HomStructure",
                   [ IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -1136,25 +1136,25 @@ DeclareOperation( "HomStructure",
 #! The output is <C>HomomorphismStructureOnObjects</C> called on  a,b .
 #! @Returns an object
 #! @Arguments a, b
-DeclareOperation( "HomStructure",
+@DeclareOperation( "HomStructure",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
 #! This is a convenience method for
 #! <C>InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure</C>.
-DeclareOperation( "HomStructure",
+@DeclareOperation( "HomStructure",
                   [ IsCapCategoryMorphism ] );
 
 #! @Description
 #! This is a convenience method for
 #! <C>InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism</C>.
-DeclareOperation( "HomStructure",
+@DeclareOperation( "HomStructure",
                   [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
 #! This is a convenience method for
 #! <C>DistinguishedObjectOfHomomorphismStructure</C>.
-DeclareOperation( "HomStructure",
+@DeclareOperation( "HomStructure",
                   [ IsCapCategory ] );
 
 #! @BeginGroup
@@ -1176,35 +1176,35 @@ DeclareOperation( "HomStructure",
 #! the inverse of the embedding on its image.
 #! @Returns nothing
 #! @Arguments C, E, object_function, morphism_function, object_function_inverse, morphism_function_inverse
-DeclareOperation( "ExtendRangeOfHomomorphismStructureByFullEmbedding",
+@DeclareOperation( "ExtendRangeOfHomomorphismStructureByFullEmbedding",
                   [ IsCapCategory, IsCapCategory, IsFunction, IsFunction, IsFunction, IsFunction ] );
 
 #! @Arguments C, E, a, b
-DeclareOperation( "HomomorphismStructureOnObjectsExtendedByFullEmbedding",
+@DeclareOperation( "HomomorphismStructureOnObjectsExtendedByFullEmbedding",
                   [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Arguments C, E, alpha, beta
-DeclareOperation( "HomomorphismStructureOnMorphismsExtendedByFullEmbedding",
+@DeclareOperation( "HomomorphismStructureOnMorphismsExtendedByFullEmbedding",
                   [ IsCapCategory, IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Arguments C, E, s, alpha, beta, r
-DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjectsExtendedByFullEmbedding",
+@DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjectsExtendedByFullEmbedding",
                   [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Arguments C, E
-DeclareOperation( "DistinguishedObjectOfHomomorphismStructureExtendedByFullEmbedding",
+@DeclareOperation( "DistinguishedObjectOfHomomorphismStructureExtendedByFullEmbedding",
                   [ IsCapCategory, IsCapCategory ] );
 
 #! @Arguments C, E, alpha
-DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureExtendedByFullEmbedding",
+@DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureExtendedByFullEmbedding",
                   [ IsCapCategory, IsCapCategory, IsCapCategoryMorphism ] );
 
 #! @Arguments C, E, distinguished_object, alpha, r
-DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjectsExtendedByFullEmbedding",
+@DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjectsExtendedByFullEmbedding",
                   [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Arguments C, E, a, a', iota
-DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphismExtendedByFullEmbedding",
+@DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphismExtendedByFullEmbedding",
                   [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ] );
 #! @EndGroup
 
@@ -1215,7 +1215,7 @@ DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructu
 #! <Ref Oper="ExtendRangeOfHomomorphismStructureByFullEmbedding" Label="for IsCapCategory, IsCapCategory, IsFunction, IsFunction, IsFunction, IsFunction" />.
 #! @Returns nothing
 #! @Arguments C
-DeclareOperation( "ExtendRangeOfHomomorphismStructureByIdentityAsFullEmbedding",
+@DeclareOperation( "ExtendRangeOfHomomorphismStructureByIdentityAsFullEmbedding",
                   [ IsCapCategory ] );
 
 
@@ -1227,7 +1227,7 @@ DeclareOperation( "ExtendRangeOfHomomorphismStructureByIdentityAsFullEmbedding",
 #! <C>CoefficientsOfMorphismWithGivenBasisOfExternalHom</C>( \alpha,L ).
 #! @Returns a list of morphisms ⥉  \mathrm[Hom]_[C](a,b) 
 #! @Arguments a, b
-DeclareOperation( "BasisOfExternalHom",
+@DeclareOperation( "BasisOfExternalHom",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -1236,7 +1236,7 @@ DeclareOperation( "BasisOfExternalHom",
 #! The output is a list of coefficients of  \alpha  with respect to  L .
 #! @Returns a list of elements ⥉  k 
 #! @Arguments alpha, L
-DeclareOperation( "CoefficientsOfMorphismWithGivenBasisOfExternalHom",
+@DeclareOperation( "CoefficientsOfMorphismWithGivenBasisOfExternalHom",
                   [ IsCapCategoryMorphism, IsList ] );
 
 #! @Description
@@ -1291,7 +1291,7 @@ DeclareOperation( "CoefficientsOfMorphismWithGivenBasisOfExternalHom",
 #! The output is a simplified morphism  \phi_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](A,B) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifyMorphism",
+@DeclareOperation( "SimplifyMorphism",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #!  \  
@@ -1308,7 +1308,7 @@ DeclareOperation( "SimplifyMorphism",
 #! The output is a simplified morphism with simplified source  \phi_i: A_i \rightarrow B .
 #! @Returns a morphism ⥉  \mathrm[Hom](A_i,B) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifySource",
+@DeclareOperation( "SimplifySource",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1316,7 +1316,7 @@ DeclareOperation( "SimplifySource",
 #! The output is the isomorphism  (\sigma_i)^[-1]: A_i \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](A_i,A) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifySource_IsoToInputObject",
+@DeclareOperation( "SimplifySource_IsoToInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1324,7 +1324,7 @@ DeclareOperation( "SimplifySource_IsoToInputObject",
 #! The output is the isomorphism  \sigma_i: A \rightarrow A_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](A,A_i) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifySource_IsoFromInputObject",
+@DeclareOperation( "SimplifySource_IsoFromInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 ## SimplifyRange
@@ -1341,7 +1341,7 @@ DeclareOperation( "SimplifySource_IsoFromInputObject",
 #! The output is a simplified morphism with simplified range  \phi_i: A \rightarrow B_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](A,B_i) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifyRange",
+@DeclareOperation( "SimplifyRange",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1349,7 +1349,7 @@ DeclareOperation( "SimplifyRange",
 #! The output is the isomorphism  (\rho_i)^[-1]: B_i \rightarrow B .
 #! @Returns a morphism ⥉  \mathrm[Hom](B_i,B) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifyRange_IsoToInputObject",
+@DeclareOperation( "SimplifyRange_IsoToInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1357,7 +1357,7 @@ DeclareOperation( "SimplifyRange_IsoToInputObject",
 #! The output is the isomorphism  \rho_i: B \rightarrow B_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](B,B_i) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifyRange_IsoFromInputObject",
+@DeclareOperation( "SimplifyRange_IsoFromInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 ## SimplifySourceAndRange*
@@ -1375,7 +1375,7 @@ DeclareOperation( "SimplifyRange_IsoFromInputObject",
 #! The output is a simplified morphism with simplified source && range  \phi_i: A_i \rightarrow B_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](A_i,B_i) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifySourceAndRange",
+@DeclareOperation( "SimplifySourceAndRange",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1383,7 +1383,7 @@ DeclareOperation( "SimplifySourceAndRange",
 #! The output is the isomorphism  (\rho_i)^[-1]: B_i \rightarrow B .
 #! @Returns a morphism ⥉  \mathrm[Hom](B_i,B) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifySourceAndRange_IsoToInputRange",
+@DeclareOperation( "SimplifySourceAndRange_IsoToInputRange",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1391,7 +1391,7 @@ DeclareOperation( "SimplifySourceAndRange_IsoToInputRange",
 #! The output is the isomorphism  \rho_i: B \rightarrow B_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](B,B_i) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifySourceAndRange_IsoFromInputRange",
+@DeclareOperation( "SimplifySourceAndRange_IsoFromInputRange",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1399,7 +1399,7 @@ DeclareOperation( "SimplifySourceAndRange_IsoFromInputRange",
 #! The output is the isomorphism  (\sigma_i)^[-1]: A_i \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](A_i,A) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifySourceAndRange_IsoToInputSource",
+@DeclareOperation( "SimplifySourceAndRange_IsoToInputSource",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1407,7 +1407,7 @@ DeclareOperation( "SimplifySourceAndRange_IsoToInputSource",
 #! The output is the isomorphism  \sigma_i: A \rightarrow A_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](A,A_i) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifySourceAndRange_IsoFromInputSource",
+@DeclareOperation( "SimplifySourceAndRange_IsoFromInputSource",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 ## SimplifyEndo*
@@ -1425,7 +1425,7 @@ DeclareOperation( "SimplifySourceAndRange_IsoFromInputSource",
 #! The output is a simplified endomorphism  \phi_i: A_i \rightarrow A_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](A_i,A_i) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifyEndo",
+@DeclareOperation( "SimplifyEndo",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1433,7 +1433,7 @@ DeclareOperation( "SimplifyEndo",
 #! The output is the isomorphism  (\sigma_i)^[-1]: A_i \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](A_i,A) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifyEndo_IsoToInputObject",
+@DeclareOperation( "SimplifyEndo_IsoToInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
@@ -1441,7 +1441,7 @@ DeclareOperation( "SimplifyEndo_IsoToInputObject",
 #! The output is the isomorphism  \sigma_i: A \rightarrow A_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](A,A_i) 
 #! @Arguments phi, i
-DeclareOperation( "SimplifyEndo_IsoFromInputObject",
+@DeclareOperation( "SimplifyEndo_IsoFromInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 

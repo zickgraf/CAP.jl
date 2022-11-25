@@ -11,7 +11,7 @@
 ######################################
 
 # backwards compatibility
-BindGlobal( "IsCapCategoryObjectRep", IsCapCategoryObject );
+@BindGlobal( "IsCapCategoryObjectRep", IsCapCategoryObject );
 
 #######################################
 ##
@@ -19,7 +19,7 @@ BindGlobal( "IsCapCategoryObjectRep", IsCapCategoryObject );
 ##
 #######################################
 
-InstallValue( PROPAGATION_LIST_FOR_EQUAL_OBJECTS,
+@InstallValueConst( PROPAGATION_LIST_FOR_EQUAL_OBJECTS,
               [  
                  "IsTerminal",
                  "IsInitial",
@@ -57,7 +57,7 @@ InstallOtherMethod( IsEqualForObjects,
 end );
 
 ##
-InstallMethod( ==,
+InstallMethod( @__MODULE__,  ==,
                [ IsCapCategoryObject, IsCapCategoryObject ],
   function( object_1, object_2 )
 
@@ -71,7 +71,7 @@ InstallMethod( ==,
 end );
 
 ##
-InstallGlobalFunction( INSTALL_TODO_LIST_FOR_EQUAL_OBJECTS,
+@InstallGlobalFunction( INSTALL_TODO_LIST_FOR_EQUAL_OBJECTS,
                        
   function( object_1, object_2 )
     local category, i, entry;
@@ -97,7 +97,7 @@ InstallGlobalFunction( INSTALL_TODO_LIST_FOR_EQUAL_OBJECTS,
 end );
 
 ##
-InstallMethod( AddPropertyToMatchAtIsEqualForObjects,
+InstallMethod( @__MODULE__,  AddPropertyToMatchAtIsEqualForObjects,
                [ IsCapCategory, IsString ],
                
   function( category, name )
@@ -122,7 +122,7 @@ end );
 ##
 #######################################
 
-InstallMethod( Add,
+InstallMethod( @__MODULE__,  Add,
                [ IsCapCategory, IsCapCategoryObject ],
                
   function( category, object )
@@ -163,7 +163,7 @@ InstallMethod( Add,
     
 end );
 
-InstallMethod( AddObject,
+InstallMethod( @__MODULE__,  AddObject,
                [ IsCapCategory, IsCapCategoryObject ],
                
   function( category, object )
@@ -172,7 +172,7 @@ InstallMethod( AddObject,
     
 end );
 
-InstallMethod( AddObject,
+InstallMethod( @__MODULE__,  AddObject,
                [ IsCapCategory, IsAttributeStoringRep ],
                
   function( category, object )
@@ -184,7 +184,7 @@ InstallMethod( AddObject,
 end );
 
 ##
-InstallMethod( /,
+InstallMethod( @__MODULE__,  /,
                [ IsObject, IsCapCategory ],
                
   function( object_datum, cat )
@@ -200,19 +200,19 @@ InstallMethod( /,
 end );
 
 ##
-InstallMethod( IsWellDefined,
+InstallMethod( @__MODULE__,  IsWellDefined,
                [ IsCapCategoryObject ],
   IsWellDefinedForObjects
 );
 
 ##
-InstallMethod( IsZero,
+InstallMethod( @__MODULE__,  IsZero,
                [ IsCapCategoryObject ],
                   
 IsZeroForObjects );
 
 ##
-InstallMethod( IsEqualForCache,
+InstallMethod( @__MODULE__,  IsEqualForCache,
                [ IsCapCategoryObject, IsCapCategoryObject ],
                
   IsEqualForCacheForObjects );
@@ -225,7 +225,7 @@ InstallOtherMethod( IsEqualForCacheForObjects,
   ( cat, obj1, obj2 ) -> IsIdenticalObj( obj1, obj2 ) );
 
 ##
-InstallMethod( AddObjectRepresentation,
+InstallMethod( @__MODULE__,  AddObjectRepresentation,
                [ IsCapCategory, IsObject ],
                
   function( category, representation )
@@ -242,13 +242,13 @@ InstallMethod( AddObjectRepresentation,
 end );
 
 ##
-InstallMethod( RandomObject, [ IsCapCategory, IsInt ], RandomObjectByInteger );
+InstallMethod( @__MODULE__,  RandomObject, [ IsCapCategory, IsInt ], RandomObjectByInteger );
 
 ##
-InstallMethod( RandomObject, [ IsCapCategory, IsList ], RandomObjectByList );
+InstallMethod( @__MODULE__,  RandomObject, [ IsCapCategory, IsList ], RandomObjectByList );
 
 ##
-InstallGlobalFunction( ObjectifyObjectForCAPWithAttributes,
+@InstallGlobalFunction( ObjectifyObjectForCAPWithAttributes,
                        
   function( object, category, additional_arguments_list... )
     local arg_list;
@@ -262,7 +262,7 @@ InstallGlobalFunction( ObjectifyObjectForCAPWithAttributes,
 end );
 
 ##
-InstallGlobalFunction( CreateCapCategoryObjectWithAttributes,
+@InstallGlobalFunction( CreateCapCategoryObjectWithAttributes,
                        
   function( category, additional_arguments_list... )
     local arg_list;
@@ -278,7 +278,7 @@ InstallGlobalFunction( CreateCapCategoryObjectWithAttributes,
 end );
 
 ##
-InstallMethod( Simplify,
+InstallMethod( @__MODULE__,  Simplify,
                [ IsCapCategoryObject ],
   function( object )
     
@@ -293,7 +293,7 @@ end );
 ###########################
 
 # fallback methods for Julia
-InstallMethod( ViewObj,
+InstallMethod( @__MODULE__,  ViewObj,
                [ IsCapCategoryObject ],
                
   function ( object )
@@ -303,7 +303,7 @@ InstallMethod( ViewObj,
     
 end );
 
-InstallMethod( Display,
+InstallMethod( @__MODULE__,  Display,
                [ IsCapCategoryObject ],
                
   function ( object )
@@ -314,7 +314,7 @@ InstallMethod( Display,
 end );
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_CREATE_OBJECT_PRINT,
+@InstallGlobalFunction( CAP_INTERNAL_CREATE_OBJECT_PRINT,
                        
   function( )
     local print_graph, object_function;
@@ -352,7 +352,7 @@ end );
 CAP_INTERNAL_CREATE_OBJECT_PRINT( );
 # =#
 
-InstallMethod( String,
+InstallMethod( @__MODULE__,  String,
                [ IsCapCategoryObject ],
                
   function( object )

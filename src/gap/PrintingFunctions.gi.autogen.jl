@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-InstallGlobalFunction( InfoStringOfInstalledOperationsOfCategory,
+@InstallGlobalFunction( InfoStringOfInstalledOperationsOfCategory,
   
   function( category )
     local list_of_mathematical_properties, list_of_potential_algorithmic_properties,
@@ -64,7 +64,7 @@ InstallGlobalFunction( InfoStringOfInstalledOperationsOfCategory,
     
 end );
 
-InstallGlobalFunction( InfoOfInstalledOperationsOfCategory,
+@InstallGlobalFunction( InfoOfInstalledOperationsOfCategory,
   
   function( category )
 

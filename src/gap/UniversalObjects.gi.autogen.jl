@@ -26,7 +26,7 @@ InstallDeprecatedAlias( "CokernelFunctorialWithGivenCokernelObjects", "CokernelO
 ####################################
 
 ##
-InstallMethod( Coproduct,
+InstallMethod( @__MODULE__,  Coproduct,
                [ IsCapCategoryObject, IsCapCategoryObject ],
                
   function( object_1, object_2 )
@@ -36,7 +36,7 @@ InstallMethod( Coproduct,
 end );
 
 ##
-InstallMethod( Coproduct,
+InstallMethod( @__MODULE__,  Coproduct,
                [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject ],
                
   function( object_1, object_2, object_3 )
@@ -68,7 +68,7 @@ end );
 
 ##
 # compatibility with GAP's DirectProduct function
-InstallMethod( DirectProductOp,
+InstallMethod( @__MODULE__,  DirectProductOp,
                [ IsList, IsCapCategoryObject ],
                
   function( diagram, object )
@@ -79,7 +79,7 @@ end );
 
 ##
 # compatibility with GAP's DirectProduct function
-InstallMethod( DirectProductOp,
+InstallMethod( @__MODULE__,  DirectProductOp,
                [ IsList, IsCapCategory ],
                
   function( category_and_diagram, category )
@@ -107,7 +107,7 @@ end );
 
 ##
 # compatibility with GAP's DirectSum function
-InstallMethod( DirectSumOp,
+InstallMethod( @__MODULE__,  DirectSumOp,
                [ IsList, IsCapCategoryObject ],
                
   function( diagram, object )
@@ -118,7 +118,7 @@ end );
 
 ##
 # compatibility with GAP's DirectSum function
-InstallMethod( DirectSumOp,
+InstallMethod( @__MODULE__,  DirectSumOp,
                [ IsList, IsCapCategory ],
                
   function( category_and_diagram, category )
@@ -145,7 +145,7 @@ end );
 
 # convenience
 ##
-InstallMethod( MorphismBetweenDirectSums,
+InstallMethod( @__MODULE__,  MorphismBetweenDirectSums,
                [ IsList ],
                
   function( morphism_matrix )
@@ -215,7 +215,7 @@ end );
 ####################################
 
 ##
-InstallGlobalFunction( Equalizer,
+@InstallGlobalFunction( Equalizer,
   
   function( arg... )
     
@@ -474,7 +474,7 @@ end );
 ####################################
 
 ##
-InstallGlobalFunction( FiberProduct,
+@InstallGlobalFunction( FiberProduct,
   
   function( arg... )
     
@@ -507,7 +507,7 @@ end );
 ####################################
 
 ##
-InstallGlobalFunction( Coequalizer,
+@InstallGlobalFunction( Coequalizer,
   
   function( arg... )
     
@@ -766,7 +766,7 @@ end );
 ####################################
 
 ##
-InstallMethod( Pushout,
+InstallMethod( @__MODULE__,  Pushout,
                [ IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
   function( mor1, mor2 )
@@ -796,7 +796,7 @@ InstallDeprecatedAlias( "AddAstrictionToCoimageWithGivenCoimage", "AddAstriction
 InstallDeprecatedAlias( "AddUniversalMorphismIntoCoimageWithGivenCoimage", "AddUniversalMorphismIntoCoimageWithGivenCoimageObject", "2023.03.29" );
 
 ##
-InstallMethod( MorphismFromCoimageToImage,
+InstallMethod( @__MODULE__,  MorphismFromCoimageToImage,
                [ IsCapCategoryMorphism ],
                
   function( morphism )
@@ -806,7 +806,7 @@ InstallMethod( MorphismFromCoimageToImage,
 end );
 
 ##
-InstallMethod( InverseMorphismFromCoimageToImage,
+InstallMethod( @__MODULE__,  InverseMorphismFromCoimageToImage,
                [ IsCapCategoryMorphism ],
                
   function( morphism )
@@ -840,7 +840,7 @@ CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
 ####################################
 
 ##
-InstallMethod( HomologyObjectFunctorial,
+InstallMethod( @__MODULE__,  HomologyObjectFunctorial,
               [ IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism ],
               
   function( alpha, beta, epsilon, gamma, delta )

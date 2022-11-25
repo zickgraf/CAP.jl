@@ -26,13 +26,13 @@
 @DeclareFilter( "WasCreatedAsOppositeCategory",
                IsCapCategory );
 
-DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_CATEGORY" );
+@DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_CATEGORY" );
 
-DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_MORPHISM" );
+@DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_MORPHISM" );
 
-DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_OBJECT" );
+@DeclareGlobalFunction( "INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_OBJECT" );
 
-DeclareGlobalFunction( "CAP_INTERNAL_OPPOSITE_RECURSIVE" );
+@DeclareGlobalFunction( "CAP_INTERNAL_OPPOSITE_RECURSIVE" );
 
 ###################################
 ##
@@ -58,7 +58,7 @@ CapJitAddTypeSignature( "OppositeCategory", [ WasCreatedAsOppositeCategory ], fu
     
 end );
 
-DeclareOperation( "Opposite",
+@DeclareOperation( "Opposite",
                   [ IsCapCategory, IsString ] );
 
 # FIXME: Usage of DeclareAttribute leads to recursion error

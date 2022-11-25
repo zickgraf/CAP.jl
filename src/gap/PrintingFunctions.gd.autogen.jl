@@ -5,6 +5,6 @@
 #
 #! @Chapter Pretty print methods
 
-DeclareGlobalFunction( "InfoStringOfInstalledOperationsOfCategory" );
+@DeclareGlobalFunction( "InfoStringOfInstalledOperationsOfCategory" );
 
-DeclareGlobalFunction( "InfoOfInstalledOperationsOfCategory" );
+@DeclareGlobalFunction( "InfoOfInstalledOperationsOfCategory" );

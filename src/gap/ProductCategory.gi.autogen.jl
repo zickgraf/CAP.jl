@@ -11,23 +11,23 @@
 #############################################################################
 
 # backwards compatibility
-BindGlobal( "IsCapCategoryProductObjectRep", IsCapCategoryProductObject );
+@BindGlobal( "IsCapCategoryProductObjectRep", IsCapCategoryProductObject );
 
 # backwards compatibility
-BindGlobal( "IsCapCategoryProductMorphismRep", IsCapCategoryProductMorphism );
+@BindGlobal( "IsCapCategoryProductMorphismRep", IsCapCategoryProductMorphism );
 
 # backwards compatibility
-BindGlobal( "IsCapCategoryProductTwoCellRep", IsCapCategoryProductTwoCell );
+@BindGlobal( "IsCapCategoryProductTwoCellRep", IsCapCategoryProductTwoCell );
 
-BindGlobal( "TheTypeOfCapCategoryProductObjects",
+@BindGlobal( "TheTypeOfCapCategoryProductObjects",
         NewType( TheFamilyOfCapCategoryObjects,
                 IsCapCategoryProductObject ) );
 
-BindGlobal( "TheTypeOfCapCategoryProductMorphisms",
+@BindGlobal( "TheTypeOfCapCategoryProductMorphisms",
         NewType( TheFamilyOfCapCategoryMorphisms,
                 IsCapCategoryProductMorphism ) );
 
-BindGlobal( "TheTypeOfCapCategoryProductTwoCells",
+@BindGlobal( "TheTypeOfCapCategoryProductTwoCells",
         NewType( TheFamilyOfCapCategoryTwoCells,
                 IsCapCategoryProductTwoCell ) );
 
@@ -38,25 +38,25 @@ BindGlobal( "TheTypeOfCapCategoryProductTwoCells",
 ###################################
 
 ##
-InstallMethod( Components,
+InstallMethod( @__MODULE__,  Components,
                [ IsCapProductCategory ],
                
   i -> [ i ] );
 
 ##
-InstallMethod( Components,
+InstallMethod( @__MODULE__,  Components,
                [ IsCapCategoryProductObject ],
                
   i -> [ i ] );
 
 ##
-InstallMethod( Components,
+InstallMethod( @__MODULE__,  Components,
                [ IsCapCategoryProductMorphism ],
                
   i -> [ i ] );
 
 ##
-InstallMethod( Components,
+InstallMethod( @__MODULE__,  Components,
                [ IsCapCategoryProductTwoCell ],
                
   i -> [ i ] );
@@ -67,7 +67,7 @@ InstallMethod( Components,
 ##
 ###################################
 
-BindGlobal( "CAP_INTERNAL_CREATE_PRODUCT_ARGUMENT_LIST",
+@BindGlobal( "CAP_INTERNAL_CREATE_PRODUCT_ARGUMENT_LIST",
   
   function( arg_list )
     local nr_components, current_argument, i, j, current_mat, new_args;
@@ -127,7 +127,7 @@ BindGlobal( "CAP_INTERNAL_CREATE_PRODUCT_ARGUMENT_LIST",
 end );
 
 ##
-BindGlobal( "CAP_INTERNAL_INSTALL_PRODUCT_ADDS_FROM_CATEGORY",
+@BindGlobal( "CAP_INTERNAL_INSTALL_PRODUCT_ADDS_FROM_CATEGORY",
   
   function( product_category )
     local recnames, current_recname, category_weight_list, current_entry, func,
@@ -281,7 +281,7 @@ InstallMethodWithCacheFromObject( ProductOp_OnTwoCells,
 end; ArgumentNumber = 2 );
 
 ##
-InstallMethod( ProductOp,
+InstallMethod( @__MODULE__,  ProductOp,
                [ IsList, IsCapCategoryObject ],
                
   function( object_list, selector )
@@ -319,7 +319,7 @@ InstallOtherMethod( /,
 end );
 
 ##
-InstallMethod( ProductOp,
+InstallMethod( @__MODULE__,  ProductOp,
                [ IsList, IsCapCategoryMorphism ],
                
   function( morphism_list, selector )
@@ -332,7 +332,7 @@ InstallMethod( ProductOp,
 end );
 
 ##
-InstallMethod( ProductOp,
+InstallMethod( @__MODULE__,  ProductOp,
                [ IsList, IsCapCategoryTwoCell ],
                
   function( twocell_list, selector )
@@ -345,7 +345,7 @@ InstallMethod( ProductOp,
 end );
 
 ##
-InstallMethod( getindex,
+InstallMethod( @__MODULE__,  getindex,
                [ IsCapProductCategory, IsInt ],
                
   function( category, index )
@@ -361,7 +361,7 @@ InstallMethod( getindex,
 end );
 
 ##
-InstallMethod( getindex,
+InstallMethod( @__MODULE__,  getindex,
                [ IsCapCategoryProductObject, IsInt ],
                
   function( cell, index )
@@ -377,7 +377,7 @@ InstallMethod( getindex,
 end );
 
 ##
-InstallMethod( getindex,
+InstallMethod( @__MODULE__,  getindex,
                [ IsCapCategoryProductMorphism, IsInt ],
                
   function( cell, index )
@@ -393,7 +393,7 @@ InstallMethod( getindex,
 end );
 
 ##
-InstallMethod( getindex,
+InstallMethod( @__MODULE__,  getindex,
                [ IsCapCategoryProductTwoCell, IsInt ],
                
   function( cell, index )
@@ -415,7 +415,7 @@ end );
 ###################################
 
 ##
-InstallMethod( Source,
+InstallMethod( @__MODULE__,  Source,
                [ IsCapCategoryProductMorphism ],
                
   function( morphism )
@@ -425,7 +425,7 @@ InstallMethod( Source,
 end );
 
 ##
-InstallMethod( Range,
+InstallMethod( @__MODULE__,  Range,
                [ IsCapCategoryProductMorphism ],
                
   function( morphism )
@@ -435,7 +435,7 @@ InstallMethod( Range,
 end );
 
 ##
-InstallMethod( Source,
+InstallMethod( @__MODULE__,  Source,
                [ IsCapCategoryProductTwoCell ],
                
   function( twocell )
@@ -445,7 +445,7 @@ InstallMethod( Source,
 end );
 
 ##
-InstallMethod( Range,
+InstallMethod( @__MODULE__,  Range,
                [ IsCapCategoryProductTwoCell ],
                
   function( twocell )
@@ -576,7 +576,7 @@ end );
 ###################################
 
 #= comment for Julia
-BindGlobal( "CAP_INTERNAL_PRODUCT_SAVE", Product );
+@BindGlobal( "CAP_INTERNAL_PRODUCT_SAVE", Product );
 
 MakeReadWriteGlobal( "Product" );
 
@@ -597,7 +597,7 @@ MakeReadOnlyGlobal( "Product" );
 # =#
 
 ##
-InstallMethod( IsEqualForCache,
+InstallMethod( @__MODULE__,  IsEqualForCache,
                [ IsCapProductCategory, IsCapProductCategory ],
                
   function( category1, category2 )
@@ -620,7 +620,7 @@ InstallMethod( IsEqualForCache,
 end );
 
 ##
-InstallMethod( IsEqualForCache,
+InstallMethod( @__MODULE__,  IsEqualForCache,
                [ IsCapCategoryProductObject, IsCapCategoryProductObject ],
                
   function( obj1, obj2 )
@@ -643,7 +643,7 @@ InstallMethod( IsEqualForCache,
 end );
 
 ##
-InstallMethod( IsEqualForCache,
+InstallMethod( @__MODULE__,  IsEqualForCache,
                [ IsCapCategoryProductMorphism, IsCapCategoryProductMorphism ],
                
   function( obj1, obj2 )
@@ -666,7 +666,7 @@ InstallMethod( IsEqualForCache,
 end );
 
 ##
-InstallMethod( IsEqualForCache,
+InstallMethod( @__MODULE__,  IsEqualForCache,
                [ IsCapCategoryProductTwoCell, IsCapCategoryProductTwoCell ],
                
   function( obj1, obj2 )

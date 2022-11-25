@@ -43,5 +43,5 @@
 #!  The dummy category will pretend to support empty limits by default.
 #! @Arguments options
 #! @Returns a category
-DeclareOperation( "DummyCategory",
+@DeclareOperation( "DummyCategory",
                   [ IsRecord ] );

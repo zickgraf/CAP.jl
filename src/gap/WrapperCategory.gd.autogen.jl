@@ -137,7 +137,7 @@ end );
 #!  Wrap an object <A>object</A> (in the category underlying the wrapper category <A>category</A>) to form an object ⥉ <A>category</A>.
 #! @Arguments category, object
 #! @Returns an object
-DeclareOperation( "AsObjectInWrapperCategory",
+@DeclareOperation( "AsObjectInWrapperCategory",
                   [ IsWrapperCapCategory, IsCapCategoryObject ] );
 
 ##
@@ -154,7 +154,7 @@ end );
 #!  with given source && range.
 #! @Arguments source, morphism, range
 #! @Returns a morphism
-DeclareOperation( "AsMorphismInWrapperCategory",
+@DeclareOperation( "AsMorphismInWrapperCategory",
                   [ IsWrapperCapCategoryObject, IsCapCategoryMorphism, IsWrapperCapCategoryObject ] );
 
 ##
@@ -170,14 +170,14 @@ end );
 #!  Wrap a morphism <A>morphism</A> (in the category underlying the wrapper category <A>category</A>) to form a morphism ⥉ <A>category</A>.
 #! @Arguments category, morphism
 #! @Returns a morphism
-DeclareOperation( "AsMorphismInWrapperCategory",
+@DeclareOperation( "AsMorphismInWrapperCategory",
                   [ IsWrapperCapCategory, IsCapCategoryMorphism ] );
 
 #! @Description
 #!  Convenience method for <Ref Oper="AsObjectInWrapperCategory" Label="for IsWrapperCapCategory, IsCapCategoryObject" />
 #!  && <Ref Oper="AsMorphismInWrapperCategory" Label="for IsWrapperCapCategory, IsCapCategoryMorphism" />.
 #! @Arguments cell, category
-DeclareOperation( "/",
+@DeclareOperation( "/",
                 [ IsCapCategoryCell, IsWrapperCapCategory ] );
 
 #! @Description
@@ -196,7 +196,7 @@ DeclareOperation( "/",
 #!  * `modeling_tower_morphism_datum`: a function which gets the wrapper category && a morphism ⥉ the modeling category && returns the corresponding morphism datum (in the sense of `morphism_datum`),
 #! @Arguments category, options
 #! @Returns a category
-DeclareOperation( "WrapperCategory",
+@DeclareOperation( "WrapperCategory",
                   [ IsCapCategory, IsRecord ] );
 
 
@@ -213,7 +213,7 @@ DeclareOperation( "WrapperCategory",
 #!  <A>cat</A> must be a CAP category which has been created as a wrapper CAP category (but !necessarily uses the default data structure).
 #! @Arguments cat, obj
 #! @Returns a CAP category object
-DeclareOperation( "ModelingObject",
+@DeclareOperation( "ModelingObject",
                   [ IsCapCategory, IsCapCategoryObject ] );
 
 #! @Description
@@ -221,7 +221,7 @@ DeclareOperation( "ModelingObject",
 #!  <A>cat</A> must be a CAP category which has been created as a wrapper CAP category (but !necessarily uses the default data structure).
 #! @Arguments cat, obj
 #! @Returns a CAP category object
-DeclareOperation( "ModeledObject",
+@DeclareOperation( "ModeledObject",
                   [ IsCapCategory, IsCapCategoryObject ] );
 
 #! @Description
@@ -229,18 +229,18 @@ DeclareOperation( "ModeledObject",
 #!  <A>cat</A> must be a CAP category which has been created as a wrapper CAP category (but !necessarily uses the default data structure).
 #! @Arguments cat, mor
 #! @Returns a CAP category morphism
-DeclareOperation( "ModelingMorphism", [ IsCapCategory, IsCapCategoryMorphism ] );
+@DeclareOperation( "ModelingMorphism", [ IsCapCategory, IsCapCategoryMorphism ] );
 
 #! @Description
 #!  Returns the morphism modeled by the morphism <A>mor</A> ⥉ the modeling category of <A>cat</A> with given source && range.
 #!  <A>cat</A> must be a CAP category which has been created as a wrapper CAP category (but !necessarily uses the default data structure).
 #! @Arguments cat, source, obj, range
 #! @Returns a CAP category morphism
-DeclareOperation( "ModeledMorphism", [ IsCapCategory, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
+@DeclareOperation( "ModeledMorphism", [ IsCapCategory, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 # helper operations
 # Those should never be used outside of WrapperCategory, but allow to register methods for CompilerForCAP.
-DeclareOperation( "ModelingTowerObjectConstructor", [ IsCapCategory, IsObject ] );
-DeclareOperation( "ModelingTowerObjectDatum", [ IsCapCategory, IsCapCategoryObject ] );
-DeclareOperation( "ModelingTowerMorphismConstructor", [ IsCapCategory, IsCapCategoryObject, IsObject, IsCapCategoryObject ] );
-DeclareOperation( "ModelingTowerMorphismDatum", [ IsCapCategory, IsCapCategoryMorphism ] );
+@DeclareOperation( "ModelingTowerObjectConstructor", [ IsCapCategory, IsObject ] );
+@DeclareOperation( "ModelingTowerObjectDatum", [ IsCapCategory, IsCapCategoryObject ] );
+@DeclareOperation( "ModelingTowerMorphismConstructor", [ IsCapCategory, IsCapCategoryObject, IsObject, IsCapCategoryObject ] );
+@DeclareOperation( "ModelingTowerMorphismDatum", [ IsCapCategory, IsCapCategoryMorphism ] );

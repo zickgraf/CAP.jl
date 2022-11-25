@@ -4,10 +4,10 @@
 # Implementations
 #
 
-BindGlobal( "init_CAP", function ( )
+@BindGlobal( "init_CAP", function ( )
     
     ##
-    InstallValue( CAP_INTERNAL,
+    @InstallValue( CAP_INTERNAL,
                     rec(
                         name_counter = 0,
                         default_cache_type = "weak",
@@ -46,7 +46,7 @@ BindGlobal( "init_CAP", function ( )
     );
     
     #= comment for Julia
-    BindGlobal( "CapCat", CAP_INTERNAL_CREATE_Cat( ) );
+    @BindGlobal( "CapCat", CAP_INTERNAL_CREATE_Cat( ) );
     # =#
     
 end );

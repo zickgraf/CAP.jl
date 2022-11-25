@@ -19,10 +19,10 @@
 @DeclareFilter( "IsCapCategoryProductTwoCell",
                  IsCapCategoryTwoCell );
 
-DeclareOperationWithCache( "DirectProductFunctor",
+@DeclareOperation( "DirectProductFunctor",
                            [ IsCapCategory, IsInt ] );
 
-DeclareOperationWithCache( "CoproductFunctor",
+@DeclareOperation( "CoproductFunctor",
                            [ IsCapCategory, IsInt ] );
 
 @DeclareFilter( "IsCapProductCategory", IsCapCategory );
@@ -40,16 +40,16 @@ DeclareOperationWithCache( "CoproductFunctor",
 @DeclareAttribute( "Components",
                   IsCapCategoryProductTwoCell );
 
-DeclareOperation( "[]",
+@DeclareOperation( "[]",
                   [ IsCapProductCategory, IsInt ] );
 
-DeclareOperation( "[]",
+@DeclareOperation( "[]",
                   [ IsCapCategoryProductObject, IsInt ] );
 
-DeclareOperation( "[]",
+@DeclareOperation( "[]",
                   [ IsCapCategoryProductMorphism, IsInt ] );
 
-DeclareOperation( "[]",
+@DeclareOperation( "[]",
                   [ IsCapCategoryProductTwoCell, IsInt ] );
 
 
@@ -59,22 +59,22 @@ DeclareOperation( "[]",
 ##
 ############################
 
-DeclareOperation( "ProductOp",
+@DeclareOperation( "ProductOp",
                   [ IsList, IsCapCategory ] );
 
-DeclareOperation( "ProductOp_OnMorphisms",
+@DeclareOperation( "ProductOp_OnMorphisms",
                   [ IsList, IsCapCategory ] );
 
-DeclareOperation( "ProductOp_OnObjects",
+@DeclareOperation( "ProductOp_OnObjects",
                   [ IsList, IsCapCategory ] );
 
-DeclareOperation( "ProductOp_OnTwoCells",
+@DeclareOperation( "ProductOp_OnTwoCells",
                   [ IsList, IsCapCategory ] );
 
-DeclareOperation( "/",
+@DeclareOperation( "/",
                   [ IsList, IsCapProductCategory ] );
 
-DeclareOperation( "ProductOp",
+@DeclareOperation( "ProductOp",
                   [ IsList, IsCapCategoryCell ] );
 
 ############################

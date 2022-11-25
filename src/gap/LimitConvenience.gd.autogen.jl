@@ -14,4 +14,4 @@
 #!   The result is compared to the content of the file <A>package_name</A>`/gap/LimitConvenienceOutput.gi`.
 #!   If a difference is found, a warning is raised && the generated string is written to a temporary file for manual inspection.
 #! @Arguments package_name, method_name_record, limits
-DeclareGlobalFunction( "CAP_INTERNAL_GENERATE_CONVENIENCE_METHODS_FOR_LIMITS" );
+@DeclareGlobalFunction( "CAP_INTERNAL_GENERATE_CONVENIENCE_METHODS_FOR_LIMITS" );

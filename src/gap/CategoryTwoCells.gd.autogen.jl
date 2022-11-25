@@ -67,10 +67,10 @@
 ##
 ###################################
 
-DeclareOperation( "Add",
+@DeclareOperation( "Add",
                   [ IsCapCategory, IsCapCategoryTwoCell ] );
 
-DeclareOperation( "AddTwoCell",
+@DeclareOperation( "AddTwoCell",
                   [ IsCapCategory, IsObject ] );
 
 ###################################
@@ -97,7 +97,7 @@ DeclareOperation( "AddTwoCell",
 #!  d \ast c: (\gamma \circ \alpha) \rightarrow (\delta \circ \beta) .
 #! @Returns a  2 -cell
 #! @Arguments c,d
-DeclareOperation( "HorizontalPreCompose",
+@DeclareOperation( "HorizontalPreCompose",
                   [ IsCapCategoryTwoCell, IsCapCategoryTwoCell ] );
 
 #! @Description
@@ -109,7 +109,7 @@ DeclareOperation( "HorizontalPreCompose",
 #!  d \ast c: (\gamma \circ \alpha) \rightarrow (\delta \circ \beta) .
 #! @Returns a  2 -cell
 #! @Arguments d,c
-DeclareOperation( "HorizontalPostCompose",
+@DeclareOperation( "HorizontalPostCompose",
                   [ IsCapCategoryTwoCell, IsCapCategoryTwoCell ] );
 
 #! @Description
@@ -121,7 +121,7 @@ DeclareOperation( "HorizontalPostCompose",
 #!  d \circ c: \alpha \rightarrow \gamma .
 #! @Returns a  2 -cell
 #! @Arguments c,d
-DeclareOperation( "VerticalPreCompose",
+@DeclareOperation( "VerticalPreCompose",
                   [ IsCapCategoryTwoCell, IsCapCategoryTwoCell ] );
 
 #! @Description
@@ -133,7 +133,7 @@ DeclareOperation( "VerticalPreCompose",
 #!  d \circ c: \alpha \rightarrow \gamma .
 #! @Returns a  2 -cell
 #! @Arguments d,c
-DeclareOperation( "VerticalPostCompose",
+@DeclareOperation( "VerticalPostCompose",
                   [ IsCapCategoryTwoCell, IsCapCategoryTwoCell ] );
 
 ######################################
@@ -148,5 +148,5 @@ DeclareOperation( "VerticalPostCompose",
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments c
-DeclareOperation( "IsWellDefinedForTwoCells",
+@DeclareOperation( "IsWellDefinedForTwoCells",
                   [ IsCapCategoryTwoCell ] );

@@ -56,49 +56,30 @@ function Base.setproperty!(obj::CAPDict, key::Symbol, value)
 	getfield(obj, :dict)[key] = value
 end
 
+function Base.propertynames(obj::CAPDict)
+	dict = getfield(obj, :dict)
+	filter(key -> dict[key] != nothing, keys(dict))
+end
+
 function copy(record::CAPRecord)
 	CAPRecord(copy(getfield(record, :dict)))
-end
-
-# Objectify
-function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_and_values... )
-	if !iseven(length(attributes_and_values))
-		throw("odd number of attributes and values")
-	end
-	# https://docs.julialang.org/en/v1/manual/methods/#Redefining-Methods
-	obj = Base.invokelatest(type, getfield(record, :dict))
-	for i in 1:2:length(attributes_and_values)-1
-		symbol_setter = Setter(attributes_and_values[i])
-		value = attributes_and_values[i + 1]
-		symbol_setter(obj, value)
-	end
-	obj
-end
-
-function NewType( family, filter )
-	type_symbol = Symbol("TheJuliaConcreteType" * string(filter) * string(gensym()))
-	eval(:(
-		struct $type_symbol <: $(filter.data_type)
-			dict::Dict
-		end
-	))
-	eval(:(export $type_symbol))
-	eval(type_symbol)
-end
-
-function Objectify(type, record)
-	ObjectifyWithAttributes( record, type )
 end
 
 # filters
 
 struct Filter <: Function
 	name::String
-	data_type::Type
+	abstract_type::Type
+	concrete_type::Type
+	subtypable::Bool
+end
+
+function Filter(name::String, abstract_type::Type)
+	Filter(name, abstract_type, Any, true)
 end
 
 function (filter::Filter)(obj)
-	isa(obj, filter.data_type)
+	isa(obj, filter.abstract_type)
 end
 
 function IsFilter( obj )
@@ -107,26 +88,28 @@ end
 
 macro DeclareFilter(name::String, parent_filter::Union{Symbol,Expr} = :IsObject)
 	filter_symbol = Symbol(name)
-	type_symbol = Symbol("TheJuliaAbstractType" * name)
-	quote
-		abstract type $type_symbol <: $parent_filter.data_type end
-		global const $filter_symbol = Filter($name, $(esc(type_symbol)))
-	end
+	abstract_type_symbol = Symbol("TheJuliaAbstractType" * name)
+	concrete_type_symbol = Symbol("TheJuliaConcreteType" * name)
+	# all our macros are meant to fully execute in the context where the macro is called -> always fully escape them
+	esc(quote
+		@assert $parent_filter.subtypable
+		abstract type $abstract_type_symbol <: $parent_filter.abstract_type end
+		struct $concrete_type_symbol{T} <: $abstract_type_symbol
+			dict::Dict
+		end
+		global const $filter_symbol = Filter($name, $abstract_type_symbol, $concrete_type_symbol, true)
+	end)
 end
 
 export @DeclareFilter
 
 function NewFilter( name, parent_filter )
-	type_symbol = Symbol("TheJuliaAbstractType" * name * string(gensym()))
-	eval(:(abstract type $type_symbol <: $(parent_filter.data_type) end))
-	type = eval(type_symbol)
-	filter = Filter(name, type)
-	eval(:(export $type_symbol))
-	filter
-end
-
-function NewFilter( name )
-	NewFilter(name, IsObject)
+	if !parent_filter.subtypable
+		throw("cannot create NewFilter with a parent filter which was itself created by NewFilter")
+	end
+	type_symbol = Symbol(name, gensym())
+	concrete_type = parent_filter.concrete_type{type_symbol}
+	Filter(name, concrete_type, concrete_type, false)
 end
 
 const NewCategory = NewFilter
@@ -135,12 +118,9 @@ const NewCategory = NewFilter
 abstract type AttributeStoringRep <: CAPDict end
 const IsAttributeStoringRep = Filter("IsAttributeStoringRep", AttributeStoringRep)
 
-abstract type CachingObject end
-const IsCachingObject = Filter("IsCachingObject", CachingObject )
-
 const IsIO = Filter("IsIO", IO)
 const IsObject = Filter("IsObject", Any)
-const IsString = Filter("IsString", String)
+const IsString = Filter("IsString", AbstractString)
 const IsStringRep = IsString
 const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Set})
 const IsDenseList = IsList
@@ -156,42 +136,104 @@ const IsRecord = Filter("IsRecord", CAPRecord)
 # integer or infinity (a float)
 const IsCyclotomic = Filter("IsCyclotomic", Union{Int,Float64}) # TODO
 
-# global functions
-DeclareGlobalFunction = function( name )
-	DeclareOperation( name )
-end;
+# Objectify
+function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_and_values... )
+	if !iseven(length(attributes_and_values))
+		throw("odd number of attributes and values")
+	end
+	@assert type <: CAPDict
+	# https://docs.julialang.org/en/v1/manual/methods/#Redefining-Methods
+	obj = Base.invokelatest(type, getfield(record, :dict))
+	for i in 1:2:length(attributes_and_values)-1
+		symbol_setter = Setter(attributes_and_values[i])
+		value = attributes_and_values[i + 1]
+		symbol_setter(obj, value)
+	end
+	obj
+end
 
-InstallGlobalFunction = function( name, func )
-	@assert length(methods(func)) == 1
-	InstallMethod( name, nothing, func )
+function NewType(family, filter::Filter)
+	if filter.concrete_type == Any
+		throw(string("the concrete type of ", filter.name, " is Any, cannot create objects from this"))
+	end
+	if filter.subtypable
+		filter.concrete_type{:generic}
+	else
+		filter.concrete_type
+	end
+end
+
+function Objectify(type, record)
+	ObjectifyWithAttributes( record, type )
 end
 
 # global variables
 DeclareGlobalVariable = function( name )
-	symbol = Symbol(name)
-	eval(:(global $symbol = $name))
-	eval(:(export $symbol))
+	# noop
 end;
 
-InstallValue = function( name, value )
-	eval(:(global $(Symbol(name)) = $value))
+macro InstallValueConst(name::Symbol, value)
+	esc(:(global const $name = $value))
 end
+
+export @InstallValueConst
+
+macro InstallValue(name::Symbol, value)
+	esc(:(global $name = $value))
+end
+
+export @InstallValue
+
+# global functions
+macro DeclareGlobalFunction(name::String)
+	esc(:(@DeclareOperation($name)))
+end
+
+export @DeclareGlobalFunction
+
+macro InstallGlobalFunction(name::String, func)
+	symbol = Symbol(name)
+	esc(:(@InstallGlobalFunction($symbol, $func)))
+end
+
+macro InstallGlobalFunction(name::Symbol, func)
+	esc(:(InstallMethod($name, nothing, $func)))
+end
+
+export @InstallGlobalFunction
 
 # global names
 DeclareGlobalName = function( name )
 	# noop
 end
 
-BindGlobal = function( name, value )
-	if isa( value, Function )
-		DeclareGlobalFunction(name)
-		InstallGlobalFunction(name, value)
+macro BindGlobalConst(name::String, value)
+	if value isa Expr && (value.head === :function || value.head === :->)
+		esc(quote
+			@DeclareGlobalFunction($name)
+			@InstallGlobalFunction($name, $value)
+		end)
 	else
 		symbol = Symbol(name)
-		eval(:(global $symbol = $value))
-		eval(:(export $symbol))
+		esc(:(@InstallValueConst($symbol, $value)))
 	end
 end
+
+export @BindGlobalConst
+
+macro BindGlobal(name::String, value)
+	if value isa Expr && (value.head === :function || value.head === :->)
+		esc(quote
+			@DeclareGlobalFunction($name)
+			@InstallGlobalFunction($name, $value)
+		end)
+	else
+		symbol = Symbol(name)
+		esc(:(@InstallValue($symbol, $value)))
+	end
+end
+
+export @BindGlobal
 
 # options
 
@@ -216,30 +258,50 @@ function ValueOption( name )
 end
 
 # operations
-function DeclareOperation( name )
-	if isdefined(@__MODULE__, Symbol(name))
-		return
+
+macro DeclareOperation(name::String, filter_list = [])
+	# prevent attributes from being redefined as operations
+	if isdefined(__module__, Symbol(name))
+		return nothing
 	end
 	symbol = Symbol(name)
-	eval(:(function $symbol end))
-	eval(:(export $symbol))
+	esc(:(function $symbol end))
 end
 
-function DeclareOperation( name, filter_list )
-	DeclareOperation( name )
-end
+export @DeclareOperation
 
-DeclareOperationWithCache = DeclareOperation
-
-function KeyDependentOperation( name, filter1, filter2, func )
-	DeclareOperation( name )
+macro KeyDependentOperation(name::String, filter1, filter2, func)
 	symbol = Symbol(name)
 	symbol_op = Symbol(name * "Op")
-	eval(:(global $symbol_op = $symbol))
-	eval(:(export $symbol_op))
+	esc(quote
+		@DeclareOperation($name)
+		global const $symbol_op = $symbol
+	end)
 end
 
-function InstallMethod( operation, filter_list, func )
+export @KeyDependentOperation
+
+function with_additional_dropped_first_argument(f)
+	(arg1, args...) -> f(args...)
+end
+
+function InstallMethod(operation, filter_list, func)
+	if IsAttribute( operation )
+		mod = parentmodule(operation.operation)
+	elseif isa(operation, Function)
+		mod = parentmodule(operation)
+	else
+		mod = @__MODULE__
+	end
+	
+	if mod === Base
+		mod = @__MODULE__
+	end
+	
+	InstallMethod(mod, operation, filter_list, func)
+end
+
+function InstallMethod(mod::Module, operation, filter_list, func::Function)
 	if operation == Pair
 		return
 	elseif operation == String
@@ -248,7 +310,11 @@ function InstallMethod( operation, filter_list, func )
 		operation = show
 		@assert length(filter_list) == 1
 		filter_list = [IsIO, filter_list[1]]
-		func = eval(:((io, obj) -> $func(obj)))
+		func = with_additional_dropped_first_argument(func)
+	end
+	
+	if !isa(operation, Function)
+		display(operation)
 	end
 	
 	if !isnothing(filter_list)
@@ -273,21 +339,21 @@ function InstallMethod( operation, filter_list, func )
 	else
 		vars_with_types = map(function(i)
 			arg_symbol = vars[i]
-			type = filter_list[i].data_type
+			type = filter_list[i].abstract_type
 			:($arg_symbol::$type)
 		end, 1:length(filter_list))
 	end
 	if IsAttribute( operation )
-		symbol = Symbol(operation.name * "Operation")
+		symbol = Symbol(operation.operation)
 	else
-		symbol = Symbol(string(operation))
+		symbol = Symbol(operation)
 	end
 	
-	if !isdefined(@__MODULE__, symbol)
-		print("WARNING: installing method in module ", @__MODULE__, " for undefined symbol ", symbol, "\n")
+	if !isdefined(mod, symbol)
+		print("WARNING: installing method in module ", mod, " for undefined symbol ", symbol, "\n")
 	end
 	
-	eval(:(
+	Base.eval(mod, :(
 		function $symbol($(vars_with_types...); keywords...)
 			if length(keywords) > 0
 				PushOptions(CAPRecord(Dict(keywords)))
@@ -299,21 +365,25 @@ function InstallMethod( operation, filter_list, func )
 			result
 		end
 	))
-	eval(:(export $symbol))
+	Base.eval(mod, :(export $symbol))
 end
 
-function InstallMethod( operation, description, filter_list, func )
+function InstallMethod(operation, description::String, filter_list, func)
 	InstallMethod(operation, filter_list, func)
+end
+
+function InstallMethod(mod, operation, description::String, filter_list, func)
+	InstallMethod(mod, operation, filter_list, func)
 end
 
 InstallOtherMethod = InstallMethod
 function InstallMethodWithCacheFromObject( operation, filter_list, func; ArgumentNumber = 1 )
 	InstallMethod( operation, filter_list, func )
 end
-function InstallMethodWithCache( operation, filter_list, func; Cache = "cache" )
+function InstallMethodWithCache( operation, filter_list, func; InstallMethod = InstallMethod, Cache = "cache" )
 	InstallMethod( operation, filter_list, func )
 end
-function InstallMethodWithCache( operation, description, filter_list, func; Cache = "cache" )
+function InstallMethodWithCache( operation, description, filter_list, func; InstallMethod = InstallMethod, Cache = "cache" )
 	InstallMethod( operation, filter_list, func )
 end
 InstallMethodWithCrispCache = InstallMethod
@@ -345,19 +415,19 @@ function (attr::Attribute)(args...)
 	attr.operation(args...)
 end
 
-function declare_attribute_or_property(name::String, is_property::Bool, esc)
+function declare_attribute_or_property(mod, name::String, is_property::Bool)
 	# attributes and properties might be installed for different parent filters
 	# since we do not take the parent filter into account here, we only have to install
 	# the attribute or property once
-	if isdefined(@__MODULE__, Symbol(name))
+	if isdefined(mod, Symbol(name))
 		return nothing
 	end
-	symbol = esc(Symbol(name))
-	symbol_op = esc(Symbol(name * "Operation"))
-	symbol_tester = esc(Symbol("Has" * name))
-	symbol_getter = esc(Symbol("Get" * name))
-	symbol_setter = esc(Symbol("Set" * name))
-	quote
+	symbol = Symbol(name)
+	symbol_op = Symbol(name * "Operation")
+	symbol_tester = Symbol("Has" * name)
+	symbol_getter = Symbol("Get" * name)
+	symbol_setter = Symbol("Set" * name)
+	esc(quote
 		function $symbol_op end
 		function $symbol_tester(obj::CAPDict)
 			dict = getfield(obj, :dict)
@@ -377,11 +447,11 @@ function declare_attribute_or_property(name::String, is_property::Bool, esc)
 			end
 		end
 		$symbol = Attribute($name, $symbol_op, $symbol_tester, $symbol_getter, $symbol_setter, $is_property, [])
-	end
+	end)
 end
 
 macro DeclareAttribute(name::String, parent_filter, mutability = missing)
-	declare_attribute_or_property(name, false, esc)
+	declare_attribute_or_property(__module__, name, false)
 end
 
 export @DeclareAttribute
@@ -398,19 +468,16 @@ function Setter(attribute::Attribute)
 	attribute.setter
 end
 
-DeclareSynonymAttr = function( name, attr )
-	# TODO
+macro DeclareSynonymAttr(name::String, attr)
+	symbol = Symbol(name)
+	esc(:(global const $symbol = $attr))
 end
 
 macro DeclareProperty(name::String, parent_filter)
-	declare_attribute_or_property(name, true, esc)
+	declare_attribute_or_property(__module__, name, true)
 end
 
 export @DeclareProperty
-
-function DeclareProperty(name::String, parent_filter)
-	eval(declare_attribute_or_property(name, true, identity))
-end
 
 IsProperty = function( obj )
 	obj isa Attribute && obj.is_property
@@ -697,7 +764,7 @@ function EvalString(string::String)
 	if string[1] == '['
 		pos = PositionSublist(string, "] -> ")
 		if pos != fail
-		string = "(" * string[2:pos-1] * ")" * string[pos+1:length(string)]
+		string = "(" * string[2:pos-1] * ")" * string[pos+1:end]
 		end
 	end
 	eval(Meta.parse(string))
@@ -810,7 +877,7 @@ function WITH_IMPS_FLAGS(filter)
 end
 
 function IS_SUBSET_FLAGS( filter1, filter2 )
-	filter1.data_type <: filter2.data_type
+	filter1.abstract_type <: filter2.abstract_type
 end
 
 StableSortBy = function( list, func )
@@ -878,3 +945,16 @@ function MaximalObjects( L, f )
     return L[PositionsOfMaximalObjects( L, f )];
     
 end
+
+# Julia macros
+
+macro init_CAP_package()
+	symbol = Symbol("init_" * string(__module__))
+	if isdefined(__module__, symbol)
+		esc(:($symbol()))
+	else
+		nothing
+	end
+end
+
+export @init_CAP_package

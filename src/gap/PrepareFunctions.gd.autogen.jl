@@ -23,7 +23,7 @@ DeclareGlobalVariable( "CAP_PREPARE_FUNCTION_RECORD" );
 #!  Note that <A>func</A> is !handled by the CAP caching mechanism && that the use
 #!  of prepare functions is incompatible with <C>WithGiven</C> operations. Thus, one has
 #!  to ensure manually that the equality && typing specifications are fulfilled.
-DeclareGlobalFunction( "CAPOperationPrepareFunction" );
+@DeclareGlobalFunction( "CAPOperationPrepareFunction" );
 
 #! @Arguments prepare_function, name, doc_string[, precondition_list]
 #! @Description
@@ -36,9 +36,9 @@ DeclareGlobalFunction( "CAPOperationPrepareFunction" );
 #!  if the category does need to have PreCompose computable. This information is also recovered automatically from the
 #!  prepare function itself, so the <A>precondition_list</A> is only necessary if the function needed is !explicitly
 #!  used ⥉ the prepare function, e.g., if you use <C>+</C> instead of <C>AdditionForMorphisms</C>.
-DeclareGlobalFunction( "CAPAddPrepareFunction" );
+@DeclareGlobalFunction( "CAPAddPrepareFunction" );
 
 #! @Description
 #!  Lists all prepare functions.
-DeclareGlobalFunction( "ListCAPPrepareFunctions" );
+@DeclareGlobalFunction( "ListCAPPrepareFunctions" );
 

@@ -16,16 +16,16 @@
 #!  F: ( a, b ) \\mapsto \\mathtt[AdditionForMorphisms](a, b) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddAdditionForMorphisms",
+@DeclareOperation( "AddAdditionForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddAdditionForMorphisms",
+@DeclareOperation( "AddAdditionForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddAdditionForMorphisms",
+@DeclareOperation( "AddAdditionForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddAdditionForMorphisms",
+@DeclareOperation( "AddAdditionForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -35,16 +35,16 @@ DeclareOperation( "AddAdditionForMorphisms",
 #!  F: (  ) \\mapsto \\mathtt[AdditiveGenerators]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddAdditiveGenerators",
+@DeclareOperation( "AddAdditiveGenerators",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddAdditiveGenerators",
+@DeclareOperation( "AddAdditiveGenerators",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddAdditiveGenerators",
+@DeclareOperation( "AddAdditiveGenerators",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddAdditiveGenerators",
+@DeclareOperation( "AddAdditiveGenerators",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -54,16 +54,16 @@ DeclareOperation( "AddAdditiveGenerators",
 #!  F: ( a ) \\mapsto \\mathtt[AdditiveInverseForMorphisms](a) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddAdditiveInverseForMorphisms",
+@DeclareOperation( "AddAdditiveInverseForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddAdditiveInverseForMorphisms",
+@DeclareOperation( "AddAdditiveInverseForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddAdditiveInverseForMorphisms",
+@DeclareOperation( "AddAdditiveInverseForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddAdditiveInverseForMorphisms",
+@DeclareOperation( "AddAdditiveInverseForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -73,16 +73,16 @@ DeclareOperation( "AddAdditiveInverseForMorphisms",
 #!  F: ( alpha ) \\mapsto \\mathtt[AstrictionToCoimage](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddAstrictionToCoimage",
+@DeclareOperation( "AddAstrictionToCoimage",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddAstrictionToCoimage",
+@DeclareOperation( "AddAstrictionToCoimage",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddAstrictionToCoimage",
+@DeclareOperation( "AddAstrictionToCoimage",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddAstrictionToCoimage",
+@DeclareOperation( "AddAstrictionToCoimage",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -92,16 +92,16 @@ DeclareOperation( "AddAstrictionToCoimage",
 #!  F: ( alpha, C ) \\mapsto \\mathtt[AstrictionToCoimageWithGivenCoimageObject](alpha, C) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
+@DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
+@DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
+@DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
+@DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -111,16 +111,16 @@ DeclareOperation( "AddAstrictionToCoimageWithGivenCoimageObject",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[BasisOfExternalHom](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddBasisOfExternalHom",
+@DeclareOperation( "AddBasisOfExternalHom",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddBasisOfExternalHom",
+@DeclareOperation( "AddBasisOfExternalHom",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddBasisOfExternalHom",
+@DeclareOperation( "AddBasisOfExternalHom",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddBasisOfExternalHom",
+@DeclareOperation( "AddBasisOfExternalHom",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -130,16 +130,16 @@ DeclareOperation( "AddBasisOfExternalHom",
 #!  F: ( alpha ) \\mapsto \\mathtt[CanonicalIdentificationFromCoimageToImageObject](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
+@DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
+@DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
+@DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
+@DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -149,16 +149,16 @@ DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
 #!  F: ( alpha ) \\mapsto \\mathtt[CanonicalIdentificationFromImageObjectToCoimage](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
+@DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
+@DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
+@DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
+@DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -168,16 +168,16 @@ DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
 #!  F: ( alpha ) \\mapsto \\mathtt[CoastrictionToImage](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoastrictionToImage",
+@DeclareOperation( "AddCoastrictionToImage",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoastrictionToImage",
+@DeclareOperation( "AddCoastrictionToImage",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoastrictionToImage",
+@DeclareOperation( "AddCoastrictionToImage",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoastrictionToImage",
+@DeclareOperation( "AddCoastrictionToImage",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -187,16 +187,16 @@ DeclareOperation( "AddCoastrictionToImage",
 #!  F: ( alpha, I ) \\mapsto \\mathtt[CoastrictionToImageWithGivenImageObject](alpha, I) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
+@DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
+@DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
+@DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
+@DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -206,16 +206,16 @@ DeclareOperation( "AddCoastrictionToImageWithGivenImageObject",
 #!  F: ( arg2 ) \\mapsto \\mathtt[CoefficientsOfMorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoefficientsOfMorphism",
+@DeclareOperation( "AddCoefficientsOfMorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoefficientsOfMorphism",
+@DeclareOperation( "AddCoefficientsOfMorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoefficientsOfMorphism",
+@DeclareOperation( "AddCoefficientsOfMorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoefficientsOfMorphism",
+@DeclareOperation( "AddCoefficientsOfMorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -225,16 +225,16 @@ DeclareOperation( "AddCoefficientsOfMorphism",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[Coequalizer](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoequalizer",
+@DeclareOperation( "AddCoequalizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoequalizer",
+@DeclareOperation( "AddCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoequalizer",
+@DeclareOperation( "AddCoequalizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoequalizer",
+@DeclareOperation( "AddCoequalizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -244,16 +244,16 @@ DeclareOperation( "AddCoequalizer",
 #!  F: ( morphisms, mu, morphismsp ) \\mapsto \\mathtt[CoequalizerFunctorial](morphisms, mu, morphismsp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoequalizerFunctorial",
+@DeclareOperation( "AddCoequalizerFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoequalizerFunctorial",
+@DeclareOperation( "AddCoequalizerFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoequalizerFunctorial",
+@DeclareOperation( "AddCoequalizerFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoequalizerFunctorial",
+@DeclareOperation( "AddCoequalizerFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -263,16 +263,16 @@ DeclareOperation( "AddCoequalizerFunctorial",
 #!  F: ( P, morphisms, mu, morphismsp, Pp ) \\mapsto \\mathtt[CoequalizerFunctorialWithGivenCoequalizers](P, morphisms, mu, morphismsp, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
+@DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
+@DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
+@DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
+@DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -282,16 +282,16 @@ DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
 #!  F: ( arg2 ) \\mapsto \\mathtt[CoimageObject](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoimageObject",
+@DeclareOperation( "AddCoimageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoimageObject",
+@DeclareOperation( "AddCoimageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoimageObject",
+@DeclareOperation( "AddCoimageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoimageObject",
+@DeclareOperation( "AddCoimageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -301,16 +301,16 @@ DeclareOperation( "AddCoimageObject",
 #!  F: ( alpha ) \\mapsto \\mathtt[CoimageProjection](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoimageProjection",
+@DeclareOperation( "AddCoimageProjection",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoimageProjection",
+@DeclareOperation( "AddCoimageProjection",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoimageProjection",
+@DeclareOperation( "AddCoimageProjection",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoimageProjection",
+@DeclareOperation( "AddCoimageProjection",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -320,16 +320,16 @@ DeclareOperation( "AddCoimageProjection",
 #!  F: ( alpha, C ) \\mapsto \\mathtt[CoimageProjectionWithGivenCoimageObject](alpha, C) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
+@DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
+@DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
+@DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
+@DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -339,16 +339,16 @@ DeclareOperation( "AddCoimageProjectionWithGivenCoimageObject",
 #!  F: ( alpha, T, tau ) \\mapsto \\mathtt[CokernelColift](alpha, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCokernelColift",
+@DeclareOperation( "AddCokernelColift",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCokernelColift",
+@DeclareOperation( "AddCokernelColift",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCokernelColift",
+@DeclareOperation( "AddCokernelColift",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCokernelColift",
+@DeclareOperation( "AddCokernelColift",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -358,16 +358,16 @@ DeclareOperation( "AddCokernelColift",
 #!  F: ( alpha, T, tau, P ) \\mapsto \\mathtt[CokernelColiftWithGivenCokernelObject](alpha, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
+@DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
+@DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
+@DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
+@DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -377,16 +377,16 @@ DeclareOperation( "AddCokernelColiftWithGivenCokernelObject",
 #!  F: ( arg2 ) \\mapsto \\mathtt[CokernelObject](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCokernelObject",
+@DeclareOperation( "AddCokernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCokernelObject",
+@DeclareOperation( "AddCokernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCokernelObject",
+@DeclareOperation( "AddCokernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCokernelObject",
+@DeclareOperation( "AddCokernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -396,16 +396,16 @@ DeclareOperation( "AddCokernelObject",
 #!  F: ( alpha, mu, alphap ) \\mapsto \\mathtt[CokernelObjectFunctorial](alpha, mu, alphap) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCokernelObjectFunctorial",
+@DeclareOperation( "AddCokernelObjectFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCokernelObjectFunctorial",
+@DeclareOperation( "AddCokernelObjectFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCokernelObjectFunctorial",
+@DeclareOperation( "AddCokernelObjectFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCokernelObjectFunctorial",
+@DeclareOperation( "AddCokernelObjectFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -415,16 +415,16 @@ DeclareOperation( "AddCokernelObjectFunctorial",
 #!  F: ( P, alpha, mu, alphap, Pp ) \\mapsto \\mathtt[CokernelObjectFunctorialWithGivenCokernelObjects](P, alpha, mu, alphap, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
+@DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
+@DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
+@DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
+@DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -434,16 +434,16 @@ DeclareOperation( "AddCokernelObjectFunctorialWithGivenCokernelObjects",
 #!  F: ( alpha ) \\mapsto \\mathtt[CokernelProjection](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCokernelProjection",
+@DeclareOperation( "AddCokernelProjection",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCokernelProjection",
+@DeclareOperation( "AddCokernelProjection",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCokernelProjection",
+@DeclareOperation( "AddCokernelProjection",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCokernelProjection",
+@DeclareOperation( "AddCokernelProjection",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -453,16 +453,16 @@ DeclareOperation( "AddCokernelProjection",
 #!  F: ( alpha, P ) \\mapsto \\mathtt[CokernelProjectionWithGivenCokernelObject](alpha, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
+@DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
+@DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
+@DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
+@DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -472,16 +472,16 @@ DeclareOperation( "AddCokernelProjectionWithGivenCokernelObject",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[Colift](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddColift",
+@DeclareOperation( "AddColift",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddColift",
+@DeclareOperation( "AddColift",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddColift",
+@DeclareOperation( "AddColift",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddColift",
+@DeclareOperation( "AddColift",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -491,16 +491,16 @@ DeclareOperation( "AddColift",
 #!  F: ( epsilon, tau ) \\mapsto \\mathtt[ColiftAlongEpimorphism](epsilon, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddColiftAlongEpimorphism",
+@DeclareOperation( "AddColiftAlongEpimorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddColiftAlongEpimorphism",
+@DeclareOperation( "AddColiftAlongEpimorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddColiftAlongEpimorphism",
+@DeclareOperation( "AddColiftAlongEpimorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddColiftAlongEpimorphism",
+@DeclareOperation( "AddColiftAlongEpimorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -510,16 +510,16 @@ DeclareOperation( "AddColiftAlongEpimorphism",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[ColiftOrFail](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddColiftOrFail",
+@DeclareOperation( "AddColiftOrFail",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddColiftOrFail",
+@DeclareOperation( "AddColiftOrFail",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddColiftOrFail",
+@DeclareOperation( "AddColiftOrFail",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddColiftOrFail",
+@DeclareOperation( "AddColiftOrFail",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -529,16 +529,16 @@ DeclareOperation( "AddColiftOrFail",
 #!  F: ( alpha, S, i ) \\mapsto \\mathtt[ComponentOfMorphismFromDirectSum](alpha, S, i) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddComponentOfMorphismFromDirectSum",
+@DeclareOperation( "AddComponentOfMorphismFromDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddComponentOfMorphismFromDirectSum",
+@DeclareOperation( "AddComponentOfMorphismFromDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddComponentOfMorphismFromDirectSum",
+@DeclareOperation( "AddComponentOfMorphismFromDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddComponentOfMorphismFromDirectSum",
+@DeclareOperation( "AddComponentOfMorphismFromDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -548,16 +548,16 @@ DeclareOperation( "AddComponentOfMorphismFromDirectSum",
 #!  F: ( alpha, S, i ) \\mapsto \\mathtt[ComponentOfMorphismIntoDirectSum](alpha, S, i) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
+@DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
+@DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
+@DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
+@DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -567,16 +567,16 @@ DeclareOperation( "AddComponentOfMorphismIntoDirectSum",
 #!  F: ( arg2 ) \\mapsto \\mathtt[Coproduct](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoproduct",
+@DeclareOperation( "AddCoproduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoproduct",
+@DeclareOperation( "AddCoproduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoproduct",
+@DeclareOperation( "AddCoproduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoproduct",
+@DeclareOperation( "AddCoproduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -586,16 +586,16 @@ DeclareOperation( "AddCoproduct",
 #!  F: ( objects, L, objectsp ) \\mapsto \\mathtt[CoproductFunctorial](objects, L, objectsp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoproductFunctorial",
+@DeclareOperation( "AddCoproductFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoproductFunctorial",
+@DeclareOperation( "AddCoproductFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoproductFunctorial",
+@DeclareOperation( "AddCoproductFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoproductFunctorial",
+@DeclareOperation( "AddCoproductFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -605,16 +605,16 @@ DeclareOperation( "AddCoproductFunctorial",
 #!  F: ( P, objects, L, objectsp, Pp ) \\mapsto \\mathtt[CoproductFunctorialWithGivenCoproducts](P, objects, L, objectsp, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
+@DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
+@DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
+@DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
+@DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -624,16 +624,16 @@ DeclareOperation( "AddCoproductFunctorialWithGivenCoproducts",
 #!  F: ( arg2 ) \\mapsto \\mathtt[DirectProduct](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectProduct",
+@DeclareOperation( "AddDirectProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectProduct",
+@DeclareOperation( "AddDirectProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectProduct",
+@DeclareOperation( "AddDirectProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectProduct",
+@DeclareOperation( "AddDirectProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -643,16 +643,16 @@ DeclareOperation( "AddDirectProduct",
 #!  F: ( objects, L, objectsp ) \\mapsto \\mathtt[DirectProductFunctorial](objects, L, objectsp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectProductFunctorial",
+@DeclareOperation( "AddDirectProductFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectProductFunctorial",
+@DeclareOperation( "AddDirectProductFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectProductFunctorial",
+@DeclareOperation( "AddDirectProductFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectProductFunctorial",
+@DeclareOperation( "AddDirectProductFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -662,16 +662,16 @@ DeclareOperation( "AddDirectProductFunctorial",
 #!  F: ( P, objects, L, objectsp, Pp ) \\mapsto \\mathtt[DirectProductFunctorialWithGivenDirectProducts](P, objects, L, objectsp, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
+@DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
+@DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
+@DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
+@DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -681,16 +681,16 @@ DeclareOperation( "AddDirectProductFunctorialWithGivenDirectProducts",
 #!  F: ( arg2 ) \\mapsto \\mathtt[DirectSum](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectSum",
+@DeclareOperation( "AddDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectSum",
+@DeclareOperation( "AddDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectSum",
+@DeclareOperation( "AddDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectSum",
+@DeclareOperation( "AddDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -700,16 +700,16 @@ DeclareOperation( "AddDirectSum",
 #!  F: ( D ) \\mapsto \\mathtt[DirectSumCodiagonalDifference](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectSumCodiagonalDifference",
+@DeclareOperation( "AddDirectSumCodiagonalDifference",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectSumCodiagonalDifference",
+@DeclareOperation( "AddDirectSumCodiagonalDifference",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectSumCodiagonalDifference",
+@DeclareOperation( "AddDirectSumCodiagonalDifference",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectSumCodiagonalDifference",
+@DeclareOperation( "AddDirectSumCodiagonalDifference",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -719,16 +719,16 @@ DeclareOperation( "AddDirectSumCodiagonalDifference",
 #!  F: ( D ) \\mapsto \\mathtt[DirectSumDiagonalDifference](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectSumDiagonalDifference",
+@DeclareOperation( "AddDirectSumDiagonalDifference",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectSumDiagonalDifference",
+@DeclareOperation( "AddDirectSumDiagonalDifference",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectSumDiagonalDifference",
+@DeclareOperation( "AddDirectSumDiagonalDifference",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectSumDiagonalDifference",
+@DeclareOperation( "AddDirectSumDiagonalDifference",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -738,16 +738,16 @@ DeclareOperation( "AddDirectSumDiagonalDifference",
 #!  F: ( objects, L, objectsp ) \\mapsto \\mathtt[DirectSumFunctorial](objects, L, objectsp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectSumFunctorial",
+@DeclareOperation( "AddDirectSumFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectSumFunctorial",
+@DeclareOperation( "AddDirectSumFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectSumFunctorial",
+@DeclareOperation( "AddDirectSumFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectSumFunctorial",
+@DeclareOperation( "AddDirectSumFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -757,16 +757,16 @@ DeclareOperation( "AddDirectSumFunctorial",
 #!  F: ( P, objects, L, objectsp, Pp ) \\mapsto \\mathtt[DirectSumFunctorialWithGivenDirectSums](P, objects, L, objectsp, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
+@DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
+@DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
+@DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
+@DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -776,16 +776,16 @@ DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
 #!  F: ( D ) \\mapsto \\mathtt[DirectSumProjectionInPushout](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDirectSumProjectionInPushout",
+@DeclareOperation( "AddDirectSumProjectionInPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDirectSumProjectionInPushout",
+@DeclareOperation( "AddDirectSumProjectionInPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDirectSumProjectionInPushout",
+@DeclareOperation( "AddDirectSumProjectionInPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDirectSumProjectionInPushout",
+@DeclareOperation( "AddDirectSumProjectionInPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -795,16 +795,16 @@ DeclareOperation( "AddDirectSumProjectionInPushout",
 #!  F: (  ) \\mapsto \\mathtt[DistinguishedObjectOfHomomorphismStructure]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
+@DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
+@DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
+@DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
+@DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -814,16 +814,16 @@ DeclareOperation( "AddDistinguishedObjectOfHomomorphismStructure",
 #!  F: ( Y, morphisms ) \\mapsto \\mathtt[EmbeddingOfEqualizer](Y, morphisms) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddEmbeddingOfEqualizer",
+@DeclareOperation( "AddEmbeddingOfEqualizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddEmbeddingOfEqualizer",
+@DeclareOperation( "AddEmbeddingOfEqualizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddEmbeddingOfEqualizer",
+@DeclareOperation( "AddEmbeddingOfEqualizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddEmbeddingOfEqualizer",
+@DeclareOperation( "AddEmbeddingOfEqualizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -833,16 +833,16 @@ DeclareOperation( "AddEmbeddingOfEqualizer",
 #!  F: ( Y, morphisms, P ) \\mapsto \\mathtt[EmbeddingOfEqualizerWithGivenEqualizer](Y, morphisms, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
+@DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
+@DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
+@DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
+@DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -852,16 +852,16 @@ DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
 #!  F: ( A ) \\mapsto \\mathtt[EpimorphismFromSomeProjectiveObject](A) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
+@DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
+@DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
+@DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
+@DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -871,16 +871,16 @@ DeclareOperation( "AddEpimorphismFromSomeProjectiveObject",
 #!  F: ( A, P ) \\mapsto \\mathtt[EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject](A, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
+@DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
+@DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
+@DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
+@DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -890,16 +890,16 @@ DeclareOperation( "AddEpimorphismFromSomeProjectiveObjectWithGivenSomeProjective
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[Equalizer](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddEqualizer",
+@DeclareOperation( "AddEqualizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddEqualizer",
+@DeclareOperation( "AddEqualizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddEqualizer",
+@DeclareOperation( "AddEqualizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddEqualizer",
+@DeclareOperation( "AddEqualizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -909,16 +909,16 @@ DeclareOperation( "AddEqualizer",
 #!  F: ( morphisms, mu, morphismsp ) \\mapsto \\mathtt[EqualizerFunctorial](morphisms, mu, morphismsp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddEqualizerFunctorial",
+@DeclareOperation( "AddEqualizerFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddEqualizerFunctorial",
+@DeclareOperation( "AddEqualizerFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddEqualizerFunctorial",
+@DeclareOperation( "AddEqualizerFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddEqualizerFunctorial",
+@DeclareOperation( "AddEqualizerFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -928,16 +928,16 @@ DeclareOperation( "AddEqualizerFunctorial",
 #!  F: ( P, morphisms, mu, morphismsp, Pp ) \\mapsto \\mathtt[EqualizerFunctorialWithGivenEqualizers](P, morphisms, mu, morphismsp, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
+@DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
+@DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
+@DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
+@DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -947,16 +947,16 @@ DeclareOperation( "AddEqualizerFunctorialWithGivenEqualizers",
 #!  F: ( arg2 ) \\mapsto \\mathtt[FiberProduct](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddFiberProduct",
+@DeclareOperation( "AddFiberProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddFiberProduct",
+@DeclareOperation( "AddFiberProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddFiberProduct",
+@DeclareOperation( "AddFiberProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddFiberProduct",
+@DeclareOperation( "AddFiberProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -966,16 +966,16 @@ DeclareOperation( "AddFiberProduct",
 #!  F: ( D ) \\mapsto \\mathtt[FiberProductEmbeddingInDirectSum](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
+@DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
+@DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
+@DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
+@DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -985,16 +985,16 @@ DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
 #!  F: ( morphisms, L, morphismsp ) \\mapsto \\mathtt[FiberProductFunctorial](morphisms, L, morphismsp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddFiberProductFunctorial",
+@DeclareOperation( "AddFiberProductFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddFiberProductFunctorial",
+@DeclareOperation( "AddFiberProductFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddFiberProductFunctorial",
+@DeclareOperation( "AddFiberProductFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddFiberProductFunctorial",
+@DeclareOperation( "AddFiberProductFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1004,16 +1004,16 @@ DeclareOperation( "AddFiberProductFunctorial",
 #!  F: ( P, morphisms, L, morphismsp, Pp ) \\mapsto \\mathtt[FiberProductFunctorialWithGivenFiberProducts](P, morphisms, L, morphismsp, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
+@DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
+@DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
+@DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
+@DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1023,16 +1023,16 @@ DeclareOperation( "AddFiberProductFunctorialWithGivenFiberProducts",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[HomologyObject](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddHomologyObject",
+@DeclareOperation( "AddHomologyObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddHomologyObject",
+@DeclareOperation( "AddHomologyObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddHomologyObject",
+@DeclareOperation( "AddHomologyObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddHomologyObject",
+@DeclareOperation( "AddHomologyObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1042,16 +1042,16 @@ DeclareOperation( "AddHomologyObject",
 #!  F: ( H_1, L, H_2 ) \\mapsto \\mathtt[HomologyObjectFunctorialWithGivenHomologyObjects](H_1, L, H_2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
+@DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
+@DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
+@DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
+@DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1061,16 +1061,16 @@ DeclareOperation( "AddHomologyObjectFunctorialWithGivenHomologyObjects",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[HomomorphismStructureOnMorphisms](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddHomomorphismStructureOnMorphisms",
+@DeclareOperation( "AddHomomorphismStructureOnMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddHomomorphismStructureOnMorphisms",
+@DeclareOperation( "AddHomomorphismStructureOnMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddHomomorphismStructureOnMorphisms",
+@DeclareOperation( "AddHomomorphismStructureOnMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddHomomorphismStructureOnMorphisms",
+@DeclareOperation( "AddHomomorphismStructureOnMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1080,16 +1080,16 @@ DeclareOperation( "AddHomomorphismStructureOnMorphisms",
 #!  F: ( source, alpha, beta, range ) \\mapsto \\mathtt[HomomorphismStructureOnMorphismsWithGivenObjects](source, alpha, beta, range) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
+@DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
+@DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
+@DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
+@DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1099,16 +1099,16 @@ DeclareOperation( "AddHomomorphismStructureOnMorphismsWithGivenObjects",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[HomomorphismStructureOnObjects](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddHomomorphismStructureOnObjects",
+@DeclareOperation( "AddHomomorphismStructureOnObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddHomomorphismStructureOnObjects",
+@DeclareOperation( "AddHomomorphismStructureOnObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddHomomorphismStructureOnObjects",
+@DeclareOperation( "AddHomomorphismStructureOnObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddHomomorphismStructureOnObjects",
+@DeclareOperation( "AddHomomorphismStructureOnObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1118,16 +1118,16 @@ DeclareOperation( "AddHomomorphismStructureOnObjects",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[HorizontalPostCompose](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddHorizontalPostCompose",
+@DeclareOperation( "AddHorizontalPostCompose",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddHorizontalPostCompose",
+@DeclareOperation( "AddHorizontalPostCompose",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddHorizontalPostCompose",
+@DeclareOperation( "AddHorizontalPostCompose",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddHorizontalPostCompose",
+@DeclareOperation( "AddHorizontalPostCompose",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1137,16 +1137,16 @@ DeclareOperation( "AddHorizontalPostCompose",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[HorizontalPreCompose](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddHorizontalPreCompose",
+@DeclareOperation( "AddHorizontalPreCompose",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddHorizontalPreCompose",
+@DeclareOperation( "AddHorizontalPreCompose",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddHorizontalPreCompose",
+@DeclareOperation( "AddHorizontalPreCompose",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddHorizontalPreCompose",
+@DeclareOperation( "AddHorizontalPreCompose",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1156,16 +1156,16 @@ DeclareOperation( "AddHorizontalPreCompose",
 #!  F: ( a ) \\mapsto \\mathtt[IdentityMorphism](a) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIdentityMorphism",
+@DeclareOperation( "AddIdentityMorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIdentityMorphism",
+@DeclareOperation( "AddIdentityMorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIdentityMorphism",
+@DeclareOperation( "AddIdentityMorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIdentityMorphism",
+@DeclareOperation( "AddIdentityMorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1175,16 +1175,16 @@ DeclareOperation( "AddIdentityMorphism",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IdentityTwoCell](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIdentityTwoCell",
+@DeclareOperation( "AddIdentityTwoCell",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIdentityTwoCell",
+@DeclareOperation( "AddIdentityTwoCell",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIdentityTwoCell",
+@DeclareOperation( "AddIdentityTwoCell",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIdentityTwoCell",
+@DeclareOperation( "AddIdentityTwoCell",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1194,16 +1194,16 @@ DeclareOperation( "AddIdentityTwoCell",
 #!  F: ( alpha ) \\mapsto \\mathtt[ImageEmbedding](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddImageEmbedding",
+@DeclareOperation( "AddImageEmbedding",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddImageEmbedding",
+@DeclareOperation( "AddImageEmbedding",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddImageEmbedding",
+@DeclareOperation( "AddImageEmbedding",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddImageEmbedding",
+@DeclareOperation( "AddImageEmbedding",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1213,16 +1213,16 @@ DeclareOperation( "AddImageEmbedding",
 #!  F: ( alpha, I ) \\mapsto \\mathtt[ImageEmbeddingWithGivenImageObject](alpha, I) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
+@DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
+@DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
+@DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
+@DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1232,16 +1232,16 @@ DeclareOperation( "AddImageEmbeddingWithGivenImageObject",
 #!  F: ( arg2 ) \\mapsto \\mathtt[ImageObject](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddImageObject",
+@DeclareOperation( "AddImageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddImageObject",
+@DeclareOperation( "AddImageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddImageObject",
+@DeclareOperation( "AddImageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddImageObject",
+@DeclareOperation( "AddImageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1251,16 +1251,16 @@ DeclareOperation( "AddImageObject",
 #!  F: (  ) \\mapsto \\mathtt[IndecomposableInjectiveObjects]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIndecomposableInjectiveObjects",
+@DeclareOperation( "AddIndecomposableInjectiveObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIndecomposableInjectiveObjects",
+@DeclareOperation( "AddIndecomposableInjectiveObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIndecomposableInjectiveObjects",
+@DeclareOperation( "AddIndecomposableInjectiveObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIndecomposableInjectiveObjects",
+@DeclareOperation( "AddIndecomposableInjectiveObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1270,16 +1270,16 @@ DeclareOperation( "AddIndecomposableInjectiveObjects",
 #!  F: (  ) \\mapsto \\mathtt[IndecomposableProjectiveObjects]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIndecomposableProjectiveObjects",
+@DeclareOperation( "AddIndecomposableProjectiveObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIndecomposableProjectiveObjects",
+@DeclareOperation( "AddIndecomposableProjectiveObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIndecomposableProjectiveObjects",
+@DeclareOperation( "AddIndecomposableProjectiveObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIndecomposableProjectiveObjects",
+@DeclareOperation( "AddIndecomposableProjectiveObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1289,16 +1289,16 @@ DeclareOperation( "AddIndecomposableProjectiveObjects",
 #!  F: (  ) \\mapsto \\mathtt[InitialObject]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInitialObject",
+@DeclareOperation( "AddInitialObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInitialObject",
+@DeclareOperation( "AddInitialObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInitialObject",
+@DeclareOperation( "AddInitialObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInitialObject",
+@DeclareOperation( "AddInitialObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1308,16 +1308,16 @@ DeclareOperation( "AddInitialObject",
 #!  F: (  ) \\mapsto \\mathtt[InitialObjectFunctorial]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInitialObjectFunctorial",
+@DeclareOperation( "AddInitialObjectFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInitialObjectFunctorial",
+@DeclareOperation( "AddInitialObjectFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInitialObjectFunctorial",
+@DeclareOperation( "AddInitialObjectFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInitialObjectFunctorial",
+@DeclareOperation( "AddInitialObjectFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1327,16 +1327,16 @@ DeclareOperation( "AddInitialObjectFunctorial",
 #!  F: ( P, Pp ) \\mapsto \\mathtt[InitialObjectFunctorialWithGivenInitialObjects](P, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
+@DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
+@DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
+@DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
+@DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1346,16 +1346,16 @@ DeclareOperation( "AddInitialObjectFunctorialWithGivenInitialObjects",
 #!  F: ( objects, k ) \\mapsto \\mathtt[InjectionOfCofactorOfCoproduct](objects, k) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
+@DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
+@DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
+@DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
+@DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1365,16 +1365,16 @@ DeclareOperation( "AddInjectionOfCofactorOfCoproduct",
 #!  F: ( objects, k, P ) \\mapsto \\mathtt[InjectionOfCofactorOfCoproductWithGivenCoproduct](objects, k, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
+@DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
+@DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
+@DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
+@DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1384,16 +1384,16 @@ DeclareOperation( "AddInjectionOfCofactorOfCoproductWithGivenCoproduct",
 #!  F: ( objects, k ) \\mapsto \\mathtt[InjectionOfCofactorOfDirectSum](objects, k) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
+@DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
+@DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
+@DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
+@DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1403,16 +1403,16 @@ DeclareOperation( "AddInjectionOfCofactorOfDirectSum",
 #!  F: ( objects, k, P ) \\mapsto \\mathtt[InjectionOfCofactorOfDirectSumWithGivenDirectSum](objects, k, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1422,16 +1422,16 @@ DeclareOperation( "AddInjectionOfCofactorOfDirectSumWithGivenDirectSum",
 #!  F: ( morphisms, k ) \\mapsto \\mathtt[InjectionOfCofactorOfPushout](morphisms, k) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInjectionOfCofactorOfPushout",
+@DeclareOperation( "AddInjectionOfCofactorOfPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfPushout",
+@DeclareOperation( "AddInjectionOfCofactorOfPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfPushout",
+@DeclareOperation( "AddInjectionOfCofactorOfPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfPushout",
+@DeclareOperation( "AddInjectionOfCofactorOfPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1441,16 +1441,16 @@ DeclareOperation( "AddInjectionOfCofactorOfPushout",
 #!  F: ( morphisms, k, P ) \\mapsto \\mathtt[InjectionOfCofactorOfPushoutWithGivenPushout](morphisms, k, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
+@DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
+@DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
+@DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
+@DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1460,16 +1460,16 @@ DeclareOperation( "AddInjectionOfCofactorOfPushoutWithGivenPushout",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[InjectiveColift](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInjectiveColift",
+@DeclareOperation( "AddInjectiveColift",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInjectiveColift",
+@DeclareOperation( "AddInjectiveColift",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInjectiveColift",
+@DeclareOperation( "AddInjectiveColift",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInjectiveColift",
+@DeclareOperation( "AddInjectiveColift",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1479,16 +1479,16 @@ DeclareOperation( "AddInjectiveColift",
 #!  F: ( arg2 ) \\mapsto \\mathtt[InjectiveDimension](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInjectiveDimension",
+@DeclareOperation( "AddInjectiveDimension",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInjectiveDimension",
+@DeclareOperation( "AddInjectiveDimension",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInjectiveDimension",
+@DeclareOperation( "AddInjectiveDimension",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInjectiveDimension",
+@DeclareOperation( "AddInjectiveDimension",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1498,16 +1498,16 @@ DeclareOperation( "AddInjectiveDimension",
 #!  F: ( alpha ) \\mapsto \\mathtt[InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+@DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+@DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+@DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+@DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1517,16 +1517,16 @@ DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomo
 #!  F: ( source, alpha, range ) \\mapsto \\mathtt[InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects](source, alpha, range) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+@DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+@DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+@DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+@DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1536,16 +1536,16 @@ DeclareOperation( "AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomo
 #!  F: ( arg2, arg3, arg4 ) \\mapsto \\mathtt[InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism](arg2, arg3, arg4) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+@DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+@DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+@DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+@DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1555,16 +1555,16 @@ DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStru
 #!  F: ( alpha ) \\mapsto \\mathtt[InverseForMorphisms](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInverseForMorphisms",
+@DeclareOperation( "AddInverseForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInverseForMorphisms",
+@DeclareOperation( "AddInverseForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInverseForMorphisms",
+@DeclareOperation( "AddInverseForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInverseForMorphisms",
+@DeclareOperation( "AddInverseForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1574,16 +1574,16 @@ DeclareOperation( "AddInverseForMorphisms",
 #!  F: ( C, alpha, I ) \\mapsto \\mathtt[InverseMorphismFromCoimageToImageWithGivenObjects](C, alpha, I) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1593,16 +1593,16 @@ DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsAutomorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsAutomorphism",
+@DeclareOperation( "AddIsAutomorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsAutomorphism",
+@DeclareOperation( "AddIsAutomorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsAutomorphism",
+@DeclareOperation( "AddIsAutomorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsAutomorphism",
+@DeclareOperation( "AddIsAutomorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1612,16 +1612,16 @@ DeclareOperation( "AddIsAutomorphism",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsBijectiveObject](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsBijectiveObject",
+@DeclareOperation( "AddIsBijectiveObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsBijectiveObject",
+@DeclareOperation( "AddIsBijectiveObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsBijectiveObject",
+@DeclareOperation( "AddIsBijectiveObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsBijectiveObject",
+@DeclareOperation( "AddIsBijectiveObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1631,16 +1631,16 @@ DeclareOperation( "AddIsBijectiveObject",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsCodominating](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsCodominating",
+@DeclareOperation( "AddIsCodominating",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsCodominating",
+@DeclareOperation( "AddIsCodominating",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsCodominating",
+@DeclareOperation( "AddIsCodominating",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsCodominating",
+@DeclareOperation( "AddIsCodominating",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1650,16 +1650,16 @@ DeclareOperation( "AddIsCodominating",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsColiftable](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsColiftable",
+@DeclareOperation( "AddIsColiftable",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsColiftable",
+@DeclareOperation( "AddIsColiftable",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsColiftable",
+@DeclareOperation( "AddIsColiftable",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsColiftable",
+@DeclareOperation( "AddIsColiftable",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1669,16 +1669,16 @@ DeclareOperation( "AddIsColiftable",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsColiftableAlongEpimorphism](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsColiftableAlongEpimorphism",
+@DeclareOperation( "AddIsColiftableAlongEpimorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsColiftableAlongEpimorphism",
+@DeclareOperation( "AddIsColiftableAlongEpimorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsColiftableAlongEpimorphism",
+@DeclareOperation( "AddIsColiftableAlongEpimorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsColiftableAlongEpimorphism",
+@DeclareOperation( "AddIsColiftableAlongEpimorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1688,16 +1688,16 @@ DeclareOperation( "AddIsColiftableAlongEpimorphism",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsCongruentForMorphisms](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsCongruentForMorphisms",
+@DeclareOperation( "AddIsCongruentForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsCongruentForMorphisms",
+@DeclareOperation( "AddIsCongruentForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsCongruentForMorphisms",
+@DeclareOperation( "AddIsCongruentForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsCongruentForMorphisms",
+@DeclareOperation( "AddIsCongruentForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1707,16 +1707,16 @@ DeclareOperation( "AddIsCongruentForMorphisms",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsDominating](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsDominating",
+@DeclareOperation( "AddIsDominating",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsDominating",
+@DeclareOperation( "AddIsDominating",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsDominating",
+@DeclareOperation( "AddIsDominating",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsDominating",
+@DeclareOperation( "AddIsDominating",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1726,16 +1726,16 @@ DeclareOperation( "AddIsDominating",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsEndomorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEndomorphism",
+@DeclareOperation( "AddIsEndomorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEndomorphism",
+@DeclareOperation( "AddIsEndomorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEndomorphism",
+@DeclareOperation( "AddIsEndomorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEndomorphism",
+@DeclareOperation( "AddIsEndomorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1745,16 +1745,16 @@ DeclareOperation( "AddIsEndomorphism",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsEpimorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEpimorphism",
+@DeclareOperation( "AddIsEpimorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEpimorphism",
+@DeclareOperation( "AddIsEpimorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEpimorphism",
+@DeclareOperation( "AddIsEpimorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEpimorphism",
+@DeclareOperation( "AddIsEpimorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1764,16 +1764,16 @@ DeclareOperation( "AddIsEpimorphism",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsEqualAsFactorobjects](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualAsFactorobjects",
+@DeclareOperation( "AddIsEqualAsFactorobjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualAsFactorobjects",
+@DeclareOperation( "AddIsEqualAsFactorobjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualAsFactorobjects",
+@DeclareOperation( "AddIsEqualAsFactorobjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualAsFactorobjects",
+@DeclareOperation( "AddIsEqualAsFactorobjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1783,16 +1783,16 @@ DeclareOperation( "AddIsEqualAsFactorobjects",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsEqualAsSubobjects](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualAsSubobjects",
+@DeclareOperation( "AddIsEqualAsSubobjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualAsSubobjects",
+@DeclareOperation( "AddIsEqualAsSubobjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualAsSubobjects",
+@DeclareOperation( "AddIsEqualAsSubobjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualAsSubobjects",
+@DeclareOperation( "AddIsEqualAsSubobjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1802,16 +1802,16 @@ DeclareOperation( "AddIsEqualAsSubobjects",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsEqualForCacheForMorphisms](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualForCacheForMorphisms",
+@DeclareOperation( "AddIsEqualForCacheForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualForCacheForMorphisms",
+@DeclareOperation( "AddIsEqualForCacheForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualForCacheForMorphisms",
+@DeclareOperation( "AddIsEqualForCacheForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualForCacheForMorphisms",
+@DeclareOperation( "AddIsEqualForCacheForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1821,16 +1821,16 @@ DeclareOperation( "AddIsEqualForCacheForMorphisms",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsEqualForCacheForObjects](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualForCacheForObjects",
+@DeclareOperation( "AddIsEqualForCacheForObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualForCacheForObjects",
+@DeclareOperation( "AddIsEqualForCacheForObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualForCacheForObjects",
+@DeclareOperation( "AddIsEqualForCacheForObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualForCacheForObjects",
+@DeclareOperation( "AddIsEqualForCacheForObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1840,16 +1840,16 @@ DeclareOperation( "AddIsEqualForCacheForObjects",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsEqualForMorphisms](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualForMorphisms",
+@DeclareOperation( "AddIsEqualForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualForMorphisms",
+@DeclareOperation( "AddIsEqualForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualForMorphisms",
+@DeclareOperation( "AddIsEqualForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualForMorphisms",
+@DeclareOperation( "AddIsEqualForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1859,16 +1859,16 @@ DeclareOperation( "AddIsEqualForMorphisms",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsEqualForMorphismsOnMor](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualForMorphismsOnMor",
+@DeclareOperation( "AddIsEqualForMorphismsOnMor",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualForMorphismsOnMor",
+@DeclareOperation( "AddIsEqualForMorphismsOnMor",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualForMorphismsOnMor",
+@DeclareOperation( "AddIsEqualForMorphismsOnMor",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualForMorphismsOnMor",
+@DeclareOperation( "AddIsEqualForMorphismsOnMor",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1878,16 +1878,16 @@ DeclareOperation( "AddIsEqualForMorphismsOnMor",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsEqualForObjects](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualForObjects",
+@DeclareOperation( "AddIsEqualForObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualForObjects",
+@DeclareOperation( "AddIsEqualForObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualForObjects",
+@DeclareOperation( "AddIsEqualForObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualForObjects",
+@DeclareOperation( "AddIsEqualForObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1897,16 +1897,16 @@ DeclareOperation( "AddIsEqualForObjects",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsEqualToIdentityMorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualToIdentityMorphism",
+@DeclareOperation( "AddIsEqualToIdentityMorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualToIdentityMorphism",
+@DeclareOperation( "AddIsEqualToIdentityMorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualToIdentityMorphism",
+@DeclareOperation( "AddIsEqualToIdentityMorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualToIdentityMorphism",
+@DeclareOperation( "AddIsEqualToIdentityMorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1916,16 +1916,16 @@ DeclareOperation( "AddIsEqualToIdentityMorphism",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsEqualToZeroMorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsEqualToZeroMorphism",
+@DeclareOperation( "AddIsEqualToZeroMorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsEqualToZeroMorphism",
+@DeclareOperation( "AddIsEqualToZeroMorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsEqualToZeroMorphism",
+@DeclareOperation( "AddIsEqualToZeroMorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsEqualToZeroMorphism",
+@DeclareOperation( "AddIsEqualToZeroMorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1935,16 +1935,16 @@ DeclareOperation( "AddIsEqualToZeroMorphism",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsHomSetInhabited](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsHomSetInhabited",
+@DeclareOperation( "AddIsHomSetInhabited",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsHomSetInhabited",
+@DeclareOperation( "AddIsHomSetInhabited",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsHomSetInhabited",
+@DeclareOperation( "AddIsHomSetInhabited",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsHomSetInhabited",
+@DeclareOperation( "AddIsHomSetInhabited",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1954,16 +1954,16 @@ DeclareOperation( "AddIsHomSetInhabited",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsIdempotent](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsIdempotent",
+@DeclareOperation( "AddIsIdempotent",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsIdempotent",
+@DeclareOperation( "AddIsIdempotent",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsIdempotent",
+@DeclareOperation( "AddIsIdempotent",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsIdempotent",
+@DeclareOperation( "AddIsIdempotent",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1973,16 +1973,16 @@ DeclareOperation( "AddIsIdempotent",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsInitial](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsInitial",
+@DeclareOperation( "AddIsInitial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsInitial",
+@DeclareOperation( "AddIsInitial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsInitial",
+@DeclareOperation( "AddIsInitial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsInitial",
+@DeclareOperation( "AddIsInitial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1992,16 +1992,16 @@ DeclareOperation( "AddIsInitial",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsInjective](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsInjective",
+@DeclareOperation( "AddIsInjective",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsInjective",
+@DeclareOperation( "AddIsInjective",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsInjective",
+@DeclareOperation( "AddIsInjective",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsInjective",
+@DeclareOperation( "AddIsInjective",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2011,16 +2011,16 @@ DeclareOperation( "AddIsInjective",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsIsomorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsIsomorphism",
+@DeclareOperation( "AddIsIsomorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsIsomorphism",
+@DeclareOperation( "AddIsIsomorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsIsomorphism",
+@DeclareOperation( "AddIsIsomorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsIsomorphism",
+@DeclareOperation( "AddIsIsomorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2030,16 +2030,16 @@ DeclareOperation( "AddIsIsomorphism",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsLiftable](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsLiftable",
+@DeclareOperation( "AddIsLiftable",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsLiftable",
+@DeclareOperation( "AddIsLiftable",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsLiftable",
+@DeclareOperation( "AddIsLiftable",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsLiftable",
+@DeclareOperation( "AddIsLiftable",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2049,16 +2049,16 @@ DeclareOperation( "AddIsLiftable",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[IsLiftableAlongMonomorphism](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsLiftableAlongMonomorphism",
+@DeclareOperation( "AddIsLiftableAlongMonomorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsLiftableAlongMonomorphism",
+@DeclareOperation( "AddIsLiftableAlongMonomorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsLiftableAlongMonomorphism",
+@DeclareOperation( "AddIsLiftableAlongMonomorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsLiftableAlongMonomorphism",
+@DeclareOperation( "AddIsLiftableAlongMonomorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2068,16 +2068,16 @@ DeclareOperation( "AddIsLiftableAlongMonomorphism",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsMonomorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsMonomorphism",
+@DeclareOperation( "AddIsMonomorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsMonomorphism",
+@DeclareOperation( "AddIsMonomorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsMonomorphism",
+@DeclareOperation( "AddIsMonomorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsMonomorphism",
+@DeclareOperation( "AddIsMonomorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2087,16 +2087,16 @@ DeclareOperation( "AddIsMonomorphism",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsOne](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsOne",
+@DeclareOperation( "AddIsOne",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsOne",
+@DeclareOperation( "AddIsOne",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsOne",
+@DeclareOperation( "AddIsOne",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsOne",
+@DeclareOperation( "AddIsOne",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2106,16 +2106,16 @@ DeclareOperation( "AddIsOne",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsProjective](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsProjective",
+@DeclareOperation( "AddIsProjective",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsProjective",
+@DeclareOperation( "AddIsProjective",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsProjective",
+@DeclareOperation( "AddIsProjective",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsProjective",
+@DeclareOperation( "AddIsProjective",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2125,16 +2125,16 @@ DeclareOperation( "AddIsProjective",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsSplitEpimorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsSplitEpimorphism",
+@DeclareOperation( "AddIsSplitEpimorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsSplitEpimorphism",
+@DeclareOperation( "AddIsSplitEpimorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsSplitEpimorphism",
+@DeclareOperation( "AddIsSplitEpimorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsSplitEpimorphism",
+@DeclareOperation( "AddIsSplitEpimorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2144,16 +2144,16 @@ DeclareOperation( "AddIsSplitEpimorphism",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsSplitMonomorphism](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsSplitMonomorphism",
+@DeclareOperation( "AddIsSplitMonomorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsSplitMonomorphism",
+@DeclareOperation( "AddIsSplitMonomorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsSplitMonomorphism",
+@DeclareOperation( "AddIsSplitMonomorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsSplitMonomorphism",
+@DeclareOperation( "AddIsSplitMonomorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2163,16 +2163,16 @@ DeclareOperation( "AddIsSplitMonomorphism",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsTerminal](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsTerminal",
+@DeclareOperation( "AddIsTerminal",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsTerminal",
+@DeclareOperation( "AddIsTerminal",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsTerminal",
+@DeclareOperation( "AddIsTerminal",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsTerminal",
+@DeclareOperation( "AddIsTerminal",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2182,16 +2182,16 @@ DeclareOperation( "AddIsTerminal",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsWellDefinedForMorphisms](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsWellDefinedForMorphisms",
+@DeclareOperation( "AddIsWellDefinedForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsWellDefinedForMorphisms",
+@DeclareOperation( "AddIsWellDefinedForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsWellDefinedForMorphisms",
+@DeclareOperation( "AddIsWellDefinedForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsWellDefinedForMorphisms",
+@DeclareOperation( "AddIsWellDefinedForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2201,16 +2201,16 @@ DeclareOperation( "AddIsWellDefinedForMorphisms",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsWellDefinedForObjects](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsWellDefinedForObjects",
+@DeclareOperation( "AddIsWellDefinedForObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsWellDefinedForObjects",
+@DeclareOperation( "AddIsWellDefinedForObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsWellDefinedForObjects",
+@DeclareOperation( "AddIsWellDefinedForObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsWellDefinedForObjects",
+@DeclareOperation( "AddIsWellDefinedForObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2220,16 +2220,16 @@ DeclareOperation( "AddIsWellDefinedForObjects",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsWellDefinedForTwoCells](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsWellDefinedForTwoCells",
+@DeclareOperation( "AddIsWellDefinedForTwoCells",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsWellDefinedForTwoCells",
+@DeclareOperation( "AddIsWellDefinedForTwoCells",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsWellDefinedForTwoCells",
+@DeclareOperation( "AddIsWellDefinedForTwoCells",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsWellDefinedForTwoCells",
+@DeclareOperation( "AddIsWellDefinedForTwoCells",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2239,16 +2239,16 @@ DeclareOperation( "AddIsWellDefinedForTwoCells",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsZeroForMorphisms](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsZeroForMorphisms",
+@DeclareOperation( "AddIsZeroForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsZeroForMorphisms",
+@DeclareOperation( "AddIsZeroForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsZeroForMorphisms",
+@DeclareOperation( "AddIsZeroForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsZeroForMorphisms",
+@DeclareOperation( "AddIsZeroForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2258,16 +2258,16 @@ DeclareOperation( "AddIsZeroForMorphisms",
 #!  F: ( arg2 ) \\mapsto \\mathtt[IsZeroForObjects](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsZeroForObjects",
+@DeclareOperation( "AddIsZeroForObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsZeroForObjects",
+@DeclareOperation( "AddIsZeroForObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsZeroForObjects",
+@DeclareOperation( "AddIsZeroForObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsZeroForObjects",
+@DeclareOperation( "AddIsZeroForObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2277,16 +2277,16 @@ DeclareOperation( "AddIsZeroForObjects",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromCoequalizerOfCoproductDiagramToPushout](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
+@DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
+@DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
+@DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
+@DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2296,16 +2296,16 @@ DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
 #!  F: ( alpha ) \\mapsto \\mathtt[IsomorphismFromCoimageToCokernelOfKernel](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
+@DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
+@DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
+@DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
+@DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2315,16 +2315,16 @@ DeclareOperation( "AddIsomorphismFromCoimageToCokernelOfKernel",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromCokernelOfDiagonalDifferenceToPushout](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2334,16 +2334,16 @@ DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
 #!  F: ( alpha ) \\mapsto \\mathtt[IsomorphismFromCokernelOfKernelToCoimage](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
+@DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
+@DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
+@DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
+@DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2353,16 +2353,16 @@ DeclareOperation( "AddIsomorphismFromCokernelOfKernelToCoimage",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromCoproductToDirectSum](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
+@DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
+@DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
+@DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
+@DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2372,16 +2372,16 @@ DeclareOperation( "AddIsomorphismFromCoproductToDirectSum",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromDirectProductToDirectSum](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
+@DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
+@DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
+@DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
+@DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2391,16 +2391,16 @@ DeclareOperation( "AddIsomorphismFromDirectProductToDirectSum",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromDirectSumToCoproduct](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
+@DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
+@DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
+@DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
+@DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2410,16 +2410,16 @@ DeclareOperation( "AddIsomorphismFromDirectSumToCoproduct",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromDirectSumToDirectProduct](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
+@DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
+@DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
+@DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
+@DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2429,16 +2429,16 @@ DeclareOperation( "AddIsomorphismFromDirectSumToDirectProduct",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2448,16 +2448,16 @@ DeclareOperation( "AddIsomorphismFromEqualizerOfDirectProductDiagramToFiberProdu
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
+@DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
+@DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
+@DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
+@DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2467,16 +2467,16 @@ DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagr
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromFiberProductToKernelOfDiagonalDifference](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
+@DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
+@DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
+@DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
+@DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2486,16 +2486,16 @@ DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[IsomorphismFromHomologyObjectToItsConstructionAsAnImageObject](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
+@DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
+@DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
+@DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
+@DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2505,16 +2505,16 @@ DeclareOperation( "AddIsomorphismFromHomologyObjectToItsConstructionAsAnImageObj
 #!  F: ( alpha ) \\mapsto \\mathtt[IsomorphismFromImageObjectToKernelOfCokernel](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
+@DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
+@DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
+@DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
+@DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2524,16 +2524,16 @@ DeclareOperation( "AddIsomorphismFromImageObjectToKernelOfCokernel",
 #!  F: (  ) \\mapsto \\mathtt[IsomorphismFromInitialObjectToZeroObject]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
+@DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
+@DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
+@DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
+@DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2543,16 +2543,16 @@ DeclareOperation( "AddIsomorphismFromInitialObjectToZeroObject",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
+@DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
+@DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
+@DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
+@DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2562,16 +2562,16 @@ DeclareOperation( "AddIsomorphismFromItsConstructionAsAnImageObjectToHomologyObj
 #!  F: ( alpha ) \\mapsto \\mathtt[IsomorphismFromKernelOfCokernelToImageObject](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
+@DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
+@DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
+@DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
+@DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2581,16 +2581,16 @@ DeclareOperation( "AddIsomorphismFromKernelOfCokernelToImageObject",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2600,16 +2600,16 @@ DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromPushoutToCoequalizerOfCoproductDiagram](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
+@DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
+@DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
+@DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
+@DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2619,16 +2619,16 @@ DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromPushoutToCokernelOfDiagonalDifference](D) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
+@DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
+@DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
+@DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
+@DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2638,16 +2638,16 @@ DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
 #!  F: (  ) \\mapsto \\mathtt[IsomorphismFromTerminalObjectToZeroObject]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
+@DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
+@DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
+@DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
+@DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2657,16 +2657,16 @@ DeclareOperation( "AddIsomorphismFromTerminalObjectToZeroObject",
 #!  F: (  ) \\mapsto \\mathtt[IsomorphismFromZeroObjectToInitialObject]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
+@DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
+@DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
+@DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
+@DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2676,16 +2676,16 @@ DeclareOperation( "AddIsomorphismFromZeroObjectToInitialObject",
 #!  F: (  ) \\mapsto \\mathtt[IsomorphismFromZeroObjectToTerminalObject]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
+@DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
+@DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
+@DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
+@DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2695,16 +2695,16 @@ DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
 #!  F: ( alpha ) \\mapsto \\mathtt[KernelEmbedding](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddKernelEmbedding",
+@DeclareOperation( "AddKernelEmbedding",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddKernelEmbedding",
+@DeclareOperation( "AddKernelEmbedding",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddKernelEmbedding",
+@DeclareOperation( "AddKernelEmbedding",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddKernelEmbedding",
+@DeclareOperation( "AddKernelEmbedding",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2714,16 +2714,16 @@ DeclareOperation( "AddKernelEmbedding",
 #!  F: ( alpha, P ) \\mapsto \\mathtt[KernelEmbeddingWithGivenKernelObject](alpha, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
+@DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
+@DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
+@DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
+@DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2733,16 +2733,16 @@ DeclareOperation( "AddKernelEmbeddingWithGivenKernelObject",
 #!  F: ( alpha, T, tau ) \\mapsto \\mathtt[KernelLift](alpha, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddKernelLift",
+@DeclareOperation( "AddKernelLift",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddKernelLift",
+@DeclareOperation( "AddKernelLift",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddKernelLift",
+@DeclareOperation( "AddKernelLift",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddKernelLift",
+@DeclareOperation( "AddKernelLift",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2752,16 +2752,16 @@ DeclareOperation( "AddKernelLift",
 #!  F: ( alpha, T, tau, P ) \\mapsto \\mathtt[KernelLiftWithGivenKernelObject](alpha, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddKernelLiftWithGivenKernelObject",
+@DeclareOperation( "AddKernelLiftWithGivenKernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddKernelLiftWithGivenKernelObject",
+@DeclareOperation( "AddKernelLiftWithGivenKernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddKernelLiftWithGivenKernelObject",
+@DeclareOperation( "AddKernelLiftWithGivenKernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddKernelLiftWithGivenKernelObject",
+@DeclareOperation( "AddKernelLiftWithGivenKernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2771,16 +2771,16 @@ DeclareOperation( "AddKernelLiftWithGivenKernelObject",
 #!  F: ( arg2 ) \\mapsto \\mathtt[KernelObject](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddKernelObject",
+@DeclareOperation( "AddKernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddKernelObject",
+@DeclareOperation( "AddKernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddKernelObject",
+@DeclareOperation( "AddKernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddKernelObject",
+@DeclareOperation( "AddKernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2790,16 +2790,16 @@ DeclareOperation( "AddKernelObject",
 #!  F: ( alpha, mu, alphap ) \\mapsto \\mathtt[KernelObjectFunctorial](alpha, mu, alphap) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddKernelObjectFunctorial",
+@DeclareOperation( "AddKernelObjectFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddKernelObjectFunctorial",
+@DeclareOperation( "AddKernelObjectFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddKernelObjectFunctorial",
+@DeclareOperation( "AddKernelObjectFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddKernelObjectFunctorial",
+@DeclareOperation( "AddKernelObjectFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2809,16 +2809,16 @@ DeclareOperation( "AddKernelObjectFunctorial",
 #!  F: ( P, alpha, mu, alphap, Pp ) \\mapsto \\mathtt[KernelObjectFunctorialWithGivenKernelObjects](P, alpha, mu, alphap, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
+@DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
+@DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
+@DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
+@DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2828,16 +2828,16 @@ DeclareOperation( "AddKernelObjectFunctorialWithGivenKernelObjects",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[Lift](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddLift",
+@DeclareOperation( "AddLift",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddLift",
+@DeclareOperation( "AddLift",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddLift",
+@DeclareOperation( "AddLift",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddLift",
+@DeclareOperation( "AddLift",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2847,16 +2847,16 @@ DeclareOperation( "AddLift",
 #!  F: ( iota, tau ) \\mapsto \\mathtt[LiftAlongMonomorphism](iota, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddLiftAlongMonomorphism",
+@DeclareOperation( "AddLiftAlongMonomorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddLiftAlongMonomorphism",
+@DeclareOperation( "AddLiftAlongMonomorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddLiftAlongMonomorphism",
+@DeclareOperation( "AddLiftAlongMonomorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddLiftAlongMonomorphism",
+@DeclareOperation( "AddLiftAlongMonomorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2866,16 +2866,16 @@ DeclareOperation( "AddLiftAlongMonomorphism",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[LiftOrFail](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddLiftOrFail",
+@DeclareOperation( "AddLiftOrFail",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddLiftOrFail",
+@DeclareOperation( "AddLiftOrFail",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddLiftOrFail",
+@DeclareOperation( "AddLiftOrFail",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddLiftOrFail",
+@DeclareOperation( "AddLiftOrFail",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2885,16 +2885,16 @@ DeclareOperation( "AddLiftOrFail",
 #!  F: ( arg2, arg3, arg4 ) \\mapsto \\mathtt[MereExistenceOfSolutionOfLinearSystemInAbCategory](arg2, arg3, arg4) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
+@DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
+@DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
+@DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
+@DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2904,16 +2904,16 @@ DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
 #!  F: ( A ) \\mapsto \\mathtt[MonomorphismIntoSomeInjectiveObject](A) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
+@DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
+@DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
+@DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
+@DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2923,16 +2923,16 @@ DeclareOperation( "AddMonomorphismIntoSomeInjectiveObject",
 #!  F: ( A, I ) \\mapsto \\mathtt[MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject](A, I) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
+@DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
+@DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
+@DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
+@DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2942,16 +2942,16 @@ DeclareOperation( "AddMonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveO
 #!  F: ( source_diagram, mat, range_diagram ) \\mapsto \\mathtt[MorphismBetweenDirectSums](source_diagram, mat, range_diagram) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismBetweenDirectSums",
+@DeclareOperation( "AddMorphismBetweenDirectSums",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismBetweenDirectSums",
+@DeclareOperation( "AddMorphismBetweenDirectSums",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismBetweenDirectSums",
+@DeclareOperation( "AddMorphismBetweenDirectSums",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismBetweenDirectSums",
+@DeclareOperation( "AddMorphismBetweenDirectSums",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2961,16 +2961,16 @@ DeclareOperation( "AddMorphismBetweenDirectSums",
 #!  F: ( S, source_diagram, mat, range_diagram, T ) \\mapsto \\mathtt[MorphismBetweenDirectSumsWithGivenDirectSums](S, source_diagram, mat, range_diagram, T) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
+@DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
+@DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
+@DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
+@DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2980,16 +2980,16 @@ DeclareOperation( "AddMorphismBetweenDirectSumsWithGivenDirectSums",
 #!  F: ( arg2, arg3, arg4 ) \\mapsto \\mathtt[MorphismConstructor](arg2, arg3, arg4) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismConstructor",
+@DeclareOperation( "AddMorphismConstructor",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismConstructor",
+@DeclareOperation( "AddMorphismConstructor",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismConstructor",
+@DeclareOperation( "AddMorphismConstructor",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismConstructor",
+@DeclareOperation( "AddMorphismConstructor",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2999,16 +2999,16 @@ DeclareOperation( "AddMorphismConstructor",
 #!  F: ( arg2 ) \\mapsto \\mathtt[MorphismDatum](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismDatum",
+@DeclareOperation( "AddMorphismDatum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismDatum",
+@DeclareOperation( "AddMorphismDatum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismDatum",
+@DeclareOperation( "AddMorphismDatum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismDatum",
+@DeclareOperation( "AddMorphismDatum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3018,16 +3018,16 @@ DeclareOperation( "AddMorphismDatum",
 #!  F: ( C, alpha, I ) \\mapsto \\mathtt[MorphismFromCoimageToImageWithGivenObjects](C, alpha, I) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3037,16 +3037,16 @@ DeclareOperation( "AddMorphismFromCoimageToImageWithGivenObjects",
 #!  F: ( Y, morphisms ) \\mapsto \\mathtt[MorphismFromEqualizerToSink](Y, morphisms) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromEqualizerToSink",
+@DeclareOperation( "AddMorphismFromEqualizerToSink",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromEqualizerToSink",
+@DeclareOperation( "AddMorphismFromEqualizerToSink",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromEqualizerToSink",
+@DeclareOperation( "AddMorphismFromEqualizerToSink",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromEqualizerToSink",
+@DeclareOperation( "AddMorphismFromEqualizerToSink",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3056,16 +3056,16 @@ DeclareOperation( "AddMorphismFromEqualizerToSink",
 #!  F: ( Y, morphisms, P ) \\mapsto \\mathtt[MorphismFromEqualizerToSinkWithGivenEqualizer](Y, morphisms, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
+@DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
+@DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
+@DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
+@DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3075,16 +3075,16 @@ DeclareOperation( "AddMorphismFromEqualizerToSinkWithGivenEqualizer",
 #!  F: ( morphisms ) \\mapsto \\mathtt[MorphismFromFiberProductToSink](morphisms) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromFiberProductToSink",
+@DeclareOperation( "AddMorphismFromFiberProductToSink",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromFiberProductToSink",
+@DeclareOperation( "AddMorphismFromFiberProductToSink",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromFiberProductToSink",
+@DeclareOperation( "AddMorphismFromFiberProductToSink",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromFiberProductToSink",
+@DeclareOperation( "AddMorphismFromFiberProductToSink",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3094,16 +3094,16 @@ DeclareOperation( "AddMorphismFromFiberProductToSink",
 #!  F: ( morphisms, P ) \\mapsto \\mathtt[MorphismFromFiberProductToSinkWithGivenFiberProduct](morphisms, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
+@DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
+@DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
+@DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
+@DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3113,16 +3113,16 @@ DeclareOperation( "AddMorphismFromFiberProductToSinkWithGivenFiberProduct",
 #!  F: ( alpha ) \\mapsto \\mathtt[MorphismFromKernelObjectToSink](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromKernelObjectToSink",
+@DeclareOperation( "AddMorphismFromKernelObjectToSink",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromKernelObjectToSink",
+@DeclareOperation( "AddMorphismFromKernelObjectToSink",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromKernelObjectToSink",
+@DeclareOperation( "AddMorphismFromKernelObjectToSink",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromKernelObjectToSink",
+@DeclareOperation( "AddMorphismFromKernelObjectToSink",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3132,16 +3132,16 @@ DeclareOperation( "AddMorphismFromKernelObjectToSink",
 #!  F: ( alpha, P ) \\mapsto \\mathtt[MorphismFromKernelObjectToSinkWithGivenKernelObject](alpha, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
+@DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
+@DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
+@DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
+@DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3151,16 +3151,16 @@ DeclareOperation( "AddMorphismFromKernelObjectToSinkWithGivenKernelObject",
 #!  F: ( Y, morphisms ) \\mapsto \\mathtt[MorphismFromSourceToCoequalizer](Y, morphisms) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromSourceToCoequalizer",
+@DeclareOperation( "AddMorphismFromSourceToCoequalizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromSourceToCoequalizer",
+@DeclareOperation( "AddMorphismFromSourceToCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToCoequalizer",
+@DeclareOperation( "AddMorphismFromSourceToCoequalizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToCoequalizer",
+@DeclareOperation( "AddMorphismFromSourceToCoequalizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3170,16 +3170,16 @@ DeclareOperation( "AddMorphismFromSourceToCoequalizer",
 #!  F: ( Y, morphisms, P ) \\mapsto \\mathtt[MorphismFromSourceToCoequalizerWithGivenCoequalizer](Y, morphisms, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3189,16 +3189,16 @@ DeclareOperation( "AddMorphismFromSourceToCoequalizerWithGivenCoequalizer",
 #!  F: ( alpha ) \\mapsto \\mathtt[MorphismFromSourceToCokernelObject](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromSourceToCokernelObject",
+@DeclareOperation( "AddMorphismFromSourceToCokernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromSourceToCokernelObject",
+@DeclareOperation( "AddMorphismFromSourceToCokernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToCokernelObject",
+@DeclareOperation( "AddMorphismFromSourceToCokernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToCokernelObject",
+@DeclareOperation( "AddMorphismFromSourceToCokernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3208,16 +3208,16 @@ DeclareOperation( "AddMorphismFromSourceToCokernelObject",
 #!  F: ( alpha, P ) \\mapsto \\mathtt[MorphismFromSourceToCokernelObjectWithGivenCokernelObject](alpha, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject",
+@DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject",
+@DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject",
+@DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject",
+@DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3227,16 +3227,16 @@ DeclareOperation( "AddMorphismFromSourceToCokernelObjectWithGivenCokernelObject"
 #!  F: ( morphisms ) \\mapsto \\mathtt[MorphismFromSourceToPushout](morphisms) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromSourceToPushout",
+@DeclareOperation( "AddMorphismFromSourceToPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromSourceToPushout",
+@DeclareOperation( "AddMorphismFromSourceToPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToPushout",
+@DeclareOperation( "AddMorphismFromSourceToPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToPushout",
+@DeclareOperation( "AddMorphismFromSourceToPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3246,16 +3246,16 @@ DeclareOperation( "AddMorphismFromSourceToPushout",
 #!  F: ( morphisms, P ) \\mapsto \\mathtt[MorphismFromSourceToPushoutWithGivenPushout](morphisms, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
+@DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
+@DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
+@DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
+@DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3265,16 +3265,16 @@ DeclareOperation( "AddMorphismFromSourceToPushoutWithGivenPushout",
 #!  F: ( r, a ) \\mapsto \\mathtt[MultiplyWithElementOfCommutativeRingForMorphisms](r, a) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
+@DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
+@DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
+@DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
+@DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3284,16 +3284,16 @@ DeclareOperation( "AddMultiplyWithElementOfCommutativeRingForMorphisms",
 #!  F: ( arg2 ) \\mapsto \\mathtt[ObjectConstructor](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddObjectConstructor",
+@DeclareOperation( "AddObjectConstructor",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddObjectConstructor",
+@DeclareOperation( "AddObjectConstructor",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddObjectConstructor",
+@DeclareOperation( "AddObjectConstructor",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddObjectConstructor",
+@DeclareOperation( "AddObjectConstructor",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3303,16 +3303,16 @@ DeclareOperation( "AddObjectConstructor",
 #!  F: ( arg2 ) \\mapsto \\mathtt[ObjectDatum](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddObjectDatum",
+@DeclareOperation( "AddObjectDatum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddObjectDatum",
+@DeclareOperation( "AddObjectDatum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddObjectDatum",
+@DeclareOperation( "AddObjectDatum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddObjectDatum",
+@DeclareOperation( "AddObjectDatum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3322,16 +3322,16 @@ DeclareOperation( "AddObjectDatum",
 #!  F: ( beta, alpha ) \\mapsto \\mathtt[PostCompose](beta, alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPostCompose",
+@DeclareOperation( "AddPostCompose",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPostCompose",
+@DeclareOperation( "AddPostCompose",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPostCompose",
+@DeclareOperation( "AddPostCompose",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPostCompose",
+@DeclareOperation( "AddPostCompose",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3341,16 +3341,16 @@ DeclareOperation( "AddPostCompose",
 #!  F: ( list_of_morphisms ) \\mapsto \\mathtt[PostComposeList](list_of_morphisms) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPostComposeList",
+@DeclareOperation( "AddPostComposeList",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPostComposeList",
+@DeclareOperation( "AddPostComposeList",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPostComposeList",
+@DeclareOperation( "AddPostComposeList",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPostComposeList",
+@DeclareOperation( "AddPostComposeList",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3360,16 +3360,16 @@ DeclareOperation( "AddPostComposeList",
 #!  F: ( alpha ) \\mapsto \\mathtt[PostInverseForMorphisms](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPostInverseForMorphisms",
+@DeclareOperation( "AddPostInverseForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPostInverseForMorphisms",
+@DeclareOperation( "AddPostInverseForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPostInverseForMorphisms",
+@DeclareOperation( "AddPostInverseForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPostInverseForMorphisms",
+@DeclareOperation( "AddPostInverseForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3379,16 +3379,16 @@ DeclareOperation( "AddPostInverseForMorphisms",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[PreCompose](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPreCompose",
+@DeclareOperation( "AddPreCompose",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPreCompose",
+@DeclareOperation( "AddPreCompose",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPreCompose",
+@DeclareOperation( "AddPreCompose",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPreCompose",
+@DeclareOperation( "AddPreCompose",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3398,16 +3398,16 @@ DeclareOperation( "AddPreCompose",
 #!  F: ( list_of_morphisms ) \\mapsto \\mathtt[PreComposeList](list_of_morphisms) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPreComposeList",
+@DeclareOperation( "AddPreComposeList",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPreComposeList",
+@DeclareOperation( "AddPreComposeList",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPreComposeList",
+@DeclareOperation( "AddPreComposeList",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPreComposeList",
+@DeclareOperation( "AddPreComposeList",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3417,16 +3417,16 @@ DeclareOperation( "AddPreComposeList",
 #!  F: ( alpha ) \\mapsto \\mathtt[PreInverseForMorphisms](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPreInverseForMorphisms",
+@DeclareOperation( "AddPreInverseForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPreInverseForMorphisms",
+@DeclareOperation( "AddPreInverseForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPreInverseForMorphisms",
+@DeclareOperation( "AddPreInverseForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPreInverseForMorphisms",
+@DeclareOperation( "AddPreInverseForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3436,16 +3436,16 @@ DeclareOperation( "AddPreInverseForMorphisms",
 #!  F: ( objects, k ) \\mapsto \\mathtt[ProjectionInFactorOfDirectProduct](objects, k) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectionInFactorOfDirectProduct",
+@DeclareOperation( "AddProjectionInFactorOfDirectProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectProduct",
+@DeclareOperation( "AddProjectionInFactorOfDirectProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectProduct",
+@DeclareOperation( "AddProjectionInFactorOfDirectProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectProduct",
+@DeclareOperation( "AddProjectionInFactorOfDirectProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3455,16 +3455,16 @@ DeclareOperation( "AddProjectionInFactorOfDirectProduct",
 #!  F: ( objects, k, P ) \\mapsto \\mathtt[ProjectionInFactorOfDirectProductWithGivenDirectProduct](objects, k, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
+@DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
+@DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
+@DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
+@DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3474,16 +3474,16 @@ DeclareOperation( "AddProjectionInFactorOfDirectProductWithGivenDirectProduct",
 #!  F: ( objects, k ) \\mapsto \\mathtt[ProjectionInFactorOfDirectSum](objects, k) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectionInFactorOfDirectSum",
+@DeclareOperation( "AddProjectionInFactorOfDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectSum",
+@DeclareOperation( "AddProjectionInFactorOfDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectSum",
+@DeclareOperation( "AddProjectionInFactorOfDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectSum",
+@DeclareOperation( "AddProjectionInFactorOfDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3493,16 +3493,16 @@ DeclareOperation( "AddProjectionInFactorOfDirectSum",
 #!  F: ( objects, k, P ) \\mapsto \\mathtt[ProjectionInFactorOfDirectSumWithGivenDirectSum](objects, k, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3512,16 +3512,16 @@ DeclareOperation( "AddProjectionInFactorOfDirectSumWithGivenDirectSum",
 #!  F: ( morphisms, k ) \\mapsto \\mathtt[ProjectionInFactorOfFiberProduct](morphisms, k) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectionInFactorOfFiberProduct",
+@DeclareOperation( "AddProjectionInFactorOfFiberProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectionInFactorOfFiberProduct",
+@DeclareOperation( "AddProjectionInFactorOfFiberProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfFiberProduct",
+@DeclareOperation( "AddProjectionInFactorOfFiberProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfFiberProduct",
+@DeclareOperation( "AddProjectionInFactorOfFiberProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3531,16 +3531,16 @@ DeclareOperation( "AddProjectionInFactorOfFiberProduct",
 #!  F: ( morphisms, k, P ) \\mapsto \\mathtt[ProjectionInFactorOfFiberProductWithGivenFiberProduct](morphisms, k, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
+@DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
+@DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
+@DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
+@DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3550,16 +3550,16 @@ DeclareOperation( "AddProjectionInFactorOfFiberProductWithGivenFiberProduct",
 #!  F: ( Y, morphisms ) \\mapsto \\mathtt[ProjectionOntoCoequalizer](Y, morphisms) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectionOntoCoequalizer",
+@DeclareOperation( "AddProjectionOntoCoequalizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectionOntoCoequalizer",
+@DeclareOperation( "AddProjectionOntoCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectionOntoCoequalizer",
+@DeclareOperation( "AddProjectionOntoCoequalizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectionOntoCoequalizer",
+@DeclareOperation( "AddProjectionOntoCoequalizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3569,16 +3569,16 @@ DeclareOperation( "AddProjectionOntoCoequalizer",
 #!  F: ( Y, morphisms, P ) \\mapsto \\mathtt[ProjectionOntoCoequalizerWithGivenCoequalizer](Y, morphisms, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3588,16 +3588,16 @@ DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
 #!  F: ( arg2 ) \\mapsto \\mathtt[ProjectiveDimension](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectiveDimension",
+@DeclareOperation( "AddProjectiveDimension",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectiveDimension",
+@DeclareOperation( "AddProjectiveDimension",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectiveDimension",
+@DeclareOperation( "AddProjectiveDimension",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectiveDimension",
+@DeclareOperation( "AddProjectiveDimension",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3607,16 +3607,16 @@ DeclareOperation( "AddProjectiveDimension",
 #!  F: ( alpha, beta ) \\mapsto \\mathtt[ProjectiveLift](alpha, beta) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddProjectiveLift",
+@DeclareOperation( "AddProjectiveLift",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddProjectiveLift",
+@DeclareOperation( "AddProjectiveLift",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddProjectiveLift",
+@DeclareOperation( "AddProjectiveLift",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddProjectiveLift",
+@DeclareOperation( "AddProjectiveLift",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3626,16 +3626,16 @@ DeclareOperation( "AddProjectiveLift",
 #!  F: ( arg2 ) \\mapsto \\mathtt[Pushout](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPushout",
+@DeclareOperation( "AddPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPushout",
+@DeclareOperation( "AddPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPushout",
+@DeclareOperation( "AddPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPushout",
+@DeclareOperation( "AddPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3645,16 +3645,16 @@ DeclareOperation( "AddPushout",
 #!  F: ( morphisms, L, morphismsp ) \\mapsto \\mathtt[PushoutFunctorial](morphisms, L, morphismsp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPushoutFunctorial",
+@DeclareOperation( "AddPushoutFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPushoutFunctorial",
+@DeclareOperation( "AddPushoutFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPushoutFunctorial",
+@DeclareOperation( "AddPushoutFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPushoutFunctorial",
+@DeclareOperation( "AddPushoutFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3664,16 +3664,16 @@ DeclareOperation( "AddPushoutFunctorial",
 #!  F: ( P, morphisms, L, morphismsp, Pp ) \\mapsto \\mathtt[PushoutFunctorialWithGivenPushouts](P, morphisms, L, morphismsp, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
+@DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
+@DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
+@DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
+@DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3683,16 +3683,16 @@ DeclareOperation( "AddPushoutFunctorialWithGivenPushouts",
 #!  F: ( n ) \\mapsto \\mathtt[RandomMorphismByInteger](n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomMorphismByInteger",
+@DeclareOperation( "AddRandomMorphismByInteger",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomMorphismByInteger",
+@DeclareOperation( "AddRandomMorphismByInteger",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismByInteger",
+@DeclareOperation( "AddRandomMorphismByInteger",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismByInteger",
+@DeclareOperation( "AddRandomMorphismByInteger",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3702,16 +3702,16 @@ DeclareOperation( "AddRandomMorphismByInteger",
 #!  F: ( L ) \\mapsto \\mathtt[RandomMorphismByList](L) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomMorphismByList",
+@DeclareOperation( "AddRandomMorphismByList",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomMorphismByList",
+@DeclareOperation( "AddRandomMorphismByList",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismByList",
+@DeclareOperation( "AddRandomMorphismByList",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismByList",
+@DeclareOperation( "AddRandomMorphismByList",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3721,16 +3721,16 @@ DeclareOperation( "AddRandomMorphismByList",
 #!  F: ( B, n ) \\mapsto \\mathtt[RandomMorphismWithFixedRangeByInteger](B, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3740,16 +3740,16 @@ DeclareOperation( "AddRandomMorphismWithFixedRangeByInteger",
 #!  F: ( B, L ) \\mapsto \\mathtt[RandomMorphismWithFixedRangeByList](B, L) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
+@DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
+@DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
+@DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
+@DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3759,16 +3759,16 @@ DeclareOperation( "AddRandomMorphismWithFixedRangeByList",
 #!  F: ( A, B, n ) \\mapsto \\mathtt[RandomMorphismWithFixedSourceAndRangeByInteger](A, B, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3778,16 +3778,16 @@ DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByInteger",
 #!  F: ( A, B, L ) \\mapsto \\mathtt[RandomMorphismWithFixedSourceAndRangeByList](A, B, L) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3797,16 +3797,16 @@ DeclareOperation( "AddRandomMorphismWithFixedSourceAndRangeByList",
 #!  F: ( A, n ) \\mapsto \\mathtt[RandomMorphismWithFixedSourceByInteger](A, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3816,16 +3816,16 @@ DeclareOperation( "AddRandomMorphismWithFixedSourceByInteger",
 #!  F: ( A, L ) \\mapsto \\mathtt[RandomMorphismWithFixedSourceByList](A, L) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
+@DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3835,16 +3835,16 @@ DeclareOperation( "AddRandomMorphismWithFixedSourceByList",
 #!  F: ( n ) \\mapsto \\mathtt[RandomObjectByInteger](n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomObjectByInteger",
+@DeclareOperation( "AddRandomObjectByInteger",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomObjectByInteger",
+@DeclareOperation( "AddRandomObjectByInteger",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomObjectByInteger",
+@DeclareOperation( "AddRandomObjectByInteger",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomObjectByInteger",
+@DeclareOperation( "AddRandomObjectByInteger",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3854,16 +3854,16 @@ DeclareOperation( "AddRandomObjectByInteger",
 #!  F: ( L ) \\mapsto \\mathtt[RandomObjectByList](L) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddRandomObjectByList",
+@DeclareOperation( "AddRandomObjectByList",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddRandomObjectByList",
+@DeclareOperation( "AddRandomObjectByList",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddRandomObjectByList",
+@DeclareOperation( "AddRandomObjectByList",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddRandomObjectByList",
+@DeclareOperation( "AddRandomObjectByList",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3873,16 +3873,16 @@ DeclareOperation( "AddRandomObjectByList",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifyEndo](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyEndo",
+@DeclareOperation( "AddSimplifyEndo",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyEndo",
+@DeclareOperation( "AddSimplifyEndo",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyEndo",
+@DeclareOperation( "AddSimplifyEndo",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyEndo",
+@DeclareOperation( "AddSimplifyEndo",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3892,16 +3892,16 @@ DeclareOperation( "AddSimplifyEndo",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifyEndo_IsoFromInputObject](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3911,16 +3911,16 @@ DeclareOperation( "AddSimplifyEndo_IsoFromInputObject",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifyEndo_IsoToInputObject](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
+@DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
+@DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
+@DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
+@DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3930,16 +3930,16 @@ DeclareOperation( "AddSimplifyEndo_IsoToInputObject",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifyMorphism](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyMorphism",
+@DeclareOperation( "AddSimplifyMorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyMorphism",
+@DeclareOperation( "AddSimplifyMorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyMorphism",
+@DeclareOperation( "AddSimplifyMorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyMorphism",
+@DeclareOperation( "AddSimplifyMorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3949,16 +3949,16 @@ DeclareOperation( "AddSimplifyMorphism",
 #!  F: ( A, n ) \\mapsto \\mathtt[SimplifyObject](A, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyObject",
+@DeclareOperation( "AddSimplifyObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyObject",
+@DeclareOperation( "AddSimplifyObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyObject",
+@DeclareOperation( "AddSimplifyObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyObject",
+@DeclareOperation( "AddSimplifyObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3968,16 +3968,16 @@ DeclareOperation( "AddSimplifyObject",
 #!  F: ( A, n ) \\mapsto \\mathtt[SimplifyObject_IsoFromInputObject](A, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3987,16 +3987,16 @@ DeclareOperation( "AddSimplifyObject_IsoFromInputObject",
 #!  F: ( A, n ) \\mapsto \\mathtt[SimplifyObject_IsoToInputObject](A, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyObject_IsoToInputObject",
+@DeclareOperation( "AddSimplifyObject_IsoToInputObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyObject_IsoToInputObject",
+@DeclareOperation( "AddSimplifyObject_IsoToInputObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyObject_IsoToInputObject",
+@DeclareOperation( "AddSimplifyObject_IsoToInputObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyObject_IsoToInputObject",
+@DeclareOperation( "AddSimplifyObject_IsoToInputObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4006,16 +4006,16 @@ DeclareOperation( "AddSimplifyObject_IsoToInputObject",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifyRange](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyRange",
+@DeclareOperation( "AddSimplifyRange",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyRange",
+@DeclareOperation( "AddSimplifyRange",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyRange",
+@DeclareOperation( "AddSimplifyRange",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyRange",
+@DeclareOperation( "AddSimplifyRange",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4025,16 +4025,16 @@ DeclareOperation( "AddSimplifyRange",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifyRange_IsoFromInputObject](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
+@DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4044,16 +4044,16 @@ DeclareOperation( "AddSimplifyRange_IsoFromInputObject",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifyRange_IsoToInputObject](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifyRange_IsoToInputObject",
+@DeclareOperation( "AddSimplifyRange_IsoToInputObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifyRange_IsoToInputObject",
+@DeclareOperation( "AddSimplifyRange_IsoToInputObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifyRange_IsoToInputObject",
+@DeclareOperation( "AddSimplifyRange_IsoToInputObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifyRange_IsoToInputObject",
+@DeclareOperation( "AddSimplifyRange_IsoToInputObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4063,16 +4063,16 @@ DeclareOperation( "AddSimplifyRange_IsoToInputObject",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifySource](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifySource",
+@DeclareOperation( "AddSimplifySource",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifySource",
+@DeclareOperation( "AddSimplifySource",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifySource",
+@DeclareOperation( "AddSimplifySource",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifySource",
+@DeclareOperation( "AddSimplifySource",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4082,16 +4082,16 @@ DeclareOperation( "AddSimplifySource",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifySourceAndRange](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifySourceAndRange",
+@DeclareOperation( "AddSimplifySourceAndRange",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifySourceAndRange",
+@DeclareOperation( "AddSimplifySourceAndRange",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange",
+@DeclareOperation( "AddSimplifySourceAndRange",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange",
+@DeclareOperation( "AddSimplifySourceAndRange",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4101,16 +4101,16 @@ DeclareOperation( "AddSimplifySourceAndRange",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifySourceAndRange_IsoFromInputRange](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4120,16 +4120,16 @@ DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputRange",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifySourceAndRange_IsoFromInputSource](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4139,16 +4139,16 @@ DeclareOperation( "AddSimplifySourceAndRange_IsoFromInputSource",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifySourceAndRange_IsoToInputRange](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4158,16 +4158,16 @@ DeclareOperation( "AddSimplifySourceAndRange_IsoToInputRange",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifySourceAndRange_IsoToInputSource](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
+@DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4177,16 +4177,16 @@ DeclareOperation( "AddSimplifySourceAndRange_IsoToInputSource",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifySource_IsoFromInputObject](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifySource_IsoFromInputObject",
+@DeclareOperation( "AddSimplifySource_IsoFromInputObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifySource_IsoFromInputObject",
+@DeclareOperation( "AddSimplifySource_IsoFromInputObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifySource_IsoFromInputObject",
+@DeclareOperation( "AddSimplifySource_IsoFromInputObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifySource_IsoFromInputObject",
+@DeclareOperation( "AddSimplifySource_IsoFromInputObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4196,16 +4196,16 @@ DeclareOperation( "AddSimplifySource_IsoFromInputObject",
 #!  F: ( mor, n ) \\mapsto \\mathtt[SimplifySource_IsoToInputObject](mor, n) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSimplifySource_IsoToInputObject",
+@DeclareOperation( "AddSimplifySource_IsoToInputObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSimplifySource_IsoToInputObject",
+@DeclareOperation( "AddSimplifySource_IsoToInputObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSimplifySource_IsoToInputObject",
+@DeclareOperation( "AddSimplifySource_IsoToInputObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSimplifySource_IsoToInputObject",
+@DeclareOperation( "AddSimplifySource_IsoToInputObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4215,16 +4215,16 @@ DeclareOperation( "AddSimplifySource_IsoToInputObject",
 #!  F: ( arg2, arg3, arg4 ) \\mapsto \\mathtt[SolveLinearSystemInAbCategory](arg2, arg3, arg4) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSolveLinearSystemInAbCategory",
+@DeclareOperation( "AddSolveLinearSystemInAbCategory",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSolveLinearSystemInAbCategory",
+@DeclareOperation( "AddSolveLinearSystemInAbCategory",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSolveLinearSystemInAbCategory",
+@DeclareOperation( "AddSolveLinearSystemInAbCategory",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSolveLinearSystemInAbCategory",
+@DeclareOperation( "AddSolveLinearSystemInAbCategory",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4234,16 +4234,16 @@ DeclareOperation( "AddSolveLinearSystemInAbCategory",
 #!  F: ( arg2, arg3, arg4 ) \\mapsto \\mathtt[SolveLinearSystemInAbCategoryOrFail](arg2, arg3, arg4) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
+@DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
+@DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
+@DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
+@DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4253,16 +4253,16 @@ DeclareOperation( "AddSolveLinearSystemInAbCategoryOrFail",
 #!  F: ( arg2 ) \\mapsto \\mathtt[SomeInjectiveObject](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSomeInjectiveObject",
+@DeclareOperation( "AddSomeInjectiveObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSomeInjectiveObject",
+@DeclareOperation( "AddSomeInjectiveObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSomeInjectiveObject",
+@DeclareOperation( "AddSomeInjectiveObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSomeInjectiveObject",
+@DeclareOperation( "AddSomeInjectiveObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4272,16 +4272,16 @@ DeclareOperation( "AddSomeInjectiveObject",
 #!  F: ( arg2 ) \\mapsto \\mathtt[SomeProjectiveObject](arg2) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSomeProjectiveObject",
+@DeclareOperation( "AddSomeProjectiveObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSomeProjectiveObject",
+@DeclareOperation( "AddSomeProjectiveObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSomeProjectiveObject",
+@DeclareOperation( "AddSomeProjectiveObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSomeProjectiveObject",
+@DeclareOperation( "AddSomeProjectiveObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4291,16 +4291,16 @@ DeclareOperation( "AddSomeProjectiveObject",
 #!  F: ( alpha ) \\mapsto \\mathtt[SomeReductionBySplitEpiSummand](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSomeReductionBySplitEpiSummand",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4310,16 +4310,16 @@ DeclareOperation( "AddSomeReductionBySplitEpiSummand",
 #!  F: ( alpha ) \\mapsto \\mathtt[SomeReductionBySplitEpiSummand_MorphismFromInputRange](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4329,16 +4329,16 @@ DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismFromInputRange",
 #!  F: ( alpha ) \\mapsto \\mathtt[SomeReductionBySplitEpiSummand_MorphismToInputRange](alpha) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
+@DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4348,16 +4348,16 @@ DeclareOperation( "AddSomeReductionBySplitEpiSummand_MorphismToInputRange",
 #!  F: ( a, b ) \\mapsto \\mathtt[SubtractionForMorphisms](a, b) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSubtractionForMorphisms",
+@DeclareOperation( "AddSubtractionForMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSubtractionForMorphisms",
+@DeclareOperation( "AddSubtractionForMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSubtractionForMorphisms",
+@DeclareOperation( "AddSubtractionForMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSubtractionForMorphisms",
+@DeclareOperation( "AddSubtractionForMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4367,16 +4367,16 @@ DeclareOperation( "AddSubtractionForMorphisms",
 #!  F: ( source, list_of_morphisms, range ) \\mapsto \\mathtt[SumOfMorphisms](source, list_of_morphisms, range) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddSumOfMorphisms",
+@DeclareOperation( "AddSumOfMorphisms",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddSumOfMorphisms",
+@DeclareOperation( "AddSumOfMorphisms",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddSumOfMorphisms",
+@DeclareOperation( "AddSumOfMorphisms",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddSumOfMorphisms",
+@DeclareOperation( "AddSumOfMorphisms",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4386,16 +4386,16 @@ DeclareOperation( "AddSumOfMorphisms",
 #!  F: (  ) \\mapsto \\mathtt[TerminalObject]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddTerminalObject",
+@DeclareOperation( "AddTerminalObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddTerminalObject",
+@DeclareOperation( "AddTerminalObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddTerminalObject",
+@DeclareOperation( "AddTerminalObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddTerminalObject",
+@DeclareOperation( "AddTerminalObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4405,16 +4405,16 @@ DeclareOperation( "AddTerminalObject",
 #!  F: (  ) \\mapsto \\mathtt[TerminalObjectFunctorial]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddTerminalObjectFunctorial",
+@DeclareOperation( "AddTerminalObjectFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddTerminalObjectFunctorial",
+@DeclareOperation( "AddTerminalObjectFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddTerminalObjectFunctorial",
+@DeclareOperation( "AddTerminalObjectFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddTerminalObjectFunctorial",
+@DeclareOperation( "AddTerminalObjectFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4424,16 +4424,16 @@ DeclareOperation( "AddTerminalObjectFunctorial",
 #!  F: ( P, Pp ) \\mapsto \\mathtt[TerminalObjectFunctorialWithGivenTerminalObjects](P, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
+@DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
+@DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
+@DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
+@DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4443,16 +4443,16 @@ DeclareOperation( "AddTerminalObjectFunctorialWithGivenTerminalObjects",
 #!  F: ( Y, morphisms, T, tau ) \\mapsto \\mathtt[UniversalMorphismFromCoequalizer](Y, morphisms, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromCoequalizer",
+@DeclareOperation( "AddUniversalMorphismFromCoequalizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoequalizer",
+@DeclareOperation( "AddUniversalMorphismFromCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoequalizer",
+@DeclareOperation( "AddUniversalMorphismFromCoequalizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoequalizer",
+@DeclareOperation( "AddUniversalMorphismFromCoequalizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4462,16 +4462,16 @@ DeclareOperation( "AddUniversalMorphismFromCoequalizer",
 #!  F: ( Y, morphisms, T, tau, P ) \\mapsto \\mathtt[UniversalMorphismFromCoequalizerWithGivenCoequalizer](Y, morphisms, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4481,16 +4481,16 @@ DeclareOperation( "AddUniversalMorphismFromCoequalizerWithGivenCoequalizer",
 #!  F: ( objects, T, tau ) \\mapsto \\mathtt[UniversalMorphismFromCoproduct](objects, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromCoproduct",
+@DeclareOperation( "AddUniversalMorphismFromCoproduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoproduct",
+@DeclareOperation( "AddUniversalMorphismFromCoproduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoproduct",
+@DeclareOperation( "AddUniversalMorphismFromCoproduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoproduct",
+@DeclareOperation( "AddUniversalMorphismFromCoproduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4500,16 +4500,16 @@ DeclareOperation( "AddUniversalMorphismFromCoproduct",
 #!  F: ( objects, T, tau, P ) \\mapsto \\mathtt[UniversalMorphismFromCoproductWithGivenCoproduct](objects, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
+@DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
+@DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
+@DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
+@DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4519,16 +4519,16 @@ DeclareOperation( "AddUniversalMorphismFromCoproductWithGivenCoproduct",
 #!  F: ( objects, T, tau ) \\mapsto \\mathtt[UniversalMorphismFromDirectSum](objects, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromDirectSum",
+@DeclareOperation( "AddUniversalMorphismFromDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromDirectSum",
+@DeclareOperation( "AddUniversalMorphismFromDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromDirectSum",
+@DeclareOperation( "AddUniversalMorphismFromDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromDirectSum",
+@DeclareOperation( "AddUniversalMorphismFromDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4538,16 +4538,16 @@ DeclareOperation( "AddUniversalMorphismFromDirectSum",
 #!  F: ( objects, T, tau, P ) \\mapsto \\mathtt[UniversalMorphismFromDirectSumWithGivenDirectSum](objects, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4557,16 +4557,16 @@ DeclareOperation( "AddUniversalMorphismFromDirectSumWithGivenDirectSum",
 #!  F: ( alpha, tau ) \\mapsto \\mathtt[UniversalMorphismFromImage](alpha, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromImage",
+@DeclareOperation( "AddUniversalMorphismFromImage",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromImage",
+@DeclareOperation( "AddUniversalMorphismFromImage",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromImage",
+@DeclareOperation( "AddUniversalMorphismFromImage",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromImage",
+@DeclareOperation( "AddUniversalMorphismFromImage",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4576,16 +4576,16 @@ DeclareOperation( "AddUniversalMorphismFromImage",
 #!  F: ( alpha, tau, I ) \\mapsto \\mathtt[UniversalMorphismFromImageWithGivenImageObject](alpha, tau, I) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
+@DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
+@DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
+@DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
+@DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4595,16 +4595,16 @@ DeclareOperation( "AddUniversalMorphismFromImageWithGivenImageObject",
 #!  F: ( T ) \\mapsto \\mathtt[UniversalMorphismFromInitialObject](T) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromInitialObject",
+@DeclareOperation( "AddUniversalMorphismFromInitialObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromInitialObject",
+@DeclareOperation( "AddUniversalMorphismFromInitialObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromInitialObject",
+@DeclareOperation( "AddUniversalMorphismFromInitialObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromInitialObject",
+@DeclareOperation( "AddUniversalMorphismFromInitialObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4614,16 +4614,16 @@ DeclareOperation( "AddUniversalMorphismFromInitialObject",
 #!  F: ( T, P ) \\mapsto \\mathtt[UniversalMorphismFromInitialObjectWithGivenInitialObject](T, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
+@DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
+@DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
+@DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
+@DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4633,16 +4633,16 @@ DeclareOperation( "AddUniversalMorphismFromInitialObjectWithGivenInitialObject",
 #!  F: ( morphisms, T, tau ) \\mapsto \\mathtt[UniversalMorphismFromPushout](morphisms, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromPushout",
+@DeclareOperation( "AddUniversalMorphismFromPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromPushout",
+@DeclareOperation( "AddUniversalMorphismFromPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromPushout",
+@DeclareOperation( "AddUniversalMorphismFromPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromPushout",
+@DeclareOperation( "AddUniversalMorphismFromPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4652,16 +4652,16 @@ DeclareOperation( "AddUniversalMorphismFromPushout",
 #!  F: ( morphisms, T, tau, P ) \\mapsto \\mathtt[UniversalMorphismFromPushoutWithGivenPushout](morphisms, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
+@DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
+@DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
+@DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
+@DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4671,16 +4671,16 @@ DeclareOperation( "AddUniversalMorphismFromPushoutWithGivenPushout",
 #!  F: ( T ) \\mapsto \\mathtt[UniversalMorphismFromZeroObject](T) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromZeroObject",
+@DeclareOperation( "AddUniversalMorphismFromZeroObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromZeroObject",
+@DeclareOperation( "AddUniversalMorphismFromZeroObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromZeroObject",
+@DeclareOperation( "AddUniversalMorphismFromZeroObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromZeroObject",
+@DeclareOperation( "AddUniversalMorphismFromZeroObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4690,16 +4690,16 @@ DeclareOperation( "AddUniversalMorphismFromZeroObject",
 #!  F: ( T, P ) \\mapsto \\mathtt[UniversalMorphismFromZeroObjectWithGivenZeroObject](T, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
+@DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
+@DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
+@DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
+@DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4709,16 +4709,16 @@ DeclareOperation( "AddUniversalMorphismFromZeroObjectWithGivenZeroObject",
 #!  F: ( alpha, tau ) \\mapsto \\mathtt[UniversalMorphismIntoCoimage](alpha, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoCoimage",
+@DeclareOperation( "AddUniversalMorphismIntoCoimage",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoCoimage",
+@DeclareOperation( "AddUniversalMorphismIntoCoimage",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoCoimage",
+@DeclareOperation( "AddUniversalMorphismIntoCoimage",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoCoimage",
+@DeclareOperation( "AddUniversalMorphismIntoCoimage",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4728,16 +4728,16 @@ DeclareOperation( "AddUniversalMorphismIntoCoimage",
 #!  F: ( alpha, tau, C ) \\mapsto \\mathtt[UniversalMorphismIntoCoimageWithGivenCoimageObject](alpha, tau, C) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
+@DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
+@DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
+@DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
+@DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4747,16 +4747,16 @@ DeclareOperation( "AddUniversalMorphismIntoCoimageWithGivenCoimageObject",
 #!  F: ( objects, T, tau ) \\mapsto \\mathtt[UniversalMorphismIntoDirectProduct](objects, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
+@DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
+@DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
+@DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
+@DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4766,16 +4766,16 @@ DeclareOperation( "AddUniversalMorphismIntoDirectProduct",
 #!  F: ( objects, T, tau, P ) \\mapsto \\mathtt[UniversalMorphismIntoDirectProductWithGivenDirectProduct](objects, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
+@DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
+@DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
+@DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
+@DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4785,16 +4785,16 @@ DeclareOperation( "AddUniversalMorphismIntoDirectProductWithGivenDirectProduct",
 #!  F: ( objects, T, tau ) \\mapsto \\mathtt[UniversalMorphismIntoDirectSum](objects, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoDirectSum",
+@DeclareOperation( "AddUniversalMorphismIntoDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectSum",
+@DeclareOperation( "AddUniversalMorphismIntoDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectSum",
+@DeclareOperation( "AddUniversalMorphismIntoDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectSum",
+@DeclareOperation( "AddUniversalMorphismIntoDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4804,16 +4804,16 @@ DeclareOperation( "AddUniversalMorphismIntoDirectSum",
 #!  F: ( objects, T, tau, P ) \\mapsto \\mathtt[UniversalMorphismIntoDirectSumWithGivenDirectSum](objects, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
+@DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4823,16 +4823,16 @@ DeclareOperation( "AddUniversalMorphismIntoDirectSumWithGivenDirectSum",
 #!  F: ( Y, morphisms, T, tau ) \\mapsto \\mathtt[UniversalMorphismIntoEqualizer](Y, morphisms, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoEqualizer",
+@DeclareOperation( "AddUniversalMorphismIntoEqualizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoEqualizer",
+@DeclareOperation( "AddUniversalMorphismIntoEqualizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoEqualizer",
+@DeclareOperation( "AddUniversalMorphismIntoEqualizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoEqualizer",
+@DeclareOperation( "AddUniversalMorphismIntoEqualizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4842,16 +4842,16 @@ DeclareOperation( "AddUniversalMorphismIntoEqualizer",
 #!  F: ( Y, morphisms, T, tau, P ) \\mapsto \\mathtt[UniversalMorphismIntoEqualizerWithGivenEqualizer](Y, morphisms, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
+@DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
+@DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
+@DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
+@DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4861,16 +4861,16 @@ DeclareOperation( "AddUniversalMorphismIntoEqualizerWithGivenEqualizer",
 #!  F: ( morphisms, T, tau ) \\mapsto \\mathtt[UniversalMorphismIntoFiberProduct](morphisms, T, tau) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
+@DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
+@DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
+@DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
+@DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4880,16 +4880,16 @@ DeclareOperation( "AddUniversalMorphismIntoFiberProduct",
 #!  F: ( morphisms, T, tau, P ) \\mapsto \\mathtt[UniversalMorphismIntoFiberProductWithGivenFiberProduct](morphisms, T, tau, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
+@DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
+@DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
+@DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
+@DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4899,16 +4899,16 @@ DeclareOperation( "AddUniversalMorphismIntoFiberProductWithGivenFiberProduct",
 #!  F: ( T ) \\mapsto \\mathtt[UniversalMorphismIntoTerminalObject](T) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
+@DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
+@DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
+@DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
+@DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4918,16 +4918,16 @@ DeclareOperation( "AddUniversalMorphismIntoTerminalObject",
 #!  F: ( T, P ) \\mapsto \\mathtt[UniversalMorphismIntoTerminalObjectWithGivenTerminalObject](T, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
+@DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
+@DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
+@DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
+@DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4937,16 +4937,16 @@ DeclareOperation( "AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject
 #!  F: ( T ) \\mapsto \\mathtt[UniversalMorphismIntoZeroObject](T) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoZeroObject",
+@DeclareOperation( "AddUniversalMorphismIntoZeroObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoZeroObject",
+@DeclareOperation( "AddUniversalMorphismIntoZeroObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoZeroObject",
+@DeclareOperation( "AddUniversalMorphismIntoZeroObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoZeroObject",
+@DeclareOperation( "AddUniversalMorphismIntoZeroObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4956,16 +4956,16 @@ DeclareOperation( "AddUniversalMorphismIntoZeroObject",
 #!  F: ( T, P ) \\mapsto \\mathtt[UniversalMorphismIntoZeroObjectWithGivenZeroObject](T, P) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
+@DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
+@DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
+@DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
+@DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4975,16 +4975,16 @@ DeclareOperation( "AddUniversalMorphismIntoZeroObjectWithGivenZeroObject",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[VerticalPostCompose](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddVerticalPostCompose",
+@DeclareOperation( "AddVerticalPostCompose",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddVerticalPostCompose",
+@DeclareOperation( "AddVerticalPostCompose",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddVerticalPostCompose",
+@DeclareOperation( "AddVerticalPostCompose",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddVerticalPostCompose",
+@DeclareOperation( "AddVerticalPostCompose",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -4994,16 +4994,16 @@ DeclareOperation( "AddVerticalPostCompose",
 #!  F: ( arg2, arg3 ) \\mapsto \\mathtt[VerticalPreCompose](arg2, arg3) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddVerticalPreCompose",
+@DeclareOperation( "AddVerticalPreCompose",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddVerticalPreCompose",
+@DeclareOperation( "AddVerticalPreCompose",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddVerticalPreCompose",
+@DeclareOperation( "AddVerticalPreCompose",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddVerticalPreCompose",
+@DeclareOperation( "AddVerticalPreCompose",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -5013,16 +5013,16 @@ DeclareOperation( "AddVerticalPreCompose",
 #!  F: ( a, b ) \\mapsto \\mathtt[ZeroMorphism](a, b) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddZeroMorphism",
+@DeclareOperation( "AddZeroMorphism",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddZeroMorphism",
+@DeclareOperation( "AddZeroMorphism",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddZeroMorphism",
+@DeclareOperation( "AddZeroMorphism",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddZeroMorphism",
+@DeclareOperation( "AddZeroMorphism",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -5032,16 +5032,16 @@ DeclareOperation( "AddZeroMorphism",
 #!  F: (  ) \\mapsto \\mathtt[ZeroObject]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddZeroObject",
+@DeclareOperation( "AddZeroObject",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddZeroObject",
+@DeclareOperation( "AddZeroObject",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddZeroObject",
+@DeclareOperation( "AddZeroObject",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddZeroObject",
+@DeclareOperation( "AddZeroObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -5051,16 +5051,16 @@ DeclareOperation( "AddZeroObject",
 #!  F: (  ) \\mapsto \\mathtt[ZeroObjectFunctorial]() .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddZeroObjectFunctorial",
+@DeclareOperation( "AddZeroObjectFunctorial",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddZeroObjectFunctorial",
+@DeclareOperation( "AddZeroObjectFunctorial",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddZeroObjectFunctorial",
+@DeclareOperation( "AddZeroObjectFunctorial",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddZeroObjectFunctorial",
+@DeclareOperation( "AddZeroObjectFunctorial",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -5070,14 +5070,14 @@ DeclareOperation( "AddZeroObjectFunctorial",
 #!  F: ( P, Pp ) \\mapsto \\mathtt[ZeroObjectFunctorialWithGivenZeroObjects](P, Pp) .
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddZeroObjectFunctorialWithGivenZeroObjects",
+@DeclareOperation( "AddZeroObjectFunctorialWithGivenZeroObjects",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddZeroObjectFunctorialWithGivenZeroObjects",
+@DeclareOperation( "AddZeroObjectFunctorialWithGivenZeroObjects",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddZeroObjectFunctorialWithGivenZeroObjects",
+@DeclareOperation( "AddZeroObjectFunctorialWithGivenZeroObjects",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddZeroObjectFunctorialWithGivenZeroObjects",
+@DeclareOperation( "AddZeroObjectFunctorialWithGivenZeroObjects",
                   [ IsCapCategory, IsList ] );

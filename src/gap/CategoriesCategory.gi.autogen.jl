@@ -4,20 +4,20 @@
 # Implementations
 #
 # backwards compatibility
-BindGlobal( "IsCapCategoryAsCatObjectRep", IsCapCategoryAsCatObject );
+@BindGlobal( "IsCapCategoryAsCatObjectRep", IsCapCategoryAsCatObject );
 
 # backwards compatibility
-BindGlobal( "IsCapFunctorRep", IsCapFunctor );
+@BindGlobal( "IsCapFunctorRep", IsCapFunctor );
 
 # backwards compatibility
-BindGlobal( "IsCapNaturalTransformationRep", IsCapNaturalTransformation );
+@BindGlobal( "IsCapNaturalTransformationRep", IsCapNaturalTransformation );
 
-BindGlobal( "TheTypeOfCapNaturalTransformations",
+@BindGlobal( "TheTypeOfCapNaturalTransformations",
         NewType( TheFamilyOfCapCategoryTwoCells,
                 IsCapNaturalTransformation ) );
 
 ##
-BindGlobal( "CAP_INTERNAL_CREATE_Cat",
+@BindGlobal( "CAP_INTERNAL_CREATE_Cat",
                
   function(  )
     local obj_rec, cat;
@@ -33,7 +33,7 @@ BindGlobal( "CAP_INTERNAL_CREATE_Cat",
 end );
 
 ##
-InstallMethod( AsCatObject,
+InstallMethod( @__MODULE__,  AsCatObject,
                [ IsCapCategory ],
   
   function( category )
@@ -48,7 +48,7 @@ InstallMethod( AsCatObject,
     
 end );
 
-BindGlobal( "CAP_INTERNAL_NICE_FUNCTOR_INPUT_LIST",
+@BindGlobal( "CAP_INTERNAL_NICE_FUNCTOR_INPUT_LIST",
   
   function( list )
     
@@ -70,7 +70,7 @@ BindGlobal( "CAP_INTERNAL_NICE_FUNCTOR_INPUT_LIST",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_CREATE_FUNCTOR_SOURCE",
+@BindGlobal( "CAP_INTERNAL_CREATE_FUNCTOR_SOURCE",
   
   function( list )
     local source_list, i;
@@ -92,7 +92,7 @@ BindGlobal( "CAP_INTERNAL_CREATE_FUNCTOR_SOURCE",
 end );
 
 ##
-InstallMethod( CapFunctor,
+InstallMethod( @__MODULE__,  CapFunctor,
                [ IsString, IsList, IsCapCategory ],
                
   function( name, source_list, range )
@@ -119,7 +119,7 @@ InstallMethod( CapFunctor,
 end );
 
 ##
-InstallMethod( CapFunctor,
+InstallMethod( @__MODULE__,  CapFunctor,
                [ IsString, IsList, IsCapCategoryAsCatObject ],
                
   function( name, source_list, range )
@@ -129,7 +129,7 @@ InstallMethod( CapFunctor,
 end );
 
 ##
-InstallMethod( CapFunctor,
+InstallMethod( @__MODULE__,  CapFunctor,
                [ IsString, IsCapCategory, IsCapCategory ],
                
   function( name, source, range )
@@ -139,7 +139,7 @@ InstallMethod( CapFunctor,
 end );
 
 ##
-InstallMethod( CapFunctor,
+InstallMethod( @__MODULE__,  CapFunctor,
                [ IsString, IsCapCategoryAsCatObject, IsCapCategory ],
                
   function( name, source, range )
@@ -149,7 +149,7 @@ InstallMethod( CapFunctor,
 end );
 
 ##
-InstallMethod( CapFunctor,
+InstallMethod( @__MODULE__,  CapFunctor,
                [ IsString, IsCapCategory, IsCapCategoryAsCatObject ],
                
   function( name, source, range )
@@ -159,7 +159,7 @@ InstallMethod( CapFunctor,
 end );
 
 ##
-InstallMethod( CapFunctor,
+InstallMethod( @__MODULE__,  CapFunctor,
                [ IsString, IsCapCategoryAsCatObject, IsCapCategoryAsCatObject ],
                
   function( name, source, range )
@@ -169,20 +169,20 @@ InstallMethod( CapFunctor,
 end );
 
 ##
-InstallMethod( SourceOfFunctor,
+InstallMethod( @__MODULE__,  SourceOfFunctor,
           [ IsCapFunctor ],
   
   F -> AsCapCategory( Source( F ) )
 );
 
 ##
-InstallMethod( RangeOfFunctor,
+InstallMethod( @__MODULE__,  RangeOfFunctor,
           [ IsCapFunctor ],
   
   F -> AsCapCategory( Range( F ) )
 );
 
-BindGlobal( "CAP_INTERNAL_SANITIZE_FUNC_LIST_FOR_FUNCTORS",
+@BindGlobal( "CAP_INTERNAL_SANITIZE_FUNC_LIST_FOR_FUNCTORS",
   
   function( list )
     local sanitized_list, i;
@@ -215,7 +215,7 @@ BindGlobal( "CAP_INTERNAL_SANITIZE_FUNC_LIST_FOR_FUNCTORS",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_FUNCTOR_CREATE_FILTER_LIST",
+@BindGlobal( "CAP_INTERNAL_FUNCTOR_CREATE_FILTER_LIST",
   
   function( functor, type )
     local filter_list;
@@ -245,7 +245,7 @@ BindGlobal( "CAP_INTERNAL_FUNCTOR_CREATE_FILTER_LIST",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_INSTALL_FUNCTOR_OPERATION",
+@BindGlobal( "CAP_INTERNAL_INSTALL_FUNCTOR_OPERATION",
   
   function( operation, func_list, filter_list, cache )
     local current_filter_list, current_methend;
@@ -260,7 +260,7 @@ BindGlobal( "CAP_INTERNAL_INSTALL_FUNCTOR_OPERATION",
     
 end );
 
-InstallMethod( FunctorObjectOperation,
+InstallMethod( @__MODULE__,  FunctorObjectOperation,
                [ IsCapFunctor ],
                
   function( functor )
@@ -272,7 +272,7 @@ InstallMethod( FunctorObjectOperation,
     
 end );
 
-InstallMethod( FunctorMorphismOperation,
+InstallMethod( @__MODULE__,  FunctorMorphismOperation,
                [ IsCapFunctor ],
                
   function( functor )
@@ -289,7 +289,7 @@ InstallMethod( FunctorMorphismOperation,
 end );
 
 ##
-InstallMethod( AddObjectFunction,
+InstallMethod( @__MODULE__,  AddObjectFunction,
                [ IsCapFunctor, IsList ],
                
   function( functor, func_list )
@@ -316,7 +316,7 @@ InstallMethod( AddObjectFunction,
 end );
 
 ##
-InstallMethod( AddObjectFunction,
+InstallMethod( @__MODULE__,  AddObjectFunction,
                [ IsCapFunctor, IsFunction ],
                
   function( functor, func )
@@ -326,7 +326,7 @@ InstallMethod( AddObjectFunction,
 end );
 
 ##
-InstallMethod( AddMorphismFunction,
+InstallMethod( @__MODULE__,  AddMorphismFunction,
                [ IsCapFunctor, IsList ],
                
   function( functor, func_list )
@@ -357,7 +357,7 @@ InstallMethod( AddMorphismFunction,
 end );
 
 ##
-InstallMethod( AddMorphismFunction,
+InstallMethod( @__MODULE__,  AddMorphismFunction,
                [ IsCapFunctor, IsFunction ],
                
   function( functor, func )
@@ -367,7 +367,7 @@ InstallMethod( AddMorphismFunction,
 end );
 
 ##
-InstallMethod( ObjectCache,
+InstallMethod( @__MODULE__,  ObjectCache,
                [ IsCapFunctor ],
                
   function( functor )
@@ -377,7 +377,7 @@ InstallMethod( ObjectCache,
 end );
 
 ##
-InstallMethod( MorphismCache,
+InstallMethod( @__MODULE__,  MorphismCache,
                [ IsCapFunctor ],
                
   function( functor )
@@ -387,7 +387,7 @@ InstallMethod( MorphismCache,
 end );
 
 ##
-InstallGlobalFunction( ApplyFunctor,
+@InstallGlobalFunction( ApplyFunctor,
                
   function( functor, arguments... )
     local is_object, cache, cache_return, computed_value,
@@ -501,7 +501,7 @@ InstallGlobalFunction( ApplyFunctor,
     
 end );
 
-BindGlobal( "INSTALL_CAP_CAT_FUNCTIONS", function ( cat )
+@BindGlobal( "INSTALL_CAP_CAT_FUNCTIONS", function ( cat )
 
 ##
 AddPreCompose( cat,
@@ -725,7 +725,7 @@ end );
 ##
 ####################################
 
-InstallMethod( InstallFunctor,
+InstallMethod( @__MODULE__,  InstallFunctor,
                [ IsCapFunctor, IsString ],
                
   function( functor, install_name )
@@ -821,7 +821,7 @@ InstallMethod( InstallFunctor,
 end );
 
 ##
-InstallMethod( IdentityFunctor,
+InstallMethod( @__MODULE__,  IdentityFunctor,
                [ IsCapCategory ],
                
   function( category )
@@ -831,7 +831,7 @@ InstallMethod( IdentityFunctor,
 end );
 
 ##
-InstallMethod( FunctorCanonicalizeZeroObjects,
+InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroObjects,
                [ IsCapCategory ],
                
   function( category )
@@ -873,7 +873,7 @@ InstallMethod( FunctorCanonicalizeZeroObjects,
 end );
 
 ##
-InstallMethod( NaturalIsomorphismFromIdentityToCanonicalizeZeroObjects,
+InstallMethod( @__MODULE__,  NaturalIsomorphismFromIdentityToCanonicalizeZeroObjects,
                [ IsCapCategory ],
                
   function( category )
@@ -906,7 +906,7 @@ InstallMethod( NaturalIsomorphismFromIdentityToCanonicalizeZeroObjects,
 end );
 
 ##
-InstallMethod( FunctorCanonicalizeZeroMorphisms,
+InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroMorphisms,
                [ IsCapCategory ],
                
   function( category )
@@ -936,7 +936,7 @@ InstallMethod( FunctorCanonicalizeZeroMorphisms,
 end );
 
 ##
-InstallMethod( NaturalIsomorphismFromIdentityToCanonicalizeZeroMorphisms,
+InstallMethod( @__MODULE__,  NaturalIsomorphismFromIdentityToCanonicalizeZeroMorphisms,
                [ IsCapCategory ],
                
   function( category )
@@ -971,7 +971,7 @@ end );
 ###################################
 
 ##
-InstallMethod( NaturalTransformation,
+InstallMethod( @__MODULE__,  NaturalTransformation,
                [ IsCapFunctor, IsCapFunctor ],
                
   function( source, range )
@@ -981,7 +981,7 @@ InstallMethod( NaturalTransformation,
 end );
 
 ##
-InstallMethod( NaturalTransformation,
+InstallMethod( @__MODULE__,  NaturalTransformation,
                [ IsString, IsCapFunctor, IsCapFunctor ],
                
   function( name, source, range )
@@ -1007,7 +1007,7 @@ InstallMethod( NaturalTransformation,
 end );
 
 ##
-InstallMethod( NaturalTransformationCache,
+InstallMethod( @__MODULE__,  NaturalTransformationCache,
                [ IsCapNaturalTransformation ],
                
   function( natural_trafo )
@@ -1017,7 +1017,7 @@ InstallMethod( NaturalTransformationCache,
 end );
 
 ##
-InstallMethod( NaturalTransformationOperation,
+InstallMethod( @__MODULE__,  NaturalTransformationOperation,
                [ IsCapNaturalTransformation ],
                
   function( trafo )
@@ -1032,7 +1032,7 @@ InstallMethod( NaturalTransformationOperation,
 end );
 
 ##
-InstallMethod( AddNaturalTransformationFunction,
+InstallMethod( @__MODULE__,  AddNaturalTransformationFunction,
                [ IsCapNaturalTransformation, IsList ],
                
   function( trafo, func_list )
@@ -1061,7 +1061,7 @@ InstallMethod( AddNaturalTransformationFunction,
 end );
 
 ##
-InstallMethod( AddNaturalTransformationFunction,
+InstallMethod( @__MODULE__,  AddNaturalTransformationFunction,
                [ IsCapNaturalTransformation, IsFunction ],
                
   function( trafo, func )
@@ -1070,7 +1070,7 @@ InstallMethod( AddNaturalTransformationFunction,
     
 end );
 
-InstallGlobalFunction( ApplyNaturalTransformation,
+@InstallGlobalFunction( ApplyNaturalTransformation,
                
   function( arg... )
     local trafo, source_functor, arguments, i, source_value, range_value, computed_value;
@@ -1113,7 +1113,7 @@ InstallGlobalFunction( ApplyNaturalTransformation,
     
 end );
 
-InstallMethod( InstallNaturalTransformation,
+InstallMethod( @__MODULE__,  InstallNaturalTransformation,
                [ IsCapNaturalTransformation, IsString ],
                
   function( trafo, install_name )

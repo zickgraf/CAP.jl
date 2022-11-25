@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-BindGlobal( "CAP_INTERNAL_ADD_OBJECT_OR_FAIL",
+@BindGlobal( "CAP_INTERNAL_ADD_OBJECT_OR_FAIL",
   
   function( category, object_or_fail )
     
@@ -15,7 +15,7 @@ BindGlobal( "CAP_INTERNAL_ADD_OBJECT_OR_FAIL",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_ADD_MORPHISM_OR_FAIL",
+@BindGlobal( "CAP_INTERNAL_ADD_MORPHISM_OR_FAIL",
   
   function( category, morphism_or_fail )
     
@@ -27,7 +27,7 @@ BindGlobal( "CAP_INTERNAL_ADD_MORPHISM_OR_FAIL",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_DISPLAY_ERROR_FOR_FUNCTION_OF_CATEGORY",
+@BindGlobal( "CAP_INTERNAL_DISPLAY_ERROR_FOR_FUNCTION_OF_CATEGORY",
   
   function( function_name, category, message )
     
@@ -37,7 +37,7 @@ BindGlobal( "CAP_INTERNAL_DISPLAY_ERROR_FOR_FUNCTION_OF_CATEGORY",
     
 end );
 
-InstallGlobalFunction( CapInternalInstallAdd,
+@InstallGlobalFunction( CapInternalInstallAdd,
   
   function( record )
     local function_name, install_name, add_name, pre_function, pre_function_full,
@@ -103,8 +103,6 @@ InstallGlobalFunction( CapInternalInstallAdd,
     if record.install_convenience_without_category
         
         replaced_filter_list = CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS( filter_list );
-        
-        DeclareOperation( install_name, replaced_filter_list );
         
         if filter_list[2] ⥉ [ "object", "morphism", "twocell" ]
             
@@ -529,7 +527,7 @@ InstallGlobalFunction( CapInternalInstallAdd,
                     
                     return result;
                     
-                end; Cache = GET_METHOD_CACHE( category, function_name, Length( filter_list ) ) );
+                end; InstallMethod = InstallOtherMethod, Cache = GET_METHOD_CACHE( category, function_name, Length( filter_list ) ) );
             
             else #category.overhead == false
                 
@@ -613,7 +611,7 @@ InstallGlobalFunction( CapInternalInstallAdd,
     
 end );
 
-BindGlobal( "CAP_INTERNAL_INSTALL_WITH_GIVEN_DERIVATION_PAIR", function( without_given_rec, with_given_rec )
+@BindGlobal( "CAP_INTERNAL_INSTALL_WITH_GIVEN_DERIVATION_PAIR", function( without_given_rec, with_given_rec )
   local without_given_name, with_given_name, without_given_arguments_names, with_given_arguments_names, with_given_object_position, with_given_via_without_given_function, with_given_arguments_strings, without_given_via_with_given_function;
     
     without_given_name = without_given_rec.function_name;
@@ -687,7 +685,7 @@ BindGlobal( "CAP_INTERNAL_INSTALL_WITH_GIVEN_DERIVATION_PAIR", function( without
     
 end );
 
-BindGlobal( "CAP_INTERNAL_INSTALL_WITH_GIVEN_DERIVATIONS", function( record )
+@BindGlobal( "CAP_INTERNAL_INSTALL_WITH_GIVEN_DERIVATIONS", function( record )
   local recnames, current_rec, without_given_rec, with_given_rec, current_recname;
     
     recnames = RecNames( record );
@@ -709,7 +707,7 @@ BindGlobal( "CAP_INTERNAL_INSTALL_WITH_GIVEN_DERIVATIONS", function( record )
     
 end );
 
-InstallGlobalFunction( CAP_INTERNAL_INSTALL_ADDS_FROM_RECORD,
+@InstallGlobalFunction( CAP_INTERNAL_INSTALL_ADDS_FROM_RECORD,
     
   function( record )
     local recnames, current_recname, current_rec;

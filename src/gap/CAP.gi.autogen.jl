@@ -10,13 +10,13 @@
 ##
 ######################################
 
-BindGlobal( "TheFamilyOfCapCategoryObjects",
+@BindGlobal( "TheFamilyOfCapCategoryObjects",
         NewFamily( "TheFamilyOfCapCategoryObjects" ) );
 
-BindGlobal( "TheFamilyOfCapCategoryMorphisms",
+@BindGlobal( "TheFamilyOfCapCategoryMorphisms",
         NewFamily( "TheFamilyOfCapCategoryMorphisms" ) );
 
-BindGlobal( "TheFamilyOfCapCategoryTwoCells",
+@BindGlobal( "TheFamilyOfCapCategoryTwoCells",
         NewFamily( "TheFamilyOfCapCategoryTwoCells" ) );
 
 ######################################
@@ -44,7 +44,7 @@ InstallTrueMethod( IsAbelianCategory, IsAbelianCategoryWithEnoughInjectives );
 ######################################
 
 ##
-InstallGlobalFunction( CAP_INTERNAL_NAME_COUNTER,
+@InstallGlobalFunction( CAP_INTERNAL_NAME_COUNTER,
                        
   function( )
     local counter;
@@ -58,7 +58,7 @@ InstallGlobalFunction( CAP_INTERNAL_NAME_COUNTER,
 end );
 
 ##
-InstallGlobalFunction( GET_METHOD_CACHE,
+@InstallGlobalFunction( GET_METHOD_CACHE,
                        
   function( category, name, number )
     local cache, cache_type;
@@ -108,7 +108,7 @@ InstallGlobalFunction( GET_METHOD_CACHE,
 end );
 
 ##
-InstallGlobalFunction( SET_VALUE_OF_CATEGORY_CACHE,
+@InstallGlobalFunction( SET_VALUE_OF_CATEGORY_CACHE,
                        
   function( category, name, number, key, value )
     local cache;
@@ -120,7 +120,7 @@ InstallGlobalFunction( SET_VALUE_OF_CATEGORY_CACHE,
 end );
 
 ##
-InstallGlobalFunction( HAS_VALUE_OF_CATEGORY_CACHE,
+@InstallGlobalFunction( HAS_VALUE_OF_CATEGORY_CACHE,
                        
   function( category, name, number, key, value )
     local cache;
@@ -131,7 +131,7 @@ InstallGlobalFunction( HAS_VALUE_OF_CATEGORY_CACHE,
     
 end );
 
-InstallValue( CAP_INTERNAL_DERIVATION_GRAPH,
+@InstallValueConst( CAP_INTERNAL_DERIVATION_GRAPH,
     
     MakeDerivationGraph( [ ] ) );
 
@@ -143,12 +143,12 @@ InstallValue( CAP_INTERNAL_DERIVATION_GRAPH,
 ######################################
 
 # backwards compatibility
-BindGlobal( "IsCapCategoryRep", IsCapCategory );
+@BindGlobal( "IsCapCategoryRep", IsCapCategory );
 
-BindGlobal( "TheFamilyOfCapCategories",
+@BindGlobal( "TheFamilyOfCapCategories",
         NewFamily( "TheFamilyOfCapCategories" ) );
 
-BindGlobal( "TheTypeOfCapCategories",
+@BindGlobal( "TheTypeOfCapCategories",
         NewType( TheFamilyOfCapCategories,
                  IsCapCategory ) );
 
@@ -160,7 +160,7 @@ BindGlobal( "TheTypeOfCapCategories",
 #####################################
 
 ##
-InstallGlobalFunction( "CREATE_CAP_CATEGORY_OBJECT",
+@InstallGlobalFunction( "CREATE_CAP_CATEGORY_OBJECT",
   function( obj_rec, name, category_filter, object_filter, morphism_filter, two_cell_filter )
     local filter, obj, operation_name;
     
@@ -228,7 +228,7 @@ InstallGlobalFunction( "CREATE_CAP_CATEGORY_OBJECT",
     
 end );
 
-InstallMethod( TheoremRecord,
+InstallMethod( @__MODULE__,  TheoremRecord,
                [ IsCapCategory ],
                
   function( category )
@@ -243,7 +243,7 @@ end );
 ##
 ######################################################
 
-InstallMethod( AddCategoryToFamily,
+InstallMethod( @__MODULE__,  AddCategoryToFamily,
                [ IsCapCategory, IsString ],
                
   function( category, family )
@@ -265,7 +265,7 @@ end );
 #######################################
 
 ##
-InstallMethod( SetCaching,
+InstallMethod( @__MODULE__,  SetCaching,
                [ IsCapCategory, IsString, IsString ],
                
   function( category, function_name, caching_info )
@@ -298,7 +298,7 @@ InstallMethod( SetCaching,
 end );
 
 ##
-InstallMethod( SetCachingToWeak,
+InstallMethod( @__MODULE__,  SetCachingToWeak,
                [ IsCapCategory, IsString ],
                
   function( category, function_name )
@@ -308,7 +308,7 @@ InstallMethod( SetCachingToWeak,
 end );
 
 ##
-InstallMethod( SetCachingToCrisp,
+InstallMethod( @__MODULE__,  SetCachingToCrisp,
                [ IsCapCategory, IsString ],
                
   function( category, function_name )
@@ -318,7 +318,7 @@ InstallMethod( SetCachingToCrisp,
 end );
 
 ##
-InstallMethod( DeactivateCaching,
+InstallMethod( @__MODULE__,  DeactivateCaching,
                [ IsCapCategory, IsString ],
                
   function( category, function_name )
@@ -327,8 +327,9 @@ InstallMethod( DeactivateCaching,
     
 end );
 
+#= comment for Julia
 ##
-InstallMethod( CachingObject,
+InstallMethod( @__MODULE__,  CachingObject,
                [ IsCapCategoryCell, IsString, IsInt ],
                
   function( cell, name, number )
@@ -338,12 +339,13 @@ InstallMethod( CachingObject,
 end );
 
 ##
-InstallMethod( CachingObject,
+InstallMethod( @__MODULE__,  CachingObject,
                [ IsCapCategory, IsString, IsInt ],
                
   GET_METHOD_CACHE );
+# =#
 
-InstallGlobalFunction( SetCachingOfCategory,
+@InstallGlobalFunction( SetCachingOfCategory,
   
   function( category, type )
     local current_name;
@@ -366,7 +368,7 @@ InstallGlobalFunction( SetCachingOfCategory,
     
 end );
 
-InstallGlobalFunction( SetCachingOfCategoryWeak,
+@InstallGlobalFunction( SetCachingOfCategoryWeak,
   
   function( category )
     
@@ -374,7 +376,7 @@ InstallGlobalFunction( SetCachingOfCategoryWeak,
     
 end );
 
-InstallGlobalFunction( SetCachingOfCategoryCrisp,
+@InstallGlobalFunction( SetCachingOfCategoryCrisp,
   
   function( category )
     
@@ -382,7 +384,7 @@ InstallGlobalFunction( SetCachingOfCategoryCrisp,
     
 end );
 
-InstallGlobalFunction( DeactivateCachingOfCategory,
+@InstallGlobalFunction( DeactivateCachingOfCategory,
   
   function( category )
     
@@ -391,7 +393,7 @@ InstallGlobalFunction( DeactivateCachingOfCategory,
 end );
 
 
-InstallGlobalFunction( SetDefaultCaching,
+@InstallGlobalFunction( SetDefaultCaching,
 
   function( type )
     local current_name;
@@ -404,17 +406,17 @@ InstallGlobalFunction( SetDefaultCaching,
 
 end );
 
-InstallGlobalFunction( SetDefaultCachingWeak,
+@InstallGlobalFunction( SetDefaultCachingWeak,
   function( )
     SetDefaultCaching( "weak" );
 end );
 
-InstallGlobalFunction( SetDefaultCachingCrisp,
+@InstallGlobalFunction( SetDefaultCachingCrisp,
   function( )
     SetDefaultCaching( "crisp" );
 end );
 
-InstallGlobalFunction( DeactivateDefaultCaching,
+@InstallGlobalFunction( DeactivateDefaultCaching,
   function( )
     SetDefaultCaching( "none" );
 end );
@@ -426,7 +428,7 @@ end );
 #######################################
 
 ##
-InstallMethod( CreateCapCategory,
+InstallMethod( @__MODULE__,  CreateCapCategory,
                [ ],
                
   function( )
@@ -439,7 +441,7 @@ InstallMethod( CreateCapCategory,
 end );
 
 ##
-InstallMethod( CreateCapCategory,
+InstallMethod( @__MODULE__,  CreateCapCategory,
                [ IsString ],
                
   function( name )
@@ -449,7 +451,7 @@ InstallMethod( CreateCapCategory,
 end );
 
 ##
-InstallMethod( CreateCapCategory,
+InstallMethod( @__MODULE__,  CreateCapCategory,
                [ IsString, IsFunction, IsFunction, IsFunction, IsFunction ],
                
   function( name, category_filter, object_filter, morphism_filter, two_cell_filter )
@@ -480,7 +482,7 @@ InstallMethod( CreateCapCategory,
 end );
 
 ##
-InstallMethod( CanCompute,
+InstallMethod( @__MODULE__,  CanCompute,
                [ IsCapCategory, IsString ],
                
   function( category, string )
@@ -499,7 +501,7 @@ InstallMethod( CanCompute,
 end );
 
 ##
-InstallMethod( CanCompute,
+InstallMethod( @__MODULE__,  CanCompute,
                [ IsCapCategory, IsFunction ],
                
   function( category, operation )
@@ -511,7 +513,7 @@ InstallMethod( CanCompute,
 end );
 
 ##
-InstallMethod( CheckConstructivenessOfCategory,
+InstallMethod( @__MODULE__,  CheckConstructivenessOfCategory,
                [ IsCapCategory, IsString ],
                
   function( category, string )
@@ -544,58 +546,58 @@ end );
 ## Sanity checks
 ##
 ####################################
-InstallGlobalFunction( "DisableInputSanityChecks",
+@InstallGlobalFunction( "DisableInputSanityChecks",
   function( category )
     
     category.input_sanity_check_level = 0;
     
 end );
-InstallGlobalFunction( "DisableOutputSanityChecks", 
+@InstallGlobalFunction( "DisableOutputSanityChecks", 
   function( category )
     
     category.output_sanity_check_level = 0;
     
 end );
-InstallGlobalFunction( "EnablePartialInputSanityChecks" ,
+@InstallGlobalFunction( "EnablePartialInputSanityChecks" ,
   function( category )
   
     category.input_sanity_check_level = 1;
     
 end );
-InstallGlobalFunction( "EnablePartialOutputSanityChecks" ,
+@InstallGlobalFunction( "EnablePartialOutputSanityChecks" ,
   function( category )
     
     category.output_sanity_check_level = 1;
     
 end );
-InstallGlobalFunction( "EnableFullInputSanityChecks" ,
+@InstallGlobalFunction( "EnableFullInputSanityChecks" ,
   function( category )
   
     category.input_sanity_check_level = 2;
      
 end );
-InstallGlobalFunction( "EnableFullOutputSanityChecks" ,
+@InstallGlobalFunction( "EnableFullOutputSanityChecks" ,
   function( category )
     
     category.output_sanity_check_level = 2;
     
 end );
 
-InstallGlobalFunction( "DisableSanityChecks" ,
+@InstallGlobalFunction( "DisableSanityChecks" ,
   function( category )
     
     DisableInputSanityChecks( category );
     DisableOutputSanityChecks( category );
      
 end );
-InstallGlobalFunction( "EnablePartialSanityChecks" ,
+@InstallGlobalFunction( "EnablePartialSanityChecks" ,
   function( category )
     
     EnablePartialInputSanityChecks( category );
     EnablePartialOutputSanityChecks( category );
     
 end );
-InstallGlobalFunction( "EnableFullSanityChecks" ,
+@InstallGlobalFunction( "EnableFullSanityChecks" ,
   function( category )
     
     EnableFullInputSanityChecks( category );
@@ -609,7 +611,7 @@ end );
 ##
 ####################################
 
-InstallGlobalFunction( "EnableTimingStatistics",
+@InstallGlobalFunction( "EnableTimingStatistics",
   function( category )
     
     if category.overhead != true
@@ -622,7 +624,7 @@ InstallGlobalFunction( "EnableTimingStatistics",
     
 end );
 
-InstallGlobalFunction( "DisableTimingStatistics",
+@InstallGlobalFunction( "DisableTimingStatistics",
   function( category )
     
     if category.overhead != true
@@ -635,7 +637,7 @@ InstallGlobalFunction( "DisableTimingStatistics",
     
 end );
 
-InstallGlobalFunction( "ResetTimingStatistics",
+@InstallGlobalFunction( "ResetTimingStatistics",
   function( category )
     local recname;
     
@@ -653,7 +655,7 @@ InstallGlobalFunction( "ResetTimingStatistics",
     
 end );
 
-BindGlobal( "CAP_INTERNAL_PREPARE_TIMING_STATISTICS_FOR_DISPLAY",
+@BindGlobal( "CAP_INTERNAL_PREPARE_TIMING_STATISTICS_FOR_DISPLAY",
   function( category )
     local header, warning, operations, total_time_global, times, execs, total_time, time_per_exec, recname;
     
@@ -715,7 +717,7 @@ BindGlobal( "CAP_INTERNAL_PREPARE_TIMING_STATISTICS_FOR_DISPLAY",
     
 end );
 
-InstallGlobalFunction( "DisplayTimingStatistics",
+@InstallGlobalFunction( "DisplayTimingStatistics",
   function( category )
     local info, operation;
     
@@ -760,7 +762,7 @@ end );
 
 if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound( NCurses.BrowseDenseList )
     
-    InstallGlobalFunction( "BrowseTimingStatistics",
+    @InstallGlobalFunction( "BrowseTimingStatistics",
       function( category )
         local info, header, value_matrix, labelsRow, labelsCol, operation;
         
@@ -803,7 +805,7 @@ if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound
     
 else
     
-    InstallGlobalFunction( "BrowseTimingStatistics",
+    @InstallGlobalFunction( "BrowseTimingStatistics",
       function( category )
         
         Display( "`BrowseTimingStatistics` needs the function `NCurses.BrowseDenseList`, which should be available ⥉ the package \"Browse\"." );
@@ -819,7 +821,7 @@ end;
 ##
 #######################################
 
-InstallGlobalFunction( CapCategorySwitchLogicPropagationForObjectsOn,
+@InstallGlobalFunction( CapCategorySwitchLogicPropagationForObjectsOn,
   
   function( category )
     
@@ -827,7 +829,7 @@ InstallGlobalFunction( CapCategorySwitchLogicPropagationForObjectsOn,
     
 end );
 
-InstallGlobalFunction( CapCategorySwitchLogicPropagationForObjectsOff,
+@InstallGlobalFunction( CapCategorySwitchLogicPropagationForObjectsOff,
   
   function( category )
     
@@ -835,7 +837,7 @@ InstallGlobalFunction( CapCategorySwitchLogicPropagationForObjectsOff,
     
 end );
 
-InstallGlobalFunction( CapCategorySwitchLogicPropagationForMorphismsOn,
+@InstallGlobalFunction( CapCategorySwitchLogicPropagationForMorphismsOn,
   
   function( category )
     
@@ -843,7 +845,7 @@ InstallGlobalFunction( CapCategorySwitchLogicPropagationForMorphismsOn,
     
 end );
 
-InstallGlobalFunction( CapCategorySwitchLogicPropagationForMorphismsOff,
+@InstallGlobalFunction( CapCategorySwitchLogicPropagationForMorphismsOff,
   
   function( category )
     
@@ -851,7 +853,7 @@ InstallGlobalFunction( CapCategorySwitchLogicPropagationForMorphismsOff,
     
 end );
 
-InstallGlobalFunction( CapCategorySwitchLogicPropagationOn,
+@InstallGlobalFunction( CapCategorySwitchLogicPropagationOn,
   
   function( category )
     
@@ -860,7 +862,7 @@ InstallGlobalFunction( CapCategorySwitchLogicPropagationOn,
     
 end );
 
-InstallGlobalFunction( CapCategorySwitchLogicPropagationOff,
+@InstallGlobalFunction( CapCategorySwitchLogicPropagationOff,
   
   function( category )
     
@@ -869,7 +871,7 @@ InstallGlobalFunction( CapCategorySwitchLogicPropagationOff,
     
 end );
 
-InstallGlobalFunction( CapCategorySwitchLogicOn,
+@InstallGlobalFunction( CapCategorySwitchLogicOn,
   
   function( category )
     
@@ -877,7 +879,7 @@ InstallGlobalFunction( CapCategorySwitchLogicOn,
     
 end );
 
-InstallGlobalFunction( CapCategorySwitchLogicOff,
+@InstallGlobalFunction( CapCategorySwitchLogicOff,
   
   function( category )
     
@@ -892,22 +894,22 @@ end );
 #######################################
 
 ##
-InstallMethod( Down, [ IsObject ], IdFunc );
+InstallMethod( @__MODULE__,  Down, [ IsObject ], IdFunc );
 
 ##
-InstallMethod( Down, [ IsCapCategoryObject ], x -> "unknown object data" );
+InstallMethod( @__MODULE__,  Down, [ IsCapCategoryObject ], x -> "unknown object data" );
 
 ##
-InstallMethod( Down2, [ IsObject ], x -> Down( Down( x ) ) );
+InstallMethod( @__MODULE__,  Down2, [ IsObject ], x -> Down( Down( x ) ) );
 
 ##
-InstallMethod( Down3, [ IsObject ], x -> Down( Down( Down( x ) ) ) );
+InstallMethod( @__MODULE__,  Down3, [ IsObject ], x -> Down( Down( Down( x ) ) ) );
 
 ##
-InstallMethod( DownOnlyMorphismData, [ IsCapCategoryMorphism ], x -> "unknown morphism data" );
+InstallMethod( @__MODULE__,  DownOnlyMorphismData, [ IsCapCategoryMorphism ], x -> "unknown morphism data" );
 
 ##
-InstallMethod( Down,
+InstallMethod( @__MODULE__,  Down,
                [ IsCapCategoryMorphism ],
   function( mor )
     
@@ -916,7 +918,7 @@ InstallMethod( Down,
 end );
 
 ##
-InstallMethod( Down,
+InstallMethod( @__MODULE__,  Down,
                [ IsList ],
                
   function( obj )
@@ -926,7 +928,7 @@ InstallMethod( Down,
 end );
 
 ##
-InstallMethod( DownToBottom,
+InstallMethod( @__MODULE__,  DownToBottom,
                [ IsObject ],
                
   function( obj )
@@ -965,7 +967,7 @@ end );
 #######################################
 
 # fallback methods for Julia
-InstallMethod( ViewObj,
+InstallMethod( @__MODULE__,  ViewObj,
                [ IsCapCategory ],
                
   function ( category )
@@ -974,7 +976,7 @@ InstallMethod( ViewObj,
     
 end );
 
-InstallMethod( Display,
+InstallMethod( @__MODULE__,  Display,
                [ IsCapCategory ],
                
   function ( category )
@@ -983,7 +985,7 @@ InstallMethod( Display,
     
 end );
 
-InstallGlobalFunction( CAP_INTERNAL_INSTALL_PRINT_FUNCTION,
+@InstallGlobalFunction( CAP_INTERNAL_INSTALL_PRINT_FUNCTION,
                
   function( )
     local print_graph, category_function, i, internal_list;
@@ -1021,7 +1023,7 @@ InstallGlobalFunction( CAP_INTERNAL_INSTALL_PRINT_FUNCTION,
     
 end );
 
-InstallMethod( String,
+InstallMethod( @__MODULE__,  String,
                [ IsCapCategory ],
     Name );
 
@@ -1029,7 +1031,7 @@ InstallMethod( String,
 CAP_INTERNAL_INSTALL_PRINT_FUNCTION( );
 # =#
 
-InstallGlobalFunction( DisableAddForCategoricalOperations,
+@InstallGlobalFunction( DisableAddForCategoricalOperations,
   
   function( category )
     
@@ -1041,7 +1043,7 @@ InstallGlobalFunction( DisableAddForCategoricalOperations,
     
 end );
 
-InstallGlobalFunction( EnableAddForCategoricalOperations,
+@InstallGlobalFunction( EnableAddForCategoricalOperations,
   
   function( category )
     
@@ -1053,7 +1055,7 @@ InstallGlobalFunction( EnableAddForCategoricalOperations,
     
 end );
 
-InstallMethod( CellFilter,
+InstallMethod( @__MODULE__,  CellFilter,
                [ IsCapCategory ],
 
   function ( category )

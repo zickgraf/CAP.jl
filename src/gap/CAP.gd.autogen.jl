@@ -51,29 +51,27 @@
 
 DeclareGlobalVariable( "CAP_INTERNAL" );
 
-DeclareGlobalFunction( "CAP_INTERNAL_NAME_COUNTER" );
+@DeclareGlobalFunction( "CAP_INTERNAL_NAME_COUNTER" );
 
-DeclareGlobalFunction( "CATEGORIES_CACHE_GETTER" );
+@DeclareGlobalFunction( "CATEGORIES_CACHE_GETTER" );
 
-DeclareGlobalFunction( "GET_METHOD_CACHE" );
+@DeclareGlobalFunction( "GET_METHOD_CACHE" );
 
-DeclareGlobalFunction( "SET_VALUE_OF_CATEGORY_CACHE" );
+@DeclareGlobalFunction( "SET_VALUE_OF_CATEGORY_CACHE" );
 
-DeclareGlobalFunction( "HAS_VALUE_OF_CATEGORY_CACHE" );
+@DeclareGlobalFunction( "HAS_VALUE_OF_CATEGORY_CACHE" );
 
-DeclareGlobalFunction( "CAP_INTERNAL_INSTALL_PRINT_FUNCTION" );
+@DeclareGlobalFunction( "CAP_INTERNAL_INSTALL_PRINT_FUNCTION" );
 
 DeclareGlobalVariable( "CAP_INTERNAL_DERIVATION_GRAPH" );
 
 DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
 
-## Syntax for categorical property with no dual counterpart:
-## [ , "property" ]
-InstallValue( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, [ ] );
+@InstallValueConst( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, [ ] );
 
 DeclareGlobalVariable( "CATEGORIES_FAMILY_PROPERTIES" );
 
-InstallValue( CATEGORIES_FAMILY_PROPERTIES,
+@InstallValueConst( CATEGORIES_FAMILY_PROPERTIES,
 
               rec( ) );
 
@@ -128,6 +126,13 @@ InstallValue( CATEGORIES_FAMILY_PROPERTIES,
 @DeclareFilter( "IsCellOfSkeletalCategory",
                  IsCapCategoryCell );
 
+###################################
+##
+#! @Section Categorical properties
+##
+###################################
+
+
 #! @Description
 #!  Adds a categorical property to the list of CAP
 #!  categorical properties. <A>list</A> must be a list
@@ -137,9 +142,9 @@ InstallValue( CATEGORIES_FAMILY_PROPERTIES,
 #!  is a property name, the property is assumed to have no
 #!  dual.
 #! @Arguments list
-DeclareGlobalFunction( "AddCategoricalProperty" );
+@DeclareGlobalFunction( "AddCategoricalProperty" );
 
-InstallGlobalFunction( AddCategoricalProperty,
+@InstallGlobalFunction( AddCategoricalProperty,
   function( property_pair )
     local property;
     
@@ -154,34 +159,123 @@ InstallGlobalFunction( AddCategoricalProperty,
     
     Add( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, property_pair );
     
-    DeclareProperty( property_pair[1], IsCapCategory );
-    
-    # all property pairs must also be added with the entries swapped
-    # this will declare the opposite property
+    #= comment for Julia
+    if !IsBoundGlobal( property_pair[1] )
+        
+        Print( "WARNING: please declare ", property_pair[1], " as a property of IsCapCategory with corresponding documentation before adding it as a categorical property.\n" );
+        
+        DeclareProperty( property_pair[1], IsCapCategory );
+        
+        # all property pairs must also be added with the entries swapped
+        # this will declare the opposite property
+        
+    end;
+    # =#
     
 end );
 
-Perform(
-## This is the CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST
-    [ [ "IsEquippedWithHomomorphismStructure", "IsEquippedWithHomomorphismStructure" ],
-      [ "IsEnrichedOverCommutativeRegularSemigroup", "IsEnrichedOverCommutativeRegularSemigroup" ],
-      [ "IsSkeletalCategory", "IsSkeletalCategory" ],
-      [ "IsAbCategory", "IsAbCategory" ],
-      [ "IsLinearCategoryOverCommutativeRing", "IsLinearCategoryOverCommutativeRing" ],
-      [ "IsAdditiveCategory", "IsAdditiveCategory" ],
-      [ "IsPreAbelianCategory", "IsPreAbelianCategory" ],
-      [ "IsAbelianCategory", "IsAbelianCategory" ],
-      [ "IsAbelianCategoryWithEnoughProjectives", "IsAbelianCategoryWithEnoughInjectives" ],
-      [ "IsAbelianCategoryWithEnoughInjectives", "IsAbelianCategoryWithEnoughProjectives" ],
-      [ "IsLocallyOfFiniteProjectiveDimension", "IsLocallyOfFiniteInjectiveDimension" ],
-      [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFiniteProjectiveDimension" ]
-    ],
-    AddCategoricalProperty );
+#! @Description
+#!  The property of the category <A>C</A> being equipped with a homomorphism structure.
+#! @Arguments C
+@DeclareProperty( "IsEquippedWithHomomorphismStructure", IsCapCategory );
+
+AddCategoricalProperty( [ "IsEquippedWithHomomorphismStructure", "IsEquippedWithHomomorphismStructure" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> having decidable lifts.
+#! @Arguments C
+@DeclareProperty( "IsCategoryWithDecidableLifts", IsCapCategory );
+
+AddCategoricalProperty( [ "IsCategoryWithDecidableLifts", "IsCategoryWithDecidableColifts" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> having decidable colifts.
+#! @Arguments C
+@DeclareProperty( "IsCategoryWithDecidableColifts", IsCapCategory );
+
+AddCategoricalProperty( [ "IsCategoryWithDecidableColifts", "IsCategoryWithDecidableLifts" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being enriched over a commutative regular semigroup.
+#! @Arguments C
+@DeclareProperty( "IsEnrichedOverCommutativeRegularSemigroup", IsCapCategory );
+
+AddCategoricalProperty( [ "IsEnrichedOverCommutativeRegularSemigroup", "IsEnrichedOverCommutativeRegularSemigroup" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being skeletal.
+#! @Arguments C
+@DeclareProperty( "IsSkeletalCategory", IsCapCategory );
+
+AddCategoricalProperty( [ "IsSkeletalCategory", "IsSkeletalCategory" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being preadditive.
+#! @Arguments C
+@DeclareProperty( "IsAbCategory", IsCapCategory );
+
+AddCategoricalProperty( [ "IsAbCategory", "IsAbCategory" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being linear over a commutative ring.
+#! @Arguments C
+@DeclareProperty( "IsLinearCategoryOverCommutativeRing", IsCapCategory );
+
+AddCategoricalProperty( [ "IsLinearCategoryOverCommutativeRing", "IsLinearCategoryOverCommutativeRing" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being additive.
+#! @Arguments C
+@DeclareProperty( "IsAdditiveCategory", IsCapCategory );
+
+AddCategoricalProperty( [ "IsAdditiveCategory", "IsAdditiveCategory" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being preabelian.
+#! @Arguments C
+@DeclareProperty( "IsPreAbelianCategory", IsCapCategory );
+
+AddCategoricalProperty( [ "IsPreAbelianCategory", "IsPreAbelianCategory" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being abelian.
+#! @Arguments C
+@DeclareProperty( "IsAbelianCategory", IsCapCategory );
+
+AddCategoricalProperty( [ "IsAbelianCategory", "IsAbelianCategory" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being abelian with enough projectives.
+#! @Arguments C
+@DeclareProperty( "IsAbelianCategoryWithEnoughProjectives", IsCapCategory );
+
+AddCategoricalProperty( [ "IsAbelianCategoryWithEnoughProjectives", "IsAbelianCategoryWithEnoughInjectives" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being abelian with enough injectives.
+#! @Arguments C
+@DeclareProperty( "IsAbelianCategoryWithEnoughInjectives", IsCapCategory );
+
+AddCategoricalProperty( [ "IsAbelianCategoryWithEnoughInjectives", "IsAbelianCategoryWithEnoughProjectives" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being locally of finite projective dimension.
+#! @Arguments C
+@DeclareProperty( "IsLocallyOfFiniteProjectiveDimension", IsCapCategory );
+
+AddCategoricalProperty( [ "IsLocallyOfFiniteProjectiveDimension", "IsLocallyOfFiniteInjectiveDimension" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> being locally of finite injective dimension.
+#! @Arguments C
+@DeclareProperty( "IsLocallyOfFiniteInjectiveDimension", IsCapCategory );
+
+AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFiniteProjectiveDimension" ] );
 
 @DeclareAttribute( "TheoremRecord",
                   IsCapCategory, "mutable" );
 
-DeclareOperation( "AddCategoryToFamily",
+@DeclareOperation( "AddCategoryToFamily",
                   [ IsCapCategory, IsString ] );
 
 ###################################
@@ -190,9 +284,9 @@ DeclareOperation( "AddCategoryToFamily",
 ##
 ###################################
 
-DeclareGlobalFunction( "CREATE_CAP_CATEGORY_OBJECT" );
+@DeclareGlobalFunction( "CREATE_CAP_CATEGORY_OBJECT" );
 
-DeclareGlobalFunction( "INSTALL_ADD_FUNCTIONS_FOR_CATEGORY" );
+@DeclareGlobalFunction( "INSTALL_ADD_FUNCTIONS_FOR_CATEGORY" );
 
 #! @Description
 #! Creates a new CAP category from scratch.
@@ -200,7 +294,7 @@ DeclareGlobalFunction( "INSTALL_ADD_FUNCTIONS_FOR_CATEGORY" );
 #! @Arguments
 #! @Returns a category
 #! @Label
-DeclareOperation( "CreateCapCategory",
+@DeclareOperation( "CreateCapCategory",
                   [ ] );
 
 #! @Description
@@ -209,7 +303,7 @@ DeclareOperation( "CreateCapCategory",
 #! Its name is set to  s .
 #! @Arguments s
 #! @Returns a category
-DeclareOperation( "CreateCapCategory",
+@DeclareOperation( "CreateCapCategory",
                            [ IsString ] );
 
 #! @Description
@@ -219,7 +313,7 @@ DeclareOperation( "CreateCapCategory",
 #! The category, its objects, its morphisms, && its two cells will lie ⥉ the corresponding given filters.
 #! @Arguments s, category_filter, object_filter, morphism_filter, two_cell_filter
 #! @Returns a category
-DeclareOperation( "CreateCapCategory",
+@DeclareOperation( "CreateCapCategory",
                            [ IsString, IsFunction, IsFunction, IsFunction, IsFunction ] );
 
 ###################################
@@ -333,42 +427,42 @@ DeclareOperation( "CreateCapCategory",
 #! @Description
 #!  Activates the predicate logic propagation between equal objects for the category <A>C</A>.
 #! @Arguments C
-DeclareGlobalFunction( "CapCategorySwitchLogicPropagationForObjectsOn" );
+@DeclareGlobalFunction( "CapCategorySwitchLogicPropagationForObjectsOn" );
 
 #! @Description
 #!  Deactivates the predicate logic propagation between equal objects for the category <A>C</A>.
 #! @Arguments C
-DeclareGlobalFunction( "CapCategorySwitchLogicPropagationForObjectsOff" );
+@DeclareGlobalFunction( "CapCategorySwitchLogicPropagationForObjectsOff" );
 
 #! @Description
 #!  Activates the predicate logic propagation between equal morphisms for the category <A>C</A>.
 #! @Arguments C
-DeclareGlobalFunction( "CapCategorySwitchLogicPropagationForMorphismsOn" );
+@DeclareGlobalFunction( "CapCategorySwitchLogicPropagationForMorphismsOn" );
 
 #! @Description
 #!  Deactivates the predicate logic propagation between equal morphisms for the category <A>C</A>.
 #! @Arguments C
-DeclareGlobalFunction( "CapCategorySwitchLogicPropagationForMorphismsOff" );
+@DeclareGlobalFunction( "CapCategorySwitchLogicPropagationForMorphismsOff" );
 
 #! @Description
 #!  Activates the predicate logic propagation between equal cells for the category <A>C</A>.
 #! @Arguments C
-DeclareGlobalFunction( "CapCategorySwitchLogicPropagationOn" );
+@DeclareGlobalFunction( "CapCategorySwitchLogicPropagationOn" );
 
 #! @Description
 #!  Deactivates the predicate logic propagation between equal cells for the category <A>C</A>.
 #! @Arguments C
-DeclareGlobalFunction( "CapCategorySwitchLogicPropagationOff" );
+@DeclareGlobalFunction( "CapCategorySwitchLogicPropagationOff" );
 
 #! @Description
 #!  Activates the predicate implication logic for the category <A>C</A>.
 #! @Arguments C
-DeclareGlobalFunction( "CapCategorySwitchLogicOn" );
+@DeclareGlobalFunction( "CapCategorySwitchLogicOn" );
 
 #! @Description
 #!  Deactivates the predicate implication logic for the category <A>C</A>.
 #! @Arguments C
-DeclareGlobalFunction( "CapCategorySwitchLogicOff" );
+@DeclareGlobalFunction( "CapCategorySwitchLogicOff" );
 
 #############################################
 ##
@@ -385,10 +479,10 @@ DeclareGlobalFunction( "CapCategorySwitchLogicOff" );
 #! For debugging purposes one can also pass the CAP operation instead of its name.
 #! @Returns <C>true</C> || <C>false</C>
 #! @Arguments C, string
-DeclareOperation( "CanCompute",
+@DeclareOperation( "CanCompute",
                   [ IsCapCategory, IsString ] );
 #! @Arguments C, operation
-DeclareOperation( "CanCompute",
+@DeclareOperation( "CanCompute",
                   [ IsCapCategory, IsFunction ] );
 #! @EndGroup
 
@@ -401,7 +495,7 @@ DeclareOperation( "CanCompute",
 #! If  s  is !a categorical property, an error is raised.
 #! @Returns a list
 #! @Arguments C,s
-DeclareOperation( "CheckConstructivenessOfCategory",
+@DeclareOperation( "CheckConstructivenessOfCategory",
                   [ IsCapCategory, IsString ] );
 
 #############################################
@@ -469,32 +563,32 @@ DeclareOperation( "CheckConstructivenessOfCategory",
 ##
 ####################################
 
-DeclareOperation( "SetCaching",
+@DeclareOperation( "SetCaching",
                   [ IsCapCategory, IsString, IsString ] );
 
-DeclareOperation( "SetCachingToWeak",
+@DeclareOperation( "SetCachingToWeak",
                   [ IsCapCategory, IsString ] );
 
-DeclareOperation( "SetCachingToCrisp",
+@DeclareOperation( "SetCachingToCrisp",
                   [ IsCapCategory, IsString ] );
 
-DeclareOperation( "DeactivateCaching",
+@DeclareOperation( "DeactivateCaching",
                   [ IsCapCategory, IsString ] );
 
 #! @Description
 #!  Sets the caching of <A>category</A> to <A>type</A>.
 #! @Arguments category, type
-DeclareGlobalFunction( "SetCachingOfCategory" );
+@DeclareGlobalFunction( "SetCachingOfCategory" );
 
 #! @BeginGroup
 #! @Description
 #!  Sets the caching of <A>category</A> to <C>weak</C>, <C>crisp</C> || <C>none</C>, respectively.
 #! @Arguments category
-DeclareGlobalFunction( "SetCachingOfCategoryWeak" );
+@DeclareGlobalFunction( "SetCachingOfCategoryWeak" );
 #! @Arguments category
-DeclareGlobalFunction( "SetCachingOfCategoryCrisp" );
+@DeclareGlobalFunction( "SetCachingOfCategoryCrisp" );
 #! @Arguments category
-DeclareGlobalFunction( "DeactivateCachingOfCategory" );
+@DeclareGlobalFunction( "DeactivateCachingOfCategory" );
 #! @EndGroup
 
 #! @BeginGroup
@@ -502,13 +596,13 @@ DeclareGlobalFunction( "DeactivateCachingOfCategory" );
 #!  Sets the default caching behaviour, all new categories will have their caching set to either
 #!  <C>weak</C>, <C>crisp</C>, || <C>none</C>. The default at startup is <C>weak</C>.
 #! @Arguments type
-DeclareGlobalFunction( "SetDefaultCaching" );
+@DeclareGlobalFunction( "SetDefaultCaching" );
 #! @Arguments
-DeclareGlobalFunction( "SetDefaultCachingWeak" );
+@DeclareGlobalFunction( "SetDefaultCachingWeak" );
 #! @Arguments
-DeclareGlobalFunction( "SetDefaultCachingCrisp" );
+@DeclareGlobalFunction( "SetDefaultCachingCrisp" );
 #! @Arguments
-DeclareGlobalFunction( "DeactivateDefaultCaching" );
+@DeclareGlobalFunction( "DeactivateDefaultCaching" );
 #! @EndGroup
 
 ####################################
@@ -525,23 +619,23 @@ DeclareGlobalFunction( "DeactivateDefaultCaching" );
 #!  With the following commands you can either enable the full checks, the partial checks or, for performance, disable the checks altogether.
 #!  You can do this for input checks, output checks || for both at once.
 #! @Arguments category
-DeclareGlobalFunction( "DisableInputSanityChecks" );
+@DeclareGlobalFunction( "DisableInputSanityChecks" );
 #! @Arguments category
-DeclareGlobalFunction( "DisableOutputSanityChecks" );
+@DeclareGlobalFunction( "DisableOutputSanityChecks" );
 #! @Arguments category
-DeclareGlobalFunction( "EnablePartialInputSanityChecks" );
+@DeclareGlobalFunction( "EnablePartialInputSanityChecks" );
 #! @Arguments category
-DeclareGlobalFunction( "EnablePartialOutputSanityChecks" );
+@DeclareGlobalFunction( "EnablePartialOutputSanityChecks" );
 #! @Arguments category
-DeclareGlobalFunction( "EnableFullInputSanityChecks" );
+@DeclareGlobalFunction( "EnableFullInputSanityChecks" );
 #! @Arguments category
-DeclareGlobalFunction( "EnableFullOutputSanityChecks" );
+@DeclareGlobalFunction( "EnableFullOutputSanityChecks" );
 #! @Arguments category
-DeclareGlobalFunction( "DisableSanityChecks" );
+@DeclareGlobalFunction( "DisableSanityChecks" );
 #! @Arguments category
-DeclareGlobalFunction( "EnablePartialSanityChecks" );
+@DeclareGlobalFunction( "EnablePartialSanityChecks" );
 #! @Arguments category
-DeclareGlobalFunction( "EnableFullSanityChecks" );
+@DeclareGlobalFunction( "EnableFullSanityChecks" );
 #! @EndGroup
 
 ####################################
@@ -557,15 +651,15 @@ DeclareGlobalFunction( "EnableFullSanityChecks" );
 #!   Caution: If a primitive operation calls another primitive operation, the runtime
 #!   of the later (including sanity checks etc.) is also included ⥉ the runtime of the former.
 #! @Arguments category
-DeclareGlobalFunction( "EnableTimingStatistics" );
+@DeclareGlobalFunction( "EnableTimingStatistics" );
 #! @Arguments category
-DeclareGlobalFunction( "DisableTimingStatistics" );
+@DeclareGlobalFunction( "DisableTimingStatistics" );
 #! @Arguments category
-DeclareGlobalFunction( "ResetTimingStatistics" );
+@DeclareGlobalFunction( "ResetTimingStatistics" );
 #! @Arguments category
-DeclareGlobalFunction( "DisplayTimingStatistics" );
+@DeclareGlobalFunction( "DisplayTimingStatistics" );
 #! @Arguments category
-DeclareGlobalFunction( "BrowseTimingStatistics" );
+@DeclareGlobalFunction( "BrowseTimingStatistics" );
 #! @Arguments category
 #! @EndGroup
 
@@ -587,9 +681,9 @@ DeclareGlobalFunction( "BrowseTimingStatistics" );
 #!  lying ⥉ <C>IsAttributeStoringRep</C> (with suitable attributes <C>Source</C> && <C>Range</C>
 #!  if the output should be a morphism || a twocell).
 #! @Arguments C
-DeclareGlobalFunction( "EnableAddForCategoricalOperations" );
+@DeclareGlobalFunction( "EnableAddForCategoricalOperations" );
 #! @Arguments C
-DeclareGlobalFunction( "DisableAddForCategoricalOperations" );
+@DeclareGlobalFunction( "DisableAddForCategoricalOperations" );
 #! @EndGroup
 
 
@@ -630,11 +724,11 @@ DeclareGlobalFunction( "DisableAddForCategoricalOperations" );
 #! The output is a LaTeX string  s  (without enclosing dollar signs) that may be used to print out  c  nicely.
 #! @Returns a string
 #! @Arguments c
-DeclareOperation( "LaTeXOutput", [ IsCapCategoryCell ] );
+@DeclareOperation( "LaTeXOutput", [ IsCapCategoryCell ] );
 
 #! @Description
 #! The argument is a category  C .
 #! The output is a LaTeX string  s  (without enclosing dollar signs) that may be used to print out  C  nicely.
 #! @Returns a string
 #! @Arguments C
-DeclareOperation( "LaTeXOutput", [ IsCapCategory ] );
+@DeclareOperation( "LaTeXOutput", [ IsCapCategory ] );

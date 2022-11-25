@@ -6,7 +6,7 @@
 #! @Chapter Prepare functions
 
 ##
-BindGlobal( "CAP_PREFUNCTION_BINARY_DIRECT_PRODUCT_TO_DIRECT_PRODUCT",
+@BindGlobal( "CAP_PREFUNCTION_BINARY_DIRECT_PRODUCT_TO_DIRECT_PRODUCT",
   function( binary_direct_product_func, category )
     return function( cat, diagram )
       local direct_product, i;
@@ -35,7 +35,7 @@ CAPAddPrepareFunction( CAP_PREFUNCTION_BINARY_DIRECT_PRODUCT_TO_DIRECT_PRODUCT,
                        "turns a binary coproduct function into a n-ary coproduct function" );
 
 ##
-BindGlobal( "GET_CAP_PREFUNCTION_PROJECTION_IN_FACTOR_OF_BINARY_DIRECT_PRODUCT_TO_PROJECTION_IN_FACTOR_OF_DIRECT_PRODUCT",
+@BindGlobal( "GET_CAP_PREFUNCTION_PROJECTION_IN_FACTOR_OF_BINARY_DIRECT_PRODUCT_TO_PROJECTION_IN_FACTOR_OF_DIRECT_PRODUCT",
   function( direct_product_method, limit_or_colimit )
     return function( projection_in_factor_of_binary_direct_product_func, category )
         return function( cat, diagram, projection_number )
@@ -87,7 +87,7 @@ CAPAddPrepareFunction( GET_CAP_PREFUNCTION_PROJECTION_IN_FACTOR_OF_BINARY_DIRECT
                        [ "Coproduct" ] );
 
 ##
-BindGlobal( "CAP_PREFUNCTION_UNIVERSAL_MORPHISM_INTO_BINARY_DIRECT_PRODUCT_TO_UNIVERSAL_MORPHISM_INTO_DIRECT_PRODUCT",
+@BindGlobal( "CAP_PREFUNCTION_UNIVERSAL_MORPHISM_INTO_BINARY_DIRECT_PRODUCT_TO_UNIVERSAL_MORPHISM_INTO_DIRECT_PRODUCT",
   function( universal_morphism_into_binary_direct_product_func, category )
     return function( cat, diagram, test_object, tau )
       local universal_morphism, i;

@@ -113,19 +113,19 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 #!  <A>A</A> && <A>B</A> are the source && target of the functor,
 #!  && they can be given as objects ⥉ <C>CapCat</C> || as a CAP-category.
 #! @Arguments name, A, B
-DeclareOperation( "CapFunctor",
+@DeclareOperation( "CapFunctor",
                   [ IsString, IsCapCategory, IsCapCategory ] );
 
 #! @Arguments name,A,B
-DeclareOperation( "CapFunctor",
+@DeclareOperation( "CapFunctor",
                   [ IsString, IsCapCategoryAsCatObject, IsCapCategory ] );
 
 #! @Arguments name,A,B
-DeclareOperation( "CapFunctor",
+@DeclareOperation( "CapFunctor",
                   [ IsString, IsCapCategory, IsCapCategoryAsCatObject ] );
 
 #! @Arguments name,A,B
-DeclareOperation( "CapFunctor",
+@DeclareOperation( "CapFunctor",
                   [ IsString, IsCapCategoryAsCatObject, IsCapCategoryAsCatObject ] );
 
 #! @EndGroup
@@ -149,11 +149,11 @@ DeclareOperation( "CapFunctor",
 #!  with source given by the product category  D_1 \times ... \times D_n ,
 #!  where  D_i == A_i  if  b_i == \\mathtt[false] , &&  D_i == A_i^[\mathrm[op]]  otherwise.
 #! @Arguments name, list, B
-DeclareOperation( "CapFunctor",
+@DeclareOperation( "CapFunctor",
                   [ IsString, IsList, IsCapCategory ] );
 
 #! @Arguments name, list, B
-DeclareOperation( "CapFunctor",
+@DeclareOperation( "CapFunctor",
                   [ IsString, IsList, IsCapCategoryAsCatObject ] );
 #! @EndGroup
 
@@ -186,10 +186,10 @@ DeclareOperation( "CapFunctor",
 #!  In this case the output only has to be a GAP object ⥉ <C>IsAttributeStoringRep</C>,
 #!  which will be automatically added as an object to the range of the functor.
 #! @Arguments F, f
-DeclareOperation( "AddObjectFunction",
+@DeclareOperation( "AddObjectFunction",
                   [ IsCapFunctor, IsFunction ] );
 
-DeclareOperation( "AddObjectFunction",
+@DeclareOperation( "AddObjectFunction",
                   [ IsCapFunctor, IsList ] );
 
 
@@ -224,10 +224,10 @@ DeclareOperation( "AddObjectFunction",
 #!  (with attributes <C>Source</C> && <C>Range</C> containing also GAP objects ⥉ <C>IsAttributeStoringRep</C>),
 #!  which will be automatically added as a morphism to the range of the functor.
 #! @Arguments F, f
-DeclareOperation( "AddMorphismFunction",
+@DeclareOperation( "AddMorphismFunction",
                   [ IsCapFunctor, IsFunction ] );
 
-DeclareOperation( "AddMorphismFunction",
+@DeclareOperation( "AddMorphismFunction",
                   [ IsCapFunctor, IsList ] );
 
 #! @Description
@@ -255,7 +255,7 @@ DeclareOperation( "AddMorphismFunction",
 #!     ⥉ the input signature of <A>func</A>.
 #! @Returns IsCapCategoryCell
 #! @Arguments func, A[, B, ...]
-DeclareGlobalFunction( "ApplyFunctor" );
+@DeclareGlobalFunction( "ApplyFunctor" );
 
 #! @EndGroup
 
@@ -307,7 +307,7 @@ DeclareGlobalFunction( "ApplyFunctor" );
 #! This function can only be called once for each functor, every further call will be ignored.
 #! @Returns nothing
 #! @Arguments F, s
-DeclareOperation( "InstallFunctor",
+@DeclareOperation( "InstallFunctor",
                   [ IsCapFunctor, IsString ] );
 
 @DeclareAttribute( "ObjectFunctionName",
@@ -393,10 +393,10 @@ DeclareOperation( "InstallFunctor",
 #!  set automatically from the names of the functors
 #! @Arguments [name,],F,G
 #! @Returns a natural transformation
-DeclareOperation( "NaturalTransformation",
+@DeclareOperation( "NaturalTransformation",
                   [ IsCapFunctor, IsCapFunctor ] );
 
-DeclareOperation( "NaturalTransformation",
+@DeclareOperation( "NaturalTransformation",
                   [ IsString, IsCapFunctor, IsCapFunctor ] );
 #! @EndGroup
 
@@ -416,10 +416,10 @@ DeclareOperation( "NaturalTransformation",
 #!  The function || each function ⥉ the list should take three arguments. If  N: F \rightarrow G ,
 #!  the arguments should be  F(A), A, G(A) . The ouptput should be a morphism,  F(A) \rightarrow G(A) .
 #! @Arguments N, func
-DeclareOperation( "AddNaturalTransformationFunction",
+@DeclareOperation( "AddNaturalTransformationFunction",
                   [ IsCapNaturalTransformation, IsFunction ] );
 
-DeclareOperation( "AddNaturalTransformationFunction",
+@DeclareOperation( "AddNaturalTransformationFunction",
                   [ IsCapNaturalTransformation, IsList ] );
 
 #! @EndGroup
@@ -430,13 +430,13 @@ DeclareOperation( "AddNaturalTransformationFunction",
 #!  <A>N</A>.
 #! @Arguments N, A
 #! @Returns a morphism
-DeclareGlobalFunction( "ApplyNaturalTransformation" );
+@DeclareGlobalFunction( "ApplyNaturalTransformation" );
 
 #! @Description
 #!  Installs the natural transformation <A>N</A> as operation with the name <A>name</A>.
 #!  Argument for this operation is an object, output is a morphism.
 #! @Arguments N, name
-DeclareOperation( "InstallNaturalTransformation",
+@DeclareOperation( "InstallNaturalTransformation",
                   [ IsCapNaturalTransformation, IsString ] );
 
 #! @Description
@@ -444,7 +444,7 @@ DeclareOperation( "InstallNaturalTransformation",
 #!  the functor <A>F</A>.
 #! @Arguments N,F
 #! @Returns a natural transformation
-DeclareOperationWithCache( "HorizontalPreComposeNaturalTransformationWithFunctor",
+@DeclareOperation( "HorizontalPreComposeNaturalTransformationWithFunctor",
                            [ IsCapNaturalTransformation, IsCapFunctor ] );
 
 #! @Description
@@ -452,7 +452,7 @@ DeclareOperationWithCache( "HorizontalPreComposeNaturalTransformationWithFunctor
 #!  the natural transformation <A>N</A>.
 #! @Arguments F,N
 #! @Returns a natural transformation
-DeclareOperationWithCache( "HorizontalPreComposeFunctorWithNaturalTransformation",
+@DeclareOperation( "HorizontalPreComposeFunctorWithNaturalTransformation",
                            [ IsCapFunctor, IsCapNaturalTransformation ] );
 
 

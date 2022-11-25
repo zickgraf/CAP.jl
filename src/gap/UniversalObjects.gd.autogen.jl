@@ -68,7 +68,7 @@
 #! The output is the kernel embedding  \iota: K \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](K,A) 
 #! @Arguments alpha, K
-DeclareOperation( "KernelEmbeddingWithGivenKernelObject",
+@DeclareOperation( "KernelEmbeddingWithGivenKernelObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -76,7 +76,7 @@ DeclareOperation( "KernelEmbeddingWithGivenKernelObject",
 #! The output is the zero morphism  0: \mathrm[KernelObject](\alpha) \rightarrow B .
 #! @Returns the zero morphism ⥉  \mathrm[Hom]( \mathrm[KernelObject](\alpha), B ) 
 #! @Arguments alpha
-DeclareOperation( "MorphismFromKernelObjectToSink",
+@DeclareOperation( "MorphismFromKernelObjectToSink",
                   [ IsCapCategoryMorphism ] );
 
 #! @Description
@@ -85,7 +85,7 @@ DeclareOperation( "MorphismFromKernelObjectToSink",
 #! The output is the zero morphism  0: K \rightarrow B .
 #! @Returns the zero morphism ⥉  \mathrm[Hom]( K, B ) 
 #! @Arguments alpha, K
-DeclareOperation( "MorphismFromKernelObjectToSinkWithGivenKernelObject",
+@DeclareOperation( "MorphismFromKernelObjectToSinkWithGivenKernelObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -96,7 +96,7 @@ DeclareOperation( "MorphismFromKernelObjectToSinkWithGivenKernelObject",
 #! given by the universal property of the kernel.
 #! @Returns a morphism ⥉  \mathrm[Hom](T,\mathrm[KernelObject](\alpha)) 
 #! @Arguments alpha, T, tau
-DeclareOperation( "KernelLift",
+@DeclareOperation( "KernelLift",
                   [ IsCapCategoryMorphism, IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -108,7 +108,7 @@ DeclareOperation( "KernelLift",
 #! given by the universal property of the kernel.
 #! @Returns a morphism ⥉  \mathrm[Hom](T,K) 
 #! @Arguments alpha, T, tau, K
-DeclareOperation( "KernelLiftWithGivenKernelObject",
+@DeclareOperation( "KernelLiftWithGivenKernelObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -118,7 +118,7 @@ DeclareOperation( "KernelLiftWithGivenKernelObject",
 #! given by the functoriality of the kernel.
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[KernelObject]( \alpha ), \mathrm[KernelObject]( \alpha' ) ) 
 #! @Arguments L
-DeclareOperation( "KernelObjectFunctorial",
+@DeclareOperation( "KernelObjectFunctorial",
                   [ IsList ] );
 
 #! @Description
@@ -129,7 +129,7 @@ DeclareOperation( "KernelObjectFunctorial",
 #! given by the functoriality of the kernel.
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[KernelObject]( \alpha ), \mathrm[KernelObject]( \alpha' ) ) 
 #! @Arguments alpha, mu, alpha_prime
-DeclareOperation( "KernelObjectFunctorial",
+@DeclareOperation( "KernelObjectFunctorial",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -142,7 +142,7 @@ DeclareOperation( "KernelObjectFunctorial",
 #! given by the functoriality of the kernel.
 #! @Returns a morphism ⥉  \mathrm[Hom]( s, r ) 
 #! @Arguments s, alpha, mu, alpha_prime, r
-DeclareOperation( "KernelObjectFunctorialWithGivenKernelObjects",
+@DeclareOperation( "KernelObjectFunctorialWithGivenKernelObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, 
                     IsCapCategoryMorphism, IsCapCategoryObject ] );
 
@@ -156,7 +156,7 @@ DeclareOperation( "KernelObjectFunctorialWithGivenKernelObjects",
 #! given by the functoriality of the kernel.
 #! @Returns a morphism ⥉  \mathrm[Hom]( s, r ) 
 #! @Arguments s, alpha, mu, nu, alpha_prime, r
-DeclareOperation( "KernelObjectFunctorialWithGivenKernelObjects",
+@DeclareOperation( "KernelObjectFunctorialWithGivenKernelObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism,
                     IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
@@ -226,7 +226,7 @@ DeclareOperation( "KernelObjectFunctorialWithGivenKernelObjects",
 #! The output is the cokernel projection  \epsilon: B \rightarrow \mathrm[CokernelObject]( \alpha ) .
 #! @Returns a morphism ⥉  \mathrm[Hom](B, K) 
 #! @Arguments alpha, K
-DeclareOperation( "CokernelProjectionWithGivenCokernelObject",
+@DeclareOperation( "CokernelProjectionWithGivenCokernelObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -234,7 +234,7 @@ DeclareOperation( "CokernelProjectionWithGivenCokernelObject",
 #! The output is the zero morphism  0: A \rightarrow \mathrm[CokernelObject](\alpha) .
 #! @Returns the zero morphism ⥉  \mathrm[Hom]( A, \mathrm[CokernelObject]( \alpha ) ) .
 #! @Arguments alpha
-DeclareOperation( "MorphismFromSourceToCokernelObject",
+@DeclareOperation( "MorphismFromSourceToCokernelObject",
                   [ IsCapCategoryMorphism ] );
 
 #! @Description
@@ -243,7 +243,7 @@ DeclareOperation( "MorphismFromSourceToCokernelObject",
 #! The output is the zero morphism  0: A \rightarrow K .
 #! @Returns the zero morphism ⥉  \mathrm[Hom]( A, K ) .
 #! @Arguments alpha, K
-DeclareOperation( "MorphismFromSourceToCokernelObjectWithGivenCokernelObject",
+@DeclareOperation( "MorphismFromSourceToCokernelObjectWithGivenCokernelObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -254,7 +254,7 @@ DeclareOperation( "MorphismFromSourceToCokernelObjectWithGivenCokernelObject",
 #! given by the universal property of the cokernel.
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[CokernelObject](\alpha),T) 
 #! @Arguments alpha, T, tau
-DeclareOperation( "CokernelColift",
+@DeclareOperation( "CokernelColift",
                   [ IsCapCategoryMorphism, IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -266,7 +266,7 @@ DeclareOperation( "CokernelColift",
 #! given by the universal property of the cokernel.
 #! @Returns a morphism ⥉  \mathrm[Hom](K,T) 
 #! @Arguments alpha, T, tau, K
-DeclareOperation( "CokernelColiftWithGivenCokernelObject",
+@DeclareOperation( "CokernelColiftWithGivenCokernelObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -276,7 +276,7 @@ DeclareOperation( "CokernelColiftWithGivenCokernelObject",
 #! given by the functoriality of the cokernel.
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[CokernelObject]( \alpha ), \mathrm[CokernelObject]( \alpha' )) 
 #! @Arguments L
-DeclareOperation( "CokernelObjectFunctorial",
+@DeclareOperation( "CokernelObjectFunctorial",
                   [ IsList ] );
 
 #! @Description
@@ -287,7 +287,7 @@ DeclareOperation( "CokernelObjectFunctorial",
 #! given by the functoriality of the cokernel.
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[CokernelObject]( \alpha ), \mathrm[CokernelObject]( \alpha' )) 
 #! @Arguments alpha, nu, alpha_prime
-DeclareOperation( "CokernelObjectFunctorial",
+@DeclareOperation( "CokernelObjectFunctorial",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -300,7 +300,7 @@ DeclareOperation( "CokernelObjectFunctorial",
 #! given by the functoriality of the cokernel.
 #! @Returns a morphism ⥉  \mathrm[Hom](s, r) 
 #! @Arguments s, alpha, nu, alpha_prime, r
-DeclareOperation( "CokernelObjectFunctorialWithGivenCokernelObjects",
+@DeclareOperation( "CokernelObjectFunctorialWithGivenCokernelObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, 
                     IsCapCategoryMorphism, IsCapCategoryObject ] );
 
@@ -314,7 +314,7 @@ DeclareOperation( "CokernelObjectFunctorialWithGivenCokernelObjects",
 #! given by the functoriality of the cokernel.
 #! @Returns a morphism ⥉  \mathrm[Hom](s, r) 
 #! @Arguments s, alpha, mu, nu, alpha_prime, r
-DeclareOperation( "CokernelObjectFunctorialWithGivenCokernelObjects",
+@DeclareOperation( "CokernelObjectFunctorialWithGivenCokernelObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism,
                     IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
@@ -370,7 +370,7 @@ DeclareOperation( "CokernelObjectFunctorialWithGivenCokernelObjects",
 #! The output is the universal morphism  u_[\mathrm[out]]: Z \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](Z, A) 
 #! @Arguments A, Z
-DeclareOperation( "UniversalMorphismFromZeroObjectWithGivenZeroObject",
+@DeclareOperation( "UniversalMorphismFromZeroObjectWithGivenZeroObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -387,7 +387,7 @@ DeclareOperation( "UniversalMorphismFromZeroObjectWithGivenZeroObject",
 #! The output is the universal morphism  u_[\mathrm[in]]: A \rightarrow Z .
 #! @Returns a morphism ⥉  \mathrm[Hom](A, Z) 
 #! @Arguments A, Z
-DeclareOperation( "UniversalMorphismIntoZeroObjectWithGivenZeroObject",
+@DeclareOperation( "UniversalMorphismIntoZeroObjectWithGivenZeroObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -396,7 +396,7 @@ DeclareOperation( "UniversalMorphismIntoZeroObjectWithGivenZeroObject",
 #! @Arguments A
 # DeclareAttribute( "MorphismFromZeroObject", IsCapCategoryObject );
 # this comment stops AutoDoc from trying to parse the next line (which it can't at the moment)
-DeclareSynonymAttr( "MorphismFromZeroObject",
+@DeclareSynonymAttr( "MorphismFromZeroObject",
                     UniversalMorphismFromZeroObject );
 
 #! @Description
@@ -405,7 +405,7 @@ DeclareSynonymAttr( "MorphismFromZeroObject",
 #! @Arguments A
 # DeclareAttribute( "MorphismIntoZeroObject", IsCapCategoryObject );
 # this comment stops AutoDoc from trying to parse the next line (which it can't at the moment)
-DeclareSynonymAttr( "MorphismIntoZeroObject",
+@DeclareSynonymAttr( "MorphismIntoZeroObject",
                     UniversalMorphismIntoZeroObject );
 
 #! @Description
@@ -453,7 +453,7 @@ DeclareSynonymAttr( "MorphismIntoZeroObject",
 #! The output is the unique morphism  zero_object1 \rightarrow zero_object2 .
 #! @Returns a morphism ⥉  \mathrm[Hom](zero_object1, zero_object2) 
 #! @Arguments C, zero_object1, zero_object2
-DeclareOperation( "ZeroObjectFunctorialWithGivenZeroObjects",
+@DeclareOperation( "ZeroObjectFunctorialWithGivenZeroObjects",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -511,7 +511,7 @@ DeclareOperation( "ZeroObjectFunctorialWithGivenZeroObjects",
 #! The output is the universal morphism  u(A): A \rightarrow T .
 #! @Returns a morphism ⥉  \mathrm[Hom]( A, T ) 
 #! @Arguments A, T
-DeclareOperation( "UniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
+@DeclareOperation( "UniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -527,7 +527,7 @@ DeclareOperation( "UniversalMorphismIntoTerminalObjectWithGivenTerminalObject",
 #! The output is the unique morphism  terminal_object1 \rightarrow terminal_object2 .
 #! @Returns a morphism ⥉  \mathrm[Hom](terminal_object1, terminal_object2) 
 #! @Arguments C, terminal_object1, terminal_object2
-DeclareOperation( "TerminalObjectFunctorialWithGivenTerminalObjects",
+@DeclareOperation( "TerminalObjectFunctorialWithGivenTerminalObjects",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -586,7 +586,7 @@ DeclareOperation( "TerminalObjectFunctorialWithGivenTerminalObjects",
 #! The output is the universal morphism  u(A): \mathrm[InitialObject] \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[InitialObject] \rightarrow A) .
 #! @Arguments A, I
-DeclareOperation( "UniversalMorphismFromInitialObjectWithGivenInitialObject",
+@DeclareOperation( "UniversalMorphismFromInitialObjectWithGivenInitialObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -602,7 +602,7 @@ DeclareOperation( "UniversalMorphismFromInitialObjectWithGivenInitialObject",
 #! The output is the unique morphism  initial_object1 \rightarrow initial_object2 .
 #! @Returns a morphism ⥉  \mathrm[Hom](initial_object1, initial_object2) 
 #! @Arguments C, initial_object1, initial_object2
-DeclareOperation( "InitialObjectFunctorialWithGivenInitialObjects",
+@DeclareOperation( "InitialObjectFunctorialWithGivenInitialObjects",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -687,20 +687,20 @@ DeclareOperation( "InitialObjectFunctorialWithGivenInitialObjects",
 #! * The arguments are objects  S_1, \dots, S_n .
 #! The output is the direct sum  \bigoplus_[i=1]^n S_i .
 #! @Returns an object
-# DeclareGlobalFunction( "DirectSum" ); # already defined by GAP
+# @DeclareGlobalFunction( "DirectSum" ); # already defined by GAP
 
 #! @Description
 #! The argument is a list of objects  D == (S_1, \dots, S_n) .
 #! The output is the direct sum  \bigoplus_[i=1]^n S_i .
 #! @Returns an object
 #! @Arguments D
-DeclareOperation( "DirectSumOp",
+@DeclareOperation( "DirectSumOp",
                            [ IsList ] );
 
 # for compatibility with GAP's DirectSum function
-DeclareOperation( "DirectSumOp",
+@DeclareOperation( "DirectSumOp",
                   [ IsList, IsCapCategoryObject ] );
-DeclareOperation( "DirectSumOp",
+@DeclareOperation( "DirectSumOp",
                   [ IsList, IsCapCategory ] );
 
 #! @Description
@@ -710,7 +710,7 @@ DeclareOperation( "DirectSumOp",
 #!  \pi_k: \bigoplus_[i=1]^n S_i \rightarrow S_k .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \bigoplus_[i=1]^n S_i, S_k ) 
 #! @Arguments D,k
-DeclareOperation( "ProjectionInFactorOfDirectSum",
+@DeclareOperation( "ProjectionInFactorOfDirectSum",
                   [ IsList, IsInt ] );
 
 #! @Description
@@ -721,7 +721,7 @@ DeclareOperation( "ProjectionInFactorOfDirectSum",
 #!  \pi_k: S \rightarrow S_k .
 #! @Returns a morphism ⥉  \mathrm[Hom]( S, S_k ) 
 #! @Arguments D,k,S
-DeclareOperation( "ProjectionInFactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "ProjectionInFactorOfDirectSumWithGivenDirectSum",
                   [ IsList, IsInt, IsCapCategoryObject ] );
 
 #! @Description
@@ -731,7 +731,7 @@ DeclareOperation( "ProjectionInFactorOfDirectSumWithGivenDirectSum",
 #!  \iota_k: S_k \rightarrow \bigoplus_[i=1]^n S_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( S_k, \bigoplus_[i=1]^n S_i ) 
 #! @Arguments D,k
-DeclareOperation( "InjectionOfCofactorOfDirectSum",
+@DeclareOperation( "InjectionOfCofactorOfDirectSum",
                   [ IsList, IsInt ] );
 
 #! @Description
@@ -742,7 +742,7 @@ DeclareOperation( "InjectionOfCofactorOfDirectSum",
 #!  \iota_k: S_k \rightarrow S .
 #! @Returns a morphism ⥉  \mathrm[Hom]( S_k, S ) 
 #! @Arguments D,k,S
-DeclareOperation( "InjectionOfCofactorOfDirectSumWithGivenDirectSum",
+@DeclareOperation( "InjectionOfCofactorOfDirectSumWithGivenDirectSum",
                   [ IsList, IsInt, IsCapCategoryObject ] );
 
 #! @Description
@@ -755,10 +755,10 @@ DeclareOperation( "InjectionOfCofactorOfDirectSumWithGivenDirectSum",
 #! given by the universal property of the direct sum.
 #! @Returns a morphism ⥉  \mathrm[Hom](T, \bigoplus_[i=1]^n S_i) 
 #! @Arguments D, T, tau
-DeclareOperation( "UniversalMorphismIntoDirectSum",
+@DeclareOperation( "UniversalMorphismIntoDirectSum",
                   [ IsList, IsCapCategoryObject, IsList ] );
 
-DeclareOperation( "UniversalMorphismIntoDirectSum",
+@DeclareOperation( "UniversalMorphismIntoDirectSum",
                   [ IsList ] );
 
 #! @Description
@@ -771,7 +771,7 @@ DeclareOperation( "UniversalMorphismIntoDirectSum",
 #! given by the universal property of the direct sum.
 #! @Returns a morphism ⥉  \mathrm[Hom](T, S) 
 #! @Arguments D, T, tau, S
-DeclareOperation( "UniversalMorphismIntoDirectSumWithGivenDirectSum",
+@DeclareOperation( "UniversalMorphismIntoDirectSumWithGivenDirectSum",
                   [ IsList, IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -784,10 +784,10 @@ DeclareOperation( "UniversalMorphismIntoDirectSumWithGivenDirectSum",
 #! given by the universal property of the direct sum.
 #! @Returns a morphism ⥉  \mathrm[Hom](\bigoplus_[i=1]^n S_i, T) 
 #! @Arguments D, T, tau
-DeclareOperation( "UniversalMorphismFromDirectSum",
+@DeclareOperation( "UniversalMorphismFromDirectSum",
                   [ IsList, IsCapCategoryObject, IsList ] );
 
-DeclareOperation( "UniversalMorphismFromDirectSum",
+@DeclareOperation( "UniversalMorphismFromDirectSum",
                   [ IsList ] );
 
 #! @Description
@@ -800,7 +800,7 @@ DeclareOperation( "UniversalMorphismFromDirectSum",
 #! given by the universal property of the direct sum.
 #! @Returns a morphism ⥉  \mathrm[Hom](S, T) 
 #! @Arguments D, T, tau, S
-DeclareOperation( "UniversalMorphismFromDirectSumWithGivenDirectSum",
+@DeclareOperation( "UniversalMorphismFromDirectSumWithGivenDirectSum",
                   [ IsList, IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -809,7 +809,7 @@ DeclareOperation( "UniversalMorphismFromDirectSumWithGivenDirectSum",
 #!  \bigoplus_[i=1]^n S_i \rightarrow \prod_[i=1]^[n]S_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \bigoplus_[i=1]^n S_i, \prod_[i=1]^[n]S_i ) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromDirectSumToDirectProduct",
+@DeclareOperation( "IsomorphismFromDirectSumToDirectProduct",
                   [ IsList ] );
 
 #! @Description
@@ -818,7 +818,7 @@ DeclareOperation( "IsomorphismFromDirectSumToDirectProduct",
 #!  \prod_[i=1]^[n]S_i \rightarrow \bigoplus_[i=1]^n S_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \prod_[i=1]^[n]S_i, \bigoplus_[i=1]^n S_i ) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromDirectProductToDirectSum",
+@DeclareOperation( "IsomorphismFromDirectProductToDirectSum",
                   [ IsList ] );
 
 #! @Description
@@ -827,7 +827,7 @@ DeclareOperation( "IsomorphismFromDirectProductToDirectSum",
 #!  \bigoplus_[i=1]^n S_i \rightarrow \bigsqcup_[i=1]^[n]S_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \bigoplus_[i=1]^n S_i, \bigsqcup_[i=1]^[n]S_i ) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromDirectSumToCoproduct",
+@DeclareOperation( "IsomorphismFromDirectSumToCoproduct",
                   [ IsList ] );
 
 #! @Description
@@ -836,7 +836,7 @@ DeclareOperation( "IsomorphismFromDirectSumToCoproduct",
 #!  \bigsqcup_[i=1]^[n]S_i \rightarrow \bigoplus_[i=1]^n S_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \bigsqcup_[i=1]^[n]S_i, \bigoplus_[i=1]^n S_i ) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromCoproductToDirectSum",
+@DeclareOperation( "IsomorphismFromCoproductToDirectSum",
                   [ IsList ] );
 
 #! @Description
@@ -849,7 +849,7 @@ DeclareOperation( "IsomorphismFromCoproductToDirectSum",
 #! defined by the matrix  M .
 #! @Returns a morphism ⥉  \mathrm[Hom](\bigoplus_[i=1]^[m]A_i, \bigoplus_[j=1]^n B_j) 
 #! @Arguments diagram_S, M, diagram_T
-DeclareOperation( "MorphismBetweenDirectSums",
+@DeclareOperation( "MorphismBetweenDirectSums",
                   [ IsList, IsList, IsList ] );
 
 #! @Description
@@ -861,7 +861,7 @@ DeclareOperation( "MorphismBetweenDirectSums",
 #! defined by the matrix  M .
 #! @Returns a morphism ⥉  \mathrm[Hom](\bigoplus_[i=1]^[m]A_i, \bigoplus_[j=1]^n B_j) 
 #! @Arguments M
-DeclareOperation( "MorphismBetweenDirectSums",
+@DeclareOperation( "MorphismBetweenDirectSums",
                   [ IsList ] );
 
 #! @Description
@@ -876,7 +876,7 @@ DeclareOperation( "MorphismBetweenDirectSums",
 #! defined by the matrix  M .
 #! @Returns a morphism ⥉  \mathrm[Hom](\bigoplus_[i=1]^[m]A_i, \bigoplus_[j=1]^n B_j) 
 #! @Arguments S, diagram_S, M, diagram_T, T
-DeclareOperation( "MorphismBetweenDirectSumsWithGivenDirectSums",
+@DeclareOperation( "MorphismBetweenDirectSumsWithGivenDirectSums",
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -891,7 +891,7 @@ DeclareOperation( "MorphismBetweenDirectSumsWithGivenDirectSums",
 #! defined by the list  M  regarded as a matrix of dimension  m \times n .
 #! @Returns a morphism ⥉  \mathrm[Hom](\bigoplus_[i=1]^[m]A_i, \bigoplus_[j=1]^n B_j) 
 #! @Arguments M, m, n
-DeclareOperation( "MorphismBetweenDirectSums",
+@DeclareOperation( "MorphismBetweenDirectSums",
                            [ IsList, IsInt, IsInt ] );
 
 #! @Description
@@ -902,7 +902,7 @@ DeclareOperation( "MorphismBetweenDirectSums",
 #!  A \rightarrow S_k .
 #! @Returns a morphism ⥉  \mathrm[Hom](A, S_k) 
 #! @Arguments alpha, D, k
-DeclareOperation( "ComponentOfMorphismIntoDirectSum",
+@DeclareOperation( "ComponentOfMorphismIntoDirectSum",
                   [ IsCapCategoryMorphism, IsList, IsInt ] );
 
 #! @Description
@@ -913,7 +913,7 @@ DeclareOperation( "ComponentOfMorphismIntoDirectSum",
 #!  S_k \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom](S_k, A) 
 #! @Arguments alpha, D, k
-DeclareOperation( "ComponentOfMorphismFromDirectSum",
+@DeclareOperation( "ComponentOfMorphismFromDirectSum",
                   [ IsCapCategoryMorphism, IsList, IsInt ] );
 
 #! @Description
@@ -928,7 +928,7 @@ DeclareOperation( "ComponentOfMorphismFromDirectSum",
 #! given by the functoriality of the direct sum.
 #! @Returns a morphism ⥉  \mathrm[Hom]( \bigoplus_[i=1]^n S_i, \bigoplus_[i=1]^n S_i' ) 
 #! @Arguments source_diagram, L, range_diagram
-DeclareOperation( "DirectSumFunctorial",
+@DeclareOperation( "DirectSumFunctorial",
                   [ IsList, IsList, IsList ] );
 
 #! @Description
@@ -944,7 +944,7 @@ DeclareOperation( "DirectSumFunctorial",
 #! given by the functoriality of the direct sum.
 #! @Returns a morphism ⥉  \mathrm[Hom]( d_1, d_2 ) 
 #! @Arguments d_1, source_diagram, L, range_diagram, d_2
-DeclareOperation( "DirectSumFunctorialWithGivenDirectSums",
+@DeclareOperation( "DirectSumFunctorialWithGivenDirectSums",
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -1004,7 +1004,7 @@ DeclareOperation( "DirectSumFunctorialWithGivenDirectSums",
 #! The output is the coproduct  I_1 \bigsqcup I_2 .
 #! @Returns an object
 #! @Arguments I1, I2
-DeclareOperation( "Coproduct",
+@DeclareOperation( "Coproduct",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
@@ -1013,7 +1013,7 @@ DeclareOperation( "Coproduct",
 #! The output is the coproduct  I_1 \bigsqcup I_2 \bigsqcup I_3 .
 #! @Returns an object
 #! @Arguments I1, I2
-DeclareOperation( "Coproduct",
+@DeclareOperation( "Coproduct",
                   [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject ] );
 
 
@@ -1024,7 +1024,7 @@ DeclareOperation( "Coproduct",
 #!  \iota_k: I_k \rightarrow \bigsqcup_[i=1]^n I_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](I_k, \bigsqcup_[i=1]^n I_i) 
 #! @Arguments D,k
-DeclareOperation( "InjectionOfCofactorOfCoproduct",
+@DeclareOperation( "InjectionOfCofactorOfCoproduct",
                   [ IsList, IsInt ] );
 
 #! @Description
@@ -1035,7 +1035,7 @@ DeclareOperation( "InjectionOfCofactorOfCoproduct",
 #!  \iota_k: I_k \rightarrow I .
 #! @Returns a morphism ⥉  \mathrm[Hom](I_k, I) 
 #! @Arguments D,k,I
-DeclareOperation( "InjectionOfCofactorOfCoproductWithGivenCoproduct",
+@DeclareOperation( "InjectionOfCofactorOfCoproductWithGivenCoproduct",
                   [ IsList, IsInt, IsCapCategoryObject ] );
 
 #! @Description
@@ -1048,10 +1048,10 @@ DeclareOperation( "InjectionOfCofactorOfCoproductWithGivenCoproduct",
 #! given by the universal property of the coproduct.
 #! @Returns a morphism ⥉  \mathrm[Hom](\bigsqcup_[i=1]^n I_i, T) 
 #! @Arguments D, T, tau
-DeclareOperation( "UniversalMorphismFromCoproduct",
+@DeclareOperation( "UniversalMorphismFromCoproduct",
                   [ IsList, IsCapCategoryObject, IsList ] );
 
-DeclareOperation( "UniversalMorphismFromCoproduct",
+@DeclareOperation( "UniversalMorphismFromCoproduct",
                   [ IsList ] );
 
 #! @Description
@@ -1064,7 +1064,7 @@ DeclareOperation( "UniversalMorphismFromCoproduct",
 #! given by the universal property of the coproduct.
 #! @Returns a morphism ⥉  \mathrm[Hom](I, T) 
 #! @Arguments D, T, tau, I
-DeclareOperation( "UniversalMorphismFromCoproductWithGivenCoproduct",
+@DeclareOperation( "UniversalMorphismFromCoproductWithGivenCoproduct",
                   [ IsList, IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -1079,7 +1079,7 @@ DeclareOperation( "UniversalMorphismFromCoproductWithGivenCoproduct",
 #! given by the functoriality of the coproduct.
 #! @Returns a morphism ⥉  \mathrm[Hom](\bigsqcup_[i=1]^n I_i, \bigsqcup_[i=1]^n I_i') 
 #! @Arguments source_diagram, L, range_diagram
-DeclareOperation( "CoproductFunctorial",
+@DeclareOperation( "CoproductFunctorial",
                   [ IsList, IsList, IsList ] );
 
 #! @Description
@@ -1095,7 +1095,7 @@ DeclareOperation( "CoproductFunctorial",
 #! given by the functoriality of the coproduct.
 #! @Returns a morphism ⥉  \mathrm[Hom](s, r) 
 #! @Arguments s, source_diagram, L, range_diagram, r
-DeclareOperation( "CoproductFunctorialWithGivenCoproducts",
+@DeclareOperation( "CoproductFunctorialWithGivenCoproducts",
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -1148,20 +1148,20 @@ DeclareOperation( "CoproductFunctorialWithGivenCoproducts",
 #! * The arguments are objects  P_1, \dots, P_n .
 #! The output is the direct product  \prod_[i=1]^n P_i .
 #! @Returns an object
-# DeclareGlobalFunction( "DirectProduct" ); # already defined by GAP
+# @DeclareGlobalFunction( "DirectProduct" ); # already defined by GAP
 
 #! @Description
 #! The argument is a list of objects  D == ( P_1, \dots, P_n ) .
 #! The output is the direct product  \prod_[i=1]^n P_i .
 #! @Returns an object
 #! @Arguments D
-DeclareOperation( "DirectProductOp",
+@DeclareOperation( "DirectProductOp",
                            [ IsList ] );
 
 # for compatibility with GAP's DirectProduct function
-DeclareOperation( "DirectProductOp",
+@DeclareOperation( "DirectProductOp",
                   [ IsList, IsCapCategoryObject ] );
-DeclareOperation( "DirectProductOp",
+@DeclareOperation( "DirectProductOp",
                   [ IsList, IsCapCategory ] );
 
 #! @Description
@@ -1171,7 +1171,7 @@ DeclareOperation( "DirectProductOp",
 #!  \pi_k: \prod_[i=1]^n P_i \rightarrow P_k .
 #! @Returns a morphism ⥉  \mathrm[Hom](\prod_[i=1]^n P_i, P_k) 
 #! @Arguments D,k
-DeclareOperation( "ProjectionInFactorOfDirectProduct",
+@DeclareOperation( "ProjectionInFactorOfDirectProduct",
                   [ IsList, IsInt ] );
 
 #! @Description
@@ -1182,7 +1182,7 @@ DeclareOperation( "ProjectionInFactorOfDirectProduct",
 #!  \pi_k: P \rightarrow P_k .
 #! @Returns a morphism ⥉  \mathrm[Hom](P, P_k) 
 #! @Arguments D,k,P
-DeclareOperation( "ProjectionInFactorOfDirectProductWithGivenDirectProduct",
+@DeclareOperation( "ProjectionInFactorOfDirectProductWithGivenDirectProduct",
                   [ IsList, IsInt, IsCapCategoryObject ] );
 
 #! @Description
@@ -1195,10 +1195,10 @@ DeclareOperation( "ProjectionInFactorOfDirectProductWithGivenDirectProduct",
 #! given by the universal property of the direct product.
 #! @Returns a morphism ⥉  \mathrm[Hom](T, \prod_[i=1]^n P_i) 
 #! @Arguments D, T, tau
-DeclareOperation( "UniversalMorphismIntoDirectProduct",
+@DeclareOperation( "UniversalMorphismIntoDirectProduct",
                   [ IsList, IsCapCategoryObject, IsList ] );
 
-DeclareOperation( "UniversalMorphismIntoDirectProduct",
+@DeclareOperation( "UniversalMorphismIntoDirectProduct",
                   [ IsList ] );
 
 #! @Description
@@ -1211,7 +1211,7 @@ DeclareOperation( "UniversalMorphismIntoDirectProduct",
 #! given by the universal property of the direct product.
 #! @Returns a morphism ⥉  \mathrm[Hom](T, \prod_[i=1]^n P_i) 
 #! @Arguments D, T, tau, P
-DeclareOperation( "UniversalMorphismIntoDirectProductWithGivenDirectProduct",
+@DeclareOperation( "UniversalMorphismIntoDirectProductWithGivenDirectProduct",
                   [ IsList, IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -1226,7 +1226,7 @@ DeclareOperation( "UniversalMorphismIntoDirectProductWithGivenDirectProduct",
 #! given by the functoriality of the direct product.
 #! @Returns a morphism ⥉  \mathrm[Hom]( \prod_[i=1]^n P_i, \prod_[i=1]^n P_i' ) 
 #! @Arguments source_diagram, L, range_diagram
-DeclareOperation( "DirectProductFunctorial",
+@DeclareOperation( "DirectProductFunctorial",
                   [ IsList, IsList, IsList ] );
 
 #! @Description
@@ -1242,7 +1242,7 @@ DeclareOperation( "DirectProductFunctorial",
 #! given by the functoriality of the direct product.
 #! @Returns a morphism ⥉  \mathrm[Hom]( s, r ) 
 #! @Arguments s, source_diagram, L, range_diagram r
-DeclareOperation( "DirectProductFunctorialWithGivenDirectProducts",
+@DeclareOperation( "DirectProductFunctorialWithGivenDirectProducts",
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -1306,7 +1306,7 @@ DeclareOperation( "DirectProductFunctorialWithGivenDirectProducts",
 #! * The arguments are morphisms  \beta_1: A \rightarrow B, \dots, \beta_n: A \rightarrow B .
 #! The output is the equalizer  \mathrm[Equalizer](D) .
 #! @Returns an object
-DeclareGlobalFunction( "Equalizer" );
+@DeclareGlobalFunction( "Equalizer" );
 
 #! @Description
 #! The arguments are an object  A  && list of morphisms  D == ( \beta_i: A \rightarrow B )_[i == 1 \dots n] .
@@ -1314,7 +1314,7 @@ DeclareGlobalFunction( "Equalizer" );
 #! The output is the equalizer  \mathrm[Equalizer](D) .
 #! @Returns an object
 #! @Arguments A, D
-DeclareOperation( "EqualizerOp",
+@DeclareOperation( "EqualizerOp",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -1324,7 +1324,7 @@ DeclareOperation( "EqualizerOp",
 #!  \iota: \mathrm[Equalizer](D) \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[Equalizer](D), A ) 
 #! @Arguments A, D
-DeclareOperation( "EmbeddingOfEqualizer",
+@DeclareOperation( "EmbeddingOfEqualizer",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -1335,7 +1335,7 @@ DeclareOperation( "EmbeddingOfEqualizer",
 #!  \iota: E \rightarrow A .
 #! @Returns a morphism ⥉  \mathrm[Hom]( E, A ) 
 #! @Arguments A, D, E
-DeclareOperation( "EmbeddingOfEqualizerWithGivenEqualizer",
+@DeclareOperation( "EmbeddingOfEqualizerWithGivenEqualizer",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -1345,7 +1345,7 @@ DeclareOperation( "EmbeddingOfEqualizerWithGivenEqualizer",
 #! of the embedding  \iota: \mathrm[Equalizer](D) \rightarrow A  &&  \beta_1 .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[Equalizer](D), B ) 
 #! @Arguments A, D
-DeclareOperation( "MorphismFromEqualizerToSink",
+@DeclareOperation( "MorphismFromEqualizerToSink",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -1356,7 +1356,7 @@ DeclareOperation( "MorphismFromEqualizerToSink",
 #! of the embedding  \iota: E \rightarrow A  &&  \beta_1 .
 #! @Returns a morphism ⥉  \mathrm[Hom]( E, B ) 
 #! @Arguments A, D, E
-DeclareOperation( "MorphismFromEqualizerToSinkWithGivenEqualizer",
+@DeclareOperation( "MorphismFromEqualizerToSinkWithGivenEqualizer",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -1370,7 +1370,7 @@ DeclareOperation( "MorphismFromEqualizerToSinkWithGivenEqualizer",
 #! given by the universal property of the equalizer.
 #! @Returns a morphism ⥉  \mathrm[Hom]( T, \mathrm[Equalizer](D) ) 
 #! @Arguments A, D, T, tau
-DeclareOperation( "UniversalMorphismIntoEqualizer",
+@DeclareOperation( "UniversalMorphismIntoEqualizer",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -1385,7 +1385,7 @@ DeclareOperation( "UniversalMorphismIntoEqualizer",
 #! given by the universal property of the equalizer.
 #! @Returns a morphism ⥉  \mathrm[Hom]( T, E ) 
 #! @Arguments A, D, T, tau, E
-DeclareOperation( "UniversalMorphismIntoEqualizerWithGivenEqualizer",
+@DeclareOperation( "UniversalMorphismIntoEqualizerWithGivenEqualizer",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -1402,7 +1402,7 @@ DeclareOperation( "UniversalMorphismIntoEqualizerWithGivenEqualizer",
 #! given by the functorality of the equalizer.
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[Equalizer]( ( \beta_i )_[i=1 \dots n] ), \mathrm[Equalizer]( ( \beta_i' )_[i=1 \dots n] )) 
 #! @Arguments Ls, mu, Lr
-DeclareOperation( "EqualizerFunctorial",
+@DeclareOperation( "EqualizerFunctorial",
                   [ IsList, IsCapCategoryMorphism, IsList ] );
 
 #! @Description
@@ -1421,7 +1421,7 @@ DeclareOperation( "EqualizerFunctorial",
 #! given by the functorality of the equalizer.
 #! @Returns a morphism ⥉  \mathrm[Hom](s, r) 
 #! @Arguments s, Ls, mu, Lr, r
-DeclareOperation( "EqualizerFunctorialWithGivenEqualizers",
+@DeclareOperation( "EqualizerFunctorialWithGivenEqualizers",
                   [ IsCapCategoryObject, IsList, IsCapCategoryMorphism, IsList, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -1485,7 +1485,7 @@ DeclareOperation( "EqualizerFunctorialWithGivenEqualizers",
 #! * The arguments are morphisms  \beta_1: B \rightarrow A, \dots, \beta_n: B \rightarrow A .
 #! The output is the coequalizer  \mathrm[Coequalizer](D) .
 #! @Returns an object
-DeclareGlobalFunction( "Coequalizer" );
+@DeclareGlobalFunction( "Coequalizer" );
 
 
 #! @Description
@@ -1494,7 +1494,7 @@ DeclareGlobalFunction( "Coequalizer" );
 #! The output is the coequalizer  \mathrm[Coequalizer](D) .
 #! @Returns an object
 #! @Arguments A, D
-DeclareOperation( "CoequalizerOp",
+@DeclareOperation( "CoequalizerOp",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -1504,7 +1504,7 @@ DeclareOperation( "CoequalizerOp",
 #!  \pi: A \rightarrow \mathrm[Coequalizer]( D ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( A, \mathrm[Coequalizer]( D ) ) .
 #! @Arguments A, D
-DeclareOperation( "ProjectionOntoCoequalizer",
+@DeclareOperation( "ProjectionOntoCoequalizer",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -1515,7 +1515,7 @@ DeclareOperation( "ProjectionOntoCoequalizer",
 #!  \pi: A \rightarrow C .
 #! @Returns a morphism ⥉  \mathrm[Hom]( A, C ) .
 #! @Arguments A, D, C
-DeclareOperation( "ProjectionOntoCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "ProjectionOntoCoequalizerWithGivenCoequalizer",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -1525,7 +1525,7 @@ DeclareOperation( "ProjectionOntoCoequalizerWithGivenCoequalizer",
 #! of  \beta_1  && the projection  \pi: A \rightarrow \mathrm[Coequalizer]( D ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( B, \mathrm[Coequalizer]( D ) ) .
 #! @Arguments A, D
-DeclareOperation( "MorphismFromSourceToCoequalizer",
+@DeclareOperation( "MorphismFromSourceToCoequalizer",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -1536,7 +1536,7 @@ DeclareOperation( "MorphismFromSourceToCoequalizer",
 #! of  \beta_1  && the projection  \pi: A \rightarrow C .
 #! @Returns a morphism ⥉  \mathrm[Hom]( B, C ) .
 #! @Arguments A, D, C
-DeclareOperation( "MorphismFromSourceToCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "MorphismFromSourceToCoequalizerWithGivenCoequalizer",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -1550,7 +1550,7 @@ DeclareOperation( "MorphismFromSourceToCoequalizerWithGivenCoequalizer",
 #! given by the universal property of the coequalizer.
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[Coequalizer](D), T ) 
 #! @Arguments A, D, T, tau
-DeclareOperation( "UniversalMorphismFromCoequalizer",
+@DeclareOperation( "UniversalMorphismFromCoequalizer",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -1565,7 +1565,7 @@ DeclareOperation( "UniversalMorphismFromCoequalizer",
 #! given by the universal property of the coequalizer.
 #! @Returns a morphism ⥉  \mathrm[Hom]( C, T ) 
 #! @Arguments A, D, T, tau, C
-DeclareOperation( "UniversalMorphismFromCoequalizerWithGivenCoequalizer",
+@DeclareOperation( "UniversalMorphismFromCoequalizerWithGivenCoequalizer",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -1582,7 +1582,7 @@ DeclareOperation( "UniversalMorphismFromCoequalizerWithGivenCoequalizer",
 #! given by the functorality of the coequalizer.
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[Coequalizer]( ( \beta_i )_[i=1 \dots n] ), \mathrm[Coequalizer]( ( \beta_i' )_[i=1 \dots n] )) 
 #! @Arguments Ls, mu, Lr
-DeclareOperation( "CoequalizerFunctorial",
+@DeclareOperation( "CoequalizerFunctorial",
                   [ IsList, IsCapCategoryMorphism, IsList ] );
 
 #! @Description
@@ -1601,7 +1601,7 @@ DeclareOperation( "CoequalizerFunctorial",
 #! given by the functorality of the coequalizer.
 #! @Returns a morphism ⥉  \mathrm[Hom](s, r) 
 #! @Arguments s, Ls, mu, Lr, r
-DeclareOperation( "CoequalizerFunctorialWithGivenCoequalizers",
+@DeclareOperation( "CoequalizerFunctorialWithGivenCoequalizers",
                   [ IsCapCategoryObject, IsList, IsCapCategoryMorphism, IsList, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -1665,7 +1665,7 @@ DeclareOperation( "CoequalizerFunctorialWithGivenCoequalizers",
 #! where  \Delta  denotes the kernel object equalizing the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[FiberProduct](D), \Delta) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromFiberProductToKernelOfDiagonalDifference",
+@DeclareOperation( "IsomorphismFromFiberProductToKernelOfDiagonalDifference",
                   [ IsList ] );
 
 #! @Description
@@ -1675,7 +1675,7 @@ DeclareOperation( "IsomorphismFromFiberProductToKernelOfDiagonalDifference",
 #! where  \Delta  denotes the kernel object equalizing the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](\Delta, \mathrm[FiberProduct](D)) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
                   [ IsList ] );
 
 #! @Description
@@ -1685,7 +1685,7 @@ DeclareOperation( "IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
 #! where  \Delta  denotes the equalizer of the product diagram of the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[FiberProduct](D), \Delta) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
+@DeclareOperation( "IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
                   [ IsList ] );
 
 #! @Description
@@ -1695,7 +1695,7 @@ DeclareOperation( "IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram"
 #! where  \Delta  denotes the equalizer of the product diagram of the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](\Delta, \mathrm[FiberProduct](D)) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
+@DeclareOperation( "IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
                   [ IsList ] );
 
 #! @Description
@@ -1705,7 +1705,7 @@ DeclareOperation( "IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct"
 #! such that its kernel equalizes the  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \bigoplus_[i=1]^n P_i, B ) 
 #! @Arguments D
-DeclareOperation( "DirectSumDiagonalDifference",
+@DeclareOperation( "DirectSumDiagonalDifference",
                   [ IsList ] );
 
 #! @Description
@@ -1714,7 +1714,7 @@ DeclareOperation( "DirectSumDiagonalDifference",
 #!  \mathrm[FiberProduct](D) \rightarrow \bigoplus_[i=1]^n P_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[FiberProduct](D), \bigoplus_[i=1]^n P_i ) 
 #! @Arguments D
-DeclareOperation( "FiberProductEmbeddingInDirectSum",
+@DeclareOperation( "FiberProductEmbeddingInDirectSum",
                   [ IsList ] );
 
 #! @Description
@@ -1724,14 +1724,14 @@ DeclareOperation( "FiberProductEmbeddingInDirectSum",
 #! * The arguments are morphisms  \beta_1: P_1 \rightarrow B, \dots, \beta_n: P_n \rightarrow B .
 #! The output is the fiber product  \mathrm[FiberProduct](D) .
 #! @Returns an object
-DeclareGlobalFunction( "FiberProduct" );
+@DeclareGlobalFunction( "FiberProduct" );
 
 #! @Description
 #! The argument is a list of morphisms  D == ( \beta_i: P_i \rightarrow B )_[i == 1 \dots n] .
 #! The output is the fiber product  \mathrm[FiberProduct](D) .
 #! @Returns an object
 #! @Arguments D
-DeclareOperation( "FiberProductOp",
+@DeclareOperation( "FiberProductOp",
                            [ IsList ] );
 
 #! @Description
@@ -1741,7 +1741,7 @@ DeclareOperation( "FiberProductOp",
 #!  \pi_[k]: \mathrm[FiberProduct](D) \rightarrow P_k .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[FiberProduct](D), P_k ) 
 #! @Arguments D,k
-DeclareOperation( "ProjectionInFactorOfFiberProduct",
+@DeclareOperation( "ProjectionInFactorOfFiberProduct",
                   [ IsList, IsInt ] );
 
 #! @Description
@@ -1752,7 +1752,7 @@ DeclareOperation( "ProjectionInFactorOfFiberProduct",
 #!  \pi_[k]: P \rightarrow P_k .
 #! @Returns a morphism ⥉  \mathrm[Hom]( P, P_k ) 
 #! @Arguments D,k,P
-DeclareOperation( "ProjectionInFactorOfFiberProductWithGivenFiberProduct",
+@DeclareOperation( "ProjectionInFactorOfFiberProductWithGivenFiberProduct",
                   [ IsList, IsInt, IsCapCategoryObject ] );
 
 #! @Description
@@ -1761,7 +1761,7 @@ DeclareOperation( "ProjectionInFactorOfFiberProductWithGivenFiberProduct",
 #! of the  1 -st projection  \pi_1: \mathrm[FiberProduct](D) \rightarrow P_1  &&  \beta_1 .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[FiberProduct](D), B ) 
 #! @Arguments D
-DeclareOperation( "MorphismFromFiberProductToSink",
+@DeclareOperation( "MorphismFromFiberProductToSink",
                   [ IsList ] );
 
 #! @Description
@@ -1771,7 +1771,7 @@ DeclareOperation( "MorphismFromFiberProductToSink",
 #! of the  1 -st projection  \pi_1: P \rightarrow P_1  &&  \beta_1 .
 #! @Returns a morphism ⥉  \mathrm[Hom]( P, B ) 
 #! @Arguments D, P
-DeclareOperation( "MorphismFromFiberProductToSinkWithGivenFiberProduct",
+@DeclareOperation( "MorphismFromFiberProductToSinkWithGivenFiberProduct",
                   [ IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -1784,7 +1784,7 @@ DeclareOperation( "MorphismFromFiberProductToSinkWithGivenFiberProduct",
 #! given by the universal property of the fiber product.
 #! @Returns a morphism ⥉  \mathrm[Hom]( T, \mathrm[FiberProduct](D) ) 
 #! @Arguments D, T, tau
-DeclareOperation( "UniversalMorphismIntoFiberProduct",
+@DeclareOperation( "UniversalMorphismIntoFiberProduct",
                   [ IsList, IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -1798,7 +1798,7 @@ DeclareOperation( "UniversalMorphismIntoFiberProduct",
 #! given by the universal property of the fiber product.
 #! @Returns a morphism ⥉  \mathrm[Hom]( T, P ) 
 #! @Arguments D, T, tau, P
-DeclareOperation( "UniversalMorphismIntoFiberProductWithGivenFiberProduct",
+@DeclareOperation( "UniversalMorphismIntoFiberProductWithGivenFiberProduct",
                   [ IsList, IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -1814,7 +1814,7 @@ DeclareOperation( "UniversalMorphismIntoFiberProductWithGivenFiberProduct",
 #! given by the functoriality of the fiber product.
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[FiberProduct]( ( \beta_i )_[i=1 \dots n] ), \mathrm[FiberProduct]( ( \beta_i' )_[i=1 \dots n] )) 
 #! @Arguments Ls, Lm, Lr
-DeclareOperation( "FiberProductFunctorial",
+@DeclareOperation( "FiberProductFunctorial",
                   [ IsList, IsList, IsList ] );
 
 
@@ -1833,7 +1833,7 @@ DeclareOperation( "FiberProductFunctorial",
 #! given by the functoriality of the fiber product.
 #! @Returns a morphism ⥉  \mathrm[Hom](s, r) 
 #! @Arguments s, Ls, Lm, Lr, r
-DeclareOperation( "FiberProductFunctorialWithGivenFiberProducts",
+@DeclareOperation( "FiberProductFunctorialWithGivenFiberProducts",
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -1894,7 +1894,7 @@ DeclareOperation( "FiberProductFunctorialWithGivenFiberProducts",
 #! where  \Delta  denotes the cokernel object coequalizing the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[Pushout](D), \Delta) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromPushoutToCokernelOfDiagonalDifference",
+@DeclareOperation( "IsomorphismFromPushoutToCokernelOfDiagonalDifference",
                   [ IsList ] );
 
 #! @Description
@@ -1904,7 +1904,7 @@ DeclareOperation( "IsomorphismFromPushoutToCokernelOfDiagonalDifference",
 #! where  \Delta  denotes the cokernel object coequalizing the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \Delta, \mathrm[Pushout](D)) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "IsomorphismFromCokernelOfDiagonalDifferenceToPushout",
                   [ IsList ] );
 
 #! @Description
@@ -1914,7 +1914,7 @@ DeclareOperation( "IsomorphismFromCokernelOfDiagonalDifferenceToPushout",
 #! where  \Delta  denotes the coequalizer of the coproduct diagram of the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[Pushout](D), \Delta) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
+@DeclareOperation( "IsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
                   [ IsList ] );
 
 #! @Description
@@ -1924,7 +1924,7 @@ DeclareOperation( "IsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
 #! where  \Delta  denotes the coequalizer of the coproduct diagram of the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \Delta, \mathrm[Pushout](D)) 
 #! @Arguments D
-DeclareOperation( "IsomorphismFromCoequalizerOfCoproductDiagramToPushout",
+@DeclareOperation( "IsomorphismFromCoequalizerOfCoproductDiagramToPushout",
                   [ IsList ] );
 
 #! @Description
@@ -1934,7 +1934,7 @@ DeclareOperation( "IsomorphismFromCoequalizerOfCoproductDiagramToPushout",
 #! such that its cokernel coequalizes the  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](B, \bigoplus_[i=1]^n I_i) 
 #! @Arguments D
-DeclareOperation( "DirectSumCodiagonalDifference",
+@DeclareOperation( "DirectSumCodiagonalDifference",
                   [ IsList ] );
 
 #! @Description
@@ -1943,7 +1943,7 @@ DeclareOperation( "DirectSumCodiagonalDifference",
 #!  \bigoplus_[i=1]^n I_i \rightarrow \mathrm[Pushout](D) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \bigoplus_[i=1]^n I_i, \mathrm[Pushout](D) ) 
 #! @Arguments D
-DeclareOperation( "DirectSumProjectionInPushout",
+@DeclareOperation( "DirectSumProjectionInPushout",
                   [ IsList ] );
 
 #! @Description
@@ -1951,7 +1951,7 @@ DeclareOperation( "DirectSumProjectionInPushout",
 #! The output is the pushout  \mathrm[Pushout](D) .
 #! @Returns an object
 #! @Arguments D
-DeclareOperation( "Pushout",
+@DeclareOperation( "Pushout",
                    [ IsList ] );
 
 #! @Description
@@ -1960,7 +1960,7 @@ DeclareOperation( "Pushout",
 #! The output is the pushout  \mathrm[Pushout](\alpha, \beta) .
 #! @Returns an object
 #! @Arguments D
-DeclareOperation( "Pushout",
+@DeclareOperation( "Pushout",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -1970,7 +1970,7 @@ DeclareOperation( "Pushout",
 #!  \iota_k: I_k \rightarrow \mathrm[Pushout]( D ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( I_k, \mathrm[Pushout]( D ) ) .
 #! @Arguments D, k
-DeclareOperation( "InjectionOfCofactorOfPushout",
+@DeclareOperation( "InjectionOfCofactorOfPushout",
                   [ IsList, IsInt ] );
 
 #! @Description
@@ -1981,7 +1981,7 @@ DeclareOperation( "InjectionOfCofactorOfPushout",
 #!  \iota_k: I_k \rightarrow I .
 #! @Returns a morphism ⥉  \mathrm[Hom]( I_k, I ) .
 #! @Arguments D, k, I
-DeclareOperation( "InjectionOfCofactorOfPushoutWithGivenPushout",
+@DeclareOperation( "InjectionOfCofactorOfPushoutWithGivenPushout",
                   [ IsList, IsInt, IsCapCategoryObject ] );
 
 #! @Description
@@ -1990,7 +1990,7 @@ DeclareOperation( "InjectionOfCofactorOfPushoutWithGivenPushout",
 #! of  \beta_1  && the  1 -st injection  \iota_1: I_1 \rightarrow \mathrm[Pushout]( D ) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( B, \mathrm[Pushout]( D ) ) .
 #! @Arguments D
-DeclareOperation( "MorphismFromSourceToPushout",
+@DeclareOperation( "MorphismFromSourceToPushout",
                   [ IsList ] );
 
 #! @Description
@@ -2000,7 +2000,7 @@ DeclareOperation( "MorphismFromSourceToPushout",
 #! of  \beta_1  && the  1 -st injection  \iota_1: I_1 \rightarrow I .
 #! @Returns a morphism ⥉  \mathrm[Hom]( B, I ) .
 #! @Arguments D, I
-DeclareOperation( "MorphismFromSourceToPushoutWithGivenPushout",
+@DeclareOperation( "MorphismFromSourceToPushoutWithGivenPushout",
                   [ IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -2013,7 +2013,7 @@ DeclareOperation( "MorphismFromSourceToPushoutWithGivenPushout",
 #! given by the universal property of the pushout.
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[Pushout](D), T ) 
 #! @Arguments D, T, tau
-DeclareOperation( "UniversalMorphismFromPushout",
+@DeclareOperation( "UniversalMorphismFromPushout",
                   [ IsList, IsCapCategoryObject, IsList ] );
 
 #! @Description
@@ -2027,7 +2027,7 @@ DeclareOperation( "UniversalMorphismFromPushout",
 #! given by the universal property of the pushout.
 #! @Returns a morphism ⥉  \mathrm[Hom]( I, T ) 
 #! @Arguments D, T, tau, I
-DeclareOperation( "UniversalMorphismFromPushoutWithGivenPushout",
+@DeclareOperation( "UniversalMorphismFromPushoutWithGivenPushout",
                   [ IsList, IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -2043,7 +2043,7 @@ DeclareOperation( "UniversalMorphismFromPushoutWithGivenPushout",
 #! given by the functoriality of the pushout.
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[Pushout]( ( \beta_i )_[i=1]^n ), \mathrm[Pushout]( ( \beta_i' )_[i=1]^n )) 
 #! @Arguments Ls, Lm, Lr
-DeclareOperation( "PushoutFunctorial",
+@DeclareOperation( "PushoutFunctorial",
                   [ IsList, IsList, IsList ] );
 
 
@@ -2062,7 +2062,7 @@ DeclareOperation( "PushoutFunctorial",
 #! given by the functoriality of the pushout.
 #! @Returns a morphism ⥉  \mathrm[Hom](s, r) 
 #! @Arguments s, Ls, Lm, Lr, r
-DeclareOperation( "PushoutFunctorialWithGivenPushouts",
+@DeclareOperation( "PushoutFunctorialWithGivenPushouts",
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -2149,7 +2149,7 @@ DeclareOperation( "PushoutFunctorialWithGivenPushouts",
 #!  \iota: I \hookrightarrow B .
 #! @Returns a morphism ⥉  \mathrm[Hom](I, B) 
 #! @Arguments alpha, I
-DeclareOperation( "ImageEmbeddingWithGivenImageObject",
+@DeclareOperation( "ImageEmbeddingWithGivenImageObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 
@@ -2169,7 +2169,7 @@ DeclareOperation( "ImageEmbeddingWithGivenImageObject",
 #!  c: A \rightarrow I .
 #! @Returns a morphism ⥉  \mathrm[Hom](A, I) 
 #! @Arguments alpha, I
-DeclareOperation( "CoastrictionToImageWithGivenImageObject",
+@DeclareOperation( "CoastrictionToImageWithGivenImageObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -2183,7 +2183,7 @@ DeclareOperation( "CoastrictionToImageWithGivenImageObject",
 #! given by the universal property of the image.
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[im](\alpha), T) 
 #! @Arguments alpha, tau
-DeclareOperation( "UniversalMorphismFromImage",
+@DeclareOperation( "UniversalMorphismFromImage",
                   [ IsCapCategoryMorphism, IsList ] );
 
 #! @Description
@@ -2198,7 +2198,7 @@ DeclareOperation( "UniversalMorphismFromImage",
 #! given by the universal property of the image.
 #! @Returns a morphism ⥉  \mathrm[Hom](I, T) 
 #! @Arguments alpha, tau, I
-DeclareOperation( "UniversalMorphismFromImageWithGivenImageObject",
+@DeclareOperation( "UniversalMorphismFromImageWithGivenImageObject",
                   [ IsCapCategoryMorphism, IsList, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
@@ -2259,7 +2259,7 @@ DeclareOperation( "UniversalMorphismFromImageWithGivenImageObject",
 #!  C \rightarrow I .
 #! @Returns a morphism ⥉  \mathrm[Hom](C,I) 
 #! @Arguments alpha
-DeclareOperation( "MorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "MorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -2279,7 +2279,7 @@ DeclareOperation( "MorphismFromCoimageToImageWithGivenObjects",
 #!  I \rightarrow C .
 #! @Returns a morphism ⥉  \mathrm[Hom](I,C) 
 #! @Arguments C, alpha, I
-DeclareOperation( "InverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "InverseMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -2324,7 +2324,7 @@ DeclareOperation( "InverseMorphismFromCoimageToImageWithGivenObjects",
 #!  \pi: A \twoheadrightarrow C .
 #! @Returns a morphism ⥉  \mathrm[Hom](A, C) 
 #! @Arguments alpha, C
-DeclareOperation( "CoimageProjectionWithGivenCoimageObject",
+@DeclareOperation( "CoimageProjectionWithGivenCoimageObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -2343,7 +2343,7 @@ DeclareOperation( "CoimageProjectionWithGivenCoimageObject",
 #!  a: C \rightarrow B .
 #! @Returns a morphism ⥉  \mathrm[Hom](C,B) 
 #! @Arguments alpha, C
-DeclareOperation( "AstrictionToCoimageWithGivenCoimageObject",
+@DeclareOperation( "AstrictionToCoimageWithGivenCoimageObject",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -2357,7 +2357,7 @@ DeclareOperation( "AstrictionToCoimageWithGivenCoimageObject",
 #! given by the universal property of the coimage.
 #! @Returns a morphism ⥉  \mathrm[Hom](T, \mathrm[coim]( \alpha )) 
 #! @Arguments alpha, tau
-DeclareOperation( "UniversalMorphismIntoCoimage",
+@DeclareOperation( "UniversalMorphismIntoCoimage",
                   [ IsCapCategoryMorphism, IsList ] );
 
 #! @Description
@@ -2372,7 +2372,7 @@ DeclareOperation( "UniversalMorphismIntoCoimage",
 #! given by the universal property of the coimage.
 #! @Returns a morphism ⥉  \mathrm[Hom](T, C) 
 #! @Arguments alpha, tau, C
-DeclareOperation( "UniversalMorphismIntoCoimageWithGivenCoimageObject",
+@DeclareOperation( "UniversalMorphismIntoCoimageWithGivenCoimageObject",
                   [ IsCapCategoryMorphism, IsList, IsCapCategoryObject ] );
 
 #! Whenever the <C>CoastrictionToImage</C> is an epi,
@@ -2429,7 +2429,7 @@ DeclareOperation( "UniversalMorphismIntoCoimageWithGivenCoimageObject",
 #! The output is the homology object  H  of this pair.
 #! @Returns an object
 #! @Arguments alpha, beta
-DeclareOperation( "HomologyObject",
+@DeclareOperation( "HomologyObject",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -2445,7 +2445,7 @@ DeclareOperation( "HomologyObject",
 #! &&  H_2  denotes the homology object of the pair  \gamma, \delta .
 #! @Returns a morphism ⥉  \mathrm[Hom]( H_1, H_2 ) 
 #! @Arguments alpha, beta, epsilon, gamma, delta
-DeclareOperation( "HomologyObjectFunctorial",
+@DeclareOperation( "HomologyObjectFunctorial",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -2464,7 +2464,7 @@ DeclareOperation( "HomologyObjectFunctorial",
 #! &&  H_2  denotes the homology object of the pair  \gamma, \delta .
 #! @Returns a morphism ⥉  \mathrm[Hom]( H_1, H_2 ) 
 #! @Arguments H_1, L, H_2
-DeclareOperation( "HomologyObjectFunctorialWithGivenHomologyObjects",
+@DeclareOperation( "HomologyObjectFunctorialWithGivenHomologyObjects",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
@@ -2475,7 +2475,7 @@ DeclareOperation( "HomologyObjectFunctorialWithGivenHomologyObjects",
 #! denoted by  I .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[HomologyObject]( \alpha, \beta ), I ) 
 #! @Arguments alpha, beta
-DeclareOperation( "IsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
+@DeclareOperation( "IsomorphismFromHomologyObjectToItsConstructionAsAnImageObject",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
@@ -2486,7 +2486,7 @@ DeclareOperation( "IsomorphismFromHomologyObjectToItsConstructionAsAnImageObject
 #! to the homology object  H  of  \alpha  &&  \beta .
 #! @Returns a morphism ⥉  \mathrm[Hom]( I, \mathrm[HomologyObject]( \alpha, \beta ) ) 
 #! @Arguments alpha, beta
-DeclareOperation( "IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
+@DeclareOperation( "IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Chapter Universal Objects

@@ -11,10 +11,10 @@
 #####################################
 
 # backwards compatibility
-BindGlobal( "IsCapTerminalCategoryObjectRep", IsObjectInCapTerminalCategoryWithSingleObject );
+@BindGlobal( "IsCapTerminalCategoryObjectRep", IsObjectInCapTerminalCategoryWithSingleObject );
 
 # backwards compatibility
-BindGlobal( "IsCapTerminalCategoryMorphismRep", IsMorphismInCapTerminalCategoryWithSingleObject );
+@BindGlobal( "IsCapTerminalCategoryMorphismRep", IsMorphismInCapTerminalCategoryWithSingleObject );
 
 ####################################
 #
@@ -22,14 +22,14 @@ BindGlobal( "IsCapTerminalCategoryMorphismRep", IsMorphismInCapTerminalCategoryW
 #
 ####################################
 
-InstallGlobalFunction( CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY,
+@InstallGlobalFunction( CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY,
   function( input_record )
     local completed_record, list_of_operations_to_install, skip, info, properties, excluded_properties, T, operation_name;
     
     completed_record = ShallowCopy( input_record );
     
     list_of_operations_to_install =
-      Concatenation( List( RecNames( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD ), p -> CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p] ) );
+      Set( Concatenation( List( RecNames( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD ), p -> CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p] ) ) );
     
     skip = [ ];
     
@@ -108,7 +108,7 @@ end );
 #########################################
 
 ##
-InstallGlobalFunction( TerminalCategoryWithSingleObject,
+@InstallGlobalFunction( TerminalCategoryWithSingleObject,
   function( )
     local name, category_filter, category_object_filter, category_morphism_filter,
           create_func_object, create_func_morphism,
@@ -225,7 +225,7 @@ InstallGlobalFunction( TerminalCategoryWithSingleObject,
 end );
 
 ##
-InstallMethod( UniqueObject,
+InstallMethod( @__MODULE__,  UniqueObject,
                [ IsCapTerminalCategoryWithSingleObject ],
                
   function( category )
@@ -238,7 +238,7 @@ InstallMethod( UniqueObject,
 end );
 
 ##
-InstallMethod( UniqueMorphism,
+InstallMethod( @__MODULE__,  UniqueMorphism,
                [ IsCapTerminalCategoryWithSingleObject ],
                
   function( category )
@@ -259,7 +259,7 @@ end );
 #########################################
 
 ##
-InstallGlobalFunction( TerminalCategoryWithMultipleObjects,
+@InstallGlobalFunction( TerminalCategoryWithMultipleObjects,
   function( )
     local name, category_filter, category_object_filter, category_morphism_filter,
           create_func_object, create_func_morphism,
@@ -395,7 +395,7 @@ end );
 ################################
 
 ##
-InstallMethod( FunctorFromTerminalCategory,
+InstallMethod( @__MODULE__,  FunctorFromTerminalCategory,
                [ IsCapCategoryObject ],
                
   function( object )
@@ -442,7 +442,7 @@ InstallOtherMethod( FunctorFromTerminalCategory,
 #################################
 
 ##
-InstallMethod( Display,
+InstallMethod( @__MODULE__,  Display,
         [ IsObjectInCapTerminalCategoryWithMultipleObjects ],
 
   function( o )
@@ -452,7 +452,7 @@ InstallMethod( Display,
 end );
 
 ##
-InstallMethod( Display,
+InstallMethod( @__MODULE__,  Display,
         [ IsMorphismInCapTerminalCategoryWithMultipleObjects ],
 
   function( m )
