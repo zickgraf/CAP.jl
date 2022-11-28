@@ -142,8 +142,7 @@ function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_
 		throw("odd number of attributes and values")
 	end
 	@assert type <: CAPDict
-	# https://docs.julialang.org/en/v1/manual/methods/#Redefining-Methods
-	obj = Base.invokelatest(type, getfield(record, :dict))
+	obj = type(getfield(record, :dict))
 	for i in 1:2:length(attributes_and_values)-1
 		symbol_setter = Setter(attributes_and_values[i])
 		value = attributes_and_values[i + 1]
