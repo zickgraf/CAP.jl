@@ -215,7 +215,7 @@ IsZeroForObjects );
 InstallMethod( @__MODULE__,  IsEqualForCache,
                [ IsCapCategoryObject, IsCapCategoryObject ],
                
-  IsEqualForCacheForObjects );
+  ( obj1, obj2 ) -> IsEqualForCacheForObjects( CapCategory( obj1 ), obj1, obj2 ) );
 
 ##
 # generic fallback to IsIdenticalObj
@@ -236,8 +236,13 @@ InstallMethod( @__MODULE__,  AddObjectRepresentation,
         
     end;
     
-    category.object_representation = representation;
-    category.object_type = NewType( TheFamilyOfCapCategoryObjects, representation && ObjectFilter( category ) && HasCapCategory );
+    if IsBound( category.initially_known_categorical_properties )
+        
+        Error( "calling AddObjectRepresentation after adding functions to the category is !supported" );
+        
+    end;
+    
+    InstallTrueMethod( representation, ObjectFilter( category ) );
     
 end );
 
@@ -251,13 +256,22 @@ InstallMethod( @__MODULE__,  RandomObject, [ IsCapCategory, IsList ], RandomObje
 @InstallGlobalFunction( ObjectifyObjectForCAPWithAttributes,
                        
   function( object, category, additional_arguments_list... )
-    local arg_list;
+    local arg_list, obj;
     
     arg_list = Concatenation(
         [ object, category.object_type, CapCategory, category ], additional_arguments_list
     );
     
-    return CallFuncList( ObjectifyWithAttributes, arg_list );
+    obj = CallFuncList( ObjectifyWithAttributes, arg_list );
+    
+    #= comment for Julia
+    # work around https://github.com/gap-system/gap/issues/3642:
+    # New implications of `ObjectFilter( category )` (e.g. installed via `AddObjectRepresentation`)
+    # are !automatically set ⥉ `category.object_type`.
+    SetFilterObj( obj, ObjectFilter( category ) );
+    # =#
+    
+    return obj;
     
 end );
 
@@ -265,7 +279,7 @@ end );
 @InstallGlobalFunction( CreateCapCategoryObjectWithAttributes,
                        
   function( category, additional_arguments_list... )
-    local arg_list;
+    local arg_list, obj;
     
     # inline ObjectifyObjectForCAPWithAttributes( rec( ), category, additional_arguments_list... );
     
@@ -273,7 +287,16 @@ end );
         [ rec( ), category.object_type, CapCategory, category ], additional_arguments_list
     );
     
-    return CallFuncList( ObjectifyWithAttributes, arg_list );
+    obj = CallFuncList( ObjectifyWithAttributes, arg_list );
+    
+    #= comment for Julia
+    # work around https://github.com/gap-system/gap/issues/3642:
+    # New implications of `ObjectFilter( category )` (e.g. installed via `AddObjectRepresentation`)
+    # are !automatically set ⥉ `category.object_type`.
+    SetFilterObj( obj, ObjectFilter( category ) );
+    # =#
+    
+    return obj;
     
 end );
 
@@ -293,23 +316,31 @@ end );
 ###########################
 
 # fallback methods for Julia
-InstallMethod( @__MODULE__,  ViewObj,
+InstallMethod( @__MODULE__,  String,
                [ IsCapCategoryObject ],
                
-  function ( object )
+  function( object )
     
     # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    Print( "<An object ", "in ", Name( CapCategory( object ) ), ">" );
+    return Concatenation( "An object ", "in ", Name( CapCategory( object ) ) );
     
 end );
 
-InstallMethod( @__MODULE__,  Display,
+InstallMethod( @__MODULE__,  ViewString,
                [ IsCapCategoryObject ],
                
   function ( object )
     
-    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    Print( "An object ", "in ", Name( CapCategory( object ) ), ".\n" );
+    return Concatenation( "<", string( object ), ">" );
+    
+end );
+
+InstallMethod( @__MODULE__,  DisplayString,
+               [ IsCapCategoryObject ],
+               
+  function ( object )
+    
+    return Concatenation( string( object ), ".\n" );
     
 end );
 
@@ -351,12 +382,3 @@ end );
 #= comment for Julia
 CAP_INTERNAL_CREATE_OBJECT_PRINT( );
 # =#
-
-InstallMethod( @__MODULE__,  String,
-               [ IsCapCategoryObject ],
-               
-  function( object )
-    
-    return Concatenation( "An object ⥉ ", Name( CapCategory( object ) ) );
-    
-end );

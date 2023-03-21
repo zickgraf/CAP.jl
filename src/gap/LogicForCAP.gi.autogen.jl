@@ -123,13 +123,11 @@ end );
     
     if !IsBound( theorem_record[name] )
         
-        theorem_record[name] = [ implication_record ];
-        
-    else
-        
-        Add( theorem_record[name], implication_record );
+        theorem_record[name] = [ ];
         
     end;
+    
+    Add( theorem_record[name], implication_record );
     
 end );
 
@@ -246,6 +244,12 @@ end );
         
         ## check wether argument list matches here
         current_argument_type = current_theorem.Variable_list;
+        
+        if Length( current_argument_type ) != Length( arguments )
+            
+            Error( "while installing todo for logical theorems: got ", Length( arguments ), " arguments but expected ", Length( current_argument_type ) );
+            
+        end;
         
         is_valid_theorem = true;
         

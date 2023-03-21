@@ -143,15 +143,11 @@ end );
         
         current_entry = CAP_INTERNAL_METHOD_NAME_RECORD[current_recname];
         
-        if !ForAll( current_entry.filter_list, filter -> filter ⥉ [ "category", "object", "morphism", "twocell", IsInt, "list_of_objects", "list_of_morphisms", "list_of_twocells" ] )
+        if !ForAll( current_entry.filter_list, filter -> filter ⥉ [ "category", "object", "morphism", "twocell", "integer", "list_of_objects", "list_of_morphisms", "list_of_twocells" ] )
             continue;
         end;
         
         if !current_entry.return_type ⥉ [ "object", "morphism", "twocell", "bool" ]
-            continue;
-        end;
-        
-        if IsBound( current_entry.no_install ) && current_entry.no_install == true
             continue;
         end;
         
@@ -211,6 +207,8 @@ InstallMethodWithCrispCache( ProductOp,
     namestring = Concatenation( "Product of: " , namestring );
     
     product_category = CreateCapCategory( namestring );
+    
+    product_category.category_as_first_argument = false;
     
     SetComponents( product_category, category_list );
     

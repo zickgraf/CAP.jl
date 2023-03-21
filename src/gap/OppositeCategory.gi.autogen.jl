@@ -59,8 +59,9 @@ end );
 @BindGlobal( "CAP_INTERNAL_INSTALL_OPPOSITE_ADDS_FROM_CATEGORY",
   
   function( opposite_category, category )
-    local only_primitive_operations, recnames, current_recname, current_entry, dual_operation_name,
-          filter_list, input_arguments_names, return_type, func_string,
+    local only_primitive_operations, recnames, list_of_underlying_operations,
+          operations_of_homomorphism_structure, operations_of_external_hom,
+          current_recname, current_entry, dual_operation_name, filter_list, input_arguments_names, return_type, func_string,
           dual_preprocessor_func_string, preprocessor_string, dual_arguments, tmp,
           dual_postprocessor_func_string, postprocessor_string, output_source_getter_string, output_range_getter_string, return_statement,
           func, weight, current_add, list_of_attributes, attr, tester, setter, getter;
@@ -69,7 +70,7 @@ end );
     
     ## Take care of attributes
     ## TODO: if there are more instances, set markers ⥉ the MethodRecord
-    list_of_attributes = [ "RangeCategoryOfHomomorphismStructure", "CommutativeRingOfLinearCategory" ];
+    list_of_attributes = [ "CommutativeRingOfLinearCategory" ];
     
     for attr in list_of_attributes
         
@@ -89,22 +90,46 @@ end );
     
     recnames = AsSortedList( RecNames( CAP_INTERNAL_METHOD_NAME_RECORD ) );
     
+    ## No support for twocells
+    recnames = Difference( recnames,
+                        [ "HorizontalPreCompose",
+                          "HorizontalPostCompose",
+                          "VerticalPreCompose",
+                          "VerticalPostCompose",
+                          "IdenticalTwoCell" ] );
+    
+    if only_primitive_operations
+        list_of_underlying_operations = ListPrimitivelyInstalledOperationsOfCategory( category );
+    else
+        list_of_underlying_operations = ListInstalledOperationsOfCategory( category );
+    end;
+    
+    operations_of_homomorphism_structure =
+      [ "DistinguishedObjectOfHomomorphismStructure",
+        "HomomorphismStructureOnObjects",
+        "HomomorphismStructureOnMorphisms",
+        "HomomorphismStructureOnMorphismsWithGivenObjects",
+        "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+        "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+        "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+        ];
+    
+    if !IsEmpty( Intersection( list_of_underlying_operations, operations_of_homomorphism_structure ) )
+        
+        if !HasRangeCategoryOfHomomorphismStructure( category )
+            
+            Error( "<category> has operations related to the homomorphism structure but no range category is set. This is !supported." );
+            
+        end;
+        
+        SetRangeCategoryOfHomomorphismStructure( opposite_category, RangeCategoryOfHomomorphismStructure( category ) );
+        SetIsEquippedWithHomomorphismStructure( opposite_category, true );
+        
+    end;
+    
     for current_recname in recnames
         
         current_entry = CAP_INTERNAL_METHOD_NAME_RECORD[current_recname];
-        
-        if IsBound( current_entry.no_install ) && current_entry.no_install == true
-            continue;
-        end;
-        
-        ## No support for twocells
-        if current_recname ⥉ [ "HorizontalPreCompose",
-                                "HorizontalPostCompose",
-                                "VerticalPreCompose",
-                                "VerticalPostCompose",
-                                "IdenticalTwoCell" ]
-            continue;
-        end;
         
         ## Conservative
         if !IsBound( current_entry.dual_operation )
@@ -113,11 +138,7 @@ end );
         
         dual_operation_name = current_entry.dual_operation;
         
-        if !CanCompute( category, dual_operation_name )
-            continue;
-        end;
-        
-        if only_primitive_operations && !dual_operation_name ⥉ ListPrimitivelyInstalledOperationsOfCategory( category )
+        if !dual_operation_name ⥉ list_of_underlying_operations
             continue;
         end;
         
@@ -190,7 +211,7 @@ end );
                     
                     return Concatenation( "MorphismDatum( cat, ", argument_name, " )" );
                     
-                elseif filter == IsInt || filter == IsRingElement || filter == IsCyclotomic
+                elseif filter == "integer" || filter == IsRingElement
                     
                     return argument_name;
                     
@@ -366,9 +387,6 @@ InstallMethod( @__MODULE__,  Opposite,
         category_attribute_names = [
             "OppositeCategory",
         ],
-        category_filter = WasCreatedAsOppositeCategory,
-        object_filter = IsCapCategoryOppositeObject,
-        morphism_filter = IsCapCategoryOppositeMorphism,
     );
     
     SetOppositeCategory( opposite_category, category );
@@ -401,7 +419,7 @@ InstallMethod( @__MODULE__,  Opposite,
       local opposite_object;
         
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( object, OppositeCategory( cat ), () -> "the object datum given to the object constructor of <cat>" );
+        CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( object, OppositeCategory( cat ), [ "the object datum given to the object constructor of <cat>" ] );
         
         #% CAP_JIT_DROP_NEXT_STATEMENT
         if HasOpposite( object )
@@ -439,7 +457,7 @@ InstallMethod( @__MODULE__,  Opposite,
       local opposite_morphism;
         
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( morphism, OppositeCategory( cat ), () -> "the morphism datum given to the morphism constructor of <cat>" );
+        CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( morphism, OppositeCategory( cat ), [ "the morphism datum given to the morphism constructor of <cat>" ] );
         
         if IsEqualForObjects( OppositeCategory( cat ), Source( morphism ), Opposite( range ) ) == false
             
@@ -509,7 +527,7 @@ InstallMethod( @__MODULE__,  Opposite,
   function( category )
     local opposite_category;
     
-    opposite_category = Concatenation( "Opposite of ", Name( category ) );
+    opposite_category = Concatenation( "Opposite( ", Name( category ), " )" );
     
     return Opposite( category, opposite_category );
     
@@ -584,25 +602,21 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  Display,
+InstallMethod( @__MODULE__,  DisplayString,
         [ IsCapCategoryOppositeObject ],
         
   function( object )
-
-    Display( Opposite( object ) );
-
-    Print( "\nAn object ⥉ ", Name( CapCategory( object ) ), " given by the above data\n" );
+    
+    return Concatenation( DisplayString( Opposite( object ) ), "\nAn object ⥉ ", Name( CapCategory( object ) ), " given by the above data\n" );
     
 end );
 
 ##
-InstallMethod( @__MODULE__,  Display,
+InstallMethod( @__MODULE__,  DisplayString,
         [ IsCapCategoryOppositeMorphism ],
         
   function( morphism )
-
-    Display( Opposite( morphism ) );
-
-    Print( "\nA morphism ⥉ ", Name( CapCategory( morphism ) ), " given by the above data\n" );
+    
+    return Concatenation( DisplayString( Opposite( morphism ) ), "\nA morphism ⥉ ", Name( CapCategory( morphism ) ), " given by the above data\n" );
     
 end );

@@ -373,6 +373,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 #! @Arguments category, filter
 #! @Description
+#!  **Deprecated**: use <Ref Func="CreateCapCategoryWithDataTypes" /> instead.
 #!  The argument <A>filter</A> is used to create a morphism type for the
 #!  category <A>category</A>, which is then used ⥉ <C>ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes</C>
 #!  to objectify morphisms for this category. <A>filter</A> must imply `IsCapCategoryMorphism`.
@@ -383,7 +384,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #!  Objectifies the morphism <A>morphism</A> with the type created
 #!  for morphisms in the category <A>category</A>. The type
-#!  is created by passing a representation to <C>AddMorphismRepresentation</C>.
+#!  is created by passing a morphism filter to <Ref Func="CreateCapCategoryWithDataTypes" />.
 #!  Morphisms which are objectified using this method do !have to be passed
 #!  to the <C>AddMorphism</C> function.
 #!  The arguments <C>source</C> && <C>range</C> are assumed to be objectified.
@@ -582,8 +583,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
-#! \def\h[1];
+#! \def\w[2]
+#! \def\h[1]
 #! \node (a) at (0,\h) [ a ];
 #! \node (b) at (0,-\h) [ b ];
 #! \node (c) at (\w,0) [ c ];
@@ -608,8 +609,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
-#! \def\h[1];
+#! \def\w[2]
+#! \def\h[1]
 #! \node (c) at (0,0) [ c ];
 #! \node (a) at (\w,\h) [ a ];
 #! \node (b) at (\w,-\h) [ b ];
@@ -741,8 +742,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
-#! \def\h[1];
+#! \def\w[2]
+#! \def\h[1]
 #! \node (a) at (0,\h) [ a ];
 #! \node (b) at (0,-\h) [ b ];
 #! \node (c) at (\w,0) [ c ];
@@ -758,8 +759,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
-#! \def\h[1];
+#! \def\w[2]
+#! \def\h[1]
 #! \node (a) at (0,0) [ a ];
 #! \node (c) at (\w,\h) [ c ];
 #! \node (b) at (\w,-\h) [ b ];
@@ -903,8 +904,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
-#! \def\h[1];
+#! \def\w[2]
+#! \def\h[1]
 #! \node (a) at (0,0) [ a ];
 #! \node (b) at (\w,0) [ b ];
 #! \draw[-latex] (a) to node[pos=0.45, above] [ \alpha ] (b);
@@ -1471,8 +1472,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[4];
-#! \def\h[2];
+#! \def\w[4]
+#! \def\h[2]
 #! \node (A) at (0,0) [ A ];
 #! \node (B) at (\w,0) [ B ];
 #! \node (Ap) at (0,\h) [ A' \oplus A'' ];
@@ -1494,8 +1495,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[4];
-#! \def\h[2];
+#! \def\w[4]
+#! \def\h[2]
 #! \node (A) at (0,0) [ A ];
 #! \node (B) at (\w,0) [ B ];
 #! \node (Ap) at (0,\h) [ A' ];
@@ -1513,8 +1514,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[4];
-#! \def\h[2];
+#! \def\w[4]
+#! \def\h[2]
 #! \node (A) at (0,0) [ A ];
 #! \node (B) at (\w,0) [ B ];
 #! \node (Ap) at (0,\h) [ A' ];

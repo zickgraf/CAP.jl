@@ -69,12 +69,6 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
 
 @InstallValueConst( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, [ ] );
 
-DeclareGlobalVariable( "CATEGORIES_FAMILY_PROPERTIES" );
-
-@InstallValueConst( CATEGORIES_FAMILY_PROPERTIES,
-
-              rec( ) );
-
 ###################################
 ##
 #! @Section Categories
@@ -284,10 +278,6 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 ##
 ###################################
 
-@DeclareGlobalFunction( "CREATE_CAP_CATEGORY_OBJECT" );
-
-@DeclareGlobalFunction( "INSTALL_ADD_FUNCTIONS_FOR_CATEGORY" );
-
 #! @Description
 #! Creates a new CAP category from scratch.
 #! It gets a generic name.
@@ -315,6 +305,18 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! @Returns a category
 @DeclareOperation( "CreateCapCategory",
                            [ IsString, IsFunction, IsFunction, IsFunction, IsFunction ] );
+
+#! @Description
+#! The argument is a string  s .
+#! This operation creates a new CAP category from scratch.
+#! Its name is set to  s .
+#! The category, its objects, its morphisms, && its two cells will lie ⥉ the corresponding given filters.
+#! The data types of the object/morphism/two cell datum can be given as described ⥉ <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />.
+#! As a convenience, simply a filter can be given if this suffices to fully determine the data type.
+#! If a data type is !specified, pass `fail` instead.
+#! @Arguments s, category_filter, object_filter, morphism_filter, two_cell_filter, object_datum_type, morphism_datum_type, two_cell_datum_type
+#! @Returns a category
+@DeclareGlobalFunction( "CreateCapCategoryWithDataTypes" );
 
 ###################################
 ##
@@ -370,6 +372,33 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! @Arguments C
 #! @Returns a filter
 @DeclareAttribute( "TwoCellFilter",
+                  IsCapCategory );
+
+#! @Description
+#! The argument is a category  C .
+#! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
+#! of object data of  C  (or `fail` if this data type is !specified).
+#! @Arguments C
+#! @Returns a data type || `fail`
+@DeclareAttribute( "ObjectDatumType",
+                  IsCapCategory );
+
+#! @Description
+#! The argument is a category  C .
+#! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
+#! of morphism data of  C  (or `fail` if this data type is !specified).
+#! @Arguments C
+#! @Returns a data type || `fail`
+@DeclareAttribute( "MorphismDatumType",
+                  IsCapCategory );
+
+#! @Description
+#! The argument is a category  C .
+#! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
+#! of two cell data of  C  (or `fail` if this data type is !specified).
+#! @Arguments C
+#! @Returns a data type || `fail`
+@DeclareAttribute( "TwoCellDatumType",
                   IsCapCategory );
 
 #! @Description
@@ -694,6 +723,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #############################################
 
 #!  For finding performance issues ⥉ primitive operations, you can collect timing statistics, see <Ref Sect="Section_Timing_statistics" />.
+#!  You can use the package `CompilerForCAP` to compile your code.
 #!  Additionally, CAP has several settings which can improve the performance.
 #!  In the following some of these are listed.
 #!    * <C>DeactivateCachingOfCategory</C> || <C>DeactivateDefaultCaching</C>: see <Ref Sect="Section_Caching" />.
@@ -707,9 +737,6 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #!        instead of <C>AddObject</C> &&
 #!        <C>CreateCapCategoryMorphismWithAttributes</C> (<Ref Sect="Section_Adding_Morphisms_to_a_Category" />)
 #!        instead of <C>AddMorphism</C>.
-#!    * Add all attribute testers (<C>Has...</C>) of your objects resp. morphisms to the filters passed to
-#!        <C>AddObjectRepresentation</C> (<Ref Sect="Section_Adding_Objects_to_a_Category" />) resp.
-#!        <C>AddMorphismRepresentation</C> (<Ref Sect="Section_Adding_Morphisms_to_a_Category" />).
 #!    * Pass the option <C>overhead = false</C> to <C>CreateCapCategory</C>.
 #!        Note: this may have unintended effects. Use with care!
 

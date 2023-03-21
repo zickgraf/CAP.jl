@@ -160,40 +160,86 @@ end );
 #####################################
 
 ##
-@InstallGlobalFunction( "CREATE_CAP_CATEGORY_OBJECT",
-  function( obj_rec, name, category_filter, object_filter, morphism_filter, two_cell_filter )
+@InstallGlobalFunction( "CreateCapCategoryWithDataTypes",
+  function( name, category_filter, object_filter, morphism_filter, two_cell_filter, object_datum_type, morphism_datum_type, two_cell_datum_type )
     local filter, obj, operation_name;
     
-    obj_rec.logical_implication_files = StructuralCopy( CATEGORIES_LOGIC_FILES );
+    ## plausibility checks
+    if !IsSpecializationOfFilter( IsCapCategory, category_filter )
+        
+        Print( "WARNING: filter ", category_filter, " does !imply `IsCapCategory`. This will probably cause errors.\n" );
+        
+    end;
     
-    filter = NewFilter( Concatenation( name, "InternalCategoryFilter" ), category_filter );
+    if !IsSpecializationOfFilter( IsCapCategoryObject, object_filter )
+        
+        Print( "WARNING: filter ", object_filter, " does !imply `IsCapCategoryObject`. This will probably cause errors.\n" );
+        
+    end;
     
-    obj = ObjectifyWithAttributes( obj_rec, NewType( TheFamilyOfCapCategories, filter ), Name, name );
+    if !IsSpecializationOfFilter( IsCapCategoryMorphism, morphism_filter )
+        
+        Print( "WARNING: filter ", morphism_filter, " does !imply `IsCapCategoryMorphism`. This will probably cause errors.\n" );
+        
+    end;
     
+    if !IsSpecializationOfFilter( IsCapCategoryTwoCell, two_cell_filter )
+        
+        Print( "WARNING: filter ", two_cell_filter, " does !imply `IsCapCategoryTwoCell`. This will probably cause errors.\n" );
+        
+    end;
+    
+    if IsFilter( object_datum_type )
+        
+        object_datum_type = rec( filter = object_datum_type );
+        
+    end;
+    
+    if IsFilter( morphism_datum_type )
+        
+        morphism_datum_type = rec( filter = morphism_datum_type );
+        
+    end;
+    
+    if IsFilter( two_cell_datum_type )
+        
+        two_cell_datum_type = rec( filter = two_cell_datum_type );
+        
+    end;
+    
+    filter = NewFilter( Concatenation( name, "InstanceCategoryFilter" ), category_filter );
+    
+    obj = ObjectifyWithAttributes( rec( ), NewType( TheFamilyOfCapCategories, filter ), Name, name );
+    
+    ## filters
     SetCategoryFilter( obj, filter );
     
     # object filter
-    filter = NewCategory( Concatenation( name, "ObjectFilter" ), object_filter );
+    filter = NewCategory( Concatenation( name, "InstanceObjectFilter" ), object_filter );
     
     SetObjectFilter( obj, filter );
+    SetObjectDatumType( obj, object_datum_type );
     
-    obj.object_representation = object_filter;
     obj.object_type = NewType( TheFamilyOfCapCategoryObjects, filter );
     
     # morphism filter
-    filter = NewCategory( Concatenation( name, "MorphismFilter" ), morphism_filter );
+    filter = NewCategory( Concatenation( name, "InstanceMorphismFilter" ), morphism_filter );
     
     SetMorphismFilter( obj, filter );
+    SetMorphismDatumType( obj, morphism_datum_type );
     
-    obj.morphism_representation = morphism_filter;
     obj.morphism_type = NewType( TheFamilyOfCapCategoryMorphisms, filter );
     
     # two cell filter
-    filter = NewCategory( Concatenation( name, "TwoCellFilter" ), two_cell_filter );
+    filter = NewCategory( Concatenation( name, "InstanceTwoCellFilter" ), two_cell_filter );
     
     SetTwoCellFilter( obj, filter );
+    SetTwoCellDatumType( obj, two_cell_datum_type );
     
+    ## misc
     SetIsFinalized( obj, false );
+    
+    obj.is_computable = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "is_computable", true );
     
     obj.derivations_weight_list = MakeOperationWeightList( obj, CAP_INTERNAL_DERIVATION_GRAPH );
     
@@ -206,7 +252,7 @@ end );
     end;
     
     obj.primitive_operations = rec( );
-
+    
     obj.added_functions = rec( );
     
     obj.timing_statistics = rec( );
@@ -220,9 +266,65 @@ end );
     obj.predicate_logic_propagation_for_objects = false;
     obj.predicate_logic_propagation_for_morphisms = false;
     
-    obj.predicate_logic = true;
+    obj.logical_implication_files = StructuralCopy( CATEGORIES_LOGIC_FILES );
+    
+    obj.overhead = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "overhead", true );
+    
+    if obj.overhead
+        
+        obj.predicate_logic = true;
+        
+        AddCategoryToFamily( obj, "general" );
+        
+    else
+        
+        obj.predicate_logic = false;
+        
+    end;
+    
+    obj.category_as_first_argument = fail;
     
     obj.add_primitive_output = false;
+    
+    # convenience for Julia lists
+    if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" )
+        
+        if object_datum_type != fail && object_datum_type.filter == IsList
+            
+            InstallOtherMethod( ObjectConstructor,
+                                [ CategoryFilter( obj ), ValueGlobal( "IsJuliaObject" ) ],
+                                
+              function( cat, julia_list )
+                
+                return ObjectConstructor( cat, ValueGlobal( "ConvertJuliaToGAP" )( julia_list ) );
+                
+            end );
+            
+        end;
+        
+        if morphism_datum_type != fail && morphism_datum_type.filter == IsList
+            
+            InstallOtherMethod( MorphismConstructor,
+                                [ ObjectFilter( obj ), ValueGlobal( "IsJuliaObject" ), ObjectFilter( obj ) ],
+                                
+              function( source, julia_list, range )
+                
+                return MorphismConstructor( source, ValueGlobal( "ConvertJuliaToGAP" )( julia_list ), range );
+                
+            end );
+            
+            InstallOtherMethod( MorphismConstructor,
+                                [ CategoryFilter( obj ), ObjectFilter( obj ), ValueGlobal( "IsJuliaObject" ), ObjectFilter( obj ) ],
+                                
+              function( cat, source, julia_list, range )
+                
+                return MorphismConstructor( cat, source, ValueGlobal( "ConvertJuliaToGAP" )( julia_list ), range );
+                
+            end );
+            
+        end;
+        
+    end;
     
     return obj;
     
@@ -455,29 +557,8 @@ InstallMethod( @__MODULE__,  CreateCapCategory,
                [ IsString, IsFunction, IsFunction, IsFunction, IsFunction ],
                
   function( name, category_filter, object_filter, morphism_filter, two_cell_filter )
-    local overhead, is_computable, category;
     
-    overhead = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "overhead", true );
-    
-    is_computable = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "is_computable", true );
-
-    category = CREATE_CAP_CATEGORY_OBJECT( rec( ), name, category_filter, object_filter, morphism_filter, two_cell_filter );
-    
-    category.overhead = overhead;
-    
-    category.is_computable = is_computable;
-
-    if overhead
-    
-      AddCategoryToFamily( category, "general" );
-      
-    else
-      
-      category.predicate_logic = false;
-      
-    end;
-    
-    return category;
+    return CreateCapCategoryWithDataTypes( name, category_filter, object_filter, morphism_filter, two_cell_filter, fail, fail, fail );
     
 end );
 
@@ -962,74 +1043,26 @@ end );
 
 #######################################
 ##
-## ViewObj
+## Print
 ##
 #######################################
-
-# fallback methods for Julia
-InstallMethod( @__MODULE__,  ViewObj,
-               [ IsCapCategory ],
-               
-  function ( category )
-    
-    Print( Name( category ) );
-    
-end );
-
-InstallMethod( @__MODULE__,  Display,
-               [ IsCapCategory ],
-               
-  function ( category )
-    
-    Print( "A CAP category with name ", Name( category ), "\n" );
-    
-end );
-
-@InstallGlobalFunction( CAP_INTERNAL_INSTALL_PRINT_FUNCTION,
-               
-  function( )
-    local print_graph, category_function, i, internal_list;
-    
-    category_function = function( category )
-      local string;
-      
-      string = "CAP category";
-      
-      if HasName( category )
-          
-          Append( string, " with name " );
-          
-          Append( string, Name( category ) );
-          
-      end;
-      
-      return string;
-      
-    end;
-    
-    print_graph = CreatePrintingGraph( IsCapCategory, category_function );
-    
-    internal_list = Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST );
-    
-    for i in internal_list
-        
-        AddNodeToGraph( print_graph, rec( Conditions = i,
-                                          TypeOfView = 3,
-                                          ComputeLevel = 5 ) );
-        
-    end;
-    
-    InstallPrintFunctionsOutOfPrintingGraph( print_graph );
-    
-end );
 
 InstallMethod( @__MODULE__,  String,
                [ IsCapCategory ],
     Name );
 
-#= comment for Julia
-CAP_INTERNAL_INSTALL_PRINT_FUNCTION( );
-# =#
+InstallMethod( @__MODULE__,  ViewString,
+               [ IsCapCategory ],
+    Name );
+
+InstallMethod( @__MODULE__,  DisplayString,
+               [ IsCapCategory ],
+               
+  function ( category )
+    
+    return Concatenation( "A CAP category with name ", Name( category ), ":\n\n", InfoStringOfInstalledOperationsOfCategory( category ) );
+    
+end );
 
 @InstallGlobalFunction( DisableAddForCategoricalOperations,
   

@@ -14,12 +14,12 @@
         "object_in_range_category_of_homomorphism_structure",
         "morphism_in_range_category_of_homomorphism_structure",
         "bool",
-        "other_object",
-        "other_morphism",
+        "list_of_objects",
         "list_of_morphisms",
         "list_of_morphisms_or_fail",
+        "object_datum",
+        "morphism_datum",
         "nonneg_integer_or_Inf",
-        "list_of_objects"
     ]
 #! @EndCode
 );
@@ -43,25 +43,25 @@ end );
 
 @InstallValueConst( CAP_INTERNAL_METHOD_NAME_RECORD, rec(
 ObjectConstructor = rec(
-  filter_list = [ "category", IsObject ],
+  filter_list = [ "category", "object_datum" ],
   return_type = "object",
   compatible_with_congruence_of_morphisms = false,
 ),
 
 ObjectDatum = rec(
   filter_list = [ "category", "object" ],
-  return_type = IsObject,
+  return_type = "object_datum",
 ),
 
 MorphismConstructor = rec(
-  filter_list = [ "category", "object", IsObject, "object" ],
+  filter_list = [ "category", "object", "morphism_datum", "object" ],
   return_type = "morphism",
   compatible_with_congruence_of_morphisms = false,
 ),
 
 MorphismDatum = rec(
   filter_list = [ "category", "morphism" ],
-  return_type = IsObject,
+  return_type = "morphism_datum",
   compatible_with_congruence_of_morphisms = false,
 ),
 
@@ -71,7 +71,7 @@ LiftAlongMonomorphism = rec(
   pre_function = function( cat, iota, tau )
     local value, category;
     
-    value = IsEqualForObjects( Range( iota ), Range( tau ) );
+    value = IsEqualForObjects( cat, Range( iota ), Range( tau ) );
     
     if value == fail
         
@@ -95,7 +95,7 @@ IsLiftableAlongMonomorphism = rec(
   pre_function = function( cat, iota, tau )
     local value;
     
-    value = IsEqualForObjects( Range( iota ), Range( tau ) );
+    value = IsEqualForObjects( cat, Range( iota ), Range( tau ) );
     
     if value == fail
         
@@ -120,7 +120,7 @@ ColiftAlongEpimorphism = rec(
   pre_function = function( cat, epsilon, tau )
     local value, category;
     
-    value = IsEqualForObjects( Source( epsilon ), Source( tau ) );
+    value = IsEqualForObjects( cat, Source( epsilon ), Source( tau ) );
     
     if value == fail
         
@@ -144,7 +144,7 @@ IsColiftableAlongEpimorphism = rec(
   pre_function = function( cat, epsilon, tau )
     local value;
     
-    value = IsEqualForObjects( Source( epsilon ), Source( tau ) );
+    value = IsEqualForObjects( cat, Source( epsilon ), Source( tau ) );
     
     if value == fail
         
@@ -169,7 +169,7 @@ Lift = rec(
   pre_function = function( cat, iota, tau )
     local value;
     
-    value = IsEqualForObjects( Range( iota ), Range( tau ) );
+    value = IsEqualForObjects( cat, Range( iota ), Range( tau ) );
     
     if value == fail
         
@@ -216,7 +216,7 @@ Colift = rec(
   pre_function = function( cat, epsilon, tau )
     local value;
     
-    value = IsEqualForObjects( Source( epsilon ), Source( tau ) );
+    value = IsEqualForObjects( cat, Source( epsilon ), Source( tau ) );
     
     if value == fail
         
@@ -263,7 +263,7 @@ ProjectiveLift = rec(
   pre_function = function( cat, iota, tau )
     local value;
     
-    value = IsEqualForObjects( Range( iota ), Range( tau ) );
+    value = IsEqualForObjects( cat, Range( iota ), Range( tau ) );
     
     if value == fail
         
@@ -289,7 +289,7 @@ InjectiveColift = rec(
   pre_function = function( cat, epsilon, tau )
     local value;
     
-    value = IsEqualForObjects( Source( epsilon ), Source( tau ) );
+    value = IsEqualForObjects( cat, Source( epsilon ), Source( tau ) );
     
     if value == fail
         
@@ -465,7 +465,7 @@ PreCompose = rec(
   pre_function = function( cat, mor_left, mor_right )
     local is_equal_for_objects;
     
-    is_equal_for_objects = IsEqualForObjects( Range( mor_left ), Source( mor_right ) );
+    is_equal_for_objects = IsEqualForObjects( cat, Range( mor_left ), Source( mor_right ) );
     
     if is_equal_for_objects == fail
       
@@ -532,7 +532,7 @@ PreComposeList = rec(
     
     for i in (1):(Length( list_of_morphisms ) - 1)
         
-        is_equal_for_objects = IsEqualForObjects( Range( list_of_morphisms[i] ), Source( list_of_morphisms[i + 1] ) );
+        is_equal_for_objects = IsEqualForObjects( cat, Range( list_of_morphisms[i] ), Source( list_of_morphisms[i + 1] ) );
         
         if is_equal_for_objects == fail
             
@@ -565,7 +565,7 @@ PostCompose = rec(
   pre_function = function( cat, mor_right, mor_left )
     local is_equal_for_objects;
     
-    is_equal_for_objects = IsEqualForObjects( Range( mor_left ), Source( mor_right ) );
+    is_equal_for_objects = IsEqualForObjects( cat, Range( mor_left ), Source( mor_right ) );
     
     if is_equal_for_objects == fail
       
@@ -599,7 +599,7 @@ PostComposeList = rec(
     
     for i in (1):(Length( list_of_morphisms ) - 1)
         
-        is_equal_for_objects = IsEqualForObjects( Range( list_of_morphisms[i + 1] ), Source( list_of_morphisms[i] ) );
+        is_equal_for_objects = IsEqualForObjects( cat, Range( list_of_morphisms[i + 1] ), Source( list_of_morphisms[i] ) );
         
         if is_equal_for_objects == fail
             
@@ -720,14 +720,14 @@ DirectSum = rec(
 ),
 
 ProjectionInFactorOfDirectSum = rec(
-  filter_list = [ "category", "list_of_objects", IsInt ],
+  filter_list = [ "category", "list_of_objects", "integer" ],
   io_type = [ [ "objects", "k" ], [ "P", "objects_k" ] ],
   with_given_object_position = "Source",
   return_type = "morphism",
   dual_operation = "InjectionOfCofactorOfDirectSum" ),
 
 ProjectionInFactorOfDirectSumWithGivenDirectSum = rec(
-  filter_list = [ "category", "list_of_objects", IsInt, "object" ],
+  filter_list = [ "category", "list_of_objects", "integer", "object" ],
   io_type = [ [ "objects", "k", "P" ], [ "P", "objects_k" ] ],
   return_type = "morphism",
   dual_operation = "InjectionOfCofactorOfDirectSumWithGivenDirectSum" ),
@@ -743,7 +743,7 @@ UniversalMorphismIntoDirectSum = rec(
     
     for current_morphism in source
         
-        current_return = IsEqualForObjects( Source( current_morphism ), test_object );
+        current_return = IsEqualForObjects( cat, Source( current_morphism ), test_object );
         
         if current_return == fail
             
@@ -774,7 +774,7 @@ UniversalMorphismIntoDirectSumWithGivenDirectSum = rec(
     
     for current_morphism in source
         
-        current_return = IsEqualForObjects( Source( current_morphism ), test_object );
+        current_return = IsEqualForObjects( cat, Source( current_morphism ), test_object );
         
         if current_return == fail
             
@@ -796,14 +796,14 @@ UniversalMorphismIntoDirectSumWithGivenDirectSum = rec(
 ),
 
 InjectionOfCofactorOfDirectSum = rec(
-  filter_list = [ "category", "list_of_objects", IsInt ],
+  filter_list = [ "category", "list_of_objects", "integer" ],
   io_type = [ [ "objects", "k" ], [ "objects_k", "P" ] ],
   with_given_object_position = "Range",
   return_type = "morphism",
   dual_operation = "ProjectionInFactorOfDirectSum" ),
 
 InjectionOfCofactorOfDirectSumWithGivenDirectSum = rec(
-  filter_list = [ "category", "list_of_objects", IsInt, "object" ],
+  filter_list = [ "category", "list_of_objects", "integer", "object" ],
   io_type = [ [ "objects", "k", "P" ], [ "objects_k", "P" ] ],
   return_type = "morphism",
   dual_operation = "ProjectionInFactorOfDirectSumWithGivenDirectSum" ),
@@ -819,7 +819,7 @@ UniversalMorphismFromDirectSum = rec(
     
     for current_morphism in sink
         
-        current_return = IsEqualForObjects( Range( current_morphism ), test_object );
+        current_return = IsEqualForObjects( cat, Range( current_morphism ), test_object );
         
         if current_return == fail
             
@@ -850,7 +850,7 @@ UniversalMorphismFromDirectSumWithGivenDirectSum = rec(
     
     for current_morphism in sink
         
-        current_return = IsEqualForObjects( Range( current_morphism ), test_object );
+        current_return = IsEqualForObjects( cat, Range( current_morphism ), test_object );
         
         if current_return == fail
             
@@ -919,14 +919,14 @@ DirectProduct = rec(
 ),
 
 ProjectionInFactorOfDirectProduct = rec(
-  filter_list = [ "category", "list_of_objects", IsInt ],
+  filter_list = [ "category", "list_of_objects", "integer" ],
   io_type = [ [ "objects", "k" ], [ "P", "objects_k" ] ],
   with_given_object_position = "Source",
   return_type = "morphism",
   dual_operation = "InjectionOfCofactorOfCoproduct" ),
 
 ProjectionInFactorOfDirectProductWithGivenDirectProduct = rec(
-  filter_list = [ "category", "list_of_objects", IsInt, "object" ],
+  filter_list = [ "category", "list_of_objects", "integer", "object" ],
   io_type = [ [ "objects", "k", "P" ], [ "P", "objects_k" ] ],
   return_type = "morphism",
   dual_operation = "InjectionOfCofactorOfCoproductWithGivenCoproduct" ),
@@ -942,7 +942,7 @@ UniversalMorphismIntoDirectProduct = rec(
     
     for current_morphism in source
         
-        current_return = IsEqualForObjects( Source( current_morphism ), test_object );
+        current_return = IsEqualForObjects( cat, Source( current_morphism ), test_object );
         
         if current_return == fail
             
@@ -973,7 +973,7 @@ UniversalMorphismIntoDirectProductWithGivenDirectProduct = rec(
     
     for current_morphism in source
         
-        current_return = IsEqualForObjects( Source( current_morphism ), test_object );
+        current_return = IsEqualForObjects( cat, Source( current_morphism ), test_object );
         
         if current_return == fail
             
@@ -994,6 +994,12 @@ UniversalMorphismIntoDirectProductWithGivenDirectProduct = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
+ComponentOfMorphismIntoDirectProduct = rec(
+  filter_list = [ "category", "morphism", "list_of_objects", "integer" ],
+  io_type = [ [ "alpha", "P", "i" ], [ "alpha_source", "P_i" ] ],
+  return_type = "morphism",
+  dual_operation = "ComponentOfMorphismFromCoproduct" ),
+
 IsCongruentForMorphisms = rec(
   filter_list = [ "category", "morphism", "morphism" ],
   well_defined_todo = false,
@@ -1002,7 +1008,7 @@ IsCongruentForMorphisms = rec(
   pre_function = function( cat, morphism_1, morphism_2 )
     local value_1, value_2;
     
-    value_1 = IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) );
+    value_1 = IsEqualForObjects( cat, Source( morphism_1 ), Source( morphism_2 ) );
     
     if value_1 == fail
       
@@ -1010,7 +1016,7 @@ IsCongruentForMorphisms = rec(
       
     end;
     
-    value_2 = IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) );
+    value_2 = IsEqualForObjects( cat, Range( morphism_1 ), Range( morphism_2 ) );
     
     if value_2 == fail
       
@@ -1072,7 +1078,7 @@ IsEqualForMorphisms = rec(
   pre_function = function( cat, morphism_1, morphism_2 )
     local value_1, value_2;
     
-    value_1 = IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) );
+    value_1 = IsEqualForObjects( cat, Source( morphism_1 ), Source( morphism_2 ) );
     
     if value_1 == fail
       
@@ -1080,7 +1086,7 @@ IsEqualForMorphisms = rec(
       
     end;
     
-    value_2 = IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) );
+    value_2 = IsEqualForObjects( cat, Range( morphism_1 ), Range( morphism_2 ) );
     
     if value_2 == fail
       
@@ -1210,7 +1216,7 @@ AdditionForMorphisms = rec(
   pre_function = function( cat, morphism_1, morphism_2 )
     local value_1, value_2;
     
-    value_1 = IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) );
+    value_1 = IsEqualForObjects( cat, Source( morphism_1 ), Source( morphism_2 ) );
     
     if value_1 == fail
       
@@ -1218,7 +1224,7 @@ AdditionForMorphisms = rec(
       
     end;
     
-    value_2 = IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) );
+    value_2 = IsEqualForObjects( cat, Range( morphism_1 ), Range( morphism_2 ) );
     
     if value_2 == fail
       
@@ -1254,7 +1260,7 @@ SubtractionForMorphisms = rec(
   pre_function = function( cat, morphism_1, morphism_2 )
     local value_1, value_2;
     
-    value_1 = IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) );
+    value_1 = IsEqualForObjects( cat, Source( morphism_1 ), Source( morphism_2 ) );
     
     if value_1 == fail
       
@@ -1262,7 +1268,7 @@ SubtractionForMorphisms = rec(
       
     end;
     
-    value_2 = IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) );
+    value_2 = IsEqualForObjects( cat, Range( morphism_1 ), Range( morphism_2 ) );
     
     if value_2 == fail
       
@@ -1296,7 +1302,7 @@ MultiplyWithElementOfCommutativeRingForMorphisms = rec(
   
   pre_function = function( cat, r, morphism )
     
-    if !r ⥉ CommutativeRingOfLinearCategory( CapCategory( morphism ) )
+    if !r ⥉ CommutativeRingOfLinearCategory( cat )
       
       return [ false, "the first argument is !an element of the ring of the category of the morphism" ];
       
@@ -1325,14 +1331,14 @@ Coproduct = rec(
 ),
 
 InjectionOfCofactorOfCoproduct = rec(
-  filter_list = [ "category", "list_of_objects", IsInt ],
+  filter_list = [ "category", "list_of_objects", "integer" ],
   io_type = [ [ "objects", "k" ], [ "objects_k", "P" ] ],
   with_given_object_position = "Range",
   return_type = "morphism",
   dual_operation = "ProjectionInFactorOfDirectProduct" ),
 
 InjectionOfCofactorOfCoproductWithGivenCoproduct = rec(
-  filter_list = [ "category", "list_of_objects", IsInt, "object" ],
+  filter_list = [ "category", "list_of_objects", "integer", "object" ],
   io_type = [ [ "objects", "k", "P" ], [ "objects_k", "P" ] ],
   return_type = "morphism",
   dual_operation = "ProjectionInFactorOfDirectProductWithGivenDirectProduct" ),
@@ -1348,7 +1354,7 @@ UniversalMorphismFromCoproduct = rec(
     
     for current_morphism in sink
         
-        current_return = IsEqualForObjects( Range( current_morphism ), test_object );
+        current_return = IsEqualForObjects( cat, Range( current_morphism ), test_object );
         
         if current_return == fail
             
@@ -1379,7 +1385,7 @@ UniversalMorphismFromCoproductWithGivenCoproduct = rec(
     
     for current_morphism in sink
         
-        current_return = IsEqualForObjects( Range( current_morphism ), test_object );
+        current_return = IsEqualForObjects( cat, Range( current_morphism ), test_object );
         
         if current_return == fail
             
@@ -1399,6 +1405,12 @@ UniversalMorphismFromCoproductWithGivenCoproduct = rec(
   return_type = "morphism",
   compatible_with_congruence_of_morphisms = true,
 ),
+
+ComponentOfMorphismFromCoproduct = rec(
+  filter_list = [ "category", "morphism", "list_of_objects", "integer" ],
+  io_type = [ [ "alpha", "I", "i" ], [ "I_i", "alpha_range" ] ],
+  return_type = "morphism",
+  dual_operation = "ComponentOfMorphismIntoDirectProduct" ),
 
 IsEqualAsSubobjects = rec(
   filter_list = [ "category", "morphism", "morphism" ],
@@ -1424,7 +1436,7 @@ IsDominating = rec(
   pre_function = function( cat, sub1, sub2 )
     local is_equal_for_objects;
     
-    is_equal_for_objects = IsEqualForObjects( Range( sub1 ), Range( sub2 ) );
+    is_equal_for_objects = IsEqualForObjects( cat, Range( sub1 ), Range( sub2 ) );
     
     if is_equal_for_objects == fail
         
@@ -1450,7 +1462,7 @@ IsCodominating = rec(
   pre_function = function( cat, factor1, factor2 )
     local is_equal_for_objects;
     
-    is_equal_for_objects = IsEqualForObjects( Source( factor1 ), Source( factor2 ) );
+    is_equal_for_objects = IsEqualForObjects( cat, Source( factor1 ), Source( factor2 ) );
     
     if is_equal_for_objects == fail
         
@@ -1484,7 +1496,7 @@ Equalizer = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the equalizer diagram have equal sources" ];
@@ -1498,7 +1510,7 @@ Equalizer = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the equalizer diagram have equal ranges" ];
@@ -1568,7 +1580,7 @@ UniversalMorphismIntoEqualizer = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the equalizer diagram have equal sources" ];
@@ -1582,7 +1594,7 @@ UniversalMorphismIntoEqualizer = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the equalizer diagram have equal ranges" ];
@@ -1594,7 +1606,7 @@ UniversalMorphismIntoEqualizer = rec(
     
     for current_morphism_position in (1):(Length( diagram ))
         
-        current_value = IsEqualForObjects( Source( diagram[ current_morphism_position ] ), Range( tau ) );
+        current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( tau ) );
         
         if current_value == fail
             return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
@@ -1617,6 +1629,20 @@ UniversalMorphismIntoEqualizerWithGivenEqualizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
+IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct = rec(
+  filter_list = [ "category", "object", "list_of_morphisms" ],
+  io_type = [ [ "A", "D" ], [ "E", "Delta" ] ],
+  return_type = "morphism",
+  dual_operation = "IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer",
+),
+
+IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer = rec(
+  filter_list = [ "category", "object", "list_of_morphisms" ],
+  io_type = [ [ "A", "D" ], [ "Delta", "E" ] ],
+  return_type = "morphism",
+  dual_operation = "IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct",
+),
+
 FiberProduct = rec(
   filter_list = [ "category", "list_of_morphisms" ],
   dual_operation = "Pushout",
@@ -1634,7 +1660,7 @@ FiberProduct = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
@@ -1652,7 +1678,7 @@ FiberProduct = rec(
 ),
 
 ProjectionInFactorOfFiberProduct = rec(
-  filter_list = [ "category", "list_of_morphisms", IsInt ],
+  filter_list = [ "category", "list_of_morphisms", "integer" ],
   io_type = [ [ "morphisms", "k" ], [ "P", "morphisms_k_source" ] ],
   with_given_object_position = "Source",
   dual_operation = "InjectionOfCofactorOfPushout",
@@ -1668,7 +1694,7 @@ ProjectionInFactorOfFiberProduct = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
@@ -1685,7 +1711,7 @@ ProjectionInFactorOfFiberProduct = rec(
 ),
 
 ProjectionInFactorOfFiberProductWithGivenFiberProduct = rec(
-  filter_list = [ "category", "list_of_morphisms", IsInt, "object" ],
+  filter_list = [ "category", "list_of_morphisms", "integer", "object" ],
   io_type = [ [ "morphisms", "k", "P" ], [ "P", "morphisms_k_source" ] ],
   dual_operation = "InjectionOfCofactorOfPushoutWithGivenPushout",
   
@@ -1700,7 +1726,7 @@ ProjectionInFactorOfFiberProductWithGivenFiberProduct = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
@@ -1729,7 +1755,7 @@ MorphismFromFiberProductToSink = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
@@ -1757,7 +1783,7 @@ MorphismFromFiberProductToSinkWithGivenFiberProduct = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
@@ -1796,7 +1822,7 @@ UniversalMorphismIntoFiberProduct = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
@@ -1808,7 +1834,7 @@ UniversalMorphismIntoFiberProduct = rec(
     
     for current_morphism in source
         
-        current_value = IsEqualForObjects( Source( current_morphism ), test_object );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), test_object );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the test source have sources equal to the test object" ];
@@ -1820,7 +1846,7 @@ UniversalMorphismIntoFiberProduct = rec(
     
     for current_morphism_position in (1):(Length( diagram ))
         
-        current_value = IsEqualForObjects( Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
+        current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
         
         if current_value == fail
             return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
@@ -1858,7 +1884,7 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
@@ -1870,7 +1896,7 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = rec(
     
     for current_morphism in source
         
-        current_value = IsEqualForObjects( Source( current_morphism ), test_object );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), test_object );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the test source have sources equal to the test object" ];
@@ -1882,7 +1908,7 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = rec(
     
     for current_morphism_position in (1):(Length( diagram ))
         
-        current_value = IsEqualForObjects( Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
+        current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
         
         if current_value == fail
             return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
@@ -1916,7 +1942,7 @@ Coequalizer = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the coequalizer diagram have equal sources" ];
@@ -1928,7 +1954,7 @@ Coequalizer = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the coequalizer diagram have equal ranges" ];
@@ -2000,7 +2026,7 @@ UniversalMorphismFromCoequalizer = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), base );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), base );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the coequalizer diagram have equal sources" ];
@@ -2012,7 +2038,7 @@ UniversalMorphismFromCoequalizer = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Range( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the coequalizer diagram have equal ranges" ];
@@ -2024,7 +2050,7 @@ UniversalMorphismFromCoequalizer = rec(
     
     for current_morphism_position in (1):(Length( diagram ))
         
-        current_value = IsEqualForObjects( Range( diagram[ current_morphism_position ] ), Source( tau ) );
+        current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( tau ) );
         
         if current_value == fail
             return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether range && source are equal" ) ];
@@ -2047,6 +2073,20 @@ UniversalMorphismFromCoequalizerWithGivenCoequalizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
+IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct = rec(
+  filter_list = [ "category", "object", "list_of_morphisms" ],
+  io_type = [ [ "A", "D" ], [ "C", "Delta" ] ],
+  return_type = "morphism",
+  dual_operation = "IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer",
+),
+
+IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer = rec(
+  filter_list = [ "category", "object", "list_of_morphisms" ],
+  io_type = [ [ "A", "D" ], [ "Delta", "C" ] ],
+  return_type = "morphism",
+  dual_operation = "IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+),
+
 Pushout = rec(
   filter_list = [ "category", "list_of_morphisms" ],
   dual_operation = "FiberProduct",
@@ -2064,7 +2104,7 @@ Pushout = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
@@ -2082,7 +2122,7 @@ Pushout = rec(
 ),
 
 InjectionOfCofactorOfPushout = rec(
-  filter_list = [ "category", "list_of_morphisms", IsInt ],
+  filter_list = [ "category", "list_of_morphisms", "integer" ],
   io_type = [ [ "morphisms", "k" ], [ "morphisms_k_range", "P" ] ],
   with_given_object_position = "Range",
   dual_operation = "ProjectionInFactorOfFiberProduct",
@@ -2098,7 +2138,7 @@ InjectionOfCofactorOfPushout = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
@@ -2115,7 +2155,7 @@ InjectionOfCofactorOfPushout = rec(
 ),
 
 InjectionOfCofactorOfPushoutWithGivenPushout = rec(
-  filter_list = [ "category", "list_of_morphisms", IsInt, "object" ],
+  filter_list = [ "category", "list_of_morphisms", "integer", "object" ],
   io_type = [ [ "morphisms", "k", "P" ], [ "morphisms_k_range", "P" ] ],
   dual_operation = "ProjectionInFactorOfFiberProductWithGivenFiberProduct",
   
@@ -2130,7 +2170,7 @@ InjectionOfCofactorOfPushoutWithGivenPushout = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
@@ -2159,7 +2199,7 @@ MorphismFromSourceToPushout = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
@@ -2187,7 +2227,7 @@ MorphismFromSourceToPushoutWithGivenPushout = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
@@ -2226,7 +2266,7 @@ UniversalMorphismFromPushout = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
@@ -2238,7 +2278,7 @@ UniversalMorphismFromPushout = rec(
     
     for current_morphism in sink
         
-        current_value = IsEqualForObjects( Range( current_morphism ), test_object );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), test_object );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the test sink have ranges equal to the test object" ];
@@ -2250,7 +2290,7 @@ UniversalMorphismFromPushout = rec(
     
     for current_morphism_position in (1):(Length( diagram ))
         
-        current_value = IsEqualForObjects( Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
+        current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
         
         if current_value == fail
             return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
@@ -2288,7 +2328,7 @@ UniversalMorphismFromPushoutWithGivenPushout = rec(
     
     for current_morphism in diagram[(2):(Length( diagram ))]
         
-        current_value = IsEqualForObjects( Source( current_morphism ), cobase );
+        current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
@@ -2300,7 +2340,7 @@ UniversalMorphismFromPushoutWithGivenPushout = rec(
     
     for current_morphism in sink
         
-        current_value = IsEqualForObjects( Range( current_morphism ), test_object );
+        current_value = IsEqualForObjects( cat, Range( current_morphism ), test_object );
         
         if current_value == fail
             return [ false, "can!decide whether the given morphisms of the test sink have ranges equal to the test object" ];
@@ -2312,7 +2352,7 @@ UniversalMorphismFromPushoutWithGivenPushout = rec(
     
     for current_morphism_position in (1):(Length( diagram ))
         
-        current_value = IsEqualForObjects( Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
+        current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
         
         if current_value == fail
             return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
@@ -2331,7 +2371,9 @@ UniversalMorphismFromPushoutWithGivenPushout = rec(
 ImageObject = rec(
   filter_list = [ "category", "morphism" ],
   return_type = "object",
-  dual_operation = "CoimageObject" ),
+  dual_operation = "CoimageObject",
+  functorial = "ImageObjectFunctorial",
+),
 
 ImageEmbedding = rec(
   filter_list = [ "category", "morphism" ],
@@ -2349,7 +2391,9 @@ ImageEmbeddingWithGivenImageObject = rec(
 CoimageObject = rec(
   filter_list = [ "category", "morphism" ],
   return_type = "object",
-  dual_operation = "ImageObject" ),
+  dual_operation = "ImageObject",
+  functorial = "CoimageObjectFunctorial",
+),
 
 CoimageProjection = rec(
   filter_list = [ "category", "morphism" ],
@@ -2385,21 +2429,21 @@ UniversalMorphismIntoCoimage = rec(
   pre_function = function( cat, morphism, test_factorization )
     local value;
     
-    value = IsEqualForObjects( Source( morphism ), Source( test_factorization[ 1 ] ) );
+    value = IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) );
     if value == fail
         return [ false, "can!decide whether source of morphism && test factorization are equal" ];
     elseif value == false
         return [ false, "source of morphism && test factorization are !equal" ];
     end;
     
-    value = IsEqualForObjects( Range( morphism ), Range( test_factorization[ 2 ] ) );
+    value = IsEqualForObjects( cat, Range( morphism ), Range( test_factorization[ 2 ] ) );
     if value == fail
         return [ false, "can!decide whether range of morphism && test factorization are equal" ];
     elseif value == false
         return [ false, "range of morphism && test factorization are !equal" ];
     end;
     
-    value = IsEqualForObjects( Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
+    value = IsEqualForObjects( cat, Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
     if value == fail
         return [ false, "can!decide whether source && range of test factorization are equal" ];
     elseif value == false
@@ -2418,21 +2462,21 @@ UniversalMorphismIntoCoimageWithGivenCoimageObject = rec(
   pre_function = function( cat, morphism, test_factorization, image )
     local value;
     
-    value = IsEqualForObjects( Source( morphism ), Source( test_factorization[ 1 ] ) );
+    value = IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) );
     if value == fail
         return [ false, "can!decide whether source of morphism && test factorization are equal" ];
     elseif value == false
         return [ false, "source of morphism && test factorization are !equal" ];
     end;
     
-    value = IsEqualForObjects( Range( morphism ), Range( test_factorization[ 2 ] ) );
+    value = IsEqualForObjects( cat, Range( morphism ), Range( test_factorization[ 2 ] ) );
     if value == fail
         return [ false, "can!decide whether range of morphism && test factorization are equal" ];
     elseif value == false
         return [ false, "range of morphism && test factorization are !equal" ];
     end;
     
-    value = IsEqualForObjects( Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
+    value = IsEqualForObjects( cat, Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
     if value == fail
         return [ false, "can!decide whether source && range of test factorization are equal" ];
     elseif value == false
@@ -2464,16 +2508,13 @@ IsWellDefinedForMorphisms = rec(
   dual_operation = "IsWellDefinedForMorphisms",
   
   redirect_function = function( cat, morphism )
-    local category, source, range;
+    local source, range;
     
     source = Source( morphism );
     
     range = Range( morphism );
     
-    category = CapCategory( morphism );
-    
-    if !( IsWellDefined( source ) && IsWellDefined( range ) ) ||
-       !( IsIdenticalObj( CapCategory( source ), category ) && IsIdenticalObj( CapCategory( range ), category ) )
+    if !( IsWellDefinedForObjects( cat, source ) && IsWellDefinedForObjects( cat, range ) )
       
       return [ true, false ];
       
@@ -2547,7 +2588,7 @@ IsOne = rec(
   pre_function = function( cat, morphism )
     local is_equal_for_objects;
     
-    is_equal_for_objects = IsEqualForObjects( Source( morphism ), Range( morphism ) );
+    is_equal_for_objects = IsEqualForObjects( cat, Source( morphism ), Range( morphism ) );
     
     if is_equal_for_objects == fail
       
@@ -2583,7 +2624,7 @@ IsIdempotent = rec(
     
     # do !use IsEndomorphism( morphism ) here because you don't know if
     # the user has given an own IsEndomorphism function
-    if !IsEqualForObjects( Source( morphism ), Range( morphism ) )
+    if !IsEqualForObjects( cat, Source( morphism ), Range( morphism ) )
       
       return [ false, "the given morphism has to be an endomorphism" ];
       
@@ -2668,21 +2709,21 @@ UniversalMorphismFromImage = rec(
   pre_function = function( cat, morphism, test_factorization )
     local value;
     
-    value = IsEqualForObjects( Source( morphism ), Source( test_factorization[ 1 ] ) );
+    value = IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) );
     if value == fail
         return [ false, "can!decide whether source of morphism && test factorization are equal" ];
     elseif value == false
         return [ false, "source of morphism && test factorization are !equal" ];
     end;
     
-    value = IsEqualForObjects( Range( morphism ), Range( test_factorization[ 2 ] ) );
+    value = IsEqualForObjects( cat, Range( morphism ), Range( test_factorization[ 2 ] ) );
     if value == fail
         return [ false, "can!decide whether range of morphism && test factorization are equal" ];
     elseif value == false
         return [ false, "range of morphism && test factorization are !equal" ];
     end;
     
-    value = IsEqualForObjects( Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
+    value = IsEqualForObjects( cat, Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
     if value == fail
         return [ false, "can!decide whether source && range of test factorization are equal" ];
     elseif value == false
@@ -2701,21 +2742,21 @@ UniversalMorphismFromImageWithGivenImageObject = rec(
   pre_function = function( cat, morphism, test_factorization, image )
     local value;
     
-    value = IsEqualForObjects( Source( morphism ), Source( test_factorization[ 1 ] ) );
+    value = IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) );
     if value == fail
         return [ false, "can!decide whether source of morphism && test factorization are equal" ];
     elseif value == false
         return [ false, "source of morphism && test factorization are !equal" ];
     end;
     
-    value = IsEqualForObjects( Range( morphism ), Range( test_factorization[ 2 ] ) );
+    value = IsEqualForObjects( cat, Range( morphism ), Range( test_factorization[ 2 ] ) );
     if value == fail
         return [ false, "can!decide whether range of morphism && test factorization are equal" ];
     elseif value == false
         return [ false, "range of morphism && test factorization are !equal" ];
     end;
     
-    value = IsEqualForObjects( Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
+    value = IsEqualForObjects( cat, Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
     if value == fail
         return [ false, "can!decide whether source && range of test factorization are equal" ];
     elseif value == false
@@ -2873,8 +2914,8 @@ EqualizerFunctorial = rec(
   filter_list = [ "category", "list_of_morphisms", "morphism", "list_of_morphisms" ],
   input_arguments_names = [ "cat", "morphisms", "mu", "morphismsp" ],
   return_type = "morphism",
-  output_source_getter_string = "Equalizer( cat, morphisms )",
-  output_range_getter_string = "Equalizer( cat, morphismsp )",
+  output_source_getter_string = "Equalizer( cat, Source( mu ), morphisms )",
+  output_range_getter_string = "Equalizer( cat, Range( mu ), morphismsp )",
   with_given_object_position = "both",
   dual_operation = "CoequalizerFunctorial",
   dual_arguments_reversed = true,
@@ -2894,8 +2935,8 @@ CoequalizerFunctorial = rec(
   filter_list = [ "category", "list_of_morphisms", "morphism", "list_of_morphisms" ],
   input_arguments_names = [ "cat", "morphisms", "mu", "morphismsp" ],
   return_type = "morphism",
-  output_source_getter_string = "Coequalizer( cat, morphisms )",
-  output_range_getter_string = "Coequalizer( cat, morphismsp )",
+  output_source_getter_string = "Coequalizer( cat, Source( mu ), morphisms )",
+  output_range_getter_string = "Coequalizer( cat, Range( mu ), morphismsp )",
   with_given_object_position = "both",
   dual_operation = "EqualizerFunctorial",
   dual_arguments_reversed = true,
@@ -2953,6 +2994,44 @@ PushoutFunctorialWithGivenPushouts = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
+ImageObjectFunctorial = rec(
+  filter_list = [ "category", "morphism", "morphism", "morphism" ],
+  input_arguments_names = [ "cat", "alpha", "nu", "alphap" ],
+  return_type = "morphism",
+  output_source_getter_string = "ImageObject( cat, alpha )",
+  output_range_getter_string = "ImageObject( cat, alphap )",
+  with_given_object_position = "both",
+  dual_operation = "CoimageObjectFunctorial",
+  dual_arguments_reversed = true,
+),
+
+ImageObjectFunctorialWithGivenImageObjects = rec(
+  filter_list = [ "category", "object", "morphism", "morphism", "morphism", "object" ],
+  io_type = [ [ "I", "alpha", "nu", "alphap", "Ip" ], [ "I", "Ip" ] ],
+  return_type = "morphism",
+  dual_operation = "CoimageObjectFunctorialWithGivenCoimageObjects",
+  dual_arguments_reversed = true,
+),
+
+CoimageObjectFunctorial = rec(
+  filter_list = [ "category", "morphism", "morphism", "morphism" ],
+  input_arguments_names = [ "cat", "alpha", "mu", "alphap" ],
+  return_type = "morphism",
+  output_source_getter_string = "CoimageObject( cat, alpha )",
+  output_range_getter_string = "CoimageObject( cat, alphap )",
+  with_given_object_position = "both",
+  dual_operation = "ImageObjectFunctorial",
+  dual_arguments_reversed = true,
+),
+
+CoimageObjectFunctorialWithGivenCoimageObjects = rec(
+  filter_list = [ "category", "object", "morphism", "morphism", "morphism", "object" ],
+  io_type = [ [ "C", "alpha", "mu", "alphap", "Cp" ], [ "C", "Cp" ] ],
+  return_type = "morphism",
+  dual_operation = "ImageObjectFunctorialWithGivenImageObjects",
+  dual_arguments_reversed = true,
+),
+
 HorizontalPreCompose = rec(
   filter_list = [ "category", "twocell", "twocell" ],
   dual_operation = "HorizontalPostCompose",
@@ -2960,7 +3039,7 @@ HorizontalPreCompose = rec(
   pre_function = function( cat, twocell_1, twocell_2 )
     local value;
     
-    value = IsEqualForObjects( Range( Source( twocell_1 ) ), Source( Source( twocell_2 ) ) );
+    value = IsEqualForObjects( cat, Range( Source( twocell_1 ) ), Source( Source( twocell_2 ) ) );
     if value == fail
         return [ false, "can!decide whether 2-cells are horizontally composable" ];
     elseif value == false
@@ -2978,7 +3057,7 @@ HorizontalPostCompose = rec(
   pre_function = function( cat, twocell_2, twocell_1 )
     local value;
     
-    value = IsEqualForObjects( Range( Source( twocell_1 ) ), Source( Source( twocell_2 ) ) );
+    value = IsEqualForObjects( cat, Range( Source( twocell_1 ) ), Source( Source( twocell_2 ) ) );
     if value == fail
         return [ false, "can!decide whether 2-cells are horizontally composable" ];
     elseif value == false
@@ -3049,34 +3128,13 @@ IsWellDefinedForTwoCells = rec(
   
   return_type = "bool" ),
   
-DirectSumDiagonalDifference = rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  io_type = [ [ "D" ], [ "S", "D_1_range" ] ],
+JointPairwiseDifferencesOfMorphismsIntoDirectProduct = rec(
+  filter_list = [ "category", "object", "list_of_morphisms" ],
+  io_type = [ [ "A", "D" ], [ "A", "P" ] ],
   return_type = "morphism",
-  dual_operation = "DirectSumCodiagonalDifference",
+  dual_operation = "JointPairwiseDifferencesOfMorphismsFromCoproduct",
 ),
-  
-FiberProductEmbeddingInDirectSum = rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  io_type = [ [ "D" ], [ "P", "S" ] ],
-  return_type = "morphism",
-  dual_operation = "DirectSumProjectionInPushout",
-),
-  
-IsomorphismFromFiberProductToKernelOfDiagonalDifference = rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  io_type = [ [ "D" ], [ "P", "Delta" ] ],
-  return_type = "morphism",
-  dual_operation = "IsomorphismFromCokernelOfDiagonalDifferenceToPushout",
-),
-  
-IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct = rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  io_type = [ [ "D" ], [ "Delta", "P" ] ],
-  return_type = "morphism",
-  dual_operation = "IsomorphismFromPushoutToCokernelOfDiagonalDifference",
-),
-  
+
 IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram = rec(
   filter_list = [ "category", "list_of_morphisms" ],
   io_type = [ [ "D" ], [ "P", "Delta" ] ],
@@ -3089,20 +3147,6 @@ IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct = rec(
   io_type = [ [ "D" ], [ "Delta", "P" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
-),
-  
-IsomorphismFromPushoutToCokernelOfDiagonalDifference = rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  io_type = [ [ "D" ], [ "I", "Delta" ] ],
-  return_type = "morphism",
-  dual_operation = "IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
-),
-  
-IsomorphismFromCokernelOfDiagonalDifferenceToPushout = rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  io_type = [ [ "D" ], [ "Delta", "I" ] ],
-  return_type = "morphism",
-  dual_operation = "IsomorphismFromFiberProductToKernelOfDiagonalDifference",
 ),
   
 IsomorphismFromPushoutToCoequalizerOfCoproductDiagram = rec(
@@ -3189,18 +3233,11 @@ IsomorphismFromCoproductToDirectSum = rec(
   dual_operation = "IsomorphismFromDirectSumToDirectProduct",
 ),
 
-DirectSumCodiagonalDifference = rec(
-  io_type = [ [ "D" ], [ "D_1_source", "S" ] ],
-  filter_list = [ "category", "list_of_morphisms" ],
+JointPairwiseDifferencesOfMorphismsFromCoproduct = rec(
+  filter_list = [ "category", "object", "list_of_morphisms" ],
+  io_type = [ [ "A", "D" ], [ "C", "A" ] ],
   return_type = "morphism",
-  dual_operation = "DirectSumDiagonalDifference",
-),
-
-DirectSumProjectionInPushout = rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  io_type = [ [ "D" ], [ "S", "I" ] ],
-  return_type = "morphism",
-  dual_operation = "FiberProductEmbeddingInDirectSum",
+  dual_operation = "JointPairwiseDifferencesOfMorphismsIntoDirectProduct",
 ),
 
 SomeProjectiveObject = rec(
@@ -3246,19 +3283,19 @@ MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject = rec(
   is_merely_set_theoretic = true ),
 
 ComponentOfMorphismIntoDirectSum = rec(
-  filter_list = [ "category", "morphism", "list_of_objects", IsInt ],
+  filter_list = [ "category", "morphism", "list_of_objects", "integer" ],
   io_type = [ [ "alpha", "S", "i" ], [ "alpha_source", "S_i" ] ],
   return_type = "morphism",
   dual_operation = "ComponentOfMorphismFromDirectSum" ),
 
 ComponentOfMorphismFromDirectSum = rec(
-  filter_list = [ "category", "morphism", "list_of_objects", IsInt ],
+  filter_list = [ "category", "morphism", "list_of_objects", "integer" ],
   io_type = [ [ "alpha", "S", "i" ], [ "S_i", "alpha_range" ] ],
   return_type = "morphism",
   dual_operation = "ComponentOfMorphismIntoDirectSum" ),
 
 MorphismBetweenDirectSums = rec(
-  filter_list = [ "category", "list_of_objects", IsList, "list_of_objects" ],
+  filter_list = [ "category", "list_of_objects", "list_of_lists_of_morphisms", "list_of_objects" ],
   input_arguments_names = [ "cat", "source_diagram", "mat", "range_diagram" ],
   return_type = "morphism",
   output_source_getter_string = "DirectSum( cat, source_diagram )",
@@ -3283,7 +3320,7 @@ MorphismBetweenDirectSums = rec(
           
           for j in (1):(Length( range_diagram ))
               
-              result = IsEqualForObjects( source_diagram[i], Source( listlist[i][j] ) );
+              result = IsEqualForObjects( cat, source_diagram[i], Source( listlist[i][j] ) );
               
               if result == fail
                   
@@ -3295,7 +3332,7 @@ MorphismBetweenDirectSums = rec(
                   
               end;
               
-              result = IsEqualForObjects( range_diagram[j], Range( listlist[i][j] ) );
+              result = IsEqualForObjects( cat, range_diagram[j], Range( listlist[i][j] ) );
               
               if result == fail
                   
@@ -3323,7 +3360,7 @@ MorphismBetweenDirectSums = rec(
 ),
 
 MorphismBetweenDirectSumsWithGivenDirectSums = rec(
-  filter_list = [ "category", "object", "list_of_objects", IsList, "list_of_objects", "object" ],
+  filter_list = [ "category", "object", "list_of_objects", "list_of_lists_of_morphisms", "list_of_objects", "object" ],
   io_type = [ [ "S", "source_diagram", "mat", "range_diagram", "T" ], [ "S", "T" ] ],
   return_type = "morphism",
   dual_operation = "MorphismBetweenDirectSumsWithGivenDirectSums",
@@ -3396,9 +3433,9 @@ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure = rec(
 InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects = rec(
   filter_list = [ "category", "object_in_range_category_of_homomorphism_structure", "morphism", "object_in_range_category_of_homomorphism_structure" ],
   input_arguments_names = [ "cat", "source", "alpha", "range" ],
+  return_type = "morphism_in_range_category_of_homomorphism_structure",
   output_source_getter_string = "source",
   output_range_getter_string = "range",
-  return_type = "morphism_in_range_category_of_homomorphism_structure",
   dual_operation = "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
   dual_preprocessor_func = function( cat, distinguished_object, alpha, hom_source_range )
     return nTuple( 4, OppositeCategory( cat ), distinguished_object, Opposite( alpha ), hom_source_range );
@@ -3408,7 +3445,10 @@ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGiv
 
 InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism = rec(
   filter_list = [ "category", "object", "object", "morphism_in_range_category_of_homomorphism_structure" ],
+  input_arguments_names = [ "cat", "source", "range", "alpha" ],
   return_type = "morphism",
+  output_source_getter_string = "source",
+  output_range_getter_string = "range",
   dual_operation = "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
   dual_preprocessor_func = function( cat, A, B, morphism )
     return nTuple( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), morphism );
@@ -3416,7 +3456,7 @@ InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism = rec(
 ),
 
 SolveLinearSystemInAbCategory = rec(
-  filter_list = [ "category", IsList, IsList, "list_of_morphisms" ],
+  filter_list = [ "category", "list_of_lists_of_morphisms", "list_of_lists_of_morphisms", "list_of_morphisms" ],
   return_type = "list_of_morphisms",
   pre_function = function( cat, left_coeffs, right_coeffs, rhs )
     
@@ -3432,7 +3472,7 @@ SolveLinearSystemInAbCategory = rec(
         return [ false, "the list of left coefficients does !have the same length as the right hand side" ];
     end;
     
-    if !ForAll( Concatenation( left_coeffs, right_coeffs ), x -> IsList( x ) && Length( x ) == Length( left_coeffs[1] ) && ForAll( x, y -> IsCapCategoryMorphism( y ) && IsIdenticalObj( CapCategory( y ), cat ) ) )
+    if !ForAll( Concatenation( left_coeffs, right_coeffs ), x -> IsList( x ) && Length( x ) == Length( left_coeffs[1] ) )
         return [ false, "the left coefficients && the right coefficients must be given by lists of lists of the same length containing morphisms ⥉ the current category" ];
     end;
     
@@ -3442,23 +3482,23 @@ SolveLinearSystemInAbCategory = rec(
   pre_function_full = function( cat, left_coeffs, right_coeffs, rhs )
     local nr_columns_left, nr_columns_right;
     
-    if !ForAll( (1):(Length( left_coeffs )), i -> ForAll( left_coeffs[i], coeff -> IsEqualForObjects( Source( coeff ), Source( rhs[i] ) ) != false ) )
+    if !ForAll( (1):(Length( left_coeffs )), i -> ForAll( left_coeffs[i], coeff -> IsEqualForObjects( cat, Source( coeff ), Source( rhs[i] ) ) != false ) )
         return [ false, "the sources of the left coefficients must correspond to the sources of the right hand side" ];
     end;
     
-    if !ForAll( (1):(Length( right_coeffs )), i -> ForAll( right_coeffs[i], coeff -> IsEqualForObjects( Range( coeff ), Range( rhs[i] ) ) != false ) )
+    if !ForAll( (1):(Length( right_coeffs )), i -> ForAll( right_coeffs[i], coeff -> IsEqualForObjects( cat, Range( coeff ), Range( rhs[i] ) ) != false ) )
         return [ false, "the ranges of the right coefficients must correspond to the ranges of the right hand side" ];
     end;
     
     nr_columns_left = Length( left_coeffs[1] );
     
-    if !ForAll( (1):(nr_columns_left), j -> ForAll( left_coeffs, x -> IsEqualForObjects( Range( x[j] ), Range( left_coeffs[1][j] ) ) != false ) )
+    if !ForAll( (1):(nr_columns_left), j -> ForAll( left_coeffs, x -> IsEqualForObjects( cat, Range( x[j] ), Range( left_coeffs[1][j] ) ) != false ) )
         return [ false, "all ranges ⥉ a column of the left coefficients must be equal" ];
     end;
     
     nr_columns_right = Length( right_coeffs[1] );
     
-    if !ForAll( (1):(nr_columns_right), j -> ForAll( right_coeffs, x -> IsEqualForObjects( Source( x[j] ), Source( right_coeffs[1][j] ) ) != false ) )
+    if !ForAll( (1):(nr_columns_right), j -> ForAll( right_coeffs, x -> IsEqualForObjects( cat, Source( x[j] ), Source( right_coeffs[1][j] ) ) != false ) )
         return [ false, "all sources ⥉ a column of the right coefficients must be equal" ];
     end;
     
@@ -3468,14 +3508,14 @@ SolveLinearSystemInAbCategory = rec(
 ),
 
 SolveLinearSystemInAbCategoryOrFail = rec(
-  filter_list = [ "category", IsList, IsList, "list_of_morphisms" ],
+  filter_list = [ "category", "list_of_lists_of_morphisms", "list_of_lists_of_morphisms", "list_of_morphisms" ],
   return_type = "list_of_morphisms_or_fail",
   pre_function = "SolveLinearSystemInAbCategory",
   pre_function_full = "SolveLinearSystemInAbCategory"
 ),
 
 MereExistenceOfSolutionOfLinearSystemInAbCategory = rec(
-  filter_list = [ "category", IsList, IsList, "list_of_morphisms" ],
+  filter_list = [ "category", "list_of_lists_of_morphisms", "list_of_lists_of_morphisms", "list_of_morphisms" ],
   return_type = "bool",
   pre_function = "SolveLinearSystemInAbCategory",
   pre_function_full = "SolveLinearSystemInAbCategory"
@@ -3496,35 +3536,35 @@ CoefficientsOfMorphism = rec(
 ),
 
 RandomObjectByInteger = rec(
-  filter_list = [ "category", IsInt ],
+  filter_list = [ "category", "integer" ],
   io_type = [ [ "n" ], [ "A" ] ],
   return_type = "object",
   dual_operation = "RandomObjectByInteger",
 ),
 
 RandomMorphismByInteger = rec(
-  filter_list = [ "category", IsInt ],
+  filter_list = [ "category", "integer" ],
   io_type = [ [ "n" ], [ "A", "B" ] ],
   return_type = "morphism",
   dual_operation = "RandomMorphismByInteger",
 ),
 
 RandomMorphismWithFixedSourceByInteger = rec(
-  filter_list = [ "category", "object", IsInt ],
+  filter_list = [ "category", "object", "integer" ],
   io_type = [ [ "A", "n" ], [ "A", "B" ] ],
   return_type = "morphism",
   dual_operation = "RandomMorphismWithFixedRangeByInteger",
 ),
 
 RandomMorphismWithFixedRangeByInteger = rec(
-  filter_list = [ "category", "object", IsInt ],
+  filter_list = [ "category", "object", "integer" ],
   io_type = [ [ "B", "n" ], [ "A", "B" ] ],
   return_type = "morphism",
   dual_operation = "RandomMorphismWithFixedSourceByInteger",
 ),
 
 RandomMorphismWithFixedSourceAndRangeByInteger = rec(
-  filter_list = [ "category", "object", "object", IsInt ],
+  filter_list = [ "category", "object", "object", "integer" ],
   io_type = [ [ "A", "B", "n" ], [ "A", "B" ] ],
   return_type = "morphism",
   dual_operation = "RandomMorphismWithFixedSourceAndRangeByInteger",
@@ -3568,7 +3608,7 @@ HomologyObject = rec(
   io_type = [ [ "alpha", "beta" ], [ "H" ] ],
   return_type = "object",
   pre_function = function( cat, alpha, beta )
-      if !IsEqualForObjects( Range( alpha ), Source( beta ) )
+      if !IsEqualForObjects( cat, Range( alpha ), Source( beta ) )
             
             return [ false, "the range of the first morphism has to be equal to the source of the second morphism" ];
             
@@ -3598,25 +3638,25 @@ HomologyObjectFunctorialWithGivenHomologyObjects = rec(
       
       delta = L[5];
       
-      if !IsEqualForObjects( Range( alpha ), Source( beta ) )
+      if !IsEqualForObjects( cat, Range( alpha ), Source( beta ) )
             
             return [ false, "the range of the first morphism has to be equal to the source of the second morphism" ];
             
       end;
       
-      if !IsEqualForObjects( Range( gamma ), Source( delta ) )
+      if !IsEqualForObjects( cat, Range( gamma ), Source( delta ) )
             
             return [ false, "the range of the fourth morphism has to be equal to the source of the fifth morphism" ];
             
       end;
       
-      if !IsEqualForObjects( Source( epsilon ), Source( beta ) )
+      if !IsEqualForObjects( cat, Source( epsilon ), Source( beta ) )
             
             return [ false, "the source of the third morphism has to be equal to the source of the second morphism" ];
             
       end;
       
-      if !IsEqualForObjects( Range( epsilon ), Range( gamma ) )
+      if !IsEqualForObjects( cat, Range( epsilon ), Range( gamma ) )
             
             return [ false, "the range of the third morphism has to be equal to the range of the fourth morphism" ];
             
@@ -3910,6 +3950,48 @@ IndecomposableInjectiveObjects = rec(
   return_type = "list_of_objects",
   dual_operation = "IndecomposableProjectiveObjects",
 ),
+
+ProjectiveCoverObject = rec(
+  filter_list = [ "category", "object" ],
+  return_type = "object",
+  dual_operation = "InjectiveEnvelopeObject",
+  is_merely_set_theoretic = true ),
+
+EpimorphismFromProjectiveCoverObject = rec(
+  filter_list = [ "category", "object" ],
+  io_type = [ [ "A" ], [ "P", "A" ] ],
+  with_given_object_position = "Source",
+  return_type = "morphism",
+  dual_operation = "MonomorphismIntoInjectiveEnvelopeObject",
+  is_merely_set_theoretic = true ),
+
+EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject = rec(
+  filter_list = [ "category", "object", "object" ],
+  io_type = [ [ "A", "P" ], [ "P", "A" ] ],
+  return_type = "morphism",
+  dual_operation = "MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject",
+  is_merely_set_theoretic = true ),
+
+InjectiveEnvelopeObject = rec(
+  filter_list = [ "category", "object" ],
+  return_type = "object",
+  dual_operation = "ProjectiveCoverObject",
+  is_merely_set_theoretic = true ),
+
+MonomorphismIntoInjectiveEnvelopeObject = rec(
+  filter_list = [ "category", "object" ],
+  io_type = [ [ "A" ], [ "A", "I" ] ],
+  with_given_object_position = "Range",
+  return_type = "morphism",
+  dual_operation = "EpimorphismFromProjectiveCoverObject",
+  is_merely_set_theoretic = true ),
+
+MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject = rec(
+  filter_list = [ "category", "object", "object" ],
+  io_type = [ [ "A", "I" ], [ "A", "I" ] ],
+  return_type = "morphism",
+  dual_operation = "EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject",
+  is_merely_set_theoretic = true ),
 
 ) );
 
@@ -4283,7 +4365,7 @@ end );
         projection_filter_list = Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ) );
         projection_io_type = [ StructuralCopy( limit.diagram_input_type ), [ ] ];
         if limit.number_of_targets > 1
-            Add( projection_filter_list, IsInt );
+            Add( projection_filter_list, "integer" );
             Add( projection_io_type[1], "k" );
         end;
         if limit.target_positions == limit.unbound_object_positions
@@ -4757,7 +4839,7 @@ end );
   function( record )
     local recnames, current_recname, current_rec, io_type, number_of_arguments, func_string,
           installation_name, output_list, input_list, argument_names, return_list, current_output, input_position, list_position,
-          without_given_name, with_given_names, with_given_name, without_given_rec, with_given_object_position, object_name,
+          without_given_name, with_given_prefix, with_given_names, with_given_name, without_given_rec, with_given_object_position, object_name,
           object_filter_list, with_given_object_filter, given_source_argument_name, given_range_argument_name, with_given_rec, i,
           can_always_compute_output_source_getter, can_always_compute_output_range_getter;
     
@@ -4771,6 +4853,10 @@ end );
         # validity checks
         if !IsBound( current_rec.return_type )
             Error( "<current_rec> has no return_type" );
+        end;
+        
+        if current_rec.return_type ⥉ [ "other_object", "other_morphism" ]
+            Error( "The return types \"other_object\" && \"other_morphism\" are !supported anymore. If you need those, please report this using the CAP_projects's issue tracker." );
         end;
         
         if !( IsFilter( current_rec.return_type ) || current_rec.return_type ⥉ CAP_INTERNAL_VALID_RETURN_TYPES )
@@ -4791,6 +4877,10 @@ end );
             
             Error( "The first entry of `filter_list` must be the string \"category\". Search for `category_as_first_argument` in the documentation for more details." );
             
+        end;
+        
+        if ForAny( current_rec.filter_list, x -> x ⥉ [ "other_category", "other_object", "other_morphism", "other_twocell" ] )
+            Error( "The filters \"other_category\", \"other_object\", \"other_morphism\", && \"other_twocell\" are !supported anymore. If you need those, please report this using the CAP_projects's issue tracker." );
         end;
         
         if IsBound( current_rec.io_type )
@@ -4886,7 +4976,7 @@ end );
         
         if !IsBound( current_rec.install_convenience_without_category )
             
-            if ForAny( [ "object", "morphism", "twocell", "list_of_objects", "list_of_morphisms" ], filter -> filter ⥉ current_rec.filter_list )
+            if ForAny( [ "object", "morphism", "twocell", "list_of_objects", "list_of_morphisms", "list_of_twocells" ], filter -> filter ⥉ current_rec.filter_list )
                 
                 current_rec.install_convenience_without_category = true;
                 
@@ -5140,7 +5230,7 @@ end );
             
         end;
         
-        if ForAll( current_rec.filter_list, x -> x ⥉ [ IsInt, IsRingElement, "category", "object", "object_in_range_category_of_homomorphism_structure", "other_object", "list_of_objects", "nonneg_integer_or_Inf" ] )
+        if ForAll( current_rec.filter_list, x -> x ⥉ [ IsRingElement, "integer", "nonneg_integer_or_Inf", "category", "object", "object_in_range_category_of_homomorphism_structure", "list_of_objects" ] )
             
             if !IsBound( current_rec.compatible_with_congruence_of_morphisms )
                 
@@ -5173,7 +5263,9 @@ end );
             
             without_given_name = current_recname;
             
-            with_given_names = Filtered( recnames, x -> StartsWith( x, Concatenation( without_given_name, "WithGiven" ) ) );
+            with_given_prefix = Concatenation( without_given_name, "WithGiven" );
+            
+            with_given_names = Filtered( recnames, x -> StartsWith( x, with_given_prefix ) );
             
             if Length( with_given_names ) != 1
                 
@@ -5187,7 +5279,7 @@ end );
             
             with_given_object_position = without_given_rec.with_given_object_position;
             
-            object_name = ReplacedString( with_given_name, Concatenation( without_given_name, "WithGiven" ), "" );
+            object_name = ReplacedString( with_given_name, with_given_prefix, "" );
             
             # generate output_source_getter_string resp. output_range_getter_string automatically if possible
             if object_name ⥉ recnames
@@ -5237,9 +5329,9 @@ end );
                 
             end;
             
-            if !without_given_rec.return_type ⥉ [ "morphism", "morphism_in_range_category_of_homomorphism_structure", "other_morphism" ]
+            if !without_given_rec.return_type ⥉ [ "morphism", "morphism_in_range_category_of_homomorphism_structure" ]
                 
-                Error( "This is a WithoutGiven record, but return_type is neither \"morphism\" nor \"morphism_in_range_category_of_homomorphism_structure\" nor \"other_morphism\". This is !supported." );
+                Error( "This is a WithoutGiven record, but return_type is neither \"morphism\" nor \"morphism_in_range_category_of_homomorphism_structure\". This is !supported." );
                 
             end;
             
@@ -5251,10 +5343,6 @@ end );
             elseif without_given_rec.return_type == "morphism_in_range_category_of_homomorphism_structure"
                 
                 with_given_object_filter = "object_in_range_category_of_homomorphism_structure";
-                
-            elseif without_given_rec.return_type == "other_morphism"
-                
-                with_given_object_filter = "other_object";
                 
             else
                 

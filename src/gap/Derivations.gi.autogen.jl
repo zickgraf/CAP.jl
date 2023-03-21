@@ -33,6 +33,7 @@ InstallMethod( @__MODULE__,  MakeDerivation,
                [ IsString, IsFunction, IsDenseList, IsPosInt, IsFunction, IsFunction ],
                
 function( name, target_op, used_op_names_with_multiples_and_category_getters, weight, func, category_filter )
+  local wrapped_category_filter;
     
     if PositionSublist( string( category_filter ), "CanCompute" ) != fail
         
@@ -46,12 +47,28 @@ function( name, target_op, used_op_names_with_multiples_and_category_getters, we
         
     end;
     
+    if ForAny( used_op_names_with_multiples_and_category_getters, x -> x[3] != fail ) && category_filter == IsCapCategory
+        
+        Print( "WARNING: A derivation for ", NameFunction( target_op ), " depends on other categories (e.g. RangeCategoryOfHomomorphismStructure) but does no test via the CategoryFilter if the other categories are available (e.g. by testing HasRangeCategoryOfHomomorphismStructure).\n" );
+        
+    end;
+    
+    if IsProperty( category_filter )
+        
+        wrapped_category_filter = cat -> Tester( category_filter )( cat ) && category_filter( cat );
+        
+    else
+        
+        wrapped_category_filter = category_filter;
+        
+    end;
+    
     return ObjectifyWithAttributes(
         rec( ), TheTypeOfDerivedMethods,
         DerivationName, name,
         DerivationWeight, weight,
         DerivationFunction, func,
-        CategoryFilter, category_filter,
+        CategoryFilter, wrapped_category_filter,
         TargetOperation, NameFunction( target_op ),
         UsedOperationsWithMultiplesAndCategoryGetters, used_op_names_with_multiples_and_category_getters
     );
@@ -65,24 +82,16 @@ function( d )
                         " of operation ", TargetOperation( d ) );
 end );
 
-InstallMethod( @__MODULE__,  ViewObj,
+InstallMethod( @__MODULE__,  ViewString,
                [ IsDerivedMethod ],
 function( d )
-  Print( "<", string( d ), ">" );
+  return Concatenation( "<", string( d ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  IsApplicableToCategory,
                [ IsDerivedMethod, IsCapCategory ],
 function( d, C )
-  local filter;
-  filter = CategoryFilter( d );
-  if IsProperty( filter )
-      return Tester( filter )( C ) && filter( C );
-  elseif IsFunction( filter )
-      return filter( C );
-  else
-      Error( "Category filter is !a filter || function" );
-  end;
+  return CategoryFilter( d )( C );
 end );
 
 InstallMethod( @__MODULE__,  InstallDerivationForCategory,
@@ -112,7 +121,7 @@ function( d, weight, C )
   
   # use the add method with signature IsCapCategory, IsList, IsInt to avoid
   # the convenience for AddZeroObject etc.
-  add_method( C, [ Pair( func, [ ] ) ], weight; IsDerivation = true );
+  add_method( C, [ pair( func, [ ] ) ], weight; IsDerivation = true );
   
 end );
 
@@ -178,10 +187,10 @@ function( G )
   return "derivation graph";
 end );
 
-InstallMethod( @__MODULE__,  ViewObj,
+InstallMethod( @__MODULE__,  ViewString,
                [ IsDerivedMethodGraph ],
 function( G )
-  Print( "<", string( G ), ">" );
+  return Concatenation( "<", string( G ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  AddDerivation,
@@ -435,10 +444,10 @@ function( owl )
                         string( CategoryOfOperationWeightList( owl ) ) );
 end );
 
-InstallMethod( @__MODULE__,  ViewObj,
+InstallMethod( @__MODULE__,  ViewString,
                [ IsOperationWeightList ],
 function( owl )
-  Print( "<", string( owl ), ">" );
+  return Concatenation( "<", string( owl ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  CurrentOperationWeight,
@@ -716,10 +725,10 @@ function( H )
                         string( HeapSize( H ) ) );
 end );
 
-InstallMethod( @__MODULE__,  ViewObj,
+InstallMethod( @__MODULE__,  ViewString,
                [ IsStringMinHeap ],
 function( H )
-  Print( "<", string( H ), ">" );
+  return Concatenation( "<", string( H ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  HeapSize,
@@ -899,7 +908,7 @@ end );
 @InstallGlobalFunction( DerivationsOfMethodByCategory,
   
   function( category, name )
-    local category_weight_list, current_weight, current_derivation, currently_installed_funcs, to_delete, weight_list, category_getter_string, possible_derivations, category_filter, weight, i, x;
+    local category_weight_list, current_weight, current_derivation, currently_installed_funcs, to_delete, weight_list, category_getter_string, possible_derivations, category_filter, weight, found, i, x, final_derivation;
     
     if IsFunction( name )
         name = NameFunction( name );
@@ -978,7 +987,7 @@ end );
                 
             end;
             
-            currently_installed_funcs = [ Pair( DerivationFunction( current_derivation ), [ ] ) ];
+            currently_installed_funcs = [ pair( DerivationFunction( current_derivation ), [ ] ) ];
             
         end;
         
@@ -1014,24 +1023,46 @@ end );
     
     Print( "Possible derivations are:\n\n" );
     
-    possible_derivations = DerivationsOfOperation( CAP_INTERNAL_DERIVATION_GRAPH, name );
+    possible_derivations = List( DerivationsOfOperation( CAP_INTERNAL_DERIVATION_GRAPH, name ), d -> rec( derivation = d ) );
+    
+    for final_derivation in CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list
+        
+        for current_derivation in final_derivation.derivations
+            
+            if TargetOperation( current_derivation ) == name
+                
+                Add( possible_derivations, rec(
+                    derivation = current_derivation,
+                    can_compute = UsedOperationsWithMultiplesAndCategoryGetters( final_derivation.dummy_derivation ),
+                    cannot_compute = final_derivation.cannot_compute,
+                ) );
+                
+            end;
+            
+        end;
+        
+    end;
     
     for current_derivation in possible_derivations
         
-        category_filter = CategoryFilter( current_derivation );
+        category_filter = CategoryFilter( current_derivation.derivation );
         
+        # `SizeScreen()[1] - 3` is taken from the code for package banners
+        Print( ListWithIdenticalEntries( SizeScreen()[1] - 3, '-' ), "\n" );
         if IsProperty( category_filter ) && Tester( category_filter )( category ) && !category_filter( category )
             continue;
         elseif IsProperty( category_filter ) && !Tester( category_filter )( category )
             Print( "If ", Name( category ), " would be ", JoinStringsWithSeparator( Filtered( NamesFilter( category_filter ), name -> !StartsWith( name, "Has" ) ), " && " ), " then\n" );
             Print( TextAttr.b4, name, TextAttr.reset, " could be derived by\n" );
         elseif IsFunction( category_filter ) && !category_filter( category )
-            continue;
+            Print( "If ", Name( category ), " would fulfill the conditions given by\n\n" );
+            Display( category_filter );
+            Print( "\nthen ", TextAttr.b4, name, TextAttr.reset, " could be derived by\n" );
         else
             Print( TextAttr.b4, name, TextAttr.reset, " can be derived by\n" );
         end;
         
-        for x in UsedOperationsWithMultiplesAndCategoryGetters( current_derivation )
+        for x in UsedOperationsWithMultiplesAndCategoryGetters( current_derivation.derivation )
             
             if x[3] == fail
                 
@@ -1057,7 +1088,77 @@ end );
             
         end;
         
-        Print( "with additional weight ", DerivationWeight( current_derivation ), ".\n\n" );
+        Print( "with additional weight ", DerivationWeight( current_derivation.derivation ) );
+        
+        Assert( 0, IsBound( current_derivation.can_compute ) == IsBound( current_derivation.cannot_compute ) );
+        
+        if IsBound( current_derivation.can_compute )
+            
+            Print( "\n\nas a final derivation\nif the following additional operations could be computed\n" );
+            
+            found = false;
+            
+            for x in current_derivation.can_compute
+                
+                if x[3] == fail
+                    
+                    weight_list = category_weight_list;
+                    category_getter_string = "";
+                    
+                else
+                    
+                    weight_list = x[3](category).derivations_weight_list;
+                    category_getter_string = Concatenation( " ⥉ category obtained by applying ", string( x[3] ) );
+                    
+                end;
+                
+                weight = CurrentOperationWeight( weight_list, x[1] );
+                
+                if weight == Inf
+                    
+                    Print( "* ", x[1], "\n" );
+                    found = true;
+                    
+                end;
+                
+            end;
+            
+            if !found
+                
+                Print( "(none)\n" );
+                
+            end;
+            
+            Print( "\nand the following additional operations could !be computed\n" );
+            
+            found = false;
+            
+            for x in current_derivation.cannot_compute
+                
+                weight = CurrentOperationWeight( weight_list, x );
+                
+                if weight < Inf
+                    
+                    Print( "* ", x, "\n" );
+                    found = true;
+                    
+                end;
+                
+            end;
+            
+            if !found
+                
+                Print( "(none)\n" );
+                
+            end;
+            
+        else
+            
+            Print( ".\n" );
+            
+        end;
+        
+        Print( "\n" );
         
     end;
     

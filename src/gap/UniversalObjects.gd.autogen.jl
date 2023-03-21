@@ -29,7 +29,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (K) at (-\w,0) [ K ];
 #! \node (T) at (-\w,\w) [ T ];
 #! \node (A) at (0,0) [ A ];
@@ -187,7 +187,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (A) at (0,0) [ A ];
 #! \node (B) at (\w,0) [ B ];
 #! \node (K) at (2*\w,0) [ K ];
@@ -575,7 +575,7 @@
 #! @Description
 #! The argument is an object  A .
 #! The output is the universal morphism  u(A): \mathrm[InitialObject] \rightarrow A .
-#! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[InitialObject] \rightarrow A) .
+#! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[InitialObject], A) .
 #! @Arguments A
 @DeclareAttribute( "UniversalMorphismFromInitialObject",
                   IsCapCategoryObject );
@@ -584,7 +584,7 @@
 #! The arguments are an object  A ,
 #! && an object  I == \mathrm[InitialObject] .
 #! The output is the universal morphism  u(A): \mathrm[InitialObject] \rightarrow A .
-#! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[InitialObject] \rightarrow A) .
+#! @Returns a morphism ⥉  \mathrm[Hom](I, A) .
 #! @Arguments A, I
 @DeclareOperation( "UniversalMorphismFromInitialObjectWithGivenInitialObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
@@ -639,8 +639,8 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
-#! \def\a[20];
+#! \def\w[2]
+#! \def\a[20]
 #! \node (S) at (0,0) [ S ];
 #! \node (S1) at (-\w,0) [ S_1 ];
 #! \node (S2) at (\w,0) [ S_2 ];
@@ -659,8 +659,8 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
-#! \def\a[20];
+#! \def\w[2]
+#! \def\a[20]
 #! \node (S) at (0,0) [ S ];
 #! \node (S1) at (-\w,0) [ S_1 ];
 #! \node (S2) at (\w,0) [ S_2 ];
@@ -973,7 +973,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (I) at (0,0) [ I ];
 #! \node (I1) at (-\w,0) [ I_1 ];
 #! \node (I2) at (\w,0) [ I_2 ];
@@ -1098,6 +1098,17 @@
 @DeclareOperation( "CoproductFunctorialWithGivenCoproducts",
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
+#! @Description
+#! The arguments are a morphism  \alpha: I \rightarrow A ,
+#! a list  D == (I_1, \dots, I_n)  of objects with  I == \bigsqcup_[j=1]^n I_j ,
+#! && an integer  k .
+#! The output is the component morphism
+#!  I_k \rightarrow A .
+#! @Returns a morphism ⥉  \mathrm[Hom](I_k, A) 
+#! @Arguments alpha, D, k
+@DeclareOperation( "ComponentOfMorphismFromCoproduct",
+                  [ IsCapCategoryMorphism, IsList, IsInt ] );
+
 #! @Chapter Universal Objects
 
 ####################################
@@ -1124,7 +1135,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (P) at (0,0) [ P ];
 #! \node (P1) at (-\w,0) [ P_1 ];
 #! \node (P2) at (\w,0) [ P_2 ];
@@ -1245,6 +1256,17 @@
 @DeclareOperation( "DirectProductFunctorialWithGivenDirectProducts",
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
+#! @Description
+#! The arguments are a morphism  \alpha: A \rightarrow P ,
+#! a list  D == (P_1, \dots, P_n)  of objects with  P == \prod_[j=1]^n P_j ,
+#! && an integer  k .
+#! The output is the component morphism
+#!  A \rightarrow P_k .
+#! @Returns a morphism ⥉  \mathrm[Hom](A, P_k) 
+#! @Arguments alpha, D, k
+@DeclareOperation( "ComponentOfMorphismIntoDirectProduct",
+                  [ IsCapCategoryMorphism, IsList, IsInt ] );
+
 #! @Chapter Universal Objects
 
 ####################################
@@ -1279,7 +1301,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (E) at (-\w,0) [ E ];
 #! \node (T) at (-\w,\w) [ T ];
 #! \node (A) at (0,0) [ A ];
@@ -1424,6 +1446,36 @@
 @DeclareOperation( "EqualizerFunctorialWithGivenEqualizers",
                   [ IsCapCategoryObject, IsList, IsCapCategoryMorphism, IsList, IsCapCategoryObject ] );
 
+#! @Description
+#! The arguments are an object A && a list of morphisms  D == ( \beta_i: A \rightarrow B )_[i == 1 \dots n] .
+#! The output is a morphism
+#!  A \rightarrow \prod_[i=1]^[n-1] B 
+#! such that its kernel equalizes the  \beta_i .
+#! @Returns a morphism ⥉  \mathrm[Hom]( A, \prod_[i=1]^[n-1] B ) 
+#! @Arguments A, D
+@DeclareOperation( "JointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are an object A && a list of morphisms  D == ( \beta_i: A \rightarrow B )_[i == 1 \dots n] .
+#! The output is a morphism
+#!  \mathrm[Equalizer](D) \rightarrow \Delta ,
+#! where  \Delta  denotes the kernel object equalizing the morphisms  \beta_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[Equalizer](D), \Delta) 
+#! @Arguments A, D
+@DeclareOperation( "IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are an object A && a list of morphisms  D == ( \beta_i: A \rightarrow B )_[i == 1 \dots n] .
+#! The output is a morphism
+#!  \Delta \rightarrow \mathrm[Equalizer](D) ,
+#! where  \Delta  denotes the kernel object equalizing the morphisms  \beta_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](\Delta, \mathrm[Equalizer](D)) 
+#! @Arguments A, D
+@DeclareOperation( "IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer",
+                  [ IsCapCategoryObject, IsList ] );
+
 #! @Chapter Universal Objects
 
 ####################################
@@ -1458,7 +1510,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (B) at (0,0) [ B ];
 #! \node (A) at (\w,0) [ A ];
 #! \node (C) at (2*\w,0) [ C ];
@@ -1486,7 +1538,6 @@
 #! The output is the coequalizer  \mathrm[Coequalizer](D) .
 #! @Returns an object
 @DeclareGlobalFunction( "Coequalizer" );
-
 
 #! @Description
 #! The arguments are an object  A  && a list of morphisms  D == ( \beta_i: B \rightarrow A )_[i == 1 \dots n] .
@@ -1604,6 +1655,36 @@
 @DeclareOperation( "CoequalizerFunctorialWithGivenCoequalizers",
                   [ IsCapCategoryObject, IsList, IsCapCategoryMorphism, IsList, IsCapCategoryObject ] );
 
+#! @Description
+#! The arguments are an object A && a list of morphisms  D == ( \beta_i: B \rightarrow A )_[i == 1 \dots n] .
+#! The output is a morphism
+#!  \bigsqcup_[i=1]^[n-1] B \rightarrow A 
+#! such that its cokernel coequalizes the  \beta_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](\bigsqcup_[i=1]^[n-1] B, A) 
+#! @Arguments A, D
+@DeclareOperation( "JointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are an object A && a list of morphisms  D == ( \beta_i: B \rightarrow A )_[i == 1 \dots n] .
+#! The output is a morphism
+#!  \mathrm[Coequalizer](D) \rightarrow \Delta ,
+#! where  \Delta  denotes the cokernel object coequalizing the morphisms  \beta_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[Coequalizer](D), \Delta) 
+#! @Arguments A, D
+@DeclareOperation( "IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are an object A && a list of morphisms  D == ( \beta_i: B \rightarrow A )_[i == 1 \dots n] .
+#! The output is a morphism
+#!  \Delta \rightarrow \mathrm[Coequalizer](D) ,
+#! where  \Delta  denotes the cokernel object coequalizing the morphisms  \beta_i .
+#! @Returns a morphism ⥉  \mathrm[Hom](\Delta, \mathrm[Coequalizer](D)) 
+#! @Arguments A, D
+@DeclareOperation( "IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer",
+                  [ IsCapCategoryObject, IsList ] );
+
 #! @Chapter Universal Objects
 
 ####################################
@@ -1638,7 +1719,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (T) at (-\w,2*\w) [ T ];
 #! \node (P) at (0,\w) [ P ];
 #! \node (P1) at (0,0) [ P_1 ];
@@ -1662,26 +1743,6 @@
 #! The argument is a list of morphisms  D == ( \beta_i: P_i \rightarrow B )_[i == 1 \dots n] .
 #! The output is a morphism
 #!  \mathrm[FiberProduct](D) \rightarrow \Delta ,
-#! where  \Delta  denotes the kernel object equalizing the morphisms  \beta_i .
-#! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[FiberProduct](D), \Delta) 
-#! @Arguments D
-@DeclareOperation( "IsomorphismFromFiberProductToKernelOfDiagonalDifference",
-                  [ IsList ] );
-
-#! @Description
-#! The argument is a list of morphisms  D == ( \beta_i: P_i \rightarrow B )_[i == 1 \dots n] .
-#! The output is a morphism
-#!  \Delta \rightarrow \mathrm[FiberProduct](D) ,
-#! where  \Delta  denotes the kernel object equalizing the morphisms  \beta_i .
-#! @Returns a morphism ⥉  \mathrm[Hom](\Delta, \mathrm[FiberProduct](D)) 
-#! @Arguments D
-@DeclareOperation( "IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
-                  [ IsList ] );
-
-#! @Description
-#! The argument is a list of morphisms  D == ( \beta_i: P_i \rightarrow B )_[i == 1 \dots n] .
-#! The output is a morphism
-#!  \mathrm[FiberProduct](D) \rightarrow \Delta ,
 #! where  \Delta  denotes the equalizer of the product diagram of the morphisms  \beta_i .
 #! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[FiberProduct](D), \Delta) 
 #! @Arguments D
@@ -1699,16 +1760,16 @@
                   [ IsList ] );
 
 #! @Description
+#! This is a convenience method.
 #! The argument is a list of morphisms  D == ( \beta_i: P_i \rightarrow B )_[i == 1 \dots n] .
-#! The output is a morphism
-#!  \bigoplus_[i=1]^n P_i \rightarrow B 
-#! such that its kernel equalizes the  \beta_i .
-#! @Returns a morphism ⥉  \mathrm[Hom]( \bigoplus_[i=1]^n P_i, B ) 
+#! The output is the natural embedding
+#!  \mathrm[FiberProduct](D) \rightarrow \prod_[i=1]^n P_i .
+#! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[FiberProduct](D), \prod_[i=1]^n P_i ) 
 #! @Arguments D
-@DeclareOperation( "DirectSumDiagonalDifference",
+@DeclareOperation( "FiberProductEmbeddingInDirectProduct",
                   [ IsList ] );
-
 #! @Description
+#! This is a convenience method.
 #! The argument is a list of morphisms  D == ( \beta_i: P_i \rightarrow B )_[i == 1 \dots n] .
 #! The output is the natural embedding
 #!  \mathrm[FiberProduct](D) \rightarrow \bigoplus_[i=1]^n P_i .
@@ -1870,7 +1931,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (B) at (0,0) [ B ];
 #! \node (I1) at (\w,0) [ I_1 ];
 #! \node (I2) at (0,\w) [ I_2 ];
@@ -1886,26 +1947,6 @@
 #! \end[tikzpicture]
 #! \end[center]
 #! @EndLatexOnly
-
-#! @Description
-#! The argument is a list of morphisms  D == ( \beta_i: B \rightarrow I_i )_[i == 1 \dots n] .
-#! The output is a morphism
-#!  \mathrm[Pushout](D) \rightarrow \Delta ,
-#! where  \Delta  denotes the cokernel object coequalizing the morphisms  \beta_i .
-#! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[Pushout](D), \Delta) 
-#! @Arguments D
-@DeclareOperation( "IsomorphismFromPushoutToCokernelOfDiagonalDifference",
-                  [ IsList ] );
-
-#! @Description
-#! The argument is a list of morphisms  D == ( \beta_i: B \rightarrow I_i )_[i == 1 \dots n] .
-#! The output is a morphism
-#!  \Delta \rightarrow \mathrm[Pushout](D) ,
-#! where  \Delta  denotes the cokernel object coequalizing the morphisms  \beta_i .
-#! @Returns a morphism ⥉  \mathrm[Hom]( \Delta, \mathrm[Pushout](D)) 
-#! @Arguments D
-@DeclareOperation( "IsomorphismFromCokernelOfDiagonalDifferenceToPushout",
-                  [ IsList ] );
 
 #! @Description
 #! The argument is a list of morphisms  D == ( \beta_i: B \rightarrow I_i )_[i == 1 \dots n] .
@@ -1928,22 +1969,23 @@
                   [ IsList ] );
 
 #! @Description
+#! This is a convenience method.
 #! The argument is a list of morphisms  D == ( \beta_i: B \rightarrow I_i )_[i == 1 \dots n] .
-#! The output is a morphism
-#!  B \rightarrow \bigoplus_[i=1]^n I_i 
-#! such that its cokernel coequalizes the  \beta_i .
-#! @Returns a morphism ⥉  \mathrm[Hom](B, \bigoplus_[i=1]^n I_i) 
+#! The output is the natural projection
+#!  \bigsqcup_[i=1]^n I_i \rightarrow \mathrm[Pushout](D) .
+#! @Returns a morphism ⥉  \mathrm[Hom]( \bigsqcup [i=1]^n I_i, \mathrm[Pushout](D) ) 
 #! @Arguments D
-@DeclareOperation( "DirectSumCodiagonalDifference",
+@DeclareOperation( "PushoutProjectionFromCoproduct",
                   [ IsList ] );
 
 #! @Description
+#! This is a convenience method.
 #! The argument is a list of morphisms  D == ( \beta_i: B \rightarrow I_i )_[i == 1 \dots n] .
 #! The output is the natural projection
 #!  \bigoplus_[i=1]^n I_i \rightarrow \mathrm[Pushout](D) .
 #! @Returns a morphism ⥉  \mathrm[Hom]( \bigoplus_[i=1]^n I_i, \mathrm[Pushout](D) ) 
 #! @Arguments D
-@DeclareOperation( "DirectSumProjectionInPushout",
+@DeclareOperation( "PushoutProjectionFromDirectSum",
                   [ IsList ] );
 
 #! @Description
@@ -2092,7 +2134,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (A) at (-\w,0) [ A ];
 #! \node (B) at (\w,0) [ B ];
 #! \node (I) at (0,-\w) [ I ];
@@ -2201,6 +2243,30 @@
 @DeclareOperation( "UniversalMorphismFromImageWithGivenImageObject",
                   [ IsCapCategoryMorphism, IsList, IsCapCategoryObject ] );
 
+#! @Description
+#! The arguments are three morphisms
+#!  \alpha: A \rightarrow B ,  \nu: B \rightarrow B' ,  \alpha': A' \rightarrow B' .
+#! The output is the morphism
+#!  \mathrm[ImageObject]( \alpha ) \rightarrow \mathrm[ImageObject]( \alpha' ) 
+#! given by the functoriality of the image.
+#! @Returns a morphism ⥉  \mathrm[Hom]( \mathrm[ImageObject]( \alpha ), \mathrm[ImageObject]( \alpha' ) ) 
+#! @Arguments alpha, nu, alpha_prime
+@DeclareOperation( "ImageObjectFunctorial",
+        [ IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are an object  s == \mathrm[ImageObject]( \alpha ) ,
+#! three morphisms
+#!  \alpha: A \rightarrow B ,  \nu: B \rightarrow B' ,  \alpha': A' \rightarrow B' ,
+#! && an object  r == \mathrm[ImageObject]( \alpha' ) .
+#! The output is the morphism
+#!  \mathrm[ImageObject]( \alpha ) \rightarrow \mathrm[ImageObject]( \alpha' ) 
+#! given by the functoriality of the image.
+#! @Returns a morphism ⥉  \mathrm[Hom]( s, r ) 
+#! @Arguments s, alpha, nu, alpha_prime, r
+@DeclareOperation( "ImageObjectFunctorialWithGivenImageObjects",
+        [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
 #! @Chapter Universal Objects
 
 ####################################
@@ -2227,7 +2293,7 @@
 #! @BeginLatexOnly
 #! \begin[center]
 #! \begin[tikzpicture]
-#! \def\w[2];
+#! \def\w[2]
 #! \node (A) at (-\w,0) [ A ];
 #! \node (B) at (\w,0) [ B ];
 #! \node (C) at (0,-\w) [ C ];
@@ -2400,6 +2466,31 @@
 @DeclareAttribute( "CanonicalIdentificationFromCoimageToImageObject",
                   IsCapCategoryMorphism );
 
+#! @Description
+#! The arguments are three morphisms
+#!  \alpha: A \rightarrow B, \mu: A \rightarrow A', \alpha': A' \rightarrow B' .
+#! The output is the morphism
+#!  \mathrm[CoimageObject]( \alpha ) \rightarrow \mathrm[CoimageObject]( \alpha' ) 
+#! given by the functoriality of the coimage.
+#! @Returns a morphism ⥉  \mathrm[Hom](\mathrm[CoimageObject]( \alpha ), \mathrm[CoimageObject]( \alpha' )) 
+#! @Arguments alpha, mu, alpha_prime
+@DeclareOperation( "CoimageObjectFunctorial",
+        [ IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+
+#! @Description
+#! The arguments are an object  s == \mathrm[CoimageObject]( \alpha ) ,
+#! three morphisms
+#!  \alpha: A \rightarrow B, \mu: A \rightarrow A', \alpha': A' \rightarrow B' ,
+#! && an object  r == \mathrm[CoimageObject]( \alpha' ) .
+#! The output is the morphism
+#!  \mathrm[CoimageObject]( \alpha ) \rightarrow \mathrm[CoimageObject]( \alpha' ) 
+#! given by the functoriality of the coimage.
+#! @Returns a morphism ⥉  \mathrm[Hom](s, r) 
+#! @Arguments s, alpha, mu, alpha_prime, r
+@DeclareOperation( "CoimageObjectFunctorialWithGivenCoimageObjects",
+        [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
 #! @Chapter Universal Objects
 
 ####################################
@@ -2488,6 +2579,62 @@
 #! @Arguments alpha, beta
 @DeclareOperation( "IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
+
+#! @Chapter Universal Objects
+
+###################################
+##
+#! @Section Projective covers && injective envelopes
+##
+###################################
+
+#! @Description
+#!  The argument is an object  A .
+#!  The output is a projective cover of  A .
+#! @Arguments A
+#! @Returns an object
+@DeclareAttribute( "ProjectiveCoverObject",
+        IsCapCategoryObject );
+
+#! @Description
+#!  The argument is an object  A .
+#!  The output is an epimorphism from a projective cover of  A .
+#! @Arguments A
+#! @Returns an epimorphism
+@DeclareAttribute( "EpimorphismFromProjectiveCoverObject",
+        IsCapCategoryObject );
+
+#! @Description
+#!  The argument is an object  A .
+#!  The output is the epimorphism from the projective cover  P  of  A .
+#! @Arguments A, P
+#! @Returns an epimorphism
+@DeclareOperation( "EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject",
+        [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#!  The argument is an object  A .
+#!  The output is an injective envelope of  A .
+#! @Arguments A
+#! @Returns an object
+@DeclareAttribute( "InjectiveEnvelopeObject",
+        IsCapCategoryObject );
+
+#! @Description
+#!  The argument is an object  A .
+#!  The output is a monomorphism into an injective envelope of  A .
+#! @Arguments A
+#! @Returns a monomorphism
+@DeclareAttribute( "MonomorphismIntoInjectiveEnvelopeObject",
+        IsCapCategoryObject );
+
+#! @Description
+#!  The argument is an object  A .
+#!  The output is a monomorphism into an injective envelope  I  of  A .
+#! @Arguments A, I
+#! @Returns a monomorphism
+@DeclareOperation( "MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject",
+        [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Chapter Universal Objects
 

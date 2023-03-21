@@ -29,7 +29,7 @@
     completed_record = ShallowCopy( input_record );
     
     list_of_operations_to_install =
-      Set( Concatenation( List( RecNames( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD ), p -> CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p] ) ) );
+      UnionGAP( List( RecNames( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD ), p -> CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p] ) );
     
     skip = [ ];
     
@@ -76,17 +76,22 @@
     ## can still set IsInitialCategory == true manually, if the doctrine is clear from the context.
     Add( excluded_properties, "IsInitialCategory" );
     
-    properties = Filtered( properties, p -> !ForAny( excluded_properties, e -> e == p || e ⥉ ListImpliedFilters( FilterByName( p ) ) ) );
+    properties = Filtered( properties, p -> !ForAny( excluded_properties, e -> e == p || e ⥉ ListImpliedFilters( ValueGlobal( p ) ) ) );
     
     Add( properties, "IsTerminalCategory" );
     
     completed_record.properties = properties;
     
     if !IsBound( completed_record.commutative_ring_of_linear_category )
+        #= comment for Julia
         completed_record.commutative_ring_of_linear_category = Integers;
+        # =#
     end;
     
     T = CategoryConstructor( completed_record );
+    
+    SetRangeCategoryOfHomomorphismStructure( T, T );
+    SetIsEquippedWithHomomorphismStructure( T, true );
     
     ##
     AddIsCongruentForMorphisms( T,
@@ -119,9 +124,17 @@ end );
     
     category_filter = IsCapTerminalCategoryWithSingleObject;
     
-    category_object_filter = IsObjectInCapTerminalCategoryWithSingleObject && HasIsZeroForObjects && IsZeroForObjects;
+    category_object_filter = IsObjectInCapTerminalCategoryWithSingleObject;
     
-    category_morphism_filter = IsMorphismInCapTerminalCategoryWithSingleObject && HasIsZeroForMorphisms && IsZeroForMorphisms && HasIsOne && IsOne;
+    #= comment for Julia
+    category_object_filter = category_object_filter && HasIsZeroForObjects && IsZeroForObjects;
+    # =#
+    
+    category_morphism_filter = IsMorphismInCapTerminalCategoryWithSingleObject;
+    
+    #= comment for Julia
+    category_morphism_filter = category_morphism_filter && HasIsZeroForMorphisms && IsZeroForMorphisms && HasIsOne && IsOne;
+    # =#
     
     ## e.g., ZeroObject, DirectSum
     create_func_object =
@@ -270,9 +283,17 @@ end );
     
     category_filter = IsCapTerminalCategoryWithMultipleObjects;
     
-    category_object_filter = IsObjectInCapTerminalCategoryWithMultipleObjects && HasIsZeroForObjects && IsZeroForObjects;
+    category_object_filter = IsObjectInCapTerminalCategoryWithMultipleObjects;
     
-    category_morphism_filter = IsMorphismInCapTerminalCategoryWithMultipleObjects && HasIsZeroForMorphisms && IsZeroForMorphisms;
+    #= comment for Julia
+    category_object_filter = category_object_filter && HasIsZeroForObjects && IsZeroForObjects;
+    # =#
+    
+    category_morphism_filter = IsMorphismInCapTerminalCategoryWithMultipleObjects;
+    
+    #= comment for Julia
+    category_morphism_filter = category_morphism_filter && HasIsZeroForMorphisms && IsZeroForMorphisms;
+    # =#
     
     ## e.g., ZeroObject, DirectSum
     create_func_object =
@@ -442,23 +463,23 @@ InstallOtherMethod( FunctorFromTerminalCategory,
 #################################
 
 ##
-InstallMethod( @__MODULE__,  Display,
+InstallMethod( @__MODULE__,  DisplayString,
         [ IsObjectInCapTerminalCategoryWithMultipleObjects ],
 
   function( o )
     
-    Display( string( o ) );
+    # This is just GAP's derivation of DisplayString from PrintString from String,
+    # but CAP installs a method for DisplayString which we want to avoid.
+    return Concatenation( string( o ), "\n" );
     
 end );
 
 ##
-InstallMethod( @__MODULE__,  Display,
+InstallMethod( @__MODULE__,  DisplayString,
         [ IsMorphismInCapTerminalCategoryWithMultipleObjects ],
 
   function( m )
     
-    Display( Source( m ) );
-    Print( "|\n| ", string( m ), "\nv\n" );
-    Display( Range( m ) );
+    return Concatenation( DisplayString( Source( m ) ), "|\n| ", string( m ), "\nv\n", DisplayString( Range( m ) ) );
     
 end );

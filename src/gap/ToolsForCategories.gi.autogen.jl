@@ -4,175 +4,195 @@
 # Implementations
 #
 
-##########################################
-##
-## Family property
-##
-##########################################
-
-@InstallGlobalFunction( DeclareFamilyProperty,
-                       
-  function( arg... )
-    local name, filter, family, cell_type, reinstall;
-    
-    if Length( arg ) < 2 || Length( arg ) > 4
-        
-        Error( "usage DeclareFamilyProperty( name, filter[, family, type of cell ] )" );
-        
-    end;
-    
-    name = arg[ 1 ];
-    
-    filter = arg[ 2 ];
-    
-    if !IsBound( arg[ 3 ] )
-        
-        family = "general";
-        
-    elseif IsBound( arg[ 3 ] ) && LowercaseString( arg[ 3 ] ) ⥉ [ "object", "morphism", "twocell" ]
-        
-        arg[ 4 ] = arg[ 3 ];
-        
-        family = "general";
-        
-    else
-        
-        family = LowercaseString( arg[ 3 ] );
-        
-    end;
-    
-    if Length( arg ) > 3
-        
-        cell_type = LowercaseString( arg[ 4 ] );
-        
-    else
-        
-        Error( "the case `cell` is !supported anymore" );
-        
-    end;
-    
-    if !cell_type ⥉ [ "object", "morphism", "twocell" ]
-        
-        Error( "cell must be object, morphism, || twocell" );
-        
-    end;
-    
-    if !IsBound( CATEGORIES_FAMILY_PROPERTIES[family] )
-        
-        CATEGORIES_FAMILY_PROPERTIES[family] = rec( );
-        
-    end;
-    
-    if !IsBound( CATEGORIES_FAMILY_PROPERTIES[family][cell_type] )
-        
-        CATEGORIES_FAMILY_PROPERTIES[family][cell_type] = [ ];
-        
-    end;
-    
-    reinstall = ValueOption( "reinstall" );
-    
-    if reinstall != false
-        
-        reinstall = true;
-        
-    end;
-    
-    Add( CATEGORIES_FAMILY_PROPERTIES[family][cell_type], [ name, reinstall ] );
-    
-    DeclareProperty( name, filter );
-    
-end );
-
 #####################################
 ##
 ## Install add
 ##
 #####################################
 
-@InstallGlobalFunction( CAP_INTERNAL_REPLACE_STRING_WITH_FILTER,
-  
-  function( filter_or_string, args... )
-    local category;
+@InstallGlobalFunction( "CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING", function ( string, args... )
+  local category;
+    
+    if !IsString( string )
+        
+        Error( string, " is !a string" );
+        
+    end;
     
     if Length( args ) > 1
-        Error( "CAP_INTERNAL_REPLACE_STRING_WITH_FILTER must be called with at most two arguments" );
+        
+        Error( "CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING must be called with at most two arguments" );
+        
     elseif Length( args ) == 1
+        
         category = args[1];
+        
     else
+        
         category = false;
+        
+    end;
+    
+    if string == "bool"
+        
+        return rec( filter = IsBool );
+        
+    elseif string == "integer"
+        
+        return rec( filter = IsInt );
+        
+    elseif string == "nonneg_integer_or_Inf"
+        
+        return rec( filter = IsCyclotomic );
+        
+    elseif string == "category"
+        
+        return CapJitDataTypeOfCategory( category );
+        
+    elseif string == "object"
+        
+        return CapJitDataTypeOfObjectOfCategory( category );
+        
+    elseif string == "morphism"
+        
+        return CapJitDataTypeOfMorphismOfCategory( category );
+        
+    elseif string == "twocell"
+        
+        return CapJitDataTypeOfTwoCellOfCategory( category );
+        
+    elseif string == "list_of_objects"
+        
+        return rec( filter = IsList, element_type = CapJitDataTypeOfObjectOfCategory( category ) );
+        
+    elseif string == "list_of_morphisms"
+        
+        return rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) );
+        
+    elseif string == "list_of_lists_of_morphisms"
+        
+        return rec( filter = IsList, element_type = rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) ) );
+        
+    elseif string == "list_of_twocells"
+        
+        return rec( filter = IsList, element_type = CapJitDataTypeOfTwoCellOfCategory( category ) );
+        
+    elseif string == "object_in_range_category_of_homomorphism_structure"
+        
+        if category != false && !HasRangeCategoryOfHomomorphismStructure( category )
+            
+            Display( Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
+            
+        end;
+        
+        if category == false || !HasRangeCategoryOfHomomorphismStructure( category )
+            
+            return CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( "object" );
+            
+        else
+            
+            return CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( "object", RangeCategoryOfHomomorphismStructure( category ) );
+            
+        end;
+        
+    elseif string == "morphism_in_range_category_of_homomorphism_structure"
+        
+        if category != false && !HasRangeCategoryOfHomomorphismStructure( category )
+            
+            Display( Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
+            
+        end;
+        
+        if category == false || !HasRangeCategoryOfHomomorphismStructure( category )
+            
+            return CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( "morphism" );
+            
+        else
+            
+            return CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( "morphism", RangeCategoryOfHomomorphismStructure( category ) );
+            
+        end;
+        
+    elseif string == "object_datum"
+        
+        if category != false
+            
+            # might be `fail`
+            return ObjectDatumType( category );
+            
+        else
+            
+            return fail;
+            
+        end;
+        
+    elseif string == "morphism_datum"
+        
+        if category != false
+            
+            # might be `fail`
+            return MorphismDatumType( category );
+            
+        else
+            
+            return fail;
+            
+        end;
+        
+    elseif string == "object_or_fail" || string == "morphism_or_fail" || string == "list_or_morphisms_or_fail"
+        
+        # can!be express "or fail" yet
+        return fail;
+        
+    else
+        
+        Error( "filter type ", string, " is !recognized, see the documentation for allowed values" );
+        
+    end;
+    
+end );
+
+@InstallGlobalFunction( CAP_INTERNAL_REPLACED_STRING_WITH_FILTER,
+  
+  function( filter_or_string, args... )
+    local category, data_type;
+    
+    if Length( args ) > 1
+        
+        Error( "CAP_INTERNAL_REPLACED_STRING_WITH_FILTER must be called with at most two arguments" );
+        
+    elseif Length( args ) == 1
+        
+        category = args[1];
+        
+    else
+        
+        category = false;
+        
     end;
     
     if IsFilter( filter_or_string )
+        
         return filter_or_string;
+        
     elseif IsString( filter_or_string )
-        if filter_or_string == "category"
-            if category != false
-                return CategoryFilter( category );
-            else
-                return IsCapCategory;
-            end;
-        elseif filter_or_string == "object"
-            if category != false
-                return ObjectFilter( category );
-            else
-                return IsCapCategoryObject;
-            end;
-        elseif filter_or_string == "morphism"
-            if category != false
-                return MorphismFilter( category );
-            else
-                return IsCapCategoryMorphism;
-            end;
-        elseif filter_or_string == "twocell"
-            if category != false
-                return TwoCellFilter( category );
-            else
-                return IsCapCategoryTwoCell;
-            end;
-        elseif filter_or_string == "object_in_range_category_of_homomorphism_structure"
+        
+        data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter_or_string, category );
+        
+        if data_type == fail
             
-            if category != false && !HasRangeCategoryOfHomomorphismStructure( category )
-                
-                Display( Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
-                
-            end;
+            return IsObject;
             
-            if category != false && HasRangeCategoryOfHomomorphismStructure( category )
-                return ObjectFilter( RangeCategoryOfHomomorphismStructure( category ) );
-            else
-                return IsCapCategoryObject;
-            end;
-        elseif filter_or_string == "morphism_in_range_category_of_homomorphism_structure"
+        elseif IsSpecializationOfFilter( IsnTuple, data_type.filter )
             
-            if category != false && !HasRangeCategoryOfHomomorphismStructure( category )
-                
-                Display( Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
-                
-            end;
-            
-            if category != false && HasRangeCategoryOfHomomorphismStructure( category )
-                return MorphismFilter( RangeCategoryOfHomomorphismStructure( category ) );
-            else
-                return IsCapCategoryMorphism;
-            end;
-        elseif filter_or_string == "other_category"
-            return IsCapCategory;
-        elseif filter_or_string == "other_object"
-            return IsCapCategoryObject;
-        elseif filter_or_string == "other_morphism"
-            return IsCapCategoryMorphism;
-        elseif filter_or_string == "other_twocell"
-            return IsCapCategoryTwoCell;
-        elseif filter_or_string == "list_of_objects"
+            # `IsnTuple` deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
+            # However, on the GAP level tuples are just lists.
             return IsList;
-        elseif filter_or_string == "list_of_morphisms"
-            return IsList;
-        elseif filter_or_string == "list_of_twocells"
-            return IsList;
-        elseif filter_or_string == "nonneg_integer_or_Inf"
-            return IsCyclotomic;
+            
         else
-            Error( "filter type ", filter_or_string, " is !recognized, see the documentation for allowed values" );
+            
+            return data_type.filter;
+            
         end;
         
     else
@@ -183,21 +203,53 @@ end );
     
 end );
 
-@InstallGlobalFunction( CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS,
+@InstallGlobalFunction( CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS,
   
   function( list, args... )
       local category;
       
       if Length( args ) > 1
-          Error( "CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS must be called with at most two arguments" );
+          Error( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS must be called with at most two arguments" );
       elseif Length( args ) == 1
           category = args[1];
       else
           category = false;
       end;
       
-      return List( list, l -> CAP_INTERNAL_REPLACE_STRING_WITH_FILTER( l, category ) );
+      return List( list, l -> CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( l, category ) );
       
+end );
+
+@InstallGlobalFunction( CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA,
+  
+  function( list, args... )
+    local category;
+    
+    if Length( args ) > 1
+        Error( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA must be called with at most two arguments" );
+    elseif Length( args ) == 1
+        category = args[1];
+    else
+        category = false;
+    end;
+    
+    return List( list, function ( l )
+      local filter;
+        
+        filter = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( l, category );
+        
+        if filter == IsList
+            
+            return ValueGlobal( "IsJuliaObject" );
+            
+        else
+            
+            return filter;
+            
+        end;
+        
+    end );
+    
 end );
 
 @InstallGlobalFunction( "CAP_INTERNAL_MERGE_FILTER_LISTS",
@@ -219,6 +271,183 @@ end );
     return filter_list;
 end );
 
+@InstallGlobalFunction( "CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER",
+  
+  function( data_type, human_readable_identifier_list )
+    local generic_help_string, filter, asserts_value_is_of_element_type, generic_assert_value_is_of_element_type;
+    
+    generic_help_string = " You can access the value via the local variable 'value' ⥉ a break loop.";
+    
+    filter = data_type.filter;
+    
+    if IsSpecializationOfFilter( IsFunction, filter )
+        
+        return function( value )
+            
+            if !filter( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                
+            end;
+            
+            if NumberArgumentsFunction( value ) >= 0 && NumberArgumentsFunction( value ) != Length( data_type.signature[1] )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " has ", NumberArgumentsFunction( value ), " arguments but ", Length( data_type.signature[1] ), " were expected.", generic_help_string ] ) );
+                
+            end;
+            
+        end;
+        
+    elseif IsSpecializationOfFilter( IsList, filter )
+        
+        # In principle, we have to create an assertion function for each integer to get the human readable identifier correct.
+        # The "correct" approach would be to generate those on demand but that would imply that we have to create assertion functions at runtime.
+        # Thus, we take the pragmatic approach: We generate an assertion function for the first few entries, && a generic assertion function for all other entries.
+        # For nested lists the number of assertion functions grows exponentially, so we choose a quite small number (4).
+        asserts_value_is_of_element_type = List( (1):(4), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_type, Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
+        
+        generic_assert_value_is_of_element_type = CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_type, Concatenation( [ "some entry of " ], human_readable_identifier_list )  );
+        
+        return function( value )
+          local i;
+            
+            if !filter( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                
+            end;
+            
+            for i in (1):(Length( value ))
+                
+                if !IsBound( value[i] )
+                    
+                    CallFuncList( Error, Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
+                    
+                end;
+                
+                if i <= 4
+                    
+                    asserts_value_is_of_element_type[i]( value[i] );
+                    
+                else
+                    
+                    generic_assert_value_is_of_element_type( value[i] );
+                    
+                end;
+                
+            end;
+            
+        end;
+        
+    elseif IsSpecializationOfFilter( IsnTuple, filter )
+        
+        asserts_value_is_of_element_type = List( (1):(Length( data_type.element_types )), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_types[i], Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
+        
+        return function( value )
+          local i;
+            
+            # tuples are modeled as lists
+            if !IsList( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsList (implementation filter of IsnTuple).", generic_help_string ] ) );
+                
+            end;
+            
+            if Length( value ) != Length( data_type.element_types )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " has length ", Length( value ), " but ", Length( data_type.element_types ), " was expected.", generic_help_string ] ) );
+                
+            end;
+            
+            for i in (1):(Length( value ))
+                
+                if !IsBound( value[i] )
+                    
+                    CallFuncList( Error, Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
+                    
+                end;
+                
+                asserts_value_is_of_element_type[i]( value[i] );
+                
+            end;
+            
+        end;
+        
+    elseif IsSpecializationOfFilter( IsCapCategory, filter )
+        
+        return function( value )
+            
+            if !filter( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                
+            end;
+            
+            if !IsIdenticalObj( value, data_type.category )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " is !the expected category although it lies ⥉ the category filter of the expected category. This should never happen, please report this using the CAP_project's issue tracker.", generic_help_string ] ) );
+                
+            end;
+            
+        end;
+        
+    elseif IsSpecializationOfFilter( IsCapCategoryObject, filter )
+        
+        return function( value )
+            
+            if !filter( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                
+            end;
+            
+            CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( value, data_type.category, human_readable_identifier_list );
+            
+        end;
+        
+    elseif IsSpecializationOfFilter( IsCapCategoryMorphism, filter )
+        
+        return function( value )
+            
+            if !filter( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                
+            end;
+            
+            CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( value, data_type.category, human_readable_identifier_list );
+            
+        end;
+        
+    elseif IsSpecializationOfFilter( IsCapCategoryTwoCell, filter )
+        
+        return function( value )
+            
+            if !filter( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                
+            end;
+            
+            CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY( value, data_type.category, human_readable_identifier_list );
+            
+        end;
+        
+    else
+        
+        return function( value )
+            
+            if !filter( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                
+            end;
+            
+        end;
+        
+    end;
+    
+end );
 
 @InstallGlobalFunction( CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT,
     
@@ -647,8 +876,8 @@ end );
 ##
 @InstallGlobalFunction( "IsSpecializationOfFilter", function ( filter1, filter2 )
     
-    filter1 = CAP_INTERNAL_REPLACE_STRING_WITH_FILTER( filter1 );
-    filter2 = CAP_INTERNAL_REPLACE_STRING_WITH_FILTER( filter2 );
+    filter1 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter1 );
+    filter2 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter2 );
     
     return IS_SUBSET_FLAGS( WITH_IMPS_FLAGS( FLAGS_FILTER( filter2 ) ), WITH_IMPS_FLAGS( FLAGS_FILTER( filter1 ) ) );
     
@@ -924,27 +1153,18 @@ end );
 @InstallGlobalFunction( CapJitDataTypeOfCategory, function ( cat )
   local type;
     
-    if !IsBound( cat.compiler_hints ) || !IsBound( cat.compiler_hints.category_filter )
-        
-        Print( "WARNING: The category with name \"", Name( cat ), "\" has no component `cat.compiler_hints.category_filter`. Using `IsCapCategory` instead.\n" );
+    if cat == false
         
         type = rec(
             filter = IsCapCategory,
-            category = cat,
         );
         
     else
         
         type = rec(
-            filter = cat.compiler_hints.category_filter,
+            filter = CategoryFilter( cat ),
             category = cat,
         );
-        
-    end;
-    
-    if !IsSpecializationOfFilter( IsCapCategory, type.filter )
-        
-        Print( "WARNING: filter ", type.filter, " does !imply `IsCapCategory`. This will probably cause errors.\n" );
         
     end;
     
@@ -956,40 +1176,18 @@ end );
 @InstallGlobalFunction( CapJitDataTypeOfObjectOfCategory, function ( cat )
   local type;
     
-    if !IsBound( cat.compiler_hints ) || !IsBound( cat.compiler_hints.object_filter )
+    if cat == false
         
-        Print( "WARNING: The category with name \"", Name( cat ), "\" has no component `cat.compiler_hints.object_filter`. Using the object representation instead.\n" );
-        
-        if !IsBound( cat.object_representation )
-            
-            Print( "WARNING: The category with name \"", Name( cat ), "\" has no component `cat.object_representation`. Using `IsCapCategoryObject` instead.\n" );
-            
-            type = rec(
-                filter = IsCapCategoryObject,
-                category = cat,
-            );
-            
-        else
-            
-            type = rec(
-                filter = cat.object_representation,
-                category = cat,
-            );
-            
-        end;
+        type = rec(
+            filter = IsCapCategoryObject,
+        );
         
     else
         
         type = rec(
-            filter = cat.compiler_hints.object_filter,
+            filter = ObjectFilter( cat ),
             category = cat,
         );
-        
-    end;
-    
-    if !IsSpecializationOfFilter( IsCapCategoryObject, type.filter )
-        
-        Print( "WARNING: filter ", type.filter, " does !imply `IsCapCategoryObject`. This will probably cause errors.\n" );
         
     end;
     
@@ -1001,40 +1199,41 @@ end );
 @InstallGlobalFunction( CapJitDataTypeOfMorphismOfCategory, function ( cat )
   local type;
     
-    if !IsBound( cat.compiler_hints ) || !IsBound( cat.compiler_hints.morphism_filter )
+    if cat == false
         
-        Print( "WARNING: The category with name \"", Name( cat ), "\" has no component `cat.compiler_hints.morphism_filter`. Using the morphism representation instead.\n" );
-        
-        if !IsBound( cat.morphism_representation )
-            
-            Print( "WARNING: The category with name \"", Name( cat ), "\" has no component `cat.morphism_representation`. Using `IsCapCategoryMorphism` instead.\n" );
-            
-            type = rec(
-                filter = IsCapCategoryMorphism,
-                category = cat,
-            );
-            
-        else
-            
-            type = rec(
-                filter = cat.morphism_representation,
-                category = cat,
-            );
-            
-        end;
+        type = rec(
+            filter = IsCapCategoryMorphism,
+        );
         
     else
         
         type = rec(
-            filter = cat.compiler_hints.morphism_filter,
+            filter = MorphismFilter( cat ),
             category = cat,
         );
         
     end;
     
-    if !IsSpecializationOfFilter( IsCapCategoryMorphism, type.filter )
+    return type;
+    
+end );
+
+##
+@InstallGlobalFunction( CapJitDataTypeOfTwoCellOfCategory, function ( cat )
+  local type;
+    
+    if cat == false
         
-        Print( "WARNING: filter ", type.filter, " does !imply `IsCapCategoryMorphism`. This will probably cause errors.\n" );
+        type = rec(
+            filter = IsCapCategoryTwoCell,
+        );
+        
+    else
+        
+        type = rec(
+            filter = TwoCellFilter( cat ),
+            category = cat,
+        );
         
     end;
     
@@ -1119,6 +1318,21 @@ InstallMethod( @__MODULE__,  SafePosition,
 end );
 
 ##
+InstallMethod( @__MODULE__,  SafeUniquePosition,
+               [ IsList, IsObject ],
+               
+  function( list, obj )
+    local positions;
+    
+    positions = Positions( list, obj );
+    
+    Assert( 0, Length( positions ) == 1 );
+    
+    return positions[1];
+    
+end );
+
+##
 InstallMethod( @__MODULE__,  SafePositionProperty,
                [ IsList, IsFunction ],
                
@@ -1130,6 +1344,21 @@ InstallMethod( @__MODULE__,  SafePositionProperty,
     Assert( 0, pos != fail );
     
     return pos;
+    
+end );
+
+##
+InstallMethod( @__MODULE__,  SafeUniquePositionProperty,
+               [ IsList, IsFunction ],
+               
+  function( list, func )
+    local positions;
+    
+    positions = PositionsProperty( list, func );
+    
+    Assert( 0, Length( positions ) == 1 );
+    
+    return positions[1];
     
 end );
 
@@ -1149,6 +1378,23 @@ InstallMethod( @__MODULE__,  SafeFirst,
 end );
 
 ##
+InstallMethod( @__MODULE__,  SafeUniqueEntry,
+               [ IsList, IsFunction ],
+               
+  function( list, func )
+    local positions;
+    
+    positions = PositionsProperty( list, func );
+    
+    Assert( 0, Length( positions ) == 1 );
+    
+    return list[positions[1]];
+    
+end );
+
+##
+#= comment for Julia
+# We want `args` to be a list but ⥉ Julia it's a tuple -> we need a separate implementation for Julia
 @InstallGlobalFunction( nTuple, function ( n, args... )
     
     Assert( 0, Length( args ) == n );
@@ -1156,9 +1402,10 @@ end );
     return args;
     
 end );
+# =#
 
 ##
-@InstallGlobalFunction( Pair, function ( first, second )
+@InstallGlobalFunction( pair, function ( first, second )
     #% CAP_JIT_RESOLVE_FUNCTION
     
     return nTuple( 2, first, second );
@@ -1261,11 +1508,16 @@ end );
         
     end;
     
+    # return void for Julia
+    return;
+    
 end );
 
 @InstallGlobalFunction( CAP_JIT_INCOMPLETE_LOGIC, IdFunc );
 
 ##
+#= comment for Julia
+# Julia does !have non-dense lists && thus needs a separate implementation
 @InstallGlobalFunction( ListWithKeys, function ( list, func )
   local res, i;
     
@@ -1289,6 +1541,7 @@ end );
     return res;
     
 end );
+# =#
 
 ##
 @InstallGlobalFunction( SumWithKeys, function ( list, func )
@@ -1405,6 +1658,8 @@ end );
 end );
 
 ##
+#= comment for Julia
+# Julia does !have non-dense lists && thus needs a separate implementation
 @InstallGlobalFunction( FilteredWithKeys, function ( list, func )
   local res, i, elm, j;
     
@@ -1431,6 +1686,7 @@ end );
     return res;
     
 end );
+# =#
 
 ##
 @InstallGlobalFunction( FirstWithKeys, function ( list, func )

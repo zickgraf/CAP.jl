@@ -87,25 +87,6 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
     
     CC.compiler_hints = rec( );
     
-    ## set filters && attributes
-    if IsBound( options.category_filter )
-        
-        CC.compiler_hints.category_filter = options.category_filter;
-        
-    end;
-    
-    if IsBound( options.category_object_filter )
-        
-        CC.compiler_hints.object_filter = options.category_object_filter;
-        
-    end;
-    
-    if IsBound( options.category_morphism_filter )
-        
-        CC.compiler_hints.morphism_filter = options.category_morphism_filter;
-        
-    end;
-    
     if IsBound( options.commutative_ring_of_linear_category )
         
         SetCommutativeRingOfLinearCategory( CC, options.commutative_ring_of_linear_category );
@@ -270,7 +251,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         info = CAP_INTERNAL_METHOD_NAME_RECORD[name];
         
         # check if filters && return_type are known
-        unknown_filters = Filtered( info.filter_list, filter -> !filter ⥉ [ "category", "object", "morphism", IsInt, IsRingElement, "nonneg_integer_or_Inf", "list_of_objects", "list_of_morphisms" ] );
+        unknown_filters = Filtered( info.filter_list, filter -> !filter ⥉ [ "category", "object", "morphism", "integer", IsRingElement, "nonneg_integer_or_Inf", "list_of_objects", "list_of_morphisms" ] );
         
         if !IsEmpty( unknown_filters )
             
@@ -353,7 +334,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                     
                     return Concatenation( options.underlying_morphism_getter_string, "( cat, ", argument_name, " )" );
                     
-                elseif filter == IsInt || filter == IsRingElement || filter == "nonneg_integer_or_Inf"
+                elseif filter == "integer" || filter == IsRingElement || filter == "nonneg_integer_or_Inf"
                     
                     return argument_name;
                     

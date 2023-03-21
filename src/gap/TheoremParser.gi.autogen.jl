@@ -460,6 +460,20 @@ end );
     
     return_record.Function = func;
     
+    if IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[func] )
+        
+        if Length( return_record.Variables ) != Length( CAP_INTERNAL_METHOD_NAME_RECORD[func].filter_list ) - 1
+            
+            Error( "in logic file: ", func, " gets ", Length( return_record.Variables ), " arguments but ", Length( CAP_INTERNAL_METHOD_NAME_RECORD[func].filter_list ) - 1, " were expected" );
+            
+        end;
+        
+    elseif func != "Source" && func != "Range"
+        
+        Error( "in logic file: ", func, " is neither a CAP operation nor `Source` || `Range`" );
+        
+    end;
+    
     return return_record;
     
 end );

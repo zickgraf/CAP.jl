@@ -297,6 +297,44 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
+#! to the category for the basic operation `CoimageObjectFunctorial`.
+#!  F: ( alpha, mu, alphap ) \\mapsto \\mathtt[CoimageObjectFunctorial](alpha, mu, alphap) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddCoimageObjectFunctorial",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddCoimageObjectFunctorial",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddCoimageObjectFunctorial",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddCoimageObjectFunctorial",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `CoimageObjectFunctorialWithGivenCoimageObjects`.
+#!  F: ( C, alpha, mu, alphap, Cp ) \\mapsto \\mathtt[CoimageObjectFunctorialWithGivenCoimageObjects](C, alpha, mu, alphap, Cp) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddCoimageObjectFunctorialWithGivenCoimageObjects",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddCoimageObjectFunctorialWithGivenCoimageObjects",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddCoimageObjectFunctorialWithGivenCoimageObjects",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddCoimageObjectFunctorialWithGivenCoimageObjects",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
 #! to the category for the basic operation `CoimageProjection`.
 #!  F: ( alpha ) \\mapsto \\mathtt[CoimageProjection](alpha) .
 #! @Returns nothing
@@ -525,6 +563,25 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
+#! to the category for the basic operation `ComponentOfMorphismFromCoproduct`.
+#!  F: ( alpha, I, i ) \\mapsto \\mathtt[ComponentOfMorphismFromCoproduct](alpha, I, i) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddComponentOfMorphismFromCoproduct",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddComponentOfMorphismFromCoproduct",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddComponentOfMorphismFromCoproduct",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddComponentOfMorphismFromCoproduct",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
 #! to the category for the basic operation `ComponentOfMorphismFromDirectSum`.
 #!  F: ( alpha, S, i ) \\mapsto \\mathtt[ComponentOfMorphismFromDirectSum](alpha, S, i) .
 #! @Returns nothing
@@ -539,6 +596,25 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddComponentOfMorphismFromDirectSum",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `ComponentOfMorphismIntoDirectProduct`.
+#!  F: ( alpha, P, i ) \\mapsto \\mathtt[ComponentOfMorphismIntoDirectProduct](alpha, P, i) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddComponentOfMorphismIntoDirectProduct",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddComponentOfMorphismIntoDirectProduct",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddComponentOfMorphismIntoDirectProduct",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddComponentOfMorphismIntoDirectProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -696,44 +772,6 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
-#! to the category for the basic operation `DirectSumCodiagonalDifference`.
-#!  F: ( D ) \\mapsto \\mathtt[DirectSumCodiagonalDifference](D) .
-#! @Returns nothing
-#! @Arguments C, F
-@DeclareOperation( "AddDirectSumCodiagonalDifference",
-                  [ IsCapCategory, IsFunction ] );
-
-@DeclareOperation( "AddDirectSumCodiagonalDifference",
-                  [ IsCapCategory, IsFunction, IsInt ] );
-
-@DeclareOperation( "AddDirectSumCodiagonalDifference",
-                  [ IsCapCategory, IsList, IsInt ] );
-
-@DeclareOperation( "AddDirectSumCodiagonalDifference",
-                  [ IsCapCategory, IsList ] );
-
-#! @Description
-#! The arguments are a category  C  && a function  F .
-#! This operation adds the given function  F 
-#! to the category for the basic operation `DirectSumDiagonalDifference`.
-#!  F: ( D ) \\mapsto \\mathtt[DirectSumDiagonalDifference](D) .
-#! @Returns nothing
-#! @Arguments C, F
-@DeclareOperation( "AddDirectSumDiagonalDifference",
-                  [ IsCapCategory, IsFunction ] );
-
-@DeclareOperation( "AddDirectSumDiagonalDifference",
-                  [ IsCapCategory, IsFunction, IsInt ] );
-
-@DeclareOperation( "AddDirectSumDiagonalDifference",
-                  [ IsCapCategory, IsList, IsInt ] );
-
-@DeclareOperation( "AddDirectSumDiagonalDifference",
-                  [ IsCapCategory, IsList ] );
-
-#! @Description
-#! The arguments are a category  C  && a function  F .
-#! This operation adds the given function  F 
 #! to the category for the basic operation `DirectSumFunctorial`.
 #!  F: ( objects, L, objectsp ) \\mapsto \\mathtt[DirectSumFunctorial](objects, L, objectsp) .
 #! @Returns nothing
@@ -767,25 +805,6 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddDirectSumFunctorialWithGivenDirectSums",
-                  [ IsCapCategory, IsList ] );
-
-#! @Description
-#! The arguments are a category  C  && a function  F .
-#! This operation adds the given function  F 
-#! to the category for the basic operation `DirectSumProjectionInPushout`.
-#!  F: ( D ) \\mapsto \\mathtt[DirectSumProjectionInPushout](D) .
-#! @Returns nothing
-#! @Arguments C, F
-@DeclareOperation( "AddDirectSumProjectionInPushout",
-                  [ IsCapCategory, IsFunction ] );
-
-@DeclareOperation( "AddDirectSumProjectionInPushout",
-                  [ IsCapCategory, IsFunction, IsInt ] );
-
-@DeclareOperation( "AddDirectSumProjectionInPushout",
-                  [ IsCapCategory, IsList, IsInt ] );
-
-@DeclareOperation( "AddDirectSumProjectionInPushout",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -843,6 +862,44 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddEmbeddingOfEqualizerWithGivenEqualizer",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `EpimorphismFromProjectiveCoverObject`.
+#!  F: ( A ) \\mapsto \\mathtt[EpimorphismFromProjectiveCoverObject](A) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddEpimorphismFromProjectiveCoverObject",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddEpimorphismFromProjectiveCoverObject",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddEpimorphismFromProjectiveCoverObject",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddEpimorphismFromProjectiveCoverObject",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject`.
+#!  F: ( A, P ) \\mapsto \\mathtt[EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject](A, P) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddEpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddEpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddEpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddEpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -957,25 +1014,6 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddFiberProduct",
-                  [ IsCapCategory, IsList ] );
-
-#! @Description
-#! The arguments are a category  C  && a function  F .
-#! This operation adds the given function  F 
-#! to the category for the basic operation `FiberProductEmbeddingInDirectSum`.
-#!  F: ( D ) \\mapsto \\mathtt[FiberProductEmbeddingInDirectSum](D) .
-#! @Returns nothing
-#! @Arguments C, F
-@DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
-                  [ IsCapCategory, IsFunction ] );
-
-@DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
-                  [ IsCapCategory, IsFunction, IsInt ] );
-
-@DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
-                  [ IsCapCategory, IsList, IsInt ] );
-
-@DeclareOperation( "AddFiberProductEmbeddingInDirectSum",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -1247,6 +1285,44 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
+#! to the category for the basic operation `ImageObjectFunctorial`.
+#!  F: ( alpha, nu, alphap ) \\mapsto \\mathtt[ImageObjectFunctorial](alpha, nu, alphap) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddImageObjectFunctorial",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddImageObjectFunctorial",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddImageObjectFunctorial",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddImageObjectFunctorial",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `ImageObjectFunctorialWithGivenImageObjects`.
+#!  F: ( I, alpha, nu, alphap, Ip ) \\mapsto \\mathtt[ImageObjectFunctorialWithGivenImageObjects](I, alpha, nu, alphap, Ip) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddImageObjectFunctorialWithGivenImageObjects",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddImageObjectFunctorialWithGivenImageObjects",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddImageObjectFunctorialWithGivenImageObjects",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddImageObjectFunctorialWithGivenImageObjects",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
 #! to the category for the basic operation `IndecomposableInjectiveObjects`.
 #!  F: (  ) \\mapsto \\mathtt[IndecomposableInjectiveObjects]() .
 #! @Returns nothing
@@ -1494,6 +1570,25 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
+#! to the category for the basic operation `InjectiveEnvelopeObject`.
+#!  F: ( arg2 ) \\mapsto \\mathtt[InjectiveEnvelopeObject](arg2) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
 #! to the category for the basic operation `InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure`.
 #!  F: ( alpha ) \\mapsto \\mathtt[InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure](alpha) .
 #! @Returns nothing
@@ -1533,7 +1628,7 @@
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
 #! to the category for the basic operation `InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism`.
-#!  F: ( arg2, arg3, arg4 ) \\mapsto \\mathtt[InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism](arg2, arg3, arg4) .
+#!  F: ( source, range, alpha ) \\mapsto \\mathtt[InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism](source, range, alpha) .
 #! @Returns nothing
 #! @Arguments C, F
 @DeclareOperation( "AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
@@ -2292,6 +2387,25 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
+#! to the category for the basic operation `IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct`.
+#!  F: ( A, D ) \\mapsto \\mathtt[IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct](A, D) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddIsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddIsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddIsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddIsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
 #! to the category for the basic operation `IsomorphismFromCoimageToCokernelOfKernel`.
 #!  F: ( alpha ) \\mapsto \\mathtt[IsomorphismFromCoimageToCokernelOfKernel](alpha) .
 #! @Returns nothing
@@ -2311,20 +2425,20 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
-#! to the category for the basic operation `IsomorphismFromCokernelOfDiagonalDifferenceToPushout`.
-#!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromCokernelOfDiagonalDifferenceToPushout](D) .
+#! to the category for the basic operation `IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer`.
+#!  F: ( A, D ) \\mapsto \\mathtt[IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer](A, D) .
 #! @Returns nothing
 #! @Arguments C, F
-@DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "AddIsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer",
                   [ IsCapCategory, IsFunction ] );
 
-@DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "AddIsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-@DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "AddIsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-@DeclareOperation( "AddIsomorphismFromCokernelOfDiagonalDifferenceToPushout",
+@DeclareOperation( "AddIsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2444,6 +2558,25 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
+#! to the category for the basic operation `IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct`.
+#!  F: ( A, D ) \\mapsto \\mathtt[IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct](A, D) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddIsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddIsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddIsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddIsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
 #! to the category for the basic operation `IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram`.
 #!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram](D) .
 #! @Returns nothing
@@ -2458,25 +2591,6 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddIsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
-                  [ IsCapCategory, IsList ] );
-
-#! @Description
-#! The arguments are a category  C  && a function  F .
-#! This operation adds the given function  F 
-#! to the category for the basic operation `IsomorphismFromFiberProductToKernelOfDiagonalDifference`.
-#!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromFiberProductToKernelOfDiagonalDifference](D) .
-#! @Returns nothing
-#! @Arguments C, F
-@DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
-                  [ IsCapCategory, IsFunction ] );
-
-@DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
-                  [ IsCapCategory, IsFunction, IsInt ] );
-
-@DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
-                  [ IsCapCategory, IsList, IsInt ] );
-
-@DeclareOperation( "AddIsomorphismFromFiberProductToKernelOfDiagonalDifference",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2577,20 +2691,20 @@
 #! @Description
 #! The arguments are a category  C  && a function  F .
 #! This operation adds the given function  F 
-#! to the category for the basic operation `IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct`.
-#!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromKernelOfDiagonalDifferenceToFiberProduct](D) .
+#! to the category for the basic operation `IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer`.
+#!  F: ( A, D ) \\mapsto \\mathtt[IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer](A, D) .
 #! @Returns nothing
 #! @Arguments C, F
-@DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer",
                   [ IsCapCategory, IsFunction ] );
 
-@DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-@DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer",
                   [ IsCapCategory, IsList, IsInt ] );
 
-@DeclareOperation( "AddIsomorphismFromKernelOfDiagonalDifferenceToFiberProduct",
+@DeclareOperation( "AddIsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2610,25 +2724,6 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddIsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
-                  [ IsCapCategory, IsList ] );
-
-#! @Description
-#! The arguments are a category  C  && a function  F .
-#! This operation adds the given function  F 
-#! to the category for the basic operation `IsomorphismFromPushoutToCokernelOfDiagonalDifference`.
-#!  F: ( D ) \\mapsto \\mathtt[IsomorphismFromPushoutToCokernelOfDiagonalDifference](D) .
-#! @Returns nothing
-#! @Arguments C, F
-@DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
-                  [ IsCapCategory, IsFunction ] );
-
-@DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
-                  [ IsCapCategory, IsFunction, IsInt ] );
-
-@DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
-                  [ IsCapCategory, IsList, IsInt ] );
-
-@DeclareOperation( "AddIsomorphismFromPushoutToCokernelOfDiagonalDifference",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2686,6 +2781,44 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddIsomorphismFromZeroObjectToTerminalObject",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `JointPairwiseDifferencesOfMorphismsFromCoproduct`.
+#!  F: ( A, D ) \\mapsto \\mathtt[JointPairwiseDifferencesOfMorphismsFromCoproduct](A, D) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddJointPairwiseDifferencesOfMorphismsFromCoproduct",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `JointPairwiseDifferencesOfMorphismsIntoDirectProduct`.
+#!  F: ( A, D ) \\mapsto \\mathtt[JointPairwiseDifferencesOfMorphismsIntoDirectProduct](A, D) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -2895,6 +3028,44 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddMereExistenceOfSolutionOfLinearSystemInAbCategory",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `MonomorphismIntoInjectiveEnvelopeObject`.
+#!  F: ( A ) \\mapsto \\mathtt[MonomorphismIntoInjectiveEnvelopeObject](A) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddMonomorphismIntoInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddMonomorphismIntoInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddMonomorphismIntoInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddMonomorphismIntoInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject`.
+#!  F: ( A, I ) \\mapsto \\mathtt[MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject](A, I) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddMonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddMonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddMonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddMonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3579,6 +3750,25 @@
                   [ IsCapCategory, IsList, IsInt ] );
 
 @DeclareOperation( "AddProjectionOntoCoequalizerWithGivenCoequalizer",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category  C  && a function  F .
+#! This operation adds the given function  F 
+#! to the category for the basic operation `ProjectiveCoverObject`.
+#!  F: ( arg2 ) \\mapsto \\mathtt[ProjectiveCoverObject](arg2) .
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddProjectiveCoverObject",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddProjectiveCoverObject",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddProjectiveCoverObject",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddProjectiveCoverObject",
                   [ IsCapCategory, IsList ] );
 
 #! @Description

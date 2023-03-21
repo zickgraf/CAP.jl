@@ -20,11 +20,11 @@
 @BindGlobal( "CAP_INTERNAL_CREATE_Cat",
                
   function(  )
-    local obj_rec, cat;
+    local cat;
     
-    obj_rec = rec( caching_info = rec( ), overhead = true, is_computable = true );
+    cat = CreateCapCategory( "Cat", IsCapCategory, IsCapCategoryAsCatObject, IsCapFunctor, IsCapNaturalTransformation );
     
-    cat = CREATE_CAP_CATEGORY_OBJECT( obj_rec, "Cat", IsCapCategory, IsCapCategoryAsCatObject, IsCapFunctor, IsCapNaturalTransformation );
+    cat.category_as_first_argument = false;
     
     INSTALL_CAP_CAT_FUNCTIONS( cat );
     
@@ -401,7 +401,7 @@ end );
     if Length( arguments ) == 1 && functor.number_arguments > 1
         
         if source_category.input_sanity_check_level > 0
-            CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], source_category, function( ) return Concatenation( "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ); end );
+            CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], source_category, [ "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
 
         arguments = ShallowCopy( Components( arguments[ 1 ] ) );
@@ -414,7 +414,7 @@ end );
         
     elseif Length( arguments ) == 1 && input_signature[ 1 ][ 2 ] == true
         if source_category.input_sanity_check_level > 0
-            CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], false, function( ) return Concatenation( "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ); end );
+            CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], false, [ "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
 
         if IsIdenticalObj( CapCategory( arguments[ 1 ] ), Opposite( input_signature[ 1 ][ 1 ] ) )
@@ -422,7 +422,7 @@ end );
         end;
     elseif Length( arguments ) == 1
         if source_category.input_sanity_check_level > 0
-            CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], source_category, function( ) return Concatenation( "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ); end );
+            CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], source_category, [ "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
     end;
     
@@ -435,14 +435,14 @@ end );
             end;
 
             for i in (1):(Length( input_signature ))
-                CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( arguments[ i ], input_signature[ i ][ 1 ], function( ) return Concatenation( "the ", string(i), "-th argument passed to the functor named \033[1m", Name(functor), "\033[0m" ); end );
+                CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( arguments[ i ], input_signature[ i ][ 1 ], [ "the ", string(i), "-th argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
             end;
         end;
         
         computed_value = CallFuncList( FunctorObjectOperation( functor ), arguments );
 
         if range_category.output_sanity_check_level > 0 && !range_category.add_primitive_output
-            CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( computed_value, range_category, function( ) return Concatenation( "the result of the object function of the functor named \033[1m", Name(functor), "\033[0m" ); end );
+            CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( computed_value, range_category, [ "the result of the object function of the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
         
         if range_category.add_primitive_output
@@ -459,7 +459,7 @@ end );
             end;
 
             for i in (1):(Length( input_signature ))
-                CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( arguments[ i ], input_signature[ i ][ 1 ], function( ) return Concatenation( "the ", string(i), "-th argument passed to the functor named \033[1m", Name(functor), "\033[0m" ); end );
+                CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( arguments[ i ], input_signature[ i ][ 1 ], [ "the ", string(i), "-th argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
             end;
         end;
         
@@ -482,7 +482,7 @@ end );
         computed_value = CallFuncList( FunctorMorphismOperation( functor ), Concatenation( [ source_value ], arguments, [ range_value ] ) );
 
         if range_category.output_sanity_check_level > 0 && !range_category.add_primitive_output
-            CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( computed_value, range_category, function( ) return Concatenation( "the result of the morphism function of the functor named \033[1m", Name(functor), "\033[0m" ); end );
+            CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( computed_value, range_category, [ "the result of the morphism function of the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
         
         if range_category.add_primitive_output

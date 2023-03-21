@@ -5,7 +5,6 @@ import Base.+
 import Base./
 import Base.string
 import Base.getindex
-import Base.show
 import Base.copy
 import Base.in
 
@@ -24,8 +23,42 @@ function CreateCrispCachingObject( args... )
 	"crisp_caching_object"
 end
 
+function UnionGAP(args...)
+	if length(args) == 1
+		args = args[1]
+	end
+	if length(args) == 0
+		[ ]
+	elseif length(args) == 1
+		args[1]
+	else
+		sort(union(args...))
+	end
+end
+
+function ListWithKeys(list, func)
+	map(p -> func(p...), enumerate(list))
+end
+
+function FilteredWithKeys(list, func)
+	map(p -> p[2], filter(p -> func(p...), collect(enumerate(list))))
+end
+
+function nTuple(n, args...)
+	@assert n == length(args)
+	collect(args)
+end
+
 # we want "in" to bind stronger than "!"
 ⥉ = in
+
+struct Fail end
+
+fail = Fail()
+
+function Base.show(io::IO, fail::Fail)
+	print(io, "fail")
+end
 
 # CAPDict
 
@@ -63,6 +96,51 @@ end
 
 function copy(record::CAPRecord)
 	CAPRecord(copy(getfield(record, :dict)))
+end
+
+const DEFAULTDISPLAYSTRING = "<object>\n"
+const DEFAULTVIEWSTRING = "<object>"
+
+function DisplayString(obj::CAPDict)
+	DEFAULTDISPLAYSTRING
+end
+
+function ViewString(obj::CAPDict)
+	DEFAULTVIEWSTRING
+end
+
+function Display(obj::CAPDict)
+	string = DisplayString(obj)
+	if string == DEFAULTDISPLAYSTRING
+		PrintObj(obj)
+	else
+		print(string)
+	end
+end
+
+function ViewObj(obj::CAPDict)
+	string = ViewString(obj)
+	if string == DEFAULTVIEWSTRING
+		PrintObj(obj)
+	else
+		print(string)
+	end
+end
+
+function PrintObj(obj::CAPDict)
+	print(PrintString(obj))
+end
+
+function PrintString(obj::CAPDict)
+	String(obj)
+end
+
+function String(obj::CAPDict)
+	"<object>"
+end
+
+function Base.show(io::IO, obj::CAPDict)
+	print(io, ViewString(obj))
 end
 
 # filters
@@ -144,6 +222,7 @@ function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_
 	@assert type <: CAPDict
 	obj = type(getfield(record, :dict))
 	for i in 1:2:length(attributes_and_values)-1
+		@assert attributes_and_values[i] isa Attribute
 		symbol_setter = Setter(attributes_and_values[i])
 		value = attributes_and_values[i + 1]
 		symbol_setter(obj, value)
@@ -301,15 +380,14 @@ function InstallMethod(operation, filter_list, func)
 end
 
 function InstallMethod(mod::Module, operation, filter_list, func::Function)
-	if operation == Pair
-		return
-	elseif operation == String
+	if operation == String
 		operation = string
 	elseif operation == ViewObj
-		operation = show
-		@assert length(filter_list) == 1
-		filter_list = [IsIO, filter_list[1]]
-		func = with_additional_dropped_first_argument(func)
+		println("ignoring installation for ViewObj, use ViewString instead")
+		return
+	elseif operation == Display
+		println("ignoring installation for Display, use DisplayString instead")
+		return
 	end
 	
 	if !isa(operation, Function)
@@ -323,7 +401,7 @@ function InstallMethod(mod::Module, operation, filter_list, func::Function)
 		nargs = methods(func)[1].nargs - 1
 		isva = methods(func)[1].isva
 	else
-		display("Cannot determine number of arguments for the following operation:")
+		println("Cannot determine number of arguments for the following operation:")
 		display(operation)
 		nargs = 1
 		isva = true
@@ -489,7 +567,7 @@ end
 
 function ListImpliedFilters(prop)
 	@assert IsProperty( prop )
-	prop.implied_properties
+	union(prop.implied_properties, map(p -> ListImpliedFilters(p), prop.implied_properties)...)
 end
 
 # families
@@ -532,7 +610,8 @@ end
 
 function RecNames(obj::CAPDict)
 	dict = getfield(obj, :dict)
-	[string(key) for key in filter(key -> dict[key] != nothing, keys(dict))]
+	# the order of element of `keys` may vary -> we have to sort
+	sort([string(key) for key in filter(key -> dict[key] != nothing, keys(dict))])
 end
 
 function ==(rec1::CAPRecord, rec2::CAPRecord)
@@ -548,27 +627,15 @@ end
 
 @DeclareAttribute("Length", IsAttributeStoringRep)
 
-function LengthOperation(list::Vector)
-	length(list)
-end
-
-function LengthOperation(list::UnitRange)
-	length(list)
-end
-
-function LengthOperation(list::StepRange)
-	length(list)
-end
-
-function LengthOperation(list::Tuple)
-	length(list)
-end
-
-function LengthOperation(list::Set)
+function LengthOperation(list::Union{Vector, UnitRange, StepRange, Tuple, Set, String})
 	length(list)
 end
 
 function Add( list::Vector, element::Any )
+	push!(list, element)
+end
+
+function Add( list::Set, element::Any )
 	push!(list, element)
 end
 
@@ -652,8 +719,6 @@ function ⇿(obj1, obj2)
 	end
 end
 
-fail = Symbol("fail")
-
 function Assert( level, assertion )
 	if !assertion
 		throw("assertion failed")
@@ -671,7 +736,6 @@ function Display(func::Function)
 	display(func)
 end
 
-ViewObj = show
 Print = print
 
 Reversed = reverse
@@ -729,7 +793,7 @@ function PositionSublist(string::String, substring::String)
 end
 
 function Error(args...)
-	display(string(args...))
+	print(args...)
 	throw("Error")
 end
 
@@ -846,7 +910,7 @@ function ResumeMethodReordering()
 end
 
 function SetFilterObj(obj, filter)
-	display("trying to set the following filter for an object")
+	println("trying to set the following filter for an object")
 	display(filter)
 	display(string(filter))
 end

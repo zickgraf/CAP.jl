@@ -212,6 +212,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 
 #! @Arguments category, filter
 #! @Description
+#!  **Deprecated**: use <Ref Func="CreateCapCategoryWithDataTypes" /> instead.
 #!  The argument <A>filter</A> is used to create an object type for the
 #!  category <A>category</A>, which is then used ⥉ <C>ObjectifyObjectForCAPWithAttributes</C>
 #!  to objectify objects for this category. <A>filter</A> must imply `IsCapCategoryObject`.
@@ -222,7 +223,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 #! @Description
 #!  Objectifies the object <A>object</A> with the type created
 #!  for objects in the category <A>category</A>. The type
-#!  is created by passing a representation to <C>AddObjectRepresentation</C>.
+#!  is created by passing an object filter to <Ref Func="CreateCapCategoryWithDataTypes" />.
 #!  Objects which are objectified using this method do !have to be passed
 #!  to the <C>AddObject</C> function.
 #!  The optional arguments behave like the corresponding arguments ⥉ <C>ObjectifyWithAttributes</C>.

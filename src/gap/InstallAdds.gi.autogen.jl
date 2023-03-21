@@ -102,7 +102,7 @@ end );
     # declare operation with category as first argument && install convenience method
     if record.install_convenience_without_category
         
-        replaced_filter_list = CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS( filter_list );
+        replaced_filter_list = CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS( filter_list );
         
         if filter_list[2] ⥉ [ "object", "morphism", "twocell" ]
             
@@ -130,6 +130,33 @@ end );
         
     end;
     
+    # convenience for Julia lists
+    #= comment for Julia
+    if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" )
+        
+        if "list_of_objects" ⥉ filter_list || "list_of_morphisms" ⥉ filter_list || "list_of_twocells" ⥉ filter_list
+            
+            replaced_filter_list = CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA( filter_list );
+            
+            Assert( 0, ValueGlobal( "IsJuliaObject" ) ⥉ replaced_filter_list );
+            
+            InstallOtherMethod( ValueGlobal( install_name ),
+                    replaced_filter_list,
+                    ( arg... ) -> CallFuncList( ValueGlobal( install_name ),
+                            List( arg, function( ar ) if ValueGlobal( "IsJuliaObject" )( ar ) then return ValueGlobal( "ConvertJuliaToGAP" )( ar ); fi; return ar; end ) ) );
+            
+            Assert( 0, record.install_convenience_without_category );
+            
+            InstallOtherMethod( ValueGlobal( install_name ),
+                    replaced_filter_list[(2):(Length( replaced_filter_list ))],
+                    ( arg... ) -> CallFuncList( ValueGlobal( install_name ),
+                            List( arg, function( ar ) if ValueGlobal( "IsJuliaObject" )( ar ) then return ValueGlobal( "ConvertJuliaToGAP" )( ar ); fi; return ar; end ) ) );
+            
+        end;
+        
+    end;
+    # =#
+    
     InstallMethod( ValueGlobal( add_name ),
                    [ IsCapCategory, IsFunction ],
                    
@@ -143,22 +170,8 @@ end );
                    [ IsCapCategory, IsFunction, IsInt ],
                    
       function( category, func, weight )
-        local wrapped_func;
         
-        if function_name ⥉ [ "ZeroObject", "TerminalObject", "InitialObject", "DistinguishedObjectOfHomomorphismStructure" ] && !(IsBound( category.category_as_first_argument ) && category.category_as_first_argument == true)
-            
-            ## The users do !have to give the category as an argument
-            ## to their functions, but within derivations, the category has
-            ## to be an argument (see any derivation of ZeroObject ⥉ DerivedMethods.gi)
-            wrapped_func = function( cat ) return func(); end;
-            
-        else
-            
-            wrapped_func = func;
-            
-        end;
-        
-        ValueGlobal( add_name )( category, [ [ wrapped_func, [ ] ] ], weight );
+        ValueGlobal( add_name )( category, [ [ func, [ ] ] ], weight );
         
     end );
     
@@ -177,8 +190,8 @@ end );
       function( category, method_list, weight )
         local install_func, replaced_filter_list, needs_wrapping, i, is_derivation, is_final_derivation, is_precompiled_derivation, without_given_name, with_given_name,
               without_given_weight, with_given_weight, number_of_proposed_arguments, current_function_number,
-              current_function_argument_number, current_additional_filter_list_length, input_human_readable_identifier_getter, input_sanity_check_functions,
-              output_human_readable_identifier_getter, output_sanity_check_function;
+              current_function_argument_number, current_additional_filter_list_length, input_sanity_check_functions,
+              output_human_readable_identifier_list, output_data_type, assert_is_value_of_return_type, output_sanity_check_function, name;
         
         if IsFinalized( category )
             Error( "can!add methods anymore, category is finalized" );
@@ -227,13 +240,24 @@ end );
             
         end;
         
-        replaced_filter_list = CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS( filter_list, category );
+        replaced_filter_list = CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS( filter_list, category );
         
         ## Nr arguments sanity check
         
-        needs_wrapping = record.install_convenience_without_category && !( ( is_derivation || is_final_derivation ) || ( IsBound( category.category_as_first_argument ) && category.category_as_first_argument == true ) );
+        if !category.category_as_first_argument ⥉ [ false, true ]
+            
+            Print(
+                "WARNING: Please set the component `category_as_first_argument` of the category with name \"", Name( category ), "\" explicitly to `true` || `false`. ",
+                "Currently, the default value is `false` (which will now be set automatically), but this will change ⥉ the future.\n"
+            );
+            
+            category.category_as_first_argument = false;
+            
+        end;
         
-        # backwards compatibility for categories without category.category_as_first_argument
+        # backwards compatibility for categories with `category.category_as_first_argument == false`
+        needs_wrapping = category.category_as_first_argument == false && !(is_derivation || is_final_derivation);
+        
         if needs_wrapping
             
             number_of_proposed_arguments = Length( filter_list ) - 1;
@@ -253,7 +277,7 @@ end );
                        " arguments but should have ", string( number_of_proposed_arguments ) );
             end;
             
-            if ( is_derivation || is_final_derivation ) || ( IsBound( category.category_as_first_argument ) && category.category_as_first_argument == true )
+            if !needs_wrapping
                 
                 current_additional_filter_list_length = Length( method_list[ current_function_number ][ 2 ] );
                 
@@ -262,10 +286,7 @@ end );
                            string( current_additional_filter_list_length ), " but should have length ", string( number_of_proposed_arguments ), " (or 0)" );
                 end;
                 
-            end;
-            
-            # backwards compatibility for categories without category.category_as_first_argument
-            if needs_wrapping
+            else
                 
                 method_list[ current_function_number ][ 1 ] = CAP_INTERNAL_CREATE_NEW_FUNC_WITH_ONE_MORE_ARGUMENT_WITH_RETURN( method_list[ current_function_number ][ 1 ] );
                 
@@ -280,152 +301,97 @@ end );
         end;
         
         # prepare input sanity check
-        input_human_readable_identifier_getter = i -> Concatenation( "the ", string(i), "-th argument of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" );
-        
         input_sanity_check_functions = List( (1):(Length( record.filter_list )), function ( i )
-          local filter;
+          local filter, data_type, assert_is_value_of_type;
             
             filter = record.filter_list[ i ];
-
+            
             if IsFilter( filter )
+                
                 # the only check would be that the input lies ⥉ the filter, which is already checked by the method selection
                 return ReturnTrue;
-            elseif filter == "category"
-                # the only check would be that the input lies ⥉ IsCapCategory, which is already checked by the method selection
-                return ReturnTrue;
-            elseif filter == "object"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( arg, category, function( ) return input_human_readable_identifier_getter( i ); end );
+                
+            elseif IsString( filter )
+                
+                data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter, category );
+                
+                if data_type != fail
+                    
+                    return CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type, [ "the ", i, "-th argument of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" ] );
+                    
+                else
+                    
+                    return ReturnTrue;
+                    
                 end;
-            elseif filter == "morphism"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( arg, category, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "twocell"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY( arg, category, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "object_in_range_category_of_homomorphism_structure"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( arg, RangeCategoryOfHomomorphismStructure( category ), function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "morphism_in_range_category_of_homomorphism_structure"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( arg, RangeCategoryOfHomomorphismStructure( category ), function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "other_object"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( arg, false, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "other_morphism"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( arg, false, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "other_twocell"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY( arg, false, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "list_of_objects"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_LIST_OF_OBJECTS_OF_CATEGORY( arg, category, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "list_of_morphisms"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_LIST_OF_MORPHISMS_OF_CATEGORY( arg, category, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "list_of_twocells"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_LIST_OF_TWO_CELLS_OF_CATEGORY( arg, category, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
-            elseif filter == "nonneg_integer_or_Inf"
-                return function( arg, i )
-                    CAP_INTERNAL_ASSERT_IS_NON_NEGATIVE_INTEGER_OR_INFINITY( arg, function( ) return input_human_readable_identifier_getter( i ); end );
-                end;
+                
             else
-                Display( Concatenation( "Warning: You should add an input sanity check for the following filter: ", string( filter ) ) );
-                return ReturnTrue;
+                
+                Error( "this should never happen" );
+                
             end;
             
         end );
         
         # prepare output sanity check
-        output_human_readable_identifier_getter = function( )
-            return Concatenation( "the result of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" );
-        end;
+        output_human_readable_identifier_list = [ "the result of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" ];
         
         if IsFilter( record.return_type )
+            
             output_sanity_check_function = function( result )
+                
                 if !record.return_type( result )
-                    Error( Concatenation( output_human_readable_identifier_getter(), " does !lie ⥉ the required filter. You can access the result && the filter via the local variables 'result' && 'record.return_type' ⥉ a break loop." ) );
+                    
+                    CallFuncList( Error, Concatenation( output_human_readable_identifier_list, [ " does !lie ⥉ the required filter. You can access the result && the filter via the local variables 'result' && 'record.return_type' ⥉ a break loop." ] ) );
+                    
                 end;
+                
             end;
-        elseif record.return_type == "object"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( result, category, output_human_readable_identifier_getter );
+            
+        elseif IsString( record.return_type )
+            
+            if EndsWith( record.return_type, "_or_fail" )
+                
+                output_data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( record.return_type[(1):(Length( record.return_type ) - 8)], category );
+                
+            else
+                
+                output_data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( record.return_type, category );
+                
             end;
-        elseif record.return_type == "object_or_fail"
-            output_sanity_check_function = function( result )
-                if result != fail
-                    CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( result, category, output_human_readable_identifier_getter );
+            
+            if output_data_type != fail
+                
+                assert_is_value_of_return_type = CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( output_data_type, output_human_readable_identifier_list );
+                
+                if EndsWith( record.return_type, "_or_fail" )
+                    
+                    output_sanity_check_function = function( result )
+                        
+                        if result != fail
+                            
+                            assert_is_value_of_return_type( result );
+                            
+                        end;
+                        
+                    end;
+                    
+                else
+                    
+                    output_sanity_check_function = assert_is_value_of_return_type;
+                    
                 end;
+                
+            else
+                
+                output_sanity_check_function = ReturnTrue;
+                
             end;
-        elseif record.return_type == "morphism"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( result, category, output_human_readable_identifier_getter );
-            end;
-        elseif record.return_type == "morphism_or_fail"
-            output_sanity_check_function = function( result )
-                if result != fail
-                    CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( result, category, output_human_readable_identifier_getter );
-                end;
-            end;
-        elseif record.return_type == "twocell"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY( result, category, output_human_readable_identifier_getter );
-            end;
-        elseif record.return_type == "object_in_range_category_of_homomorphism_structure"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( result, RangeCategoryOfHomomorphismStructure( category ), output_human_readable_identifier_getter );
-            end;
-        elseif record.return_type == "morphism_in_range_category_of_homomorphism_structure"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( result, RangeCategoryOfHomomorphismStructure( category ), output_human_readable_identifier_getter );
-            end;
-        elseif record.return_type == "bool"
-            output_sanity_check_function = function( result )
-                if !( result == true || result == false )
-                    Error( Concatenation( output_human_readable_identifier_getter(), " is !a boolean (true/false). You can access the result via the local variable 'result' ⥉ a break loop." ) );
-                end;
-            end;
-        elseif record.return_type == "other_object"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( result, false, output_human_readable_identifier_getter );
-            end;
-        elseif record.return_type == "other_morphism"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( result, false, output_human_readable_identifier_getter );
-            end;
-        elseif record.return_type == "list_of_morphisms"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_LIST_OF_MORPHISMS_OF_CATEGORY( result, category, output_human_readable_identifier_getter );
-            end;
-        elseif record.return_type == "list_of_morphisms_or_fail"
-            output_sanity_check_function = function( result )
-                if result != fail
-                    CAP_INTERNAL_ASSERT_IS_LIST_OF_MORPHISMS_OF_CATEGORY( result, category, output_human_readable_identifier_getter );
-                end;
-            end;
-        elseif record.return_type == "list_of_objects"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_LIST_OF_OBJECTS_OF_CATEGORY( result, category, output_human_readable_identifier_getter );
-            end;
-        elseif record.return_type == "nonneg_integer_or_Inf"
-            output_sanity_check_function = function( result )
-                CAP_INTERNAL_ASSERT_IS_NON_NEGATIVE_INTEGER_OR_INFINITY( result, output_human_readable_identifier_getter );
-            end;
+            
         else
-            Display( Concatenation( "Warning: You should add an output sanity check for the following return_type: ", string( record.return_type ) ) );
-            output_sanity_check_function = ReturnTrue;
+            
+            Error( "this should never happen" );
+            
         end;
         
         install_func = function( func_to_install, additional_filters )
@@ -456,11 +422,7 @@ end );
                         redirect_return = CallFuncList( redirect_function, arg );
                         if redirect_return[ 1 ] == true
                             if category.predicate_logic
-                                if record.install_convenience_without_category
-                                    INSTALL_TODO_FOR_LOGICAL_THEOREMS( record.function_name, arg[(2):(Length( arg ))], redirect_return[ 2 ], category );
-                                else
-                                    INSTALL_TODO_FOR_LOGICAL_THEOREMS( record.function_name, arg, redirect_return[ 2 ], category );
-                                end;
+                                INSTALL_TODO_FOR_LOGICAL_THEOREMS( record.function_name, arg[(2):(Length( arg ))], redirect_return[ 2 ], category );
                             end;
                             return redirect_return[ 2 ];
                         end;
@@ -468,7 +430,7 @@ end );
                     
                     if category.input_sanity_check_level > 0
                         for i in (1):(Length( input_sanity_check_functions ))
-                            input_sanity_check_functions[ i ]( arg[ i ], i );
+                            input_sanity_check_functions[ i ]( arg[ i ] );
                         end;
                         
                         pre_func_return = CallFuncList( pre_function, arg );
@@ -504,11 +466,7 @@ end );
                     end;
                     
                     if category.predicate_logic
-                        if record.install_convenience_without_category
-                            INSTALL_TODO_FOR_LOGICAL_THEOREMS( record.function_name, arg[(2):(Length( arg ))], result, category );
-                        else
-                            INSTALL_TODO_FOR_LOGICAL_THEOREMS( record.function_name, arg, result, category );
-                        end;
+                        INSTALL_TODO_FOR_LOGICAL_THEOREMS( record.function_name, arg[(2):(Length( arg ))], result, category );
                     end;
                     
                     if !is_derivation && !is_final_derivation
@@ -531,7 +489,7 @@ end );
             
             else #category.overhead == false
                 
-                InstallMethod( ValueGlobal( install_name ),
+                InstallOtherMethod( ValueGlobal( install_name ),
                             new_filter_list,
                     
                     function( arg... )
@@ -558,28 +516,26 @@ end );
         
         for i in method_list
             
-            if record.installation_name == "IsEqualForObjects" && IsIdenticalObj( i[ 1 ], IsIdenticalObj ) && category.default_cache_type != "crisp" && !ValueOption( "SuppressCacheWarning" ) == true
-                Display( "WARNING: IsIdenticalObj is used for deciding the equality of objects but the caching is !set to crisp. Thus, probably the specification that equal input gives equal output is !fulfilled. You can suppress this warning by passing the option \"SuppressCacheWarning = true\" to AddIsEqualForObjects." );
-            end;
+            name = Name( category );
             
             # set name for debugging purposes
             if NameFunction( i[ 1 ] ) ⥉ [ "unknown", "_EVALSTRINGTMP" ]
                 
                 if is_derivation
                     
-                    SetNameFunction( i[ 1 ], Concatenation( "Derivation (first added to ", Name( category ), ") of ", function_name ) );
+                    SetNameFunction( i[ 1 ], Concatenation( "Derivation (first added to ", name, ") of ", function_name ) );
                     
                 elseif is_final_derivation
                     
-                    SetNameFunction( i[ 1 ], Concatenation( "Final derivation (first added to ", Name( category ), ") of ", function_name ) );
+                    SetNameFunction( i[ 1 ], Concatenation( "Final derivation (first added to ", name, ") of ", function_name ) );
                     
                 elseif is_precompiled_derivation
                     
-                    SetNameFunction( i[ 1 ], Concatenation( "Precompiled derivation added to ", Name( category ), " for ", function_name ) );
+                    SetNameFunction( i[ 1 ], Concatenation( "Precompiled derivation added to ", name, " for ", function_name ) );
                     
                 else
                     
-                    SetNameFunction( i[ 1 ], Concatenation( "Function added to ", Name( category ), " for ", function_name ) );
+                    SetNameFunction( i[ 1 ], Concatenation( "Function added to ", name, " for ", function_name ) );
                     
                 end;
                 
@@ -712,8 +668,6 @@ end );
   function( record )
     local recnames, current_recname, current_rec;
     
-    CAP_INTERNAL_ENHANCE_NAME_RECORD( record );
-    
     recnames = RecNames( record );
     
     AddOperationsToDerivationGraph( CAP_INTERNAL_DERIVATION_GRAPH, recnames );
@@ -722,14 +676,14 @@ end );
         
         current_rec = record[current_recname];
         
-        ## keep track of it ⥉ method name rec
-        CAP_INTERNAL_METHOD_NAME_RECORD[current_recname] = current_rec;
-        
-        if IsBound( current_rec.no_install ) && current_rec.no_install == true
+        if !IsBound( current_rec.function_name )
             
-            continue;
+            Error( "the record has no entry `function_name`, probably you forgot to call CAP_INTERNAL_ENHANCE_NAME_RECORD" );
             
         end;
+        
+        ## keep track of it ⥉ method name rec
+        CAP_INTERNAL_METHOD_NAME_RECORD[current_recname] = current_rec;
         
         CapInternalInstallAdd( current_rec );
         

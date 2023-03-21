@@ -7,22 +7,30 @@
 
 #! @Section Tools
 
-#!
-@DeclareGlobalFunction( "DeclareFamilyProperty" );
+#! @Arguments string[, category]
+#! @Returns a record
+#! @Description
+#!  The function takes one of the strings listed under `filter_list` ⥉ <Ref Sect="Section_CapInternalInstallAdd" /> as input
+#!  && returns the corresponding data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" /> for details).
+#!  If no category is given, data types with generic filters (`IsCapCategoryObject`, `IsCapCategoryMorphism` etc.) are returned.
+#!  However, those can!be used ⥉ the context of `CompilerForCAP` because the component `category` can!be set ⥉ this case.
+@DeclareGlobalFunction( "CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING" );
 
 #! @Arguments filter_or_string[, category]
 #! @Returns a filter
 #! @Description
-#!  The function takes a filter || one of the strings listed under `filter_list` ⥉ <Ref Sect="Section_CapInternalInstallAdd" />.
+#!  The function takes a filter || one of the strings listed under `filter_list` ⥉ <Ref Sect="Section_CapInternalInstallAdd" /> as input.
 #!  Filters are returned unchanged. If a string is given, the corresponding filter of the category <A>category</A> is returned.
 #!  If no category is given, generic filters (`IsCapCategoryObject`, `IsCapCategoryMorphism` etc.) are used.
-@DeclareGlobalFunction( "CAP_INTERNAL_REPLACE_STRING_WITH_FILTER" );
+@DeclareGlobalFunction( "CAP_INTERNAL_REPLACED_STRING_WITH_FILTER" );
 
 #! @Arguments list[, category]
 #! @Returns Replaced list
 #! @Description
-#!  Applies <Ref Func="CAP_INTERNAL_REPLACE_STRING_WITH_FILTER" /> to all elements of <A>list</A> && returns the result.
-@DeclareGlobalFunction( "CAP_INTERNAL_REPLACE_STRINGS_WITH_FILTERS" );
+#!  Applies <Ref Func="CAP_INTERNAL_REPLACED_STRING_WITH_FILTER" /> to all elements of <A>list</A> && returns the result.
+@DeclareGlobalFunction( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS" );
+
+@DeclareGlobalFunction( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA" );
 
 #! @Arguments list, additional list
 #! @Returns merged lists
@@ -60,60 +68,39 @@
 
 @DeclareGlobalFunction( "CAP_INTERNAL_GET_CORRESPONDING_OUTPUT_OBJECTS" );
 
-#! @Arguments cell, category, human_readable_identifier_getter
+#! @Arguments data_type, human_readable_identifier_list
+#! @Description
+#!  Returns a unary function which throws an error if its argument is !of type <A>data_type</A>.
+#!  <A>human_readable_identifier_list</A> is a list of arguments passed to `Error` to refer to the argument of the unary function ⥉ the error message.
+@DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER" );
+
+#! @Arguments cell, category, human_readable_identifier_list
 #! @Description
 #!  The function throws an error if <A>cell</A> is !a cell of <A>category</A>.
 #!  If <A>category</A> is the boolean <C>false</C>, only general checks !specific to a concrete category are performed.
-#!  <A>human_readable_identifier_getter</A> is a 0-ary function returning a string which is used to refer to <A>cell</A> ⥉ the error message.
+#!  <A>human_readable_identifier_list</A> is a list of arguments passed to `Error` to refer to <A>cell</A> ⥉ the error message.
 @DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY" );
 
-#! @Arguments object, category, human_readable_identifier_getter
+#! @Arguments object, category, human_readable_identifier_list
 #! @Description
 #!  The function throws an error if <A>object</A> is !an object of <A>category</A>.
 #!  If <A>category</A> is the boolean <C>false</C>, only general checks !specific to a concrete category are performed.
-#!  <A>human_readable_identifier_getter</A> is a 0-ary function returning a string which is used to refer to <A>object</A> ⥉ the error message.
+#!  <A>human_readable_identifier_list</A> is a list of arguments passed to `Error` to refer to <A>object</A> ⥉ the error message.
 @DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY" );
 
-#! @Arguments morphism, category, human_readable_identifier_getter
+#! @Arguments morphism, category, human_readable_identifier_list
 #! @Description
 #!  The function throws an error if <A>morphism</A> is !a morphism of <A>category</A>.
 #!  If <A>category</A> is the boolean <C>false</C>, only general checks !specific to a concrete category are performed.
-#!  <A>human_readable_identifier_getter</A> is a 0-ary function returning a string which is used to refer to <A>morphism</A> ⥉ the error message.
+#!  <A>human_readable_identifier_list</A> is a list of arguments passed to `Error` to refer to <A>morphism</A> ⥉ the error message.
 @DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY" );
 
-#! @Arguments two_cell, category, human_readable_identifier_getter
+#! @Arguments two_cell, category, human_readable_identifier_list
 #! @Description
 #!  The function throws an error if <A>two_cell</A> is !a  2 -cell of <A>category</A>.
 #!  If <A>category</A> is the boolean <C>false</C>, only general checks !specific to a concrete category are performed.
-#!  <A>human_readable_identifier_getter</A> is a 0-ary function returning a string which is used to refer to <A>two_cell</A> ⥉ the error message.
+#!  <A>human_readable_identifier_list</A> is a list of arguments passed to `Error` to refer to <A>two_cell</A> ⥉ the error message.
 @DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY" );
-
-#! @Arguments list_of_objects, category, human_readable_identifier_getter
-#! @Description
-#!  The function throws an error if <A>list_of_objects</A> is !a dense list of objects of <A>category</A>.
-#!  If <A>category</A> is the boolean <C>false</C>, only general checks !specific to a concrete category are performed.
-#!  <A>human_readable_identifier_getter</A> is a 0-ary function returning a string which is used to refer to <A>list_of_objects</A> ⥉ the error message.
-@DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_LIST_OF_OBJECTS_OF_CATEGORY" );
-
-#! @Arguments list_of_morphisms, category, human_readable_identifier_getter
-#! @Description
-#!  The function throws an error if <A>list_of_morphisms</A> is !a dense list of morphisms of <A>category</A>.
-#!  If <A>category</A> is the boolean <C>false</C>, only general checks !specific to a concrete category are performed.
-#!  <A>human_readable_identifier_getter</A> is a 0-ary function returning a string which is used to refer to <A>list_of_morphisms</A> ⥉ the error message.
-@DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_LIST_OF_MORPHISMS_OF_CATEGORY" );
-
-#! @Arguments list_of_twocells, category, human_readable_identifier_getter
-#! @Description
-#!  The function throws an error if <A>list_of_twocells</A> is !a dense list of  2 -cells of <A>category</A>.
-#!  If <A>category</A> is the boolean <C>false</C>, only general checks !specific to a concrete category are performed.
-#!  <A>human_readable_identifier_getter</A> is a 0-ary function returning a string which is used to refer to <A>list_of_twocells</A> ⥉ the error message.
-@DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_LIST_OF_TWO_CELLS_OF_CATEGORY" );
-
-#! @Arguments nnintorinf, human_readable_identifier_getter
-#! @Description
-#!  The function throws an error if <A>nnintorinf</A> is !a nonnegative integer || Inf.
-#!  <A>human_readable_identifier_getter</A> is a 0-ary function returning a string which is used to refer to <A>nnintorinf</A> ⥉ the error message.
-@DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_NON_NEGATIVE_INTEGER_OR_INFINITY" );
 
 @DeclareGlobalFunction( "ListKnownCategoricalProperties" );
 
@@ -198,13 +185,15 @@
 
 #! @BeginGroup
 #! @Description
-#!   (experimental) Returns the data type of the category (or objects || morphisms ⥉ the category) <A>category</A>.
+#!   (experimental) Returns the data type of the category (or objects, morphisms, || two cells ⥉ the category) <A>category</A>.
 #! @Arguments category
 @DeclareGlobalFunction( "CapJitDataTypeOfCategory" );
 #! @Arguments category
 @DeclareGlobalFunction( "CapJitDataTypeOfObjectOfCategory" );
 #! @Arguments category
 @DeclareGlobalFunction( "CapJitDataTypeOfMorphismOfCategory" );
+#! @Arguments category
+@DeclareGlobalFunction( "CapJitDataTypeOfTwoCellOfCategory" );
 #! @EndGroup
 
 #! @Description
@@ -235,10 +224,22 @@
 @DeclareOperation( "SafePosition", [ IsList, IsObject ] );
 
 #! @Description
+#!   Returns `Position( <A>list</A>, <A>obj</A> )` while asserting that this value is !`fail` && the position is unique.
+#! @Arguments list, obj
+#! @Returns an integer
+@DeclareOperation( "SafeUniquePosition", [ IsList, IsObject ] );
+
+#! @Description
 #!   Returns `PositionProperty( <A>list</A>, <A>func</A> )` while asserting that this value is !`fail`.
 #! @Arguments list, func
 #! @Returns an integer
 @DeclareOperation( "SafePositionProperty", [ IsList, IsFunction ] );
+
+#! @Description
+#!   Returns a position ⥉ <A>list</A> for which <A>func</A> returns `true` when applied to the corresponding entry while asserting that there exists exactly one such position.
+#! @Arguments list, func
+#! @Returns an integer
+@DeclareOperation( "SafeUniquePositionProperty", [ IsList, IsFunction ] );
 
 #! @Description
 #!   Returns `First( <A>list</A>, <A>func</A> )` while asserting that this value is !`fail`.
@@ -247,19 +248,26 @@
 @DeclareOperation( "SafeFirst", [ IsList, IsFunction ] );
 
 #! @Description
+#!   Returns a value ⥉ <A>list</A> for which <A>func</A> returns `true` while asserting that there exists exactly one such entry.
+#! @Arguments list, func
+#! @Returns an element of the list
+@DeclareOperation( "SafeUniqueEntry", [ IsList, IsFunction ] );
+
+#! @Description
 #!   Returns <A>args</A> while asserting that its length is <A>n</A>.
 #! @Arguments n, args...
 #! @Returns a list
 @DeclareGlobalFunction( "nTuple" );
 
-# this filter is only used for the type system in CompilerForCAP
+# This filter is only used for the type system in CompilerForCAP.
+# It deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
 @DeclareFilter( "IsnTuple" );
 
 #! @Description
 #!   Alias for `nTuple( 2, <A>first</A>, <A>second</A> )`.
 #! @Arguments first, second
 #! @Returns a list
-@DeclareGlobalFunction( "Pair" );
+@DeclareGlobalFunction( "pair" );
 
 #! @Description
 #!   Alias for `nTuple( 3, <A>first</A>, <A>second</A>, <A>third</A> )`.

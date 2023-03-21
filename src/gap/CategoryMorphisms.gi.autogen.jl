@@ -234,7 +234,7 @@ end );
 InstallMethod( @__MODULE__,  IsEqualForCache,
                [ IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
-  IsEqualForCacheForMorphisms );
+  ( mor1, mor2 ) -> IsEqualForCacheForMorphisms( CapCategory( mor1 ), mor1, mor2 ) );
 
 ##
 # generic fallback to IsIdenticalObj
@@ -255,8 +255,13 @@ InstallMethod( @__MODULE__,  AddMorphismRepresentation,
         
     end;
     
-    category.morphism_representation = representation;
-    category.morphism_type = NewType( TheFamilyOfCapCategoryMorphisms, representation && MorphismFilter( category ) && HasSource && HasRange && HasCapCategory );
+    if IsBound( category.initially_known_categorical_properties )
+        
+        Error( "calling AddMorphismRepresentation after adding functions to the category is !supported" );
+        
+    end;
+    
+    InstallTrueMethod( representation, MorphismFilter( category ) );
     
 end );
 
@@ -307,6 +312,13 @@ InstallMethod( @__MODULE__,  RandomMorphism,
         INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Range", [ objectified_morphism ], range, category );
     end;
     
+    #= comment for Julia
+    # work around https://github.com/gap-system/gap/issues/3642:
+    # New implications of `MorphismFilter( category )` (e.g. installed via `AddMorphismRepresentation`)
+    # are !automatically set ⥉ `category.morphism_type`.
+    SetFilterObj( objectified_morphism, MorphismFilter( category ) );
+    # =#
+    
     return objectified_morphism;
     
 end );
@@ -329,6 +341,13 @@ end );
         INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Source", [ objectified_morphism ], source, category );
         INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Range", [ objectified_morphism ], range, category );
     end;
+    
+    #= comment for Julia
+    # work around https://github.com/gap-system/gap/issues/3642:
+    # New implications of `MorphismFilter( category )` (e.g. installed via `AddMorphismRepresentation`)
+    # are !automatically set ⥉ `category.morphism_type`.
+    SetFilterObj( objectified_morphism, MorphismFilter( category ) );
+    # =#
     
     return objectified_morphism;
     
@@ -585,6 +604,51 @@ InstallMethod( @__MODULE__,  HomStructure,
 );
 
 ##
+
+# usually the type signatures should be part of the gd file, but `CapJitAddTypeSignature` is !available there
+
+CapJitAddTypeSignature( "HomomorphismStructureOnObjectsExtendedByFullEmbedding", [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ], function ( input_types )
+    
+    return CapJitDataTypeOfObjectOfCategory( input_types[2].category );
+    
+end );
+
+CapJitAddTypeSignature( "HomomorphismStructureOnMorphismsExtendedByFullEmbedding", [ IsCapCategory, IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ], function ( input_types )
+    
+    return CapJitDataTypeOfMorphismOfCategory( input_types[2].category );
+    
+end );
+
+CapJitAddTypeSignature( "HomomorphismStructureOnMorphismsWithGivenObjectsExtendedByFullEmbedding", [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ], function ( input_types )
+    
+    return CapJitDataTypeOfMorphismOfCategory( input_types[2].category );
+    
+end );
+
+CapJitAddTypeSignature( "DistinguishedObjectOfHomomorphismStructureExtendedByFullEmbedding", [ IsCapCategory, IsCapCategory ], function ( input_types )
+    
+    return CapJitDataTypeOfObjectOfCategory( input_types[2].category );
+    
+end );
+
+CapJitAddTypeSignature( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureExtendedByFullEmbedding", [ IsCapCategory, IsCapCategory, IsCapCategoryMorphism ], function ( input_types )
+    
+    return CapJitDataTypeOfMorphismOfCategory( input_types[2].category );
+    
+end );
+
+CapJitAddTypeSignature( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjectsExtendedByFullEmbedding", [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ], function ( input_types )
+    
+    return CapJitDataTypeOfMorphismOfCategory( input_types[2].category );
+    
+end );
+
+CapJitAddTypeSignature( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphismExtendedByFullEmbedding", [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ], function ( input_types )
+    
+    return CapJitDataTypeOfMorphismOfCategory( input_types[1].category );
+    
+end );
+
 InstallMethod( @__MODULE__,  ExtendRangeOfHomomorphismStructureByFullEmbedding,
                [ IsCapCategory, IsCapCategory, IsFunction, IsFunction, IsFunction, IsFunction ],
   function ( C, E, object_function, morphism_function, object_function_inverse, morphism_function_inverse )
@@ -744,23 +808,31 @@ InstallMethod( @__MODULE__,  IsWellDefined,
 ###########################
 
 # fallback methods for Julia
-InstallMethod( @__MODULE__,  ViewObj,
+InstallMethod( @__MODULE__,  String,
                [ IsCapCategoryMorphism ],
                
-  function ( morphism )
+  function( morphism )
     
     # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    Print( "<A morphism ", "in ", Name( CapCategory( morphism ) ), ">" );
+    return Concatenation( "A morphism ", "in ", Name( CapCategory( morphism ) ) );
     
 end );
 
-InstallMethod( @__MODULE__,  Display,
+InstallMethod( @__MODULE__,  ViewString,
                [ IsCapCategoryMorphism ],
                
   function ( morphism )
     
-    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    Print( "A morphism ", "in ", Name( CapCategory( morphism ) ), ".\n" );
+    return Concatenation( "<", string( morphism ), ">" );
+    
+end );
+
+InstallMethod( @__MODULE__,  DisplayString,
+               [ IsCapCategoryMorphism ],
+               
+  function ( morphism )
+    
+    return Concatenation( string( morphism ), ".\n" );
     
 end );
 
@@ -843,12 +915,3 @@ end );
 #= comment for Julia
 CAP_INTERNAL_CREATE_MORPHISM_PRINT( );
 # =#
-
-InstallMethod( @__MODULE__,  String,
-               [ IsCapCategoryMorphism ],
-               
-  function( morphism )
-    
-    return Concatenation( "A morphism ⥉ ", Name( CapCategory( morphism ) ) );
-    
-end );

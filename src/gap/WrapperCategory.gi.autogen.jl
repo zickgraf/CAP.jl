@@ -27,7 +27,7 @@ InstallMethod( @__MODULE__,  AsObjectInWrapperCategory,
   function( D, object )
     
     #% CAP_JIT_DROP_NEXT_STATEMENT
-    CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( object, ModelingCategory( D ), () -> "the object given to AsObjectInWrapperCategory" );
+    CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( object, ModelingCategory( D ), [ "the object given to AsObjectInWrapperCategory" ] );
     
     return ObjectifyObjectForCAPWithAttributes( rec( ), D,
             UnderlyingCell, object );
@@ -53,7 +53,7 @@ InstallOtherMethodForCompilerForCAP( AsMorphismInWrapperCategory,
   function( D, source, morphism, range )
     
     #% CAP_JIT_DROP_NEXT_STATEMENT
-    CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( morphism, ModelingCategory( D ), () -> "the morphism given to AsMorphismInWrapperCategory" );
+    CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( morphism, ModelingCategory( D ), [ "the morphism given to AsMorphismInWrapperCategory" ] );
     
     return ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( rec( ), D,
             source,
@@ -498,6 +498,7 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         end;
         
         SetRangeCategoryOfHomomorphismStructure( D, HC );
+        SetIsEquippedWithHomomorphismStructure( D, true );
         
         if "DistinguishedObjectOfHomomorphismStructure" ⥉ list_of_operations_to_install
             AddDistinguishedObjectOfHomomorphismStructure( D,
@@ -609,27 +610,23 @@ end );
 ##################################
 
 ##
-InstallMethod( @__MODULE__,  Display,
+InstallMethod( @__MODULE__,  DisplayString,
         "for an object in a wrapper CAP category",
         [ IsWrapperCapCategoryObject ],
         
   function( a )
     
-    Display( ObjectDatum( a ) );
-    
-    Print( "\nAn object ⥉ ", Name( CapCategory( a ) ), " given by the above data\n" );
+    return Concatenation( DisplayString( ObjectDatum( a ) ), "\nAn object ⥉ ", Name( CapCategory( a ) ), " given by the above data\n" );
     
 end );
 
 ##
-InstallMethod( @__MODULE__,  Display,
+InstallMethod( @__MODULE__,  DisplayString,
         "for a morphism in a wrapper CAP category",
         [ IsWrapperCapCategoryMorphism ],
         
   function( phi )
     
-    Display( MorphismDatum( phi ) );
-    
-    Print( "\nA morphism ⥉ ", Name( CapCategory( phi ) ), " given by the above data\n" );
+    return Concatenation( DisplayString( MorphismDatum( phi ) ), "\nA morphism ⥉ ", Name( CapCategory( phi ) ), " given by the above data\n" );
     
 end );
