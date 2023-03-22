@@ -183,9 +183,9 @@ end );
             
             return IsObject;
             
-        elseif IsSpecializationOfFilter( IsnTuple, data_type.filter )
+        elseif IsSpecializationOfFilter( IsNTuple, data_type.filter )
             
-            # `IsnTuple` deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
+            # `IsNTuple` deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
             # However, on the GAP level tuples are just lists.
             return IsList;
             
@@ -339,7 +339,7 @@ end );
             
         end;
         
-    elseif IsSpecializationOfFilter( IsnTuple, filter )
+    elseif IsSpecializationOfFilter( IsNTuple, filter )
         
         asserts_value_is_of_element_type = List( (1):(Length( data_type.element_types )), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_types[i], Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
         
@@ -349,7 +349,7 @@ end );
             # tuples are modeled as lists
             if !IsList( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsList (implementation filter of IsnTuple).", generic_help_string ] ) );
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsList (implementation filter of IsNTuple).", generic_help_string ] ) );
                 
             end;
             
@@ -729,7 +729,7 @@ end );
         elseif Length( current_output ) == 3
             
             if ForAll( current_output[ 2 ], i -> i ⥉ "0123456789" )
-                list_position = int( current_output[ 2 ] );
+                list_position = IntGAP( current_output[ 2 ] );
             else
                 list_position = Position( input_list, current_output[ 2 ] );
                 if list_position == fail
@@ -840,8 +840,8 @@ end );
         elseif IsCrispCache( current_cache )
             Print( "crisp cache, " );
         end;
-        Print( "hits: ", string( current_cache.hit_counter ), ", misses: ", string( current_cache.miss_counter ), ", " );
-        Print( string( Length( PositionsProperty( current_cache.value, ReturnTrue ) ) ), " objects stored\n" );
+        Print( "hits: ", StringGAP( current_cache.hit_counter ), ", misses: ", StringGAP( current_cache.miss_counter ), ", " );
+        Print( StringGAP( Length( PositionsProperty( current_cache.value, ReturnTrue ) ) ), " objects stored\n" );
     end;
     
 end );
@@ -1395,7 +1395,7 @@ end );
 ##
 #= comment for Julia
 # We want `args` to be a list but ⥉ Julia it's a tuple -> we need a separate implementation for Julia
-@InstallGlobalFunction( nTuple, function ( n, args... )
+@InstallGlobalFunction( NTupleGAP, function ( n, args... )
     
     Assert( 0, Length( args ) == n );
     
@@ -1405,10 +1405,10 @@ end );
 # =#
 
 ##
-@InstallGlobalFunction( pair, function ( first, second )
+@InstallGlobalFunction( PairGAP, function ( first, second )
     #% CAP_JIT_RESOLVE_FUNCTION
     
-    return nTuple( 2, first, second );
+    return NTupleGAP( 2, first, second );
     
 end );
 
@@ -1416,7 +1416,7 @@ end );
 @InstallGlobalFunction( Triple, function ( first, second, third )
     #% CAP_JIT_RESOLVE_FUNCTION
     
-    return nTuple( 3, first, second, third );
+    return NTupleGAP( 3, first, second, third );
     
 end );
 

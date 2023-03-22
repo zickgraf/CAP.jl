@@ -66,7 +66,7 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 ####################################
 
 #! @Description
-#!  Given a CAP category  C , this method returns the corresponding object ⥉ Cat.
+#!  Given a CAP category $C$, this method returns the corresponding object ⥉ Cat.
 #!  For technical reasons, the filter <C>IsCapCategory</C> must !imply the filter <C>IsCapCategoryObject</C>.
 #!  For example, if <C>InitialObject</C> is applied to an object, it returns the initial object of its category. If it is
 #!  applied to a category, it returns the initial object of the category. If a CAP category would be
@@ -78,7 +78,7 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
                   IsCapCategory );
 
 #! @Description
-#!  For an object  C  ⥉ Cat, this method returns the underlying CAP category. This method is inverse to <C>AsCatObject</C>, i.e.
+#!  For an object $C$ ⥉ Cat, this method returns the underlying CAP category. This method is inverse to <C>AsCatObject</C>, i.e.
 #!  AsCapCategory( AsCatObject( A ) ) == A.
 #! @Arguments C
 @DeclareAttribute( "AsCapCategory",
@@ -92,8 +92,8 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 #!  A multivariate functor can be constructed via a product category as source,
 #!  a presheaf is constructed via the opposite category as source.
 #!  However, the user can explicitly decide the arity of a functor (which will only have technical implications).
-#!  Thus, it is for example possible to consider a functor  A \times B \rightarrow C 
-#!  either as a unary functor with source category  A \times B  || as a binary functor.
+#!  Thus, it is for example possible to consider a functor $A \times B \rightarrow C$
+#!  either as a unary functor with source category $A \times B$ || as a binary functor.
 #!  Moreover, an object && a morphism function can be added to a functor, to apply it
 #!  to objects || morphisms ⥉ the source category.
 ##
@@ -138,16 +138,16 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 #!  The second argument is a list
 #!  encoding the input signature of the functor.
 #!  It can be given as a list of pairs
-#!   [ [ A_1, b_1 ], \dots, [ A_n, b_n ] ] 
-#!  where a pair consists of a category  A_i  (given as an object ⥉ <C>CapCat</C> || as a CAP-category)
-#!  && a boolean  b_i  for  i == 1, \dots, n . Instead of a pair
-#!   [ A_i, b_i ] , you can also give simply  A_i , which will be interpreted as
-#!  the pair  [ A_i, \\mathtt[false] ] .
+#!  $[ [ A_1, b_1 ], \dots, [ A_n, b_n ] ]$
+#!  where a pair consists of a category $A_i$ (given as an object ⥉ <C>CapCat</C> || as a CAP-category)
+#!  && a boolean $b_i$ for $i == 1, \dots, n$. Instead of a pair
+#!  $[ A_i, b_i ]$, you can also give simply $A_i$, which will be interpreted as
+#!  the pair $[ A_i, \mathtt[false] ]$.
 #!  The third argument is the target <A>B</A> of the functor,
 #!  && it can be given as an object ⥉ <C>CapCat</C> || as a CAP-category.
 #!  The output is a functor
-#!  with source given by the product category  D_1 \times ... \times D_n ,
-#!  where  D_i == A_i  if  b_i == \\mathtt[false] , &&  D_i == A_i^[\mathrm[op]]  otherwise.
+#!  with source given by the product category $D_1 \times ... \times D_n$,
+#!  where $D_i == A_i$ if $b_i == \mathtt[false]$, && $D_i == A_i^[\mathrm[op]]$ otherwise.
 #! @Arguments name, list, B
 @DeclareOperation( "CapFunctor",
                   [ IsString, IsList, IsCapCategory ] );
@@ -158,12 +158,12 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 #! @EndGroup
 
 #! @Description
-#! The argument is a functor  F . The output is its source as CAP category.
+#! The argument is a functor $F$. The output is its source as CAP category.
 #! @Arguments F
 @DeclareAttribute( "SourceOfFunctor", IsCapFunctor );
 
 #! @Description
-#! The argument is a functor  F . The output is its range as CAP category.
+#! The argument is a functor $F$. The output is its range as CAP category.
 #! @Arguments F
 @DeclareAttribute( "RangeOfFunctor", IsCapFunctor );
 
@@ -174,13 +174,13 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 ####################################
 
 #! @Description
-#!  This operation adds a function  f  to the functor  F  which can then be applied to
-#!  objects ⥉ the source. The given function  f  has to take 
-#!  arguments according to the <C>InputSignature</C> of  F , i.e., if the input signature is
+#!  This operation adds a function $f$ to the functor $F$ which can then be applied to
+#!  objects ⥉ the source. The given function $f$ has to take 
+#!  arguments according to the <C>InputSignature</C> of $F$, i.e., if the input signature is
 #!  given by
-#!   [ [A_1, b_1], \dots, [A_n,b_n] ] ,
-#!  then  f  must take  n  arguments, where the  i -th
-#!  argument is an object ⥉ the category  A_i  (the boolean  b_i  is ignored).
+#!  $[ [A_1, b_1], \dots, [A_n,b_n] ]$,
+#!  then $f$ must take $n$ arguments, where the $i$-th
+#!  argument is an object ⥉ the category $A_i$ (the boolean $b_i$ is ignored).
 #!  The function should return an object ⥉ the range of the functor, except when
 #!  the automatic call of <C>AddObject</C> was enabled via <C>EnableAddForCategoricalOperations</C>.
 #!  In this case the output only has to be a GAP object ⥉ <C>IsAttributeStoringRep</C>,
@@ -194,9 +194,9 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 
 
 #! @Description
-#! The argument is a functor  F .
+#! The argument is a functor $F$.
 #! The output is the GAP operation
-#! realizing the action of  F  on objects.
+#! realizing the action of $F$ on objects.
 #! @Arguments F
 #! @Returns a GAP operation
 @DeclareAttribute( "FunctorObjectOperation",
@@ -204,20 +204,20 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 
 
 #! @Description
-#!  This operation adds a function  f  to the functor  F  which can then be applied to
-#!  morphisms ⥉ the source. The given function  f  has to take
-#!  as its first argument an object  s  that is equal (via <C>IsEqualForObjects</C>)
+#!  This operation adds a function $f$ to the functor $F$ which can then be applied to
+#!  morphisms ⥉ the source. The given function $f$ has to take
+#!  as its first argument an object $s$ that is equal (via <C>IsEqualForObjects</C>)
 #!  to the source of the result of applying
-#!   F  to the input morphisms.
-#!  The next arguments of  f  have to morphisms according to
-#!  the <C>InputSignature</C> of  F , i.e., if the input signature is
+#!  $F$ to the input morphisms.
+#!  The next arguments of $f$ have to morphisms according to
+#!  the <C>InputSignature</C> of $F$, i.e., if the input signature is
 #!  given by
-#!   [ [A_1, b_1], \dots, [A_n,b_n] ] ,
-#!  then  f  must take  n  arguments, where the  i -th
-#!  argument is a morphism ⥉ the category  A_i  (the boolean  b_i  is ignored).
-#!  The last argument of  f  must be an object  r  that is equal (via <C>IsEqualForObjects</C>)
+#!  $[ [A_1, b_1], \dots, [A_n,b_n] ]$,
+#!  then $f$ must take $n$ arguments, where the $i$-th
+#!  argument is a morphism ⥉ the category $A_i$ (the boolean $b_i$ is ignored).
+#!  The last argument of $f$ must be an object $r$ that is equal (via <C>IsEqualForObjects</C>)
 #!  to the range of the result of applying
-#!   F  to the input morphisms.
+#!  $F$ to the input morphisms.
 #!  The function should return a morphism ⥉ the range of the functor, except when
 #!  the automatic call of <C>AddMorphism</C> was enabled via <C>EnableAddForCategoricalOperations</C>.
 #!  In this case the output only has to be a GAP object ⥉ <C>IsAttributeStoringRep</C>
@@ -231,9 +231,9 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
                   [ IsCapFunctor, IsList ] );
 
 #! @Description
-#! The argument is a functor  F .
+#! The argument is a functor $F$.
 #! The output is the GAP operation
-#! realizing the action of  F  on morphisms.
+#! realizing the action of $F$ on morphisms.
 #! @Arguments F
 #! @Returns a GAP operation
 @DeclareAttribute( "FunctorMorphismOperation",
@@ -266,13 +266,13 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 ####################################
 
 #! @Description
-#! The argument is a functor  F .
+#! The argument is a functor $F$.
 #! The output is a list of pairs
-#!   [ [ A_1, b_1 ], \dots, [ A_n, b_n ] ] 
-#!  where a pair consists of a CAP-category  A_i 
-#!  && a boolean  b_i  for  i == 1, \dots, n .
-#! The source of  F  is given by the product category  D_1 \times ... \times D_n ,
-#!  where  D_i == A_i  if  b_i == \\mathtt[false] , &&  D_i == A_i^[\mathrm[op]]  otherwise.
+#!  $[ [ A_1, b_1 ], \dots, [ A_n, b_n ] ]$
+#!  where a pair consists of a CAP-category $A_i$
+#!  && a boolean $b_i$ for $i == 1, \dots, n$.
+#! The source of $F$ is given by the product category $D_1 \times ... \times D_n$,
+#!  where $D_i == A_i$ if $b_i == \mathtt[false]$, && $D_i == A_i^[\mathrm[op]]$ otherwise.
 #! @Returns IsList
 #! @Arguments F
 @DeclareAttribute( "InputSignature",
@@ -291,19 +291,19 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 #                   [ IsCapFunctor ] );
 
 #! @Description
-#! The arguments are a functor  F  && a string  s .
+#! The arguments are a functor $F$ && a string $s$.
 #! To simplify the description of this operation, we let
-#!  [ [ A_1, b_1 ], \dots, [ A_n, b_n ] ] 
-#! denote the input signature of  F .
-#! This method tries to install  3  operations:
-#! an operation  \omega_1  with the name  s , an operation  \omega_2  with 
-#! the name  s\\mathtt[OnObjects] ,
-#! && an operation  \omega_3  with the name  s\\mathtt[OnMorphisms] .
-#! The operation  \omega_1 
-#! takes as input either  n - objects/morphisms ⥉  A_i 
-#! || a single object/morphism ⥉ the source of  F ,
-#! && outputs the result of applying  F  to this input.
-#!  \omega_2  &&  \omega_3  are the corresponding variants for objects || morphisms only.
+#! $[ [ A_1, b_1 ], \dots, [ A_n, b_n ] ]$
+#! denote the input signature of $F$.
+#! This method tries to install $3$ operations:
+#! an operation $\omega_1$ with the name $s$, an operation $\omega_2$ with 
+#! the name $s\mathtt[OnObjects]$,
+#! && an operation $\omega_3$ with the name $s\mathtt[OnMorphisms]$.
+#! The operation $\omega_1$
+#! takes as input either $n$- objects/morphisms ⥉ $A_i$
+#! || a single object/morphism ⥉ the source of $F$,
+#! && outputs the result of applying $F$ to this input.
+#! $\omega_2$ && $\omega_3$ are the corresponding variants for objects || morphisms only.
 #! This function can only be called once for each functor, every further call will be ignored.
 #! @Returns nothing
 #! @Arguments F, s
@@ -373,7 +373,7 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 ##
 ####################################
 
-#! Natural transformations form the  2 -cells
+#! Natural transformations form the $2$-cells
 #! of Cat. As such, it is possible to compose them
 #! vertically && horizontally, see Section
 #! <Ref Sect="Section_id2cellsandcomp" />.
@@ -388,8 +388,8 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 #! @BeginGroup
 
 #! @Description
-#!  Constructs a natural transformation between the functors <A>F</A> :A \rightarrow B 
-#!  && <A>G</A> :A \rightarrow B . The string <A>name</A> is optional, and, if !given,
+#!  Constructs a natural transformation between the functors <A>F</A>$:A \rightarrow B$
+#!  && <A>G</A>$:A \rightarrow B$. The string <A>name</A> is optional, and, if !given,
 #!  set automatically from the names of the functors
 #! @Arguments [name,],F,G
 #! @Returns a natural transformation
@@ -413,8 +413,8 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 
 #! @Description
 #!  Adds the function (or list of functions) <A>func</A> to the natural transformation <A>N</A>.
-#!  The function || each function ⥉ the list should take three arguments. If  N: F \rightarrow G ,
-#!  the arguments should be  F(A), A, G(A) . The ouptput should be a morphism,  F(A) \rightarrow G(A) .
+#!  The function || each function ⥉ the list should take three arguments. If $N: F \rightarrow G$,
+#!  the arguments should be $F(A), A, G(A)$. The ouptput should be a morphism, $F(A) \rightarrow G(A)$.
 #! @Arguments N, func
 @DeclareOperation( "AddNaturalTransformationFunction",
                   [ IsCapNaturalTransformation, IsFunction ] );
@@ -425,8 +425,8 @@ DeclareGlobalName( "INSTALL_CAP_CAT_FUNCTIONS" );
 #! @EndGroup
 
 #! @Description
-#!  Given a natural transformation <A>N</A> :F \rightarrow G  && an object <A>A</A>,
-#!  this function should return the morphism  F(A) \rightarrow G(A) , corresponding to
+#!  Given a natural transformation <A>N</A>$:F \rightarrow G$ && an object <A>A</A>,
+#!  this function should return the morphism $F(A) \rightarrow G(A)$, corresponding to
 #!  <A>N</A>.
 #! @Arguments N, A
 #! @Returns a morphism

@@ -22,9 +22,9 @@
 ###################################
 
 #! @Description
-#! The argument is an object  a .
-#! The output is the category  \mathbf[C] 
-#! to which  a  was added.
+#! The argument is an object $a$.
+#! The output is the category $\mathbf[C]$
+#! to which $a$ was added.
 #! @Returns a category
 #! @Arguments a
 @DeclareAttribute( "CapCategory",
@@ -49,8 +49,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 ###################################
 
 #! @Description
-#! The arguments are two objects  a  &&  b .
-#! The output is <C>true</C> if  a == b ,
+#! The arguments are two objects $a$ && $b$.
+#! The output is <C>true</C> if $a == b$,
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a,b
@@ -68,8 +68,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 ###################################
 
 #! @Description
-#! The argument is an object  a .
-#! The output is <C>true</C> if  a  is a bijective object,
+#! The argument is an object $a$.
+#! The output is <C>true</C> if $a$ is a bijective object,
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
@@ -77,8 +77,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
                  IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  a .
-#! The output is <C>true</C> if  a  is a projective object,
+#! The argument is an object $a$.
+#! The output is <C>true</C> if $a$ is a projective object,
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
@@ -86,8 +86,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
                  IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  a .
-#! The output is <C>true</C> if  a  is an injective object,
+#! The argument is an object $a$.
+#! The output is <C>true</C> if $a$ is an injective object,
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
@@ -95,8 +95,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
                  IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  a  of a category  \mathbf[C] .
-#! The output is <C>true</C> if  a  is isomorphic to the terminal object of  \mathbf[C] , 
+#! The argument is an object $a$ of a category $\mathbf[C]$.
+#! The output is <C>true</C> if $a$ is isomorphic to the terminal object of $\mathbf[C]$, 
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
@@ -104,8 +104,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
                  IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  a  of a category  \mathbf[C] .
-#! The output is <C>true</C> if  a  is isomorphic to the initial object of  \mathbf[C] , 
+#! The argument is an object $a$ of a category $\mathbf[C]$.
+#! The output is <C>true</C> if $a$ is isomorphic to the initial object of $\mathbf[C]$, 
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
@@ -113,8 +113,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
                  IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  a  of a category  \mathbf[C] .
-#! The output is <C>true</C> if  a  is isomorphic to the zero object of  \mathbf[C] , 
+#! The argument is an object $a$ of a category $\mathbf[C]$.
+#! The output is <C>true</C> if $a$ is isomorphic to the zero object of $\mathbf[C]$, 
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
@@ -122,8 +122,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
                  IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  a  of a category  \mathbf[C] .
-#! The output is <C>true</C> if  a  is isomorphic to the zero object of  \mathbf[C] , 
+#! The argument is an object $a$ of a category $\mathbf[C]$.
+#! The output is <C>true</C> if $a$ is isomorphic to the zero object of $\mathbf[C]$, 
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
@@ -145,17 +145,17 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 
 
 #! @Description
-#! The arguments are a category  C  && an integer  n .
-#! The output is a random object ⥉  C .
-#! @Returns an object ⥉  C 
+#! The arguments are a category $C$ && an integer $n$.
+#! The output is a random object ⥉ $C$.
+#! @Returns an object ⥉ $C$
 #! @Arguments C, n
 @DeclareOperation( "RandomObjectByInteger",
                   [ IsCapCategory, IsInt ] );
 
 #! @Description
-#! The arguments are a category  C  && a list  L .
-#! The output is a random object ⥉  C .
-#! @Returns an object ⥉  C 
+#! The arguments are a category $C$ && a list $L$.
+#! The output is a random object ⥉ $C$.
+#! @Returns an object ⥉ $C$
 #! @Arguments C, L
 @DeclareOperation( "RandomObjectByList",
                   [ IsCapCategory, IsList ] );
@@ -181,7 +181,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 #!  used. By default, IsEqualForCacheForObjects falls back to IsEqualForCache (see ToolsForHomalg),
 #!  which ⥉ turn defaults to recursive comparison for lists && `IsIdenticalObj` in all other cases.
 #!  If you add a function via `AddIsEqualForCacheForObjects`, that function is used instead.
-#!  A function  F: a,b \\mapsto bool  is expected there. The output has to be
+#!  A function $F: a,b \mapsto bool$ is expected there. The output has to be
 #!  true || false. Fail is !allowed ⥉ this context.
 #! @Arguments phi, psi
 #! @Returns true || false
@@ -244,9 +244,9 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 ###################################
 
 #! @Description
-#! The arguments are a category  C  && an object datum  a 
+#! The arguments are a category $C$ && an object datum $a$
 #! (type && semantics of the object datum depend on the category).
-#! The output is an object of  C  defined by  a .
+#! The output is an object of $C$ defined by $a$.
 #! Note that by default this CAP operation is !cached. You can change this behaviour
 #! by calling `SetCachingToWeak( C, "ObjectConstructor" )` resp. `SetCachingToCrisp( C, "ObjectConstructor" )`.
 #! @Returns an object
@@ -279,8 +279,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 ###################################
 
 #! @Description
-#! The argument is an object  a .
-#! The output is <C>true</C> if  a  is well-defined,
+#! The argument is an object $a$.
+#! The output is <C>true</C> if $a$ is well-defined,
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments a
@@ -294,44 +294,44 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 ##
 ###################################
 
-#! For a given object  A  ⥉ an abelian category having enough projectives,
-#! the following commands allow us to compute some projective object  P 
-#! together with an epimorphism  \pi: P \rightarrow A .
+#! For a given object $A$ ⥉ an abelian category having enough projectives,
+#! the following commands allow us to compute some projective object $P$
+#! together with an epimorphism $\pi: P \rightarrow A$.
 
 ## Main Operations && Attributes
 #! @Description
-#! The argument is an object  A .
-#! The output is some projective object  P 
-#! for which there exists an epimorphism  \pi: P \rightarrow A .
+#! The argument is an object $A$.
+#! The output is some projective object $P$
+#! for which there exists an epimorphism $\pi: P \rightarrow A$.
 #! @Returns an object
 #! @Arguments A
 @DeclareAttribute( "SomeProjectiveObject",
                   IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  A .
-#! The output is an epimorphism  \pi: P \rightarrow A 
-#! with  P  a projective object that equals the output of  \mathrm[SomeProjectiveObject](A) .
-#! @Returns a morphism ⥉  \mathrm[Hom](P,A) 
+#! The argument is an object $A$.
+#! The output is an epimorphism $\pi: P \rightarrow A$
+#! with $P$ a projective object that equals the output of $\mathrm[SomeProjectiveObject](A)$.
+#! @Returns a morphism ⥉ $\mathrm[Hom](P,A)$
 #! @Arguments A
 @DeclareAttribute( "EpimorphismFromSomeProjectiveObject",
                   IsCapCategoryObject );
 
 #! @Description
-#! The arguments are an object  A 
-#! && a projective object  P  that equals the output of  \mathrm[SomeProjectiveObject](A) .
-#! The output is an epimorphism  \pi: P \rightarrow A .
-#! @Returns a morphism ⥉  \mathrm[Hom](P,A) 
+#! The arguments are an object $A$
+#! && a projective object $P$ that equals the output of $\mathrm[SomeProjectiveObject](A)$.
+#! The output is an epimorphism $\pi: P \rightarrow A$.
+#! @Returns a morphism ⥉ $\mathrm[Hom](P,A)$
 #! @Arguments A, P
 @DeclareOperation( "EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
-#! The arguments are a morphism  \pi: P \rightarrow A  with  P  a projective, 
-#! && an epimorphism  \epsilon: B \rightarrow A .
-#! The output is a morphism  \lambda: P \rightarrow B  such that
-#!  \epsilon \circ \lambda == \pi .
-#! @Returns a morphism ⥉  \mathrm[Hom](P,B) 
+#! The arguments are a morphism $\pi: P \rightarrow A$ with $P$ a projective, 
+#! && an epimorphism $\epsilon: B \rightarrow A$.
+#! The output is a morphism $\lambda: P \rightarrow B$ such that
+#! $\epsilon \circ \lambda == \pi$.
+#! @Returns a morphism ⥉ $\mathrm[Hom](P,B)$
 #! @Arguments pi, epsilon
 @DeclareOperation( "ProjectiveLift",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -342,45 +342,45 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 ##
 ###################################
 
-#! For a given object  A  ⥉ an abelian category having enough injectives,
-#! the following commands allow us to compute some injective object  I 
-#! together with a monomorphism  \iota: A \rightarrow I .
+#! For a given object $A$ ⥉ an abelian category having enough injectives,
+#! the following commands allow us to compute some injective object $I$
+#! together with a monomorphism $\iota: A \rightarrow I$.
 
 ## Main Operations && Attributes
 #! @Description
-#! The argument is an object  A .
-#! The output is some injective object  I 
-#! for which there exists a monomorphism  \iota: A \rightarrow I .
+#! The argument is an object $A$.
+#! The output is some injective object $I$
+#! for which there exists a monomorphism $\iota: A \rightarrow I$.
 #! @Returns an object
 #! @Arguments A
 @DeclareAttribute( "SomeInjectiveObject",
                   IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  A .
-#! The output is a monomorphism  \iota: A \rightarrow I 
-#! with  I  an injective object that equals the output of  \mathrm[SomeInjectiveObject](A) .
-#! @Returns a morphism ⥉  \mathrm[Hom](I,A) 
+#! The argument is an object $A$.
+#! The output is a monomorphism $\iota: A \rightarrow I$
+#! with $I$ an injective object that equals the output of $\mathrm[SomeInjectiveObject](A)$.
+#! @Returns a morphism ⥉ $\mathrm[Hom](I,A)$
 #! @Arguments A
 @DeclareAttribute( "MonomorphismIntoSomeInjectiveObject",
                   IsCapCategoryObject );
 
 #! @Description
-#! The arguments are an object  A 
-#! && an injective object  I  that equals the output of  \mathrm[SomeInjectiveObject](A) .
-#! The output is a monomorphism  \iota: A \rightarrow I .
-#! @Returns a morphism ⥉  \mathrm[Hom](I,A) 
+#! The arguments are an object $A$
+#! && an injective object $I$ that equals the output of $\mathrm[SomeInjectiveObject](A)$.
+#! The output is a monomorphism $\iota: A \rightarrow I$.
+#! @Returns a morphism ⥉ $\mathrm[Hom](I,A)$
 #! @Arguments A, I
 @DeclareOperation( "MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 ##
 #! @Description
-#! The arguments are a monomorphism  \iota: B \rightarrow A 
-#! && a morphism  \beta: B \rightarrow I  where  I  is an injective object.
-#! The output is a morphism  \lambda: A \rightarrow I  such that
-#!  \lambda \circ \iota == \beta .
-#! @Returns a morphism ⥉  \mathrm[Hom](A,I) 
+#! The arguments are a monomorphism $\iota: B \rightarrow A$
+#! && a morphism $\beta: B \rightarrow I$ where $I$ is an injective object.
+#! The output is a morphism $\lambda: A \rightarrow I$ such that
+#! $\lambda \circ \iota == \beta$.
+#! @Returns a morphism ⥉ $\mathrm[Hom](A,I)$
 #! @Arguments iota, beta
 @DeclareOperation( "InjectiveColift",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -391,42 +391,42 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 ##
 ###################################
 
-#! Let  i  be a positive integer ||  \infty .
-#! For a given object  A , an  i -th simplified object of  A  consists of
-#! * an object  A_i , 
-#! * an isomorphism  \iota_A^i: A \rightarrow A_i .
-#! The idea is that the greater the  i , the "simpler" the  A_i  (but this could mean the harder the computation)
-#! with  \infty  as a possible value.
+#! Let $i$ be a positive integer || $\infty$.
+#! For a given object $A$, an $i$-th simplified object of $A$ consists of
+#! * an object $A_i$, 
+#! * an isomorphism $\iota_A^i: A \rightarrow A_i$.
+#! The idea is that the greater the $i$, the "simpler" the $A_i$ (but this could mean the harder the computation)
+#! with $\infty$ as a possible value.
 
 #! @Description
-#! The argument is an object  A .
-#! The output is a simplified object  A_[\infty] .
+#! The argument is an object $A$.
+#! The output is a simplified object $A_[\infty]$.
 #! @Returns an object
 #! @Arguments A
 @DeclareAttribute( "Simplify",
                   IsCapCategoryObject );
 
 #! @Description
-#! The arguments are an object  A  && a positive integer  i  || <C>Inf</C>.
-#! The output is a simplified object  A_i .
+#! The arguments are an object $A$ && a positive integer $i$ || <C>Inf</C>.
+#! The output is a simplified object $A_i$.
 #! @Returns an object
 #! @Arguments A, i
 @DeclareOperation( "SimplifyObject",
                   [ IsCapCategoryObject, IsObject ] );
 
 #! @Description
-#! The arguments are an object  A  && a positive integer  i  || <C>Inf</C>.
-#! The output is an isomorphism to a simplified object  \iota_A^i: A \rightarrow A_i .
-#! @Returns a morphism ⥉  \mathrm[Hom](A,A_i) 
+#! The arguments are an object $A$ && a positive integer $i$ || <C>Inf</C>.
+#! The output is an isomorphism to a simplified object $\iota_A^i: A \rightarrow A_i$.
+#! @Returns a morphism ⥉ $\mathrm[Hom](A,A_i)$
 #! @Arguments A, i
 @DeclareOperation( "SimplifyObject_IsoFromInputObject",
                   [ IsCapCategoryObject, IsObject ] );
 
 #! @Description
-#! The arguments are an object  A  && a positive integer  i  || <C>Inf</C>.
-#! The output is an isomorphism from a simplified object  (\iota_A^i)^[-1]: A_i \rightarrow A 
+#! The arguments are an object $A$ && a positive integer $i$ || <C>Inf</C>.
+#! The output is an isomorphism from a simplified object $(\iota_A^i)^[-1]: A_i \rightarrow A$
 #! which is the inverse of the output of <C>SimplifyObject_IsoFromInputObject</C>.
-#! @Returns a morphism ⥉  \mathrm[Hom](A_i,A) 
+#! @Returns a morphism ⥉ $\mathrm[Hom](A_i,A)$
 #! @Arguments A, i
 @DeclareOperation( "SimplifyObject_IsoToInputObject",
                   [ IsCapCategoryObject, IsObject ] );
@@ -438,16 +438,16 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 ###################################
 
 #! @Description
-#! The argument is an object  A .
-#! The output is a the projective dimension of  A .
+#! The argument is an object $A$.
+#! The output is a the projective dimension of $A$.
 #! @Returns a nonnegative integer || Inf
 #! @Arguments A
 @DeclareAttribute( "ProjectiveDimension",
                   IsCapCategoryObject );
 
 #! @Description
-#! The argument is an object  A .
-#! The output is a the injective dimension of  A .
+#! The argument is an object $A$.
+#! The output is a the injective dimension of $A$.
 #! @Returns a nonnegative integer || Inf
 #! @Arguments A
 @DeclareAttribute( "InjectiveDimension",

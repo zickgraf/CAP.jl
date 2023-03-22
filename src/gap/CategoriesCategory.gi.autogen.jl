@@ -431,11 +431,11 @@ end );
         
         if source_category.input_sanity_check_level > 0
             if !Length( input_signature ) == Length( arguments )
-                Error( Concatenation("expected number of arguments (=", string( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", string( Length( arguments ) ), ")" ) );
+                Error( Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
             end;
 
             for i in (1):(Length( input_signature ))
-                CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( arguments[ i ], input_signature[ i ][ 1 ], [ "the ", string(i), "-th argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
+                CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( arguments[ i ], input_signature[ i ][ 1 ], [ "the ", StringGAP(i), "-th argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
             end;
         end;
         
@@ -455,11 +455,11 @@ end );
 
         if source_category.input_sanity_check_level > 0
             if !Length( input_signature ) == Length( arguments )
-                Error( Concatenation("expected number of arguments (=", string( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", string( Length( arguments ) ), ")" ) );
+                Error( Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
             end;
 
             for i in (1):(Length( input_signature ))
-                CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( arguments[ i ], input_signature[ i ][ 1 ], [ "the ", string(i), "-th argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
+                CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( arguments[ i ], input_signature[ i ][ 1 ], [ "the ", StringGAP(i), "-th argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
             end;
         end;
         
@@ -600,7 +600,7 @@ AddProjectionInFactorOfDirectProductWithGivenDirectProduct( cat,
     local projection_functor;
     
     projection_functor = CapFunctor( 
-      Concatenation( "Projection into ", string( projection_number ),"-th factor of ", Name( AsCapCategory( direct_product ) ) ), 
+      Concatenation( "Projection into ", StringGAP( projection_number ),"-th factor of ", Name( AsCapCategory( direct_product ) ) ), 
       direct_product, 
       object_product_list[ projection_number ]
     );

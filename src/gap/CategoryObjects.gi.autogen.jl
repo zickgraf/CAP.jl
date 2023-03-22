@@ -42,16 +42,16 @@ InstallOtherMethod( IsEqualForObjects,
   function( cat, object_1, object_2 )
 
     if !HasCapCategory( object_1 )
-        Error( Concatenation( "the object \"", string( object_1 ), "\" has no CAP category" ) );
+        Error( Concatenation( "the object \"", StringGAP( object_1 ), "\" has no CAP category" ) );
     end;
     if !HasCapCategory( object_2 )
-        Error( Concatenation( "the object \"", string( object_2 ), "\" has no CAP category" ) );
+        Error( Concatenation( "the object \"", StringGAP( object_2 ), "\" has no CAP category" ) );
     end;
 
     if !IsIdenticalObj( CapCategory( object_1 ), CapCategory( object_2 ) )
-        Error( Concatenation( "the object \"", string( object_1 ), "\" && the object \"", string( object_2 ), "\" do !belong to the same CAP category" ) );
+        Error( Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" do !belong to the same CAP category" ) );
     else
-        Error( Concatenation( "the object \"", string( object_1 ), "\" && the object \"", string( object_2 ), "\" belong to the same CAP category, but no specific method IsEqualForObjects is installed. Maybe you forgot to finalize the category?" ) );
+        Error( Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" belong to the same CAP category, but no specific method IsEqualForObjects is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
@@ -63,7 +63,7 @@ InstallMethod( @__MODULE__,  ==,
 
     if CapCategory( object_1 ).input_sanity_check_level > 0 || CapCategory( object_2 ).input_sanity_check_level > 0 
         if !IsIdenticalObj( CapCategory( object_1 ), CapCategory( object_2 ) )
-            Error( Concatenation( "the object \"", string( object_1 ), "\" && the object \"", string( object_2 ), "\" do !belong to the same CAP category" ) );
+            Error( Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" do !belong to the same CAP category" ) );
         end;
     end;
                
@@ -315,8 +315,7 @@ end );
 ##
 ###########################
 
-# fallback methods for Julia
-InstallMethod( @__MODULE__,  String,
+InstallMethod( @__MODULE__,  StringGAP,
                [ IsCapCategoryObject ],
                
   function( object )
@@ -326,12 +325,13 @@ InstallMethod( @__MODULE__,  String,
     
 end );
 
+# fallback methods for Julia
 InstallMethod( @__MODULE__,  ViewString,
                [ IsCapCategoryObject ],
                
   function ( object )
     
-    return Concatenation( "<", string( object ), ">" );
+    return Concatenation( "<", StringGAP( object ), ">" );
     
 end );
 
@@ -340,7 +340,7 @@ InstallMethod( @__MODULE__,  DisplayString,
                
   function ( object )
     
-    return Concatenation( string( object ), ".\n" );
+    return Concatenation( StringGAP( object ), ".\n" );
     
 end );
 

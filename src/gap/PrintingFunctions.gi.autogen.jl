@@ -28,9 +28,9 @@
     
     StableSortBy( list_of_maximal_algorithmic_properties, p -> Length( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p] ) );
     
-    result = string( Length( ListPrimitivelyInstalledOperationsOfCategory( category ) ) );
+    result = StringGAP( Length( ListPrimitivelyInstalledOperationsOfCategory( category ) ) );
     result = Concatenation( result, " primitive operations were used to derive " );
-    result = Concatenation( result, string( Length( ListInstalledOperationsOfCategory( category ) ) ) );
+    result = Concatenation( result, StringGAP( Length( ListInstalledOperationsOfCategory( category ) ) ) );
     result = Concatenation( result, " operations for this category" );
     if !IsEmpty( list_of_maximal_algorithmic_properties )
         result = Concatenation( result, " which algorithmically" );

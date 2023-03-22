@@ -47,8 +47,8 @@
         current_function_argument_number = NumberArgumentsFunction( DerivationFunction( derivation ) );
         
         if current_function_argument_number >= 0 && current_function_argument_number != number_of_proposed_arguments
-            Error( "While adding a final derivation for ", method_name, ": given function has ", string( current_function_argument_number ),
-                   " arguments but should have ", string( number_of_proposed_arguments ) );
+            Error( "While adding a final derivation for ", method_name, ": given function has ", StringGAP( current_function_argument_number ),
+                   " arguments but should have ", StringGAP( number_of_proposed_arguments ) );
         end;
         
     end;

@@ -71,7 +71,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
     else
         
-        name = Concatenation( "AutomaticCapCategory", string( CAP_INTERNAL_NAME_COUNTER( ) ) );
+        name = Concatenation( "AutomaticCapCategory", StringGAP( CAP_INTERNAL_NAME_COUNTER( ) ) );
         
     end;
     
@@ -304,7 +304,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         func_string = ReplacedStringViaRecord( func_string, rec(
             operation_name = name,
             input_arguments = info.input_arguments_names,
-            number_of_arguments = string( Length( info.input_arguments_names ) ),
+            number_of_arguments = StringGAP( Length( info.input_arguments_names ) ),
         ) );
         
         if PositionSublist( func_string, "underlying_arguments" ) != fail

@@ -26,7 +26,7 @@
     
     if STRING_REPRESENTS_INTEGER( string )
         
-        return int( string );
+        return IntGAP( string );
         
     else
         
@@ -771,7 +771,7 @@ end );
             
         end;
         
-        Add( sources_list, rec( Type = "testdirect", Object = i, Value = int( result_function_variables[ i ] ) ) );
+        Add( sources_list, rec( Type = "testdirect", Object = i, Value = IntGAP( result_function_variables[ i ] ) ) );
         
     end;
     
@@ -820,12 +820,14 @@ end );
     
 end );
 
+#= comment for Julia
+# "$" ⥉ strings triggers interpolation ⥉ Julia
 @BindGlobal( "REMOVE_CHARACTERS_FROM_LATEX",
             
   function( string )
     local i;
     
-    for i in [ "&", "\\", "big", "\big", " ", "mathrm", "~" ]
+    for i in [ "&", "\\", "big", "\big", "$", "mathrm", "~" ]
         
         string = Concatenation( SPLIT_STRING_MULTIPLE( string, i ) );
         
@@ -834,6 +836,7 @@ end );
     return string;
     
 end );
+# =#
 
 @InstallGlobalFunction( "READ_LOGIC_FILE",
                        
@@ -1072,7 +1075,7 @@ end );
            
        else
            
-           return int( tree );
+           return IntGAP( tree );
            
        end;
        
@@ -1121,7 +1124,7 @@ end );
                 
                 if int != false
                     
-                    Add( appearance_list, [ [ i ], int( tree[ i ] ) ] );
+                    Add( appearance_list, [ [ i ], IntGAP( tree[ i ] ) ] );
                     
                 end;
                 

@@ -238,7 +238,7 @@ end );
     
     theorem_list = TheoremRecord( category )[method_name];
     
-    Info( CapLogicInfo, 1, Concatenation( "Trying to create ", string( Length( theorem_list ) ), " theorems" ) );
+    Info( CapLogicInfo, 1, Concatenation( "Trying to create ", StringGAP( Length( theorem_list ) ), " theorems" ) );
     
     for current_theorem in theorem_list
         

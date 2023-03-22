@@ -214,7 +214,7 @@ function( q, mor )
             
             if r == fail
                 
-                Error( "can!interpret ", string( q ), " as an element of the commutative ring of ", Name( cat ) );
+                Error( "can!interpret ", StringGAP( q ), " as an element of the commutative ring of ", Name( cat ) );
                 
             end;
             
@@ -400,16 +400,16 @@ InstallOtherMethod( IsEqualForMorphisms,
   function( cat, morphism_1, morphism_2 )
     
     if !HasCapCategory( morphism_1 )
-        Error( Concatenation( "the morphism \"", string( morphism_1 ), "\" has no CAP category" ) );
+        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
     end;
     if !HasCapCategory( morphism_2 )
-        Error( Concatenation( "the morphism \"", string( morphism_2 ), "\" has no CAP category" ) );
+        Error( Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
     end;
     
     if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-        Error( Concatenation( "the morphism \"", string( morphism_1 ), "\" && the morphism \"", string( morphism_2 ), "\" do !belong to the same CAP category" ) );
+        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
     else
-        Error( Concatenation( "the morphism \"", string( morphism_1 ), "\" && the morphism \"", string( morphism_2 ), "\" belong to the same CAP category, but no specific method IsEqualForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
+        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsEqualForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
@@ -421,16 +421,16 @@ InstallOtherMethod( IsCongruentForMorphisms,
   function( cat, morphism_1, morphism_2 )
     
     if !HasCapCategory( morphism_1 )
-        Error( Concatenation( "the morphism \"", string( morphism_1 ), "\" has no CAP category" ) );
+        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
     end;
     if !HasCapCategory( morphism_2 )
-        Error( Concatenation( "the morphism \"", string( morphism_2 ), "\" has no CAP category" ) );
+        Error( Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
     end;
     
     if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-        Error( Concatenation( "the morphism \"", string( morphism_1 ), "\" && the morphism \"", string( morphism_2 ), "\" do !belong to the same CAP category" ) );
+        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
     else
-        Error( Concatenation( "the morphism \"", string( morphism_1 ), "\" && the morphism \"", string( morphism_2 ), "\" belong to the same CAP category, but no specific method IsCongruentForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
+        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsCongruentForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
@@ -443,7 +443,7 @@ InstallMethod( @__MODULE__,  ==,
     
     if CapCategory( morphism_1 ).input_sanity_check_level > 0 || CapCategory( morphism_2 ).input_sanity_check_level > 0 
         if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-            Error( Concatenation( "the morphism \"", string( morphism_1 ), "\" && the morphism \"", string( morphism_2 ), "\" do !belong to the same CAP category" ) );
+            Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
         end;
     end;
     if !IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) ) || !IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) )
@@ -807,8 +807,7 @@ InstallMethod( @__MODULE__,  IsWellDefined,
 ##
 ###########################
 
-# fallback methods for Julia
-InstallMethod( @__MODULE__,  String,
+InstallMethod( @__MODULE__,  StringGAP,
                [ IsCapCategoryMorphism ],
                
   function( morphism )
@@ -818,12 +817,13 @@ InstallMethod( @__MODULE__,  String,
     
 end );
 
+# fallback methods for Julia
 InstallMethod( @__MODULE__,  ViewString,
                [ IsCapCategoryMorphism ],
                
   function ( morphism )
     
-    return Concatenation( "<", string( morphism ), ">" );
+    return Concatenation( "<", StringGAP( morphism ), ">" );
     
 end );
 
@@ -832,7 +832,7 @@ InstallMethod( @__MODULE__,  DisplayString,
                
   function ( morphism )
     
-    return Concatenation( string( morphism ), ".\n" );
+    return Concatenation( StringGAP( morphism ), ".\n" );
     
 end );
 

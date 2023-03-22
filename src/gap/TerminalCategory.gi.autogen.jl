@@ -328,11 +328,11 @@ end );
         
         return ObjectifyObjectForCAPWithAttributes(
                        rec( ), cat,
-                       String, string );
+                       StringGAP, string );
         
     end;
     
-    object_datum = ( cat, object ) -> string( object );
+    object_datum = ( cat, object ) -> StringGAP( object );
     
     morphism_constructor = function( cat, source, string, range )
         
@@ -340,11 +340,11 @@ end );
                        rec( ), cat,
                        source,
                        range,
-                       String, string );
+                       StringGAP, string );
         
     end;
     
-    morphism_datum = ( cat, morphism ) -> string( morphism );
+    morphism_datum = ( cat, morphism ) -> StringGAP( morphism );
     
     ## prevent strictness
     properties = Set( List( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, a -> a[1] ) );
@@ -374,7 +374,7 @@ end );
     AddIsWellDefinedForObjects( T,
       function( T, object )
         
-        return IsString( string( object ) );
+        return IsString( StringGAP( object ) );
         
     end );
     
@@ -382,7 +382,7 @@ end );
     AddIsWellDefinedForMorphisms( T,
       function( T, morphism )
         
-        return IsString( string( morphism ) );
+        return IsString( StringGAP( morphism ) );
         
     end );
     
@@ -390,7 +390,7 @@ end );
     AddIsEqualForObjects( T,
       function( T, object1, object2 )
         
-        return string( object1 ) == string( object2 );
+        return StringGAP( object1 ) == StringGAP( object2 );
         
     end );
     
@@ -399,7 +399,7 @@ end );
       function( T, morphism1, morphism2 )
         
         ## equality of source && target is part of the specification of the input && checked by the pre-function
-        return string( morphism1 ) == string( morphism2 );
+        return StringGAP( morphism1 ) == StringGAP( morphism2 );
         
     end );
     
@@ -468,9 +468,9 @@ InstallMethod( @__MODULE__,  DisplayString,
 
   function( o )
     
-    # This is just GAP's derivation of DisplayString from PrintString from String,
+    # This is just GAP's derivation of DisplayString from PrintString from StringGAP,
     # but CAP installs a method for DisplayString which we want to avoid.
-    return Concatenation( string( o ), "\n" );
+    return Concatenation( StringGAP( o ), "\n" );
     
 end );
 
@@ -480,6 +480,6 @@ InstallMethod( @__MODULE__,  DisplayString,
 
   function( m )
     
-    return Concatenation( DisplayString( Source( m ) ), "|\n| ", string( m ), "\nv\n", DisplayString( Range( m ) ) );
+    return Concatenation( DisplayString( Source( m ) ), "|\n| ", StringGAP( m ), "\nv\n", DisplayString( Range( m ) ) );
     
 end );

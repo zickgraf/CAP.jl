@@ -202,12 +202,12 @@
 ####################################
 
 #! @Description
-#!  An operation weight list manages the use of derivations ⥉ a single category  C .
+#!  An operation weight list manages the use of derivations ⥉ a single category $C$.
 #!  For every operation, it keeps a weight value which indicates how costly it is
-#!  to perform that operation ⥉ the category  C .  Whenever a new operation is
-#!  implemented ⥉  C , the operation weight list should be notified about this &&
+#!  to perform that operation ⥉ the category $C$.  Whenever a new operation is
+#!  implemented ⥉ $C$, the operation weight list should be notified about this &&
 #!  given a weight to assign to this operation.  It will then automatically install
-#!  all possible derived methods for  C  in such a way that every operation has the
+#!  all possible derived methods for $C$ in such a way that every operation has the
 #!  smallest possible weight (the weight of a derived method is computed by using
 #!  the weights of the operations it uses; see <C>DerivationResultWeight</C>).
 @DeclareFilter( "IsOperationWeightList", IsAttributeStoringRep );

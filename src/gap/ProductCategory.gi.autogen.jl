@@ -497,7 +497,7 @@ InstallMethodWithCache( DirectProductFunctor,
     local direct_product_functor;
     
     direct_product_functor = CapFunctor( 
-      Concatenation( "direct_product_on_", Name( category ), "_for_", string( number_of_arguments ), "_arguments" ),
+      Concatenation( "direct_product_on_", Name( category ), "_for_", StringGAP( number_of_arguments ), "_arguments" ),
       CallFuncList( Product, List( (1):(number_of_arguments), c -> category ) ), 
       category 
     );
@@ -536,7 +536,7 @@ InstallMethodWithCache( CoproductFunctor,
     local coproduct_functor;
     
     coproduct_functor = CapFunctor( 
-      Concatenation( "coproduct_on_", Name( category ), "_for_", string( number_of_arguments ), "_arguments" ),
+      Concatenation( "coproduct_on_", Name( category ), "_for_", StringGAP( number_of_arguments ), "_arguments" ),
       CallFuncList( Product, List( (1):(number_of_arguments), c -> category ) ), 
       category 
     );

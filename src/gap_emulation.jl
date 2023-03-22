@@ -3,7 +3,6 @@ import Base.*
 import Base.-
 import Base.+
 import Base./
-import Base.string
 import Base.getindex
 import Base.copy
 import Base.in
@@ -44,7 +43,7 @@ function FilteredWithKeys(list, func)
 	map(p -> p[2], filter(p -> func(p...), collect(enumerate(list))))
 end
 
-function nTuple(n, args...)
+function NTupleGAP(n, args...)
 	@assert n == length(args)
 	collect(args)
 end
@@ -132,11 +131,15 @@ function PrintObj(obj::CAPDict)
 end
 
 function PrintString(obj::CAPDict)
-	String(obj)
+	StringGAPOperation(obj)
 end
 
-function String(obj::CAPDict)
+function StringGAPOperation(obj::CAPDict)
 	"<object>"
+end
+
+function DisplayString(int::Int)
+	string(int)
 end
 
 function Base.show(io::IO, obj::CAPDict)
@@ -380,9 +383,7 @@ function InstallMethod(operation, filter_list, func)
 end
 
 function InstallMethod(mod::Module, operation, filter_list, func::Function)
-	if operation == String
-		operation = string
-	elseif operation == ViewObj
+	if operation == ViewObj
 		println("ignoring installation for ViewObj, use ViewString instead")
 		return
 	elseif operation == Display
@@ -619,6 +620,10 @@ function ==(rec1::CAPRecord, rec2::CAPRecord)
 end
 
 # GAP functions
+function ListWithIdenticalEntries(n, obj)
+	fill(obj, n)
+end
+
 Perform = function( list, func )
 	for elm in list
 		func(elm)
@@ -629,6 +634,22 @@ end
 
 function LengthOperation(list::Union{Vector, UnitRange, StepRange, Tuple, Set, String})
 	length(list)
+end
+
+@DeclareAttribute("IntGAP", IsAttributeStoringRep)
+
+function IntGAPOperation(string::String)
+	parse(Int, string)
+end
+
+function IntGAPOperation(float::Float64)
+	Int(floor(float))
+end
+
+@DeclareAttribute("StringGAP", IsAttributeStoringRep)
+
+function StringGAPOperation(x::Union{Int})
+	string(x)
 end
 
 function Add( list::Vector, element::Any )
@@ -798,14 +819,6 @@ function Error(args...)
 end
 
 LowercaseString = lowercase
-
-function int(string::String)
-	parse(Int, string)
-end
-
-function int(float::Float64)
-	Int(floor(float))
-end
 
 function Base.getindex(obj::Nothing, index::Int)
 	nothing

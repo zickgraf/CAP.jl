@@ -12,16 +12,16 @@
 ######################################
 
 #! @Description
-#! The argument is a  2 -cell  c: \alpha \rightarrow \beta .
-#! The output is its source  \alpha .
+#! The argument is a $2$-cell $c: \alpha \rightarrow \beta$.
+#! The output is its source $\alpha$.
 #! @Returns a morphism
 #! @Arguments c
 @DeclareAttribute( "Source",
                   IsCapCategoryTwoCell );
 
 #! @Description
-#! The argument is a  2 -cell  c: \alpha \rightarrow \beta .
-#! The output is its range  \beta .
+#! The argument is a $2$-cell $c: \alpha \rightarrow \beta$.
+#! The output is its range $\beta$.
 #! @Returns a morphism
 #! @Arguments c
 @DeclareAttribute( "Range",
@@ -81,57 +81,57 @@
 ###################################
 
 #! @Description
-#! The argument is a morphism  \alpha .
-#! The output is its identity  2 -cell  \mathrm[id]_[\alpha]: \alpha \rightarrow \alpha .
-#! @Returns a  2 -cell
+#! The argument is a morphism $\alpha$.
+#! The output is its identity $2$-cell $\mathrm[id]_[\alpha]: \alpha \rightarrow \alpha$.
+#! @Returns a $2$-cell
 #! @Arguments alpha
 @DeclareAttribute( "IdentityTwoCell",
                                           IsCapCategoryMorphism );
 
 #! @Description
-#! The arguments are two  2 -cells 
-#!  c: \alpha \rightarrow \beta ,
-#!  d: \gamma \rightarrow \delta 
-#! between morphisms  \alpha, \beta: a \rightarrow b  &&  \gamma, \delta: b \rightarrow c .
+#! The arguments are two $2$-cells 
+#! $c: \alpha \rightarrow \beta$,
+#! $d: \gamma \rightarrow \delta$
+#! between morphisms $\alpha, \beta: a \rightarrow b$ && $\gamma, \delta: b \rightarrow c$.
 #! The output is their horizontal composition
-#!  d \ast c: (\gamma \circ \alpha) \rightarrow (\delta \circ \beta) .
-#! @Returns a  2 -cell
+#! $d \ast c: (\gamma \circ \alpha) \rightarrow (\delta \circ \beta)$.
+#! @Returns a $2$-cell
 #! @Arguments c,d
 @DeclareOperation( "HorizontalPreCompose",
                   [ IsCapCategoryTwoCell, IsCapCategoryTwoCell ] );
 
 #! @Description
-#! The arguments are two  2 -cells
-#!  d: \gamma \rightarrow \delta ,
-#!  c: \alpha \rightarrow \beta 
-#! between morphisms  \alpha, \beta: a \rightarrow b  &&  \gamma, \delta: b \rightarrow c .
+#! The arguments are two $2$-cells
+#! $d: \gamma \rightarrow \delta$,
+#! $c: \alpha \rightarrow \beta$
+#! between morphisms $\alpha, \beta: a \rightarrow b$ && $\gamma, \delta: b \rightarrow c$.
 #! The output is their horizontal composition
-#!  d \ast c: (\gamma \circ \alpha) \rightarrow (\delta \circ \beta) .
-#! @Returns a  2 -cell
+#! $d \ast c: (\gamma \circ \alpha) \rightarrow (\delta \circ \beta)$.
+#! @Returns a $2$-cell
 #! @Arguments d,c
 @DeclareOperation( "HorizontalPostCompose",
                   [ IsCapCategoryTwoCell, IsCapCategoryTwoCell ] );
 
 #! @Description
-#! The arguments are two  2 -cells 
-#!  c: \alpha \rightarrow \beta ,
-#!  d: \beta \rightarrow \gamma 
-#! between morphisms  \alpha, \beta, \gamma: a \rightarrow b .
+#! The arguments are two $2$-cells 
+#! $c: \alpha \rightarrow \beta$,
+#! $d: \beta \rightarrow \gamma$
+#! between morphisms $\alpha, \beta, \gamma: a \rightarrow b$.
 #! The output is their vertical composition
-#!  d \circ c: \alpha \rightarrow \gamma .
-#! @Returns a  2 -cell
+#! $d \circ c: \alpha \rightarrow \gamma$.
+#! @Returns a $2$-cell
 #! @Arguments c,d
 @DeclareOperation( "VerticalPreCompose",
                   [ IsCapCategoryTwoCell, IsCapCategoryTwoCell ] );
 
 #! @Description
-#! The arguments are two  2 -cells 
-#!  d: \beta \rightarrow \gamma ,
-#!  c: \alpha \rightarrow \beta 
-#! between morphisms  \alpha, \beta, \gamma: a \rightarrow b .
+#! The arguments are two $2$-cells 
+#! $d: \beta \rightarrow \gamma$,
+#! $c: \alpha \rightarrow \beta$
+#! between morphisms $\alpha, \beta, \gamma: a \rightarrow b$.
 #! The output is their vertical composition
-#!  d \circ c: \alpha \rightarrow \gamma .
-#! @Returns a  2 -cell
+#! $d \circ c: \alpha \rightarrow \gamma$.
+#! @Returns a $2$-cell
 #! @Arguments d,c
 @DeclareOperation( "VerticalPostCompose",
                   [ IsCapCategoryTwoCell, IsCapCategoryTwoCell ] );
@@ -143,8 +143,8 @@
 ######################################
 
 #! @Description
-#! The argument is a  2 -cell  c .
-#! The output is <C>true</C> if  c  is well-defined,
+#! The argument is a $2$-cell $c$.
+#! The output is <C>true</C> if $c$ is well-defined,
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments c

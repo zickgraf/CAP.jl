@@ -97,7 +97,7 @@
 
 #! @Arguments two_cell, category, human_readable_identifier_list
 #! @Description
-#!  The function throws an error if <A>two_cell</A> is !a  2 -cell of <A>category</A>.
+#!  The function throws an error if <A>two_cell</A> is !a $2$-cell of <A>category</A>.
 #!  If <A>category</A> is the boolean <C>false</C>, only general checks !specific to a concrete category are performed.
 #!  <A>human_readable_identifier_list</A> is a list of arguments passed to `Error` to refer to <A>two_cell</A> ⥉ the error message.
 @DeclareGlobalFunction( "CAP_INTERNAL_ASSERT_IS_TWO_CELL_OF_CATEGORY" );
@@ -257,20 +257,20 @@
 #!   Returns <A>args</A> while asserting that its length is <A>n</A>.
 #! @Arguments n, args...
 #! @Returns a list
-@DeclareGlobalFunction( "nTuple" );
+@DeclareGlobalFunction( "NTupleGAP" );
 
 # This filter is only used for the type system in CompilerForCAP.
 # It deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
-@DeclareFilter( "IsnTuple" );
+@DeclareFilter( "IsNTuple" );
 
 #! @Description
-#!   Alias for `nTuple( 2, <A>first</A>, <A>second</A> )`.
+#!   Alias for `NTupleGAP( 2, <A>first</A>, <A>second</A> )`.
 #! @Arguments first, second
 #! @Returns a list
-@DeclareGlobalFunction( "pair" );
+@DeclareGlobalFunction( "PairGAP" );
 
 #! @Description
-#!   Alias for `nTuple( 3, <A>first</A>, <A>second</A>, <A>third</A> )`.
+#!   Alias for `NTupleGAP( 3, <A>first</A>, <A>second</A>, <A>third</A> )`.
 #! @Arguments first, second, third
 #! @Returns a list
 @DeclareGlobalFunction( "Triple" );

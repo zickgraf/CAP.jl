@@ -273,8 +273,8 @@ end );
             current_function_argument_number = NumberArgumentsFunction( method_list[ current_function_number ][ 1 ] );
             
             if current_function_argument_number >= 0 && current_function_argument_number != number_of_proposed_arguments
-                Error( "In ", add_name, ": given function ", string( current_function_number ), " has ", string( current_function_argument_number ),
-                       " arguments but should have ", string( number_of_proposed_arguments ) );
+                Error( "In ", add_name, ": given function ", StringGAP( current_function_number ), " has ", StringGAP( current_function_argument_number ),
+                       " arguments but should have ", StringGAP( number_of_proposed_arguments ) );
             end;
             
             if !needs_wrapping
@@ -282,8 +282,8 @@ end );
                 current_additional_filter_list_length = Length( method_list[ current_function_number ][ 2 ] );
                 
                 if current_additional_filter_list_length > 0 && current_additional_filter_list_length != number_of_proposed_arguments
-                    Error( "In ", add_name, ": the additional filter list of given function ", string( current_function_number ), " has length ",
-                           string( current_additional_filter_list_length ), " but should have length ", string( number_of_proposed_arguments ), " (or 0)" );
+                    Error( "In ", add_name, ": the additional filter list of given function ", StringGAP( current_function_number ), " has length ",
+                           StringGAP( current_additional_filter_list_length ), " but should have length ", StringGAP( number_of_proposed_arguments ), " (or 0)" );
                 end;
                 
             else

@@ -35,11 +35,13 @@ InstallMethod( @__MODULE__,  MakeDerivation,
 function( name, target_op, used_op_names_with_multiples_and_category_getters, weight, func, category_filter )
   local wrapped_category_filter;
     
-    if PositionSublist( string( category_filter ), "CanCompute" ) != fail
+    #= comment for Julia
+    if PositionSublist( StringGAP( category_filter ), "CanCompute" ) != fail
         
         Print( "WARNING: The CategoryFilter of a derivation for ", NameFunction( target_op ), " uses `CanCompute`. Please register all preconditions explicitly.\n" );
         
     end;
+    # =#
     
     if NumberArgumentsFunction( category_filter ) == 0 || NumberArgumentsFunction( category_filter ) > 1
         
@@ -75,7 +77,7 @@ function( name, target_op, used_op_names_with_multiples_and_category_getters, we
     
 end );
 
-InstallMethod( @__MODULE__,  String,
+InstallMethod( @__MODULE__,  StringGAP,
                [ IsDerivedMethod ],
 function( d )
   return Concatenation( "derivation ", DerivationName( d ),
@@ -85,7 +87,7 @@ end );
 InstallMethod( @__MODULE__,  ViewString,
                [ IsDerivedMethod ],
 function( d )
-  return Concatenation( "<", string( d ), ">" );
+  return Concatenation( "<", StringGAP( d ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  IsApplicableToCategory,
@@ -102,7 +104,7 @@ function( d, weight, C )
         function_called_before_installation;
   
   Info( DerivationInfo, 1, Concatenation( "install(",
-                                          string( weight ),
+                                          StringGAP( weight ),
                                           ") ",
                                           TargetOperation( d ),
                                           ": ",
@@ -121,7 +123,7 @@ function( d, weight, C )
   
   # use the add method with signature IsCapCategory, IsList, IsInt to avoid
   # the convenience for AddZeroObject etc.
-  add_method( C, [ pair( func, [ ] ) ], weight; IsDerivation = true );
+  add_method( C, [ PairGAP( func, [ ] ) ], weight; IsDerivation = true );
   
 end );
 
@@ -181,7 +183,7 @@ InstallMethod( @__MODULE__,  AddOperationsToDerivationGraph,
     
 end );
 
-InstallMethod( @__MODULE__,  String,
+InstallMethod( @__MODULE__,  StringGAP,
                [ IsDerivedMethodGraph ],
 function( G )
   return "derivation graph";
@@ -190,7 +192,7 @@ end );
 InstallMethod( @__MODULE__,  ViewString,
                [ IsDerivedMethodGraph ],
 function( G )
-  return Concatenation( "<", string( G ), ">" );
+  return Concatenation( "<", StringGAP( G ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  AddDerivation,
@@ -215,8 +217,8 @@ function( G, d )
     current_function_argument_number = NumberArgumentsFunction( DerivationFunction( d ) );
     
     if current_function_argument_number >= 0 && current_function_argument_number != number_of_proposed_arguments
-        Error( "While adding a derivation for ", method_name, ": given function has ", string( current_function_argument_number ),
-               " arguments but should have ", string( number_of_proposed_arguments ) );
+        Error( "While adding a derivation for ", method_name, ": given function has ", StringGAP( current_function_argument_number ),
+               " arguments but should have ", StringGAP( number_of_proposed_arguments ) );
     end;
     
   end;
@@ -437,17 +439,17 @@ function( C, G )
     
 end );
 
-InstallMethod( @__MODULE__,  String,
+InstallMethod( @__MODULE__,  StringGAP,
                [ IsOperationWeightList ],
 function( owl )
   return Concatenation( "operation weight list for ",
-                        string( CategoryOfOperationWeightList( owl ) ) );
+                        StringGAP( CategoryOfOperationWeightList( owl ) ) );
 end );
 
 InstallMethod( @__MODULE__,  ViewString,
                [ IsOperationWeightList ],
 function( owl )
-  return Concatenation( "<", string( owl ), ">" );
+  return Concatenation( "<", StringGAP( owl ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  CurrentOperationWeight,
@@ -645,7 +647,7 @@ InstallMethod( @__MODULE__,  AddPrimitiveOperation,
 function( owl, op_name, weight )
     
     Info( DerivationInfo, 1, Concatenation( "install(",
-                                  string( weight ),
+                                  StringGAP( weight ),
                                   ") ",
                                   op_name,
                                   ": primitive installation\n" ) );
@@ -718,17 +720,17 @@ function()
                          node_indices = rec() ) );
 end );
 
-InstallMethod( @__MODULE__,  String,
+InstallMethod( @__MODULE__,  StringGAP,
                [ IsStringMinHeap ],
 function( H )
   return Concatenation( "min heap for strings, with size ",
-                        string( HeapSize( H ) ) );
+                        StringGAP( HeapSize( H ) ) );
 end );
 
 InstallMethod( @__MODULE__,  ViewString,
                [ IsStringMinHeap ],
 function( H )
-  return Concatenation( "<", string( H ), ">" );
+  return Concatenation( "<", StringGAP( H ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  HeapSize,
@@ -776,11 +778,11 @@ function( H, string, key )
   array = H.array;
   i = H.node_indices[string];
   array[ i ][ 2 ] = key;
-  parent = int( i / 2 );
+  parent = IntGAP( i / 2 );
   while parent > 0 && H.key( array[ i ] ) < H.key( array[ parent ] )
     Swap( H, i, parent );
     i = parent;
-    parent = int( i / 2 );
+    parent = IntGAP( i / 2 );
   end;
 end );
 
@@ -890,7 +892,7 @@ end );
     Print( "Can do the following basic methods at the moment:\n" );
     
     for i in can_compute
-        Print( "+ ", i[ 1 ], ", weight ", string( i[ 2 ] ), "\n" );
+        Print( "+ ", i[ 1 ], ", weight ", StringGAP( i[ 2 ] ), "\n" );
     end;
     
     Print( "\nThe following is still missing:\n" );
@@ -977,17 +979,17 @@ end );
                 else
                     
                     weight_list = x[3](category).derivations_weight_list;
-                    category_getter_string = Concatenation( " ⥉ category obtained by applying ", string( x[3] ) );
+                    category_getter_string = Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
                     
                 end;
                 
                 Print( "* ", TextAttr.b2, x[1], TextAttr.reset, " (", x[2], "x)", category_getter_string );
-                Print( " installed with weight ", string( CurrentOperationWeight( weight_list, x[1] ) ) );
+                Print( " installed with weight ", StringGAP( CurrentOperationWeight( weight_list, x[1] ) ) );
                 Print( "\n" );
                 
             end;
             
-            currently_installed_funcs = [ pair( DerivationFunction( current_derivation ), [ ] ) ];
+            currently_installed_funcs = [ PairGAP( DerivationFunction( current_derivation ), [ ] ) ];
             
         end;
         
@@ -1004,7 +1006,7 @@ end );
         for i in currently_installed_funcs
             
             Print( "Filters: " );
-            Print( string( i[ 2 ] ) );
+            Print( StringGAP( i[ 2 ] ) );
             Print( "\n\n" );
             Display( i[ 1 ] );
             Print( "\n" );
@@ -1072,7 +1074,7 @@ end );
             else
                 
                 weight_list = x[3](category).derivations_weight_list;
-                category_getter_string = Concatenation( " ⥉ category obtained by applying ", string( x[3] ) );
+                category_getter_string = Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
                 
             end;
             
@@ -1108,7 +1110,7 @@ end );
                 else
                     
                     weight_list = x[3](category).derivations_weight_list;
-                    category_getter_string = Concatenation( " ⥉ category obtained by applying ", string( x[3] ) );
+                    category_getter_string = Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
                     
                 end;
                 

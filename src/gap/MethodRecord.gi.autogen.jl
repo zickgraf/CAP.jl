@@ -1609,9 +1609,9 @@ UniversalMorphismIntoEqualizer = rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( tau ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -1687,7 +1687,7 @@ ProjectionInFactorOfFiberProduct = rec(
     local base, current_morphism, current_value;
     
     if projection_number < 1 || projection_number > Length( diagram )
-        return[ false, Concatenation( "there does !exist a ", string( projection_number ), "th projection" ) ];
+        return[ false, Concatenation( "there does !exist a ", StringGAP( projection_number ), "th projection" ) ];
     end;
     
     base = Range( diagram[1] );
@@ -1719,7 +1719,7 @@ ProjectionInFactorOfFiberProductWithGivenFiberProduct = rec(
     local base, current_morphism, current_value;
     
     if projection_number < 1 || projection_number > Length( diagram )
-        return[ false, Concatenation( "there does !exist a ", string( projection_number ), "th projection" ) ];
+        return[ false, Concatenation( "there does !exist a ", StringGAP( projection_number ), "th projection" ) ];
     end;
     
     base = Range( diagram[1] );
@@ -1849,9 +1849,9 @@ UniversalMorphismIntoFiberProduct = rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -1911,9 +1911,9 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -2053,9 +2053,9 @@ UniversalMorphismFromCoequalizer = rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( tau ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether range && source are equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether range && source are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": range && source are !equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": range && source are !equal" ) ];
         end;
         
     end;
@@ -2131,7 +2131,7 @@ InjectionOfCofactorOfPushout = rec(
     local cobase, current_morphism, current_value;
     
     if injection_number < 1 || injection_number > Length( diagram )
-        return[ false, Concatenation( "there does !exist a ", string( injection_number ), "th injection" ) ];
+        return[ false, Concatenation( "there does !exist a ", StringGAP( injection_number ), "th injection" ) ];
     end;
     
     cobase = Source( diagram[1] );
@@ -2163,7 +2163,7 @@ InjectionOfCofactorOfPushoutWithGivenPushout = rec(
     local cobase, current_morphism, current_value;
     
     if injection_number < 1 || injection_number > Length( diagram )
-        return[ false, Concatenation( "there does !exist a ", string( injection_number ), "th injection" ) ];
+        return[ false, Concatenation( "there does !exist a ", StringGAP( injection_number ), "th injection" ) ];
     end;
     
     cobase = Source( diagram[1] );
@@ -2293,9 +2293,9 @@ UniversalMorphismFromPushout = rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -2355,9 +2355,9 @@ UniversalMorphismFromPushoutWithGivenPushout = rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", string( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -3314,7 +3314,7 @@ MorphismBetweenDirectSums = rec(
           
           if Length( listlist[i] ) != Length( range_diagram )
               
-              return [ false, Concatenation( "the ", string(i), "-th row has !the same length as the range diagram" ) ];
+              return [ false, Concatenation( "the ", StringGAP(i), "-th row has !the same length as the range diagram" ) ];
               
           end;
           
@@ -3324,11 +3324,11 @@ MorphismBetweenDirectSums = rec(
               
               if result == fail
                   
-                  return [ false, Concatenation( "can!decide whether the sources of the morphisms ⥉ the ", string(i), "-th row are equal to the ", string(i), "-th entry of the source diagram" ) ];
+                  return [ false, Concatenation( "can!decide whether the sources of the morphisms ⥉ the ", StringGAP(i), "-th row are equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
                   
               elseif result == false
                   
-                  return [ false, Concatenation( "the sources of the morphisms ⥉ the ", string(i), "-th row must be equal to the ", string(i), "-th entry of the source diagram" ) ];
+                  return [ false, Concatenation( "the sources of the morphisms ⥉ the ", StringGAP(i), "-th row must be equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
                   
               end;
               
@@ -3336,11 +3336,11 @@ MorphismBetweenDirectSums = rec(
               
               if result == fail
                   
-                  return [ false, Concatenation( "can!decide whether the ranges of the morphisms ⥉ the ", string(j), "-th column are equal to the ", string(j), "-th entry of the range diagram" ) ];
+                  return [ false, Concatenation( "can!decide whether the ranges of the morphisms ⥉ the ", StringGAP(j), "-th column are equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
                   
               elseif result == false
                   
-                  return [ false, Concatenation( "the ranges of the morphisms ⥉ the ", string(j), "-th column must be equal to the ", string(j), "-th entry of the range diagram" ) ];
+                  return [ false, Concatenation( "the ranges of the morphisms ⥉ the ", StringGAP(j), "-th column must be equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
                   
               end;
               
@@ -3355,7 +3355,7 @@ MorphismBetweenDirectSums = rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return nTuple( 4, list[1], list[4], TransposedMat( list[3] ), list[2] );
+      return NTupleGAP( 4, list[1], list[4], TransposedMat( list[3] ), list[2] );
   end
 ),
 
@@ -3367,7 +3367,7 @@ MorphismBetweenDirectSumsWithGivenDirectSums = rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return nTuple( 6, list[1], list[6], list[5], TransposedMat( list[4] ), list[3], list[2] );
+      return NTupleGAP( 6, list[1], list[6], list[5], TransposedMat( list[4] ), list[3], list[2] );
   end
 ),
 
@@ -3408,7 +3408,7 @@ HomomorphismStructureOnMorphismsWithGivenObjects = rec(
   return_type = "morphism_in_range_category_of_homomorphism_structure",
   dual_operation = "HomomorphismStructureOnMorphismsWithGivenObjects",
   dual_preprocessor_func = function( cat, source, alpha, beta, range )
-    return nTuple( 5, OppositeCategory( cat ), source, Opposite( beta ), Opposite( alpha ), range );
+    return NTupleGAP( 5, OppositeCategory( cat ), source, Opposite( beta ), Opposite( alpha ), range );
   end,
   dual_postprocessor_func = IdFunc,
 ),
@@ -3438,7 +3438,7 @@ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGiv
   output_range_getter_string = "range",
   dual_operation = "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
   dual_preprocessor_func = function( cat, distinguished_object, alpha, hom_source_range )
-    return nTuple( 4, OppositeCategory( cat ), distinguished_object, Opposite( alpha ), hom_source_range );
+    return NTupleGAP( 4, OppositeCategory( cat ), distinguished_object, Opposite( alpha ), hom_source_range );
   end,
   dual_postprocessor_func = IdFunc
 ),
@@ -3451,7 +3451,7 @@ InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism = rec(
   output_range_getter_string = "range",
   dual_operation = "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
   dual_preprocessor_func = function( cat, A, B, morphism )
-    return nTuple( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), morphism );
+    return NTupleGAP( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), morphism );
   end
 ),
 
@@ -3569,7 +3569,7 @@ RandomMorphismWithFixedSourceAndRangeByInteger = rec(
   return_type = "morphism",
   dual_operation = "RandomMorphismWithFixedSourceAndRangeByInteger",
   dual_preprocessor_func = function( cat, A, B, n )
-      return nTuple( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), n );
+      return NTupleGAP( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), n );
   end
 ),
 
@@ -3669,7 +3669,7 @@ HomologyObjectFunctorialWithGivenHomologyObjects = rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return nTuple( 4, list[1], list[4], Reversed( list[3] ), list[2] );
+      return NTupleGAP( 4, list[1], list[4], Reversed( list[3] ), list[2] );
   end
 ),
 
@@ -4278,7 +4278,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
                 Display( Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" which is !expected by the validator.\n" ) );
             end;
         elseif method_record_entry[name] != generated_entry[name]
-            Display( Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" with value \"", string( method_record_entry[name] ), "\". The value expected by the validator is \"", string( generated_entry[name] ), "\".\n" ) );
+            Display( Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" with value \"", StringGAP( method_record_entry[name] ), "\". The value expected by the validator is \"", StringGAP( generated_entry[name] ), "\".\n" ) );
         end;
     end;
     for name in RecNames( generated_entry )
@@ -5113,7 +5113,7 @@ end );
                 
             else
                 
-                current_rec.input_arguments_names = Concatenation( [ "cat" ], List( (2):(Length( current_rec.filter_list )), i -> Concatenation( "arg", string( i ) ) ) );
+                current_rec.input_arguments_names = Concatenation( [ "cat" ], List( (2):(Length( current_rec.filter_list )), i -> Concatenation( "arg", StringGAP( i ) ) ) );
                 
             end;
             
@@ -5185,7 +5185,7 @@ end );
                 elseif Length( current_output ) == 3
                     
                     if ForAll( current_output[ 2 ], i -> i ⥉ "0123456789" )
-                        list_position = string( int( current_output[ 2 ] ) );
+                        list_position = StringGAP( IntGAP( current_output[ 2 ] ) );
                     else
                         list_position = Position( input_list, current_output[ 2 ] );
                         if list_position == fail
@@ -5684,9 +5684,9 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
 #
 # THIS FILE IS AUTOMATICALLY GENERATED, SEE CAP_project/CAP/gap/MethodRecord.gi
 
-# @Chapter chapter_name
+# ! @Chapter chapter_name
 
-# @Section section_name
+# ! @Section section_name
 """,
         rec(
             package_name = package_name,
@@ -5697,7 +5697,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
     );
     
     # see comment above
-    current_string = ReplacedString( current_string, "#", "#!" );
+    current_string = ReplacedString( current_string, "# !", "#!" );
     
     output_string = Concatenation( output_string, current_string );
     
@@ -5708,13 +5708,13 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
         # the space between # && ! prevents AutoDoc from parsing these strings && is removed below
         current_string = ReplacedStringViaRecord(
 """
-# @Description
-# The arguments are a category  C  && a function  F .
-# This operation adds the given function  F 
-# to the category for the basic operation `function_name`.
-#  F: ( input_arguments... ) \\mapsto \\mathtt[function_name](input_arguments...) .
-# @Returns nothing
-# @Arguments C, F
+# ! @Description
+# ! The arguments are a category $C$ && a function $F$.
+# ! This operation adds the given function $F$
+# ! to the category for the basic operation `function_name`.
+# ! $F: ( input_arguments... ) \mapsto \mathtt[function_name](input_arguments...)$.
+# ! @Returns nothing
+# ! @Arguments C, F
 @DeclareOperation( "Addfunction_name",
                   [ IsCapCategory, IsFunction ] );
 
@@ -5734,7 +5734,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
         );
         
         # see comment above
-        current_string = ReplacedString( current_string, "#", "#!" );
+        current_string = ReplacedString( current_string, "# !", "#!" );
         
         output_string = Concatenation( output_string, current_string );
         
@@ -5818,9 +5818,9 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
 #
 # THIS FILE IS AUTOMATICALLY GENERATED, SEE CAP_project/CAP/gap/MethodRecord.gi
 
-# @Chapter chapter_name
+# ! @Chapter chapter_name
 
-# @Section section_name
+# ! @Section section_name
 """,
         rec(
             package_name = package_name,
@@ -5850,14 +5850,14 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
         Assert( 0, IsString( subsection_title ) );
         
         # the space between # && ! prevents AutoDoc from parsing these strings && is removed below
-        current_string = Concatenation( "\n# @Subsection ", subsection_title );
+        current_string = Concatenation( "\n# ! @Subsection ", subsection_title );
         output_string = Concatenation( output_string, current_string );
         
         if i == 1
             
             operations = AsSortedList( ListInstalledOperationsOfCategory( category ) );
             
-            current_string = "\n\n# The following CAP operations are supported:";
+            current_string = "\n\n# ! The following CAP operations are supported:";
             
         else
             
@@ -5869,7 +5869,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
             operations = AsSortedList( Difference( ListInstalledOperationsOfCategory( category ), previous_operations ) );
             
-            current_string = "\n\n# The following additional CAP operations are supported:";
+            current_string = "\n\n# ! The following additional CAP operations are supported:";
             
         end;
         
@@ -5958,7 +5958,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             end;
             
             current_string = ReplacedStringViaRecord(
-                "\n# * <Ref BookName=\"bookname\" Func=\"operation_name\" Label=\"label\" />", # GAPDoc does !care if we use `Func` || `Oper` for external refs
+                "\n# ! * <Ref BookName=\"bookname\" Func=\"operation_name\" Label=\"label\" />", # GAPDoc does !care if we use `Func` || `Oper` for external refs
                 rec(
                     bookname = bookname,
                     operation_name = name,
@@ -5976,7 +5976,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
     end;
     
     # see comments above
-    output_string = ReplacedString( output_string, "#", "#!" );
+    output_string = ReplacedString( output_string, "# !", "#!" );
     
     if !IsExistingFileInPackageForHomalg( package_name, filename ) || output_string != ReadFileFromPackageForHomalg( package_name, filename )
         

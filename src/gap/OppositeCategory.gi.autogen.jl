@@ -170,7 +170,7 @@ end );
                 
             else
                 
-                dual_preprocessor_func_string = string( current_entry.dual_preprocessor_func );
+                dual_preprocessor_func_string = StringGAP( current_entry.dual_preprocessor_func );
                 
             end;
             
@@ -189,7 +189,7 @@ end );
             
             Assert( 0, filter_list[1] == "category" );
             
-            dual_arguments = List( (2):(Length( filter_list )), i -> Concatenation( "prep_arg[", string( i ), "]" ) );
+            dual_arguments = List( (2):(Length( filter_list )), i -> Concatenation( "prep_arg[", StringGAP( i ), "]" ) );
             
         else
             
@@ -261,7 +261,7 @@ end );
                 
             else
                 
-                dual_postprocessor_func_string = string( current_entry.dual_postprocessor_func );
+                dual_postprocessor_func_string = StringGAP( current_entry.dual_postprocessor_func );
                 
             end;
             

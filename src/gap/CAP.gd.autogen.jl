@@ -17,30 +17,30 @@
 #! Classically, a category consists of a class of objects, a set of morphisms, identity morphisms, && a composition function
 #! satisfying some simple axioms. In CAP, we use a slightly different notion of a category.
 #!
-#! A CAP category  \mathbf[C]  consists of the following data:
-#! * A set  \mathrm[Obj]_[\mathbf[C]]  of **objects**.
-#! * For every pair  a,b \in \mathrm[Obj]_[\mathbf[C]] , a set  \mathrm[Hom]_[\mathbf[C]]( a, b )  of **morphisms**.
-#! * For every pair  a,b \in \mathrm[Obj]_[\mathbf[C]] , an equivalence relation  \sim_[a,b]  on  \mathrm[Hom]_[\mathbf[C]]( a, b ) 
+#! A CAP category $\mathbf[C]$ consists of the following data:
+#! * A set $\mathrm[Obj]_[\mathbf[C]]$ of **objects**.
+#! * For every pair $a,b \in \mathrm[Obj]_[\mathbf[C]]$, a set $\mathrm[Hom]_[\mathbf[C]]( a, b )$ of **morphisms**.
+#! * For every pair $a,b \in \mathrm[Obj]_[\mathbf[C]]$, an equivalence relation $\sim_[a,b]$ on $\mathrm[Hom]_[\mathbf[C]]( a, b )$
 #!   called **congruence for morphisms**.
-#! * For every  a \in \mathrm[Obj]_[\mathbf[C]] , an **identity morphism**  \mathrm[id]_a \in \mathrm[Hom]_[\mathbf[C]]( a, a ) .
-#! * For every triple  a, b, c \in \mathrm[Obj]_[\mathbf[C]] , a **composition function**
-#!     \circ: \mathrm[Hom]_[\mathbf[C]]( b, c ) \times \mathrm[Hom]_[\mathbf[C]]( a, b ) \rightarrow \mathrm[Hom]_[\mathbf[C]]( a, c )  
+#! * For every $a \in \mathrm[Obj]_[\mathbf[C]]$, an **identity morphism** $\mathrm[id]_a \in \mathrm[Hom]_[\mathbf[C]]( a, a )$.
+#! * For every triple $a, b, c \in \mathrm[Obj]_[\mathbf[C]]$, a **composition function**
+#!   $$\circ: \mathrm[Hom]_[\mathbf[C]]( b, c ) \times \mathrm[Hom]_[\mathbf[C]]( a, b ) \rightarrow \mathrm[Hom]_[\mathbf[C]]( a, c )$$
 #!   compatible with the congruence, i.e.,
-#!   if  \alpha, \alpha' \in \mathrm[Hom]_[\mathbf[C]]( a, b ) ,
-#!    \beta, \beta' \in \mathrm[Hom]_[\mathbf[C]]( b, c ) ,
-#!    \alpha \sim_[a,b] \alpha' 
-#!   &&  \beta \sim_[b,c] \beta' ,
-#!   then  \beta \circ \alpha \sim_[a,c] \beta' \circ \alpha' .
-#! * For all  a, b \in \mathrm[Obj]_[\mathbf[C]] ,
-#!    \alpha \in \mathrm[Hom]_[\mathbf[C]]( a, b ) ,
-#!   we have   \left( \mathrm[id]_[b] \circ \alpha \right) \sim_[a,b] \alpha  
+#!   if $\alpha, \alpha' \in \mathrm[Hom]_[\mathbf[C]]( a, b )$,
+#!   $\beta, \beta' \in \mathrm[Hom]_[\mathbf[C]]( b, c )$,
+#!   $\alpha \sim_[a,b] \alpha'$
+#!   && $\beta \sim_[b,c] \beta'$,
+#!   then $\beta \circ \alpha \sim_[a,c] \beta' \circ \alpha'$.
+#! * For all $a, b \in \mathrm[Obj]_[\mathbf[C]]$,
+#!   $\alpha \in \mathrm[Hom]_[\mathbf[C]]( a, b )$,
+#!   we have $$\left( \mathrm[id]_[b] \circ \alpha \right) \sim_[a,b] \alpha$$
 #!   &&
-#!     \alpha \sim_[a,b] \left( \alpha \circ \mathrm[id]_[a] \right).  
-#! * For all  a,b,c,d \in \mathrm[Obj]_[\mathbf[C]] ,
-#!    \alpha \in \mathrm[Hom]_[\mathbf[C]]( a, b ) ,
-#!    \beta \in \mathrm[Hom]_[\mathbf[C]]( b, c ) ,
-#!    \gamma \in \mathrm[Hom]_[\mathbf[C]]( c, d ) ,
-#!   we have   \left(( \gamma \circ \beta ) \circ \alpha \right) \sim_[a,d] \left( \gamma \circ ( \beta \circ \alpha ) \right)  
+#!   $$\alpha \sim_[a,b] \left( \alpha \circ \mathrm[id]_[a] \right).$$
+#! * For all $a,b,c,d \in \mathrm[Obj]_[\mathbf[C]]$,
+#!   $\alpha \in \mathrm[Hom]_[\mathbf[C]]( a, b )$,
+#!   $\beta \in \mathrm[Hom]_[\mathbf[C]]( b, c )$,
+#!   $\gamma \in \mathrm[Hom]_[\mathbf[C]]( c, d )$,
+#!   we have $$\left(( \gamma \circ \beta ) \circ \alpha \right) \sim_[a,d] \left( \gamma \circ ( \beta \circ \alpha ) \right)$$
 
 
 ###################################
@@ -87,7 +87,7 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
 
 #! @Description
 #! The GAP category of CAP category cells.
-#! Every object, morphism, &&  2 -cell
+#! Every object, morphism, && $2$-cell
 #! of a CAP category lies ⥉ this GAP category.
 #! @Arguments object
 @DeclareFilter( "IsCapCategoryCell",
@@ -110,8 +110,8 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
                  IsCapCategoryCell  );
 
 #! @Description
-#! The GAP category of CAP category  2 -cells.
-#! Every  2 -cell of a CAP category lies in
+#! The GAP category of CAP category $2$-cells.
+#! Every $2$-cell of a CAP category lies in
 #! this GAP category.
 #! @Arguments object
 @DeclareFilter( "IsCapCategoryTwoCell",
@@ -288,18 +288,18 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
                   [ ] );
 
 #! @Description
-#! The argument is a string  s .
+#! The argument is a string $s$.
 #! This operation creates a new CAP category from scratch.
-#! Its name is set to  s .
+#! Its name is set to $s$.
 #! @Arguments s
 #! @Returns a category
 @DeclareOperation( "CreateCapCategory",
                            [ IsString ] );
 
 #! @Description
-#! The argument is a string  s .
+#! The argument is a string $s$.
 #! This operation creates a new CAP category from scratch.
-#! Its name is set to  s .
+#! Its name is set to $s$.
 #! The category, its objects, its morphisms, && its two cells will lie ⥉ the corresponding given filters.
 #! @Arguments s, category_filter, object_filter, morphism_filter, two_cell_filter
 #! @Returns a category
@@ -307,9 +307,9 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
                            [ IsString, IsFunction, IsFunction, IsFunction, IsFunction ] );
 
 #! @Description
-#! The argument is a string  s .
+#! The argument is a string $s$.
 #! This operation creates a new CAP category from scratch.
-#! Its name is set to  s .
+#! Its name is set to $s$.
 #! The category, its objects, its morphisms, && its two cells will lie ⥉ the corresponding given filters.
 #! The data types of the object/morphism/two cell datum can be given as described ⥉ <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />.
 #! As a convenience, simply a filter can be given if this suffices to fully determine the data type.
@@ -325,20 +325,20 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 ###################################
 
 #! @Description
-#! The argument is a category  C .
+#! The argument is a category $C$.
 #! The output is its name.
 #! @Arguments C
 #! @Returns a string
 @DeclareAttribute( "Name", IsCapCategory );
 
-#! Each category  C  stores various filters.
+#! Each category $C$ stores various filters.
 #! They are used to apply the right functions ⥉ the method selection.
 
 ## This filter is used by the installation
 ## of the Add methods for the terminal object.
 #! @Description
-#! The argument is a category  C .
-#! The output is a filter ⥉ which  C  lies.
+#! The argument is a category $C$.
+#! The output is a filter ⥉ which $C$ lies.
 #! @Arguments C
 #! @Returns a filter
 @DeclareAttribute( "CategoryFilter",
@@ -348,61 +348,61 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category  C .
+#! The argument is a category $C$.
 #! The output is a filter ⥉ which all objects
-#! of  C  shall lie.
+#! of $C$ shall lie.
 #! @Arguments C
 #! @Returns a filter
 @DeclareAttribute( "ObjectFilter",
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category  C .
+#! The argument is a category $C$.
 #! The output is a filter ⥉ which all morphisms
-#! of  C  shall lie.
+#! of $C$ shall lie.
 #! @Arguments C
 #! @Returns a filter
 @DeclareAttribute( "MorphismFilter",
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category  C .
-#! The output is a filter ⥉ which all  2 -cells
-#! of  C  shall lie.
+#! The argument is a category $C$.
+#! The output is a filter ⥉ which all $2$-cells
+#! of $C$ shall lie.
 #! @Arguments C
 #! @Returns a filter
 @DeclareAttribute( "TwoCellFilter",
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category  C .
+#! The argument is a category $C$.
 #! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
-#! of object data of  C  (or `fail` if this data type is !specified).
+#! of object data of $C$ (or `fail` if this data type is !specified).
 #! @Arguments C
 #! @Returns a data type || `fail`
 @DeclareAttribute( "ObjectDatumType",
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category  C .
+#! The argument is a category $C$.
 #! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
-#! of morphism data of  C  (or `fail` if this data type is !specified).
+#! of morphism data of $C$ (or `fail` if this data type is !specified).
 #! @Arguments C
 #! @Returns a data type || `fail`
 @DeclareAttribute( "MorphismDatumType",
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category  C .
+#! The argument is a category $C$.
 #! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
-#! of two cell data of  C  (or `fail` if this data type is !specified).
+#! of two cell data of $C$ (or `fail` if this data type is !specified).
 #! @Arguments C
 #! @Returns a data type || `fail`
 @DeclareAttribute( "TwoCellDatumType",
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category  C  which is expected to lie ⥉ the
+#! The argument is a category $C$ which is expected to lie ⥉ the
 #! filter <C>IsLinearCategoryOverCommutativeRing</C>.
 #! The output is a commutative ring over which the category is linear.
 #! @Arguments C
@@ -411,36 +411,36 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category  C  which is expected to lie ⥉ the
+#! The argument is a category $C$ which is expected to lie ⥉ the
 #! filter <C>IsEquippedWithHomomorphismStructure</C>.
-#! The output is the range category  D  of the defining functor
-#!  H: C^[\mathrm[op]] \times C \rightarrow D  of the homomorphism structure.
+#! The output is the range category $D$ of the defining functor
+#! $H: C^[\mathrm[op]] \times C \rightarrow D$ of the homomorphism structure.
 #! @Arguments C
 #! @Returns a category
 @DeclareAttribute( "RangeCategoryOfHomomorphismStructure",
                   IsCapCategory );
 
 #! @Description
-#! The argument is an additive category  C .
-#! The output is a list  L  of objects ⥉  C  such that every object ⥉  C  is a finite direct sum of objects ⥉  L .
+#! The argument is an additive category $C$.
+#! The output is a list $L$ of objects ⥉ $C$ such that every object ⥉ $C$ is a finite direct sum of objects ⥉ $L$.
 #! @Arguments C
 #! @Returns a list of objects
 @DeclareAttribute( "AdditiveGenerators",
                   IsCapCategory );
 
 #! @Description
-#!  The argument is an Abelian category  C  with enough projectives.
-#!  The output is the set of indecomposable projective objects ⥉  C  up to isomorphism.
-#!  That is every projective object ⥉  C  is isomorphic to a finite direct sum over these objects.
+#!  The argument is an Abelian category $C$ with enough projectives.
+#!  The output is the set of indecomposable projective objects ⥉ $C$ up to isomorphism.
+#!  That is every projective object ⥉ $C$ is isomorphic to a finite direct sum over these objects.
 #! @Arguments C
 #! @Returns a list of objects
 @DeclareAttribute( "IndecomposableProjectiveObjects",
                   IsCapCategory );
 
 #! @Description
-#!  The argument is an Abelian category  C  with enough injectives.
-#!  The output is the set of indecomposable injective objects ⥉  C  up to isomorphism.
-#!  That is every injective object ⥉  C  is isomorphic to a finite direct sum over these objects.
+#!  The argument is an Abelian category $C$ with enough injectives.
+#!  The output is the set of indecomposable injective objects ⥉ $C$ up to isomorphism.
+#!  That is every injective object ⥉ $C$ is isomorphic to a finite direct sum over these objects.
 #! @Arguments C
 #! @Returns a list of objects
 @DeclareAttribute( "IndecomposableInjectiveObjects",
@@ -503,7 +503,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! @Description
 #! The argument is a category <A>C</A> && a string <A>string</A>,
 #! which should be the name of a CAP operation, e.g., PreCompose.
-#! If applying this method is possible ⥉  C , the method returns <C>true</C>, <C>false</C> otherwise.
+#! If applying this method is possible ⥉ $C$, the method returns <C>true</C>, <C>false</C> otherwise.
 #! If the string is !the name of a CAP operation, an error is raised.
 #! For debugging purposes one can also pass the CAP operation instead of its name.
 #! @Returns <C>true</C> || <C>false</C>
@@ -516,12 +516,12 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! @EndGroup
 
 #! @Description
-#! The arguments are a category  C  && a string  s .
-#! If  s  is a categorical property (e.g. <C>"IsAbelianCategory"</C>),
+#! The arguments are a category $C$ && a string $s$.
+#! If $s$ is a categorical property (e.g. <C>"IsAbelianCategory"</C>),
 #! the output is a list of strings with CAP operations
-#! which are missing ⥉  C  to have the categorical property
+#! which are missing ⥉ $C$ to have the categorical property
 #! constructively.
-#! If  s  is !a categorical property, an error is raised.
+#! If $s$ is !a categorical property, an error is raised.
 #! @Returns a list
 #! @Arguments C,s
 @DeclareOperation( "CheckConstructivenessOfCategory",
@@ -534,8 +534,8 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #############################################
 
 #! @Description
-#! The argument is a cell  c .
-#! The output is <C>true</C> if  c  is well-defined,
+#! The argument is a cell $c$.
+#! The output is <C>true</C> if $c$ is well-defined,
 #! otherwise the output is <C>false</C>.
 #! @Returns a boolean
 #! @Arguments c
@@ -550,19 +550,19 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 
 #! @Description
-#! The argument is a GAP object  x .
-#! If  x  is an object ⥉ a CAP category, the output consists of data which are needed to reconstruct  x 
+#! The argument is a GAP object $x$.
+#! If $x$ is an object ⥉ a CAP category, the output consists of data which are needed to reconstruct $x$
 #! (e.g., by passing them to an appropriate constructor).
-#! If  x  is a morphism ⥉ a CAP category, the output consists of a triple whose first entry is the source of  x ,
-#! the third entry is the range of  x , && the second entry consists of data which are needed to reconstruct  x 
-#! (e.g., by passing them to an appropriate constructor, possibly together with the source && range of  x ).
+#! If $x$ is a morphism ⥉ a CAP category, the output consists of a triple whose first entry is the source of $x$,
+#! the third entry is the range of $x$, && the second entry consists of data which are needed to reconstruct $x$
+#! (e.g., by passing them to an appropriate constructor, possibly together with the source && range of $x$).
 #! @Returns a GAP object
 #! @Arguments x
 @DeclareAttribute( "Down",
                   IsObject );
 
 #! @Description
-#! The argument is a morphism ⥉ a CAP category, the output consists of data which are needed to reconstruct  x 
+#! The argument is a morphism ⥉ a CAP category, the output consists of data which are needed to reconstruct $x$
 #! (e.g., by passing it to an appropriate constructor, possibly together with its source && range).
 #! @Returns a GAP object
 #! @Arguments x
@@ -578,7 +578,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
                   IsObject );
 
 #! @Description
-#! The argument is a GAP object  x .
+#! The argument is a GAP object $x$.
 #! This function iteratively calls <C>Down</C> until it becomes stable.
 #! @Returns a GAP object
 #! @Arguments x
@@ -747,15 +747,15 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #############################################
 
 #! @Description
-#! The argument is a cell  c .
-#! The output is a LaTeX string  s  (without enclosing dollar signs) that may be used to print out  c  nicely.
+#! The argument is a cell $c$.
+#! The output is a LaTeX string $s$ (without enclosing dollar signs) that may be used to print out $c$ nicely.
 #! @Returns a string
 #! @Arguments c
 @DeclareOperation( "LaTeXOutput", [ IsCapCategoryCell ] );
 
 #! @Description
-#! The argument is a category  C .
-#! The output is a LaTeX string  s  (without enclosing dollar signs) that may be used to print out  C  nicely.
+#! The argument is a category $C$.
+#! The output is a LaTeX string $s$ (without enclosing dollar signs) that may be used to print out $C$ nicely.
 #! @Returns a string
 #! @Arguments C
 @DeclareOperation( "LaTeXOutput", [ IsCapCategory ] );

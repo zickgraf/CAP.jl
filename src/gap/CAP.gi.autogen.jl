@@ -536,7 +536,7 @@ InstallMethod( @__MODULE__,  CreateCapCategory,
   function( )
     local name;
     
-    name = Concatenation( "AutomaticCapCategory", string( CAP_INTERNAL_NAME_COUNTER( ) ) );
+    name = Concatenation( "AutomaticCapCategory", StringGAP( CAP_INTERNAL_NAME_COUNTER( ) ) );
     
     return CreateCapCategory( name );
     
@@ -760,7 +760,7 @@ end );
             
             execs = Length( times );
             total_time = Sum( times );
-            time_per_exec = int( total_time / execs * 1000 );
+            time_per_exec = IntGAP( total_time / execs * 1000 );
             
             Add( operations, rec(
                 name = recname,
@@ -822,7 +822,7 @@ end );
         
     end;
     
-    Display( Concatenation( "Total time spent ⥉ primitive operations of this category: ", string( info.total_time_global ) , " ms" ) );
+    Display( Concatenation( "Total time spent ⥉ primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
     
     for operation in info.operations
         
@@ -865,7 +865,7 @@ if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound
             
         end;
         
-        Add( header, Concatenation( "Total time spent ⥉ primitive operations of this category: ", string( info.total_time_global ) , " ms" ) );
+        Add( header, Concatenation( "Total time spent ⥉ primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
         Add( header, "" );
         
         value_matrix = [ ];
@@ -1047,7 +1047,7 @@ end );
 ##
 #######################################
 
-InstallMethod( @__MODULE__,  String,
+InstallMethod( @__MODULE__,  StringGAP,
                [ IsCapCategory ],
     Name );
 
@@ -1060,7 +1060,7 @@ InstallMethod( @__MODULE__,  DisplayString,
                
   function ( category )
     
-    return Concatenation( "A CAP category with name ", Name( category ), ":\n\n", InfoStringOfInstalledOperationsOfCategory( category ) );
+    return Concatenation( "A CAP category with name ", Name( category ), ":\n\n", InfoStringOfInstalledOperationsOfCategory( category ), "\n" );
     
 end );
 
