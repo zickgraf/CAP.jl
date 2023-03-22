@@ -96,7 +96,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
     ## set categorical properties
     if IsBound( options.properties )
         
-        if !IsSubset( Set( Filtered( Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) ), options.properties )
+        if !IsSubset( SetGAP( Filtered( Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) ), options.properties )
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "The value of the option `properties` must be a list of categorical properties, see CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST." );

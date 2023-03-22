@@ -200,7 +200,7 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         
     end;
     
-    if Length( Set( List( combined_options, name -> IsBound( options[name] ) ) ) ) > 1
+    if Length( SetGAP( List( combined_options, name -> IsBound( options[name] ) ) ) ) > 1
         
         Display( "WARNING: To avoid inconsistencies, either all || none of the following options should be set ⥉ a call to `WrapperCategory`. This is !the case." );
         Display( combined_options );

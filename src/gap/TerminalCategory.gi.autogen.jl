@@ -61,7 +61,7 @@
     
     completed_record.list_of_operations_to_install = list_of_operations_to_install;
     
-    properties = Set( List( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, a -> a[1] ) );
+    properties = SetGAP( List( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, a -> a[1] ) );
     
     if IsBound( completed_record.excluded_properties )
         excluded_properties = completed_record.excluded_properties;
@@ -347,7 +347,7 @@ end );
     morphism_datum = ( cat, morphism ) -> StringGAP( morphism );
     
     ## prevent strictness
-    properties = Set( List( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, a -> a[1] ) );
+    properties = SetGAP( List( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, a -> a[1] ) );
     excluded_strict_properties = Filtered( properties, p -> StartsWith( p, "IsStrict" ) );
     
     ## prevent skeletality

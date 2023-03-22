@@ -22,6 +22,10 @@ function CreateCrispCachingObject( args... )
 	"crisp_caching_object"
 end
 
+function SetGAP(list::Union{Vector, UnitRange, StepRange})
+	unique(sort(list))
+end
+
 function UnionGAP(args...)
 	if length(args) == 1
 		args = args[1]
@@ -203,7 +207,7 @@ const IsIO = Filter("IsIO", IO)
 const IsObject = Filter("IsObject", Any)
 const IsString = Filter("IsString", AbstractString)
 const IsStringRep = IsString
-const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Set})
+const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange})
 const IsDenseList = IsList
 const IsFunction = Filter("IsFunction", Function)
 const IsOperation = IsFunction
@@ -620,8 +624,18 @@ function ==(rec1::CAPRecord, rec2::CAPRecord)
 end
 
 # GAP functions
+function SizeScreen()
+	dim = displaysize(stdout)
+	[dim[2], dim[1]]
+end
+
 function ListWithIdenticalEntries(n, obj)
-	fill(obj, n)
+	list = fill(obj, n)
+	if obj isa Char
+		String(list)
+	else
+		list
+	end
 end
 
 Perform = function( list, func )
@@ -632,8 +646,8 @@ end
 
 @DeclareAttribute("Length", IsAttributeStoringRep)
 
-function LengthOperation(list::Union{Vector, UnitRange, StepRange, Tuple, Set, String})
-	length(list)
+function LengthOperation(x::Union{Vector, UnitRange, StepRange, Tuple, String})
+	length(x)
 end
 
 @DeclareAttribute("IntGAP", IsAttributeStoringRep)
@@ -652,11 +666,11 @@ function StringGAPOperation(x::Union{Int})
 	string(x)
 end
 
-function Add( list::Vector, element::Any )
-	push!(list, element)
+function StringGAPOperation(list::Vector)
+	string("[ ", map(x -> StringGAPOperation(x), list), " ]")
 end
 
-function Add( list::Set, element::Any )
+function Add( list::Vector, element::Any )
 	push!(list, element)
 end
 
@@ -706,6 +720,8 @@ function List(list::Union{Vector,UnitRange,StepRange}, func::Function)
 	map(func, list)
 end
 
+function ListOp end
+
 function List(obj, func)
 	ListOp(obj, func)
 end
@@ -724,24 +740,19 @@ end
 Positions(list, elm) = findall(e -> e === elm, list)
 Filtered(list, func) = filter(func, list)
 
-function ⟷(obj1, obj2)
-	if isa(obj1, Function) && isa(obj2, Function)
-		x -> obj1(x) ⟷ obj2(x)
-	else
-		obj1 && obj2
-	end
+INTERNAL_AssertionLevel = 0
+
+function SetAssertionLevel(new_level::Int)
+	@assert new_level >= 0
+	global INTERNAL_AssertionLevel = new_level
 end
 
-function ⇿(obj1, obj2)
-	if isa(obj1, Function) || isa(obj2, Function)
-		x -> obj1(x) ⇿ obj2(x)
-	else
-		obj1 || obj2
-	end
+function AssertionLevel()
+	INTERNAL_AssertionLevel
 end
 
-function Assert( level, assertion )
-	if !assertion
+function Assert(level, assertion)
+	if level <= INTERNAL_AssertionLevel && !assertion
 		throw("assertion failed")
 	end
 end
@@ -900,7 +911,7 @@ function Last(list)
 	end
 end
 
-function IsSubset(list1::Union{Vector,Set}, list2::Union{Vector,Set})
+function IsSubset(list1::Vector, list2::Vector)
 	issubset(list2, list1)
 end
 

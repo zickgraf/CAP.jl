@@ -331,7 +331,9 @@ InstallMethod( @__MODULE__,  ViewString,
                
   function ( object )
     
-    return Concatenation( "<", StringGAP( object ), ">" );
+    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
+    # do !reuse `StringGAP` because objects might use `StringGAP` as the attribute storing the object datum
+    return Concatenation( "<An object ", "in ", Name( CapCategory( object ) ), ">" );
     
 end );
 
@@ -340,7 +342,9 @@ InstallMethod( @__MODULE__,  DisplayString,
                
   function ( object )
     
-    return Concatenation( StringGAP( object ), ".\n" );
+    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
+    # do !reuse `StringGAP` because objects might use `StringGAP` as the attribute storing the object datum
+    return Concatenation( "An object ", "in ", Name( CapCategory( object ) ), ".\n" );
     
 end );
 

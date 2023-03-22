@@ -78,7 +78,7 @@ end );
         
         if !tester( opposite_category ) && tester( category )
             
-            setter = ValueGlobal( Concatenation( "Set", attr ) );
+            setter = ValueGlobal( Concatenation( "SetGAP", attr ) );
             
             getter = ValueGlobal( attr );
             

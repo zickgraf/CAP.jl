@@ -823,7 +823,9 @@ InstallMethod( @__MODULE__,  ViewString,
                
   function ( morphism )
     
-    return Concatenation( "<", StringGAP( morphism ), ">" );
+    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
+    # do !reuse `StringGAP` because morphisms might use `StringGAP` as the attribute storing the morphism datum
+    return Concatenation( "<A morphism ", "in ", Name( CapCategory( morphism ) ), ">" );
     
 end );
 
@@ -832,7 +834,9 @@ InstallMethod( @__MODULE__,  DisplayString,
                
   function ( morphism )
     
-    return Concatenation( StringGAP( morphism ), ".\n" );
+    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
+    # do !reuse `StringGAP` because morphisms might use `StringGAP` as the attribute storing the morphism datum
+    return Concatenation( "A morphism ", "in ", Name( CapCategory( morphism ) ), ".\n" );
     
 end );
 

@@ -776,7 +776,7 @@ end );
     
     list = [ ];
     
-    for name in Set( Filtered( Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) )
+    for name in SetGAP( Filtered( Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) )
       
       if Tester( ValueGlobal( name ) )( category ) && ValueGlobal( name )( category )
         
