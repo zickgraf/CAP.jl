@@ -10,9 +10,38 @@ import Base.in
 
 function PrintString end
 function DirectSum end
-function DirectProduct end
+DirectSumOp = DirectSum
+function DirectProduct(arg...)
+	
+    if IsCapCategory( arg[1] ) then
+        
+		Error( "this case should never be triggered" )
+        
+    end;
+    
+    if Length( arg ) == 1 &&
+       IsList( arg[1] ) &&
+       ForAll( arg[1], IsCapCategoryObject ) then
+       
+       return DirectProduct( CapCategory( arg[1][1] ), arg[1] );
+       
+    end;
+    
+    return DirectProduct( CapCategory( arg[1] ), arg );
+	
+end
+DirectProductOp = DirectProduct
 function IsEqualForCache end
 function Inverse end
+function Equalizer end
+EqualizerOp = Equalizer
+function Coequalizer end
+CoequalizerOp = Coequalizer
+function FiberProduct end
+FiberProductOp = FiberProduct
+
+function Filtered end
+function FilteredOp end
 
 function CreateWeakCachingObject( args... )
 	"weak_caching_object"
@@ -20,6 +49,14 @@ end
 
 function CreateCrispCachingObject( args... )
 	"crisp_caching_object"
+end
+
+function CacheValue(cache, key_list)
+	[ ]
+end
+
+function SetCacheValue(cache, key_list, value)
+	return;
 end
 
 function SetGAP(list::Union{Vector, UnitRange, StepRange})
@@ -51,6 +88,8 @@ function NTupleGAP(n, args...)
 	@assert n == length(args)
 	collect(args)
 end
+
+Iterator = iterate
 
 # we want "in" to bind stronger than "!"
 ⥉ = in
@@ -101,6 +140,7 @@ function copy(record::CAPRecord)
 	CAPRecord(copy(getfield(record, :dict)))
 end
 
+# GAP String, Print, View, Display
 const DEFAULTDISPLAYSTRING = "<object>\n"
 const DEFAULTVIEWSTRING = "<object>"
 
@@ -116,6 +156,7 @@ function Display(obj::CAPDict)
 	string = DisplayString(obj)
 	if string == DEFAULTDISPLAYSTRING
 		PrintObj(obj)
+		println()
 	else
 		print(string)
 	end
@@ -142,8 +183,53 @@ function StringGAPOperation(obj::CAPDict)
 	"<object>"
 end
 
+# String, Print, View, Display for native types
+function Display(list::Union{Vector,UnitRange})
+	print(DisplayString(list))
+end
+
 function DisplayString(int::Int)
+	string(int, "\n")
+end
+
+# DisplayString of a non-empty list in GAP returns "<object>"
+# This is obviously not what we want.
+function DisplayString(list::Union{Vector, UnitRange, StepRange})
+	string(PrintString(list), "\n")
+end
+
+function PrintString(int::Int)
 	string(int)
+end
+
+function PrintString(list::Union{Vector, UnitRange, StepRange})
+	StringGAPOperation(list)
+end
+
+function StringGAPOperation(x::Union{Int})
+	string(x)
+end
+
+function QuotedStringGAPOperation(x::Any)
+	StringGAPOperation(x)
+end
+
+function QuotedStringGAPOperation(x::String)
+	string("\"", x, "\"")
+end
+
+function StringGAPOperation(list::Vector)
+	string("[ ", join(map(x -> QuotedStringGAPOperation(x), list), ", "), " ]")
+end
+
+function StringGAPOperation(range::UnitRange)
+	if range.stop < range.start
+		string("[  ]")
+	elseif range.stop == range.start
+		string("[ ", range.stop, " ]")
+	else
+		string("[ ", range.start, " .. ", range.stop, " ]")
+	end
 end
 
 function Base.show(io::IO, obj::CAPDict)
@@ -207,7 +293,7 @@ const IsIO = Filter("IsIO", IO)
 const IsObject = Filter("IsObject", Any)
 const IsString = Filter("IsString", AbstractString)
 const IsStringRep = IsString
-const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange})
+const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Tuple})
 const IsDenseList = IsList
 const IsFunction = Filter("IsFunction", Function)
 const IsOperation = IsFunction
@@ -399,7 +485,12 @@ function InstallMethod(mod::Module, operation, filter_list, func::Function)
 		display(operation)
 	end
 	
-	if !isnothing(filter_list)
+	if operation === Iterator
+		@assert length(filter_list) == 1
+		filter_list = [ filter_list[1], IsObject ];
+		nargs = 2
+		isva = true
+	elseif !isnothing(filter_list)
 		nargs = length(filter_list)
 		isva = false
 	elseif length(methods(func)) == 1
@@ -413,11 +504,8 @@ function InstallMethod(mod::Module, operation, filter_list, func::Function)
 	end
 	
 	vars = Vector{Any}(map(i -> Symbol("arg" * string(i)), 1:nargs))
-	if isva
-		vars[nargs] = Expr(:..., vars[nargs])
-	end
 	if isnothing(filter_list)
-		vars_with_types = vars
+		vars_with_types = copy(vars)
 	else
 		vars_with_types = map(function(i)
 			arg_symbol = vars[i]
@@ -426,17 +514,28 @@ function InstallMethod(mod::Module, operation, filter_list, func::Function)
 		end, 1:length(filter_list))
 	end
 	if IsAttribute( operation )
-		symbol = Symbol(operation.operation)
+		funcref = Symbol(operation.operation)
+	elseif operation === CallFuncList
+		@assert !isva
+		@assert length(vars_with_types) === 2
+		@assert filter_list[2] === IsList
+		funcref = popfirst!(vars_with_types)
+		vars_with_types[1] = Expr(:..., vars[nargs])
 	else
-		symbol = Symbol(operation)
+		funcref = Symbol(operation)
 	end
 	
-	if !isdefined(mod, symbol)
-		print("WARNING: installing method in module ", mod, " for undefined symbol ", symbol, "\n")
+	if funcref isa Symbol && !isdefined(mod, funcref)
+		print("WARNING: installing method in module ", mod, " for undefined symbol ", funcref, "\n")
+	end
+	
+	if isva
+		vars[nargs] = Expr(:..., vars[nargs])
+		vars_with_types[nargs] = Expr(:..., vars_with_types[nargs])
 	end
 	
 	Base.eval(mod, :(
-		function $symbol($(vars_with_types...); keywords...)
+		function $funcref($(vars_with_types...); keywords...)
 			if length(keywords) > 0
 				PushOptions(CAPRecord(Dict(keywords)))
 			end
@@ -447,7 +546,9 @@ function InstallMethod(mod::Module, operation, filter_list, func::Function)
 			result
 		end
 	))
-	Base.eval(mod, :(export $symbol))
+	if funcref isa Symbol
+		Base.eval(mod, :(export $funcref))
+	end
 end
 
 function InstallMethod(operation, description::String, filter_list, func)
@@ -644,6 +745,42 @@ Perform = function( list, func )
 	end
 end
 
+function Product(list::Union{Vector, UnitRange, StepRange, Tuple})
+	if length(list) == 0
+		1
+	else
+		prod(list)
+	end
+end
+
+function Sum(list::Union{Vector, UnitRange, StepRange, Tuple})
+	if length(list) == 0
+		0
+	else
+		sum(list)
+	end
+end
+
+function Sum(list::Union{Vector, UnitRange, StepRange, Tuple}, func)
+	Sum(map(func, list))
+end
+
+function QuoInt(a::Int, b::Int)
+	a ÷ b
+end
+
+function RemInt(a::Int, b::Int)
+	a % b
+end
+
+function Cartesian(args...)
+	if length(args) == 1
+		args = args[1]
+	end
+	
+	map(collect,vec(permutedims(collect(Iterators.product(args...)), reverse(1:length(args)))))
+end
+
 @DeclareAttribute("Length", IsAttributeStoringRep)
 
 function LengthOperation(x::Union{Vector, UnitRange, StepRange, Tuple, String})
@@ -662,16 +799,12 @@ end
 
 @DeclareAttribute("StringGAP", IsAttributeStoringRep)
 
-function StringGAPOperation(x::Union{Int})
-	string(x)
-end
-
-function StringGAPOperation(list::Vector)
-	string("[ ", map(x -> StringGAPOperation(x), list), " ]")
-end
-
 function Add( list::Vector, element::Any )
 	push!(list, element)
+end
+
+function Add( list::Vector, element::Any, pos::Int )
+	insert!(list, pos, element)
 end
 
 function Remove( list::Vector )
@@ -716,7 +849,7 @@ function List(tuple::Tuple)
 	collect(tuple)
 end
 
-function List(list::Union{Vector,UnitRange,StepRange}, func::Function)
+function ListOp(list::Union{Vector, UnitRange, StepRange, Tuple}, func)
 	map(func, list)
 end
 
@@ -738,7 +871,14 @@ function PositionProperty(list, func)
 	end
 end
 Positions(list, elm) = findall(e -> e === elm, list)
-Filtered(list, func) = filter(func, list)
+
+function Filtered(list::Union{Vector, UnitRange, StepRange, Tuple}, func)
+	filter(func, list)
+end
+
+function Filtered(list::Any, func)
+	FilteredOp(list, func)
+end
 
 INTERNAL_AssertionLevel = 0
 
@@ -900,6 +1040,15 @@ function First(list)
 		fail
 	else
 		first(list)
+	end
+end
+
+function First(list, func)
+	pos = findfirst(func, list)
+	if isnothing(pos)
+		fail
+	else
+		list[pos]
 	end
 end
 
