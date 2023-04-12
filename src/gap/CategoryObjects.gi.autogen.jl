@@ -36,7 +36,7 @@
 ###################################
 
 # This method should usually !be selected when the two morphisms belong to the same category
-InstallOtherMethod( IsEqualForObjects,
+InstallMethod( @__MODULE__,  IsEqualForObjects,
                     [ IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ],
 
   function( cat, object_1, object_2 )
@@ -219,7 +219,7 @@ InstallMethod( @__MODULE__,  IsEqualForCache,
 
 ##
 # generic fallback to IsIdenticalObj
-InstallOtherMethod( IsEqualForCacheForObjects,
+InstallMethod( @__MODULE__,  IsEqualForCacheForObjects,
                [ IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ],
                
   ( cat, obj1, obj2 ) -> IsIdenticalObj( obj1, obj2 ) );

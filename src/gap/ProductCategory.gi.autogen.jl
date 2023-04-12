@@ -292,7 +292,7 @@ InstallMethod( @__MODULE__,  ProductOp,
 end );
 
 ##
-InstallOtherMethod( /,
+InstallMethod( @__MODULE__,  /,
           [ IsList, IsCapProductCategory ],
   function( list, category )
 

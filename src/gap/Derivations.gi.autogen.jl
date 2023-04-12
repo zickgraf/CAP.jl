@@ -244,24 +244,46 @@ InstallMethod( @__MODULE__,  AddDerivation,
                [ IsDerivedMethodGraph, IsFunction, IsFunction ],
                
   function( graph, target_op, func )
+    local loop_multiplier, category_getters, operations_in_graph, collected_list;
     
-    AddDerivation( graph, target_op, fail, func );
+    Print( "WARNING: a derivation for ", NameFunction( target_op ), " has no explicit preconditions. Calling AddDerivation without explicit preconditions is deprecated && will !be supported after 2024.03.31.\n" );
+    
+    loop_multiplier = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "WeightLoopMultiple", 2 );
+    category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", rec( ) );
+    
+    operations_in_graph = Operations( graph );
+    
+    collected_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION( func, operations_in_graph, loop_multiplier, CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS, category_getters );
+    
+    AddDerivation( graph, target_op, collected_list, func );
     
 end );
 
-# Contrary to the documentation, for internal code we allow used_ops_with_multiples_and_category_getters to be equal to fail
-# to distinguish the case of no preconditions given
-InstallOtherMethod( AddDerivation,
-               [ IsDerivedMethodGraph, IsFunction, IsObject, IsFunction ],
+InstallMethod( @__MODULE__,  AddDerivation,
+               [ IsDerivedMethodGraph, IsFunction, IsList, IsFunction ],
                
   function( graph, target_op, used_ops_with_multiples_and_category_getters, func )
-    local weight, category_filter, description, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, collected_list, used_op_names_with_multiples_and_category_getters, derivation, x;
     
-    Assert( 0, used_ops_with_multiples_and_category_getters == fail || IsList( used_ops_with_multiples_and_category_getters ) );
+    if IsStringRep( used_ops_with_multiples_and_category_getters ) || (IsString( used_ops_with_multiples_and_category_getters ) && !IsEmpty( used_ops_with_multiples_and_category_getters ))
+        
+        Error( "calling AddDerivation with a description as the second argument but without explicit preconditions is !supported." );
+        
+    end;
+    
+    Print( "WARNING: Calling AddDerivation without a description as the second argument is deprecated && will !be supported after 2024.03.31.\n" );
+    
+    AddDerivation( graph, target_op, CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" ), used_ops_with_multiples_and_category_getters, func );
+    
+end );
+
+InstallMethod( @__MODULE__,  AddDerivation,
+               [ IsDerivedMethodGraph, IsFunction, IsString, IsDenseList, IsFunction ],
+               
+  function( graph, target_op, description, used_ops_with_multiples_and_category_getters, func )
+    local weight, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, collected_list, used_op_names_with_multiples_and_category_getters, derivation, x;
     
     weight = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Weight", 1 );
     category_filter = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryFilter", IsCapCategory );
-    description = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" );
     loop_multiplier = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "WeightLoopMultiple", 2 );
     category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", rec( ) );
     function_called_before_installation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "FunctionCalledBeforeInstallation", false );
@@ -269,80 +291,60 @@ InstallOtherMethod( AddDerivation,
     ## get used ops
     operations_in_graph = Operations( graph );
     
-    used_op_names_with_multiples_and_category_getters = fail;
+    used_op_names_with_multiples_and_category_getters = [ ];
+    
+    for x in used_ops_with_multiples_and_category_getters
+        
+        if Length( x ) < 2 || !IsFunction( x[1] ) || !IsInt( x[2] )
+            
+            Error( "preconditions must be of the form `[op, mult, getter]`, where `getter` is optional" );
+            
+        end;
+        
+        if (Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] == target_op
+            
+            Error( "A derivation for ", NameFunction( target_op ), " has itself as a precondition. This is !supported because we can!compute a well-defined weight.\n" );
+            
+        end;
+        
+        if Length( x ) == 2
+            
+            Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], fail ] );
+            
+        elseif Length( x ) == 3
+            
+            if x != fail && !(IsFunction( x[3] ) && NumberArgumentsFunction( x[3] ) == 1)
+                
+                Error( "the category getter must be a single-argument function" );
+                
+            end;
+            
+            Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], x[3] ] );
+            
+        else
+            
+            Error( "The list of preconditions must be a list of pairs || triples." );
+            
+        end;
+        
+    end;
     
     #= comment for Julia
     collected_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION( func, operations_in_graph, loop_multiplier, CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS, category_getters );
     
-    if used_ops_with_multiples_and_category_getters == fail
+    if Length( collected_list ) != Length( used_op_names_with_multiples_and_category_getters ) || !ForAll( collected_list, c -> c ⥉ used_op_names_with_multiples_and_category_getters )
         
-        used_op_names_with_multiples_and_category_getters = collected_list;
+        SortBy( used_op_names_with_multiples_and_category_getters, x -> x[1] );
+        SortBy( collected_list, x -> x[1] );
+        
+        Print(
+            "WARNING: You have installed a derivation for ", NameFunction( target_op ), " with preconditions ", used_op_names_with_multiples_and_category_getters,
+            " but the automated detection has detected the following list of preconditions: ", collected_list, ".\n",
+            "If this is a bug ⥉ the automated detection, please report it.\n"
+        );
         
     end;
     # =#
-    
-    if used_ops_with_multiples_and_category_getters != fail
-        
-        used_op_names_with_multiples_and_category_getters = [ ];
-        
-        for x in used_ops_with_multiples_and_category_getters
-            
-            if Length( x ) < 2 || !IsFunction( x[1] ) || !IsInt( x[2] )
-                
-                Error( "preconditions must be of the form `[op, mult, getter]`, where `getter` is optional" );
-                
-            end;
-            
-            if (Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] == target_op
-                
-                Error( "A derivation for ", NameFunction( target_op ), " has itself as a precondition. This is !supported because we can!compute a well-defined weight.\n" );
-                
-            end;
-            
-            if Length( x ) == 2
-                
-                Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], fail ] );
-                
-            elseif Length( x ) == 3
-                
-                if x != fail && !(IsFunction( x[3] ) && NumberArgumentsFunction( x[3] ) == 1)
-                    
-                    Error( "the category getter must be a single-argument function" );
-                    
-                end;
-                
-                Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], x[3] ] );
-                
-            else
-                
-                Error( "The list of preconditions must be a list of pairs || triples." );
-                
-            end;
-            
-        end;
-        
-        #= comment for Julia
-        if Length( collected_list ) != Length( used_op_names_with_multiples_and_category_getters ) || !ForAll( collected_list, c -> c ⥉ used_op_names_with_multiples_and_category_getters )
-            
-            SortBy( used_op_names_with_multiples_and_category_getters, x -> x[1] );
-            SortBy( collected_list, x -> x[1] );
-            
-            Print(
-                "WARNING: You have installed a derivation for ", NameFunction( target_op ), " with preconditions ", used_op_names_with_multiples_and_category_getters,
-                " but the automated detection has detected the following list of preconditions: ", collected_list, ".\n",
-                "If this is a bug ⥉ the automated detection, please report it.\n"
-            );
-            
-        end;
-        # =#
-        
-    end;
-    
-    if used_op_names_with_multiples_and_category_getters == fail
-        
-        return;
-        
-    end;
     
     derivation = MakeDerivation( description,
                                   target_op,
@@ -361,24 +363,6 @@ InstallOtherMethod( AddDerivation,
     
 end );
 
-InstallMethod( @__MODULE__,  AddDerivation,
-               [ IsDerivedMethodGraph, IsFunction, IsDenseList ],
-               
-  function( graph, target_op, implementations_with_extra_filters )
-    
-    Error( "passing a list of functions to `AddDerivation` is !supported anymore" );
-    
-end );
-
-InstallMethod( @__MODULE__,  AddDerivation,
-               [ IsDerivedMethodGraph, IsFunction, IsDenseList, IsDenseList ],
-               
-  function( graph, target_op, used_ops_with_multiples, implementations_with_extra_filters )
-    
-    Error( "passing a list of functions to `AddDerivation` is !supported anymore" );
-    
-end );
-
 @InstallGlobalFunction( AddDerivationToCAP,
   
   function( arg... )
@@ -394,6 +378,8 @@ end );
   
   function( target_op, without_given_func, with_given_func )
     local without_given_name, with_given_name;
+    
+    Print( "WARNING: AddWithGivenDerivationPairToCAP is deprecated && will !be supported after 2024.03.31. Please use AddDerivationToCAP twice instead.\n" );
     
     without_given_name = NameFunction( target_op );
     
@@ -538,8 +524,8 @@ end );
         new_pos = PositionProperty( derivations_of_target, x -> IsIdenticalObj( x, d ) );
         current_pos = PositionProperty( derivations_of_target, x -> IsIdenticalObj( x, current_derivation ) );
         
-        Assert( 0, new_pos != fail );
-        Assert( 0, current_pos != fail );
+        @Assert( 0, new_pos != fail );
+        @Assert( 0, current_pos != fail );
         
     end;
 
@@ -1092,7 +1078,7 @@ end );
         
         Print( "with additional weight ", DerivationWeight( current_derivation.derivation ) );
         
-        Assert( 0, IsBound( current_derivation.can_compute ) == IsBound( current_derivation.cannot_compute ) );
+        @Assert( 0, IsBound( current_derivation.can_compute ) == IsBound( current_derivation.cannot_compute ) );
         
         if IsBound( current_derivation.can_compute )
             

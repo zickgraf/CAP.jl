@@ -604,7 +604,7 @@ end );
         if current_symbol ⥉ symbol_list
             
             # function can!end with a symbol
-            Assert( 0, i < Length( func_as_list ) );
+            @Assert( 0, i < Length( func_as_list ) );
             
             if IsBound( category_getters[func_as_list[i + 1]] )
                 
@@ -1311,7 +1311,7 @@ InstallMethod( @__MODULE__,  SafePosition,
     
     pos = Position( list, obj );
     
-    Assert( 0, pos != fail );
+    @Assert( 0, pos != fail );
     
     return pos;
     
@@ -1326,7 +1326,7 @@ InstallMethod( @__MODULE__,  SafeUniquePosition,
     
     positions = Positions( list, obj );
     
-    Assert( 0, Length( positions ) == 1 );
+    @Assert( 0, Length( positions ) == 1 );
     
     return positions[1];
     
@@ -1341,7 +1341,7 @@ InstallMethod( @__MODULE__,  SafePositionProperty,
     
     pos = PositionProperty( list, func );
     
-    Assert( 0, pos != fail );
+    @Assert( 0, pos != fail );
     
     return pos;
     
@@ -1356,7 +1356,7 @@ InstallMethod( @__MODULE__,  SafeUniquePositionProperty,
     
     positions = PositionsProperty( list, func );
     
-    Assert( 0, Length( positions ) == 1 );
+    @Assert( 0, Length( positions ) == 1 );
     
     return positions[1];
     
@@ -1371,7 +1371,7 @@ InstallMethod( @__MODULE__,  SafeFirst,
     
     entry = First( list, func );
     
-    Assert( 0, entry != fail );
+    @Assert( 0, entry != fail );
     
     return entry;
     
@@ -1386,7 +1386,7 @@ InstallMethod( @__MODULE__,  SafeUniqueEntry,
     
     positions = PositionsProperty( list, func );
     
-    Assert( 0, Length( positions ) == 1 );
+    @Assert( 0, Length( positions ) == 1 );
     
     return list[positions[1]];
     
@@ -1397,7 +1397,7 @@ end );
 # We want `args` to be a list but ⥉ Julia it's a tuple -> we need a separate implementation for Julia
 @InstallGlobalFunction( NTupleGAP, function ( n, args... )
     
-    Assert( 0, Length( args ) == n );
+    @Assert( 0, Length( args ) == n );
     
     return args;
     

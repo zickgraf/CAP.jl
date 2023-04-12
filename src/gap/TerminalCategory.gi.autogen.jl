@@ -448,7 +448,7 @@ end );
 
 ##
 #= comment for Julia
-InstallOtherMethod( FunctorFromTerminalCategory,
+InstallMethod( @__MODULE__,  FunctorFromTerminalCategory,
                     [ IsCapCategoryMorphism && IsOne ],
                
   morphism -> FunctorFromTerminalCategory( Source( morphism ) )

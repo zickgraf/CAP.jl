@@ -157,7 +157,7 @@ end );
                 
                 postprocessor_string
                 
-                return_statement;
+                return_statement
                 
             end
             """;
@@ -179,7 +179,7 @@ end );
                 dual_preprocessor_func = dual_preprocessor_func_string;
                 prep_arg = dual_preprocessor_func( input_arguments... );
                 #% CAP_JIT_DROP_NEXT_STATEMENT
-                Assert( 0, IsIdenticalObj( prep_arg[1], OppositeCategory( cat ) ) );
+                @Assert( 0, IsIdenticalObj( prep_arg[1], OppositeCategory( cat ) ) );
                 """,
                 rec(
                     dual_preprocessor_func_string = dual_preprocessor_func_string,
@@ -187,7 +187,7 @@ end );
                 )
             );
             
-            Assert( 0, filter_list[1] == "category" );
+            @Assert( 0, filter_list[1] == "category" );
             
             dual_arguments = List( (2):(Length( filter_list )), i -> Concatenation( "prep_arg[", StringGAP( i ), "]" ) );
             
@@ -195,7 +195,7 @@ end );
             
             preprocessor_string = "";
             
-            Assert( 0, filter_list[1] == "category" );
+            @Assert( 0, filter_list[1] == "category" );
             
             dual_arguments = List( (2):(Length( filter_list )), function( i )
               local filter, argument_name;
@@ -267,7 +267,7 @@ end );
             
             postprocessor_string = Concatenation( "dual_postprocessor_func = ", dual_postprocessor_func_string, ";" );
             
-            return_statement = "return dual_postprocessor_func( result )";
+            return_statement = "return dual_postprocessor_func( result );";
             
         else
             
@@ -275,11 +275,11 @@ end );
             
             if return_type == "object"
                 
-                return_statement = "return ObjectConstructor( cat, result )";
+                return_statement = "return ObjectConstructor( cat, result );";
                 
             elseif return_type == "morphism"
                 
-                return_statement = "return MorphismConstructor( cat, output_source_getter, result, output_range_getter )";
+                return_statement = "return MorphismConstructor( cat, output_source_getter, result, output_range_getter );";
                 
                 if IsBound( current_entry.output_source_getter_string ) && IsBound( current_entry.can_always_compute_output_source_getter ) && current_entry.can_always_compute_output_source_getter
                     
@@ -308,27 +308,39 @@ end );
                 
             elseif return_type == "object_or_fail"
                 
-                return_statement = "if result == fail then return fail; else return ObjectConstructor( cat, result ); fi";
+                return_statement = """
+                    if result == fail
+                        return fail;
+                    else
+                        return ObjectConstructor( cat, result );
+                    end;
+                """;
                 
             elseif return_type == "morphism_or_fail"
                 
-                return_statement = "if result == fail then return fail; else return MorphismConstructor( cat, ObjectConstructor( cat, Range( result ) ), result, ObjectConstructor( cat, Source( result ) ) ); fi";
+                return_statement = """
+                    if result == fail
+                        return fail;
+                    else
+                        return MorphismConstructor( cat, ObjectConstructor( cat, Range( result ) ), result, ObjectConstructor( cat, Source( result ) ) );
+                    end;
+                """;
                 
             elseif return_type == "list_of_morphisms"
                 
-                return_statement = "return List( result, mor -> MorphismConstructor( cat, ObjectConstructor( cat, Range( mor ) ), mor, ObjectConstructor( cat, Source( mor ) ) ) )";
+                return_statement = "return List( result, mor -> MorphismConstructor( cat, ObjectConstructor( cat, Range( mor ) ), mor, ObjectConstructor( cat, Source( mor ) ) ) );";
                 
             elseif return_type == "list_of_objects"
                 
-                return_statement = "return List( result, obj -> ObjectConstructor( cat, obj ) )";
+                return_statement = "return List( result, obj -> ObjectConstructor( cat, obj ) );";
                 
             elseif return_type == "bool"
                 
-                return_statement = "return result";
+                return_statement = "return result;";
                 
             elseif return_type == "nonneg_integer_or_Inf"
                 
-                return_statement = "return result";
+                return_statement = "return result;";
 
             else
                 
@@ -351,7 +363,7 @@ end );
         
         weight = CurrentOperationWeight( category.derivations_weight_list, dual_operation_name );
         
-        Assert( 0, weight < Inf );
+        @Assert( 0, weight < Inf );
         
         current_add = ValueGlobal( Concatenation( "Add", current_recname ) );
         

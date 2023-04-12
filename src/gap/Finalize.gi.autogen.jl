@@ -57,7 +57,28 @@ end );
 
 @InstallGlobalFunction( AddFinalDerivation,
                
-  function( target_op, can_compute, cannot_compute, func, additional_functions... )
+  function( target_op, args... )
+    local description, can_compute, cannot_compute, func, additional_functions;
+    
+    if IsString( args[1] )
+        
+        description = args[1];
+        can_compute = args[2];
+        cannot_compute = args[3];
+        func = args[4];
+        additional_functions = args[(5):(Length( args ))];
+        
+    else
+        
+        Print( "WARNING: Calling AddFinalDerivation without a description as the second argument is deprecated && will !be supported after 2024.03.31.\n" );
+        
+        description = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" );
+        can_compute = args[1];
+        cannot_compute = args[2];
+        func = args[3];
+        additional_functions = args[(4):(Length( args ))];
+        
+    end;
     
     if !IsEmpty( additional_functions )
         
@@ -65,14 +86,32 @@ end );
         
     end;
     
-    CallFuncList( AddFinalDerivationBundle, Concatenation( [ can_compute, cannot_compute, [ target_op, can_compute, func ] ], additional_functions ) );
+    CallFuncList( AddFinalDerivationBundle, Concatenation( [ description, can_compute, cannot_compute, [ target_op, can_compute, func ] ], additional_functions ) );
     
 end );
 
 @InstallGlobalFunction( AddFinalDerivationBundle,
                
-  function( can_compute, cannot_compute, additional_functions... )
-    local weight, description, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, operations_to_install, union_of_collected_lists, derivations, collected_list, used_op_names_with_multiples_and_category_getters, dummy_func, dummy_derivation, final_derivation, i, current_additional_func, x;
+  function( args... )
+    local description, can_compute, cannot_compute, additional_functions, weight, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, operations_to_install, union_of_collected_lists, derivations, used_op_names_with_multiples_and_category_getters, collected_list, dummy_func, dummy_derivation, final_derivation, i, current_additional_func, x;
+    
+    if IsString( args[1] )
+        
+        description = args[1];
+        can_compute = args[2];
+        cannot_compute = args[3];
+        additional_functions = args[(4):(Length( args ))];
+        
+    else
+        
+        Print( "WARNING: Calling AddFinalDerivationBundle without a description as the first argument is deprecated && will !be supported after 2024.03.31.\n" );
+        
+        description = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" );
+        can_compute = args[1];
+        cannot_compute = args[2];
+        additional_functions = args[(3):(Length( args ))];
+        
+    end;
     
     if IsEmpty( additional_functions )
         
@@ -81,7 +120,6 @@ end );
     end;
     
     weight = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Weight", 1 );
-    description = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" );
     category_filter = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryFilter", IsCapCategory );
     loop_multiplier = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "WeightLoopMultiple", 2 );
     category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", rec( ) );
@@ -122,82 +160,74 @@ end );
         
         if Length( current_additional_func ) == 2
             
-            used_op_names_with_multiples_and_category_getters = collected_list;
+            Print( "WARNING: a final derivation for ", NameFunction( current_additional_func[1] ), " has no explicit preconditions. Calling AddFinalDerivation(Bundle) without explicit preconditions is deprecated && will !be supported after 2024.03.31.\n" );
+            
+            current_additional_func = [ current_additional_func[1], collected_list, current_additional_func[2] ];
             
         end;
         # =#
         
-        if Length( current_additional_func ) != 2
+        @Assert( 0, Length( current_additional_func ) == 3 );
+        
+        used_op_names_with_multiples_and_category_getters = [ ];
+        
+        for x in current_additional_func[2]
             
-            Assert( 0, Length( current_additional_func ) == 3 );
-            
-            used_op_names_with_multiples_and_category_getters = [ ];
-            
-            for x in current_additional_func[2]
+            if Length( x ) < 2 || !IsFunction( x[1] ) || !IsInt( x[2] )
                 
-                if Length( x ) < 2 || !IsFunction( x[1] ) || !IsInt( x[2] )
-                    
-                    Error( "preconditions must be of the form `[op, mult, getter]`, where `getter` is optional" );
-                    
-                end;
-                
-                if (Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] == current_additional_func[1]
-                    
-                    Error( "A final derivation for ", NameFunction( current_additional_func[1] ), " has itself as a precondition. This is !supported because we can!compute a well-defined weight.\n" );
-                    
-                end;
-                
-                if Length( x ) == 2
-                    
-                    Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], fail ] );
-                    
-                elseif Length( x ) == 3
-                    
-                    if x != fail && !(IsFunction( x[3] ) && NumberArgumentsFunction( x[3] ) == 1)
-                        
-                        Error( "the category getter must be a single-argument function" );
-                        
-                    end;
-                    
-                    Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], x[3] ] );
-                    
-                else
-                    
-                    Error( "The list of preconditions must be a list of pairs || triples." );
-                    
-                end;
+                Error( "preconditions must be of the form `[op, mult, getter]`, where `getter` is optional" );
                 
             end;
             
-            #= comment for Julia
-            if Length( collected_list ) != Length( used_op_names_with_multiples_and_category_getters ) || !ForAll( collected_list, c -> c ⥉ used_op_names_with_multiples_and_category_getters )
+            if (Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] == current_additional_func[1]
                 
-                SortBy( used_op_names_with_multiples_and_category_getters, x -> x[1] );
-                SortBy( collected_list, x -> x[1] );
-                
-                Print(
-                    "WARNING: You have installed a final derivation for ", NameFunction( current_additional_func[1] ), " with preconditions ", used_op_names_with_multiples_and_category_getters,
-                    " but the automated detection has detected the following list of preconditions: ", collected_list, ".\n",
-                    "If this is a bug ⥉ the automated detection, please report it.\n"
-                );
+                Error( "A final derivation for ", NameFunction( current_additional_func[1] ), " has itself as a precondition. This is !supported because we can!compute a well-defined weight.\n" );
                 
             end;
-            # =#
+            
+            if Length( x ) == 2
+                
+                Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], fail ] );
+                
+            elseif Length( x ) == 3
+                
+                if x != fail && !(IsFunction( x[3] ) && NumberArgumentsFunction( x[3] ) == 1)
+                    
+                    Error( "the category getter must be a single-argument function" );
+                    
+                end;
+                
+                Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], x[3] ] );
+                
+            else
+                
+                Error( "The list of preconditions must be a list of pairs || triples." );
+                
+            end;
             
         end;
         
-        if used_op_names_with_multiples_and_category_getters == fail
+        #= comment for Julia
+        if Length( collected_list ) != Length( used_op_names_with_multiples_and_category_getters ) || !ForAll( collected_list, c -> c ⥉ used_op_names_with_multiples_and_category_getters )
             
-            return;
+            SortBy( used_op_names_with_multiples_and_category_getters, x -> x[1] );
+            SortBy( collected_list, x -> x[1] );
+            
+            Print(
+                "WARNING: You have installed a final derivation for ", NameFunction( current_additional_func[1] ), " with preconditions ", used_op_names_with_multiples_and_category_getters,
+                " but the automated detection has detected the following list of preconditions: ", collected_list, ".\n",
+                "If this is a bug ⥉ the automated detection, please report it.\n"
+            );
             
         end;
+        # =#
         
         Add( derivations, MakeDerivation(
             Concatenation( description, " (final derivation)" ),
             current_additional_func[1],
             used_op_names_with_multiples_and_category_getters,
             weight,
-            Last( current_additional_func ),
+            current_additional_func[3],
             category_filter
         ) );
         
@@ -383,7 +413,7 @@ InstallMethod( @__MODULE__,  Finalize,
                 
                 weight = OperationWeightUsingDerivation( weight_list, derivation );
                 
-                Assert( 0, weight != Inf );
+                @Assert( 0, weight != Inf );
                 
                 InstallDerivationForCategory( derivation, weight, category; IsFinalDerivation = true );
                 

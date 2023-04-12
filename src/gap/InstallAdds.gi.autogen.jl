@@ -40,24 +40,25 @@ end );
 @InstallGlobalFunction( CapInternalInstallAdd,
   
   function( record )
-    local function_name, install_name, add_name, pre_function, pre_function_full,
+    local function_name, CAP_operation, add_name, add_function, pre_function, pre_function_full,
           redirect_function, post_function, filter_list,
-          add_function, replaced_filter_list,
+          add_value_to_category_function, replaced_filter_list,
           enhanced_filter_list, get_convenience_function;
     
     function_name = record.function_name;
     
     if !IsBound( record.installation_name )
         
-        install_name = function_name;
+        CAP_operation = ValueGlobal( function_name );
         
     else
         
-        install_name = record.installation_name;
+        CAP_operation = ValueGlobal( record.installation_name );
         
     end;
     
     add_name = Concatenation( "Add", function_name );
+    add_function = ValueGlobal( add_name );
     
     if IsBound( record.pre_function )
         pre_function = record.pre_function;
@@ -86,17 +87,17 @@ end );
     filter_list = record.filter_list;
     
     if record.return_type == "object"
-        add_function = AddObject;
+        add_value_to_category_function = AddObject;
     elseif record.return_type == "morphism"
-        add_function = AddMorphism;
+        add_value_to_category_function = AddMorphism;
     elseif record.return_type == "twocell"
-        add_function = AddTwoCell;
+        add_value_to_category_function = AddTwoCell;
     elseif record.return_type == "object_or_fail"
-        add_function = CAP_INTERNAL_ADD_OBJECT_OR_FAIL;
+        add_value_to_category_function = CAP_INTERNAL_ADD_OBJECT_OR_FAIL;
     elseif record.return_type == "morphism_or_fail"
-        add_function = CAP_INTERNAL_ADD_MORPHISM_OR_FAIL;
+        add_value_to_category_function = CAP_INTERNAL_ADD_MORPHISM_OR_FAIL;
     else
-        add_function = ReturnTrue;
+        add_value_to_category_function = ReturnTrue;
     end;
     
     # declare operation with category as first argument && install convenience method
@@ -122,11 +123,11 @@ end );
             
         else
             
-            Error( Concatenation( "please add a way to derive the category from the arguments of ", install_name ) );
+            Error( Concatenation( "please add a way to derive the category from the arguments of ", function_name ) );
             
         end;
         
-        InstallMethod( ValueGlobal( install_name ), replaced_filter_list[(2):(Length( replaced_filter_list ))], get_convenience_function( ValueGlobal( install_name ) ) );
+        InstallMethod( CAP_operation, replaced_filter_list[(2):(Length( replaced_filter_list ))], get_convenience_function( CAP_operation ) );
         
     end;
     
@@ -138,18 +139,18 @@ end );
             
             replaced_filter_list = CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA( filter_list );
             
-            Assert( 0, ValueGlobal( "IsJuliaObject" ) ⥉ replaced_filter_list );
+            @Assert( 0, ValueGlobal( "IsJuliaObject" ) ⥉ replaced_filter_list );
             
-            InstallOtherMethod( ValueGlobal( install_name ),
+            InstallOtherMethod( CAP_operation,
                     replaced_filter_list,
-                    ( arg... ) -> CallFuncList( ValueGlobal( install_name ),
+                    ( arg... ) -> CallFuncList( CAP_operation,
                             List( arg, function( ar ) if ValueGlobal( "IsJuliaObject" )( ar ) then return ValueGlobal( "ConvertJuliaToGAP" )( ar ); fi; return ar; end ) ) );
             
-            Assert( 0, record.install_convenience_without_category );
+            @Assert( 0, record.install_convenience_without_category );
             
-            InstallOtherMethod( ValueGlobal( install_name ),
+            InstallOtherMethod( CAP_operation,
                     replaced_filter_list[(2):(Length( replaced_filter_list ))],
-                    ( arg... ) -> CallFuncList( ValueGlobal( install_name ),
+                    ( arg... ) -> CallFuncList( CAP_operation,
                             List( arg, function( ar ) if ValueGlobal( "IsJuliaObject" )( ar ) then return ValueGlobal( "ConvertJuliaToGAP" )( ar ); fi; return ar; end ) ) );
             
         end;
@@ -157,34 +158,34 @@ end );
     end;
     # =#
     
-    InstallMethod( ValueGlobal( add_name ),
+    InstallMethod( add_function,
                    [ IsCapCategory, IsFunction ],
                    
       function( category, func )
         
-        ValueGlobal( add_name )( category, func, -1 );
+        add_function( category, func, -1 );
         
     end );
     
-    InstallMethod( ValueGlobal( add_name ),
+    InstallMethod( add_function,
                    [ IsCapCategory, IsFunction, IsInt ],
                    
       function( category, func, weight )
         
-        ValueGlobal( add_name )( category, [ [ func, [ ] ] ], weight );
+        add_function( category, [ [ func, [ ] ] ], weight );
         
     end );
     
-    InstallMethod( ValueGlobal( add_name ),
+    InstallMethod( add_function,
                    [ IsCapCategory, IsList ],
                    
       function( category, func )
         
-        ValueGlobal( add_name )( category, func, -1 );
+        add_function( category, func, -1 );
         
     end );
     
-    InstallMethod( ValueGlobal( add_name ),
+    InstallMethod( add_function,
                    [ IsCapCategory, IsList, IsInt ],
       
       function( category, method_list, weight )
@@ -225,7 +226,7 @@ end );
         
         if is_final_derivation
             
-            Assert( 0, is_derivation );
+            @Assert( 0, is_derivation );
             
             # `is_derivation` is used below ⥉ the sense of a non-final derivation
             is_derivation = false;
@@ -403,7 +404,7 @@ end );
             
             if category.overhead
                 
-                InstallMethodWithCache( ValueGlobal( install_name ),
+                InstallMethodWithCache( CAP_operation,
                                 new_filter_list,
                                 
                   function( arg... )
@@ -471,7 +472,7 @@ end );
                     
                     if !is_derivation && !is_final_derivation
                         if category.add_primitive_output
-                            add_function( category, result );
+                            add_value_to_category_function( category, result );
                         elseif category.output_sanity_check_level > 0
                             output_sanity_check_function( result );
                         end;
@@ -489,7 +490,7 @@ end );
             
             else #category.overhead == false
                 
-                InstallOtherMethod( ValueGlobal( install_name ),
+                InstallOtherMethod( CAP_operation,
                             new_filter_list,
                     
                     function( arg... )
@@ -568,7 +569,7 @@ end );
 end );
 
 @BindGlobal( "CAP_INTERNAL_INSTALL_WITH_GIVEN_DERIVATION_PAIR", function( without_given_rec, with_given_rec )
-  local without_given_name, with_given_name, without_given_arguments_names, with_given_arguments_names, with_given_object_position, with_given_via_without_given_function, with_given_arguments_strings, without_given_via_with_given_function, description;
+  local without_given_name, with_given_name, without_given_arguments_names, with_given_arguments_names, with_given_object_position, with_given_via_without_given_function, with_given_arguments_strings, additional_preconditions, x, pos, without_given_via_with_given_function;
     
     without_given_name = without_given_rec.function_name;
     with_given_name = with_given_rec.function_name;
@@ -597,9 +598,27 @@ end );
         
         with_given_arguments_strings = Concatenation( without_given_arguments_names, [ without_given_rec.output_source_getter_string ] );
         
+        if !IsBound( without_given_rec.output_source_getter_preconditions )
+            
+            Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is !set.\n" );
+            return;
+            
+        end;
+        
+        additional_preconditions = without_given_rec.output_source_getter_preconditions;
+        
     elseif with_given_object_position == "Range"
         
         with_given_arguments_strings = Concatenation( without_given_arguments_names, [ without_given_rec.output_range_getter_string ] );
+        
+        if !IsBound( without_given_rec.output_range_getter_preconditions )
+            
+            Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is !set.\n" );
+            return;
+            
+        end;
+        
+        additional_preconditions = without_given_rec.output_range_getter_preconditions;
         
     elseif with_given_object_position == "both"
         
@@ -609,6 +628,39 @@ end );
             without_given_arguments_names[(2):(Length( without_given_arguments_names ))],
             [ without_given_rec.output_range_getter_string ]
         );
+        
+        if !IsBound( without_given_rec.output_source_getter_preconditions )
+            
+            Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is !set.\n" );
+            return;
+            
+        end;
+        
+        if !IsBound( without_given_rec.output_range_getter_preconditions )
+            
+            Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is !set.\n" );
+            return;
+            
+        end;
+        
+        # merge output_source_getter_preconditions && output_range_getter_preconditions
+        additional_preconditions = without_given_rec.output_source_getter_preconditions;
+        
+        for x in without_given_rec.output_range_getter_preconditions
+            
+            pos = PositionProperty( additional_preconditions, y -> y[1] == x[1] );
+            
+            if pos == fail
+                
+                Add( additional_preconditions, x );
+                
+            else
+                
+                additional_preconditions[pos][2] = additional_preconditions[pos][2] + x[2];
+                
+            end;
+            
+        end;
         
     else
         
@@ -631,31 +683,19 @@ end );
         )
     ) );
     
-    AddDerivationToCAP( ValueGlobal( with_given_name ),
-      [ [ ValueGlobal( without_given_name ), 1 ] ],
-      with_given_via_without_given_function
-     ; Description = Concatenation( with_given_name, " by calling ", without_given_name, " with the WithGiven argument(s) dropped" ) );
+    AddDerivationToCAP(
+        ValueGlobal( with_given_name ),
+        Concatenation( with_given_name, " by calling ", without_given_name, " with the WithGiven argument(s) dropped" ),
+        [ [ ValueGlobal( without_given_name ), 1 ] ],
+        with_given_via_without_given_function
+    );
     
-    description = Concatenation( without_given_name, " by calling ", with_given_name, " with the WithGiven object(s)" );
-    
-    if IsBound( with_given_rec.with_given_object_name )
-        
-        AddDerivationToCAP(
-            ValueGlobal( without_given_name ),
-            [ [ ValueGlobal( with_given_name ), 1 ], [ ValueGlobal( with_given_rec.with_given_object_name ), 1 ] ],
-            without_given_via_with_given_function
-           ; Description = description
-        );
-        
-    else
-        
-        AddDerivationToCAP(
-            ValueGlobal( without_given_name ),
-            without_given_via_with_given_function
-           ; Description = description
-        );
-        
-    end;
+    AddDerivationToCAP(
+        ValueGlobal( without_given_name ),
+        Concatenation( without_given_name, " by calling ", with_given_name, " with the WithGiven object(s)" ),
+        Concatenation( [ [ ValueGlobal( with_given_name ), 1 ] ], List( additional_preconditions, x -> [ ValueGlobal( x[1] ), x[2] ] ) ),
+        without_given_via_with_given_function
+    );
     
 end );
 

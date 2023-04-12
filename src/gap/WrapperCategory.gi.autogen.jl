@@ -46,7 +46,7 @@ InstallMethod( @__MODULE__,  AsMorphismInWrapperCategory,
 end );
 
 ##
-InstallOtherMethodForCompilerForCAP( AsMorphismInWrapperCategory,
+InstallMethod( @__MODULE__,  AsMorphismInWrapperCategory,
         "for two CAP objects in a wrapper category && a CAP morphism",
         [ IsWrapperCapCategory, IsWrapperCapCategoryObject, IsCapCategoryMorphism, IsWrapperCapCategoryObject ],
         
@@ -78,7 +78,7 @@ InstallMethodWithCache( AsMorphismInWrapperCategory,
 end );
 
 ##
-InstallOtherMethod( /,
+InstallMethod( @__MODULE__,  /,
         "for an object && a wrapper CAP category",
         [ IsObject, IsWrapperCapCategory ],
         
@@ -89,7 +89,7 @@ InstallOtherMethod( /,
 end );
 
 ##
-InstallOtherMethod( /,
+InstallMethod( @__MODULE__,  /,
         "for a CAP category object && a wrapper CAP category",
          [ IsCapCategoryObject, IsWrapperCapCategory ],
         
@@ -104,7 +104,7 @@ InstallOtherMethod( /,
 end );
 
 ##
-InstallOtherMethod( /,
+InstallMethod( @__MODULE__,  /,
         "for a CAP category morphism && a wrapper CAP category",
         [ IsCapCategoryMorphism, IsWrapperCapCategory ],
         
@@ -480,10 +480,10 @@ InstallMethod( @__MODULE__,  WrapperCategory,
                 #% CAP_JIT_RESOLVE_FUNCTION
                 
                 #% CAP_JIT_DROP_NEXT_STATEMENT
-                Assert( 0, IsEqualForObjects( source, Source( ModelingMorphism( HC, morphism ) ) ) );
+                @Assert( 0, IsEqualForObjects( source, Source( ModelingMorphism( HC, morphism ) ) ) );
                 
                 #% CAP_JIT_DROP_NEXT_STATEMENT
-                Assert( 0, IsEqualForObjects( source, Source( ModelingMorphism( HC, morphism ) ) ) );
+                @Assert( 0, IsEqualForObjects( source, Source( ModelingMorphism( HC, morphism ) ) ) );
                 
                 return ModelingMorphism( HC, morphism );
                 

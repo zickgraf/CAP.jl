@@ -182,7 +182,7 @@ InstallMethod( @__MODULE__,  MorphismBetweenDirectSums,
 end );
 
 ##
-InstallOtherMethod( MorphismBetweenDirectSums,
+InstallMethod( @__MODULE__,  MorphismBetweenDirectSums,
                     [ IsCapCategory, IsList ],
                
   function( cat, morphism_matrix )
@@ -254,7 +254,7 @@ end );
 end );
 
 ##
-InstallOtherMethod( EqualizerOp,
+InstallMethod( @__MODULE__,  EqualizerOp,
         [ IsList ],
         
   function ( list_of_morphisms )
@@ -269,7 +269,7 @@ InstallOtherMethod( EqualizerOp,
     
 end );
 
-InstallOtherMethod( EqualizerOp,
+InstallMethod( @__MODULE__,  EqualizerOp,
         [ IsCapCategory, IsList ],
         
   function ( cat, list_of_morphisms )
@@ -285,7 +285,7 @@ InstallOtherMethod( EqualizerOp,
 end );
 
 ##
-InstallOtherMethod( EmbeddingOfEqualizer,
+InstallMethod( @__MODULE__,  EmbeddingOfEqualizer,
         [ IsList ],
         
   function ( list_of_morphisms )
@@ -300,7 +300,7 @@ InstallOtherMethod( EmbeddingOfEqualizer,
     
 end );
 
-InstallOtherMethod( EmbeddingOfEqualizer,
+InstallMethod( @__MODULE__,  EmbeddingOfEqualizer,
         [ IsCapCategory, IsList ],
         
   function ( cat, list_of_morphisms )
@@ -316,7 +316,7 @@ InstallOtherMethod( EmbeddingOfEqualizer,
 end );
 
 ##
-InstallOtherMethod( EmbeddingOfEqualizerWithGivenEqualizer,
+InstallMethod( @__MODULE__,  EmbeddingOfEqualizerWithGivenEqualizer,
         [ IsList, IsCapCategoryObject ],
         
   function ( list_of_morphisms, E )
@@ -331,7 +331,7 @@ InstallOtherMethod( EmbeddingOfEqualizerWithGivenEqualizer,
     
 end );
 
-InstallOtherMethod( EmbeddingOfEqualizerWithGivenEqualizer,
+InstallMethod( @__MODULE__,  EmbeddingOfEqualizerWithGivenEqualizer,
         [ IsCapCategory, IsList, IsCapCategoryObject ],
         
   function ( cat, list_of_morphisms, E )
@@ -347,7 +347,7 @@ InstallOtherMethod( EmbeddingOfEqualizerWithGivenEqualizer,
 end );
 
 ##
-InstallOtherMethod( MorphismFromEqualizerToSink,
+InstallMethod( @__MODULE__,  MorphismFromEqualizerToSink,
         [ IsList ],
         
   function ( list_of_morphisms )
@@ -362,7 +362,7 @@ InstallOtherMethod( MorphismFromEqualizerToSink,
     
 end );
 
-InstallOtherMethod( MorphismFromEqualizerToSink,
+InstallMethod( @__MODULE__,  MorphismFromEqualizerToSink,
         [ IsCapCategory, IsList ],
         
   function ( cat, list_of_morphisms )
@@ -378,7 +378,7 @@ InstallOtherMethod( MorphismFromEqualizerToSink,
 end );
 
 ##
-InstallOtherMethod( MorphismFromEqualizerToSinkWithGivenEqualizer,
+InstallMethod( @__MODULE__,  MorphismFromEqualizerToSinkWithGivenEqualizer,
         [ IsList, IsCapCategoryObject ],
         
   function ( list_of_morphisms, E )
@@ -393,7 +393,7 @@ InstallOtherMethod( MorphismFromEqualizerToSinkWithGivenEqualizer,
     
 end );
 
-InstallOtherMethod( MorphismFromEqualizerToSinkWithGivenEqualizer,
+InstallMethod( @__MODULE__,  MorphismFromEqualizerToSinkWithGivenEqualizer,
         [ IsCapCategory, IsList, IsCapCategoryObject ],
         
   function ( cat, list_of_morphisms, E )
@@ -409,7 +409,7 @@ InstallOtherMethod( MorphismFromEqualizerToSinkWithGivenEqualizer,
 end );
 
 ##
-InstallOtherMethod( UniversalMorphismIntoEqualizer,
+InstallMethod( @__MODULE__,  UniversalMorphismIntoEqualizer,
         [ IsList, IsCapCategoryMorphism ],
         
   function ( list_of_morphisms, tau )
@@ -424,7 +424,7 @@ InstallOtherMethod( UniversalMorphismIntoEqualizer,
     
 end );
 
-InstallOtherMethod( UniversalMorphismIntoEqualizer,
+InstallMethod( @__MODULE__,  UniversalMorphismIntoEqualizer,
         [ IsCapCategory, IsList, IsCapCategoryMorphism ],
         
   function ( cat, list_of_morphisms, tau )
@@ -440,7 +440,7 @@ InstallOtherMethod( UniversalMorphismIntoEqualizer,
 end );
 
 ##
-InstallOtherMethod( UniversalMorphismIntoEqualizerWithGivenEqualizer,
+InstallMethod( @__MODULE__,  UniversalMorphismIntoEqualizerWithGivenEqualizer,
         [ IsList, IsCapCategoryMorphism, IsCapCategoryObject ],
         
   function ( list_of_morphisms, tau, E )
@@ -455,7 +455,7 @@ InstallOtherMethod( UniversalMorphismIntoEqualizerWithGivenEqualizer,
     
 end );
 
-InstallOtherMethod( UniversalMorphismIntoEqualizerWithGivenEqualizer,
+InstallMethod( @__MODULE__,  UniversalMorphismIntoEqualizerWithGivenEqualizer,
         [ IsCapCategory, IsList, IsCapCategoryMorphism, IsCapCategoryObject ],
         
   function ( cat, list_of_morphisms, tau, E )
@@ -514,7 +514,7 @@ InstallMethod( @__MODULE__,  FiberProductEmbeddingInDirectProduct,
 end );
 
 ##
-InstallOtherMethod( FiberProductEmbeddingInDirectProduct,
+InstallMethod( @__MODULE__,  FiberProductEmbeddingInDirectProduct,
         [ IsCapCategory, IsList ],
         
   function( cat, diagram )
@@ -539,7 +539,7 @@ InstallMethod( @__MODULE__,  FiberProductEmbeddingInDirectSum,
 end );
 
 ##
-InstallOtherMethod( FiberProductEmbeddingInDirectSum,
+InstallMethod( @__MODULE__,  FiberProductEmbeddingInDirectSum,
         [ IsCapCategory, IsList ],
         
   function( cat, diagram )
@@ -605,7 +605,7 @@ CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
 end );
 
 ##
-InstallOtherMethod( CoequalizerOp,
+InstallMethod( @__MODULE__,  CoequalizerOp,
         [ IsList ],
         
   function ( list_of_morphisms )
@@ -620,7 +620,7 @@ InstallOtherMethod( CoequalizerOp,
     
 end );
 
-InstallOtherMethod( CoequalizerOp,
+InstallMethod( @__MODULE__,  CoequalizerOp,
         [ IsCapCategory, IsList ],
         
   function ( cat, list_of_morphisms )
@@ -636,7 +636,7 @@ InstallOtherMethod( CoequalizerOp,
 end );
 
 ##
-InstallOtherMethod( ProjectionOntoCoequalizer,
+InstallMethod( @__MODULE__,  ProjectionOntoCoequalizer,
         [ IsList ],
         
   function ( list_of_morphisms )
@@ -651,7 +651,7 @@ InstallOtherMethod( ProjectionOntoCoequalizer,
     
 end );
 
-InstallOtherMethod( ProjectionOntoCoequalizer,
+InstallMethod( @__MODULE__,  ProjectionOntoCoequalizer,
         [ IsCapCategory, IsList ],
         
   function ( cat, list_of_morphisms )
@@ -667,7 +667,7 @@ InstallOtherMethod( ProjectionOntoCoequalizer,
 end );
 
 ##
-InstallOtherMethod( ProjectionOntoCoequalizerWithGivenCoequalizer,
+InstallMethod( @__MODULE__,  ProjectionOntoCoequalizerWithGivenCoequalizer,
         [ IsList, IsCapCategoryObject ],
         
   function ( list_of_morphisms, E )
@@ -682,7 +682,7 @@ InstallOtherMethod( ProjectionOntoCoequalizerWithGivenCoequalizer,
     
 end );
 
-InstallOtherMethod( ProjectionOntoCoequalizerWithGivenCoequalizer,
+InstallMethod( @__MODULE__,  ProjectionOntoCoequalizerWithGivenCoequalizer,
         [ IsCapCategory, IsList, IsCapCategoryObject ],
         
   function ( cat, list_of_morphisms, E )
@@ -698,7 +698,7 @@ InstallOtherMethod( ProjectionOntoCoequalizerWithGivenCoequalizer,
 end );
 
 ##
-InstallOtherMethod( MorphismFromSourceToCoequalizer,
+InstallMethod( @__MODULE__,  MorphismFromSourceToCoequalizer,
         [ IsList ],
         
   function ( list_of_morphisms )
@@ -713,7 +713,7 @@ InstallOtherMethod( MorphismFromSourceToCoequalizer,
     
 end );
 
-InstallOtherMethod( MorphismFromSourceToCoequalizer,
+InstallMethod( @__MODULE__,  MorphismFromSourceToCoequalizer,
         [ IsCapCategory, IsList ],
         
   function ( cat, list_of_morphisms )
@@ -729,7 +729,7 @@ InstallOtherMethod( MorphismFromSourceToCoequalizer,
 end );
 
 ##
-InstallOtherMethod( MorphismFromSourceToCoequalizerWithGivenCoequalizer,
+InstallMethod( @__MODULE__,  MorphismFromSourceToCoequalizerWithGivenCoequalizer,
         [ IsList, IsCapCategoryObject ],
         
   function ( list_of_morphisms, E )
@@ -744,7 +744,7 @@ InstallOtherMethod( MorphismFromSourceToCoequalizerWithGivenCoequalizer,
     
 end );
 
-InstallOtherMethod( MorphismFromSourceToCoequalizerWithGivenCoequalizer,
+InstallMethod( @__MODULE__,  MorphismFromSourceToCoequalizerWithGivenCoequalizer,
         [ IsCapCategory, IsList, IsCapCategoryObject ],
         
   function ( cat, list_of_morphisms, E )
@@ -760,7 +760,7 @@ InstallOtherMethod( MorphismFromSourceToCoequalizerWithGivenCoequalizer,
 end );
 
 ##
-InstallOtherMethod( UniversalMorphismFromCoequalizer,
+InstallMethod( @__MODULE__,  UniversalMorphismFromCoequalizer,
         [ IsList, IsCapCategoryMorphism ],
         
   function ( list_of_morphisms, tau )
@@ -775,7 +775,7 @@ InstallOtherMethod( UniversalMorphismFromCoequalizer,
     
 end );
 
-InstallOtherMethod( UniversalMorphismFromCoequalizer,
+InstallMethod( @__MODULE__,  UniversalMorphismFromCoequalizer,
         [ IsCapCategory, IsList, IsCapCategoryMorphism ],
         
   function ( cat, list_of_morphisms, tau )
@@ -791,7 +791,7 @@ InstallOtherMethod( UniversalMorphismFromCoequalizer,
 end );
 
 ##
-InstallOtherMethod( UniversalMorphismFromCoequalizerWithGivenCoequalizer,
+InstallMethod( @__MODULE__,  UniversalMorphismFromCoequalizerWithGivenCoequalizer,
         [ IsList, IsCapCategoryMorphism, IsCapCategoryObject ],
         
   function ( list_of_morphisms, tau, E )
@@ -806,7 +806,7 @@ InstallOtherMethod( UniversalMorphismFromCoequalizerWithGivenCoequalizer,
     
 end );
 
-InstallOtherMethod( UniversalMorphismFromCoequalizerWithGivenCoequalizer,
+InstallMethod( @__MODULE__,  UniversalMorphismFromCoequalizerWithGivenCoequalizer,
         [ IsCapCategory, IsList, IsCapCategoryMorphism, IsCapCategoryObject ],
         
   function ( cat, list_of_morphisms, tau, E )
@@ -852,7 +852,7 @@ InstallMethod( @__MODULE__,  PushoutProjectionFromCoproduct,
 end );
 
 ##
-InstallOtherMethod( PushoutProjectionFromCoproduct,
+InstallMethod( @__MODULE__,  PushoutProjectionFromCoproduct,
         [ IsCapCategory, IsList ],
                     
   function( cat, diagram )
@@ -877,7 +877,7 @@ InstallMethod( @__MODULE__,  PushoutProjectionFromDirectSum,
 end );
 
 ##
-InstallOtherMethod( PushoutProjectionFromDirectSum,
+InstallMethod( @__MODULE__,  PushoutProjectionFromDirectSum,
         [ IsCapCategory, IsList ],
                     
   function( cat, diagram )

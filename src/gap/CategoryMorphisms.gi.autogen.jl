@@ -163,7 +163,7 @@ CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
  );
 
 ##
-InstallOtherMethod( Inverse,
+InstallMethod( @__MODULE__,  Inverse,
                   [ IsCapCategoryMorphism ],
                   
 InverseForMorphisms );
@@ -238,7 +238,7 @@ InstallMethod( @__MODULE__,  IsEqualForCache,
 
 ##
 # generic fallback to IsIdenticalObj
-InstallOtherMethod( IsEqualForCacheForMorphisms,
+InstallMethod( @__MODULE__,  IsEqualForCacheForMorphisms,
                [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
   ( cat, mor1, mor2 ) -> IsIdenticalObj( mor1, mor2 ) );
@@ -370,7 +370,7 @@ InstallMethod( @__MODULE__,  Simplify,
 end );
 
 ##
-InstallOtherMethod( CoefficientsOfMorphismWithGivenBasisOfExternalHom,
+InstallMethod( @__MODULE__,  CoefficientsOfMorphismWithGivenBasisOfExternalHom,
           [ IsCapCategory, IsCapCategoryMorphism, IsList ],
 
   function( cat, morphism, basis )
@@ -394,7 +394,7 @@ InstallMethod( @__MODULE__,  CoefficientsOfMorphismWithGivenBasisOfExternalHom,
 ######################################
 
 # This method should usually !be selected when the two morphisms belong to the same category
-InstallOtherMethod( IsEqualForMorphisms,
+InstallMethod( @__MODULE__,  IsEqualForMorphisms,
                     [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
 
   function( cat, morphism_1, morphism_2 )
@@ -415,7 +415,7 @@ InstallOtherMethod( IsEqualForMorphisms,
 end );
 
 # This method should usually !be selected when the two morphisms belong to the same category
-InstallOtherMethod( IsCongruentForMorphisms,
+InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
                     [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
 
   function( cat, morphism_1, morphism_2 )

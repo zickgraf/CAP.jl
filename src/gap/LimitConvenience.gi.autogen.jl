@@ -120,7 +120,7 @@
             end;
             
             current_string = ReplacedStringViaRecord( """
-InstallOtherMethod( without_given_universal_morphism,
+InstallMethod( @__MODULE__,  without_given_universal_morphism,
                     [ diagram_filter_list..., tau_filter ],
                     
     function( diagram_arguments..., tau )
@@ -130,7 +130,7 @@ InstallOtherMethod( without_given_universal_morphism,
         
 end );
 
-InstallOtherMethod( without_given_universal_morphism,
+InstallMethod( @__MODULE__,  without_given_universal_morphism,
                     [ IsCapCategory, diagram_filter_list..., tau_filter ],
                     
     function( cat, diagram_arguments..., tau )
@@ -140,7 +140,7 @@ InstallOtherMethod( without_given_universal_morphism,
         
 end );
 
-InstallOtherMethod( with_given_universal_morphism,
+InstallMethod( @__MODULE__,  with_given_universal_morphism,
                     [ diagram_filter_list..., tau_filter, IsCapCategoryObject ],
                     
     function( diagram_arguments..., tau, P )
@@ -150,7 +150,7 @@ InstallOtherMethod( with_given_universal_morphism,
         
 end );
 
-InstallOtherMethod( with_given_universal_morphism,
+InstallMethod( @__MODULE__,  with_given_universal_morphism,
                     [ IsCapCategory, diagram_filter_list..., tau_filter, IsCapCategoryObject ],
                     
     function( cat, diagram_arguments..., tau, P )
@@ -178,9 +178,9 @@ end );
     end;
     
     generate_functorial_convenience_method = function( limit, limit_colimit, object_name, functorial_name, functorial_with_given_name )
-      local functorial_with_given_record, filter_list, input_type, arguments_string, source_diagram_arguments_string, range_diagram_arguments_string, replaced_filter_list, current_string, input_arguments_names, source_argument_name, range_argument_name, source_diagram_arguments_names, range_diagram_arguments_names, equalizer_preprocessing, test_string, test_arguments, universal_morphism_with_given_name, call_arguments;
+      local functorial_with_given_record, filter_list, input_type, arguments_string, source_diagram_arguments_string, range_diagram_arguments_string, replaced_filter_list, current_string, input_arguments_names, source_argument_name, range_argument_name, source_diagram_arguments_names, range_diagram_arguments_names, equalizer_preprocessing, test_string, additional_preconditions, test_arguments, universal_morphism_with_given_name, call_arguments;
         
-        Assert( 0, limit_colimit ⥉ [ "limit", "colimit" ] );
+        @Assert( 0, limit_colimit ⥉ [ "limit", "colimit" ] );
         
         functorial_with_given_record = method_name_record[limit.limit_functorial_with_given_name];
         
@@ -190,8 +190,8 @@ end );
             filter_list = limit.diagram_morphism_filter_list;
             input_type = limit.diagram_morphism_input_type;
             
-            Assert( 0, Length( filter_list ) == 1 );
-            Assert( 0, Length( input_type ) == 1 );
+            @Assert( 0, Length( filter_list ) == 1 );
+            @Assert( 0, Length( input_type ) == 1 );
             
             arguments_string = JoinStringsWithSeparator( input_type, ", " );
             
@@ -207,7 +207,7 @@ end );
             
             current_string = ReplacedStringViaRecord( """
 ##
-InstallOtherMethod( functorial_name,
+InstallMethod( @__MODULE__,  functorial_name,
                     [ filter_list... ],
                
   function( input_arguments... )
@@ -230,7 +230,7 @@ end );
             # it is safe to use InstallOtherMethodForCompilerForCAP because there is no other two-argument convenience method for functorials
             current_string = ReplacedStringViaRecord( """
 ##
-InstallOtherMethodForCompilerForCAP( functorial_name,
+InstallMethod( @__MODULE__,  functorial_name,
                                      [ IsCapCategory, filter_list... ],
                     
   function( cat, input_arguments... )
@@ -252,7 +252,7 @@ end );
             
             current_string = ReplacedStringViaRecord( """
 ##
-InstallOtherMethod( functorial_with_given_name,
+InstallMethod( @__MODULE__,  functorial_with_given_name,
                [ IsCapCategoryObject, filter_list..., IsCapCategoryObject ],
                
   function( source, input_arguments..., range )
@@ -275,7 +275,7 @@ end );
             # it is safe to use InstallOtherMethodForCompilerForCAP because there is no other four-argument convenience method for with given functorials
             current_string = ReplacedStringViaRecord( """
 ##
-InstallOtherMethodForCompilerForCAP( functorial_with_given_name,
+InstallMethod( @__MODULE__,  functorial_with_given_name,
                                      [ IsCapCategory, IsCapCategoryObject, filter_list..., IsCapCategoryObject ],
                
   function( cat, source, input_arguments..., range )
@@ -298,8 +298,8 @@ end );
         end;
         
         # derive functorials from the universality of the limit/colimit
-        Assert( 0, Length( limit.diagram_morphism_filter_list ) <= 1 );
-        Assert( 0, Length( limit.diagram_morphism_input_type ) <= 1 );
+        @Assert( 0, Length( limit.diagram_morphism_filter_list ) <= 1 );
+        @Assert( 0, Length( limit.diagram_morphism_input_type ) <= 1 );
         
         input_arguments_names = Concatenation( [ "cat" ], functorial_with_given_record.io_type[1] );
         
@@ -317,7 +317,7 @@ end );
             
             if limit.number_of_targets == 1
                 
-                Assert( 0, limit.diagram_morphism_input_type == [ "mu" ] );
+                @Assert( 0, limit.diagram_morphism_input_type == [ "mu" ] );
                 
                 if limit_colimit == "limit"
                     
@@ -330,6 +330,8 @@ end );
                         )
                     );
                     
+                    additional_preconditions = [ "[ PreCompose, 1 ]", Concatenation( "[ ", limit.limit_projection_with_given_name, ", 1 ]" ) ];
+                    
                 elseif limit_colimit == "colimit"
                     
                     test_string = ReplacedStringViaRecord(
@@ -340,6 +342,8 @@ end );
                             range_object = range_argument_name,
                         )
                     );
+                    
+                    additional_preconditions = [ "[ PreCompose, 1 ]", Concatenation( "[ ", limit.colimit_injection_with_given_name, ", 1 ]" ) ];
                     
                 else
                     
@@ -362,7 +366,7 @@ end );
                 
             else
                 
-                Assert( 0, limit.diagram_morphism_input_type == [ "L" ] );
+                @Assert( 0, limit.diagram_morphism_input_type == [ "L" ] );
                 
                 if limit_colimit == "limit"
                     
@@ -375,6 +379,8 @@ end );
                         )
                     );
                     
+                    additional_preconditions = [ "[ PreCompose, 2 ]", Concatenation( "[ ", limit.limit_projection_with_given_name, ", 2 ]" ) ];
+                    
                 elseif limit_colimit == "colimit"
                     
                     test_string = ReplacedStringViaRecord(
@@ -385,6 +391,8 @@ end );
                             range_object = range_argument_name,
                         )
                     );
+                    
+                    additional_preconditions = [ "[ PreCompose, 2 ]", Concatenation( "[ ", limit.colimit_injection_with_given_name, ", 2 ]" ) ];
                     
                 else
                     
@@ -398,9 +406,11 @@ end );
             
         else
             
-            Assert( 0, limit.diagram_morphism_input_type == [ ] );
+            @Assert( 0, limit.diagram_morphism_input_type == [ ] );
             
             test_arguments = [ ];
+            
+            additional_preconditions = [ ];
             
         end;
         
@@ -420,20 +430,22 @@ end );
             
         end;
         
-        
         current_string = ReplacedStringViaRecord( """
 ##
 AddDerivationToCAP( functorial_with_given_name,
+                    "functorial_with_given_name using the universality of the limit_colimit",
+                    [ preconditions... ],
                     
   function( input_arguments... )
     equalizer_preprocessing
     return universal_morphism_with_given( call_arguments... );
     
-end; Description = "functorial_with_given_name using the universality of the limit_colimit" );
+end );
 """,
             rec(
                 functorial_with_given_name = functorial_with_given_name,
                 input_arguments = input_arguments_names,
+                preconditions = Concatenation( [ Concatenation( "[", universal_morphism_with_given_name, ", 1 ]" ) ], additional_preconditions ),
                 equalizer_preprocessing = equalizer_preprocessing,
                 universal_morphism_with_given = universal_morphism_with_given_name,
                 call_arguments = call_arguments,
@@ -449,12 +461,15 @@ end; Description = "functorial_with_given_name using the universality of the lim
             current_string = ReplacedStringViaRecord( """
 ##
 AddDerivationToCAP( functorial_name,
+                    "functorial_name by taking the identity morphism of object_name",
+                    [ [ object_name, 1 ],
+                      [ IdentityMorphism, 1 ] ],
                     
   function( cat )
     
     return IdentityMorphism( cat, object_name( cat ) );
     
-end; Description = "functorial_name by taking the identity morphism of object_name" );
+end );
 """,
                 rec(
                     functorial_name = functorial_name,

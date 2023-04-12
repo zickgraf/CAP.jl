@@ -269,6 +269,9 @@ macro DeclareFilter(name::String, parent_filter::Union{Symbol,Expr} = :IsObject)
 			dict::Dict
 		end
 		global const $filter_symbol = Filter($name, $abstract_type_symbol, $concrete_type_symbol, true)
+		if !isdefined(CAP, $(Meta.quot(filter_symbol)))
+			setglobal!(CAP, $(Meta.quot(filter_symbol)), $filter_symbol)
+		end
 	end)
 end
 
@@ -436,7 +439,12 @@ macro DeclareOperation(name::String, filter_list = [])
 		return nothing
 	end
 	symbol = Symbol(name)
-	esc(:(function $symbol end))
+	esc(quote
+		function $symbol end
+		if !isdefined(CAP, $(Meta.quot(symbol)))
+			setglobal!(CAP, $(Meta.quot(symbol)), $symbol)
+		end
+	end)
 end
 
 export @DeclareOperation
@@ -462,11 +470,11 @@ function InstallMethod(operation, filter_list, func)
 	elseif isa(operation, Function)
 		mod = parentmodule(operation)
 	else
-		mod = @__MODULE__
+		mod = CAP
 	end
 	
 	if mod === Base
-		mod = @__MODULE__
+		mod = CAP
 	end
 	
 	InstallMethod(mod, operation, filter_list, func)
@@ -630,6 +638,9 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 			end
 		end
 		$symbol = Attribute($name, $symbol_op, $symbol_tester, $symbol_getter, $symbol_setter, $is_property, [])
+		if !isdefined(CAP, $(Meta.quot(symbol)))
+			setglobal!(CAP, $(Meta.quot(symbol)), $symbol)
+		end
 	end)
 end
 
@@ -769,7 +780,15 @@ function QuoInt(a::Int, b::Int)
 	a ÷ b
 end
 
+function QUO_INT(a::Int, b::Int)
+	a ÷ b
+end
+
 function RemInt(a::Int, b::Int)
+	a % b
+end
+
+function REM_INT(a::Int, b::Int)
 	a % b
 end
 
@@ -840,7 +859,8 @@ function JoinStringsWithSeparator( strings, sep )
 end
 
 ValueGlobal = function(name)
-	eval(Meta.parse(name))
+	@assert isdefined(CAP, Symbol(name))
+	getglobal(CAP, Symbol(name))
 end
 
 IdFunc = identity
@@ -891,11 +911,15 @@ function AssertionLevel()
 	INTERNAL_AssertionLevel
 end
 
-function Assert(level, assertion)
-	if level <= INTERNAL_AssertionLevel && !assertion
-		throw("assertion failed")
-	end
+macro Assert(level, assertion)
+	esc(quote
+		if $level <= INTERNAL_AssertionLevel && !$assertion
+			throw("assertion failed")
+		end
+	end)
 end
+
+export @Assert
 
 ShallowCopy = copy
 StructuralCopy = deepcopy
@@ -987,6 +1011,8 @@ function EndsWith(string::String, substring::String)
 	endswith(string, substring)
 end
 
+ModulesForEvaluationStack = [ CAP ]
+
 function EvalString(string::String)
 	if string[1] == '['
 		pos = PositionSublist(string, "] -> ")
@@ -994,7 +1020,7 @@ function EvalString(string::String)
 		string = "(" * string[2:pos-1] * ")" * string[pos+1:end]
 		end
 	end
-	eval(Meta.parse(string))
+	Base.eval(last(ModulesForEvaluationStack), Meta.parse(string))
 end
 
 SortedList = sort
@@ -1180,6 +1206,34 @@ function MaximalObjects( L, f )
     
     return L[PositionsOfMaximalObjects( L, f )];
     
+end
+
+function Binomial( n, k )
+	binomial(n, k)
+end
+
+function TuplesK( set, k, tup, i )
+    if k == 0
+        tup = ShallowCopy( tup );
+        tups = [ tup ];
+    else
+        tups = [ ];
+        for l in set
+            if Length( tup ) < i - 1
+				Error( "this should never happen" );
+			elseif Length( tup ) == i - 1
+				Add( tup, l );
+			else
+				tup[i] = l;
+			end
+            Append( tups, TuplesK( set, k-1, tup, i+1 ) );
+        end;
+    end;
+    return tups;
+end;
+
+function Iterated( list, f )
+	foldl(f, list)
 end
 
 # Julia macros
