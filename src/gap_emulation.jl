@@ -59,9 +59,11 @@ function SetCacheValue(cache, key_list, value)
 	return;
 end
 
-function SetGAP(list::Union{Vector, UnitRange, StepRange})
+function SSortedList(list::Union{Vector, UnitRange, StepRange})
 	unique(sort(list))
 end
+
+SetGAP = SSortedList
 
 function UnionGAP(args...)
 	if length(args) == 1
@@ -195,14 +197,38 @@ end
 # DisplayString of a non-empty list in GAP returns "<object>"
 # This is obviously not what we want.
 function DisplayString(list::Union{Vector, UnitRange, StepRange})
-	string(PrintString(list), "\n")
+	# https://github.com/gap-system/gap/pull/5418
+	if length(list) == 0
+		"[  ]"
+	else
+		string(PrintString(list), "\n")
+	end
 end
 
 function PrintString(int::Int)
 	string(int)
 end
 
-function PrintString(list::Union{Vector, UnitRange, StepRange})
+function QuotedPrintString(x::Any)
+	PrintString(x)
+end
+
+function QuotedPrintString(x::String)
+	string("\"", x, "\"")
+end
+
+# PrintString for lists in GAP simply returns String.
+# Here, we want to actually simulate the output of PrintObj.
+function PrintString(list::Vector)
+	# https://github.com/gap-system/gap/pull/5418
+	if length(list) == 0
+		"[ ]"
+	else
+		string("[ ", join(map(x -> QuotedPrintString(x), list), ", "), " ]")
+	end
+end
+
+function PrintString(list::UnitRange)
 	StringGAPOperation(list)
 end
 
@@ -219,12 +245,18 @@ function QuotedStringGAPOperation(x::String)
 end
 
 function StringGAPOperation(list::Vector)
-	string("[ ", join(map(x -> QuotedStringGAPOperation(x), list), ", "), " ]")
+	# https://github.com/gap-system/gap/pull/5418
+	if length(list) == 0
+		"[ ]"
+	else
+		string("[ ", join(map(x -> QuotedStringGAPOperation(x), list), ", "), " ]")
+	end
 end
 
 function StringGAPOperation(range::UnitRange)
 	if range.stop < range.start
-		string("[  ]")
+		# https://github.com/gap-system/gap/pull/5418
+		string("[ ]")
 	elseif range.stop == range.start
 		string("[ ", range.stop, " ]")
 	else
@@ -858,8 +890,12 @@ function JoinStringsWithSeparator( strings, sep )
 	join(strings, sep)
 end
 
+function IsBoundGlobal( name )
+	isdefined(CAP, Symbol(name))
+end
+
 ValueGlobal = function(name)
-	@assert isdefined(CAP, Symbol(name))
+	@assert IsBoundGlobal(name)
 	getglobal(CAP, Symbol(name))
 end
 
