@@ -40,6 +40,20 @@ CoequalizerOp = Coequalizer
 function FiberProduct end
 FiberProductOp = FiberProduct
 
+function TensorProductOp end
+function TensorProduct(arg...)
+    if Length(arg) == 0
+        Error("<arg> must be nonempty");
+    elseif Length(arg) == 1 && IsList(arg[1])
+        if IsEmpty(arg[1])
+            Error("<arg>[1] must be nonempty");
+        end;
+        arg = arg[1];
+    end;
+    d = TensorProductOp(arg,arg[1]);
+    return d;
+end
+
 function Filtered end
 function FilteredOp end
 
