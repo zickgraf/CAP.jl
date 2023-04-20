@@ -200,11 +200,11 @@ function StringGAPOperation(obj::CAPDict)
 end
 
 # String, Print, View, Display for native types
-function Display(list::Union{Vector,UnitRange})
+function Display(list::Union{Vector, UnitRange, StepRange})
 	print(DisplayString(list))
 end
 
-function DisplayString(int::Int)
+function DisplayString(int::Union{Int, BigInt})
 	string(int, "\n")
 end
 
@@ -219,7 +219,7 @@ function DisplayString(list::Union{Vector, UnitRange, StepRange})
 	end
 end
 
-function PrintString(int::Int)
+function PrintString(int::Union{Int, BigInt})
 	string(int)
 end
 
@@ -246,7 +246,7 @@ function PrintString(list::UnitRange)
 	StringGAPOperation(list)
 end
 
-function StringGAPOperation(x::Union{Int})
+function StringGAPOperation(x::Union{Int, BigInt})
 	string(x)
 end
 
@@ -348,6 +348,7 @@ const IsFunction = Filter("IsFunction", Function)
 const IsOperation = IsFunction
 const IsChar = Filter("IsChar", Char)
 const IsInt = Filter("IsInt", Int)
+const IsBigInt = Filter("IsBigInt", BigInt)
 const IsRat = Filter("IsRat", Rational)
 const IsBool = Filter("IsBool", Bool)
 const IsPosInt = Filter("IsPosInt", Int) # TODO
@@ -652,6 +653,10 @@ function (attr::Attribute)(args...)
 	attr.operation(args...)
 end
 
+function StringGAPOperation(attr::Attribute)
+	string("<Attribute \"", attr.name, "\">")
+end
+
 function declare_attribute_or_property(mod, name::String, is_property::Bool)
 	# attributes and properties might be installed for different parent filters
 	# since we do not take the parent filter into account here, we only have to install
@@ -822,19 +827,19 @@ function Sum(list::Union{Vector, UnitRange, StepRange, Tuple}, func)
 	Sum(map(func, list))
 end
 
-function QuoInt(a::Int, b::Int)
+function QuoInt(a::Union{Int, BigInt}, b::Union{Int, BigInt})
 	a ÷ b
 end
 
-function QUO_INT(a::Int, b::Int)
+function QUO_INT(a::Union{Int, BigInt}, b::Union{Int, BigInt})
 	a ÷ b
 end
 
-function RemInt(a::Int, b::Int)
+function RemInt(a::Union{Int, BigInt}, b::Union{Int, BigInt})
 	a % b
 end
 
-function REM_INT(a::Int, b::Int)
+function REM_INT(a::Union{Int, BigInt}, b::Union{Int, BigInt})
 	a % b
 end
 
@@ -940,7 +945,7 @@ function PositionProperty(list, func)
 		pos
 	end
 end
-Positions(list, elm) = findall(e -> e === elm, list)
+Positions(list, elm) = findall(e -> e == elm, list)
 
 function Filtered(list::Union{Vector, UnitRange, StepRange, Tuple}, func)
 	filter(func, list)
@@ -1196,7 +1201,7 @@ StableSortBy = function( list, func )
 	sort!(list, alg=Base.Sort.MergeSort, by=func)
 end
 
-function Maximum(int1::Int, int2::Int)
+function Maximum(int1::Union{Int, BigInt}, int2::Union{Int, BigInt})
 	max(int1, int2)
 end
 
