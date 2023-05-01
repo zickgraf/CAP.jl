@@ -787,6 +787,10 @@ function ==(rec1::CAPRecord, rec2::CAPRecord)
 end
 
 # GAP functions
+function IsDigitChar(x::Char)
+	x in "0123456789"
+end
+
 function SizeScreen()
 	dim = displaysize(stdout)
 	[dim[2], dim[1]]
