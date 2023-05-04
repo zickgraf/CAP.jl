@@ -17,9 +17,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         category_filter = IsFilter,
         category_object_filter = IsFilter,
         category_morphism_filter = IsFilter,
-        #= comment for Julia
-        commutative_ring_of_linear_category = IsRing && HasIsCommutative && IsCommutative,
-        # =#
+        commutative_ring_of_linear_category = R -> IsRing( R ) && HasIsCommutative( R ) && IsCommutative( R ),
         properties = IsList,
         object_constructor = IsFunction,
         object_datum = IsFunction,
@@ -251,7 +249,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         info = CAP_INTERNAL_METHOD_NAME_RECORD[name];
         
         # check if filters && return_type are known
-        unknown_filters = Filtered( info.filter_list, filter -> !filter ⥉ [ "category", "object", "morphism", "integer", IsRingElement, "nonneg_integer_or_Inf", "list_of_objects", "list_of_morphisms" ] );
+        unknown_filters = Filtered( info.filter_list, filter -> !filter ⥉ [ "category", "object", "morphism", "integer", "element_of_commutative_ring_of_linear_structure", "nonneg_integer_or_Inf", "list_of_objects", "list_of_morphisms", "pair_of_morphisms" ] );
         
         if !IsEmpty( unknown_filters )
             
@@ -260,7 +258,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             
         end;
         
-        if !IsString( info.return_type ) || !IsBound( default_func_strings[info.return_type] )
+        if !IsBound( default_func_strings[info.return_type] )
             
             Info( InfoCategoryConstructor, 3, "can!yet handle return_type=\"", info.return_type, "\" required for ", name );
             continue;
@@ -334,7 +332,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                     
                     return Concatenation( options.underlying_morphism_getter_string, "( cat, ", argument_name, " )" );
                     
-                elseif filter == "integer" || filter == IsRingElement || filter == "nonneg_integer_or_Inf"
+                elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_Inf"
                     
                     return argument_name;
                     
@@ -345,6 +343,10 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                 elseif filter == "list_of_morphisms"
                     
                     return Concatenation( "List( ", argument_name, ", x -> ", options.underlying_morphism_getter_string, "( cat, x ) )" );
+                    
+                elseif filter == "pair_of_morphisms"
+                    
+                    return Concatenation( "PairGAP( ", options.underlying_morphism_getter_string, "( cat, ", argument_name, "[1] ), ", options.underlying_morphism_getter_string, "( cat, ", argument_name, "[2] ) )" );
                     
                 else
                     

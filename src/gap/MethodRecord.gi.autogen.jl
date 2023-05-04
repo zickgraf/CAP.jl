@@ -20,6 +20,7 @@
         "object_datum",
         "morphism_datum",
         "nonneg_integer_or_Inf",
+        "list_of_elements_of_commutative_ring_of_linear_structure",
     ]
 #! @EndCode
 );
@@ -1328,7 +1329,7 @@ SubtractionForMorphisms = rec(
 ),
 
 MultiplyWithElementOfCommutativeRingForMorphisms = rec(
-  filter_list = [ "category", IsRingElement, "morphism" ],
+  filter_list = [ "category", "element_of_commutative_ring_of_linear_structure", "morphism" ],
   io_type = [ [ "r", "a" ], [ "a_source", "a_range" ] ],
   
   pre_function = function( cat, r, morphism )
@@ -2449,7 +2450,7 @@ AstrictionToCoimageWithGivenCoimageObject = rec(
   dual_operation = "CoastrictionToImageWithGivenImageObject" ),
 
 UniversalMorphismIntoCoimage = rec(
-  filter_list = [ "category", "morphism", "list_of_morphisms" ],
+  filter_list = [ "category", "morphism", "pair_of_morphisms" ],
   io_type = [ [ "alpha", "tau" ], [ "tau_1_range", "C" ] ],
   with_given_object_position = "Range",
   dual_preprocessor_func = CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
@@ -2483,7 +2484,7 @@ UniversalMorphismIntoCoimage = rec(
   dual_operation = "UniversalMorphismFromImage" ),
 
 UniversalMorphismIntoCoimageWithGivenCoimageObject = rec(
-  filter_list = [ "category", "morphism", "list_of_morphisms", "object" ],
+  filter_list = [ "category", "morphism", "pair_of_morphisms", "object" ],
   io_type = [ [ "alpha", "tau", "C" ], [ "tau_1_range", "C" ] ],
   dual_preprocessor_func = CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
   pre_function = function( cat, morphism, test_factorization, image )
@@ -2709,7 +2710,7 @@ CoastrictionToImageWithGivenImageObject = rec(
   dual_operation = "AstrictionToCoimageWithGivenCoimageObject" ),
 
 UniversalMorphismFromImage = rec(
-  filter_list = [ "category", "morphism", "list_of_morphisms" ],
+  filter_list = [ "category", "morphism", "pair_of_morphisms" ],
   io_type = [ [ "alpha", "tau" ], [ "I", "tau_1_range" ] ],
   with_given_object_position = "Source",
   dual_operation = "UniversalMorphismIntoCoimage",
@@ -2743,7 +2744,7 @@ UniversalMorphismFromImage = rec(
   return_type = "morphism" ),
 
 UniversalMorphismFromImageWithGivenImageObject = rec(
-  filter_list = [ "category", "morphism", "list_of_morphisms", "object" ],
+  filter_list = [ "category", "morphism", "pair_of_morphisms", "object" ],
   io_type = [ [ "alpha", "tau", "I" ], [ "I", "tau_1_range" ] ],
   dual_operation = "UniversalMorphismIntoCoimageWithGivenCoimageObject",
   dual_preprocessor_func = CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
@@ -3569,7 +3570,7 @@ BasisOfExternalHom = rec(
 
 CoefficientsOfMorphism = rec(
   filter_list = [ "category", "morphism" ],
-  return_type = IsList,
+  return_type = "list_of_elements_of_commutative_ring_of_linear_structure",
   dual_operation = "CoefficientsOfMorphism",
   dual_postprocessor_func = IdFunc
 ),
@@ -3613,31 +3614,31 @@ RandomMorphismWithFixedSourceAndRangeByInteger = rec(
 ),
 
 RandomObjectByList = rec(
-  filter_list = [ "category", IsList ],
+  filter_list = [ "category", "arbitrary_list" ],
   input_arguments_names = [ "cat", "L" ],
   return_type = "object"
 ),
 
 RandomMorphismByList = rec(
-  filter_list = [ "category", IsList ],
+  filter_list = [ "category", "arbitrary_list" ],
   io_type = [ [ "L" ], [ "A", "B" ] ],
   return_type = "morphism"
 ),
 
 RandomMorphismWithFixedSourceByList = rec(
-  filter_list = [ "category", "object", IsList ],
+  filter_list = [ "category", "object", "arbitrary_list" ],
   io_type = [ [ "A", "L" ], [ "A", "B" ] ],
   return_type = "morphism",
 ),
 
 RandomMorphismWithFixedRangeByList = rec(
-  filter_list = [ "category", "object", IsList ],
+  filter_list = [ "category", "object", "arbitrary_list" ],
   io_type = [ [ "B", "L" ], [ "A", "B" ] ],
   return_type = "morphism"
 ),
 
 RandomMorphismWithFixedSourceAndRangeByList = rec(
-  filter_list = [ "category", "object", "object", IsList ],
+  filter_list = [ "category", "object", "object", "arbitrary_list" ],
   io_type = [ [ "A", "B", "L" ], [ "A", "B" ] ],
   return_type = "morphism"
 ),
@@ -3661,7 +3662,7 @@ HomologyObject = rec(
 ),
 
 HomologyObjectFunctorialWithGivenHomologyObjects = rec(
-  filter_list = [ "category", "object", IsList, "object" ],
+  filter_list = [ "category", "object", "5_tuple_of_morphisms", "object" ],
   io_type = [ [ "H_1", "L", "H_2" ], [ "H_1", "H_2" ] ],
   return_type = "morphism",
   pre_function = function( cat, H_1, L, H2 )
@@ -4934,8 +4935,8 @@ end );
             Error( "The return types \"other_object\" && \"other_morphism\" are !supported anymore. If you need those, please report this using the CAP_projects's issue tracker." );
         end;
         
-        if !( IsFilter( current_rec.return_type ) || current_rec.return_type ⥉ CAP_INTERNAL_VALID_RETURN_TYPES )
-            Error( "the return_type of <current_rec> is !a filter && does !appear ⥉ CAP_INTERNAL_VALID_RETURN_TYPES" );
+        if !current_rec.return_type ⥉ CAP_INTERNAL_VALID_RETURN_TYPES
+            Error( "The return_type of <current_rec> does !appear ⥉ CAP_INTERNAL_VALID_RETURN_TYPES. Note that proper filters are !supported anymore." );
         end;
         
         if IsBound( current_rec.argument_list )
@@ -5057,8 +5058,8 @@ end );
             Error( "the dual preprocessor function of ", current_recname, " has the wrong number of arguments" );
         end;
         
-        if !ForAll( current_rec.filter_list, x -> IsString( x ) || IsFilter( x ) )
-            Error( "the filter list of ", current_recname, " does !fulfill the requirements" );
+        if !ForAll( current_rec.filter_list, IsString )
+            Error( "Not all entries of filter_list of ", current_recname, " are strings. This is !supported anymore." );
         end;
         
         if !IsBound( current_rec.install_convenience_without_category )
@@ -5282,7 +5283,7 @@ end );
             
         end;
         
-        if ForAll( current_rec.filter_list, x -> x ⥉ [ IsRingElement, "integer", "nonneg_integer_or_Inf", "category", "object", "object_in_range_category_of_homomorphism_structure", "list_of_objects" ] )
+        if ForAll( current_rec.filter_list, x -> x ⥉ [ "element_of_commutative_ring_of_linear_structure", "integer", "nonneg_integer_or_Inf", "category", "object", "object_in_range_category_of_homomorphism_structure", "list_of_objects" ] )
             
             if !IsBound( current_rec.compatible_with_congruence_of_morphisms )
                 

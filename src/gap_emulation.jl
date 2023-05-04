@@ -352,10 +352,24 @@ const IsBigInt = Filter("IsBigInt", BigInt)
 const IsRat = Filter("IsRat", Rational)
 const IsBool = Filter("IsBool", Bool)
 const IsPosInt = Filter("IsPosInt", Int) # TODO
-const IsRingElement = Filter("IsRingElement", Int) # TODO
 const IsRecord = Filter("IsRecord", CAPRecord)
 # integer or infinity (a float)
 const IsCyclotomic = Filter("IsCyclotomic", Union{Int,Float64}) # TODO
+
+# AbstractAlgebra
+const IsRing = Filter("IsRing", Ring)
+const IsRingElement = Filter("IsRingElement", AbstractAlgebra.NCRingElement)
+
+function HasIsCommutative(R::AbstractAlgebra.NCRing)
+	R isa Ring
+end
+
+function IsCommutative(R::AbstractAlgebra.NCRing)
+	R isa Ring
+end
+
+Integers = ZZ
+Rationals = QQ
 
 # Objectify
 function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_and_values... )
@@ -1086,6 +1100,9 @@ SortedList = sort
 AsSortedList = sort
 
 function IsPackageMarkedForLoading( name, version )
+	if name == "JuliaInterface"
+		return false
+	end
 	# TODO
 	false
 end
@@ -1116,6 +1133,10 @@ end
 
 function NameFunction(f::Function)
 	string(f)
+end
+
+function SetNameFunction(f, name)
+	# noop
 end
 
 IsIdenticalObj = ===

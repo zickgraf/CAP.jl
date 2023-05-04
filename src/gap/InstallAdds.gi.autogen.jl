@@ -189,10 +189,10 @@ end );
                    [ IsCapCategory, IsList, IsInt ],
       
       function( category, method_list, weight )
-        local install_func, replaced_filter_list, needs_wrapping, i, is_derivation, is_final_derivation, is_precompiled_derivation, without_given_name, with_given_name,
-              without_given_weight, with_given_weight, number_of_proposed_arguments, current_function_number,
-              current_function_argument_number, current_additional_filter_list_length, input_sanity_check_functions,
-              output_human_readable_identifier_list, output_data_type, assert_is_value_of_return_type, output_sanity_check_function, name;
+        local is_derivation, is_final_derivation, is_precompiled_derivation, replaced_filter_list, needs_wrapping,
+            number_of_proposed_arguments, current_function_argument_number, current_additional_filter_list_length,
+            input_sanity_check_functions, output_human_readable_identifier_list, output_sanity_check_function,
+            output_data_type, assert_is_value_of_return_type, install_func, name, current_function_number, i;
         
         if IsFinalized( category )
             Error( "can!add methods anymore, category is finalized" );
@@ -215,9 +215,20 @@ end );
             weight = 100;
         end;
         
-        ## If there already is a faster method, do nothing!
+        # If there already is a faster method: do nothing but display a warning because this should !happen usually.
         if weight > CurrentOperationWeight( category.derivations_weight_list, function_name )
+            
+            # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
+            #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
+            # * There are some derivations of weight 1 for thin categories which are triggered immediately && which CategoryConstructor tries to overwrite with weight 100.
+            if !WasCreatedAsOppositeCategory( category ) && CurrentOperationWeight( category.derivations_weight_list, function_name ) != 1
+                
+                Print( "WARNING: Ignoring a function added for ", function_name, " with weight ", weight, " to \"", Name( category ), "\" because there already is a function installed with weight ", CurrentOperationWeight( category.derivations_weight_list, function_name ), ".\n" );
+                
+            end;
+            
             return;
+            
         end;
         
         is_derivation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "IsDerivation", false );
@@ -238,6 +249,20 @@ end );
         if Length( Positions( [ is_derivation, is_final_derivation, is_precompiled_derivation ], true ) ) > 1
             
             Error( "at most one of the options `IsDerivation`, `IsFinalDerivation` && `IsPrecompiledDerivation` may be set" );
+            
+        end;
+        
+        # Display a warning when overwriting primitive operations with derivations.
+        if (is_derivation || is_final_derivation || is_precompiled_derivation) && IsBound( category.primitive_operations[function_name] ) && category.primitive_operations[function_name]
+            
+            # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
+            #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
+            # * There is a test ⥉ Locales creating a category via CategoryConstructor (which uses weight 100) && then installs a really cheap method for UniqueMorphism which triggers a bunch of cheap derivations.
+            if !WasCreatedAsOppositeCategory( category ) && weight > 4
+                
+                Print( "WARNING: Overriding a function for ", function_name, " primitively added to \"", Name( category ), "\" with a derivation.\n" );
+                
+            end;
             
         end;
         
@@ -303,32 +328,19 @@ end );
         
         # prepare input sanity check
         input_sanity_check_functions = List( (1):(Length( record.filter_list )), function ( i )
-          local filter, data_type, assert_is_value_of_type;
+          local filter_string, data_type, assert_is_value_of_type;
             
-            filter = record.filter_list[ i ];
+            filter_string = record.filter_list[ i ];
             
-            if IsFilter( filter )
+            data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter_string, category );
+            
+            if data_type != fail
                 
-                # the only check would be that the input lies ⥉ the filter, which is already checked by the method selection
-                return ReturnTrue;
-                
-            elseif IsString( filter )
-                
-                data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter, category );
-                
-                if data_type != fail
-                    
-                    return CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type, [ "the ", i, "-th argument of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" ] );
-                    
-                else
-                    
-                    return ReturnTrue;
-                    
-                end;
+                return CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type, [ "the ", i, "-th argument of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" ] );
                 
             else
                 
-                Error( "this should never happen" );
+                return ReturnTrue;
                 
             end;
             
@@ -337,61 +349,41 @@ end );
         # prepare output sanity check
         output_human_readable_identifier_list = [ "the result of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" ];
         
-        if IsFilter( record.return_type )
+        if EndsWith( record.return_type, "_or_fail" )
             
-            output_sanity_check_function = function( result )
-                
-                if !record.return_type( result )
-                    
-                    CallFuncList( Error, Concatenation( output_human_readable_identifier_list, [ " does !lie ⥉ the required filter. You can access the result && the filter via the local variables 'result' && 'record.return_type' ⥉ a break loop." ] ) );
-                    
-                end;
-                
-            end;
+            output_data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( record.return_type[(1):(Length( record.return_type ) - 8)], category );
             
-        elseif IsString( record.return_type )
+        else
+            
+            output_data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( record.return_type, category );
+            
+        end;
+        
+        if output_data_type != fail
+            
+            assert_is_value_of_return_type = CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( output_data_type, output_human_readable_identifier_list );
             
             if EndsWith( record.return_type, "_or_fail" )
                 
-                output_data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( record.return_type[(1):(Length( record.return_type ) - 8)], category );
-                
-            else
-                
-                output_data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( record.return_type, category );
-                
-            end;
-            
-            if output_data_type != fail
-                
-                assert_is_value_of_return_type = CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( output_data_type, output_human_readable_identifier_list );
-                
-                if EndsWith( record.return_type, "_or_fail" )
+                output_sanity_check_function = function( result )
                     
-                    output_sanity_check_function = function( result )
+                    if result != fail
                         
-                        if result != fail
-                            
-                            assert_is_value_of_return_type( result );
-                            
-                        end;
+                        assert_is_value_of_return_type( result );
                         
                     end;
-                    
-                else
-                    
-                    output_sanity_check_function = assert_is_value_of_return_type;
                     
                 end;
                 
             else
                 
-                output_sanity_check_function = ReturnTrue;
+                output_sanity_check_function = assert_is_value_of_return_type;
                 
             end;
             
         else
             
-            Error( "this should never happen" );
+            output_sanity_check_function = ReturnTrue;
             
         end;
         
@@ -410,12 +402,12 @@ end );
                   function( arg... )
                     local redirect_return, pre_func_return, collect_timing_statistics, start_time, result, end_time, i;
                     
-                    if !IsFinalized( category )
+                    if !IsFinalized( category ) && !category.primitive_operations[function_name]
                         
-                        Display( Concatenation(
-                            "WARNING: You are calling an operation ⥉ a unfinalized category with name \"", Name( category ),
-                            "\". This is fine for debugging purposes, but for production use you should finalize the category by calling `Finalize` (with the option `FinalizeCategory = true` if needed)."
-                        ) );
+                        Print(
+                            "WARNING: You are calling an operation ⥉ an unfinalized category with name \"", Name( category ),
+                            "\". This is fine for debugging purposes, but for production use you should finalize the category by calling `Finalize` (with the option `FinalizeCategory = true` if needed).\n"
+                        );
                         
                     end;
                     

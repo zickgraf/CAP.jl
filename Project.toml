@@ -8,6 +8,9 @@ authors = [
 ]
 version = "0.1.0"
 
+[deps]
+AbstractAlgebra = "c3fe647b-3220-5bb0-a1ea-a7954cac585d"
+
 [compat]
 julia = "1.9"
 

@@ -1217,33 +1217,25 @@ end );
 
 ##
 AddDerivationToCAP( IsProjective,
-                    "IsProjective by checking if the object is a summand of some projective object",
-                    [ [ IsLiftable, 1 ],
-                      [ EpimorphismFromSomeProjectiveObject, 1 ],
-                      [ IdentityMorphism, 1 ] ],
+                    "IsProjective by checking if the object is a retract of some projective object",
+                    [ [ EpimorphismFromSomeProjectiveObject, 1 ],
+                      [ IsSplitEpimorphism, 1 ] ],
                     
   function( cat, object )
     
-    return IsLiftable( cat,
-      IdentityMorphism( cat, object ),
-      EpimorphismFromSomeProjectiveObject( cat, object )
-    );
+    return IsSplitEpimorphism( cat, EpimorphismFromSomeProjectiveObject( cat, object ) );
     
 end );
 
 ##
 AddDerivationToCAP( IsInjective,
-                    "IsInjective by checking if the object is a summand of some injective object",
-                    [ [ IsColiftable, 1 ],
-                      [ MonomorphismIntoSomeInjectiveObject, 1 ],
-                      [ IdentityMorphism, 1 ] ],
+                    "IsInjective by checking if the object is a retract of some injective object",
+                    [ [ MonomorphismIntoSomeInjectiveObject, 1 ],
+                      [ IsSplitMonomorphism, 1 ] ],
                     
   function( cat, object )
     
-    return IsColiftable( cat,
-      MonomorphismIntoSomeInjectiveObject( cat, object ),
-      IdentityMorphism( cat, object )
-    );
+    return IsSplitMonomorphism( cat, MonomorphismIntoSomeInjectiveObject( cat, object ) );
     
 end );
 
@@ -1792,7 +1784,7 @@ end );
 ##
 AddDerivationToCAP( PreComposeList,
                     "PreComposeList by iterating PreCompose",
-                    [ [ PreCompose, 1 ] ],
+                    [ [ PreCompose, 2 ] ],
                     
   function( cat, morphism_list )
     
@@ -1814,7 +1806,7 @@ end );
 ##
 AddDerivationToCAP( PostComposeList,
                     "PostComposeList by iterating PostCompose",
-                    [ [ PostCompose, 1 ] ],
+                    [ [ PostCompose, 2 ] ],
                     
   function( cat, morphism_list )
     
@@ -1925,12 +1917,15 @@ end; CategoryFilter = IsAbCategory );
 ##
 AddDerivationToCAP( SumOfMorphisms,
                     "SumOfMorphisms using AdditionForMorphisms && ZeroMorphism",
-                    [ [ AdditionForMorphisms, 1 ],
+                    [ [ AdditionForMorphisms, 2 ],
                       [ ZeroMorphism, 1 ] ],
                     
   function( cat, obj1, mors, obj2 )
+    local zero_morphism;
     
-    return Iterated( mors, ( alpha, beta ) -> AdditionForMorphisms( cat, alpha, beta ), ZeroMorphism( cat, obj1, obj2 ) );
+    zero_morphism = ZeroMorphism( cat, obj1, obj2 );
+    
+    return Iterated( mors, ( alpha, beta ) -> AdditionForMorphisms( cat, alpha, beta ), zero_morphism );
     
 end; CategoryFilter = IsAbCategory );
 

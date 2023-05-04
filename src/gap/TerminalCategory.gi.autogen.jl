@@ -83,9 +83,7 @@
     completed_record.properties = properties;
     
     if !IsBound( completed_record.commutative_ring_of_linear_category )
-        #= comment for Julia
         completed_record.commutative_ring_of_linear_category = Integers;
-        # =#
     end;
     
     T = CategoryConstructor( completed_record );

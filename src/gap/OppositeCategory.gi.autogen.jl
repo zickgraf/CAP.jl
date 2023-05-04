@@ -64,25 +64,23 @@ end );
           current_recname, current_entry, dual_operation_name, filter_list, input_arguments_names, return_type, func_string,
           dual_preprocessor_func_string, preprocessor_string, dual_arguments, tmp,
           dual_postprocessor_func_string, postprocessor_string, output_source_getter_string, output_range_getter_string, return_statement,
-          func, weight, current_add, list_of_attributes, attr, tester, setter, getter;
+          func, weight, current_add, list_of_attributes, attr, tester, setter;
     
     only_primitive_operations = ValueOption( "only_primitive_operations" ) == true;
     
     ## Take care of attributes
     ## TODO: if there are more instances, set markers ⥉ the MethodRecord
-    list_of_attributes = [ "CommutativeRingOfLinearCategory" ];
+    list_of_attributes = [ CommutativeRingOfLinearCategory ];
     
     for attr in list_of_attributes
         
-        tester = ValueGlobal( Concatenation( "Has", attr ) );
+        tester = Tester( attr );
         
         if !tester( opposite_category ) && tester( category )
             
-            setter = ValueGlobal( Concatenation( "SetGAP", attr ) );
+            setter = Setter( attr );
             
-            getter = ValueGlobal( attr );
-            
-            setter( opposite_category, getter( category ) );
+            setter( opposite_category, attr( category ) );
             
         end;
         
@@ -211,7 +209,7 @@ end );
                     
                     return Concatenation( "MorphismDatum( cat, ", argument_name, " )" );
                     
-                elseif filter == "integer" || filter == IsRingElement
+                elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_Inf"
                     
                     return argument_name;
                     
@@ -222,10 +220,6 @@ end );
                 elseif filter == "list_of_morphisms"
                     
                     return Concatenation( "List( ", argument_name, ", x -> MorphismDatum( cat, x ) )" );
-                    
-                elseif filter == "nonneg_integer_or_Inf"
-                    
-                    return argument_name;
                     
                 else
                     
@@ -402,9 +396,15 @@ InstallMethod( @__MODULE__,  Opposite,
     );
     
     SetOppositeCategory( opposite_category, category );
-    
     SetOpposite( opposite_category, category );
-    SetOpposite( category, opposite_category );
+    
+    # A category might have multiple different instances of opposite categories.
+    # Only the first instance is used for attributes (of the category && its objects && morphisms).
+    if !HasOpposite( category )
+        
+        SetOpposite( category, opposite_category );
+        
+    end;
     
     known_properties = ListKnownCategoricalProperties( category );
     
@@ -433,8 +433,10 @@ InstallMethod( @__MODULE__,  Opposite,
         #% CAP_JIT_DROP_NEXT_STATEMENT
         CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( object, OppositeCategory( cat ), [ "the object datum given to the object constructor of <cat>" ] );
         
+        # A category might have multiple different instances of opposite categories.
+        # Only the first instance is used for attributes (of the category && its objects && morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        if HasOpposite( object )
+        if HasOpposite( object ) && IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
             
             return Opposite( object );
             
@@ -452,8 +454,14 @@ InstallMethod( @__MODULE__,  Opposite,
             
         end;
         
+        # A category might have multiple different instances of opposite categories.
+        # Only the first instance is used for attributes (of the category && its objects && morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        SetOpposite( object, opposite_object );
+        if IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
+            
+            SetOpposite( object, opposite_object );
+            
+        end;
         
         return opposite_object;
         
@@ -483,8 +491,10 @@ InstallMethod( @__MODULE__,  Opposite,
             
         end;
         
+        # A category might have multiple different instances of opposite categories.
+        # Only the first instance is used for attributes (of the category && its objects && morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        if HasOpposite( morphism )
+        if HasOpposite( morphism ) && IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
             
             return Opposite( morphism );
             
@@ -503,8 +513,14 @@ InstallMethod( @__MODULE__,  Opposite,
             
         end;
         
+        # A category might have multiple different instances of opposite categories.
+        # Only the first instance is used for attributes (of the category && its objects && morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        SetOpposite( morphism, opposite_morphism );
+        if IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
+            
+            SetOpposite( morphism, opposite_morphism );
+            
+        end;
         
         return opposite_morphism;
         

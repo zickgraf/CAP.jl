@@ -153,7 +153,6 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
     
     Add( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, property_pair );
     
-    #= comment for Julia
     if !IsBoundGlobal( property_pair[1] )
         
         Print( "WARNING: please declare ", property_pair[1], " as a property of IsCapCategory with corresponding documentation before adding it as a categorical property.\n" );
@@ -164,7 +163,6 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
         # this will declare the opposite property
         
     end;
-    # =#
     
 end );
 

@@ -1170,7 +1170,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! * `object_function` gets the categories $C$ && $E$ && an object ⥉ $D$.
 #! * `morphism_function` gets the categories $C$ && $E$, an object ⥉ $E$, a morphism ⥉ $D$ && another object ⥉ $E$.
 #!   The objects are the results of `object_function` applied to the source && range of the morphism.
-#! * `object_function_inverse` gets the categories $C$ && $E$ && a morphism ⥉ $E$.
+#! * `object_function_inverse` gets the categories $C$ && $E$ && an object ⥉ $E$.
 #! * `morphism_function_inverse` gets the categories $C$ && $E$, an object ⥉ $D$, a morphism ⥉ $E$ && another object ⥉ $D$.
 #!   The objects are the results of `object_function_inverse` applied to the source && range of the morphism.
 #! `object_function` && `morphism_function` define the embedding. `object_function_inverse` && `morphism_function_inverse` define

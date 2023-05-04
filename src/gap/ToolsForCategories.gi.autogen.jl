@@ -11,7 +11,7 @@
 #####################################
 
 @InstallGlobalFunction( "CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING", function ( string, args... )
-  local category;
+  local category, is_ring_element, ring, n;
     
     if !IsString( string )
         
@@ -30,6 +30,12 @@
     else
         
         category = false;
+        
+    end;
+    
+    if string == "pair_of_morphisms"
+        
+        string = "2_tuple_of_morphisms";
         
     end;
     
@@ -144,6 +150,91 @@
         # can!be express "or fail" yet
         return fail;
         
+    elseif string == "element_of_commutative_ring_of_linear_structure"
+        
+        if category != false && !HasCommutativeRingOfLinearCategory( category )
+            
+            Print( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of the linear structure over a commutative ring but the category has no CommutativeRingOfLinearCategory (yet).\n" );
+            
+        end;
+        
+        if category == false || !HasCommutativeRingOfLinearCategory( category )
+            
+            is_ring_element = IsRingElement;
+            
+        else
+            
+            ring = CommutativeRingOfLinearCategory( category );
+            
+            if IsBoundGlobal( "IsHomalgRing" ) && ValueGlobal( "IsHomalgRing" )( ring )
+                
+                is_ring_element = ValueGlobal( "IsHomalgRingElement" );
+                
+            else
+                
+                is_ring_element = IsRingElement;
+                
+            end;
+            
+        end;
+        
+        return rec(
+            filter = is_ring_element,
+        );
+        
+    elseif string == "list_of_elements_of_commutative_ring_of_linear_structure"
+        
+        if category != false && !HasCommutativeRingOfLinearCategory( category )
+            
+            Print( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of the linear structure over a commutative ring but the category has no CommutativeRingOfLinearCategory (yet).\n" );
+            
+        end;
+        
+        if category == false || !HasCommutativeRingOfLinearCategory( category )
+            
+            is_ring_element = IsRingElement;
+            
+        else
+            
+            ring = CommutativeRingOfLinearCategory( category );
+            
+            if IsBoundGlobal( "IsHomalgRing" ) && ValueGlobal( "IsHomalgRing" )( ring )
+                
+                is_ring_element = ValueGlobal( "IsHomalgRingElement" );
+                
+            else
+                
+                is_ring_element = IsRingElement;
+                
+            end;
+            
+        end;
+        
+        return rec(
+            filter = IsList,
+            element_type = rec(
+                filter = is_ring_element,
+            ),
+        );
+        
+    elseif string == "arbitrary_list"
+        
+        return rec(
+            filter = IsList,
+            element_type = rec(
+                filter = IsObject,
+            )
+        );
+        
+    elseif EndsWith( string, "_tuple_of_morphisms" ) && ForAll( string[(1):(Length( string ) - Length( "_tuple_of_morphisms" ))], IsDigitChar )
+        
+        n = IntGAP( string[(1):(Length( string ) - Length( "_tuple_of_morphisms" ))] );
+        
+        return rec(
+            filter = IsNTuple,
+            element_types = ListWithIdenticalEntries( n, CapJitDataTypeOfMorphismOfCategory( category ) ),
+        );
+        
     else
         
         Error( "filter type ", string, " is !recognized, see the documentation for allowed values" );
@@ -152,9 +243,32 @@
     
 end );
 
+@InstallGlobalFunction( CAP_INTERNAL_GET_DATA_TYPES_FROM_STRINGS,
+  
+  function( list, args... )
+    local category;
+    
+    if Length( args ) > 1
+        
+        Error( "CAP_INTERNAL_GET_DATA_TYPES_FROM_STRINGS must be called with at most two arguments" );
+        
+    elseif Length( args ) == 1
+        
+        category = args[1];
+        
+    else
+        
+        category = false;
+        
+    end;
+    
+    return List( list, l -> CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( l, category ) );
+    
+end );
+
 @InstallGlobalFunction( CAP_INTERNAL_REPLACED_STRING_WITH_FILTER,
   
-  function( filter_or_string, args... )
+  function( filter_string, args... )
     local category, data_type;
     
     if Length( args ) > 1
@@ -171,33 +285,26 @@ end );
         
     end;
     
-    if IsFilter( filter_or_string )
+    data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter_string, category );
+    
+    if data_type == fail
         
-        return filter_or_string;
+        return IsObject;
         
-    elseif IsString( filter_or_string )
+    elseif IsSpecializationOfFilter( IsNTuple, data_type.filter )
         
-        data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter_or_string, category );
+        # `IsNTuple` deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
+        # However, on the GAP level tuples are just lists.
+        return IsList;
         
-        if data_type == fail
-            
-            return IsObject;
-            
-        elseif IsSpecializationOfFilter( IsNTuple, data_type.filter )
-            
-            # `IsNTuple` deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
-            # However, on the GAP level tuples are just lists.
-            return IsList;
-            
-        else
-            
-            return data_type.filter;
-            
-        end;
+    elseif IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), data_type.filter )
+        
+        # Some things (e.g. integers) do !lie ⥉ the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
+        return IsRingElement;
         
     else
         
-        Error( "the first argument must be a string || filter" );
+        return data_type.filter;
         
     end;
     
@@ -206,18 +313,24 @@ end );
 @InstallGlobalFunction( CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS,
   
   function( list, args... )
-      local category;
-      
-      if Length( args ) > 1
-          Error( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS must be called with at most two arguments" );
-      elseif Length( args ) == 1
-          category = args[1];
-      else
-          category = false;
-      end;
-      
-      return List( list, l -> CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( l, category ) );
-      
+    local category;
+    
+    if Length( args ) > 1
+        
+        Error( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS must be called with at most two arguments" );
+        
+    elseif Length( args ) == 1
+        
+        category = args[1];
+        
+    else
+        
+        category = false;
+        
+    end;
+    
+    return List( list, l -> CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( l, category ) );
+    
 end );
 
 @InstallGlobalFunction( CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA,
@@ -226,11 +339,17 @@ end );
     local category;
     
     if Length( args ) > 1
+        
         Error( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA must be called with at most two arguments" );
+        
     elseif Length( args ) == 1
+        
         category = args[1];
+        
     else
+        
         category = false;
+        
     end;
     
     return List( list, function ( l )
@@ -433,6 +552,19 @@ end );
             
         end;
         
+    elseif IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), filter )
+        
+        return function( value )
+            
+            # Some things (e.g. integers) do !lie ⥉ the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
+            if !IsRingElement( value )
+                
+                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsRingElement.", generic_help_string ] ) );
+                
+            end;
+            
+        end;
+        
     else
         
         return function( value )
@@ -575,11 +707,12 @@ end );
         
     end;
     
-    ## Make List, Perform, Apply look like loops
-    ## Beginning space (or new line) is important here, to avoid scanning things like CallFuncList
-    for i in [ " List(", "\nList(", " ListN(", "\nListN(", " Perform(", "\nPerform(", "\nApply(", " Apply(" ]
+    # make List etc. look like loops
+    for i in [ "List", "ListN", "Perform", "Apply", "Iterated" ]
         
-        func_as_string = ReplacedString( func_as_string, i, " CAP_INTERNAL_FUNCTIONAL_LOOP" );
+        # beginning space || new line is important here to avoid scanning things like CallFuncList
+        func_as_string = ReplacedString( func_as_string, Concatenation( " ", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
+        func_as_string = ReplacedString( func_as_string, Concatenation( "\n", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
         
     end;
     
@@ -876,8 +1009,17 @@ end );
 ##
 @InstallGlobalFunction( "IsSpecializationOfFilter", function ( filter1, filter2 )
     
-    filter1 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter1 );
-    filter2 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter2 );
+    if IsString( filter1 )
+        
+        filter1 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter1 );
+        
+    end;
+    
+    if IsString( filter2 )
+        
+        filter2 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter2 );
+        
+    end;
     
     return IS_SUBSET_FLAGS( WITH_IMPS_FLAGS( FLAGS_FILTER( filter2 ) ), WITH_IMPS_FLAGS( FLAGS_FILTER( filter1 ) ) );
     

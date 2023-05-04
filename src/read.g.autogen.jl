@@ -50,6 +50,8 @@ include( "gap/CategoryConstructor.gi.autogen.jl" );
 
 include( "gap/TerminalCategory.gi.autogen.jl" );
 
+include( "gap/ReinterpretationOfCategory.gi.autogen.jl" );
+
 include( "gap/WrapperCategory.gi.autogen.jl" );
 
 include( "gap/DummyCategory.gi.autogen.jl" );
