@@ -604,12 +604,12 @@ function InstallMethod(mod::Module, operation, filter_list, func::Function)
 	end
 	
 	Base.eval(mod, :(
-		function $funcref($(vars_with_types...); keywords...)
-			if length(keywords) > 0
-				PushOptions(CAPRecord(Dict(keywords)))
+		function $funcref($(vars_with_types...); kwargs...)
+			if length(kwargs) > 0
+				PushOptions(CAPRecord(Dict(kwargs)))
 			end
 			result = $func($(vars...))
-			if length(keywords) > 0
+			if length(kwargs) > 0
 				PopOptions()
 			end
 			result
@@ -656,15 +656,15 @@ function ==(attr1::Attribute, attr2::Attribute)
 	isequal(attr1.name, attr2.name)
 end
 
-function (attr::Attribute)(obj::CAPDict)
+function (attr::Attribute)(obj::CAPDict; kwargs...)
 	if !Tester(attr)(obj)
-		Setter(attr)(obj, attr.operation(obj))
+		Setter(attr)(obj, attr.operation(obj; kwargs...))
 	end
 	attr.getter(obj)
 end
 
-function (attr::Attribute)(args...)
-	attr.operation(args...)
+function (attr::Attribute)(args...; kwargs...)
+	attr.operation(args...; kwargs...)
 end
 
 function StringGAPOperation(attr::Attribute)
