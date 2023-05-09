@@ -14,7 +14,7 @@
 
 ##################################
 ##
-## Construtor
+## Constructor
 ##
 ##################################
 
@@ -24,7 +24,17 @@ InstallMethod( @__MODULE__,  Opposite,
                
   function( object )
     
-    return ObjectConstructor( Opposite( CapCategory( object ) ), object );
+    return Opposite( Opposite( CapCategory( object ) ), object );
+    
+end );
+
+##
+InstallMethod( @__MODULE__,  Opposite,
+                    [ IsCapCategory, IsCapCategoryObject ],
+                    
+  function( opposite_cat, object )
+    
+    return ObjectConstructor( opposite_cat, object );
     
 end );
 
@@ -34,7 +44,22 @@ InstallMethod( @__MODULE__,  Opposite,
                
   function( morphism )
     
-    return MorphismConstructor( Opposite( CapCategory( morphism ) ), Opposite( Range( morphism ) ), morphism, Opposite( Source( morphism ) ) );
+    return Opposite( Opposite( CapCategory( morphism ) ), morphism );
+    
+end );
+
+##
+InstallMethod( @__MODULE__,  Opposite,
+                    [ IsCapCategory, IsCapCategoryMorphism ],
+                    
+  function( opposite_cat, morphism )
+    local source, range;
+    
+    source = ObjectConstructor( opposite_cat, Range( morphism ) );
+    
+    range = ObjectConstructor( opposite_cat, Source( morphism ) );
+    
+    return MorphismConstructor( opposite_cat, source, morphism, range );
     
 end );
 
