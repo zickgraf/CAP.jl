@@ -1,5 +1,7 @@
 module CAP
 
+@nospecialize
+
 using AbstractAlgebra
 
 include("gap_emulation.jl")
