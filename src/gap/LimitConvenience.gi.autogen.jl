@@ -37,7 +37,7 @@
             elseif limit.number_of_targets > 1
                 
                 # derive diagram from morphisms via diagram_position
-                current_string = Concatenation(
+                current_string = @Concatenation(
                     "\n",
                     "##\n",
                     "InstallMethod( ", universal_morphism_name, ",\n",
@@ -84,7 +84,7 @@
                     "end );\n"
                 );
                 
-                output_string = Concatenation( output_string, current_string );
+                output_string = @Concatenation( output_string, current_string );
                 
             end;
             
@@ -162,16 +162,16 @@ end );
 """,
                 rec(
                     without_given_universal_morphism = universal_morphism_name,
-                    with_given_universal_morphism = Concatenation( universal_morphism_name, "WithGiven", object_name ),
+                    with_given_universal_morphism = @Concatenation( universal_morphism_name, "WithGiven", object_name ),
                     diagram_filter_list = List( CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS( limit.diagram_filter_list ), NameFunction ),
                     tau_filter = tau_filter,
                     diagram_arguments = limit.diagram_input_type,
                     test_object_position = test_object_position,
-                    selected_tau = Concatenation( "tau", list_selector ),
+                    selected_tau = @Concatenation( "tau", list_selector ),
                 )
             );
             
-            output_string = Concatenation( output_string, current_string );
+            output_string = @Concatenation( output_string, current_string );
 
         end;
         
@@ -196,11 +196,11 @@ end );
             arguments_string = JoinStringsWithSeparator( input_type, ", " );
             
             if limit.number_of_targets == 1
-                source_diagram_arguments_string = Concatenation( "Source( ", arguments_string, " )" );
-                range_diagram_arguments_string = Concatenation( "Range( ", arguments_string, " )" );
+                source_diagram_arguments_string = @Concatenation( "Source( ", arguments_string, " )" );
+                range_diagram_arguments_string = @Concatenation( "Range( ", arguments_string, " )" );
             else
-                source_diagram_arguments_string = Concatenation( "List( ", arguments_string, ", Source )" );
-                range_diagram_arguments_string = Concatenation( "List( ", arguments_string, ", Range )" );
+                source_diagram_arguments_string = @Concatenation( "List( ", arguments_string, ", Source )" );
+                range_diagram_arguments_string = @Concatenation( "List( ", arguments_string, ", Range )" );
             end;
             
             replaced_filter_list = List( CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS( filter_list ), NameFunction );
@@ -225,7 +225,7 @@ end );
                 )
             );
             
-            output_string = Concatenation( output_string, current_string );
+            output_string = @Concatenation( output_string, current_string );
             
             # it is safe to use InstallOtherMethodForCompilerForCAP because there is no other two-argument convenience method for functorials
             current_string = ReplacedStringViaRecord( """
@@ -248,7 +248,7 @@ end );
                 )
             );
             
-            output_string = Concatenation( output_string, current_string );
+            output_string = @Concatenation( output_string, current_string );
             
             current_string = ReplacedStringViaRecord( """
 ##
@@ -270,7 +270,7 @@ end );
                 )
             );
             
-            output_string = Concatenation( output_string, current_string );
+            output_string = @Concatenation( output_string, current_string );
             
             # it is safe to use InstallOtherMethodForCompilerForCAP because there is no other four-argument convenience method for with given functorials
             current_string = ReplacedStringViaRecord( """
@@ -293,7 +293,7 @@ end );
                 )
             );
             
-            output_string = Concatenation( output_string, current_string );
+            output_string = @Concatenation( output_string, current_string );
             
         end;
         
@@ -301,7 +301,7 @@ end );
         @Assert( 0, Length( limit.diagram_morphism_filter_list ) <= 1 );
         @Assert( 0, Length( limit.diagram_morphism_input_type ) <= 1 );
         
-        input_arguments_names = Concatenation( [ "cat" ], functorial_with_given_record.io_type[1] );
+        input_arguments_names = @Concatenation( [ "cat" ], functorial_with_given_record.io_type[1] );
         
         source_argument_name = input_arguments_names[2];
         range_argument_name = Last( input_arguments_names );
@@ -330,7 +330,7 @@ end );
                         )
                     );
                     
-                    additional_preconditions = [ "[ PreCompose, 1 ]", Concatenation( "[ ", limit.limit_projection_with_given_name, ", 1 ]" ) ];
+                    additional_preconditions = [ "[ PreCompose, 1 ]", @Concatenation( "[ ", limit.limit_projection_with_given_name, ", 1 ]" ) ];
                     
                 elseif limit_colimit == "colimit"
                     
@@ -343,7 +343,7 @@ end );
                         )
                     );
                     
-                    additional_preconditions = [ "[ PreCompose, 1 ]", Concatenation( "[ ", limit.colimit_injection_with_given_name, ", 1 ]" ) ];
+                    additional_preconditions = [ "[ PreCompose, 1 ]", @Concatenation( "[ ", limit.colimit_injection_with_given_name, ", 1 ]" ) ];
                     
                 else
                     
@@ -379,7 +379,7 @@ end );
                         )
                     );
                     
-                    additional_preconditions = [ "[ PreCompose, 2 ]", Concatenation( "[ ", limit.limit_projection_with_given_name, ", 2 ]" ) ];
+                    additional_preconditions = [ "[ PreCompose, 2 ]", @Concatenation( "[ ", limit.limit_projection_with_given_name, ", 2 ]" ) ];
                     
                 elseif limit_colimit == "colimit"
                     
@@ -392,7 +392,7 @@ end );
                         )
                     );
                     
-                    additional_preconditions = [ "[ PreCompose, 2 ]", Concatenation( "[ ", limit.colimit_injection_with_given_name, ", 2 ]" ) ];
+                    additional_preconditions = [ "[ PreCompose, 2 ]", @Concatenation( "[ ", limit.colimit_injection_with_given_name, ", 2 ]" ) ];
                     
                 else
                     
@@ -417,12 +417,12 @@ end );
         if limit_colimit == "limit"
             
             universal_morphism_with_given_name = limit.limit_universal_morphism_with_given_name;
-            call_arguments = Concatenation( [ "cat" ], range_diagram_arguments_names, [ source_argument_name ], test_arguments, [ range_argument_name ] );
+            call_arguments = @Concatenation( [ "cat" ], range_diagram_arguments_names, [ source_argument_name ], test_arguments, [ range_argument_name ] );
             
         elseif limit_colimit == "colimit"
             
             universal_morphism_with_given_name = limit.colimit_universal_morphism_with_given_name;
-            call_arguments = Concatenation( [ "cat" ], source_diagram_arguments_names, [ range_argument_name ], test_arguments, [ source_argument_name ] );
+            call_arguments = @Concatenation( [ "cat" ], source_diagram_arguments_names, [ range_argument_name ], test_arguments, [ source_argument_name ] );
             
         else
             
@@ -445,7 +445,7 @@ end );
             rec(
                 functorial_with_given_name = functorial_with_given_name,
                 input_arguments = input_arguments_names,
-                preconditions = Concatenation( [ Concatenation( "[", universal_morphism_with_given_name, ", 1 ]" ) ], additional_preconditions ),
+                preconditions = @Concatenation( [ @Concatenation( "[", universal_morphism_with_given_name, ", 1 ]" ) ], additional_preconditions ),
                 equalizer_preprocessing = equalizer_preprocessing,
                 universal_morphism_with_given = universal_morphism_with_given_name,
                 call_arguments = call_arguments,
@@ -453,7 +453,7 @@ end );
             )
         );
         
-        output_string = Concatenation( output_string, current_string );
+        output_string = @Concatenation( output_string, current_string );
         
         # derive functorial of empty limits from IdentityMorphism
         if Length( limit.diagram_filter_list ) == 0 && (limit.limit_object_name != limit.colimit_object_name || limit_colimit == "limit")
@@ -477,7 +477,7 @@ end );
                 )
             );
             
-            output_string = Concatenation( output_string, current_string );
+            output_string = @Concatenation( output_string, current_string );
             
         end;
         
@@ -507,7 +507,7 @@ end );
         
         WriteFileForHomalg( output_path, output_string );
         
-        Display( Concatenation(
+        Display( @Concatenation(
             "WARNING: The file LimitConvenienceOutput.gi differs from the automatically generated one. ",
             "You can view the automatically generated file at the following path: ",
             output_path

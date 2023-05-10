@@ -212,7 +212,7 @@ end );
             
             @Assert( 0, filter_list[1] == "category" );
             
-            dual_arguments = List( (2):(Length( filter_list )), i -> Concatenation( "prep_arg[", StringGAP( i ), "]" ) );
+            dual_arguments = List( (2):(Length( filter_list )), i -> @Concatenation( "prep_arg[", StringGAP( i ), "]" ) );
             
         else
             
@@ -228,11 +228,11 @@ end );
                 
                 if filter == "object"
                     
-                    return Concatenation( "ObjectDatum( cat, ", argument_name, " )" );
+                    return @Concatenation( "ObjectDatum( cat, ", argument_name, " )" );
                     
                 elseif filter == "morphism"
                     
-                    return Concatenation( "MorphismDatum( cat, ", argument_name, " )" );
+                    return @Concatenation( "MorphismDatum( cat, ", argument_name, " )" );
                     
                 elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_Inf"
                     
@@ -240,11 +240,11 @@ end );
                     
                 elseif filter == "list_of_objects"
                     
-                    return Concatenation( "List( ", argument_name, ", x -> ObjectDatum( cat, x ) )" );
+                    return @Concatenation( "List( ", argument_name, ", x -> ObjectDatum( cat, x ) )" );
                     
                 elseif filter == "list_of_morphisms"
                     
-                    return Concatenation( "List( ", argument_name, ", x -> MorphismDatum( cat, x ) )" );
+                    return @Concatenation( "List( ", argument_name, ", x -> MorphismDatum( cat, x ) )" );
                     
                 else
                     
@@ -270,7 +270,7 @@ end );
             
         end;
         
-        dual_arguments = Concatenation( [ "OppositeCategory( cat )" ], dual_arguments );
+        dual_arguments = @Concatenation( [ "OppositeCategory( cat )" ], dual_arguments );
         
         if IsBound( current_entry.dual_postprocessor_func )
             
@@ -284,7 +284,7 @@ end );
                 
             end;
             
-            postprocessor_string = Concatenation( "dual_postprocessor_func = ", dual_postprocessor_func_string, ";" );
+            postprocessor_string = @Concatenation( "dual_postprocessor_func = ", dual_postprocessor_func_string, ";" );
             
             return_statement = "return dual_postprocessor_func( result );";
             
@@ -384,7 +384,7 @@ end );
         
         @Assert( 0, weight < Inf );
         
-        current_add = ValueGlobal( Concatenation( "Add", current_recname ) );
+        current_add = ValueGlobal( @Concatenation( "Add", current_recname ) );
         
         current_add( opposite_category, func, weight );
         
@@ -580,7 +580,7 @@ InstallMethod( @__MODULE__,  Opposite,
   function( category )
     local opposite_category;
     
-    opposite_category = Concatenation( "Opposite( ", Name( category ), " )" );
+    opposite_category = @Concatenation( "Opposite( ", Name( category ), " )" );
     
     return Opposite( category, opposite_category );
     
@@ -660,7 +660,7 @@ InstallMethod( @__MODULE__,  DisplayString,
         
   function( object )
     
-    return Concatenation( DisplayString( Opposite( object ) ), "\nAn object ⥉ ", Name( CapCategory( object ) ), " given by the above data\n" );
+    return @Concatenation( DisplayString( Opposite( object ) ), "\nAn object ⥉ ", Name( CapCategory( object ) ), " given by the above data\n" );
     
 end );
 
@@ -670,6 +670,6 @@ InstallMethod( @__MODULE__,  DisplayString,
         
   function( morphism )
     
-    return Concatenation( DisplayString( Opposite( morphism ) ), "\nA morphism ⥉ ", Name( CapCategory( morphism ) ), " given by the above data\n" );
+    return @Concatenation( DisplayString( Opposite( morphism ) ), "\nA morphism ⥉ ", Name( CapCategory( morphism ) ), " given by the above data\n" );
     
 end );

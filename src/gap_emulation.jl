@@ -919,6 +919,24 @@ function Concatenation(lists...)
 	end
 end
 
+# converting tuples to lists via splatting is much faster then via "collect" -> handle this via a macro
+macro Concatenation(lists...)
+	if length(lists) > 1 && any(x -> x isa Expr && x.head === :vect, lists)
+		# we are certainly dealing with multiple lists -> use splatting
+		splatted_lists = map(x -> :($x...), lists)
+		esc(quote
+			[$(splatted_lists...)]
+		end)
+	else
+		# fallback for other cases (single argument, strings, etc.)
+		esc(quote
+			Concatenation($(lists...))
+		end)
+	end
+end
+
+export @Concatenation
+
 function ReplacedString( string::String, search::String, val::String )
 	replace(string, search => val)
 end

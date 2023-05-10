@@ -207,7 +207,7 @@ end );
         
     end;
     
-    filter = NewFilter( Concatenation( name, "InstanceCategoryFilter" ), category_filter );
+    filter = NewFilter( @Concatenation( name, "InstanceCategoryFilter" ), category_filter );
     
     obj = ObjectifyWithAttributes( rec( ), NewType( TheFamilyOfCapCategories, filter ), Name, name );
     
@@ -215,7 +215,7 @@ end );
     SetCategoryFilter( obj, filter );
     
     # object filter
-    filter = NewCategory( Concatenation( name, "InstanceObjectFilter" ), object_filter );
+    filter = NewCategory( @Concatenation( name, "InstanceObjectFilter" ), object_filter );
     
     SetObjectFilter( obj, filter );
     SetObjectDatumType( obj, object_datum_type );
@@ -223,7 +223,7 @@ end );
     obj.object_type = NewType( TheFamilyOfCapCategoryObjects, filter );
     
     # morphism filter
-    filter = NewCategory( Concatenation( name, "InstanceMorphismFilter" ), morphism_filter );
+    filter = NewCategory( @Concatenation( name, "InstanceMorphismFilter" ), morphism_filter );
     
     SetMorphismFilter( obj, filter );
     SetMorphismDatumType( obj, morphism_datum_type );
@@ -231,7 +231,7 @@ end );
     obj.morphism_type = NewType( TheFamilyOfCapCategoryMorphisms, filter );
     
     # two cell filter
-    filter = NewCategory( Concatenation( name, "InstanceTwoCellFilter" ), two_cell_filter );
+    filter = NewCategory( @Concatenation( name, "InstanceTwoCellFilter" ), two_cell_filter );
     
     SetTwoCellFilter( obj, filter );
     SetTwoCellDatumType( obj, two_cell_datum_type );
@@ -536,7 +536,7 @@ InstallMethod( @__MODULE__,  CreateCapCategory,
   function( )
     local name;
     
-    name = Concatenation( "AutomaticCapCategory", StringGAP( CAP_INTERNAL_NAME_COUNTER( ) ) );
+    name = @Concatenation( "AutomaticCapCategory", StringGAP( CAP_INTERNAL_NAME_COUNTER( ) ) );
     
     return CreateCapCategory( name );
     
@@ -746,7 +746,7 @@ end );
         
     end;
     
-    header = Concatenation( "Timing statistics for the primitive operations of the category ", Name( category ), ":" );
+    header = @Concatenation( "Timing statistics for the primitive operations of the category ", Name( category ), ":" );
     
     operations = [ ];
     
@@ -822,7 +822,7 @@ end );
         
     end;
     
-    Display( Concatenation( "Total time spent ⥉ primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
+    Display( @Concatenation( "Total time spent ⥉ primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
     
     for operation in info.operations
         
@@ -865,7 +865,7 @@ if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound
             
         end;
         
-        Add( header, Concatenation( "Total time spent ⥉ primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
+        Add( header, @Concatenation( "Total time spent ⥉ primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
         Add( header, "" );
         
         value_matrix = [ ];
@@ -1060,7 +1060,7 @@ InstallMethod( @__MODULE__,  DisplayString,
                
   function ( category )
     
-    return Concatenation( "A CAP category with name ", Name( category ), ":\n\n", InfoStringOfInstalledOperationsOfCategory( category ), "\n" );
+    return @Concatenation( "A CAP category with name ", Name( category ), ":\n\n", InfoStringOfInstalledOperationsOfCategory( category ), "\n" );
     
 end );
 

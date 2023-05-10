@@ -268,7 +268,7 @@ InstallMethod( @__MODULE__,  FunctorObjectOperation,
     
     filter_list = CAP_INTERNAL_FUNCTOR_CREATE_FILTER_LIST( functor, "object" );
     
-    return NewOperation( Concatenation( "CAP_FUNCTOR_", Name( functor ), "_OBJECT_OPERATION" ), filter_list );
+    return NewOperation( @Concatenation( "CAP_FUNCTOR_", Name( functor ), "_OBJECT_OPERATION" ), filter_list );
     
 end );
 
@@ -282,9 +282,9 @@ InstallMethod( @__MODULE__,  FunctorMorphismOperation,
     
     range_cat = AsCapCategory( Range( functor ) );
     
-    filter_list = Concatenation( [ ObjectFilter( range_cat ) ], filter_list, [ ObjectFilter( range_cat ) ] );
+    filter_list = @Concatenation( [ ObjectFilter( range_cat ) ], filter_list, [ ObjectFilter( range_cat ) ] );
     
-    return NewOperation( Concatenation( "CAP_FUNCTOR_", Name( functor ), "_MORPHISM_OPERATION" ), filter_list );
+    return NewOperation( @Concatenation( "CAP_FUNCTOR_", Name( functor ), "_MORPHISM_OPERATION" ), filter_list );
     
 end );
 
@@ -338,7 +338,7 @@ InstallMethod( @__MODULE__,  AddMorphismFunction,
     
     range_cat = AsCapCategory( Range( functor ) );
     
-    filter_list = Concatenation( [ ObjectFilter( range_cat ) ], filter_list, [ ObjectFilter( range_cat ) ] );
+    filter_list = @Concatenation( [ ObjectFilter( range_cat ) ], filter_list, [ ObjectFilter( range_cat ) ] );
     
     if !IsBound( functor.morphism_function_list )
         
@@ -431,7 +431,7 @@ end );
         
         if source_category.input_sanity_check_level > 0
             if !Length( input_signature ) == Length( arguments )
-                Error( Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
+                Error( @Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
             end;
 
             for i in (1):(Length( input_signature ))
@@ -455,7 +455,7 @@ end );
 
         if source_category.input_sanity_check_level > 0
             if !Length( input_signature ) == Length( arguments )
-                Error( Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
+                Error( @Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
             end;
 
             for i in (1):(Length( input_signature ))
@@ -475,11 +475,11 @@ end );
             end;
         end;
         
-        source_value = CallFuncList( ApplyFunctor, Concatenation( [ functor ], source_list ) );
+        source_value = CallFuncList( ApplyFunctor, @Concatenation( [ functor ], source_list ) );
         
-        range_value = CallFuncList( ApplyFunctor, Concatenation( [ functor ], range_list ) );
+        range_value = CallFuncList( ApplyFunctor, @Concatenation( [ functor ], range_list ) );
         
-        computed_value = CallFuncList( FunctorMorphismOperation( functor ), Concatenation( [ source_value ], arguments, [ range_value ] ) );
+        computed_value = CallFuncList( FunctorMorphismOperation( functor ), @Concatenation( [ source_value ], arguments, [ range_value ] ) );
 
         if range_category.output_sanity_check_level > 0 && !range_category.add_primitive_output
             CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( computed_value, range_category, [ "the result of the morphism function of the functor named \033[1m", Name(functor), "\033[0m" ] );
@@ -509,7 +509,7 @@ AddPreCompose( cat,
   function( left_functor, right_functor )
     local new_functor;
     
-    new_functor = CapFunctor( Concatenation( "Precomposition of ",
+    new_functor = CapFunctor( @Concatenation( "Precomposition of ",
                                                  Name( left_functor ),
                                                  " && ",
                                                  Name( right_functor ) ),
@@ -540,7 +540,7 @@ AddIdentityMorphism( cat,
   function( category )
     local new_functor;
     
-    new_functor = CapFunctor( Concatenation( "Identity functor of ", Name( AsCapCategory( category ) ) ),
+    new_functor = CapFunctor( @Concatenation( "Identity functor of ", Name( AsCapCategory( category ) ) ),
                                                  category, category );
     
     AddObjectFunction( new_functor,
@@ -570,7 +570,7 @@ AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject( cat,
   function( category, terminal_cat )
     local new_functor;
     
-    new_functor = CapFunctor( Concatenation( "The terminal of ", Name( AsCapCategory( category ) ) ), category, terminal_cat );
+    new_functor = CapFunctor( @Concatenation( "The terminal of ", Name( AsCapCategory( category ) ) ), category, terminal_cat );
     
     AddObjectFunction( new_functor,
                        
@@ -600,7 +600,7 @@ AddProjectionInFactorOfDirectProductWithGivenDirectProduct( cat,
     local projection_functor;
     
     projection_functor = CapFunctor( 
-      Concatenation( "Projection into ", StringGAP( projection_number ),"-th factor of ", Name( AsCapCategory( direct_product ) ) ), 
+      @Concatenation( "Projection into ", StringGAP( projection_number ),"-th factor of ", Name( AsCapCategory( direct_product ) ) ), 
       direct_product, 
       object_product_list[ projection_number ]
     );
@@ -631,7 +631,7 @@ AddUniversalMorphismIntoDirectProductWithGivenDirectProduct( cat,
   function( diagram, test_object, sink, direct_product )
     local name_string, universal_functor;
     
-    name_string = Concatenation( 
+    name_string = @Concatenation( 
       "Product functor from ", 
       Name( AsCapCategory( Source( sink[1] ) ) ), 
       " to ", 
@@ -672,7 +672,7 @@ AddVerticalPreCompose( cat,
   function( above_transformation, below_transformation )
     local new_natural_transformation;
     
-    new_natural_transformation = NaturalTransformation( Concatenation( "Vertical composition of ",
+    new_natural_transformation = NaturalTransformation( @Concatenation( "Vertical composition of ",
                                                          Name( above_transformation ),
                                                          " && ",
                                                          Name( below_transformation ) ),
@@ -740,11 +740,11 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     
     if IsBoundGlobal( install_name ) && !IsOperation( ValueGlobal( install_name ) )
         
-        Error( Concatenation( "can!install functor under name ", install_name ) );
+        Error( @Concatenation( "can!install functor under name ", install_name ) );
         
     end;
     
-    object_name = Concatenation( install_name, "OnObjects" );
+    object_name = @Concatenation( install_name, "OnObjects" );
     
     if HasObjectFunctionName( functor )
         
@@ -754,13 +754,13 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     
     if IsBoundGlobal( object_name ) && !IsOperation( ValueGlobal( object_name ) )
         
-        Error( Concatenation( "can!install functor object function under name ", object_name ) );
+        Error( @Concatenation( "can!install functor object function under name ", object_name ) );
         
     end;
     
     SetObjectFunctionName( functor, object_name );
     
-    morphism_name = Concatenation( install_name, "OnMorphisms" );
+    morphism_name = @Concatenation( install_name, "OnMorphisms" );
     
     if HasMorphismFunctionName( functor )
         
@@ -770,7 +770,7 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     
     if IsBoundGlobal( morphism_name ) && !IsOperation( ValueGlobal( morphism_name ) )
         
-        Error( Concatenation( "can!install functor morphism function under name ", morphism_name ) );
+        Error( @Concatenation( "can!install functor morphism function under name ", morphism_name ) );
         
     end;
     
@@ -810,7 +810,7 @@ InstallMethod( @__MODULE__,  InstallFunctor,
                       
           function( arg... )
             
-            return CallFuncList( ApplyFunctor, Concatenation( [ functor ], arg ) );
+            return CallFuncList( ApplyFunctor, @Concatenation( [ functor ], arg ) );
             
         end );
         
@@ -884,7 +884,7 @@ InstallMethod( @__MODULE__,  NaturalIsomorphismFromIdentityToCanonicalizeZeroObj
     F = FunctorCanonicalizeZeroObjects( category );
     
     iso = NaturalTransformation(
-                   Concatenation( "natural isomorphism from the identity functor to ", Name( F ) ),
+                   @Concatenation( "natural isomorphism from the identity functor to ", Name( F ) ),
                    Id, F );
     
     AddNaturalTransformationFunction(
@@ -947,7 +947,7 @@ InstallMethod( @__MODULE__,  NaturalIsomorphismFromIdentityToCanonicalizeZeroMor
     F = FunctorCanonicalizeZeroMorphisms( category );
     
     iso = NaturalTransformation(
-                   Concatenation( "natural isomorphism from the identity functor to ", Name( F ) ),
+                   @Concatenation( "natural isomorphism from the identity functor to ", Name( F ) ),
                    Id, F );
     
     AddNaturalTransformationFunction(
@@ -976,7 +976,7 @@ InstallMethod( @__MODULE__,  NaturalTransformation,
                
   function( source, range )
     
-    return NaturalTransformation( Concatenation( "A natural transformation from ", Name( source ), " to ", Name( range ) ), source, range );
+    return NaturalTransformation( @Concatenation( "A natural transformation from ", Name( source ), " to ", Name( range ) ), source, range );
     
 end );
 
@@ -1025,9 +1025,9 @@ InstallMethod( @__MODULE__,  NaturalTransformationOperation,
     
     filter_list = CAP_INTERNAL_FUNCTOR_CREATE_FILTER_LIST( Source( trafo ), "object" );
     
-    filter_list = Concatenation( [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ], filter_list, [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ] );
+    filter_list = @Concatenation( [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ], filter_list, [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ] );
     
-    return NewOperation( Concatenation( "CAP_NATURAL_TRANSFORMATION_", Name( trafo ), "_OPERATION" ), filter_list );
+    return NewOperation( @Concatenation( "CAP_NATURAL_TRANSFORMATION_", Name( trafo ), "_OPERATION" ), filter_list );
     
 end );
 
@@ -1042,7 +1042,7 @@ InstallMethod( @__MODULE__,  AddNaturalTransformationFunction,
     
     filter_list = CAP_INTERNAL_FUNCTOR_CREATE_FILTER_LIST( Source( trafo ), "object" );
     
-    filter_list = Concatenation( [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ], filter_list, [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ] );
+    filter_list = @Concatenation( [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ], filter_list, [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ] );
     
     if !IsBound( trafo.function_list )
         
@@ -1096,11 +1096,11 @@ end );
          arguments[ 1 ] = Opposite( arguments[ 1 ] );
     end;
     
-    source_value = CallFuncList( ApplyFunctor, Concatenation( [ source_functor ], arguments ) );
+    source_value = CallFuncList( ApplyFunctor, @Concatenation( [ source_functor ], arguments ) );
     
-    range_value = CallFuncList( ApplyFunctor, Concatenation( [ Range( trafo ) ], arguments ) );
+    range_value = CallFuncList( ApplyFunctor, @Concatenation( [ Range( trafo ) ], arguments ) );
     
-    computed_value = CallFuncList( NaturalTransformationOperation( trafo ), Concatenation( [ source_value ], arguments, [ range_value ] ) );
+    computed_value = CallFuncList( NaturalTransformationOperation( trafo ), @Concatenation( [ source_value ], arguments, [ range_value ] ) );
     
     Add( AsCapCategory( Range( source_functor ) ), computed_value );
     
@@ -1127,7 +1127,7 @@ InstallMethod( @__MODULE__,  InstallNaturalTransformation,
     
     if IsBoundGlobal( install_name ) && !IsOperation( ValueGlobal( install_name ) )
         
-        Error( Concatenation( "can!install natural transformation under name ", install_name ) );
+        Error( @Concatenation( "can!install natural transformation under name ", install_name ) );
         
     end;
     
@@ -1147,7 +1147,7 @@ InstallMethod( @__MODULE__,  InstallNaturalTransformation,
                       
           function( arg... )
             
-            return CallFuncList( ApplyNaturalTransformation, Concatenation( [ trafo ], arg ) );
+            return CallFuncList( ApplyNaturalTransformation, @Concatenation( [ trafo ], arg ) );
             
         end );
         
@@ -1164,7 +1164,7 @@ InstallMethodWithCacheFromObject( HorizontalPreComposeNaturalTransformationWithF
   function( natural_transformation, functor )
     local composition;
     
-    composition = NaturalTransformation( Concatenation( "Horizontal composition of natural transformation ",
+    composition = NaturalTransformation( @Concatenation( "Horizontal composition of natural transformation ",
                                                          Name( natural_transformation ),
                                                          " && functor ",
                                                          Name( functor ) ),
@@ -1190,7 +1190,7 @@ InstallMethodWithCacheFromObject( HorizontalPreComposeFunctorWithNaturalTransfor
   function( functor, natural_transformation )
     local composition;
     
-    composition = NaturalTransformation( Concatenation( "Horizontal composition of functor ",
+    composition = NaturalTransformation( @Concatenation( "Horizontal composition of functor ",
                                                          Name( functor ),
                                                          " && natural transformation ",
                                                          Name( natural_transformation ) ),

@@ -14,7 +14,7 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory = [
 ];
 
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsEquippedWithHomomorphismStructure = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsEquippedWithHomomorphismStructure = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory,
     [
         "DistinguishedObjectOfHomomorphismStructure",
@@ -25,7 +25,7 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsEquippedWithHomomorphismStructure 
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithDecidableLifts = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithDecidableLifts = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory,
     [
         "IsLiftable",
@@ -33,7 +33,7 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithDecidableLifts = Conca
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithDecidableColifts = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithDecidableColifts = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory,
     [
         "IsColiftable",
@@ -41,14 +41,14 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithDecidableColifts = Con
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsEnrichedOverCommutativeRegularSemigroup = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsEnrichedOverCommutativeRegularSemigroup = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory,
     [
         "AdditionForMorphisms",
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbCategory = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbCategory = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsEnrichedOverCommutativeRegularSemigroup,
     [
         "ZeroMorphism",
@@ -58,14 +58,14 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbCategory = Concatenation(
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsLinearCategoryOverCommutativeRing = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsLinearCategoryOverCommutativeRing = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbCategory,
     [
         "MultiplyWithElementOfCommutativeRingForMorphisms",
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAdditiveCategory = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAdditiveCategory = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbCategory,
     [
         "ZeroObject",
@@ -79,7 +79,7 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAdditiveCategory = Concatenation(
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsPreAbelianCategory = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsPreAbelianCategory = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAdditiveCategory,
     [
         "KernelObject",
@@ -91,7 +91,7 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsPreAbelianCategory = Concatenation
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategory = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategory = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsPreAbelianCategory,
     [
         "LiftAlongMonomorphism",
@@ -99,7 +99,7 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategory = Concatenation(
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategoryWithEnoughProjectives = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategoryWithEnoughProjectives = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategory,
     [
         "EpimorphismFromSomeProjectiveObject",
@@ -107,7 +107,7 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategoryWithEnoughProjectiv
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategoryWithEnoughInjectives = Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategoryWithEnoughInjectives = @Concatenation(
     CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsAbelianCategory,
     [
         "MonomorphismIntoSomeInjectiveObject",

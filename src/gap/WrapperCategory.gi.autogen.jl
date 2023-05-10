@@ -222,7 +222,7 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         
     elseif HasName( C )
         
-        reinterpretation_options.name = Concatenation( "WrapperCategory( ", Name( C ), " )" );
+        reinterpretation_options.name = @Concatenation( "WrapperCategory( ", Name( C ), " )" );
         
     end;
     
@@ -308,7 +308,7 @@ InstallMethod( @__MODULE__,  DisplayString,
         
   function( a )
     
-    return Concatenation( DisplayString( ObjectDatum( a ) ), "\nAn object ⥉ ", Name( CapCategory( a ) ), " given by the above data\n" );
+    return @Concatenation( DisplayString( ObjectDatum( a ) ), "\nAn object ⥉ ", Name( CapCategory( a ) ), " given by the above data\n" );
     
 end );
 
@@ -319,6 +319,6 @@ InstallMethod( @__MODULE__,  DisplayString,
         
   function( phi )
     
-    return Concatenation( DisplayString( MorphismDatum( phi ) ), "\nA morphism ⥉ ", Name( CapCategory( phi ) ), " given by the above data\n" );
+    return @Concatenation( DisplayString( MorphismDatum( phi ) ), "\nA morphism ⥉ ", Name( CapCategory( phi ) ), " given by the above data\n" );
     
 end );

@@ -42,16 +42,16 @@ InstallMethod( @__MODULE__,  IsEqualForObjects,
   function( cat, object_1, object_2 )
 
     if !HasCapCategory( object_1 )
-        Error( Concatenation( "the object \"", StringGAP( object_1 ), "\" has no CAP category" ) );
+        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" has no CAP category" ) );
     end;
     if !HasCapCategory( object_2 )
-        Error( Concatenation( "the object \"", StringGAP( object_2 ), "\" has no CAP category" ) );
+        Error( @Concatenation( "the object \"", StringGAP( object_2 ), "\" has no CAP category" ) );
     end;
 
     if !IsIdenticalObj( CapCategory( object_1 ), CapCategory( object_2 ) )
-        Error( Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" do !belong to the same CAP category" ) );
+        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" do !belong to the same CAP category" ) );
     else
-        Error( Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" belong to the same CAP category, but no specific method IsEqualForObjects is installed. Maybe you forgot to finalize the category?" ) );
+        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" belong to the same CAP category, but no specific method IsEqualForObjects is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
@@ -63,7 +63,7 @@ InstallMethod( @__MODULE__,  ==,
 
     if CapCategory( object_1 ).input_sanity_check_level > 0 || CapCategory( object_2 ).input_sanity_check_level > 0 
         if !IsIdenticalObj( CapCategory( object_1 ), CapCategory( object_2 ) )
-            Error( Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" do !belong to the same CAP category" ) );
+            Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" do !belong to the same CAP category" ) );
         end;
     end;
                
@@ -145,7 +145,7 @@ InstallMethod( @__MODULE__,  Add,
         else
             
             Error(
-                Concatenation(
+                @Concatenation(
                     "an object that lies ⥉ the CAP-category with the name\n",
                     Name( CapCategory( object ) ),
                     "\n",
@@ -258,7 +258,7 @@ InstallMethod( @__MODULE__,  RandomObject, [ IsCapCategory, IsList ], RandomObje
   function( object, category, additional_arguments_list... )
     local arg_list, obj;
     
-    arg_list = Concatenation(
+    arg_list = @Concatenation(
         [ object, category.object_type, CapCategory, category ], additional_arguments_list
     );
     
@@ -283,7 +283,7 @@ end );
     
     # inline ObjectifyObjectForCAPWithAttributes( rec( ), category, additional_arguments_list... );
     
-    arg_list = Concatenation(
+    arg_list = @Concatenation(
         [ rec( ), category.object_type, CapCategory, category ], additional_arguments_list
     );
     
@@ -321,7 +321,7 @@ InstallMethod( @__MODULE__,  StringGAP,
   function( object )
     
     # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    return Concatenation( "An object ", "in ", Name( CapCategory( object ) ) );
+    return @Concatenation( "An object ", "in ", Name( CapCategory( object ) ) );
     
 end );
 
@@ -333,7 +333,7 @@ InstallMethod( @__MODULE__,  ViewString,
     
     # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
     # do !reuse `StringGAP` because objects might use `StringGAP` as the attribute storing the object datum
-    return Concatenation( "<An object ", "in ", Name( CapCategory( object ) ), ">" );
+    return @Concatenation( "<An object ", "in ", Name( CapCategory( object ) ), ">" );
     
 end );
 
@@ -344,7 +344,7 @@ InstallMethod( @__MODULE__,  DisplayString,
     
     # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
     # do !reuse `StringGAP` because objects might use `StringGAP` as the attribute storing the object datum
-    return Concatenation( "An object ", "in ", Name( CapCategory( object ) ), ".\n" );
+    return @Concatenation( "An object ", "in ", Name( CapCategory( object ) ), ".\n" );
     
 end );
 

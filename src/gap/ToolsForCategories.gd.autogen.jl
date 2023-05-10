@@ -209,7 +209,7 @@
 @DeclareGlobalFunction( "CapFixpoint" );
 
 #! @Description
-#!   Shorthand for `Iterated( Concatenation( [ <A>initial_value</A> ], <A>list</A> ), <A>func</A> )`.
+#!   Shorthand for `Iterated( @Concatenation( [ <A>initial_value</A> ], <A>list</A> ), <A>func</A> )`.
 #! @Arguments list, func, initial_value
 @DeclareOperation( "Iterated", [ IsList, IsFunction, IsObject ] );
 

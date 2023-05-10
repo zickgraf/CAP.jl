@@ -29,15 +29,15 @@
     StableSortBy( list_of_maximal_algorithmic_properties, p -> Length( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p] ) );
     
     result = StringGAP( Length( ListPrimitivelyInstalledOperationsOfCategory( category ) ) );
-    result = Concatenation( result, " primitive operations were used to derive " );
-    result = Concatenation( result, StringGAP( Length( ListInstalledOperationsOfCategory( category ) ) ) );
-    result = Concatenation( result, " operations for this category" );
+    result = @Concatenation( result, " primitive operations were used to derive " );
+    result = @Concatenation( result, StringGAP( Length( ListInstalledOperationsOfCategory( category ) ) ) );
+    result = @Concatenation( result, " operations for this category" );
     if !IsEmpty( list_of_maximal_algorithmic_properties )
-        result = Concatenation( result, " which algorithmically" );
+        result = @Concatenation( result, " which algorithmically" );
     end;
     for property in list_of_maximal_algorithmic_properties
-        result = Concatenation( result, "\n* " );
-        result = Concatenation( result, property );
+        result = @Concatenation( result, "\n* " );
+        result = @Concatenation( result, property );
     end;
     
     list_of_mathematical_properties = Difference( list_of_mathematical_properties, list_of_algorithmic_properties );
@@ -46,17 +46,17 @@
     
     if !IsEmpty( list_of_mathematical_properties )
         if !IsEmpty( list_of_algorithmic_properties )
-            result = Concatenation( result, "\nand furthermore" );
+            result = @Concatenation( result, "\nand furthermore" );
         else
-            result = Concatenation( result, " which" );
+            result = @Concatenation( result, " which" );
         end;
-        result = Concatenation( result, " mathematically" );
+        result = @Concatenation( result, " mathematically" );
     end;
     for property in list_of_mathematical_properties
-        result = Concatenation( result, "\n* " );
-        result = Concatenation( result, property );
+        result = @Concatenation( result, "\n* " );
+        result = @Concatenation( result, property );
         if property ⥉ Difference( list_of_potential_algorithmic_properties, list_of_algorithmic_properties )
-            result = Concatenation( result, " (but !yet algorithmically)" );
+            result = @Concatenation( result, " (but !yet algorithmically)" );
         end;
     end;
     

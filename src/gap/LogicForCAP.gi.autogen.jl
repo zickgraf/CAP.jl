@@ -172,7 +172,7 @@ end );
                 
             elseif IsString( i ) && LowercaseString( i ) == "all"
                 
-                object = Concatenation( object );
+                object = @Concatenation( object );
                 
             else
                 
@@ -234,11 +234,11 @@ end );
         
     end;
     
-    Info( CapLogicInfo, 1, Concatenation( "Creating todo list for operation ", method_name ) );
+    Info( CapLogicInfo, 1, @Concatenation( "Creating todo list for operation ", method_name ) );
     
     theorem_list = TheoremRecord( category )[method_name];
     
-    Info( CapLogicInfo, 1, Concatenation( "Trying to create ", StringGAP( Length( theorem_list ) ), " theorems" ) );
+    Info( CapLogicInfo, 1, @Concatenation( "Trying to create ", StringGAP( Length( theorem_list ) ), " theorems" ) );
     
     for current_theorem in theorem_list
         
@@ -335,7 +335,7 @@ end );
         
         entry = ToDoListEntry( todo_list_source, range[ 1 ], NameFunction( range[ 2 ] ), range[ 3 ] );
         
-        SetDescriptionOfImplication( entry, Concatenation( "Implication from ", method_name ) );
+        SetDescriptionOfImplication( entry, @Concatenation( "Implication from ", method_name ) );
         
         AddToToDoList( entry );
         

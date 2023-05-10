@@ -86,7 +86,7 @@ end );
         
     end;
     
-    CallFuncList( AddFinalDerivationBundle, Concatenation( [ description, can_compute, cannot_compute, [ target_op, can_compute, func ] ], additional_functions ) );
+    CallFuncList( AddFinalDerivationBundle, @Concatenation( [ description, can_compute, cannot_compute, [ target_op, can_compute, func ] ], additional_functions ) );
     
 end );
 
@@ -223,7 +223,7 @@ end );
         # =#
         
         Add( derivations, MakeDerivation(
-            Concatenation( description, " (final derivation)" ),
+            @Concatenation( description, " (final derivation)" ),
             current_additional_func[1],
             used_op_names_with_multiples_and_category_getters,
             weight,

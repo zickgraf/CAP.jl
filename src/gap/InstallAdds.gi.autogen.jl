@@ -31,7 +31,7 @@ end );
   
   function( function_name, category, message )
     
-    Error( Concatenation( "in function \033[1m", function_name,
+    Error( @Concatenation( "in function \033[1m", function_name,
         "\033[0m\n       of category \033[1m",
         Name( category ), ":\033[0m\n\033[1m       ", message, "\033[0m\n" ) );
     
@@ -57,7 +57,7 @@ end );
         
     end;
     
-    add_name = Concatenation( "Add", function_name );
+    add_name = @Concatenation( "Add", function_name );
     add_function = ValueGlobal( add_name );
     
     if IsBound( record.pre_function )
@@ -107,23 +107,23 @@ end );
         
         if filter_list[2] ⥉ [ "object", "morphism", "twocell" ]
             
-            get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, Concatenation( [ CapCategory( arg[1] ) ], arg ) );
+            get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, @Concatenation( [ CapCategory( arg[1] ) ], arg ) );
             
         elseif filter_list[2] == "list_of_objects" || filter_list[2] == "list_of_morphisms"
             
-            get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, Concatenation( [ CapCategory( arg[1][1] ) ], arg ) );
+            get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, @Concatenation( [ CapCategory( arg[1][1] ) ], arg ) );
             
         elseif filter_list[3] ⥉ [ "object", "morphism", "twocell" ]
             
-            get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, Concatenation( [ CapCategory( arg[2] ) ], arg ) );
+            get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, @Concatenation( [ CapCategory( arg[2] ) ], arg ) );
             
         elseif filter_list[4] == "list_of_objects" || filter_list[4] == "list_of_morphisms"
             
-            get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, Concatenation( [ CapCategory( arg[3][1] ) ], arg ) );
+            get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, @Concatenation( [ CapCategory( arg[3][1] ) ], arg ) );
             
         else
             
-            Error( Concatenation( "please add a way to derive the category from the arguments of ", function_name ) );
+            Error( @Concatenation( "please add a way to derive the category from the arguments of ", function_name ) );
             
         end;
         
@@ -318,7 +318,7 @@ end );
                 
                 if !IsEmpty( method_list[ current_function_number ][ 2 ] )
                     
-                    method_list[ current_function_number ][ 2 ] = Concatenation( [ IsCapCategory ], method_list[ current_function_number ][ 2 ] );
+                    method_list[ current_function_number ][ 2 ] = @Concatenation( [ IsCapCategory ], method_list[ current_function_number ][ 2 ] );
                     
                 end;
                 
@@ -472,7 +472,7 @@ end );
                     
                     if post_function != false
                         
-                        CallFuncList( post_function, Concatenation( arg, [ result ] ) );
+                        CallFuncList( post_function, @Concatenation( arg, [ result ] ) );
                         
                     end;
                     
@@ -516,19 +516,19 @@ end );
                 
                 if is_derivation
                     
-                    SetNameFunction( i[ 1 ], Concatenation( "Derivation (first added to ", name, ") of ", function_name ) );
+                    SetNameFunction( i[ 1 ], @Concatenation( "Derivation (first added to ", name, ") of ", function_name ) );
                     
                 elseif is_final_derivation
                     
-                    SetNameFunction( i[ 1 ], Concatenation( "Final derivation (first added to ", name, ") of ", function_name ) );
+                    SetNameFunction( i[ 1 ], @Concatenation( "Final derivation (first added to ", name, ") of ", function_name ) );
                     
                 elseif is_precompiled_derivation
                     
-                    SetNameFunction( i[ 1 ], Concatenation( "Precompiled derivation added to ", name, " for ", function_name ) );
+                    SetNameFunction( i[ 1 ], @Concatenation( "Precompiled derivation added to ", name, " for ", function_name ) );
                     
                 else
                     
-                    SetNameFunction( i[ 1 ], Concatenation( "Function added to ", name, " for ", function_name ) );
+                    SetNameFunction( i[ 1 ], @Concatenation( "Function added to ", name, " for ", function_name ) );
                     
                 end;
                 
@@ -588,7 +588,7 @@ end );
     
     if with_given_object_position == "Source"
         
-        with_given_arguments_strings = Concatenation( without_given_arguments_names, [ without_given_rec.output_source_getter_string ] );
+        with_given_arguments_strings = @Concatenation( without_given_arguments_names, [ without_given_rec.output_source_getter_string ] );
         
         if !IsBound( without_given_rec.output_source_getter_preconditions )
             
@@ -601,7 +601,7 @@ end );
         
     elseif with_given_object_position == "Range"
         
-        with_given_arguments_strings = Concatenation( without_given_arguments_names, [ without_given_rec.output_range_getter_string ] );
+        with_given_arguments_strings = @Concatenation( without_given_arguments_names, [ without_given_rec.output_range_getter_string ] );
         
         if !IsBound( without_given_rec.output_range_getter_preconditions )
             
@@ -614,7 +614,7 @@ end );
         
     elseif with_given_object_position == "both"
         
-        with_given_arguments_strings = Concatenation(
+        with_given_arguments_strings = @Concatenation(
             [ without_given_arguments_names[1] ],
             [ without_given_rec.output_source_getter_string ],
             without_given_arguments_names[(2):(Length( without_given_arguments_names ))],
@@ -677,15 +677,15 @@ end );
     
     AddDerivationToCAP(
         ValueGlobal( with_given_name ),
-        Concatenation( with_given_name, " by calling ", without_given_name, " with the WithGiven argument(s) dropped" ),
+        @Concatenation( with_given_name, " by calling ", without_given_name, " with the WithGiven argument(s) dropped" ),
         [ [ ValueGlobal( without_given_name ), 1 ] ],
         with_given_via_without_given_function
     );
     
     AddDerivationToCAP(
         ValueGlobal( without_given_name ),
-        Concatenation( without_given_name, " by calling ", with_given_name, " with the WithGiven object(s)" ),
-        Concatenation( [ [ ValueGlobal( with_given_name ), 1 ] ], List( additional_preconditions, x -> [ ValueGlobal( x[1] ), x[2] ] ) ),
+        @Concatenation( without_given_name, " by calling ", with_given_name, " with the WithGiven object(s)" ),
+        @Concatenation( [ [ ValueGlobal( with_given_name ), 1 ] ], List( additional_preconditions, x -> [ ValueGlobal( x[1] ), x[2] ] ) ),
         without_given_via_with_given_function
     );
     

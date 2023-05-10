@@ -68,13 +68,13 @@ end );
     
     for current_precondition in precondition_list
         if !current_precondition ⥉ operation_names
-            Error( Concatenation( "Precondition ", current_precondition, " !in list of known category functions" ) );
+            Error( @Concatenation( "Precondition ", current_precondition, " !in list of known category functions" ) );
         end;
     end;
     
     used_symbol_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION( prepare_function, operation_names, 1, rec( ), rec( ) );
     used_symbol_list = List( used_symbol_list, i -> i[ 1 ] );
-    used_symbol_list = Concatenation( used_symbol_list, precondition_list );
+    used_symbol_list = @Concatenation( used_symbol_list, precondition_list );
     used_symbol_list = DuplicateFreeList( used_symbol_list );
     
     CAP_PREPARE_FUNCTION_RECORD[name] = [ prepare_function, doc_string, used_symbol_list ];

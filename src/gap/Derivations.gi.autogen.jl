@@ -80,14 +80,14 @@ end );
 InstallMethod( @__MODULE__,  StringGAP,
                [ IsDerivedMethod ],
 function( d )
-  return Concatenation( "derivation ", DerivationName( d ),
+  return @Concatenation( "derivation ", DerivationName( d ),
                         " of operation ", TargetOperation( d ) );
 end );
 
 InstallMethod( @__MODULE__,  ViewString,
                [ IsDerivedMethod ],
 function( d )
-  return Concatenation( "<", StringGAP( d ), ">" );
+  return @Concatenation( "<", StringGAP( d ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  IsApplicableToCategory,
@@ -103,7 +103,7 @@ function( d, weight, C )
         installation_name, nr_arguments, cache_name, current_filters, current_implementation,
         function_called_before_installation;
   
-  Info( DerivationInfo, 1, Concatenation( "install(",
+  Info( DerivationInfo, 1, @Concatenation( "install(",
                                           StringGAP( weight ),
                                           ") ",
                                           TargetOperation( d ),
@@ -112,7 +112,7 @@ function( d, weight, C )
   
   method_name = TargetOperation( d );
   func = DerivationFunction( d );
-  add_name = Concatenation( "Add", method_name );
+  add_name = @Concatenation( "Add", method_name );
   add_method = ValueGlobal( add_name );
   
   if HasFunctionCalledBeforeInstallation( d )
@@ -192,7 +192,7 @@ end );
 InstallMethod( @__MODULE__,  ViewString,
                [ IsDerivedMethodGraph ],
 function( G )
-  return Concatenation( "<", StringGAP( G ), ">" );
+  return @Concatenation( "<", StringGAP( G ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  AddDerivation,
@@ -370,7 +370,7 @@ end );
   function( arg... )
     local list;
     
-    list = Concatenation( [ CAP_INTERNAL_DERIVATION_GRAPH ], arg );
+    list = @Concatenation( [ CAP_INTERNAL_DERIVATION_GRAPH ], arg );
     
     CallFuncList( AddDerivation, list );
     
@@ -430,14 +430,14 @@ end );
 InstallMethod( @__MODULE__,  StringGAP,
                [ IsOperationWeightList ],
 function( owl )
-  return Concatenation( "operation weight list for ",
+  return @Concatenation( "operation weight list for ",
                         StringGAP( CategoryOfOperationWeightList( owl ) ) );
 end );
 
 InstallMethod( @__MODULE__,  ViewString,
                [ IsOperationWeightList ],
 function( owl )
-  return Concatenation( "<", StringGAP( owl ), ">" );
+  return @Concatenation( "<", StringGAP( owl ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  CurrentOperationWeight,
@@ -634,7 +634,7 @@ InstallMethod( @__MODULE__,  AddPrimitiveOperation,
                [ IsOperationWeightList, IsString, IsInt ],
 function( owl, op_name, weight )
     
-    Info( DerivationInfo, 1, Concatenation( "install(",
+    Info( DerivationInfo, 1, @Concatenation( "install(",
                                   StringGAP( weight ),
                                   ") ",
                                   op_name,
@@ -689,7 +689,7 @@ function( owl, op_name )
     if d == fail
       return [];
     else
-      return Concatenation( [ [ fail, DerivationWeight( d ) ] ],
+      return @Concatenation( [ [ fail, DerivationWeight( d ) ] ],
                             UsedOperationsWithMultiplesAndCategoryGetters( d ) );
     end;
   end;
@@ -711,14 +711,14 @@ end );
 InstallMethod( @__MODULE__,  StringGAP,
                [ IsStringMinHeap ],
 function( H )
-  return Concatenation( "min heap for strings, with size ",
+  return @Concatenation( "min heap for strings, with size ",
                         StringGAP( HeapSize( H ) ) );
 end );
 
 InstallMethod( @__MODULE__,  ViewString,
                [ IsStringMinHeap ],
 function( H )
-  return Concatenation( "<", StringGAP( H ), ">" );
+  return @Concatenation( "<", StringGAP( H ), ">" );
 end );
 
 InstallMethod( @__MODULE__,  HeapSize,
@@ -967,7 +967,7 @@ end );
                 else
                     
                     weight_list = x[3](category).derivations_weight_list;
-                    category_getter_string = Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
+                    category_getter_string = @Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
                     
                 end;
                 
@@ -1062,7 +1062,7 @@ end );
             else
                 
                 weight_list = x[3](category).derivations_weight_list;
-                category_getter_string = Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
+                category_getter_string = @Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
                 
             end;
             
@@ -1098,7 +1098,7 @@ end );
                 else
                     
                     weight_list = x[3](category).derivations_weight_list;
-                    category_getter_string = Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
+                    category_getter_string = @Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
                     
                 end;
                 

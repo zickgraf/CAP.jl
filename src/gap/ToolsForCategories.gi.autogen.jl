@@ -87,7 +87,7 @@
         
         if category != false && !HasRangeCategoryOfHomomorphismStructure( category )
             
-            Display( Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
+            Display( @Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
             
         end;
         
@@ -105,7 +105,7 @@
         
         if category != false && !HasRangeCategoryOfHomomorphismStructure( category )
             
-            Display( Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
+            Display( @Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
             
         end;
         
@@ -405,13 +405,13 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
             if NumberArgumentsFunction( value ) >= 0 && NumberArgumentsFunction( value ) != Length( data_type.signature[1] )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " has ", NumberArgumentsFunction( value ), " arguments but ", Length( data_type.signature[1] ), " were expected.", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " has ", NumberArgumentsFunction( value ), " arguments but ", Length( data_type.signature[1] ), " were expected.", generic_help_string ] ) );
                 
             end;
             
@@ -423,16 +423,16 @@ end );
         # The "correct" approach would be to generate those on demand but that would imply that we have to create assertion functions at runtime.
         # Thus, we take the pragmatic approach: We generate an assertion function for the first few entries, && a generic assertion function for all other entries.
         # For nested lists the number of assertion functions grows exponentially, so we choose a quite small number (4).
-        asserts_value_is_of_element_type = List( (1):(4), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_type, Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
+        asserts_value_is_of_element_type = List( (1):(4), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_type, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
         
-        generic_assert_value_is_of_element_type = CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_type, Concatenation( [ "some entry of " ], human_readable_identifier_list )  );
+        generic_assert_value_is_of_element_type = CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_type, @Concatenation( [ "some entry of " ], human_readable_identifier_list )  );
         
         return function( value )
           local i;
             
             if !filter( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -440,7 +440,7 @@ end );
                 
                 if !IsBound( value[i] )
                     
-                    CallFuncList( Error, Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
+                    CallFuncList( Error, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
                     
                 end;
                 
@@ -460,7 +460,7 @@ end );
         
     elseif IsSpecializationOfFilter( IsNTuple, filter )
         
-        asserts_value_is_of_element_type = List( (1):(Length( data_type.element_types )), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_types[i], Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
+        asserts_value_is_of_element_type = List( (1):(Length( data_type.element_types )), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_types[i], @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
         
         return function( value )
           local i;
@@ -468,13 +468,13 @@ end );
             # tuples are modeled as lists
             if !IsList( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsList (implementation filter of IsNTuple).", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsList (implementation filter of IsNTuple).", generic_help_string ] ) );
                 
             end;
             
             if Length( value ) != Length( data_type.element_types )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " has length ", Length( value ), " but ", Length( data_type.element_types ), " was expected.", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " has length ", Length( value ), " but ", Length( data_type.element_types ), " was expected.", generic_help_string ] ) );
                 
             end;
             
@@ -482,7 +482,7 @@ end );
                 
                 if !IsBound( value[i] )
                     
-                    CallFuncList( Error, Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
+                    CallFuncList( Error, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
                     
                 end;
                 
@@ -498,13 +498,13 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
             if !IsIdenticalObj( value, data_type.category )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " is !the expected category although it lies ⥉ the category filter of the expected category. This should never happen, please report this using the CAP_project's issue tracker.", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " is !the expected category although it lies ⥉ the category filter of the expected category. This should never happen, please report this using the CAP_project's issue tracker.", generic_help_string ] ) );
                 
             end;
             
@@ -516,7 +516,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -530,7 +530,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -544,7 +544,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -559,7 +559,7 @@ end );
             # Some things (e.g. integers) do !lie ⥉ the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
             if !IsRingElement( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsRingElement.", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsRingElement.", generic_help_string ] ) );
                 
             end;
             
@@ -571,7 +571,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -625,7 +625,7 @@ end );
             
         end;
         
-        function_string = Concatenation( function_string[(1):(current_scan_position - 1)], " od ", function_string[(current_scan_position):(Length( function_string ))] );
+        function_string = @Concatenation( function_string[(1):(current_scan_position - 1)], " od ", function_string[(current_scan_position):(Length( function_string ))] );
         
         current_position = PositionSublist( function_string, loop_symbol, current_position + 1 );
         
@@ -679,7 +679,7 @@ end );
         
     end;
     
-    return Concatenation( appearance_list, new_appearances );
+    return @Concatenation( appearance_list, new_appearances );
     
 end );
 
@@ -711,8 +711,8 @@ end );
     for i in [ "List", "ListN", "Perform", "Apply", "Iterated" ]
         
         # beginning space || new line is important here to avoid scanning things like CallFuncList
-        func_as_string = ReplacedString( func_as_string, Concatenation( " ", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
-        func_as_string = ReplacedString( func_as_string, Concatenation( "\n", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
+        func_as_string = ReplacedString( func_as_string, @Concatenation( " ", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
+        func_as_string = ReplacedString( func_as_string, @Concatenation( "\n", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
         
     end;
     
@@ -728,7 +728,7 @@ end );
     
     symbol_appearance_list = [ ];
     
-    symbol_list = Concatenation( symbol_list, RecNames( replacement_record ) );
+    symbol_list = @Concatenation( symbol_list, RecNames( replacement_record ) );
     
     for i in (1):(Length( func_as_list ))
         
@@ -909,7 +909,7 @@ end );
     
     list = [ ];
     
-    for name in SetGAP( Filtered( Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) )
+    for name in SetGAP( Filtered( @Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) )
       
       if Tester( ValueGlobal( name ) )( category ) && ValueGlobal( name )( category )
         
@@ -988,7 +988,7 @@ end );
       local result;
         
         Print(
-          Concatenation(
+          @Concatenation(
           "WARNING: ", alias_name, " is deprecated && will !be supported after ", deprecation_date, ". Please use ", function_name, " instead.\n"
           )
         );
@@ -1407,7 +1407,7 @@ InstallMethod( @__MODULE__,  Iterated,
                
   function( list, func, initial_value )
     
-    return Iterated( Concatenation( [ initial_value ], list ), func );
+    return Iterated( @Concatenation( [ initial_value ], list ), func );
     
 end );
 
@@ -1646,7 +1646,7 @@ end );
             
         end;
         
-        category.compiler_hints.precompiled_towers = Concatenation( category.compiler_hints.precompiled_towers, precompiled_towers );
+        category.compiler_hints.precompiled_towers = @Concatenation( category.compiler_hints.precompiled_towers, precompiled_towers );
         
     end;
     

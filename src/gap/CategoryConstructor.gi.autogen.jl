@@ -69,7 +69,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
     else
         
-        name = Concatenation( "AutomaticCapCategory", StringGAP( CAP_INTERNAL_NAME_COUNTER( ) ) );
+        name = @Concatenation( "AutomaticCapCategory", StringGAP( CAP_INTERNAL_NAME_COUNTER( ) ) );
         
     end;
     
@@ -94,7 +94,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
     ## set categorical properties
     if IsBound( options.properties )
         
-        if !IsSubset( SetGAP( Filtered( Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) ), options.properties )
+        if !IsSubset( SetGAP( Filtered( @Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) ), options.properties )
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "The value of the option `properties` must be a list of categorical properties, see CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST." );
@@ -265,7 +265,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             
         end;
         
-        create_func_name = Concatenation( "create_func_", info.return_type );
+        create_func_name = @Concatenation( "create_func_", info.return_type );
         
         # check if we have a suitable create_func_*
         if !IsBound( options[create_func_name] )
@@ -322,15 +322,15 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                 
                 if filter == "category"
                     
-                    return Concatenation( options.underlying_category_getter_string, "( ", argument_name, " )" );
+                    return @Concatenation( options.underlying_category_getter_string, "( ", argument_name, " )" );
                     
                 elseif filter == "object"
                     
-                    return Concatenation( options.underlying_object_getter_string, "( cat, ", argument_name, " )" );
+                    return @Concatenation( options.underlying_object_getter_string, "( cat, ", argument_name, " )" );
                     
                 elseif filter == "morphism"
                     
-                    return Concatenation( options.underlying_morphism_getter_string, "( cat, ", argument_name, " )" );
+                    return @Concatenation( options.underlying_morphism_getter_string, "( cat, ", argument_name, " )" );
                     
                 elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_Inf"
                     
@@ -338,15 +338,15 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                     
                 elseif filter == "list_of_objects"
                     
-                    return Concatenation( "List( ", argument_name, ", x -> ", options.underlying_object_getter_string, "( cat, x ) )" );
+                    return @Concatenation( "List( ", argument_name, ", x -> ", options.underlying_object_getter_string, "( cat, x ) )" );
                     
                 elseif filter == "list_of_morphisms"
                     
-                    return Concatenation( "List( ", argument_name, ", x -> ", options.underlying_morphism_getter_string, "( cat, x ) )" );
+                    return @Concatenation( "List( ", argument_name, ", x -> ", options.underlying_morphism_getter_string, "( cat, x ) )" );
                     
                 elseif filter == "pair_of_morphisms"
                     
-                    return Concatenation( "PairGAP( ", options.underlying_morphism_getter_string, "( cat, ", argument_name, "[1] ), ", options.underlying_morphism_getter_string, "( cat, ", argument_name, "[2] ) )" );
+                    return @Concatenation( "PairGAP( ", options.underlying_morphism_getter_string, "( cat, ", argument_name, "[1] ), ", options.underlying_morphism_getter_string, "( cat, ", argument_name, "[2] ) )" );
                     
                 else
                     
@@ -447,7 +447,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
         Info( InfoCategoryConstructor, 2, name );
         
-        add = ValueGlobal( Concatenation( "Add", name ) );
+        add = ValueGlobal( @Concatenation( "Add", name ) );
         
         func = EvalString( func_string );
         

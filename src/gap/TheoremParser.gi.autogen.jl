@@ -408,7 +408,7 @@ end );
     
     if nr_substring_close_bracket > 2
         
-        part = Concatenation( "this is !a valid part: ", part );
+        part = @Concatenation( "this is !a valid part: ", part );
         
         Error( part );
         
@@ -585,7 +585,7 @@ end );
         
         if !IsBound( bound_variable )
             
-            variables = Concatenation( "variable ", variables, " was !recognized" );
+            variables = @Concatenation( "variable ", variables, " was !recognized" );
             
         end;
         
@@ -663,7 +663,7 @@ end );
         
         if COUNT_SUBSTRING_APPEARANCE( source_part[ i ], "(" ) > COUNT_SUBSTRING_APPEARANCE( source_part[ i ], ")" )
             
-            source_part[ i ] = Concatenation( source_part[ i ], source_part[ i + 1 ] );
+            source_part[ i ] = @Concatenation( source_part[ i ], source_part[ i + 1 ] );
             
             Remove( source_part, [ i + 1 ] );
             
@@ -829,7 +829,7 @@ end );
     
     for i in [ "&", "\\", "big", "\big", "$", "mathrm", "~" ]
         
-        string = Concatenation( SPLIT_STRING_MULTIPLE( string, i ) );
+        string = @Concatenation( SPLIT_STRING_MULTIPLE( string, i ) );
         
     end;
     
@@ -1014,9 +1014,9 @@ end );
             
             for j in (1):(Length( current_result ))
                 
-                current_result[ j ] = List( current_result[ j ], k -> Concatenation( [ i ], k ) );
+                current_result[ j ] = List( current_result[ j ], k -> @Concatenation( [ i ], k ) );
                 
-                return_list[ j ] = Concatenation( current_result[ j ], return_list[ j ] );
+                return_list[ j ] = @Concatenation( current_result[ j ], return_list[ j ] );
                 
             end;
             
@@ -1134,7 +1134,7 @@ end );
                 
                 for j in current_result
                     
-                    Add( appearance_list, [ Concatenation( [ i ], j[ 1 ] ), j[ 2 ] ] );
+                    Add( appearance_list, [ @Concatenation( [ i ], j[ 1 ] ), j[ 2 ] ] );
                     
                 end;
                 
@@ -1172,7 +1172,7 @@ end );
             
             for j in current_return
                 
-                Add( command_list, [ Concatenation( [ i ], j[ 1 ] ), j[ 2 ] ] );
+                Add( command_list, [ @Concatenation( [ i ], j[ 1 ] ), j[ 2 ] ] );
                 
             end;
             
@@ -1244,7 +1244,7 @@ end );
             
             current_var = GIVE_VARIABLE_NAMES_WITH_POSITIONS_RECURSIVE( tree[ i ] );
             
-            current_var = List( current_var, j -> [ Concatenation( [ i ], j[ 1 ] ), j[ 2 ] ] );
+            current_var = List( current_var, j -> [ @Concatenation( [ i ], j[ 1 ] ), j[ 2 ] ] );
             
             Append( var_list, current_var );
             
@@ -1338,7 +1338,7 @@ end );
     
     if IsString( split_record )
         
-        Error( Concatenation( split_record ), " ⥉ ", rule );
+        Error( @Concatenation( split_record ), " ⥉ ", rule );
         
     end;
     
@@ -1446,7 +1446,7 @@ end );
                 
             end;
             
-            Add( equal_variable_pairs, [ variable[ 1 ], Concatenation( variable_record[current_variable_and_index[ 1 ]], additional_position ) ] );
+            Add( equal_variable_pairs, [ variable[ 1 ], @Concatenation( variable_record[current_variable_and_index[ 1 ]], additional_position ) ] );
             
         end;
         
@@ -1458,7 +1458,7 @@ end );
         
         range_replace_list_and_index = SPLIT_INTO_LIST_NAME_AND_INDEX( range_replace );
         
-        return_rec.replace = Concatenation( variable_record[range_replace_list_and_index[ 1 ]], [ range_replace_list_and_index[ 2 ] ] );
+        return_rec.replace = @Concatenation( variable_record[range_replace_list_and_index[ 1 ]], [ range_replace_list_and_index[ 2 ] ] );
         
     else
         

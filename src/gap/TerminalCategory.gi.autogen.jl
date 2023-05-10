@@ -351,7 +351,7 @@ end );
     ## prevent skeletality
     excluded_skeletal_properties = [ "IsSkeletalCategory" ];
     
-    excluded_properties = Concatenation( excluded_strict_properties, excluded_skeletal_properties );
+    excluded_properties = @Concatenation( excluded_strict_properties, excluded_skeletal_properties );
     
     T = CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY( rec(
                  name = name,
@@ -420,7 +420,7 @@ InstallMethod( @__MODULE__,  FunctorFromTerminalCategory,
   function( object )
     local functor;
     
-    functor = CapFunctor( Concatenation( "InjectionInto", Name( CapCategory( object ) ) ), AsCapCategory( TerminalObject( CapCat ) ), CapCategory( object ) );
+    functor = CapFunctor( @Concatenation( "InjectionInto", Name( CapCategory( object ) ) ), AsCapCategory( TerminalObject( CapCat ) ), CapCategory( object ) );
     
     functor.terminal_object_functor_object = object;
     
@@ -468,7 +468,7 @@ InstallMethod( @__MODULE__,  DisplayString,
     
     # This is just GAP's derivation of DisplayString from PrintString from StringGAP,
     # but CAP installs a method for DisplayString which we want to avoid.
-    return Concatenation( StringGAP( o ), "\n" );
+    return @Concatenation( StringGAP( o ), "\n" );
     
 end );
 
@@ -478,6 +478,6 @@ InstallMethod( @__MODULE__,  DisplayString,
 
   function( m )
     
-    return Concatenation( DisplayString( Source( m ) ), "|\n| ", StringGAP( m ), "\nv\n", DisplayString( Range( m ) ) );
+    return @Concatenation( DisplayString( Source( m ) ), "|\n| ", StringGAP( m ), "\nv\n", DisplayString( Range( m ) ) );
     
 end );

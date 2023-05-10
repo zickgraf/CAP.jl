@@ -1637,9 +1637,9 @@ UniversalMorphismIntoEqualizer = rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( tau ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -1715,7 +1715,7 @@ ProjectionInFactorOfFiberProduct = rec(
     local base, current_morphism, current_value;
     
     if projection_number < 1 || projection_number > Length( diagram )
-        return[ false, Concatenation( "there does !exist a ", StringGAP( projection_number ), "th projection" ) ];
+        return[ false, @Concatenation( "there does !exist a ", StringGAP( projection_number ), "th projection" ) ];
     end;
     
     base = Range( diagram[1] );
@@ -1747,7 +1747,7 @@ ProjectionInFactorOfFiberProductWithGivenFiberProduct = rec(
     local base, current_morphism, current_value;
     
     if projection_number < 1 || projection_number > Length( diagram )
-        return[ false, Concatenation( "there does !exist a ", StringGAP( projection_number ), "th projection" ) ];
+        return[ false, @Concatenation( "there does !exist a ", StringGAP( projection_number ), "th projection" ) ];
     end;
     
     base = Range( diagram[1] );
@@ -1877,9 +1877,9 @@ UniversalMorphismIntoFiberProduct = rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -1939,9 +1939,9 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -2081,9 +2081,9 @@ UniversalMorphismFromCoequalizer = rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( tau ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether range && source are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether range && source are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": range && source are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": range && source are !equal" ) ];
         end;
         
     end;
@@ -2159,7 +2159,7 @@ InjectionOfCofactorOfPushout = rec(
     local cobase, current_morphism, current_value;
     
     if injection_number < 1 || injection_number > Length( diagram )
-        return[ false, Concatenation( "there does !exist a ", StringGAP( injection_number ), "th injection" ) ];
+        return[ false, @Concatenation( "there does !exist a ", StringGAP( injection_number ), "th injection" ) ];
     end;
     
     cobase = Source( diagram[1] );
@@ -2191,7 +2191,7 @@ InjectionOfCofactorOfPushoutWithGivenPushout = rec(
     local cobase, current_morphism, current_value;
     
     if injection_number < 1 || injection_number > Length( diagram )
-        return[ false, Concatenation( "there does !exist a ", StringGAP( injection_number ), "th injection" ) ];
+        return[ false, @Concatenation( "there does !exist a ", StringGAP( injection_number ), "th injection" ) ];
     end;
     
     cobase = Source( diagram[1] );
@@ -2321,9 +2321,9 @@ UniversalMorphismFromPushout = rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -2383,9 +2383,9 @@ UniversalMorphismFromPushoutWithGivenPushout = rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
         elseif current_value == false
-            return [ false, Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
         end;
         
     end;
@@ -3350,7 +3350,7 @@ MorphismBetweenDirectSums = rec(
           
           if Length( listlist[i] ) != Length( range_diagram )
               
-              return [ false, Concatenation( "the ", StringGAP(i), "-th row has !the same length as the range diagram" ) ];
+              return [ false, @Concatenation( "the ", StringGAP(i), "-th row has !the same length as the range diagram" ) ];
               
           end;
           
@@ -3360,11 +3360,11 @@ MorphismBetweenDirectSums = rec(
               
               if result == fail
                   
-                  return [ false, Concatenation( "can!decide whether the sources of the morphisms ⥉ the ", StringGAP(i), "-th row are equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
+                  return [ false, @Concatenation( "can!decide whether the sources of the morphisms ⥉ the ", StringGAP(i), "-th row are equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
                   
               elseif result == false
                   
-                  return [ false, Concatenation( "the sources of the morphisms ⥉ the ", StringGAP(i), "-th row must be equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
+                  return [ false, @Concatenation( "the sources of the morphisms ⥉ the ", StringGAP(i), "-th row must be equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
                   
               end;
               
@@ -3372,11 +3372,11 @@ MorphismBetweenDirectSums = rec(
               
               if result == fail
                   
-                  return [ false, Concatenation( "can!decide whether the ranges of the morphisms ⥉ the ", StringGAP(j), "-th column are equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
+                  return [ false, @Concatenation( "can!decide whether the ranges of the morphisms ⥉ the ", StringGAP(j), "-th column are equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
                   
               elseif result == false
                   
-                  return [ false, Concatenation( "the ranges of the morphisms ⥉ the ", StringGAP(j), "-th column must be equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
+                  return [ false, @Concatenation( "the ranges of the morphisms ⥉ the ", StringGAP(j), "-th column must be equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
                   
               end;
               
@@ -3512,7 +3512,7 @@ SolveLinearSystemInAbCategory = rec(
         return [ false, "the list of left coefficients does !have the same length as the right hand side" ];
     end;
     
-    if !ForAll( Concatenation( left_coeffs, right_coeffs ), x -> IsList( x ) && Length( x ) == Length( left_coeffs[1] ) )
+    if !ForAll( @Concatenation( left_coeffs, right_coeffs ), x -> IsList( x ) && Length( x ) == Length( left_coeffs[1] ) )
         return [ false, "the left coefficients && the right coefficients must be given by lists of lists of the same length containing morphisms ⥉ the current category" ];
     end;
     
@@ -4239,36 +4239,36 @@ rec(
         
         #### set default projection/injection/universal morphism names
         if number_of_targets > 0 && !IsBound( limit.limit_projection_name )
-            limit.limit_projection_name = Concatenation( "ProjectionInFactorOf", limit.limit_object_name );
+            limit.limit_projection_name = @Concatenation( "ProjectionInFactorOf", limit.limit_object_name );
         end;
         if !IsBound( limit.limit_universal_morphism_name )
-            limit.limit_universal_morphism_name = Concatenation( "UniversalMorphismInto", limit.limit_object_name );
+            limit.limit_universal_morphism_name = @Concatenation( "UniversalMorphismInto", limit.limit_object_name );
         end;
 
         if number_of_targets > 0 && !IsBound( limit.colimit_injection_name )
-            limit.colimit_injection_name = Concatenation( "InjectionOfCofactorOf", limit.colimit_object_name );
+            limit.colimit_injection_name = @Concatenation( "InjectionOfCofactorOf", limit.colimit_object_name );
         end;
         if !IsBound( limit.colimit_universal_morphism_name )
-            limit.colimit_universal_morphism_name = Concatenation( "UniversalMorphismFrom", limit.colimit_object_name );
+            limit.colimit_universal_morphism_name = @Concatenation( "UniversalMorphismFrom", limit.colimit_object_name );
         end;
         
         if number_of_targets > 0
-            limit.limit_projection_with_given_name = Concatenation( limit.limit_projection_name, "WithGiven", limit.limit_object_name );
-            limit.colimit_injection_with_given_name = Concatenation( limit.colimit_injection_name, "WithGiven", limit.colimit_object_name );
+            limit.limit_projection_with_given_name = @Concatenation( limit.limit_projection_name, "WithGiven", limit.limit_object_name );
+            limit.colimit_injection_with_given_name = @Concatenation( limit.colimit_injection_name, "WithGiven", limit.colimit_object_name );
         end;
         
-        limit.limit_universal_morphism_with_given_name = Concatenation( limit.limit_universal_morphism_name, "WithGiven", limit.limit_object_name );
-        limit.colimit_universal_morphism_with_given_name = Concatenation( limit.colimit_universal_morphism_name, "WithGiven", limit.colimit_object_name );
+        limit.limit_universal_morphism_with_given_name = @Concatenation( limit.limit_universal_morphism_name, "WithGiven", limit.limit_object_name );
+        limit.colimit_universal_morphism_with_given_name = @Concatenation( limit.colimit_universal_morphism_name, "WithGiven", limit.colimit_object_name );
         
-        limit.limit_functorial_name = Concatenation( limit.limit_object_name, "Functorial" );
-        limit.colimit_functorial_name = Concatenation( limit.colimit_object_name, "Functorial" );
+        limit.limit_functorial_name = @Concatenation( limit.limit_object_name, "Functorial" );
+        limit.colimit_functorial_name = @Concatenation( limit.colimit_object_name, "Functorial" );
 
-        limit.limit_functorial_with_given_name = Concatenation( limit.limit_functorial_name, "WithGiven", limit.limit_object_name, "s" );
-        limit.colimit_functorial_with_given_name = Concatenation( limit.colimit_functorial_name, "WithGiven", limit.colimit_object_name, "s" );
+        limit.limit_functorial_with_given_name = @Concatenation( limit.limit_functorial_name, "WithGiven", limit.limit_object_name, "s" );
+        limit.colimit_functorial_with_given_name = @Concatenation( limit.colimit_functorial_name, "WithGiven", limit.colimit_object_name, "s" );
 
         if limit.number_of_nontargets == 1
-            limit.limit_morphism_to_sink_name = Concatenation( "MorphismFrom", limit.limit_object_name, "ToSink" );
-            limit.colimit_morphism_from_source_name = Concatenation( "MorphismFromSourceTo", limit.colimit_object_name );
+            limit.limit_morphism_to_sink_name = @Concatenation( "MorphismFrom", limit.limit_object_name, "ToSink" );
+            limit.colimit_morphism_from_source_name = @Concatenation( "MorphismFromSourceTo", limit.colimit_object_name );
         end;
 
         if Length( diagram_filter_list ) > 0
@@ -4285,7 +4285,7 @@ rec(
         end;
         
         limit.functorial_source_diagram_arguments_names = limit.diagram_input_type;
-        limit.functorial_range_diagram_arguments_names = List( limit.diagram_input_type, x -> Concatenation( x, "p" ) );
+        limit.functorial_range_diagram_arguments_names = List( limit.diagram_input_type, x -> @Concatenation( x, "p" ) );
         
     end;
 end );
@@ -4301,7 +4301,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
     subset_only = ValueOption( "subset_only" ) == true;
     
     if !IsBound( method_record[entry_name] )
-        Display( Concatenation( "WARNING: The method record is missing a component named \"", entry_name, "\" which is expected by the validator.\n" ) );
+        Display( @Concatenation( "WARNING: The method record is missing a component named \"", entry_name, "\" which is expected by the validator.\n" ) );
         return;
     end;
     
@@ -4315,10 +4315,10 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
             if subset_only
                 continue;
             else
-                Display( Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" which is !expected by the validator.\n" ) );
+                Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" which is !expected by the validator.\n" ) );
             end;
         elseif method_record_entry[name] != generated_entry[name]
-            Display( Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" with value \"", StringGAP( method_record_entry[name] ), "\". The value expected by the validator is \"", StringGAP( generated_entry[name] ), "\".\n" ) );
+            Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" with value \"", StringGAP( method_record_entry[name] ), "\". The value expected by the validator is \"", StringGAP( generated_entry[name] ), "\".\n" ) );
         end;
     end;
     for name in RecNames( generated_entry )
@@ -4326,7 +4326,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
             continue;
         end;
         if !IsBound( method_record_entry[name] )
-            Display( Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record is missing a component named \"", name, "\" which is expected by the validator.\n" ) );
+            Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record is missing a component named \"", name, "\" which is expected by the validator.\n" ) );
         end;
     end;
 end );
@@ -4339,14 +4339,14 @@ end );
     make_record_with_given = function ( record, object_name, coobject_name )
         record = StructuralCopy( record );
         
-        record.function_name = Concatenation( record.function_name, "WithGiven", object_name );
+        record.function_name = @Concatenation( record.function_name, "WithGiven", object_name );
         Add( record.filter_list, "object" );
         if record.with_given_object_position == "Source"
             Add( record.io_type[1], record.io_type[2][1] );
         else
             Add( record.io_type[1], record.io_type[2][2] );
         end;
-        record.dual_operation = Concatenation( record.dual_operation, "WithGiven", coobject_name );
+        record.dual_operation = @Concatenation( record.dual_operation, "WithGiven", coobject_name );
         record.with_given_object_position = nothing;
 
         return record;
@@ -4415,10 +4415,10 @@ end );
     for limit in limits
         
         #### get filter lists && io types
-        object_filter_list = Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ) );
+        object_filter_list = @Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ) );
         
         # only used if limit.number_of_targets > 0
-        projection_filter_list = Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ) );
+        projection_filter_list = @Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ) );
         projection_io_type = [ StructuralCopy( limit.diagram_input_type ), [ ] ];
         if limit.number_of_targets > 1
             Add( projection_filter_list, "integer" );
@@ -4454,7 +4454,7 @@ end );
         end;
 
         # only used if limit.number_of_nontargets == 1
-        morphism_to_sink_filter_list = Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ) );
+        morphism_to_sink_filter_list = @Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ) );
         morphism_to_sink_io_type = [ StructuralCopy( limit.diagram_input_type ), [ ] ];
         if limit.number_of_unbound_morphisms == 1
             morphism_to_sink_io_type[2] = [ "P", "alpha_range" ];
@@ -4462,8 +4462,8 @@ end );
             morphism_to_sink_io_type[2] = [ "P", "morphisms_1_range" ];
         end;
 
-        universal_morphism_filter_list = Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ), [ "object" ] );
-        universal_morphism_io_type = [ Concatenation( StructuralCopy( limit.diagram_input_type ), [ "T" ] ), [ "T", "P" ] ];
+        universal_morphism_filter_list = @Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ), [ "object" ] );
+        universal_morphism_io_type = [ @Concatenation( StructuralCopy( limit.diagram_input_type ), [ "T" ] ), [ "T", "P" ] ];
         if limit.number_of_targets == 1
             Add( universal_morphism_filter_list, "morphism" );
             Add( universal_morphism_io_type[1], "tau" );
@@ -4495,7 +4495,7 @@ end );
 
         if limit.number_of_nontargets == 1
             morphism_to_sink_record = rec(
-                function_name = Concatenation( "MorphismFrom", limit.limit_object_name, "ToSink" ),
+                function_name = @Concatenation( "MorphismFrom", limit.limit_object_name, "ToSink" ),
                 filter_list = morphism_to_sink_filter_list,
                 io_type = morphism_to_sink_io_type,
                 with_given_object_position = "Source",
@@ -4515,18 +4515,18 @@ end );
         
         functorial_record = rec(
             function_name = limit.limit_functorial_name,
-            filter_list = Concatenation( [ "category" ], limit.diagram_filter_list, limit.diagram_morphism_filter_list, limit.diagram_filter_list ),
-            input_arguments_names = Concatenation( [ "cat" ], limit.functorial_source_diagram_arguments_names, limit.diagram_morphism_input_type, limit.functorial_range_diagram_arguments_names ),
+            filter_list = @Concatenation( [ "category" ], limit.diagram_filter_list, limit.diagram_morphism_filter_list, limit.diagram_filter_list ),
+            input_arguments_names = @Concatenation( [ "cat" ], limit.functorial_source_diagram_arguments_names, limit.diagram_morphism_input_type, limit.functorial_range_diagram_arguments_names ),
             return_type = "morphism",
             # object_name
             output_source_getter_string = ReplacedStringViaRecord(
                 "object_name( arguments... )",
-                rec( object_name = limit.limit_object_name, arguments = Concatenation( [ "cat" ], limit.functorial_source_diagram_arguments_names ) )
+                rec( object_name = limit.limit_object_name, arguments = @Concatenation( [ "cat" ], limit.functorial_source_diagram_arguments_names ) )
             ),
             output_source_getter_preconditions = [ [ limit.limit_object_name, 1 ] ],
             output_range_getter_string = ReplacedStringViaRecord(
                 "object_name( arguments... )",
-                rec( object_name = limit.limit_object_name, arguments = Concatenation( [ "cat" ], limit.functorial_range_diagram_arguments_names ) )
+                rec( object_name = limit.limit_object_name, arguments = @Concatenation( [ "cat" ], limit.functorial_range_diagram_arguments_names ) )
             ),
             output_range_getter_preconditions = [ [ limit.limit_object_name, 1 ] ],
             with_given_object_position = "both",
@@ -4536,8 +4536,8 @@ end );
         
         functorial_with_given_record = rec(
             function_name = limit.limit_functorial_with_given_name,
-            filter_list = Concatenation( [ "category", "object" ], limit.diagram_filter_list, limit.diagram_morphism_filter_list, limit.diagram_filter_list, [ "object" ] ),
-            io_type = [ Concatenation( [ "P" ], limit.functorial_source_diagram_arguments_names, limit.diagram_morphism_input_type, limit.functorial_range_diagram_arguments_names, [ "Pp" ] ), [ "P", "Pp" ] ],
+            filter_list = @Concatenation( [ "category", "object" ], limit.diagram_filter_list, limit.diagram_morphism_filter_list, limit.diagram_filter_list, [ "object" ] ),
+            io_type = [ @Concatenation( [ "P" ], limit.functorial_source_diagram_arguments_names, limit.diagram_morphism_input_type, limit.functorial_range_diagram_arguments_names, [ "Pp" ] ), [ "P", "Pp" ] ],
             return_type = "morphism",
             dual_operation = limit.colimit_functorial_with_given_name,
             dual_arguments_reversed = true,
@@ -4582,7 +4582,7 @@ end );
         
         if limit.number_of_nontargets == 1
             CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES( method_name_record, limit.limit_morphism_to_sink_name, morphism_to_sink_record );
-            CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES( method_name_record, Concatenation( limit.limit_morphism_to_sink_name, "WithGiven", limit.limit_object_name ), make_record_with_given( morphism_to_sink_record, limit.limit_object_name, limit.colimit_object_name ) );
+            CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES( method_name_record, @Concatenation( limit.limit_morphism_to_sink_name, "WithGiven", limit.limit_object_name ), make_record_with_given( morphism_to_sink_record, limit.limit_object_name, limit.colimit_object_name ) );
         end;
         
         CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES( method_name_record, limit.limit_universal_morphism_name, universal_morphism_record );
@@ -4606,7 +4606,7 @@ end );
         
         if limit.number_of_nontargets == 1
             CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES( method_name_record, limit.colimit_morphism_from_source_name, make_colimit( limit, morphism_to_sink_record ) );
-            CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES( method_name_record, Concatenation( limit.colimit_morphism_from_source_name, "WithGiven", limit.colimit_object_name ), make_record_with_given( make_colimit( limit, morphism_to_sink_record ), limit.colimit_object_name, limit.limit_object_name ) );
+            CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES( method_name_record, @Concatenation( limit.colimit_morphism_from_source_name, "WithGiven", limit.colimit_object_name ), make_record_with_given( make_colimit( limit, morphism_to_sink_record ), limit.colimit_object_name, limit.limit_object_name ) );
         end;
         
         CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES( method_name_record, limit.colimit_universal_morphism_name, make_colimit( limit, universal_morphism_record ) );
@@ -4635,7 +4635,7 @@ CAP_INTERNAL_VALIDATE_LIMITS_IN_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD, CA
 
     for current_name in RecNames( replacement_data )
         if IsBound( CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS[current_name] )
-            Error( Concatenation( current_name, " already has a replacement" ) );
+            Error( @Concatenation( current_name, " already has a replacement" ) );
         end;
         CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS[current_name] = replacement_data[current_name];
     end;
@@ -4667,7 +4667,7 @@ end );
         else
             
             current_entry = [ current_rec.installation_name, method_name_record[current_rec.dual_operation].installation_name ];
-            current_entry = [ Concatenation( current_entry[ 1 ], " vs ", current_entry[ 2 ] ), current_entry ];
+            current_entry = [ @Concatenation( current_entry[ 1 ], " vs ", current_entry[ 2 ] ), current_entry ];
             
         end;
         
@@ -4704,7 +4704,7 @@ end );
         
         return function( arg_list... )
             # drop second && last argument
-            return CallFuncList( func, arg_list[Concatenation( [ 1 ], (3):(Length( arg_list ) - 1) )] );
+            return CallFuncList( func, arg_list[@Concatenation( [ 1 ], (3):(Length( arg_list ) - 1) )] );
         end;
         
     else
@@ -4761,7 +4761,7 @@ end );
                 
             end;
             
-            return [ true, CallFuncList( with_given_name_function, Concatenation( arg, [ cache_value[ 1 ] ] ) ) ];
+            return [ true, CallFuncList( with_given_name_function, @Concatenation( arg, [ cache_value[ 1 ] ] ) ) ];
             
         end;
         
@@ -4811,7 +4811,7 @@ end );
                 
             end;
             
-            return [ true, CallFuncList( with_given_name_function, Concatenation( arg, [ cache_value[ 1 ] ] ) ) ];
+            return [ true, CallFuncList( with_given_name_function, @Concatenation( arg, [ cache_value[ 1 ] ] ) ) ];
             
         end;
         
@@ -4941,7 +4941,7 @@ end );
         
         if IsBound( current_rec.argument_list )
             
-            Display( Concatenation( 
+            Display( @Concatenation( 
                 "WARNING: the functionality previously provided by `argument_list` was removed. You will probably run into errors. ",
                 "Please use the category as the first argument instead of method selections objects/morphisms && adjust pre, post && redirect functions as well as derivations appropriately. ",
                 "Search for `category_as_first_argument` in the documentation for more details."
@@ -5146,7 +5146,7 @@ end );
             
         elseif IsFunction( ValueGlobal( current_recname ) )
             
-            current_rec.installation_name = Concatenation( current_recname, "Op" );
+            current_rec.installation_name = @Concatenation( current_recname, "Op" );
             
         else
             
@@ -5158,11 +5158,11 @@ end );
             
             if IsBound( current_rec.io_type )
                 
-                current_rec.input_arguments_names = Concatenation( [ "cat" ], current_rec.io_type[1] );
+                current_rec.input_arguments_names = @Concatenation( [ "cat" ], current_rec.io_type[1] );
                 
             else
                 
-                current_rec.input_arguments_names = Concatenation( [ "cat" ], List( (2):(Length( current_rec.filter_list )), i -> Concatenation( "arg", StringGAP( i ) ) ) );
+                current_rec.input_arguments_names = @Concatenation( [ "cat" ], List( (2):(Length( current_rec.filter_list )), i -> @Concatenation( "arg", StringGAP( i ) ) ) );
                 
             end;
             
@@ -5224,11 +5224,11 @@ end );
                 elseif Length( current_output ) == 2
                     
                     if LowercaseString( current_output[ 2 ] ) == "source"
-                        return Concatenation( "Source( ", argument_names[ input_position ], " )" );
+                        return @Concatenation( "Source( ", argument_names[ input_position ], " )" );
                     elseif LowercaseString( current_output[ 2 ] ) == "range"
-                        return Concatenation( "Range( ", argument_names[ input_position ], " )" );
+                        return @Concatenation( "Range( ", argument_names[ input_position ], " )" );
                     elseif Position( input_list, current_output[ 2 ] ) != fail
-                        return Concatenation( argument_names[ input_position ], "[", argument_names[ Position( input_list, current_output[ 2 ] ) ], "]" );
+                        return @Concatenation( argument_names[ input_position ], "[", argument_names[ Position( input_list, current_output[ 2 ] ) ], "]" );
                     else
                         Error( "wrong input type" );
                     end;
@@ -5250,9 +5250,9 @@ end );
                     end;
                     
                     if LowercaseString( current_output[ 3 ] ) == "source"
-                        return Concatenation( "Source( ", argument_names[ input_position ], "[", list_position, "] )" );
+                        return @Concatenation( "Source( ", argument_names[ input_position ], "[", list_position, "] )" );
                     elseif LowercaseString( current_output[ 3 ] ) == "range"
-                        return Concatenation( "Range( ", argument_names[ input_position ], "[", list_position, "] )" );
+                        return @Concatenation( "Range( ", argument_names[ input_position ], "[", list_position, "] )" );
                     else
                         Error( "wrong output syntax" );
                     end;
@@ -5316,7 +5316,7 @@ end );
             
             without_given_name = current_recname;
             
-            with_given_prefix = Concatenation( without_given_name, "WithGiven" );
+            with_given_prefix = @Concatenation( without_given_name, "WithGiven" );
             
             with_given_names = Filtered( recnames, x -> StartsWith( x, with_given_prefix ) );
             
@@ -5343,7 +5343,7 @@ end );
                     
                     if !IsBound( without_given_rec.output_source_getter_string )
                         
-                        without_given_rec.output_source_getter_string = Concatenation( object_name, "( ", JoinStringsWithSeparator( without_given_rec.input_arguments_names[(1):(Length( object_filter_list ))], ", " ), " )" );
+                        without_given_rec.output_source_getter_string = @Concatenation( object_name, "( ", JoinStringsWithSeparator( without_given_rec.input_arguments_names[(1):(Length( object_filter_list ))], ", " ), " )" );
                         without_given_rec.output_source_getter_preconditions = [ [ object_name, 1 ] ];
                         
                     end;
@@ -5354,7 +5354,7 @@ end );
                     
                     if !IsBound( without_given_rec.output_range_getter_string )
                         
-                        without_given_rec.output_range_getter_string = Concatenation( object_name, "( ", JoinStringsWithSeparator( without_given_rec.input_arguments_names[(1):(Length( object_filter_list ))], ", " ), " )" );
+                        without_given_rec.output_range_getter_string = @Concatenation( object_name, "( ", JoinStringsWithSeparator( without_given_rec.input_arguments_names[(1):(Length( object_filter_list ))], ", " ), " )" );
                         without_given_rec.output_range_getter_preconditions = [ [ object_name, 1 ] ];
                         
                     end;
@@ -5426,8 +5426,8 @@ end );
             
             if with_given_object_position == "Source"
                 
-                with_given_rec.filter_list = Concatenation( without_given_rec.filter_list, [ with_given_object_filter ] );
-                with_given_rec.input_arguments_names = Concatenation( without_given_rec.input_arguments_names, [ given_source_argument_name ] );
+                with_given_rec.filter_list = @Concatenation( without_given_rec.filter_list, [ with_given_object_filter ] );
+                with_given_rec.input_arguments_names = @Concatenation( without_given_rec.input_arguments_names, [ given_source_argument_name ] );
                 with_given_rec.output_source_getter_string = given_source_argument_name;
                 
                 if IsBound( without_given_rec.output_range_getter_string )
@@ -5444,8 +5444,8 @@ end );
                 
             elseif with_given_object_position == "Range"
                 
-                with_given_rec.filter_list = Concatenation( without_given_rec.filter_list, [ with_given_object_filter ] );
-                with_given_rec.input_arguments_names = Concatenation( without_given_rec.input_arguments_names, [ given_range_argument_name ] );
+                with_given_rec.filter_list = @Concatenation( without_given_rec.filter_list, [ with_given_object_filter ] );
+                with_given_rec.input_arguments_names = @Concatenation( without_given_rec.input_arguments_names, [ given_range_argument_name ] );
                 with_given_rec.output_range_getter_string = given_range_argument_name;
                 
                 if IsBound( without_given_rec.output_source_getter_string )
@@ -5462,13 +5462,13 @@ end );
                 
             elseif with_given_object_position == "both"
                 
-                with_given_rec.filter_list = Concatenation(
+                with_given_rec.filter_list = @Concatenation(
                     [ without_given_rec.filter_list[1] ],
                     [ with_given_object_filter ],
                     without_given_rec.filter_list[(2):(Length( without_given_rec.filter_list ))],
                     [ with_given_object_filter ]
                 );
-                with_given_rec.input_arguments_names = Concatenation(
+                with_given_rec.input_arguments_names = @Concatenation(
                     [ without_given_rec.input_arguments_names[1] ],
                     [ given_source_argument_name ],
                     without_given_rec.input_arguments_names[(2):(Length( without_given_rec.input_arguments_names ))],
@@ -5543,7 +5543,7 @@ end );
                     
                     if Length( record[without_given_name].filter_list ) + 1 != Length( record[with_given_name].filter_list )
                         
-                        Display( Concatenation(
+                        Display( @Concatenation(
                             "WARNING: You seem to be relying on automatically installed redirect functions. ",
                             "For this, the with given method must have exactly one additional argument compared to the without given method. ",
                             "This is !the case, so no automatic redirect function will be installed. ",
@@ -5639,7 +5639,7 @@ end );
                 
                 collected_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION(
                         current_rec.output_source_getter,
-                        Concatenation( recnames, RecNames( CAP_INTERNAL_METHOD_NAME_RECORD ) ),
+                        @Concatenation( recnames, RecNames( CAP_INTERNAL_METHOD_NAME_RECORD ) ),
                         2,
                         CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS,
                         rec( )
@@ -5723,7 +5723,7 @@ end );
                 
                 collected_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION(
                         current_rec.output_range_getter,
-                        Concatenation( recnames, RecNames( CAP_INTERNAL_METHOD_NAME_RECORD ) ),
+                        @Concatenation( recnames, RecNames( CAP_INTERNAL_METHOD_NAME_RECORD ) ),
                         2,
                         CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS,
                         rec( )
@@ -5819,7 +5819,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
     # see comment above
     current_string = ReplacedString( current_string, "# !", "#!" );
     
-    output_string = Concatenation( output_string, current_string );
+    output_string = @Concatenation( output_string, current_string );
     
     for current_recname in recnames
         
@@ -5856,7 +5856,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
         # see comment above
         current_string = ReplacedString( current_string, "# !", "#!" );
         
-        output_string = Concatenation( output_string, current_string );
+        output_string = @Concatenation( output_string, current_string );
         
     end;
     
@@ -5866,7 +5866,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
         
         WriteFileForHomalg( output_path, output_string );
         
-        Display( Concatenation(
+        Display( @Concatenation(
             "WARNING: The file ", filename, " ⥉ package ", package_name, " differs from the automatically generated one. ",
             "You can view the automatically generated file at the following path: ",
             output_path
@@ -5950,7 +5950,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
         )
     );
     
-    output_string = Concatenation( output_string, current_string );
+    output_string = @Concatenation( output_string, current_string );
     
     # We do !want to include operations from optional dependencies because those might !be available.
     transitively_needed_other_packages = TransitivelyNeededOtherPackages( package_name );
@@ -5970,8 +5970,8 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
         @Assert( 0, IsString( subsection_title ) );
         
         # the space between # && ! prevents AutoDoc from parsing these strings && is removed below
-        current_string = Concatenation( "\n# ! @Subsection ", subsection_title );
-        output_string = Concatenation( output_string, current_string );
+        current_string = @Concatenation( "\n# ! @Subsection ", subsection_title );
+        output_string = @Concatenation( output_string, current_string );
         
         if i == 1
             
@@ -5999,7 +5999,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
         end;
         
-        output_string = Concatenation( output_string, current_string );
+        output_string = @Concatenation( output_string, current_string );
         
         for name in operations
             
@@ -6008,7 +6008,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
             if bookname == fail
                 
-                Display( Concatenation( "WARNING: Could !find package for CAP operation ", name, ", skipping." ) );
+                Display( @Concatenation( "WARNING: Could !find package for CAP operation ", name, ", skipping." ) );
                 continue;
                 
             end;
@@ -6040,7 +6040,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
                 
             end;
             
-            match = Concatenation( HELP_GET_MATCHES( info, SIMPLE_STRING( Concatenation( name, " (", label, ")" ) ), true ) );
+            match = @Concatenation( HELP_GET_MATCHES( info, SIMPLE_STRING( @Concatenation( name, " (", label, ")" ) ), true ) );
             
             nr = 1;
             
@@ -6055,9 +6055,9 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
             if IsOperation( ValueGlobal( name ) )
                 
-                test_string = Concatenation( bookname, ": ", name, " for Is" );
+                test_string = @Concatenation( bookname, ": ", name, " for Is" );
                 # needed for GAPDoc < 1.6.5
-                test_string_legacy = Concatenation( bookname, ": ", name, " for is" );
+                test_string_legacy = @Concatenation( bookname, ": ", name, " for is" );
                 
                 if !(StartsWith( res[1], test_string ) || StartsWith( res[1], test_string_legacy ))
                     
@@ -6067,7 +6067,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
                 
             else
                 
-                test_string = Concatenation( bookname, ": ", name );
+                test_string = @Concatenation( bookname, ": ", name );
                 
                 if !res[1] == test_string
                     
@@ -6085,13 +6085,13 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
                     label = label,
                 )
             );
-            output_string = Concatenation( output_string, current_string );
+            output_string = @Concatenation( output_string, current_string );
             
             Add( previous_operations, name );
             
         end;
         
-        output_string = Concatenation( output_string, "\n" );
+        output_string = @Concatenation( output_string, "\n" );
         
     end;
     
@@ -6104,7 +6104,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
         
         WriteFileForHomalg( output_path, output_string );
         
-        Display( Concatenation(
+        Display( @Concatenation(
             "WARNING: The file ", filename, " ⥉ package ", package_name, " differs from the automatically generated one. ",
             "You can view the automatically generated file at the following path: ",
             output_path

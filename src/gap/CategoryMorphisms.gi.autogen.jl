@@ -93,7 +93,7 @@ InstallMethod( @__MODULE__,  Add,
         else
             
             Error(
-                Concatenation(
+                @Concatenation(
                     "a morphism that lies ⥉ the CAP-category with the name\n",
                     Name( CapCategory( morphism ) ),
                     "\n",
@@ -301,7 +301,7 @@ InstallMethod( @__MODULE__,  RandomMorphism,
   function( morphism, category, source, range, additional_arguments_list... )
     local arg_list, objectified_morphism;
     
-    arg_list = Concatenation(
+    arg_list = @Concatenation(
         [ morphism, category.morphism_type, CapCategory, category, Source, source, Range, range ], additional_arguments_list
     );
     
@@ -331,7 +331,7 @@ end );
     
     # inline ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( rec( ), category, source, range, additional_arguments_list... );
     
-    arg_list = Concatenation(
+    arg_list = @Concatenation(
         [ rec( ), category.morphism_type, CapCategory, category, Source, source, Range, range ], additional_arguments_list
     );
     
@@ -400,16 +400,16 @@ InstallMethod( @__MODULE__,  IsEqualForMorphisms,
   function( cat, morphism_1, morphism_2 )
     
     if !HasCapCategory( morphism_1 )
-        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
     end;
     if !HasCapCategory( morphism_2 )
-        Error( Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
     end;
     
     if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
     else
-        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsEqualForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsEqualForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
@@ -421,16 +421,16 @@ InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
   function( cat, morphism_1, morphism_2 )
     
     if !HasCapCategory( morphism_1 )
-        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
     end;
     if !HasCapCategory( morphism_2 )
-        Error( Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
     end;
     
     if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
     else
-        Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsCongruentForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsCongruentForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
@@ -443,7 +443,7 @@ InstallMethod( @__MODULE__,  ==,
     
     if CapCategory( morphism_1 ).input_sanity_check_level > 0 || CapCategory( morphism_2 ).input_sanity_check_level > 0 
         if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-            Error( Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
+            Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
         end;
     end;
     if !IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) ) || !IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) )
@@ -813,7 +813,7 @@ InstallMethod( @__MODULE__,  StringGAP,
   function( morphism )
     
     # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    return Concatenation( "A morphism ", "in ", Name( CapCategory( morphism ) ) );
+    return @Concatenation( "A morphism ", "in ", Name( CapCategory( morphism ) ) );
     
 end );
 
@@ -825,7 +825,7 @@ InstallMethod( @__MODULE__,  ViewString,
     
     # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
     # do !reuse `StringGAP` because morphisms might use `StringGAP` as the attribute storing the morphism datum
-    return Concatenation( "<A morphism ", "in ", Name( CapCategory( morphism ) ), ">" );
+    return @Concatenation( "<A morphism ", "in ", Name( CapCategory( morphism ) ), ">" );
     
 end );
 
@@ -836,7 +836,7 @@ InstallMethod( @__MODULE__,  DisplayString,
     
     # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
     # do !reuse `StringGAP` because morphisms might use `StringGAP` as the attribute storing the morphism datum
-    return Concatenation( "A morphism ", "in ", Name( CapCategory( morphism ) ), ".\n" );
+    return @Concatenation( "A morphism ", "in ", Name( CapCategory( morphism ) ), ".\n" );
     
 end );
 

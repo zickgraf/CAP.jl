@@ -368,7 +368,7 @@ InstallMethod( @__MODULE__,  ReinterpretationFunctor,
     
     C = ModelingCategory( R );
     
-    name = Concatenation( "Reinterpretation functor from ", Name( C ), " to its reinterpretation ", Name( R ) );
+    name = @Concatenation( "Reinterpretation functor from ", Name( C ), " to its reinterpretation ", Name( R ) );
     
     F = CapFunctor( name, C, R );
     
