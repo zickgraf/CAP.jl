@@ -15,7 +15,7 @@ julia> list_of_operations_to_install = [
             "DirectSum",
         ];
 
-julia> dummy = DummyCategory( rec(
+julia> dummy = DummyCategory( @rec(
             list_of_operations_to_install = list_of_operations_to_install,
             properties = [ "IsAdditiveCategory" ],
         ) );

@@ -98,7 +98,7 @@ InstallMethod( @__MODULE__,  CapFunctor,
   function( name, source_list, range )
     local source, functor, objectified_functor;
     
-    functor = rec( );
+    functor = @rec( );
     
     source_list = CAP_INTERNAL_NICE_FUNCTOR_INPUT_LIST( source_list );
     
@@ -299,7 +299,7 @@ InstallMethod( @__MODULE__,  AddObjectFunction,
     
     filter_list = CAP_INTERNAL_FUNCTOR_CREATE_FILTER_LIST( functor, "object" );
     
-    if !IsBound( functor.object_function_list )
+    if !@IsBound( functor.object_function_list )
         
         functor.object_function_list = sanitized_list;
         
@@ -340,7 +340,7 @@ InstallMethod( @__MODULE__,  AddMorphismFunction,
     
     filter_list = @Concatenation( [ ObjectFilter( range_cat ) ], filter_list, [ ObjectFilter( range_cat ) ] );
     
-    if !IsBound( functor.morphism_function_list )
+    if !@IsBound( functor.morphism_function_list )
         
         functor.morphism_function_list = sanitized_list;
         
@@ -732,7 +732,7 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     local object_name, morphism_name, object_filters, object_product_filters, morphism_filters,
           morphism_product_filters, current_filters, install_list;
     
-    if IsBound( functor.is_already_installed )
+    if @IsBound( functor.is_already_installed )
         
         return;
         
@@ -995,7 +995,7 @@ InstallMethod( @__MODULE__,  NaturalTransformation,
         
     end;
     
-    natural_transformation = ObjectifyWithAttributes( rec( ), TheTypeOfCapNaturalTransformations,
+    natural_transformation = ObjectifyWithAttributes( @rec( ), TheTypeOfCapNaturalTransformations,
                                                        Name, name,
                                                        Source, source,
                                                        Range, range );
@@ -1044,7 +1044,7 @@ InstallMethod( @__MODULE__,  AddNaturalTransformationFunction,
     
     filter_list = @Concatenation( [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ], filter_list, [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ] );
     
-    if !IsBound( trafo.function_list )
+    if !@IsBound( trafo.function_list )
         
         trafo.function_list = sanitized_list;
         
@@ -1119,7 +1119,7 @@ InstallMethod( @__MODULE__,  InstallNaturalTransformation,
   function( trafo, install_name )
     local object_filters, object_product_filters, current_filters;
     
-    if IsBound( trafo.is_already_installed )
+    if @IsBound( trafo.is_already_installed )
         
         return;
         

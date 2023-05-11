@@ -14,15 +14,15 @@ julia> dummy3 = CreateCapCategory( );
 julia> PrintAndReturn = function ( string )
             Print( string, "\n" ); return string; end;
 
-julia> dummy1.compiler_hints = rec( );
+julia> dummy1.compiler_hints = @rec( );
 
 julia> dummy1.compiler_hints.precompiled_towers = [
-          rec(
+          @rec(
             remaining_constructors_in_tower = [ "Constructor1" ],
             precompiled_functions_adder = cat ->
               PrintAndReturn( "Adding precompiled operations for Constructor1" ),
           ),
-          rec(
+          @rec(
             remaining_constructors_in_tower = [ "Constructor1", "Constructor2" ],
             precompiled_functions_adder = cat ->
               PrintAndReturn( "Adding precompiled operations for Constructor2" ),

@@ -395,7 +395,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 #! @Arguments morphism, category, source, range[, attr1, val1, attr2, val2, ...]
 #! @Description
-#!  Shorthand for `ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( rec( ), category, source, range[, attr1, val1, attr2, val2, ...] )`.
+#!  Shorthand for `ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( @rec( ), category, source, range[, attr1, val1, attr2, val2, ...] )`.
 #! @Returns a morphism
 @DeclareGlobalFunction( "CreateCapCategoryMorphismWithAttributes" );
 

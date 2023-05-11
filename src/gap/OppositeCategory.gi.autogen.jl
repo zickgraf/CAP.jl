@@ -155,7 +155,7 @@ end );
         current_entry = CAP_INTERNAL_METHOD_NAME_RECORD[current_recname];
         
         ## Conservative
-        if !IsBound( current_entry.dual_operation )
+        if !@IsBound( current_entry.dual_operation )
             continue;
         end;
         
@@ -185,7 +185,7 @@ end );
             end
             """;
         
-        if IsBound( current_entry.dual_preprocessor_func )
+        if @IsBound( current_entry.dual_preprocessor_func )
             
             if IsOperation( current_entry.dual_preprocessor_func ) || IsKernelFunction( current_entry.dual_preprocessor_func )
                 
@@ -204,7 +204,7 @@ end );
                 #% CAP_JIT_DROP_NEXT_STATEMENT
                 @Assert( 0, IsIdenticalObj( prep_arg[1], OppositeCategory( cat ) ) );
                 """,
-                rec(
+                @rec(
                     dual_preprocessor_func_string = dual_preprocessor_func_string,
                     input_arguments = input_arguments_names,
                 )
@@ -260,7 +260,7 @@ end );
                 
             end;
             
-            if current_entry.is_with_given && IsBound( current_entry.dual_with_given_objects_reversed ) && current_entry.dual_with_given_objects_reversed
+            if current_entry.is_with_given && @IsBound( current_entry.dual_with_given_objects_reversed ) && current_entry.dual_with_given_objects_reversed
                 
                 tmp = dual_arguments[1];
                 dual_arguments[1] = dual_arguments[Length( dual_arguments)];
@@ -272,7 +272,7 @@ end );
         
         dual_arguments = @Concatenation( [ "OppositeCategory( cat )" ], dual_arguments );
         
-        if IsBound( current_entry.dual_postprocessor_func )
+        if @IsBound( current_entry.dual_postprocessor_func )
             
             if IsOperation( current_entry.dual_postprocessor_func ) || IsKernelFunction( current_entry.dual_postprocessor_func )
                 
@@ -300,7 +300,7 @@ end );
                 
                 return_statement = "return MorphismConstructor( cat, output_source_getter, result, output_range_getter );";
                 
-                if IsBound( current_entry.output_source_getter_string ) && IsBound( current_entry.can_always_compute_output_source_getter ) && current_entry.can_always_compute_output_source_getter
+                if @IsBound( current_entry.output_source_getter_string ) && @IsBound( current_entry.can_always_compute_output_source_getter ) && current_entry.can_always_compute_output_source_getter
                     
                     output_source_getter_string = current_entry.output_source_getter_string;
                     
@@ -310,7 +310,7 @@ end );
                     
                 end;
                 
-                if IsBound( current_entry.output_range_getter_string ) && IsBound( current_entry.can_always_compute_output_range_getter ) && current_entry.can_always_compute_output_range_getter
+                if @IsBound( current_entry.output_range_getter_string ) && @IsBound( current_entry.can_always_compute_output_range_getter ) && current_entry.can_always_compute_output_range_getter
                     
                     output_range_getter_string = current_entry.output_range_getter_string;
                     
@@ -320,7 +320,7 @@ end );
                     
                 end;
                 
-                return_statement = ReplacedStringViaRecord( return_statement, rec(
+                return_statement = ReplacedStringViaRecord( return_statement, @rec(
                     output_source_getter = output_source_getter_string,
                     output_range_getter = output_range_getter_string,
                 ) );
@@ -369,7 +369,7 @@ end );
             
         end;
         
-        func_string = ReplacedStringViaRecord( func_string, rec(
+        func_string = ReplacedStringViaRecord( func_string, @rec(
             input_arguments = input_arguments_names,
             preprocessor_string = preprocessor_string,
             dual_arguments = dual_arguments,
@@ -408,13 +408,13 @@ InstallMethod( @__MODULE__,  Opposite,
     
     opposite_category.category_as_first_argument = true;
     
-    if IsBound( category.supports_empty_limits )
+    if @IsBound( category.supports_empty_limits )
         
         opposite_category.supports_empty_limits = category.supports_empty_limits;
         
     end;
     
-    opposite_category.compiler_hints = rec(
+    opposite_category.compiler_hints = @rec(
         category_attribute_names = [
             "OppositeCategory",
         ],
@@ -467,7 +467,7 @@ InstallMethod( @__MODULE__,  Opposite,
             
         end;
         
-        opposite_object = ObjectifyObjectForCAPWithAttributes( rec( ), cat,
+        opposite_object = ObjectifyObjectForCAPWithAttributes( @rec( ), cat,
                                                                 Opposite, object );
         
         #% CAP_JIT_DROP_NEXT_STATEMENT
@@ -525,7 +525,7 @@ InstallMethod( @__MODULE__,  Opposite,
             
         end;
         
-        opposite_morphism = ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( rec( ), cat,
+        opposite_morphism = ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( @rec( ), cat,
                                                                                       source, range,
                                                                                       Opposite, morphism );
         

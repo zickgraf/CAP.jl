@@ -84,7 +84,7 @@ end );
         
     end;
     
-    if IsBound( category.PROPAGATION_LIST_FOR_EQUAL_OBJECTS )
+    if @IsBound( category.PROPAGATION_LIST_FOR_EQUAL_OBJECTS )
         
         for i in category.PROPAGATION_LIST_FOR_EQUAL_OBJECTS
             
@@ -102,7 +102,7 @@ InstallMethod( @__MODULE__,  AddPropertyToMatchAtIsEqualForObjects,
                
   function( category, name )
     
-    if !IsBound( category.PROPAGATION_LIST_FOR_EQUAL_OBJECTS )
+    if !@IsBound( category.PROPAGATION_LIST_FOR_EQUAL_OBJECTS )
         
         category.PROPAGATION_LIST_FOR_EQUAL_OBJECTS = [ ];
         
@@ -236,7 +236,7 @@ InstallMethod( @__MODULE__,  AddObjectRepresentation,
         
     end;
     
-    if IsBound( category.initially_known_categorical_properties )
+    if @IsBound( category.initially_known_categorical_properties )
         
         Error( "calling AddObjectRepresentation after adding functions to the category is !supported" );
         
@@ -281,10 +281,10 @@ end );
   function( category, additional_arguments_list... )
     local arg_list, obj;
     
-    # inline ObjectifyObjectForCAPWithAttributes( rec( ), category, additional_arguments_list... );
+    # inline ObjectifyObjectForCAPWithAttributes( @rec( ), category, additional_arguments_list... );
     
     arg_list = @Concatenation(
-        [ rec( ), category.object_type, CapCategory, category ], additional_arguments_list
+        [ @rec( ), category.object_type, CapCategory, category ], additional_arguments_list
     );
     
     obj = CallFuncList( ObjectifyWithAttributes, arg_list );
@@ -368,13 +368,13 @@ end );
     print_graph = CreatePrintingGraph( IsCapCategoryObject && HasCapCategory, object_function );
     
     AddRelationToGraph( print_graph,
-                        rec( Source = [ rec( Conditions = "IsZeroForObjects",
+                        @rec( Source = [ @rec( Conditions = "IsZeroForObjects",
                                               PrintString = "zero",
                                               Adjective = true ) ],
-                             Range = [ rec( Conditions = "IsInjective",
+                             Range = [ @rec( Conditions = "IsInjective",
                                              PrintString = "injective",
                                              Adjective = true ),
-                                        rec( Conditions = "IsProjective",
+                                        @rec( Conditions = "IsProjective",
                                              PrintString = "projective",
                                              Adjective = true ) ] ) );
     

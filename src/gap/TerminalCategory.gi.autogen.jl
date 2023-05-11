@@ -44,7 +44,7 @@
             if !info.with_given_without_given_name_pair[2] ⥉ list_of_operations_to_install
                 Add( list_of_operations_to_install, info.with_given_without_given_name_pair[2] );
             end;
-            if IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[info.with_given_without_given_name_pair[2]].with_given_object_name )
+            if @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[info.with_given_without_given_name_pair[2]].with_given_object_name )
                 Add( skip, operation_name );
                 Add( list_of_operations_to_install, CAP_INTERNAL_METHOD_NAME_RECORD[info.with_given_without_given_name_pair[2]].with_given_object_name );
             end;
@@ -63,9 +63,9 @@
     
     properties = SetGAP( List( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, a -> a[1] ) );
     
-    if IsBound( completed_record.excluded_properties )
+    if @IsBound( completed_record.excluded_properties )
         excluded_properties = completed_record.excluded_properties;
-        completed_record.excluded_properties = nothing;
+        @Unbind( completed_record.excluded_properties );
     else
         excluded_properties = [ ];
     end;
@@ -82,7 +82,7 @@
     
     completed_record.properties = properties;
     
-    if !IsBound( completed_record.commutative_ring_of_linear_category )
+    if !@IsBound( completed_record.commutative_ring_of_linear_category )
         completed_record.commutative_ring_of_linear_category = Integers;
     end;
     
@@ -166,7 +166,7 @@ end );
     object_constructor = function( cat, input )
         
         return ObjectifyObjectForCAPWithAttributes(
-                       rec( ), cat );
+                       @rec( ), cat );
         
     end;
     
@@ -175,7 +175,7 @@ end );
     morphism_constructor = function( cat, source, input, range )
         
         return ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes(
-                       rec( ), cat,
+                       @rec( ), cat,
                        source,
                        range );
         
@@ -183,7 +183,7 @@ end );
     
     morphism_datum = ( cat, morphism ) -> fail;
     
-    T = CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY( rec(
+    T = CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY( @rec(
                  name = name,
                  category_filter = category_filter,
                  category_object_filter = category_object_filter,
@@ -325,7 +325,7 @@ end );
     object_constructor = function( cat, string )
         
         return ObjectifyObjectForCAPWithAttributes(
-                       rec( ), cat,
+                       @rec( ), cat,
                        StringGAP, string );
         
     end;
@@ -335,7 +335,7 @@ end );
     morphism_constructor = function( cat, source, string, range )
         
         return ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes(
-                       rec( ), cat,
+                       @rec( ), cat,
                        source,
                        range,
                        StringGAP, string );
@@ -353,7 +353,7 @@ end );
     
     excluded_properties = @Concatenation( excluded_strict_properties, excluded_skeletal_properties );
     
-    T = CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY( rec(
+    T = CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY( @rec(
                  name = name,
                  category_filter = category_filter,
                  category_object_filter = category_object_filter,

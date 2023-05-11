@@ -8,7 +8,7 @@
     
     ##
     @InstallValue( CAP_INTERNAL,
-                    rec(
+                    @rec(
                         name_counter = 0,
                         default_cache_type = "weak",
                         operation_names_with_cache_disabled_by_default = [

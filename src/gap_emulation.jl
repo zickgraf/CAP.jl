@@ -132,11 +132,7 @@ end
 
 function Base.getproperty(obj::CAPDict, key::Symbol)
 	dict = getfield(obj, :dict)
-	if haskey(dict, key)
-		dict[key]
-	else
-		nothing
-	end
+	dict[key]
 end
 
 function Base.setindex!(obj::CAPDict, value, key::String)
@@ -144,12 +140,84 @@ function Base.setindex!(obj::CAPDict, value, key::String)
 end
 
 function Base.setproperty!(obj::CAPDict, key::Symbol, value)
-	getfield(obj, :dict)[key] = value
+	dict = getfield(obj, :dict)
+	dict[key] = value
 end
 
 function Base.propertynames(obj::CAPDict)
 	dict = getfield(obj, :dict)
-	filter(key -> dict[key] != nothing, keys(dict))
+	keys(dict)
+end
+
+macro Unbind(expr)
+	if expr isa Expr && expr.head === :.
+		obj = expr.args[1]
+		key = expr.args[2]
+		esc(quote
+			delete!(getfield($obj, :dict), $key); nothing
+		end)
+	elseif expr isa Expr && expr.head === :ref
+		obj = expr.args[1]
+		string = expr.args[2]
+		esc(quote
+			delete!(getfield($obj, :dict), Symbol($string)); nothing
+		end)
+	else
+		throw("unsupported Unbind")
+	end
+end
+
+export @Unbind
+
+macro IsBound(expr)
+	if expr isa Expr && expr.head === :.
+		obj = expr.args[1]
+		key = expr.args[2]
+		esc(quote
+			haskey(getfield($obj, :dict), $key)
+		end)
+	elseif expr isa Expr && expr.head === :ref
+		obj = expr.args[1]
+		string = expr.args[2]
+		esc(quote
+			haskey(getfield($obj, :dict), Symbol($string))
+		end)
+	else
+		throw("unsupported IsBound")
+	end
+end
+
+export @IsBound
+
+# records
+function rec(; named_arguments...)
+	CAPRecord(Dict{Symbol,Any}(named_arguments))
+end
+
+macro rec(keyvalues...)
+	pairs = map(function( x )
+		@assert x isa Expr
+		@assert x.head === :(=)
+		key = x.args[1]
+		value = x.args[2]
+		@assert key isa Symbol
+		:($(Meta.quot(key)) => $value)
+	end, keyvalues)
+	esc(quote
+		CAPRecord(Dict{Symbol,Any}($(pairs...)))
+	end)
+end
+
+export @rec
+
+function RecNames(obj::CAPDict)
+	dict = getfield(obj, :dict)
+	# the order of element of `keys` may vary -> we have to sort
+	sort([string(key) for key in keys(dict)])
+end
+
+function ==(rec1::CAPRecord, rec2::CAPRecord)
+	RecNames( rec1 ) == RecNames( rec2 ) && ForAll(RecNames(rec1), name -> rec1[name] == rec2[name])
 end
 
 function copy(record::CAPRecord)
@@ -484,9 +552,8 @@ end
 
 function ValueOption( name )
 	for options in reverse(options_stack)
-		value = options[name]
-		if !isnothing(value)
-			return value
+		if @IsBound( options[name] )
+			return options[name]
 		end
 	end
 	return fail
@@ -789,21 +856,6 @@ end
 
 export @Info
 
-# records
-function rec(; named_arguments...)
-	CAPRecord(Dict{Symbol,Any}(named_arguments))
-end
-
-function RecNames(obj::CAPDict)
-	dict = getfield(obj, :dict)
-	# the order of element of `keys` may vary -> we have to sort
-	sort([string(key) for key in filter(key -> dict[key] != nothing, keys(dict))])
-end
-
-function ==(rec1::CAPRecord, rec2::CAPRecord)
-	RecNames( rec1 ) == RecNames( rec2 ) && ForAll(RecNames(rec1), name -> rec1[name] == rec2[name])
-end
-
 # GAP functions
 function IsDigitChar(x::Char)
 	x in "0123456789"
@@ -905,10 +957,6 @@ end
 
 function Remove( list::Vector, index::Int )
 	popat!(list, index)
-end
-
-function IsBound( value )
-	!isnothing(value)
 end
 
 function Concatenation(lists...)
@@ -1089,10 +1137,6 @@ function Error(args...)
 end
 
 LowercaseString = lowercase
-
-function Base.getindex(obj::Nothing, index::Int)
-	nothing
-end
 
 function StartsWith(string::String, substring::String)
 	startswith(string, substring)

@@ -103,7 +103,7 @@ end );
   function( theorem_string )
     local return_rec;
     
-    return_rec = rec( );
+    return_rec = @rec( );
     
     theorem_string = SplitString( theorem_string, "|" );
     
@@ -211,7 +211,7 @@ end );
     
     arguments = command_string[(first_pos + 1):(i - 1)];
     
-    return rec( command = command, arguments = SPLIT_KOMMAS_NOT_IN_BRACKETS( arguments ) );
+    return @rec( command = command, arguments = SPLIT_KOMMAS_NOT_IN_BRACKETS( arguments ) );
     
 end );
 
@@ -274,7 +274,7 @@ end );
   function( part )
     local return_rec, temp_rec;
     
-    return_rec = rec( );
+    return_rec = @rec( );
     
     part = SplitString( part, ":" );
     
@@ -414,7 +414,7 @@ end );
         
     end;
     
-    return_record = rec( );
+    return_record = @rec( );
     
     splitted_part = SplitString( part, "(" );
     
@@ -454,13 +454,13 @@ end );
         
     end;
     
-    return_record.TheoremPart = rec( Value = value, ValueFunction = ValueGlobal( NormalizedWhitespace( predicate ) ), Object = "result" );
+    return_record.TheoremPart = @rec( Value = value, ValueFunction = ValueGlobal( NormalizedWhitespace( predicate ) ), Object = "result" );
     
     return_record.Variables = SANITIZE_ARGUMENT_LIST( variables );
     
     return_record.Function = func;
     
-    if IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[func] )
+    if @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[func] )
         
         if Length( return_record.Variables ) != Length( CAP_INTERNAL_METHOD_NAME_RECORD[func].filter_list ) - 1
             
@@ -492,7 +492,7 @@ end );
         
     end;
     
-    source_rec = rec( );
+    source_rec = @rec( );
     
     ## find bound variables
     predicate = split_source_part[ 1 ];
@@ -575,7 +575,7 @@ end );
                     
                 else
                     
-                    bound_variable = nothing;
+                    @Unbind( bound_variable );
                     
                 end;
                 
@@ -583,7 +583,7 @@ end );
             
         end;
         
-        if !IsBound( bound_variable )
+        if !@IsBound( bound_variable )
             
             variables = @Concatenation( "variable ", variables, " was !recognized" );
             
@@ -591,7 +591,7 @@ end );
         
     end;
     
-    return rec( Object = bound_variable, ValueFunction = ValueGlobal( NormalizedWhitespace( predicate ) ), Value = value );
+    return @rec( Object = bound_variable, ValueFunction = ValueGlobal( NormalizedWhitespace( predicate ) ), Value = value );
     
 end );
 
@@ -699,15 +699,15 @@ end );
         
         theorem_record.Range = theorem_record.TheoremPart;
         
-        theorem_record.TheoremPart = nothing;
+        @Unbind( theorem_record.TheoremPart );
         
         result_function_variables = theorem_record.Variables;
         
-        theorem_record.Variables = nothing;
+        @Unbind( theorem_record.Variables );
         
     else
         
-        theorem_record = rec( );
+        theorem_record = @rec( );
         
     end;
     
@@ -737,13 +737,13 @@ end );
         
     end;
     
-    if !IsBound( theorem_record.Function )
+    if !@IsBound( theorem_record.Function )
         
         Error( "no function found. This is the wrong parser" );
         
     end;
     
-    if !IsBound( theorem_record.Range )
+    if !@IsBound( theorem_record.Range )
         
         theorem_record.Range = FIND_PREDICATE_VARIABLES( range_part, result_function_variables );
         
@@ -771,7 +771,7 @@ end );
             
         end;
         
-        Add( sources_list, rec( Type = "testdirect", Object = i, Value = IntGAP( result_function_variables[ i ] ) ) );
+        Add( sources_list, @rec( Type = "testdirect", Object = i, Value = IntGAP( result_function_variables[ i ] ) ) );
         
     end;
     
@@ -962,7 +962,7 @@ end );
     
     range_part = ValueGlobal( range_part );
     
-    return rec( CellType = variable_part, Source = source_filter, Range = range_part );
+    return @rec( CellType = variable_part, Source = source_filter, Range = range_part );
     
 end );
 
@@ -1199,7 +1199,7 @@ end );
             
             for j in (i + 1):(Length( var_list ))
                 
-                if IsBound( var_list[ j ][ 2 ] )
+                if @IsBound( var_list[ j ][ 2 ] )
                     
                     var_list[ i ][ 2 ] = var_list[ j ][ 2 ];
                     
@@ -1211,7 +1211,7 @@ end );
             
         end;
         
-        if !IsBound( var_list[ i ][ 2 ] )
+        if !@IsBound( var_list[ i ][ 2 ] )
             
             Error( "no type for variable found" );
             
@@ -1305,7 +1305,7 @@ end );
     
     if IsRecord( record )
         
-        return rec( command = record.command, arguments = REPLACE_INTEGER_STRINGS_BY_INTS_AND_VARIABLES_BY_FAIL_RECURSIVE( record.arguments ) );
+        return @rec( command = record.command, arguments = REPLACE_INTEGER_STRINGS_BY_INTS_AND_VARIABLES_BY_FAIL_RECURSIVE( record.arguments ) );
         
     elseif IsList( record ) && !IsString( record )
         
@@ -1389,7 +1389,7 @@ end );
     
     ## Build complete variable record:
     
-    variable_record = rec( );
+    variable_record = @rec( );
     
     for variable in variables
         
@@ -1405,7 +1405,7 @@ end );
         
     end;
     
-    return_rec = rec( );
+    return_rec = @rec( );
     
     return_rec.command_tree = REPLACE_INTEGER_STRINGS_BY_INTS_AND_VARIABLES_BY_FAIL_RECURSIVE( range_source_tree );
     

@@ -231,7 +231,7 @@ InstallMethodWithCacheFromObject( ProductOp_OnObjects,
   function( object_list, category )
     local product_object, entry, i;
     
-    product_object = ObjectifyWithAttributes( rec( ), TheTypeOfCapCategoryProductObjects,
+    product_object = ObjectifyWithAttributes( @rec( ), TheTypeOfCapCategoryProductObjects,
                                                Components, object_list,
                                                Length, Length( object_list )
                                              );
@@ -249,7 +249,7 @@ InstallMethodWithCacheFromObject( ProductOp_OnMorphisms,
   function( morphism_list, category )
     local product_morphism, entry, i;
     
-    product_morphism = ObjectifyWithAttributes( rec( ), TheTypeOfCapCategoryProductMorphisms,
+    product_morphism = ObjectifyWithAttributes( @rec( ), TheTypeOfCapCategoryProductMorphisms,
                                                  Components, morphism_list,
                                                  Length, Length( morphism_list )
                                                );
@@ -267,7 +267,7 @@ InstallMethodWithCacheFromObject( ProductOp_OnTwoCells,
   function( twocell_list, category )
     local product_twocell;
     
-    product_twocell = ObjectifyWithAttributes( rec( ), TheTypeOfCapCategoryProductTwoCells,
+    product_twocell = ObjectifyWithAttributes( @rec( ), TheTypeOfCapCategoryProductTwoCells,
                                                 Components, twocell_list,
                                                 Length, Length( twocell_list )
                                               );

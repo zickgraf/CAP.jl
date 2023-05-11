@@ -25,7 +25,9 @@ include( "gap/UniversalObjects.gd.autogen.jl" );
 
 include( "gap/InstallAdds.gd.autogen.jl" );
 
+#= comment for Julia
 include( "gap/TheoremParser.gd.autogen.jl" );
+# =#
 
 include( "gap/LogicForCAP.gd.autogen.jl" );
 

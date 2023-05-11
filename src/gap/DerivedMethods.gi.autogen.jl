@@ -2570,7 +2570,7 @@ AddDerivationToCAP( MorphismBetweenDirectSumsWithGivenDirectSums,
     
     return UniversalMorphismFromDirectSumWithGivenDirectSum( cat, diagram_S, T, test_diagram_coproduct, S );
     
-end; CategoryFilter = cat -> !( IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
+end; CategoryFilter = cat -> !( @IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
 
 ##
 AddDerivationToCAP( MorphismBetweenDirectSumsWithGivenDirectSums,
@@ -2587,7 +2587,7 @@ AddDerivationToCAP( MorphismBetweenDirectSumsWithGivenDirectSums,
     
     return UniversalMorphismFromDirectSumWithGivenDirectSum( cat, diagram_S, T, test_diagram_coproduct, S );
     
-end; CategoryFilter = cat -> IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true );
+end; CategoryFilter = cat -> @IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true );
 
 ##
 AddDerivationToCAP( HomologyObjectFunctorialWithGivenHomologyObjects,
@@ -2689,7 +2689,7 @@ AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsIntoDirectProduct,
     
     return SubtractionForMorphisms( cat, mor1, mor2 );
     
-end; CategoryFilter = cat -> !( IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
+end; CategoryFilter = cat -> !( @IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
 
 ##
 AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsIntoDirectProduct,
@@ -2710,7 +2710,7 @@ AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsIntoDirectProduct,
     
     return SubtractionForMorphisms( cat, mor1, mor2 );
     
-end; CategoryFilter = cat -> IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true );
+end; CategoryFilter = cat -> @IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true );
 
 ##
 AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsFromCoproduct,
@@ -2738,7 +2738,7 @@ AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsFromCoproduct,
     
     return SubtractionForMorphisms( cat, mor1, mor2 );
     
-end; CategoryFilter = cat -> !( IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
+end; CategoryFilter = cat -> !( @IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
 
 ##
 AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsFromCoproduct,
@@ -2759,7 +2759,7 @@ AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsFromCoproduct,
     
     return SubtractionForMorphisms( cat, mor1, mor2 );
     
-end; CategoryFilter = cat -> IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true );
+end; CategoryFilter = cat -> @IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true );
 
 ##
 AddDerivationToCAP( EmbeddingOfEqualizer,
@@ -3051,7 +3051,7 @@ AddDerivationToCAP( Lift,
     
     return InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism( cat, Source( alpha ), Source( beta ), Lift( range_cat, a, b ) );
     
-end; CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
       CategoryFilter = cat -> HasRangeCategoryOfHomomorphismStructure( cat ) );
 
 ##
@@ -3082,7 +3082,7 @@ AddDerivationToCAP( LiftOrFail,
     
     return InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism( cat, Source( alpha ), Source( beta ), l );
     
-end; CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
       CategoryFilter = cat -> HasRangeCategoryOfHomomorphismStructure( cat ) );
 
 ##
@@ -3104,7 +3104,7 @@ AddDerivationToCAP( IsLiftable,
     
     return IsLiftable( range_cat, a, b );
     
-end; CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
       CategoryFilter = cat -> HasRangeCategoryOfHomomorphismStructure( cat ) );
 
 ## B ←β- C -α→ A, α•ℓ == β ⇔ ν(ℓ)•H(α,B) == ν(β)
@@ -3128,7 +3128,7 @@ AddDerivationToCAP( Colift,
     
     return InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism( cat, Range( alpha ), Range( beta ), Lift( range_cat, b, a ) );
     
-end; CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
       CategoryFilter = cat -> HasRangeCategoryOfHomomorphismStructure( cat ) );
 
 ##
@@ -3159,7 +3159,7 @@ AddDerivationToCAP( ColiftOrFail,
     
     return InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism( cat, Range( alpha ), Range( beta ), l );
     
-end; CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
       CategoryFilter = cat -> HasRangeCategoryOfHomomorphismStructure( cat ) );
 
 ##
@@ -3181,7 +3181,7 @@ AddDerivationToCAP( IsColiftable,
     
     return IsLiftable( range_cat, b, a );
     
-end; CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
       CategoryFilter = cat -> HasRangeCategoryOfHomomorphismStructure( cat ) );
 
 ##
@@ -3486,7 +3486,7 @@ AddDerivationToCAP( Coproduct,
     
     return Range( InjectionOfCofactorOfCoproduct( cat, object_product_list, 1 ) );
     
-end; CategoryFilter = cat -> !( IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
+end; CategoryFilter = cat -> !( @IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
 
 ##
 AddDerivationToCAP( DirectProduct,
@@ -3497,7 +3497,7 @@ AddDerivationToCAP( DirectProduct,
     
     return Source( ProjectionInFactorOfDirectProduct( cat, object_product_list, 1 ) );
     
-end; CategoryFilter = cat -> !( IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
+end; CategoryFilter = cat -> !( @IsBound( cat.supports_empty_limits ) && cat.supports_empty_limits == true ) );
 
 ##
 AddDerivationToCAP( DirectProduct,
@@ -3827,7 +3827,7 @@ AddDerivationToCAP( SolveLinearSystemInAbCategory,
         )
       );
   end,
-  CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+  CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
   CategoryFilter = cat -> HasIsAbCategory( cat ) && IsAbCategory( cat ) && HasRangeCategoryOfHomomorphismStructure( cat )
 );
 
@@ -3899,7 +3899,7 @@ AddDerivationToCAP( SolveLinearSystemInAbCategoryOrFail,
         )
       );
   end,
-  CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+  CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
   CategoryFilter = cat -> HasIsAbCategory( cat ) && IsAbCategory( cat ) && HasRangeCategoryOfHomomorphismStructure( cat )
 );
 
@@ -3952,7 +3952,7 @@ AddDerivationToCAP( MereExistenceOfSolutionOfLinearSystemInAbCategory,
     return IsLiftable( range_cat, nu, H );
     
   end,
-  CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+  CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
   CategoryFilter = cat -> HasIsAbCategory( cat ) && IsAbCategory( cat ) && HasRangeCategoryOfHomomorphismStructure( cat )
 );
 
@@ -4670,7 +4670,7 @@ AddFinalDerivationBundle( "Adding BasisOfExternalHom && CoefficientsOfMorphism u
     
   end,
 ],
-  CategoryGetters = rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+  CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
   CategoryFilter =
     function( cat )
       local range_cat, required_methods;

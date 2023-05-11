@@ -13,7 +13,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     local known_options_with_filters, filter, mandatory_options, category_constructor_options, list_of_operations_to_install, D, operations_of_homomorphism_structure, HC, object_function, morphism_function, object_function_inverse, morphism_function_inverse, option_name, option;
     
     ## check given options
-    known_options_with_filters = rec(
+    known_options_with_filters = @rec(
         name = IsString,
         category_filter = IsFilter,
         category_object_filter = IsFilter,
@@ -31,7 +31,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     
     for option_name in RecNames( options )
         
-        if IsBound( known_options_with_filters[option_name] )
+        if @IsBound( known_options_with_filters[option_name] )
             
             filter = known_options_with_filters[option_name];
             
@@ -68,7 +68,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     
     for option in mandatory_options
         
-        if !IsBound( options[option] )
+        if !@IsBound( options[option] )
             
             Error( "mandatory option ", option, " is !set" );
             
@@ -77,7 +77,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     end;
     
     # the methods for ModelingObject et al. will be installed later once we have a category instance filter
-    category_constructor_options = rec(
+    category_constructor_options = @rec(
         underlying_category_getter_string = "ModelingCategory",
         underlying_object_getter_string = "ModelingObject",
         underlying_morphism_getter_string = "ModelingMorphism",
@@ -109,7 +109,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     
     category_constructor_options.properties = ListKnownCategoricalProperties( C );
     
-    if IsBound( options.only_primitive_operations ) && options.only_primitive_operations
+    if @IsBound( options.only_primitive_operations ) && options.only_primitive_operations
         
         list_of_operations_to_install = ListPrimitivelyInstalledOperationsOfCategory( C );
         
@@ -121,7 +121,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     
     category_constructor_options.list_of_operations_to_install = list_of_operations_to_install;
     
-    if IsBound( C.supports_empty_limits )
+    if @IsBound( C.supports_empty_limits )
         
         category_constructor_options.supports_empty_limits = C.supports_empty_limits;
         

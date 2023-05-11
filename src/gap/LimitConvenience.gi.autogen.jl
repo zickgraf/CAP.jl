@@ -160,7 +160,7 @@ InstallMethod( @__MODULE__,  with_given_universal_morphism,
         
 end );
 """,
-                rec(
+                @rec(
                     without_given_universal_morphism = universal_morphism_name,
                     with_given_universal_morphism = @Concatenation( universal_morphism_name, "WithGiven", object_name ),
                     diagram_filter_list = List( CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS( limit.diagram_filter_list ), NameFunction ),
@@ -216,7 +216,7 @@ InstallMethod( @__MODULE__,  functorial_name,
     
 end );
 """,
-                rec(
+                @rec(
                     functorial_name = functorial_name,
                     filter_list = replaced_filter_list,
                     input_arguments = input_type,
@@ -239,7 +239,7 @@ InstallMethod( @__MODULE__,  functorial_name,
     
 end );
 """,
-                rec(
+                @rec(
                     functorial_name = functorial_name,
                     filter_list = replaced_filter_list,
                     input_arguments = input_type,
@@ -261,7 +261,7 @@ InstallMethod( @__MODULE__,  functorial_with_given_name,
     
 end );
 """,
-                rec(
+                @rec(
                     functorial_with_given_name = functorial_with_given_name,
                     filter_list = replaced_filter_list,
                     input_arguments = input_type,
@@ -284,7 +284,7 @@ InstallMethod( @__MODULE__,  functorial_with_given_name,
     
 end );
 """,
-                rec(
+                @rec(
                     functorial_with_given_name = functorial_with_given_name,
                     filter_list = replaced_filter_list,
                     input_arguments = input_type,
@@ -323,7 +323,7 @@ end );
                     
                     test_string = ReplacedStringViaRecord(
                         "PreCompose( cat, projection_with_given( cat, source_diagram..., source_object ), mu )",
-                        rec(
+                        @rec(
                             projection_with_given = limit.limit_projection_with_given_name,
                             source_diagram = source_diagram_arguments_names,
                             source_object = source_argument_name,
@@ -336,7 +336,7 @@ end );
                     
                     test_string = ReplacedStringViaRecord(
                         "PreCompose( cat, mu, injection_with_given( cat, range_diagram..., range_object ) )",
-                        rec(
+                        @rec(
                             injection_with_given = limit.colimit_injection_with_given_name,
                             range_diagram = range_diagram_arguments_names,
                             range_object = range_argument_name,
@@ -372,7 +372,7 @@ end );
                     
                     test_string = ReplacedStringViaRecord(
                         "List( (1):(Length( L )), i -> PreCompose( cat, projection_with_given( cat, source_diagram..., i, source_object ), L[i] ) )",
-                        rec(
+                        @rec(
                             projection_with_given = limit.limit_projection_with_given_name,
                             source_diagram = source_diagram_arguments_names,
                             source_object = source_argument_name,
@@ -385,7 +385,7 @@ end );
                     
                     test_string = ReplacedStringViaRecord(
                         "List( (1):(Length( L )), i -> PreCompose( cat, L[i], injection_with_given( cat, range_diagram..., i, range_object ) ) )",
-                        rec(
+                        @rec(
                             injection_with_given = limit.colimit_injection_with_given_name,
                             range_diagram = range_diagram_arguments_names,
                             range_object = range_argument_name,
@@ -442,7 +442,7 @@ AddDerivationToCAP( functorial_with_given_name,
     
 end );
 """,
-            rec(
+            @rec(
                 functorial_with_given_name = functorial_with_given_name,
                 input_arguments = input_arguments_names,
                 preconditions = @Concatenation( [ @Concatenation( "[", universal_morphism_with_given_name, ", 1 ]" ) ], additional_preconditions ),
@@ -471,7 +471,7 @@ AddDerivationToCAP( functorial_name,
     
 end );
 """,
-                rec(
+                @rec(
                     functorial_name = functorial_name,
                     object_name = object_name,
                 )

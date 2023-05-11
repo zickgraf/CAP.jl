@@ -66,7 +66,7 @@ function( name, target_op, used_op_names_with_multiples_and_category_getters, we
     end;
     
     return ObjectifyWithAttributes(
-        rec( ), TheTypeOfDerivedMethods,
+        @rec( ), TheTypeOfDerivedMethods,
         DerivationName, name,
         DerivationWeight, weight,
         DerivationFunction, func,
@@ -149,8 +149,8 @@ InstallMethod( @__MODULE__,  MakeDerivationGraph,
                [ IsDenseList ],
 function( operations )
   local G, op_name;
-  G = rec( derivations_by_target = rec(),
-              derivations_by_used_ops = rec() );
+  G = @rec( derivations_by_target = @rec(),
+              derivations_by_used_ops = @rec() );
   G = ObjectifyWithAttributes( G, TheTypeOfDerivationsGraphs );
   
   SetOperations( G, operations );
@@ -204,7 +204,7 @@ function( G, d )
     
     method_name = TargetOperation( d );
     
-    if !IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[method_name] )
+    if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[method_name] )
         
         Error( "trying to add a derivation to CAP_INTERNAL_DERIVATION_GRAPH for a method !in CAP_INTERNAL_METHOD_NAME_RECORD" );
         
@@ -249,7 +249,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
     Print( "WARNING: a derivation for ", NameFunction( target_op ), " has no explicit preconditions. Calling AddDerivation without explicit preconditions is deprecated && will !be supported after 2024.03.31.\n" );
     
     loop_multiplier = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "WeightLoopMultiple", 2 );
-    category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", rec( ) );
+    category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", @rec( ) );
     
     operations_in_graph = Operations( graph );
     
@@ -287,7 +287,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
     weight = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Weight", 1 );
     category_filter = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryFilter", IsCapCategory );
     loop_multiplier = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "WeightLoopMultiple", 2 );
-    category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", rec( ) );
+    category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", @rec( ) );
     function_called_before_installation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "FunctionCalledBeforeInstallation", false );
     
     ## get used ops
@@ -409,8 +409,8 @@ InstallMethod( @__MODULE__,  MakeOperationWeightList,
 function( C, G )
   local operation_weights, operation_derivations, owl, op_name;
     
-    operation_weights = rec( );
-    operation_derivations = rec( );
+    operation_weights = @rec( );
+    operation_derivations = @rec( );
     
     for op_name in Operations( G )
         operation_weights[op_name] = Inf;
@@ -418,7 +418,7 @@ function( C, G )
     end;
     
     owl = ObjectifyWithAttributes(
-        rec( operation_weights = operation_weights, operation_derivations = operation_derivations ), TheTypeOfOperationWeightLists,
+        @rec( operation_weights = operation_weights, operation_derivations = operation_derivations ), TheTypeOfOperationWeightLists,
         DerivationGraph, G,
         CategoryOfOperationWeightList, C
     );
@@ -443,7 +443,7 @@ end );
 InstallMethod( @__MODULE__,  CurrentOperationWeight,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
-  if IsBound( owl.operation_weights[op_name] )
+  if @IsBound( owl.operation_weights[op_name] )
       return owl.operation_weights[op_name];
   end;
   return Inf;
@@ -473,7 +473,7 @@ function( owl, d )
         
         operation_name = x[1];
         
-        if !IsBound( operation_weights[operation_name] )
+        if !@IsBound( operation_weights[operation_name] )
             
             return Inf;
             
@@ -702,10 +702,10 @@ end );
 @InstallGlobalFunction( StringMinHeap,
 function()
   return Objectify( TheTypeOfStringMinHeaps,
-                    rec( key = function(n) return n[2]; end,
+                    @rec( key = function(n) return n[2]; end,
                          str = function(n) return n[1]; end,
                          array = [],
-                         node_indices = rec() ) );
+                         node_indices = @rec() ) );
 end );
 
 InstallMethod( @__MODULE__,  StringGAP,
@@ -752,7 +752,7 @@ function( H )
   Swap( H, 1, Length( array ) );
   Remove( array );
   key = H.str( node );
-  H.node_indices[key] = nothing;
+  @Unbind( H.node_indices[key] );
   if !IsEmpty( array )
     Heapify( H, 1 );
   end;
@@ -793,7 +793,7 @@ end );
 InstallMethod( @__MODULE__,  Contains,
                [ IsStringMinHeap, IsString ],
 function( H, string )
-  return IsBound( H.node_indices[string] );
+  return @IsBound( H.node_indices[string] );
 end );
 
 InstallMethod( @__MODULE__,  Heapify,
@@ -909,7 +909,7 @@ end );
         return;
     end;
     
-    if !IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[name] )
+    if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[name] )
         Error( name, " is !the name of a CAP operation." );
         return;
     end;
@@ -926,7 +926,7 @@ end );
         
         if current_derivation == fail
             
-            if IsBound( category.primitive_operations[name] ) && category.primitive_operations[name] == true
+            if @IsBound( category.primitive_operations[name] ) && category.primitive_operations[name] == true
                 
                 Print( "It was given as a primitive operation.\n" );
                 
@@ -1013,7 +1013,7 @@ end );
     
     Print( "Possible derivations are:\n\n" );
     
-    possible_derivations = List( DerivationsOfOperation( CAP_INTERNAL_DERIVATION_GRAPH, name ), d -> rec( derivation = d ) );
+    possible_derivations = List( DerivationsOfOperation( CAP_INTERNAL_DERIVATION_GRAPH, name ), d -> @rec( derivation = d ) );
     
     for final_derivation in CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list
         
@@ -1021,7 +1021,7 @@ end );
             
             if TargetOperation( current_derivation ) == name
                 
-                Add( possible_derivations, rec(
+                Add( possible_derivations, @rec(
                     derivation = current_derivation,
                     can_compute = UsedOperationsWithMultiplesAndCategoryGetters( final_derivation.dummy_derivation ),
                     cannot_compute = final_derivation.cannot_compute,
@@ -1080,9 +1080,9 @@ end );
         
         Print( "with additional weight ", DerivationWeight( current_derivation.derivation ) );
         
-        @Assert( 0, IsBound( current_derivation.can_compute ) == IsBound( current_derivation.cannot_compute ) );
+        @Assert( 0, @IsBound( current_derivation.can_compute ) == @IsBound( current_derivation.cannot_compute ) );
         
-        if IsBound( current_derivation.can_compute )
+        if @IsBound( current_derivation.can_compute )
             
             Print( "\n\nas a final derivation\nif the following additional operations could be computed\n" );
             

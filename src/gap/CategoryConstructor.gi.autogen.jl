@@ -12,7 +12,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
     local known_options_with_filters, name, filter, CC, default_func_strings, info, unknown_filters, create_func_name, create_func, func_string, underlying_arguments, add, func, option_name, prop;
     
     ## check given options
-    known_options_with_filters = rec(
+    known_options_with_filters = @rec(
         name = IsString,
         category_filter = IsFilter,
         category_object_filter = IsFilter,
@@ -42,7 +42,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
     
     for option_name in RecNames( options )
         
-        if IsBound( known_options_with_filters[option_name] )
+        if @IsBound( known_options_with_filters[option_name] )
             
             filter = known_options_with_filters[option_name];
             
@@ -63,7 +63,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
     end;
     
     ## create category
-    if IsBound( options.name )
+    if @IsBound( options.name )
         
         name = options.name;
         
@@ -77,22 +77,22 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
     
     CC.category_as_first_argument = true;
     
-    if IsBound( options.supports_empty_limits )
+    if @IsBound( options.supports_empty_limits )
         
         CC.supports_empty_limits = options.supports_empty_limits;
         
     end;
     
-    CC.compiler_hints = rec( );
+    CC.compiler_hints = @rec( );
     
-    if IsBound( options.commutative_ring_of_linear_category )
+    if @IsBound( options.commutative_ring_of_linear_category )
         
         SetCommutativeRingOfLinearCategory( CC, options.commutative_ring_of_linear_category );
         
     end;
     
     ## set categorical properties
-    if IsBound( options.properties )
+    if @IsBound( options.properties )
         
         if !IsSubset( SetGAP( Filtered( @Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) ), options.properties )
             
@@ -110,37 +110,37 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
     end;
     
     ## add constructors && data
-    if IsBound( options.object_constructor )
+    if @IsBound( options.object_constructor )
         
         AddObjectConstructor( CC, options.object_constructor );
         
     end;
     
-    if IsBound( options.object_datum )
+    if @IsBound( options.object_datum )
         
         AddObjectDatum( CC, options.object_datum );
         
     end;
     
-    if IsBound( options.morphism_constructor )
+    if @IsBound( options.morphism_constructor )
         
         AddMorphismConstructor( CC, options.morphism_constructor );
         
     end;
     
-    if IsBound( options.morphism_datum )
+    if @IsBound( options.morphism_datum )
         
         AddMorphismDatum( CC, options.morphism_datum );
         
     end;
     
     ## install operations
-    if !IsBound( options.list_of_operations_to_install )
+    if !@IsBound( options.list_of_operations_to_install )
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "Missing mandatory option `list_of_operations_to_install`." );
         
-    elseif !ForAll( options.list_of_operations_to_install, name -> IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[name] ) )
+    elseif !ForAll( options.list_of_operations_to_install, name -> @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[name] ) )
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "The value of the option `list_of_operations_to_install` must be a list of names of CAP operations." );
@@ -166,7 +166,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
     end;
     
-    default_func_strings = rec(
+    default_func_strings = @rec(
         bool = """
             function( input_arguments... )
                 
@@ -258,7 +258,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             
         end;
         
-        if !IsBound( default_func_strings[info.return_type] )
+        if !@IsBound( default_func_strings[info.return_type] )
             
             @Info( InfoCategoryConstructor, 3, "can!yet handle return_type=\"", info.return_type, "\" required for ", name );
             continue;
@@ -268,7 +268,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         create_func_name = @Concatenation( "create_func_", info.return_type );
         
         # check if we have a suitable create_func_*
-        if !IsBound( options[create_func_name] )
+        if !@IsBound( options[create_func_name] )
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "Missing mandatory option `", create_func_name, "`." );
@@ -299,7 +299,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             
         end;
         
-        func_string = ReplacedStringViaRecord( func_string, rec(
+        func_string = ReplacedStringViaRecord( func_string, @rec(
             operation_name = name,
             input_arguments = info.input_arguments_names,
             number_of_arguments = StringGAP( Length( info.input_arguments_names ) ),
@@ -307,7 +307,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
         if PositionSublist( func_string, "underlying_arguments" ) != fail
             
-            if !IsBound( options.underlying_category_getter_string ) || !IsBound( options.underlying_object_getter_string ) || !IsBound( options.underlying_morphism_getter_string )
+            if !@IsBound( options.underlying_category_getter_string ) || !@IsBound( options.underlying_object_getter_string ) || !@IsBound( options.underlying_morphism_getter_string )
                 
                 # COVERAGE_IGNORE_NEXT_LINE
                 Error( "for generating underlying_arguments you must pass category, object && morphism getter strings" );
@@ -357,7 +357,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                 
             end );
             
-            func_string = ReplacedStringViaRecord( func_string, rec(
+            func_string = ReplacedStringViaRecord( func_string, @rec(
                 underlying_arguments = underlying_arguments,
             ) );
             
@@ -367,16 +367,16 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             
             if PositionSublist( func_string, "top_object_getter" ) != fail
             
-                if IsBound( options.top_object_getter_string )
+                if @IsBound( options.top_object_getter_string )
                     
-                    func_string = ReplacedStringViaRecord( func_string, rec(
+                    func_string = ReplacedStringViaRecord( func_string, @rec(
                         top_object_getter = options.top_object_getter_string,
                     ) );
                     
                 else
                     
                     Display( "WARNING: option `top_object_getter_string` is !set ⥉ a call to `CategoryConstructor`, using default value `ObjectConstructor`. This fallback will !be supported after 2023.08.12." );
-                    func_string = ReplacedStringViaRecord( func_string, rec(
+                    func_string = ReplacedStringViaRecord( func_string, @rec(
                         top_object_getter = "ObjectConstructor",
                     ) );
                     
@@ -388,29 +388,29 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
         if StartsWith( info.return_type, "morphism" )
             
-            if IsBound( info.output_source_getter_string ) && IsBound( info.can_always_compute_output_source_getter ) && info.can_always_compute_output_source_getter
+            if @IsBound( info.output_source_getter_string ) && @IsBound( info.can_always_compute_output_source_getter ) && info.can_always_compute_output_source_getter
                 
-                func_string = ReplacedStringViaRecord( func_string, rec(
+                func_string = ReplacedStringViaRecord( func_string, @rec(
                     top_source = info.output_source_getter_string,
                 ) );
                 
-            elseif IsBound( options.generic_output_source_getter_string )
+            elseif @IsBound( options.generic_output_source_getter_string )
                 
-                func_string = ReplacedStringViaRecord( func_string, rec(
+                func_string = ReplacedStringViaRecord( func_string, @rec(
                     top_source = options.generic_output_source_getter_string,
                 ) );
                 
             end;
             
-            if IsBound( info.output_range_getter_string ) && IsBound( info.can_always_compute_output_range_getter ) && info.can_always_compute_output_range_getter
+            if @IsBound( info.output_range_getter_string ) && @IsBound( info.can_always_compute_output_range_getter ) && info.can_always_compute_output_range_getter
                 
-                func_string = ReplacedStringViaRecord( func_string, rec(
+                func_string = ReplacedStringViaRecord( func_string, @rec(
                     top_range = info.output_range_getter_string,
                 ) );
                 
-            elseif IsBound( options.generic_output_range_getter_string )
+            elseif @IsBound( options.generic_output_range_getter_string )
                 
-                func_string = ReplacedStringViaRecord( func_string, rec(
+                func_string = ReplacedStringViaRecord( func_string, @rec(
                     top_range = options.generic_output_range_getter_string,
                 ) );
                 
@@ -426,16 +426,16 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             
             if PositionSublist( func_string, "top_morphism_getter" ) != fail
             
-                if IsBound( options.top_morphism_getter_string )
+                if @IsBound( options.top_morphism_getter_string )
                     
-                    func_string = ReplacedStringViaRecord( func_string, rec(
+                    func_string = ReplacedStringViaRecord( func_string, @rec(
                         top_morphism_getter = options.top_morphism_getter_string,
                     ) );
                     
                 else
                     
                     Display( "WARNING: option `top_morphism_getter_string` is !set ⥉ a call to `CategoryConstructor`, using default value `MorphismConstructor`. This fallback will !be supported after 2023.08.12." );
-                    func_string = ReplacedStringViaRecord( func_string, rec(
+                    func_string = ReplacedStringViaRecord( func_string, @rec(
                         top_morphism_getter = "MorphismConstructor",
                     ) );
                     

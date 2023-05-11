@@ -4,7 +4,7 @@
 # Implementations
 #
 @InstallValueConst( CAP_INTERNAL_FINAL_DERIVATION_LIST,
-              rec( final_derivation_list = [ ] ) );
+              @rec( final_derivation_list = [ ] ) );
 
 @BindGlobal( "CAP_INTERNAL_FINAL_DERIVATION_SANITY_CHECK",
   
@@ -34,7 +34,7 @@
         # see AddDerivation ⥉ Derivations.gi
         method_name = TargetOperation( derivation );
         
-        if !IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[method_name] )
+        if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[method_name] )
             
             Error( "trying to add a final derivation for a method !in CAP_INTERNAL_METHOD_NAME_RECORD" );
             
@@ -122,7 +122,7 @@ end );
     weight = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Weight", 1 );
     category_filter = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryFilter", IsCapCategory );
     loop_multiplier = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "WeightLoopMultiple", 2 );
-    category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", rec( ) );
+    category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", @rec( ) );
     function_called_before_installation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "FunctionCalledBeforeInstallation", false );
     
     for i in (1):(Length( additional_functions ))
@@ -307,7 +307,7 @@ end );
         category_filter
     );
     
-    final_derivation = rec(
+    final_derivation = @rec(
         dummy_derivation = dummy_derivation,
         cannot_compute = List( cannot_compute, x -> NameFunction( x ) ),
         derivations = derivations,
@@ -339,7 +339,7 @@ InstallMethod( @__MODULE__,  Finalize,
     end;
     
     # prepare for the checks below (usually this is done when the first add function is called, but we support the case that no add function is called at all)
-    if !IsBound( category.initially_known_categorical_properties )
+    if !@IsBound( category.initially_known_categorical_properties )
         
         category.initially_known_categorical_properties = ShallowCopy( ListKnownCategoricalProperties( category ) );
         

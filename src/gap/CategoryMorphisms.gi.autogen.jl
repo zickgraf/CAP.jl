@@ -156,7 +156,7 @@ InstallMethod( @__MODULE__,  AdditiveInverse,
 AdditiveInverseForMorphisms );
 
 CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
-  rec(
+  @rec(
     AdditiveInverse = [ [ "AdditiveInverseForMorphisms", 1 ] ],
     AdditiveInverseImmutable = [ [ "AdditiveInverseForMorphisms", 1 ] ],
   )
@@ -169,7 +169,7 @@ InstallMethod( @__MODULE__,  Inverse,
 InverseForMorphisms );
 
 CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
-  rec(
+  @rec(
     Inverse = [ [ "InverseForMorphisms", 1 ] ],
     InverseImmutable = [ [ "InverseForMorphisms", 1 ] ],
   )
@@ -208,7 +208,7 @@ function( q, mor )
         
     else
         
-        if IsBound( ring.interpret_rationals_func )
+        if @IsBound( ring.interpret_rationals_func )
             
             r = ring.interpret_rationals_func( q );
             
@@ -255,7 +255,7 @@ InstallMethod( @__MODULE__,  AddMorphismRepresentation,
         
     end;
     
-    if IsBound( category.initially_known_categorical_properties )
+    if @IsBound( category.initially_known_categorical_properties )
         
         Error( "calling AddMorphismRepresentation after adding functions to the category is !supported" );
         
@@ -329,10 +329,10 @@ end );
   function( category, source, range, additional_arguments_list... )
     local arg_list, objectified_morphism;
     
-    # inline ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( rec( ), category, source, range, additional_arguments_list... );
+    # inline ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( @rec( ), category, source, range, additional_arguments_list... );
     
     arg_list = @Concatenation(
-        [ rec( ), category.morphism_type, CapCategory, category, Source, source, Range, range ], additional_arguments_list
+        [ @rec( ), category.morphism_type, CapCategory, category, Source, source, Range, range ], additional_arguments_list
     );
     
     objectified_morphism = CallFuncList( ObjectifyWithAttributes, arg_list );
@@ -470,7 +470,7 @@ end );
         
     end;
     
-    if IsBound( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS )
+    if @IsBound( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS )
         
         for i in category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS
             
@@ -488,7 +488,7 @@ InstallMethod( @__MODULE__,  AddPropertyToMatchAtIsCongruentForMorphisms,
                
   function( category, name )
     
-    if !IsBound( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS )
+    if !@IsBound( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS )
         
         category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS = [ ];
         
@@ -860,55 +860,55 @@ end );
     print_graph = CreatePrintingGraph( IsCapCategoryMorphism && HasCapCategory, morphism_function );
     
     AddRelationToGraph( print_graph,
-                        rec( Source = [ rec( Conditions = "IsIsomorphism",
+                        @rec( Source = [ @rec( Conditions = "IsIsomorphism",
                                               PrintString = "iso",
                                               Adjective = true,
                                               NoSepString = true ) ],
-                             Range = [ rec( Conditions = "IsSplitMonomorphism",
+                             Range = [ @rec( Conditions = "IsSplitMonomorphism",
                                              PrintString = "split mono",
                                              TypeOfView = "ViewObj",
                                              ComputeLevel = "AllWithCompute",
                                              Adjective = true,
                                               NoSepString = true ),
-                                        rec( Conditions = "IsSplitEpimorphism",
+                                        @rec( Conditions = "IsSplitEpimorphism",
                                              PrintString = "split epi",
                                              Adjective = true,
                                               NoSepString = true ) ] ) );
     
     AddRelationToGraph( print_graph,
-                        rec( Source = [ rec( Conditions = "IsOne",
+                        @rec( Source = [ @rec( Conditions = "IsOne",
                                               PrintString = "identity",
                                               Adjective = true ) ],
-                             Range = [ rec( Conditions = "IsAutomorphism",
+                             Range = [ @rec( Conditions = "IsAutomorphism",
                                              PrintString = "auto",
                                              Adjective = true,
                                              NoSepString = true ),
                                         "IsIsomorphism" ] ) );
     
     AddRelationToGraph( print_graph,
-                        rec( Source = [ "IsAutomorphism" ],
+                        @rec( Source = [ "IsAutomorphism" ],
                              Range = [ "IsIsomorphism",
-                                        rec( Conditions = "IsEndomorphism",
+                                        @rec( Conditions = "IsEndomorphism",
                                              PrintString = "endo",
                                              Adjective = true,
                                              NoSepString = true) ] ) );
     
     AddRelationToGraph( print_graph,
-                        rec( Source = [ "IsSplitMonomorphism" ],
-                             Range = [ rec( Conditions = "IsMonomorphism",
+                        @rec( Source = [ "IsSplitMonomorphism" ],
+                             Range = [ @rec( Conditions = "IsMonomorphism",
                                              PrintString = "mono",
                                              Adjective = true,
                                              NoSepString = true ) ] ) );
     
     AddRelationToGraph( print_graph,
-                        rec( Source = [ "IsSplitEpimorphism" ],
-                             Range = [ rec( Conditions = "IsEpimorphism",
+                        @rec( Source = [ "IsSplitEpimorphism" ],
+                             Range = [ @rec( Conditions = "IsEpimorphism",
                                              PrintString = "epi",
                                              Adjective = true,
                                              NoSepString = true ) ] ) );
     
     AddNodeToGraph( print_graph,
-                    rec( Conditions = "IsZeroForMorphisms",
+                    @rec( Conditions = "IsZeroForMorphisms",
                          PrintString = "zero",
                          Adjective = true ) );
     

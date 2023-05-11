@@ -233,7 +233,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_OBJECTS" );
 
 #! @Arguments category, [attribute1, value1, ...]
 #! @Description
-#!  Shorthand for `ObjectifyObjectForCAPWithAttributes( rec( ), category[, attribute1, value1, ...] )`.
+#!  Shorthand for `ObjectifyObjectForCAPWithAttributes( @rec( ), category[, attribute1, value1, ...] )`.
 #! @Returns an object
 @DeclareGlobalFunction( "CreateCapCategoryObjectWithAttributes" );
 

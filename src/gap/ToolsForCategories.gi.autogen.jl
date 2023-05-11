@@ -41,15 +41,15 @@
     
     if string == "bool"
         
-        return rec( filter = IsBool );
+        return @rec( filter = IsBool );
         
     elseif string == "integer"
         
-        return rec( filter = IsInt );
+        return @rec( filter = IsInt );
         
     elseif string == "nonneg_integer_or_Inf"
         
-        return rec( filter = IsCyclotomic );
+        return @rec( filter = IsCyclotomic );
         
     elseif string == "category"
         
@@ -69,19 +69,19 @@
         
     elseif string == "list_of_objects"
         
-        return rec( filter = IsList, element_type = CapJitDataTypeOfObjectOfCategory( category ) );
+        return @rec( filter = IsList, element_type = CapJitDataTypeOfObjectOfCategory( category ) );
         
     elseif string == "list_of_morphisms"
         
-        return rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) );
+        return @rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) );
         
     elseif string == "list_of_lists_of_morphisms"
         
-        return rec( filter = IsList, element_type = rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) ) );
+        return @rec( filter = IsList, element_type = @rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) ) );
         
     elseif string == "list_of_twocells"
         
-        return rec( filter = IsList, element_type = CapJitDataTypeOfTwoCellOfCategory( category ) );
+        return @rec( filter = IsList, element_type = CapJitDataTypeOfTwoCellOfCategory( category ) );
         
     elseif string == "object_in_range_category_of_homomorphism_structure"
         
@@ -178,7 +178,7 @@
             
         end;
         
-        return rec(
+        return @rec(
             filter = is_ring_element,
         );
         
@@ -210,18 +210,18 @@
             
         end;
         
-        return rec(
+        return @rec(
             filter = IsList,
-            element_type = rec(
+            element_type = @rec(
                 filter = is_ring_element,
             ),
         );
         
     elseif string == "arbitrary_list"
         
-        return rec(
+        return @rec(
             filter = IsList,
-            element_type = rec(
+            element_type = @rec(
                 filter = IsObject,
             )
         );
@@ -230,7 +230,7 @@
         
         n = IntGAP( string[(1):(Length( string ) - Length( "_tuple_of_morphisms" ))] );
         
-        return rec(
+        return @rec(
             filter = IsNTuple,
             element_types = ListWithIdenticalEntries( n, CapJitDataTypeOfMorphismOfCategory( category ) ),
         );
@@ -294,8 +294,8 @@ end );
     elseif IsSpecializationOfFilter( IsNTuple, data_type.filter )
         
         # `IsNTuple` deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
-        # However, on the GAP level tuples are just lists.
-        return IsList;
+        # However, on the GAP level tuples are just dense lists.
+        return IsDenseList;
         
     elseif IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), data_type.filter )
         
@@ -382,7 +382,7 @@ end );
     end;
     
     for i in (1):(Length( additional_filters ))
-        if IsBound( additional_filters[ i ] )
+        if @IsBound( additional_filters[ i ] )
             filter_list[ i ] = filter_list[ i ] && additional_filters[ i ];
         end;
     end;
@@ -438,11 +438,14 @@ end );
             
             for i in (1):(Length( value ))
                 
-                if !IsBound( value[i] )
+                #= comment for Julia
+                # Julia does !have non-dense lists
+                if !@IsBound( value[i] )
                     
                     CallFuncList( Error, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
                     
                 end;
+                # =#
                 
                 if i <= 4
                     
@@ -466,9 +469,9 @@ end );
           local i;
             
             # tuples are modeled as lists
-            if !IsList( value )
+            if !IsDenseList( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsList (implementation filter of IsNTuple).", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsDenseList (implementation filter of IsNTuple).", generic_help_string ] ) );
                 
             end;
             
@@ -479,12 +482,6 @@ end );
             end;
             
             for i in (1):(Length( value ))
-                
-                if !IsBound( value[i] )
-                    
-                    CallFuncList( Error, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
-                    
-                end;
                 
                 asserts_value_is_of_element_type[i]( value[i] );
                 
@@ -649,7 +646,7 @@ end );
         
         current_appearance = appearance_list[ current_appearance_nr ];
         
-        if IsBound( replacement_record[current_appearance[1]] )
+        if @IsBound( replacement_record[current_appearance[1]] )
             
             Add( remove_list, current_appearance_nr );
             
@@ -739,7 +736,7 @@ end );
             # function can!end with a symbol
             @Assert( 0, i < Length( func_as_list ) );
             
-            if IsBound( category_getters[func_as_list[i + 1]] )
+            if @IsBound( category_getters[func_as_list[i + 1]] )
                 
                 category_getter = category_getters[func_as_list[i + 1]];
                 
@@ -959,7 +956,7 @@ end );
     
     for current_cache_name in operations
         Print( current_cache_name, ": " );
-        if !IsBound( category.caches[current_cache_name] )
+        if !@IsBound( category.caches[current_cache_name] )
             Print( "!installed yet\n" );
             continue;
         end;
@@ -1105,7 +1102,7 @@ end );
 end );
 
 ##
-@BindGlobal( "CAP_JIT_INTERNAL_KNOWN_METHODS", rec( ) );
+@BindGlobal( "CAP_JIT_INTERNAL_KNOWN_METHODS", @rec( ) );
 
 @InstallGlobalFunction( CapJitAddKnownMethod,
   
@@ -1135,7 +1132,7 @@ end );
     
     operation_name = NameFunction( operation );
     
-    if IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name] ) && Length( filters ) == Length( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name].filter_list )
+    if @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name] ) && Length( filters ) == Length( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name].filter_list )
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( operation_name, " is already installed as a CAP operation with the same number of arguments" );
@@ -1155,7 +1152,7 @@ end );
         
     end;
     
-    if !IsBound( CAP_JIT_INTERNAL_KNOWN_METHODS[operation_name] )
+    if !@IsBound( CAP_JIT_INTERNAL_KNOWN_METHODS[operation_name] )
         
         CAP_JIT_INTERNAL_KNOWN_METHODS[operation_name] = [ ];
         
@@ -1170,12 +1167,12 @@ end );
         
     end;
     
-    Add( known_methods, rec( filters = filters, method = method ) );
+    Add( known_methods, @rec( filters = filters, method = method ) );
     
 end );
 
 ##
-@BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES", rec( ) );
+@BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES", @rec( ) );
 
 @InstallGlobalFunction( "CapJitAddTypeSignature", function ( name, input_filters, output_data_type )
     
@@ -1220,7 +1217,7 @@ end );
         
     end;
     
-    if !IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES[name] )
+    if !@IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES[name] )
         
         CAP_JIT_INTERNAL_TYPE_SIGNATURES[name] = [ ];
         
@@ -1242,7 +1239,7 @@ end );
     
     if IsFilter( output_data_type )
         
-        output_data_type = rec( filter = output_data_type );
+        output_data_type = @rec( filter = output_data_type );
         
     end;
     
@@ -1252,7 +1249,7 @@ end );
 end );
 
 ##
-@BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED", rec( ) );
+@BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED", @rec( ) );
 
 @InstallGlobalFunction( "CapJitAddTypeSignatureDeferred", function ( package_name, name, input_filters, output_data_type )
     
@@ -1281,7 +1278,7 @@ end );
         
     end;
     
-    if !IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name] )
+    if !@IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name] )
         
         CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name] = [ ];
         
@@ -1297,13 +1294,13 @@ end );
     
     if cat == false
         
-        type = rec(
+        type = @rec(
             filter = IsCapCategory,
         );
         
     else
         
-        type = rec(
+        type = @rec(
             filter = CategoryFilter( cat ),
             category = cat,
         );
@@ -1320,13 +1317,13 @@ end );
     
     if cat == false
         
-        type = rec(
+        type = @rec(
             filter = IsCapCategoryObject,
         );
         
     else
         
-        type = rec(
+        type = @rec(
             filter = ObjectFilter( cat ),
             category = cat,
         );
@@ -1343,13 +1340,13 @@ end );
     
     if cat == false
         
-        type = rec(
+        type = @rec(
             filter = IsCapCategoryMorphism,
         );
         
     else
         
-        type = rec(
+        type = @rec(
             filter = MorphismFilter( cat ),
             category = cat,
         );
@@ -1366,13 +1363,13 @@ end );
     
     if cat == false
         
-        type = rec(
+        type = @rec(
             filter = IsCapCategoryTwoCell,
         );
         
     else
         
-        type = rec(
+        type = @rec(
             filter = TwoCellFilter( cat ),
             category = cat,
         );
@@ -1566,7 +1563,7 @@ end );
 @InstallGlobalFunction( HandlePrecompiledTowers, function ( category, underlying_category, constructor_name )
   local precompiled_towers, remaining_constructors_in_tower, precompiled_functions_adder, info;
     
-    if !IsBound( underlying_category.compiler_hints ) || !IsBound( underlying_category.compiler_hints.precompiled_towers )
+    if !@IsBound( underlying_category.compiler_hints ) || !@IsBound( underlying_category.compiler_hints.precompiled_towers )
         
         return;
         
@@ -1583,7 +1580,7 @@ end );
     
     for info in underlying_category.compiler_hints.precompiled_towers
         
-        if !(IsRecord( info ) && IsBound( info.remaining_constructors_in_tower ) && IsBound( info.precompiled_functions_adder ))
+        if !(IsRecord( info ) && @IsBound( info.remaining_constructors_in_tower ) && @IsBound( info.precompiled_functions_adder ))
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "the entries of `underlying_category.compiler_hints.precompiled_towers` must be records with components `remaining_constructors_in_tower` && `precompiled_functions_adder`" );
@@ -1621,7 +1618,7 @@ end );
             else
                 
                 # pass information on to the next level
-                Add( precompiled_towers, rec(
+                Add( precompiled_towers, @rec(
                     remaining_constructors_in_tower = remaining_constructors_in_tower[(2):(Length( remaining_constructors_in_tower ))],
                     precompiled_functions_adder = precompiled_functions_adder,
                 ) );
@@ -1634,13 +1631,13 @@ end );
     
     if !IsEmpty( precompiled_towers )
         
-        if !IsBound( category.compiler_hints )
+        if !@IsBound( category.compiler_hints )
             
-            category.compiler_hints = rec( );
+            category.compiler_hints = @rec( );
             
         end;
         
-        if !IsBound( category.compiler_hints.precompiled_towers )
+        if !@IsBound( category.compiler_hints.precompiled_towers )
             
             category.compiler_hints.precompiled_towers = [ ];
             

@@ -7,7 +7,7 @@
 
 #! @Section Prepare functions
 
-@InstallValueConst( CAP_PREPARE_FUNCTION_RECORD, rec( ) );
+@InstallValueConst( CAP_PREPARE_FUNCTION_RECORD, @rec( ) );
 
 @InstallGlobalFunction( CAPOperationPrepareFunction,
   function( prepare_function, category, func )
@@ -28,7 +28,7 @@
         return;
     end;
     
-    if !IsBound( CAP_PREPARE_FUNCTION_RECORD[prepare_function] )
+    if !@IsBound( CAP_PREPARE_FUNCTION_RECORD[prepare_function] )
         Error( "No compatible prepare function found, see ListCAPPrepareFunctions(); for a list of prepare functions" );
         return;
     end;
@@ -72,7 +72,7 @@ end );
         end;
     end;
     
-    used_symbol_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION( prepare_function, operation_names, 1, rec( ), rec( ) );
+    used_symbol_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION( prepare_function, operation_names, 1, @rec( ), @rec( ) );
     used_symbol_list = List( used_symbol_list, i -> i[ 1 ] );
     used_symbol_list = @Concatenation( used_symbol_list, precondition_list );
     used_symbol_list = DuplicateFreeList( used_symbol_list );

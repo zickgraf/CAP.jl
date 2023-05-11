@@ -66,7 +66,7 @@ end );
     cache = fail;
     
     #= comment for Julia
-    if IsBound( category.caches[name] ) && IsCachingObject( category.caches[name] )
+    if @IsBound( category.caches[name] ) && IsCachingObject( category.caches[name] )
         
         if category.caches[name].nr_keys != number
             
@@ -79,7 +79,7 @@ end );
         
     end;
     
-    if IsBound( category.caches[name] ) && IsString( category.caches[name] )
+    if @IsBound( category.caches[name] ) && IsString( category.caches[name] )
         
         cache_type = category.caches[name];
         
@@ -191,25 +191,25 @@ end );
     
     if IsFilter( object_datum_type )
         
-        object_datum_type = rec( filter = object_datum_type );
+        object_datum_type = @rec( filter = object_datum_type );
         
     end;
     
     if IsFilter( morphism_datum_type )
         
-        morphism_datum_type = rec( filter = morphism_datum_type );
+        morphism_datum_type = @rec( filter = morphism_datum_type );
         
     end;
     
     if IsFilter( two_cell_datum_type )
         
-        two_cell_datum_type = rec( filter = two_cell_datum_type );
+        two_cell_datum_type = @rec( filter = two_cell_datum_type );
         
     end;
     
     filter = NewFilter( @Concatenation( name, "InstanceCategoryFilter" ), category_filter );
     
-    obj = ObjectifyWithAttributes( rec( ), NewType( TheFamilyOfCapCategories, filter ), Name, name );
+    obj = ObjectifyWithAttributes( @rec( ), NewType( TheFamilyOfCapCategories, filter ), Name, name );
     
     ## filters
     SetCategoryFilter( obj, filter );
@@ -243,7 +243,7 @@ end );
     
     obj.derivations_weight_list = MakeOperationWeightList( obj, CAP_INTERNAL_DERIVATION_GRAPH );
     
-    obj.caches = rec( );
+    obj.caches = @rec( );
     
     for operation_name in CAP_INTERNAL.operation_names_with_cache_disabled_by_default
         
@@ -251,11 +251,11 @@ end );
         
     end;
     
-    obj.primitive_operations = rec( );
+    obj.primitive_operations = @rec( );
     
-    obj.added_functions = rec( );
+    obj.added_functions = @rec( );
     
-    obj.timing_statistics = rec( );
+    obj.timing_statistics = @rec( );
     obj.timing_statistics_enabled = false;
     
     obj.default_cache_type = CAP_INTERNAL.default_cache_type;
@@ -335,7 +335,7 @@ InstallMethod( @__MODULE__,  TheoremRecord,
                
   function( category )
     
-    return rec( );
+    return @rec( );
     
 end );
 
@@ -350,7 +350,7 @@ InstallMethod( @__MODULE__,  AddCategoryToFamily,
                
   function( category, family )
     
-    if !IsBound( category.families )
+    if !@IsBound( category.families )
         
         category.families = [ ];
         
@@ -379,7 +379,7 @@ InstallMethod( @__MODULE__,  SetCaching,
         
     end;
     
-    if !IsBound( category.caches[function_name] ) || IsString( category.caches[function_name] )
+    if !@IsBound( category.caches[function_name] ) || IsString( category.caches[function_name] )
         
         category.caches[function_name] = caching_info;
         
@@ -569,7 +569,7 @@ InstallMethod( @__MODULE__,  CanCompute,
   function( category, string )
     local weight_list;
     
-    if !IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[string] )
+    if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[string] )
         
         Error( string, " is !the name of a CAP operation" );
         
@@ -600,7 +600,7 @@ InstallMethod( @__MODULE__,  CheckConstructivenessOfCategory,
   function( category, string )
     local category_property, result_list;
     
-    if !IsBound( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[string] )
+    if !@IsBound( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[string] )
       
       Error( "the given string is !a property of a category" );
     
@@ -762,7 +762,7 @@ end );
             total_time = Sum( times );
             time_per_exec = IntGAP( total_time / execs * 1000 );
             
-            Add( operations, rec(
+            Add( operations, @rec(
                 name = recname,
                 execs = execs,
                 total_time = total_time,
@@ -789,7 +789,7 @@ end );
         
     end;
     
-    return rec(
+    return @rec(
         header = header,
         warning = warning,
         total_time_global = total_time_global,
@@ -841,7 +841,7 @@ end );
     
 end );
 
-if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound( NCurses.BrowseDenseList )
+if IsPackageMarkedForLoading( "Browse", ">= 1.5" )
     
     @InstallGlobalFunction( "BrowseTimingStatistics",
       function( category )
@@ -880,7 +880,7 @@ if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound
             
         end;
         
-        NCurses.BrowseDenseList( value_matrix, rec( header = header, labelsCol = labelsCol, labelsRow = labelsRow ) );
+        NCurses.BrowseDenseList( value_matrix, @rec( header = header, labelsCol = labelsCol, labelsRow = labelsRow ) );
         
     end );
     

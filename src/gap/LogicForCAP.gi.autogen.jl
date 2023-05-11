@@ -5,9 +5,9 @@
 #
 @InstallValueConst( CATEGORIES_LOGIC_FILES,
               
-  rec(
+  @rec(
       
-      Propositions = rec(
+      Propositions = @rec(
           #= comment for Julia
           IsCapCategory = [
                        Filename( DirectoriesPackageLibrary( "CAP", "LogicForCategories" ), "PropositionsForGeneralCategories.tex" )
@@ -29,7 +29,7 @@
                                ],
           # =#
         ),
-      Predicates = rec(
+      Predicates = @rec(
           #= comment for Julia
           IsCapCategory = [
                        Filename( DirectoriesPackageLibrary( "CAP", "LogicForCategories" ), "PredicateImplicationsForGeneralCategories.tex" )
@@ -51,7 +51,7 @@
                                ],
           # =#
         ),
-      EvalRules = rec(
+      EvalRules = @rec(
           #= comment for Julia
           IsCapCategory = [
                       Filename( DirectoriesPackageLibrary( "CAP", "LogicForCategories" ), "RelationsForGeneralCategories.tex" )
@@ -121,7 +121,7 @@ end );
     
     name = implication_record.Function;
     
-    if !IsBound( theorem_record[name] )
+    if !@IsBound( theorem_record[name] )
         
         theorem_record[name] = [ ];
         
@@ -136,7 +136,7 @@ end );
   function( record, arguments, result_object )
     local object, index_list, i, value_function, value;
     
-    if !IsBound( record.Object )
+    if !@IsBound( record.Object )
         
         object = "result";
         
@@ -188,7 +188,7 @@ end );
         
     end;
     
-    if IsBound( record.ValueFunction )
+    if @IsBound( record.ValueFunction )
         
         value_function = record.ValueFunction;
         
@@ -198,7 +198,7 @@ end );
         
     end;
     
-    if IsBound( record.Value )
+    if @IsBound( record.Value )
         
         value = record.Value;
         
@@ -208,7 +208,7 @@ end );
         
     end;
     
-    if !IsBound( record.compare_function )
+    if !@IsBound( record.compare_function )
         
         return List( object, i -> [ i, value_function, value ] );
         
@@ -228,7 +228,7 @@ end );
           entry, current_source, sanitized_source_list, current_argument_type, i;
     
     
-    if !IsBound( TheoremRecord( category )[method_name] )
+    if !@IsBound( TheoremRecord( category )[method_name] )
         
         return;
         
@@ -281,7 +281,7 @@ end );
             
             sanitized_source_list = SANITIZE_RECORD( current_source, arguments, result_object );
             
-            if IsBound( current_source.Type ) && LowercaseString( current_source.Type ) == "testdirect"
+            if @IsBound( current_source.Type ) && LowercaseString( current_source.Type ) == "testdirect"
                 
                 for sanitized_source in sanitized_source_list
                     
@@ -375,7 +375,7 @@ end );
     
     INSTALL_PREDICATE_IMPLICATION( category, immediate_record );
     
-    if !IsBound( category.predicate_implication )
+    if !@IsBound( category.predicate_implication )
         
         category.predicate_implication = [ ];
         
@@ -423,7 +423,7 @@ end );
     
     Add( category.logical_implication_files.EvalRules.IsCapCategory, filename );
     
-    if IsBound( category.logical_implication_files.EvalRules.general_rules_already_read ) &&
+    if @IsBound( category.logical_implication_files.EvalRules.general_rules_already_read ) &&
        category.logical_implication_files.EvalRules.general_rules_already_read == true
         
         theorem_list = READ_EVAL_RULE_FILE( filename );
@@ -444,7 +444,7 @@ end );
   function( category, rule_record )
     local command;
     
-    if !IsBound( rule_record.starting_command )
+    if !@IsBound( rule_record.starting_command )
         
         return;
         
@@ -452,13 +452,13 @@ end );
     
     command = rule_record.starting_command ;
     
-    if !IsBound( category.eval_rules )
+    if !@IsBound( category.eval_rules )
         
-        category.eval_rules = rec( );
+        category.eval_rules = @rec( );
         
     end;
     
-    if !IsBound( category.eval_rules[command] )
+    if !@IsBound( category.eval_rules[command] )
         
         category.eval_rules[command] = [ ];
         

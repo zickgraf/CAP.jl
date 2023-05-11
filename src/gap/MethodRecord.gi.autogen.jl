@@ -78,31 +78,31 @@
 
 end );
 
-@InstallValueConst( CAP_INTERNAL_METHOD_NAME_RECORD, rec(
-ObjectConstructor = rec(
+@InstallValueConst( CAP_INTERNAL_METHOD_NAME_RECORD, @rec(
+ObjectConstructor = @rec(
   filter_list = [ "category", "object_datum" ],
   return_type = "object",
   compatible_with_congruence_of_morphisms = false,
 ),
 
-ObjectDatum = rec(
+ObjectDatum = @rec(
   filter_list = [ "category", "object" ],
   return_type = "object_datum",
 ),
 
-MorphismConstructor = rec(
+MorphismConstructor = @rec(
   filter_list = [ "category", "object", "morphism_datum", "object" ],
   return_type = "morphism",
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismDatum = rec(
+MorphismDatum = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "morphism_datum",
   compatible_with_congruence_of_morphisms = false,
 ),
 
-LiftAlongMonomorphism = rec(
+LiftAlongMonomorphism = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "iota", "tau" ], [ "tau_source", "iota_source" ] ],
   pre_function = function( cat, iota, tau )
@@ -127,7 +127,7 @@ LiftAlongMonomorphism = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-IsLiftableAlongMonomorphism = rec(
+IsLiftableAlongMonomorphism = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   pre_function = function( cat, iota, tau )
     local value;
@@ -151,7 +151,7 @@ IsLiftableAlongMonomorphism = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-ColiftAlongEpimorphism = rec(
+ColiftAlongEpimorphism = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "epsilon", "tau" ], [ "epsilon_range", "tau_range" ] ],
   pre_function = function( cat, epsilon, tau )
@@ -176,7 +176,7 @@ ColiftAlongEpimorphism = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-IsColiftableAlongEpimorphism = rec(
+IsColiftableAlongEpimorphism = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   pre_function = function( cat, epsilon, tau )
     local value;
@@ -200,7 +200,7 @@ IsColiftableAlongEpimorphism = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-Lift = rec(
+Lift = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "alpha_source", "beta_source" ] ],
   pre_function = function( cat, iota, tau )
@@ -227,7 +227,7 @@ Lift = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-LiftOrFail = rec(
+LiftOrFail = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "alpha_source", "beta_source" ] ],
   pre_function = "Lift",
@@ -238,7 +238,7 @@ LiftOrFail = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-IsLiftable = rec(
+IsLiftable = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   pre_function = "Lift",
   return_type = "bool",
@@ -247,7 +247,7 @@ IsLiftable = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-Colift = rec(
+Colift = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "alpha_range", "beta_range" ] ],
   pre_function = function( cat, epsilon, tau )
@@ -274,7 +274,7 @@ Colift = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-ColiftOrFail = rec(
+ColiftOrFail = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "alpha_range", "beta_range" ] ],
   pre_function = "Colift",
@@ -285,7 +285,7 @@ ColiftOrFail = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-IsColiftable = rec(
+IsColiftable = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   pre_function = "Colift",
   return_type = "bool",
@@ -294,7 +294,7 @@ IsColiftable = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-ProjectiveLift = rec(
+ProjectiveLift = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "alpha_source", "beta_source" ] ],
   pre_function = function( cat, iota, tau )
@@ -320,7 +320,7 @@ ProjectiveLift = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-InjectiveColift = rec(
+InjectiveColift = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "alpha_range", "beta_range" ] ],
   pre_function = function( cat, epsilon, tau )
@@ -346,13 +346,13 @@ InjectiveColift = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-IdentityMorphism = rec(
+IdentityMorphism = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "a" ], [ "a", "a" ] ],
   return_type = "morphism",
   dual_operation = "IdentityMorphism" ),
 
-InverseForMorphisms = rec(
+InverseForMorphisms = @rec(
 # Type check for IsIsomorphism
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "alpha_range", "alpha_source" ] ],
@@ -361,7 +361,7 @@ InverseForMorphisms = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-PreInverseForMorphisms = rec(
+PreInverseForMorphisms = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "alpha_range", "alpha_source" ] ],
   return_type = "morphism",
@@ -369,7 +369,7 @@ PreInverseForMorphisms = rec(
   is_merely_set_theoretic = true
 ),
 
-PostInverseForMorphisms = rec(
+PostInverseForMorphisms = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "alpha_range", "alpha_source" ] ],
   return_type = "morphism",
@@ -377,7 +377,7 @@ PostInverseForMorphisms = rec(
   is_merely_set_theoretic = true
 ),
 
-KernelObject = rec(
+KernelObject = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "object",
   dual_operation = "CokernelObject",
@@ -385,7 +385,7 @@ KernelObject = rec(
   functorial = "KernelObjectFunctorial",
 ),
 
-KernelEmbedding = rec(
+KernelEmbedding = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "P", "alpha_source" ] ],
   with_given_object_position = "Source",
@@ -394,7 +394,7 @@ KernelEmbedding = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-KernelEmbeddingWithGivenKernelObject = rec(
+KernelEmbeddingWithGivenKernelObject = @rec(
   filter_list = [ "category", "morphism", "object" ],
   io_type = [ [ "alpha", "P" ], [ "P", "alpha_source" ] ],
   return_type = "morphism",
@@ -402,7 +402,7 @@ KernelEmbeddingWithGivenKernelObject = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromKernelObjectToSink = rec(
+MorphismFromKernelObjectToSink = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "P", "alpha_range" ] ],
   with_given_object_position = "Source",
@@ -411,7 +411,7 @@ MorphismFromKernelObjectToSink = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromKernelObjectToSinkWithGivenKernelObject = rec(
+MorphismFromKernelObjectToSinkWithGivenKernelObject = @rec(
   filter_list = [ "category", "morphism", "object" ],
   io_type = [ [ "alpha", "P" ], [ "P", "alpha_range" ] ],
   dual_operation = "MorphismFromSourceToCokernelObjectWithGivenCokernelObject",
@@ -419,7 +419,7 @@ MorphismFromKernelObjectToSinkWithGivenKernelObject = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-KernelLift = rec(
+KernelLift = @rec(
   filter_list = [ "category", "morphism", "object", "morphism" ],
   io_type = [ [ "alpha", "T", "tau" ], [ "T", "P" ] ],
   with_given_object_position = "Range",
@@ -428,7 +428,7 @@ KernelLift = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-KernelLiftWithGivenKernelObject = rec(
+KernelLiftWithGivenKernelObject = @rec(
   filter_list = [ "category", "morphism", "object", "morphism", "object" ],
   io_type = [ [ "alpha", "T", "tau", "P" ], [ "T", "P" ] ],
   return_type = "morphism",
@@ -436,7 +436,7 @@ KernelLiftWithGivenKernelObject = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-CokernelObject = rec(
+CokernelObject = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "object",
   dual_operation = "KernelObject",
@@ -444,7 +444,7 @@ CokernelObject = rec(
   functorial = "CokernelObjectFunctorial",
 ),
 
-CokernelProjection = rec(
+CokernelProjection = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "alpha_range", "P" ] ],
   with_given_object_position = "Range",
@@ -453,7 +453,7 @@ CokernelProjection = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-CokernelProjectionWithGivenCokernelObject = rec(
+CokernelProjectionWithGivenCokernelObject = @rec(
   filter_list = [ "category", "morphism", "object" ],
   io_type = [ [ "alpha", "P" ], [ "alpha_range", "P" ] ],
   return_type = "morphism",
@@ -461,7 +461,7 @@ CokernelProjectionWithGivenCokernelObject = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromSourceToCokernelObject = rec(
+MorphismFromSourceToCokernelObject = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "alpha_source", "P" ] ],
   with_given_object_position = "Range",
@@ -470,7 +470,7 @@ MorphismFromSourceToCokernelObject = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromSourceToCokernelObjectWithGivenCokernelObject = rec(
+MorphismFromSourceToCokernelObjectWithGivenCokernelObject = @rec(
   filter_list = [ "category", "morphism", "object" ],
   io_type = [ [ "alpha", "P" ], [ "alpha_source", "P" ] ],
   dual_operation = "MorphismFromKernelObjectToSinkWithGivenKernelObject",
@@ -478,7 +478,7 @@ MorphismFromSourceToCokernelObjectWithGivenCokernelObject = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-CokernelColift = rec(
+CokernelColift = @rec(
   filter_list = [ "category", "morphism", "object", "morphism" ],
   io_type = [ [ "alpha", "T", "tau" ], [ "P", "T" ] ],
   with_given_object_position = "Source",
@@ -487,7 +487,7 @@ CokernelColift = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-CokernelColiftWithGivenCokernelObject = rec(
+CokernelColiftWithGivenCokernelObject = @rec(
   filter_list = [ "category", "morphism", "object", "morphism", "object" ],
   io_type = [ [ "alpha", "T", "tau", "P" ], [ "P", "T" ] ],
   return_type = "morphism",
@@ -495,7 +495,7 @@ CokernelColiftWithGivenCokernelObject = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-PreCompose = rec(
+PreCompose = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "alpha_source", "beta_range" ] ],
   
@@ -521,7 +521,7 @@ PreCompose = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-SumOfMorphisms = rec(
+SumOfMorphisms = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object" ],
   input_arguments_names = [ "cat", "source", "list_of_morphisms", "range" ],
   pre_function = function( cat, source, list_of_morphisms, range )
@@ -555,7 +555,7 @@ SumOfMorphisms = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-PreComposeList = rec(
+PreComposeList = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   input_arguments_names = [ "cat", "list_of_morphisms" ],
   pre_function = function( cat, list_of_morphisms )
@@ -595,7 +595,7 @@ PreComposeList = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-PostCompose = rec(
+PostCompose = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "beta", "alpha" ], [ "alpha_source", "beta_range" ] ],
   
@@ -622,7 +622,7 @@ PostCompose = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-PostComposeList = rec(
+PostComposeList = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   input_arguments_names = [ "cat", "list_of_morphisms" ],
   pre_function = function( cat, list_of_morphisms )
@@ -662,14 +662,14 @@ PostComposeList = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-ZeroObject = rec(
+ZeroObject = @rec(
   filter_list = [ "category" ],
   return_type = "object",
   dual_operation = "ZeroObject",
   functorial = "ZeroObjectFunctorial",
 ),
 
-ZeroObjectFunctorial = rec(
+ZeroObjectFunctorial = @rec(
   filter_list = [ "category" ],
   input_arguments_names = [ "cat" ],
   return_type = "morphism",
@@ -682,7 +682,7 @@ ZeroObjectFunctorial = rec(
   dual_arguments_reversed = true
 ),
 
-ZeroObjectFunctorialWithGivenZeroObjects = rec(
+ZeroObjectFunctorialWithGivenZeroObjects = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "P", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -690,88 +690,88 @@ ZeroObjectFunctorialWithGivenZeroObjects = rec(
   dual_arguments_reversed = true
 ),
 
-UniversalMorphismFromZeroObject = rec(
+UniversalMorphismFromZeroObject = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "T" ], [ "P", "T" ] ],
   with_given_object_position = "Source",
   return_type = "morphism",
   dual_operation = "UniversalMorphismIntoZeroObject" ),
   
-UniversalMorphismFromZeroObjectWithGivenZeroObject = rec(
+UniversalMorphismFromZeroObjectWithGivenZeroObject = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "T", "P" ], [ "P", "T" ] ],
   return_type = "morphism",
   dual_operation = "UniversalMorphismIntoZeroObjectWithGivenZeroObject" ),
 
-UniversalMorphismIntoZeroObject = rec(
+UniversalMorphismIntoZeroObject = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "T" ], [ "T", "P" ] ],
   with_given_object_position = "Range",
   return_type = "morphism",
   dual_operation = "UniversalMorphismFromZeroObject" ),
 
-UniversalMorphismIntoZeroObjectWithGivenZeroObject = rec(
+UniversalMorphismIntoZeroObjectWithGivenZeroObject = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "T", "P" ], [ "T", "P" ] ],
   return_type = "morphism",
   dual_operation = "UniversalMorphismFromZeroObjectWithGivenZeroObject" ),
 
-IsomorphismFromZeroObjectToInitialObject = rec(
+IsomorphismFromZeroObjectToInitialObject = @rec(
   filter_list = [ "category" ],
   ## TODO: io_type?
   return_type = "morphism",
   dual_operation = "IsomorphismFromTerminalObjectToZeroObject",
 ),
 
-IsomorphismFromInitialObjectToZeroObject = rec(
+IsomorphismFromInitialObjectToZeroObject = @rec(
   filter_list = [ "category" ],
   ## TODO: io_type?
   return_type = "morphism",
   dual_operation = "IsomorphismFromZeroObjectToTerminalObject",
 ),
 
-IsomorphismFromZeroObjectToTerminalObject = rec(
+IsomorphismFromZeroObjectToTerminalObject = @rec(
   filter_list = [ "category" ],
   ## TODO: io_type?
   return_type = "morphism",
   dual_operation = "IsomorphismFromInitialObjectToZeroObject",
 ),
 
-IsomorphismFromTerminalObjectToZeroObject = rec(
+IsomorphismFromTerminalObjectToZeroObject = @rec(
   filter_list = [ "category" ],
   ## TODO: io_type?
   return_type = "morphism",
   dual_operation = "IsomorphismFromZeroObjectToInitialObject",
 ),
 
-ZeroMorphism = rec(
+ZeroMorphism = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "a", "b" ], [ "a", "b" ] ],
   return_type = "morphism",
   dual_arguments_reversed = true,
   dual_operation = "ZeroMorphism" ),
 
-DirectSum = rec(
+DirectSum = @rec(
   filter_list = [ "category", "list_of_objects" ],
   return_type = "object",
   dual_operation = "DirectSum",
   functorial = "DirectSumFunctorial",
 ),
 
-ProjectionInFactorOfDirectSum = rec(
+ProjectionInFactorOfDirectSum = @rec(
   filter_list = [ "category", "list_of_objects", "integer" ],
   io_type = [ [ "objects", "k" ], [ "P", "objects_k" ] ],
   with_given_object_position = "Source",
   return_type = "morphism",
   dual_operation = "InjectionOfCofactorOfDirectSum" ),
 
-ProjectionInFactorOfDirectSumWithGivenDirectSum = rec(
+ProjectionInFactorOfDirectSumWithGivenDirectSum = @rec(
   filter_list = [ "category", "list_of_objects", "integer", "object" ],
   io_type = [ [ "objects", "k", "P" ], [ "P", "objects_k" ] ],
   return_type = "morphism",
   dual_operation = "InjectionOfCofactorOfDirectSumWithGivenDirectSum" ),
 
-UniversalMorphismIntoDirectSum = rec(
+UniversalMorphismIntoDirectSum = @rec(
   filter_list = [ "category", "list_of_objects", "object", "list_of_morphisms" ],
   io_type = [ [ "objects", "T", "tau" ], [ "T", "P" ] ],
   with_given_object_position = "Range",
@@ -803,7 +803,7 @@ UniversalMorphismIntoDirectSum = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-UniversalMorphismIntoDirectSumWithGivenDirectSum = rec(
+UniversalMorphismIntoDirectSumWithGivenDirectSum = @rec(
   filter_list = [ "category", "list_of_objects", "object", "list_of_morphisms", "object" ],
   io_type = [ [ "objects", "T", "tau", "P" ], [ "T", "P" ] ],
   dual_operation = "UniversalMorphismFromDirectSumWithGivenDirectSum",
@@ -834,20 +834,20 @@ UniversalMorphismIntoDirectSumWithGivenDirectSum = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-InjectionOfCofactorOfDirectSum = rec(
+InjectionOfCofactorOfDirectSum = @rec(
   filter_list = [ "category", "list_of_objects", "integer" ],
   io_type = [ [ "objects", "k" ], [ "objects_k", "P" ] ],
   with_given_object_position = "Range",
   return_type = "morphism",
   dual_operation = "ProjectionInFactorOfDirectSum" ),
 
-InjectionOfCofactorOfDirectSumWithGivenDirectSum = rec(
+InjectionOfCofactorOfDirectSumWithGivenDirectSum = @rec(
   filter_list = [ "category", "list_of_objects", "integer", "object" ],
   io_type = [ [ "objects", "k", "P" ], [ "objects_k", "P" ] ],
   return_type = "morphism",
   dual_operation = "ProjectionInFactorOfDirectSumWithGivenDirectSum" ),
 
-UniversalMorphismFromDirectSum = rec(
+UniversalMorphismFromDirectSum = @rec(
   filter_list = [ "category", "list_of_objects", "object", "list_of_morphisms" ],
   io_type = [ [ "objects", "T", "tau" ], [ "P", "T" ] ],
   with_given_object_position = "Source",
@@ -879,7 +879,7 @@ UniversalMorphismFromDirectSum = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-UniversalMorphismFromDirectSumWithGivenDirectSum = rec(
+UniversalMorphismFromDirectSumWithGivenDirectSum = @rec(
   filter_list = [ "category", "list_of_objects", "object", "list_of_morphisms", "object" ],
   io_type = [ [ "objects", "T", "tau", "P" ], [ "P", "T" ] ],
   dual_operation = "UniversalMorphismIntoDirectSumWithGivenDirectSum",
@@ -910,67 +910,67 @@ UniversalMorphismFromDirectSumWithGivenDirectSum = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-TerminalObject = rec(
+TerminalObject = @rec(
   filter_list = [ "category" ],
   return_type = "object",
   dual_operation = "InitialObject",
   functorial = "TerminalObjectFunctorial",
 ),
 
-UniversalMorphismIntoTerminalObject = rec(
+UniversalMorphismIntoTerminalObject = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "T" ], [ "T", "P" ] ],
   with_given_object_position = "Range",
   return_type = "morphism",
   dual_operation = "UniversalMorphismFromInitialObject" ),
 
-UniversalMorphismIntoTerminalObjectWithGivenTerminalObject = rec(
+UniversalMorphismIntoTerminalObjectWithGivenTerminalObject = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "T", "P" ], [ "T", "P" ] ],
   return_type = "morphism",
   dual_operation = "UniversalMorphismFromInitialObjectWithGivenInitialObject" ),
 
-InitialObject = rec(
+InitialObject = @rec(
   filter_list = [ "category" ],
   return_type = "object",
   dual_operation = "TerminalObject",
   functorial = "InitialObjectFunctorial",
 ),
 
-UniversalMorphismFromInitialObject = rec(
+UniversalMorphismFromInitialObject = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "T" ], [ "P", "T" ] ],
   with_given_object_position = "Source",
   return_type = "morphism",
   dual_operation = "UniversalMorphismIntoTerminalObject" ),
 
-UniversalMorphismFromInitialObjectWithGivenInitialObject = rec(
+UniversalMorphismFromInitialObjectWithGivenInitialObject = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "T", "P" ], [ "P", "T" ] ],
   return_type = "morphism",
   dual_operation = "UniversalMorphismIntoTerminalObjectWithGivenTerminalObject" ),
 
-DirectProduct = rec(
+DirectProduct = @rec(
   filter_list = [ "category", "list_of_objects" ],
   return_type = "object",
   dual_operation = "Coproduct",
   functorial = "DirectProductFunctorial",
 ),
 
-ProjectionInFactorOfDirectProduct = rec(
+ProjectionInFactorOfDirectProduct = @rec(
   filter_list = [ "category", "list_of_objects", "integer" ],
   io_type = [ [ "objects", "k" ], [ "P", "objects_k" ] ],
   with_given_object_position = "Source",
   return_type = "morphism",
   dual_operation = "InjectionOfCofactorOfCoproduct" ),
 
-ProjectionInFactorOfDirectProductWithGivenDirectProduct = rec(
+ProjectionInFactorOfDirectProductWithGivenDirectProduct = @rec(
   filter_list = [ "category", "list_of_objects", "integer", "object" ],
   io_type = [ [ "objects", "k", "P" ], [ "P", "objects_k" ] ],
   return_type = "morphism",
   dual_operation = "InjectionOfCofactorOfCoproductWithGivenCoproduct" ),
 
-UniversalMorphismIntoDirectProduct = rec(
+UniversalMorphismIntoDirectProduct = @rec(
   filter_list = [ "category", "list_of_objects", "object", "list_of_morphisms" ],
   io_type = [ [ "objects", "T", "tau" ], [ "T", "P" ] ],
   with_given_object_position = "Range",
@@ -1002,7 +1002,7 @@ UniversalMorphismIntoDirectProduct = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-UniversalMorphismIntoDirectProductWithGivenDirectProduct = rec(
+UniversalMorphismIntoDirectProductWithGivenDirectProduct = @rec(
   filter_list = [ "category", "list_of_objects", "object", "list_of_morphisms", "object" ],
   io_type = [ [ "objects", "T", "tau", "P" ], [ "T", "P" ] ],
   dual_operation = "UniversalMorphismFromCoproductWithGivenCoproduct",
@@ -1033,13 +1033,13 @@ UniversalMorphismIntoDirectProductWithGivenDirectProduct = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-ComponentOfMorphismIntoDirectProduct = rec(
+ComponentOfMorphismIntoDirectProduct = @rec(
   filter_list = [ "category", "morphism", "list_of_objects", "integer" ],
   io_type = [ [ "alpha", "P", "i" ], [ "alpha_source", "P_i" ] ],
   return_type = "morphism",
   dual_operation = "ComponentOfMorphismFromCoproduct" ),
 
-IsCongruentForMorphisms = rec(
+IsCongruentForMorphisms = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   dual_operation = "IsCongruentForMorphisms",
   
@@ -1108,7 +1108,7 @@ IsCongruentForMorphisms = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-IsEqualForMorphisms = rec(
+IsEqualForMorphisms = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   dual_operation = "IsEqualForMorphisms",
   
@@ -1166,7 +1166,7 @@ IsEqualForMorphisms = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-IsEqualForMorphismsOnMor = rec(
+IsEqualForMorphismsOnMor = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   dual_operation = "IsEqualForMorphismsOnMor",
   
@@ -1188,7 +1188,7 @@ IsEqualForMorphismsOnMor = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-IsEqualForObjects = rec(
+IsEqualForObjects = @rec(
   filter_list = [ "category", "object", "object" ],
   dual_operation = "IsEqualForObjects",
   
@@ -1219,19 +1219,19 @@ IsEqualForObjects = rec(
   
   return_type = "bool" ),
   
-IsEqualForCacheForObjects = rec(
+IsEqualForCacheForObjects = @rec(
   filter_list = [ "category", "object", "object" ],
   dual_operation = "IsEqualForCacheForObjects",
   return_type = "bool" ),
 
-IsEqualForCacheForMorphisms = rec(
+IsEqualForCacheForMorphisms = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   dual_operation = "IsEqualForCacheForMorphisms",
   return_type = "bool",
   compatible_with_congruence_of_morphisms = false,
 ),
   
-IsZeroForMorphisms = rec(
+IsZeroForMorphisms = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsZeroForMorphisms",
@@ -1240,7 +1240,7 @@ IsZeroForMorphisms = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-AdditionForMorphisms = rec(
+AdditionForMorphisms = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "a", "b" ], [ "a_source", "a_range" ] ],
   dual_operation = "AdditionForMorphisms",
@@ -1284,7 +1284,7 @@ AdditionForMorphisms = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-SubtractionForMorphisms = rec(
+SubtractionForMorphisms = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "a", "b" ], [ "a_source", "a_range" ] ],
   dual_operation = "SubtractionForMorphisms",
@@ -1328,7 +1328,7 @@ SubtractionForMorphisms = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-MultiplyWithElementOfCommutativeRingForMorphisms = rec(
+MultiplyWithElementOfCommutativeRingForMorphisms = @rec(
   filter_list = [ "category", "element_of_commutative_ring_of_linear_structure", "morphism" ],
   io_type = [ [ "r", "a" ], [ "a_source", "a_range" ] ],
   
@@ -1347,7 +1347,7 @@ MultiplyWithElementOfCommutativeRingForMorphisms = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-AdditiveInverseForMorphisms = rec(
+AdditiveInverseForMorphisms = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "a" ], [ "a_source", "a_range" ] ],
   dual_operation = "AdditiveInverseForMorphisms",
@@ -1355,27 +1355,27 @@ AdditiveInverseForMorphisms = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-Coproduct = rec(
+Coproduct = @rec(
   filter_list = [ "category", "list_of_objects" ],
   return_type = "object",
   dual_operation = "DirectProduct",
   functorial = "CoproductFunctorial",
 ),
 
-InjectionOfCofactorOfCoproduct = rec(
+InjectionOfCofactorOfCoproduct = @rec(
   filter_list = [ "category", "list_of_objects", "integer" ],
   io_type = [ [ "objects", "k" ], [ "objects_k", "P" ] ],
   with_given_object_position = "Range",
   return_type = "morphism",
   dual_operation = "ProjectionInFactorOfDirectProduct" ),
 
-InjectionOfCofactorOfCoproductWithGivenCoproduct = rec(
+InjectionOfCofactorOfCoproductWithGivenCoproduct = @rec(
   filter_list = [ "category", "list_of_objects", "integer", "object" ],
   io_type = [ [ "objects", "k", "P" ], [ "objects_k", "P" ] ],
   return_type = "morphism",
   dual_operation = "ProjectionInFactorOfDirectProductWithGivenDirectProduct" ),
 
-UniversalMorphismFromCoproduct = rec(
+UniversalMorphismFromCoproduct = @rec(
   filter_list = [ "category", "list_of_objects", "object", "list_of_morphisms" ],
   io_type = [ [ "objects",  "T", "tau" ], [ "P", "T" ] ],
   with_given_object_position = "Source",
@@ -1407,7 +1407,7 @@ UniversalMorphismFromCoproduct = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-UniversalMorphismFromCoproductWithGivenCoproduct = rec(
+UniversalMorphismFromCoproductWithGivenCoproduct = @rec(
   filter_list = [ "category", "list_of_objects", "object", "list_of_morphisms", "object" ],
   io_type = [ [ "objects", "T", "tau", "P" ], [ "P", "T" ] ],
   dual_operation = "UniversalMorphismIntoDirectProductWithGivenDirectProduct",
@@ -1438,27 +1438,27 @@ UniversalMorphismFromCoproductWithGivenCoproduct = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-ComponentOfMorphismFromCoproduct = rec(
+ComponentOfMorphismFromCoproduct = @rec(
   filter_list = [ "category", "morphism", "list_of_objects", "integer" ],
   io_type = [ [ "alpha", "I", "i" ], [ "I_i", "alpha_range" ] ],
   return_type = "morphism",
   dual_operation = "ComponentOfMorphismIntoDirectProduct" ),
 
-IsEqualAsSubobjects = rec(
+IsEqualAsSubobjects = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   return_type = "bool",
   dual_operation = "IsEqualAsFactorobjects",
   compatible_with_congruence_of_morphisms = true,
 ),
 
-IsEqualAsFactorobjects = rec(
+IsEqualAsFactorobjects = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   return_type = "bool",
   dual_operation = "IsEqualAsSubobjects",
   compatible_with_congruence_of_morphisms = true,
 ),
 
-IsDominating = rec(
+IsDominating = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   dual_operation = "IsCodominating",
   
@@ -1483,7 +1483,7 @@ IsDominating = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-IsCodominating = rec(
+IsCodominating = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   dual_operation = "IsDominating",
   
@@ -1508,7 +1508,7 @@ IsCodominating = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-Equalizer = rec(
+Equalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   return_type = "object",
   dual_operation = "Coequalizer",
@@ -1554,7 +1554,7 @@ Equalizer = rec(
   functorial = "EqualizerFunctorial",
 ),
 
-EmbeddingOfEqualizer = rec(
+EmbeddingOfEqualizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   return_type = "morphism",
   io_type = [ [ "Y", "morphisms" ], [ "P", "Y" ] ],
@@ -1565,7 +1565,7 @@ EmbeddingOfEqualizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-EmbeddingOfEqualizerWithGivenEqualizer = rec(
+EmbeddingOfEqualizerWithGivenEqualizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object" ],
   return_type = "morphism",
   io_type = [ [ "Y", "morphisms", "P" ], [ "P", "Y" ] ],
@@ -1573,7 +1573,7 @@ EmbeddingOfEqualizerWithGivenEqualizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromEqualizerToSink = rec(
+MorphismFromEqualizerToSink = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   io_type = [ [ "Y", "morphisms" ], [ "P", "morphisms_1_range" ] ],
   with_given_object_position = "Source",
@@ -1582,7 +1582,7 @@ MorphismFromEqualizerToSink = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromEqualizerToSinkWithGivenEqualizer = rec(
+MorphismFromEqualizerToSinkWithGivenEqualizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object" ],
   io_type = [ [ "Y", "morphisms", "P" ], [ "P", "morphisms_1_range" ] ],
   dual_operation = "MorphismFromSourceToCoequalizerWithGivenCoequalizer",
@@ -1590,7 +1590,7 @@ MorphismFromEqualizerToSinkWithGivenEqualizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-UniversalMorphismIntoEqualizer = rec(
+UniversalMorphismIntoEqualizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object", "morphism" ],
   io_type = [ [ "Y", "morphisms", "T", "tau" ], [ "T", "P" ] ],
   with_given_object_position = "Range",
@@ -1649,7 +1649,7 @@ UniversalMorphismIntoEqualizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-UniversalMorphismIntoEqualizerWithGivenEqualizer = rec(
+UniversalMorphismIntoEqualizerWithGivenEqualizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object", "morphism", "object" ],
   io_type = [ [ "Y", "morphisms", "T", "tau", "P" ], [ "T", "P" ] ],
   return_type = "morphism",
@@ -1657,21 +1657,21 @@ UniversalMorphismIntoEqualizerWithGivenEqualizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct = rec(
+IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   io_type = [ [ "A", "D" ], [ "E", "Delta" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer",
 ),
 
-IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer = rec(
+IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   io_type = [ [ "A", "D" ], [ "Delta", "E" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct",
 ),
 
-FiberProduct = rec(
+FiberProduct = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   dual_operation = "Pushout",
   
@@ -1705,7 +1705,7 @@ FiberProduct = rec(
   functorial = "FiberProductFunctorial",
 ),
 
-ProjectionInFactorOfFiberProduct = rec(
+ProjectionInFactorOfFiberProduct = @rec(
   filter_list = [ "category", "list_of_morphisms", "integer" ],
   io_type = [ [ "morphisms", "k" ], [ "P", "morphisms_k_source" ] ],
   with_given_object_position = "Source",
@@ -1738,7 +1738,7 @@ ProjectionInFactorOfFiberProduct = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-ProjectionInFactorOfFiberProductWithGivenFiberProduct = rec(
+ProjectionInFactorOfFiberProductWithGivenFiberProduct = @rec(
   filter_list = [ "category", "list_of_morphisms", "integer", "object" ],
   io_type = [ [ "morphisms", "k", "P" ], [ "P", "morphisms_k_source" ] ],
   dual_operation = "InjectionOfCofactorOfPushoutWithGivenPushout",
@@ -1770,7 +1770,7 @@ ProjectionInFactorOfFiberProductWithGivenFiberProduct = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromFiberProductToSink = rec(
+MorphismFromFiberProductToSink = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   io_type = [ [ "morphisms" ], [ "P", "morphisms_1_range" ] ],
   with_given_object_position = "Source",
@@ -1799,7 +1799,7 @@ MorphismFromFiberProductToSink = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromFiberProductToSinkWithGivenFiberProduct = rec(
+MorphismFromFiberProductToSinkWithGivenFiberProduct = @rec(
   filter_list = [ "category", "list_of_morphisms", "object" ],
   io_type = [ [ "morphisms", "P" ], [ "P", "morphisms_1_range" ] ],
   dual_operation = "MorphismFromSourceToPushoutWithGivenPushout",
@@ -1827,7 +1827,7 @@ MorphismFromFiberProductToSinkWithGivenFiberProduct = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-UniversalMorphismIntoFiberProduct = rec(
+UniversalMorphismIntoFiberProduct = @rec(
   filter_list = [ "category", "list_of_morphisms", "object", "list_of_morphisms" ],
   io_type = [ [ "morphisms", "T", "tau" ], [ "T", "P" ] ],
   with_given_object_position = "Range",
@@ -1890,7 +1890,7 @@ UniversalMorphismIntoFiberProduct = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-UniversalMorphismIntoFiberProductWithGivenFiberProduct = rec(
+UniversalMorphismIntoFiberProductWithGivenFiberProduct = @rec(
   filter_list = [ "category", "list_of_morphisms", "object", "list_of_morphisms", "object" ],
   io_type = [ [ "morphisms", "T", "tau", "P" ], [ "T", "P" ] ],
   dual_operation = "UniversalMorphismFromPushoutWithGivenPushout",
@@ -1952,7 +1952,7 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-Coequalizer = rec(
+Coequalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   return_type = "object",
   dual_operation = "Equalizer",
@@ -1998,7 +1998,7 @@ Coequalizer = rec(
   functorial = "CoequalizerFunctorial",
 ),
 
-ProjectionOntoCoequalizer = rec(
+ProjectionOntoCoequalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   return_type = "morphism",
   io_type = [ [ "Y", "morphisms" ], [ "Y", "P" ] ],
@@ -2009,7 +2009,7 @@ ProjectionOntoCoequalizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-ProjectionOntoCoequalizerWithGivenCoequalizer = rec(
+ProjectionOntoCoequalizerWithGivenCoequalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object" ],
   return_type = "morphism",
   io_type = [ [ "Y", "morphisms", "P" ], [ "Y", "P" ] ],
@@ -2017,7 +2017,7 @@ ProjectionOntoCoequalizerWithGivenCoequalizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromSourceToCoequalizer = rec(
+MorphismFromSourceToCoequalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   io_type = [ [ "Y", "morphisms" ], [ "morphisms_1_source", "P" ] ],
   with_given_object_position = "Range",
@@ -2026,7 +2026,7 @@ MorphismFromSourceToCoequalizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromSourceToCoequalizerWithGivenCoequalizer = rec(
+MorphismFromSourceToCoequalizerWithGivenCoequalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object" ],
   io_type = [ [ "Y", "morphisms", "P" ], [ "morphisms_1_source", "P" ] ],
   dual_operation = "MorphismFromEqualizerToSinkWithGivenEqualizer",
@@ -2034,7 +2034,7 @@ MorphismFromSourceToCoequalizerWithGivenCoequalizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-UniversalMorphismFromCoequalizer = rec(
+UniversalMorphismFromCoequalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object", "morphism" ],
   io_type = [ [ "Y", "morphisms", "T", "tau" ], [ "P", "T" ] ],
   with_given_object_position = "Source",
@@ -2093,7 +2093,7 @@ UniversalMorphismFromCoequalizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-UniversalMorphismFromCoequalizerWithGivenCoequalizer = rec(
+UniversalMorphismFromCoequalizerWithGivenCoequalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "object", "morphism", "object" ],
   io_type = [ [ "Y", "morphisms", "T", "tau", "P" ], [ "P", "T" ] ],
   return_type = "morphism",
@@ -2101,21 +2101,21 @@ UniversalMorphismFromCoequalizerWithGivenCoequalizer = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct = rec(
+IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   io_type = [ [ "A", "D" ], [ "C", "Delta" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer",
 ),
 
-IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer = rec(
+IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   io_type = [ [ "A", "D" ], [ "Delta", "C" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
 ),
 
-Pushout = rec(
+Pushout = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   dual_operation = "FiberProduct",
   
@@ -2149,7 +2149,7 @@ Pushout = rec(
   functorial = "PushoutFunctorial",
 ),
 
-InjectionOfCofactorOfPushout = rec(
+InjectionOfCofactorOfPushout = @rec(
   filter_list = [ "category", "list_of_morphisms", "integer" ],
   io_type = [ [ "morphisms", "k" ], [ "morphisms_k_range", "P" ] ],
   with_given_object_position = "Range",
@@ -2182,7 +2182,7 @@ InjectionOfCofactorOfPushout = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-InjectionOfCofactorOfPushoutWithGivenPushout = rec(
+InjectionOfCofactorOfPushoutWithGivenPushout = @rec(
   filter_list = [ "category", "list_of_morphisms", "integer", "object" ],
   io_type = [ [ "morphisms", "k", "P" ], [ "morphisms_k_range", "P" ] ],
   dual_operation = "ProjectionInFactorOfFiberProductWithGivenFiberProduct",
@@ -2214,7 +2214,7 @@ InjectionOfCofactorOfPushoutWithGivenPushout = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromSourceToPushout = rec(
+MorphismFromSourceToPushout = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   io_type = [ [ "morphisms" ], [ "morphisms_1_source", "P" ] ],
   with_given_object_position = "Range",
@@ -2243,7 +2243,7 @@ MorphismFromSourceToPushout = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-MorphismFromSourceToPushoutWithGivenPushout = rec(
+MorphismFromSourceToPushoutWithGivenPushout = @rec(
   filter_list = [ "category", "list_of_morphisms", "object" ],
   io_type = [ [ "morphisms", "P" ], [ "morphisms_1_source", "P" ] ],
   dual_operation = "MorphismFromFiberProductToSinkWithGivenFiberProduct",
@@ -2271,7 +2271,7 @@ MorphismFromSourceToPushoutWithGivenPushout = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-UniversalMorphismFromPushout = rec(
+UniversalMorphismFromPushout = @rec(
   filter_list = [ "category", "list_of_morphisms", "object", "list_of_morphisms" ],
   io_type = [ [ "morphisms", "T", "tau" ], [ "P", "T" ] ],
   with_given_object_position = "Source",
@@ -2334,7 +2334,7 @@ UniversalMorphismFromPushout = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-UniversalMorphismFromPushoutWithGivenPushout = rec(
+UniversalMorphismFromPushoutWithGivenPushout = @rec(
   filter_list = [ "category", "list_of_morphisms", "object", "list_of_morphisms", "object" ],
   io_type = [ [ "morphisms", "T", "tau", "P" ], [ "P", "T" ] ],
   dual_operation = "UniversalMorphismIntoFiberProductWithGivenFiberProduct",
@@ -2396,60 +2396,60 @@ UniversalMorphismFromPushoutWithGivenPushout = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-ImageObject = rec(
+ImageObject = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "object",
   dual_operation = "CoimageObject",
   functorial = "ImageObjectFunctorial",
 ),
 
-ImageEmbedding = rec(
+ImageEmbedding = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "I", "alpha_range" ] ],
   with_given_object_position = "Source",
   return_type = "morphism",
   dual_operation = "CoimageProjection" ),
 
-ImageEmbeddingWithGivenImageObject = rec(
+ImageEmbeddingWithGivenImageObject = @rec(
   filter_list = [ "category", "morphism", "object" ],
   io_type = [ [ "alpha", "I" ], [ "I", "alpha_range" ] ],
   return_type = "morphism",
   dual_operation = "CoimageProjectionWithGivenCoimageObject" ),
 
-CoimageObject = rec(
+CoimageObject = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "object",
   dual_operation = "ImageObject",
   functorial = "CoimageObjectFunctorial",
 ),
 
-CoimageProjection = rec(
+CoimageProjection = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "alpha_source", "C" ] ],
   with_given_object_position = "Range",
   return_type = "morphism",
   dual_operation = "ImageEmbedding" ),
 
-CoimageProjectionWithGivenCoimageObject = rec(
+CoimageProjectionWithGivenCoimageObject = @rec(
   filter_list = [ "category", "morphism", "object" ],
   io_type = [ [ "alpha", "C" ], [ "alpha_source", "C" ] ],
   return_type = "morphism",
   dual_operation = "ImageEmbeddingWithGivenImageObject" ),
 
-AstrictionToCoimage = rec(
+AstrictionToCoimage = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "C", "alpha_range" ] ],
   with_given_object_position = "Source",
   return_type = "morphism",
   dual_operation = "CoastrictionToImage" ),
 
-AstrictionToCoimageWithGivenCoimageObject = rec(
+AstrictionToCoimageWithGivenCoimageObject = @rec(
   filter_list = [ "category", "morphism", "object" ],
   io_type = [ [ "alpha", "C" ], [ "C", "alpha_range" ] ],
   return_type = "morphism",
   dual_operation = "CoastrictionToImageWithGivenImageObject" ),
 
-UniversalMorphismIntoCoimage = rec(
+UniversalMorphismIntoCoimage = @rec(
   filter_list = [ "category", "morphism", "pair_of_morphisms" ],
   io_type = [ [ "alpha", "tau" ], [ "tau_1_range", "C" ] ],
   with_given_object_position = "Range",
@@ -2483,7 +2483,7 @@ UniversalMorphismIntoCoimage = rec(
   return_type = "morphism",
   dual_operation = "UniversalMorphismFromImage" ),
 
-UniversalMorphismIntoCoimageWithGivenCoimageObject = rec(
+UniversalMorphismIntoCoimageWithGivenCoimageObject = @rec(
   filter_list = [ "category", "morphism", "pair_of_morphisms", "object" ],
   io_type = [ [ "alpha", "tau", "C" ], [ "tau_1_range", "C" ] ],
   dual_preprocessor_func = CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
@@ -2516,21 +2516,21 @@ UniversalMorphismIntoCoimageWithGivenCoimageObject = rec(
   return_type = "morphism",
   dual_operation = "UniversalMorphismFromImageWithGivenImageObject" ),
 
-MorphismFromCoimageToImageWithGivenObjects = rec(
+MorphismFromCoimageToImageWithGivenObjects = @rec(
   filter_list = [ "category", "object", "morphism", "object" ],
   io_type = [ [ "C", "alpha", "I" ], [ "C", "I" ] ],
   dual_operation = "MorphismFromCoimageToImageWithGivenObjects",
   dual_arguments_reversed = true,
   return_type = "morphism" ),
 
-InverseMorphismFromCoimageToImageWithGivenObjects = rec(
+InverseMorphismFromCoimageToImageWithGivenObjects = @rec(
   filter_list = [ "category", "object", "morphism", "object" ],
   io_type = [ [ "C", "alpha", "I" ], [ "I", "C" ] ],
   dual_operation = "InverseMorphismFromCoimageToImageWithGivenObjects",
   dual_arguments_reversed = true,
   return_type = "morphism" ),
 
-IsWellDefinedForMorphisms = rec(
+IsWellDefinedForMorphisms = @rec(
   filter_list = [ "category", "morphism" ],
   dual_operation = "IsWellDefinedForMorphisms",
   
@@ -2556,50 +2556,50 @@ IsWellDefinedForMorphisms = rec(
   
   return_type = "bool" ),
 
-IsWellDefinedForObjects = rec(
+IsWellDefinedForObjects = @rec(
   filter_list = [ "category", "object" ],
   dual_operation = "IsWellDefinedForObjects",
   return_type = "bool" ),
 
-IsZeroForObjects = rec(
+IsZeroForObjects = @rec(
   filter_list = [ "category", "object" ],
   return_type = "bool",
   dual_operation = "IsZeroForObjects",
   property_of = "object" ),
 
-IsMonomorphism = rec(
+IsMonomorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsEpimorphism",
   property_of = "morphism",
   is_reflected_by_faithful_functor = true ),
 
-IsEpimorphism = rec(
+IsEpimorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsMonomorphism",
   property_of = "morphism",
   is_reflected_by_faithful_functor = true ),
 
-IsIsomorphism = rec(
+IsIsomorphism = @rec(
   filter_list = [ "category", "morphism" ],
   dual_operation = "IsIsomorphism",
   return_type = "bool",
   property_of = "morphism" ),
 
-IsEndomorphism = rec(
+IsEndomorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsEndomorphism",
   property_of = "morphism" ),
 
-IsAutomorphism = rec(
+IsAutomorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsAutomorphism",
   property_of = "morphism" ),
 
-IsOne = rec(
+IsOne = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   property_of = "morphism",
@@ -2624,19 +2624,19 @@ IsOne = rec(
     return [ true ];
   end ),
 
-IsSplitMonomorphism = rec(
+IsSplitMonomorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsSplitEpimorphism",
   property_of = "morphism" ),
 
-IsSplitEpimorphism = rec(
+IsSplitEpimorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsSplitMonomorphism",
   property_of = "morphism" ),
 
-IsIdempotent = rec(
+IsIdempotent = @rec(
    pre_function = function( cat, morphism )
     
     # do !use IsEndomorphism( morphism ) here because you don't know if
@@ -2654,62 +2654,62 @@ IsIdempotent = rec(
   dual_operation = "IsIdempotent",
   property_of = "morphism" ),
 
-IsBijectiveObject = rec(
+IsBijectiveObject = @rec(
   filter_list = [ "category", "object" ],
   return_type = "bool",
   dual_operation = "IsBijectiveObject",
   property_of = "object" ),
 
-IsProjective = rec(
+IsProjective = @rec(
   filter_list = [ "category", "object" ],
   return_type = "bool",
   dual_operation = "IsInjective",
   property_of = "object" ),
 
-IsInjective = rec(
+IsInjective = @rec(
   filter_list = [ "category", "object" ],
   return_type = "bool",
   dual_operation = "IsProjective",
   property_of = "object" ),
 
-IsTerminal = rec(
+IsTerminal = @rec(
   filter_list = [ "category", "object" ],
   return_type = "bool",
   dual_operation = "IsInitial",
   property_of = "object" ),
 
-IsInitial = rec(
+IsInitial = @rec(
   filter_list = [ "category", "object" ],
   return_type = "bool",
   dual_operation = "IsTerminal",
   property_of = "object" ),
 
-IsEqualToIdentityMorphism = rec(
+IsEqualToIdentityMorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsEqualToIdentityMorphism",
   property_of = "morphism" ),
 
-IsEqualToZeroMorphism = rec(
+IsEqualToZeroMorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "bool",
   dual_operation = "IsEqualToZeroMorphism",
   property_of = "morphism" ),
 
-CoastrictionToImage = rec(
+CoastrictionToImage = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "alpha_source", "I" ] ],
   with_given_object_position = "Range",
   return_type = "morphism",
   dual_operation = "AstrictionToCoimage" ),
 
-CoastrictionToImageWithGivenImageObject = rec(
+CoastrictionToImageWithGivenImageObject = @rec(
   filter_list = [ "category", "morphism", "object" ],
   io_type = [ [ "alpha", "I" ], [ "alpha_source", "I" ] ],
   return_type = "morphism",
   dual_operation = "AstrictionToCoimageWithGivenCoimageObject" ),
 
-UniversalMorphismFromImage = rec(
+UniversalMorphismFromImage = @rec(
   filter_list = [ "category", "morphism", "pair_of_morphisms" ],
   io_type = [ [ "alpha", "tau" ], [ "I", "tau_1_range" ] ],
   with_given_object_position = "Source",
@@ -2743,7 +2743,7 @@ UniversalMorphismFromImage = rec(
   end,
   return_type = "morphism" ),
 
-UniversalMorphismFromImageWithGivenImageObject = rec(
+UniversalMorphismFromImageWithGivenImageObject = @rec(
   filter_list = [ "category", "morphism", "pair_of_morphisms", "object" ],
   io_type = [ [ "alpha", "tau", "I" ], [ "I", "tau_1_range" ] ],
   dual_operation = "UniversalMorphismIntoCoimageWithGivenCoimageObject",
@@ -2776,7 +2776,7 @@ UniversalMorphismFromImageWithGivenImageObject = rec(
   end,
   return_type = "morphism" ),
 
-KernelObjectFunctorial = rec(
+KernelObjectFunctorial = @rec(
   filter_list = [ "category", "morphism", "morphism", "morphism" ],
   input_arguments_names = [ "cat", "alpha", "mu", "alphap" ],
   return_type = "morphism",
@@ -2790,7 +2790,7 @@ KernelObjectFunctorial = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-KernelObjectFunctorialWithGivenKernelObjects = rec(
+KernelObjectFunctorialWithGivenKernelObjects = @rec(
   filter_list = [ "category", "object", "morphism", "morphism", "morphism", "object" ],
   io_type = [ [ "P", "alpha", "mu", "alphap", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2799,7 +2799,7 @@ KernelObjectFunctorialWithGivenKernelObjects = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-CokernelObjectFunctorial = rec(
+CokernelObjectFunctorial = @rec(
   filter_list = [ "category", "morphism", "morphism", "morphism" ],
   input_arguments_names = [ "cat", "alpha", "mu", "alphap" ],
   return_type = "morphism",
@@ -2813,7 +2813,7 @@ CokernelObjectFunctorial = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-CokernelObjectFunctorialWithGivenCokernelObjects = rec(
+CokernelObjectFunctorialWithGivenCokernelObjects = @rec(
   filter_list = [ "category", "object", "morphism", "morphism", "morphism", "object" ],
   io_type = [ [ "P", "alpha", "mu", "alphap", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2822,7 +2822,7 @@ CokernelObjectFunctorialWithGivenCokernelObjects = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-TerminalObjectFunctorial = rec(
+TerminalObjectFunctorial = @rec(
   filter_list = [ "category" ],
   input_arguments_names = [ "cat" ],
   return_type = "morphism",
@@ -2835,7 +2835,7 @@ TerminalObjectFunctorial = rec(
   dual_arguments_reversed = true,
 ),
 
-TerminalObjectFunctorialWithGivenTerminalObjects = rec(
+TerminalObjectFunctorialWithGivenTerminalObjects = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "P", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2843,7 +2843,7 @@ TerminalObjectFunctorialWithGivenTerminalObjects = rec(
   dual_arguments_reversed = true,
 ),
 
-InitialObjectFunctorial = rec(
+InitialObjectFunctorial = @rec(
   filter_list = [ "category" ],
   input_arguments_names = [ "cat" ],
   return_type = "morphism",
@@ -2856,7 +2856,7 @@ InitialObjectFunctorial = rec(
   dual_arguments_reversed = true,
 ),
 
-InitialObjectFunctorialWithGivenInitialObjects = rec(
+InitialObjectFunctorialWithGivenInitialObjects = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "P", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2864,7 +2864,7 @@ InitialObjectFunctorialWithGivenInitialObjects = rec(
   dual_arguments_reversed = true,
 ),
 
-DirectProductFunctorial = rec(
+DirectProductFunctorial = @rec(
   filter_list = [ "category", "list_of_objects", "list_of_morphisms", "list_of_objects" ],
   input_arguments_names = [ "cat", "objects", "L", "objectsp" ],
   return_type = "morphism",
@@ -2878,7 +2878,7 @@ DirectProductFunctorial = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-DirectProductFunctorialWithGivenDirectProducts = rec(
+DirectProductFunctorialWithGivenDirectProducts = @rec(
   filter_list = [ "category", "object", "list_of_objects", "list_of_morphisms", "list_of_objects", "object" ],
   io_type = [ [ "P", "objects", "L", "objectsp", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2887,7 +2887,7 @@ DirectProductFunctorialWithGivenDirectProducts = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-CoproductFunctorial = rec(
+CoproductFunctorial = @rec(
   filter_list = [ "category", "list_of_objects", "list_of_morphisms", "list_of_objects" ],
   input_arguments_names = [ "cat", "objects", "L", "objectsp" ],
   return_type = "morphism",
@@ -2901,7 +2901,7 @@ CoproductFunctorial = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-CoproductFunctorialWithGivenCoproducts = rec(
+CoproductFunctorialWithGivenCoproducts = @rec(
   filter_list = [ "category", "object", "list_of_objects", "list_of_morphisms", "list_of_objects", "object" ],
   io_type = [ [ "P", "objects", "L", "objectsp", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2910,7 +2910,7 @@ CoproductFunctorialWithGivenCoproducts = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-DirectSumFunctorial = rec(
+DirectSumFunctorial = @rec(
   filter_list = [ "category", "list_of_objects", "list_of_morphisms", "list_of_objects" ],
   input_arguments_names = [ "cat", "objects", "L", "objectsp" ],
   return_type = "morphism",
@@ -2924,7 +2924,7 @@ DirectSumFunctorial = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-DirectSumFunctorialWithGivenDirectSums = rec(
+DirectSumFunctorialWithGivenDirectSums = @rec(
   filter_list = [ "category", "object", "list_of_objects", "list_of_morphisms", "list_of_objects", "object" ],
   io_type = [ [ "P", "objects", "L", "objectsp", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2933,7 +2933,7 @@ DirectSumFunctorialWithGivenDirectSums = rec(
   compatible_with_congruence_of_morphisms = true,
 ),
 
-EqualizerFunctorial = rec(
+EqualizerFunctorial = @rec(
   filter_list = [ "category", "list_of_morphisms", "morphism", "list_of_morphisms" ],
   input_arguments_names = [ "cat", "morphisms", "mu", "morphismsp" ],
   return_type = "morphism",
@@ -2947,7 +2947,7 @@ EqualizerFunctorial = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-EqualizerFunctorialWithGivenEqualizers = rec(
+EqualizerFunctorialWithGivenEqualizers = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "morphism", "list_of_morphisms", "object" ],
   io_type = [ [ "P", "morphisms", "mu", "morphismsp", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2956,7 +2956,7 @@ EqualizerFunctorialWithGivenEqualizers = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-CoequalizerFunctorial = rec(
+CoequalizerFunctorial = @rec(
   filter_list = [ "category", "list_of_morphisms", "morphism", "list_of_morphisms" ],
   input_arguments_names = [ "cat", "morphisms", "mu", "morphismsp" ],
   return_type = "morphism",
@@ -2970,7 +2970,7 @@ CoequalizerFunctorial = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-CoequalizerFunctorialWithGivenCoequalizers = rec(
+CoequalizerFunctorialWithGivenCoequalizers = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "morphism", "list_of_morphisms", "object" ],
   io_type = [ [ "P", "morphisms", "mu", "morphismsp", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -2979,7 +2979,7 @@ CoequalizerFunctorialWithGivenCoequalizers = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-FiberProductFunctorial = rec(
+FiberProductFunctorial = @rec(
   filter_list = [ "category", "list_of_morphisms", "list_of_morphisms", "list_of_morphisms" ],
   input_arguments_names = [ "cat", "morphisms", "L", "morphismsp" ],
   return_type = "morphism",
@@ -2993,7 +2993,7 @@ FiberProductFunctorial = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-FiberProductFunctorialWithGivenFiberProducts = rec(
+FiberProductFunctorialWithGivenFiberProducts = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "list_of_morphisms", "list_of_morphisms", "object" ],
   io_type = [ [ "P", "morphisms", "L", "morphismsp", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -3002,7 +3002,7 @@ FiberProductFunctorialWithGivenFiberProducts = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-PushoutFunctorial = rec(
+PushoutFunctorial = @rec(
   filter_list = [ "category", "list_of_morphisms", "list_of_morphisms", "list_of_morphisms" ],
   input_arguments_names = [ "cat", "morphisms", "L", "morphismsp" ],
   return_type = "morphism",
@@ -3016,7 +3016,7 @@ PushoutFunctorial = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-PushoutFunctorialWithGivenPushouts = rec(
+PushoutFunctorialWithGivenPushouts = @rec(
   filter_list = [ "category", "object", "list_of_morphisms", "list_of_morphisms", "list_of_morphisms", "object" ],
   io_type = [ [ "P", "morphisms", "L", "morphismsp", "Pp" ], [ "P", "Pp" ] ],
   return_type = "morphism",
@@ -3025,7 +3025,7 @@ PushoutFunctorialWithGivenPushouts = rec(
   compatible_with_congruence_of_morphisms = false,
 ),
 
-ImageObjectFunctorial = rec(
+ImageObjectFunctorial = @rec(
   filter_list = [ "category", "morphism", "morphism", "morphism" ],
   input_arguments_names = [ "cat", "alpha", "nu", "alphap" ],
   return_type = "morphism",
@@ -3038,7 +3038,7 @@ ImageObjectFunctorial = rec(
   dual_arguments_reversed = true,
 ),
 
-ImageObjectFunctorialWithGivenImageObjects = rec(
+ImageObjectFunctorialWithGivenImageObjects = @rec(
   filter_list = [ "category", "object", "morphism", "morphism", "morphism", "object" ],
   io_type = [ [ "I", "alpha", "nu", "alphap", "Ip" ], [ "I", "Ip" ] ],
   return_type = "morphism",
@@ -3046,7 +3046,7 @@ ImageObjectFunctorialWithGivenImageObjects = rec(
   dual_arguments_reversed = true,
 ),
 
-CoimageObjectFunctorial = rec(
+CoimageObjectFunctorial = @rec(
   filter_list = [ "category", "morphism", "morphism", "morphism" ],
   input_arguments_names = [ "cat", "alpha", "mu", "alphap" ],
   return_type = "morphism",
@@ -3059,7 +3059,7 @@ CoimageObjectFunctorial = rec(
   dual_arguments_reversed = true,
 ),
 
-CoimageObjectFunctorialWithGivenCoimageObjects = rec(
+CoimageObjectFunctorialWithGivenCoimageObjects = @rec(
   filter_list = [ "category", "object", "morphism", "morphism", "morphism", "object" ],
   io_type = [ [ "C", "alpha", "mu", "alphap", "Cp" ], [ "C", "Cp" ] ],
   return_type = "morphism",
@@ -3067,7 +3067,7 @@ CoimageObjectFunctorialWithGivenCoimageObjects = rec(
   dual_arguments_reversed = true,
 ),
 
-HorizontalPreCompose = rec(
+HorizontalPreCompose = @rec(
   filter_list = [ "category", "twocell", "twocell" ],
   dual_operation = "HorizontalPostCompose",
   
@@ -3085,7 +3085,7 @@ HorizontalPreCompose = rec(
   end,
   return_type = "twocell" ),
 
-HorizontalPostCompose = rec(
+HorizontalPostCompose = @rec(
   filter_list = [ "category", "twocell", "twocell" ],
   dual_operation = "HorizontalPreCompose",
   
@@ -3103,7 +3103,7 @@ HorizontalPostCompose = rec(
   end,
   return_type = "twocell" ),
 
-VerticalPreCompose = rec(
+VerticalPreCompose = @rec(
   filter_list = [ "category", "twocell", "twocell" ],
   dual_operation = "VerticalPostCompose",
   
@@ -3121,7 +3121,7 @@ VerticalPreCompose = rec(
   end,
   return_type = "twocell" ),
 
-VerticalPostCompose = rec(
+VerticalPostCompose = @rec(
   filter_list = [ "category", "twocell", "twocell" ],
   dual_operation = "VerticalPreCompose",
   
@@ -3139,12 +3139,12 @@ VerticalPostCompose = rec(
   end,
   return_type = "twocell" ),
 
-IdentityTwoCell = rec(
+IdentityTwoCell = @rec(
   filter_list = [ "category", "morphism" ],
   dual_operation = "IdentityTwoCell",
   return_type = "twocell" ),
 
-IsWellDefinedForTwoCells = rec(
+IsWellDefinedForTwoCells = @rec(
   filter_list = [ "category", "twocell" ],
   dual_operation = "IsWellDefinedForTwoCells",
   
@@ -3162,125 +3162,125 @@ IsWellDefinedForTwoCells = rec(
   
   return_type = "bool" ),
   
-JointPairwiseDifferencesOfMorphismsIntoDirectProduct = rec(
+JointPairwiseDifferencesOfMorphismsIntoDirectProduct = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   io_type = [ [ "A", "D" ], [ "A", "P" ] ],
   return_type = "morphism",
   dual_operation = "JointPairwiseDifferencesOfMorphismsFromCoproduct",
 ),
 
-IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram = rec(
+IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   io_type = [ [ "D" ], [ "P", "Delta" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromCoequalizerOfCoproductDiagramToPushout",
 ),
   
-IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct = rec(
+IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   io_type = [ [ "D" ], [ "Delta", "P" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromPushoutToCoequalizerOfCoproductDiagram",
 ),
   
-IsomorphismFromPushoutToCoequalizerOfCoproductDiagram = rec(
+IsomorphismFromPushoutToCoequalizerOfCoproductDiagram = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   io_type = [ [ "D" ], [ "P", "Delta" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct",
 ),
   
-IsomorphismFromCoequalizerOfCoproductDiagramToPushout = rec(
+IsomorphismFromCoequalizerOfCoproductDiagramToPushout = @rec(
   filter_list = [ "category", "list_of_morphisms" ],
   io_type = [ [ "D" ], [ "Delta", "P" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram",
 ),
 
-IsomorphismFromImageObjectToKernelOfCokernel = rec(
+IsomorphismFromImageObjectToKernelOfCokernel = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "I", "P" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromCokernelOfKernelToCoimage",
 ),
 
-IsomorphismFromKernelOfCokernelToImageObject = rec(
+IsomorphismFromKernelOfCokernelToImageObject = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "P", "I" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromCoimageToCokernelOfKernel",
 ),
 
-IsomorphismFromCoimageToCokernelOfKernel = rec(
+IsomorphismFromCoimageToCokernelOfKernel = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "CI", "C" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromKernelOfCokernelToImageObject",
 ),
 
-IsomorphismFromCokernelOfKernelToCoimage = rec(
+IsomorphismFromCokernelOfKernelToCoimage = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "I", "CI" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromImageObjectToKernelOfCokernel",
 ),
 
-CanonicalIdentificationFromImageObjectToCoimage = rec(
+CanonicalIdentificationFromImageObjectToCoimage = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "I", "C" ] ],
   return_type = "morphism",
   dual_operation = "CanonicalIdentificationFromCoimageToImageObject",
 ),
 
-CanonicalIdentificationFromCoimageToImageObject = rec(
+CanonicalIdentificationFromCoimageToImageObject = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "C", "I" ] ],
   return_type = "morphism",
   dual_operation = "CanonicalIdentificationFromImageObjectToCoimage",
 ),
 
-IsomorphismFromDirectSumToDirectProduct = rec(
+IsomorphismFromDirectSumToDirectProduct = @rec(
   filter_list = [ "category", "list_of_objects" ],
   io_type = [ [ "D" ], [ "S", "P" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromCoproductToDirectSum",
 ),
 
-IsomorphismFromDirectSumToCoproduct = rec(
+IsomorphismFromDirectSumToCoproduct = @rec(
   filter_list = [ "category", "list_of_objects" ],
   io_type = [ [ "D" ], [ "S", "C" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromDirectProductToDirectSum",
 ),
 
-IsomorphismFromDirectProductToDirectSum = rec(
+IsomorphismFromDirectProductToDirectSum = @rec(
   filter_list = [ "category", "list_of_objects" ],
   io_type = [ [ "D" ], [ "P", "S" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromDirectSumToCoproduct",
 ),
 
-IsomorphismFromCoproductToDirectSum = rec(
+IsomorphismFromCoproductToDirectSum = @rec(
   filter_list = [ "category", "list_of_objects" ],
   io_type = [ [ "D" ], [ "C", "S" ] ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromDirectSumToDirectProduct",
 ),
 
-JointPairwiseDifferencesOfMorphismsFromCoproduct = rec(
+JointPairwiseDifferencesOfMorphismsFromCoproduct = @rec(
   filter_list = [ "category", "object", "list_of_morphisms" ],
   io_type = [ [ "A", "D" ], [ "C", "A" ] ],
   return_type = "morphism",
   dual_operation = "JointPairwiseDifferencesOfMorphismsIntoDirectProduct",
 ),
 
-SomeProjectiveObject = rec(
+SomeProjectiveObject = @rec(
   filter_list = [ "category", "object" ],
   return_type = "object",
   dual_operation = "SomeInjectiveObject",
   is_merely_set_theoretic = true ),
 
-EpimorphismFromSomeProjectiveObject = rec(
+EpimorphismFromSomeProjectiveObject = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "A" ], [ "P", "A" ] ],
   with_given_object_position = "Source",
@@ -3288,20 +3288,20 @@ EpimorphismFromSomeProjectiveObject = rec(
   dual_operation = "MonomorphismIntoSomeInjectiveObject",
   is_merely_set_theoretic = true ),
 
-EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject = rec(
+EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "A", "P" ], [ "P", "A" ] ],
   return_type = "morphism",
   dual_operation = "MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
   is_merely_set_theoretic = true ),
 
-SomeInjectiveObject = rec(
+SomeInjectiveObject = @rec(
   filter_list = [ "category", "object" ],
   return_type = "object",
   dual_operation = "SomeProjectiveObject",
   is_merely_set_theoretic = true ),
 
-MonomorphismIntoSomeInjectiveObject = rec(
+MonomorphismIntoSomeInjectiveObject = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "A" ], [ "A", "I" ] ],
   with_given_object_position = "Range",
@@ -3309,26 +3309,26 @@ MonomorphismIntoSomeInjectiveObject = rec(
   dual_operation = "EpimorphismFromSomeProjectiveObject",
   is_merely_set_theoretic = true ),
 
-MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject = rec(
+MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "A", "I" ], [ "A", "I" ] ],
   return_type = "morphism",
   dual_operation = "EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
   is_merely_set_theoretic = true ),
 
-ComponentOfMorphismIntoDirectSum = rec(
+ComponentOfMorphismIntoDirectSum = @rec(
   filter_list = [ "category", "morphism", "list_of_objects", "integer" ],
   io_type = [ [ "alpha", "S", "i" ], [ "alpha_source", "S_i" ] ],
   return_type = "morphism",
   dual_operation = "ComponentOfMorphismFromDirectSum" ),
 
-ComponentOfMorphismFromDirectSum = rec(
+ComponentOfMorphismFromDirectSum = @rec(
   filter_list = [ "category", "morphism", "list_of_objects", "integer" ],
   io_type = [ [ "alpha", "S", "i" ], [ "S_i", "alpha_range" ] ],
   return_type = "morphism",
   dual_operation = "ComponentOfMorphismIntoDirectSum" ),
 
-MorphismBetweenDirectSums = rec(
+MorphismBetweenDirectSums = @rec(
   filter_list = [ "category", "list_of_objects", "list_of_lists_of_morphisms", "list_of_objects" ],
   input_arguments_names = [ "cat", "source_diagram", "mat", "range_diagram" ],
   return_type = "morphism",
@@ -3395,7 +3395,7 @@ MorphismBetweenDirectSums = rec(
   end
 ),
 
-MorphismBetweenDirectSumsWithGivenDirectSums = rec(
+MorphismBetweenDirectSumsWithGivenDirectSums = @rec(
   filter_list = [ "category", "object", "list_of_objects", "list_of_lists_of_morphisms", "list_of_objects", "object" ],
   io_type = [ [ "S", "source_diagram", "mat", "range_diagram", "T" ], [ "S", "T" ] ],
   return_type = "morphism",
@@ -3407,14 +3407,14 @@ MorphismBetweenDirectSumsWithGivenDirectSums = rec(
   end
 ),
 
-IsHomSetInhabited = rec(
+IsHomSetInhabited = @rec(
   filter_list = [ "category", "object", "object" ],
   return_type = "bool",
   dual_operation = "IsHomSetInhabited",
   dual_arguments_reversed = true,
 ),
 
-HomomorphismStructureOnObjects = rec(
+HomomorphismStructureOnObjects = @rec(
   filter_list = [ "category", "object", "object" ],
   return_type = "object_in_range_category_of_homomorphism_structure",
   dual_operation = "HomomorphismStructureOnObjects",
@@ -3422,7 +3422,7 @@ HomomorphismStructureOnObjects = rec(
   dual_postprocessor_func = IdFunc
 ),
 
-HomomorphismStructureOnMorphisms = rec(
+HomomorphismStructureOnMorphisms = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   input_arguments_names = [ "cat", "alpha", "beta" ],
   output_source_getter_string = "HomomorphismStructureOnObjects( cat, Range( alpha ), Source( beta ) )",
@@ -3438,7 +3438,7 @@ HomomorphismStructureOnMorphisms = rec(
   dual_postprocessor_func = IdFunc,
 ),
 
-HomomorphismStructureOnMorphismsWithGivenObjects = rec(
+HomomorphismStructureOnMorphismsWithGivenObjects = @rec(
   filter_list = [ "category", "object_in_range_category_of_homomorphism_structure", "morphism", "morphism", "object_in_range_category_of_homomorphism_structure" ],
   input_arguments_names = [ "cat", "source", "alpha", "beta", "range" ],
   output_source_getter_string = "source",
@@ -3451,13 +3451,13 @@ HomomorphismStructureOnMorphismsWithGivenObjects = rec(
   dual_postprocessor_func = IdFunc,
 ),
 
-DistinguishedObjectOfHomomorphismStructure = rec(
+DistinguishedObjectOfHomomorphismStructure = @rec(
   filter_list = [ "category" ],
   return_type = "object_in_range_category_of_homomorphism_structure",
   dual_operation = "DistinguishedObjectOfHomomorphismStructure",
   dual_postprocessor_func = IdFunc ),
 
-InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure = rec(
+InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure = @rec(
   filter_list = [ "category", "morphism" ],
   input_arguments_names = [ "cat", "alpha" ],
   output_source_getter_string = "DistinguishedObjectOfHomomorphismStructure( cat )",
@@ -3470,7 +3470,7 @@ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure = rec(
   dual_postprocessor_func = IdFunc
 ),
 
-InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects = rec(
+InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects = @rec(
   filter_list = [ "category", "object_in_range_category_of_homomorphism_structure", "morphism", "object_in_range_category_of_homomorphism_structure" ],
   input_arguments_names = [ "cat", "source", "alpha", "range" ],
   return_type = "morphism_in_range_category_of_homomorphism_structure",
@@ -3483,7 +3483,7 @@ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGiv
   dual_postprocessor_func = IdFunc
 ),
 
-InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism = rec(
+InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism = @rec(
   filter_list = [ "category", "object", "object", "morphism_in_range_category_of_homomorphism_structure" ],
   input_arguments_names = [ "cat", "source", "range", "alpha" ],
   return_type = "morphism",
@@ -3495,7 +3495,7 @@ InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism = rec(
   end
 ),
 
-SolveLinearSystemInAbCategory = rec(
+SolveLinearSystemInAbCategory = @rec(
   filter_list = [ "category", "list_of_lists_of_morphisms", "list_of_lists_of_morphisms", "list_of_morphisms" ],
   return_type = "list_of_morphisms",
   pre_function = function( cat, left_coeffs, right_coeffs, rhs )
@@ -3547,63 +3547,63 @@ SolveLinearSystemInAbCategory = rec(
   end,
 ),
 
-SolveLinearSystemInAbCategoryOrFail = rec(
+SolveLinearSystemInAbCategoryOrFail = @rec(
   filter_list = [ "category", "list_of_lists_of_morphisms", "list_of_lists_of_morphisms", "list_of_morphisms" ],
   return_type = "list_of_morphisms_or_fail",
   pre_function = "SolveLinearSystemInAbCategory",
   pre_function_full = "SolveLinearSystemInAbCategory"
 ),
 
-MereExistenceOfSolutionOfLinearSystemInAbCategory = rec(
+MereExistenceOfSolutionOfLinearSystemInAbCategory = @rec(
   filter_list = [ "category", "list_of_lists_of_morphisms", "list_of_lists_of_morphisms", "list_of_morphisms" ],
   return_type = "bool",
   pre_function = "SolveLinearSystemInAbCategory",
   pre_function_full = "SolveLinearSystemInAbCategory"
 ),
 
-BasisOfExternalHom = rec(
+BasisOfExternalHom = @rec(
   filter_list = [ "category", "object", "object" ],
   return_type = "list_of_morphisms",
   dual_operation = "BasisOfExternalHom",
   dual_arguments_reversed = true
 ),
 
-CoefficientsOfMorphism = rec(
+CoefficientsOfMorphism = @rec(
   filter_list = [ "category", "morphism" ],
   return_type = "list_of_elements_of_commutative_ring_of_linear_structure",
   dual_operation = "CoefficientsOfMorphism",
   dual_postprocessor_func = IdFunc
 ),
 
-RandomObjectByInteger = rec(
+RandomObjectByInteger = @rec(
   filter_list = [ "category", "integer" ],
   input_arguments_names = [ "cat", "n" ],
   return_type = "object",
   dual_operation = "RandomObjectByInteger",
 ),
 
-RandomMorphismByInteger = rec(
+RandomMorphismByInteger = @rec(
   filter_list = [ "category", "integer" ],
   io_type = [ [ "n" ], [ "A", "B" ] ],
   return_type = "morphism",
   dual_operation = "RandomMorphismByInteger",
 ),
 
-RandomMorphismWithFixedSourceByInteger = rec(
+RandomMorphismWithFixedSourceByInteger = @rec(
   filter_list = [ "category", "object", "integer" ],
   io_type = [ [ "A", "n" ], [ "A", "B" ] ],
   return_type = "morphism",
   dual_operation = "RandomMorphismWithFixedRangeByInteger",
 ),
 
-RandomMorphismWithFixedRangeByInteger = rec(
+RandomMorphismWithFixedRangeByInteger = @rec(
   filter_list = [ "category", "object", "integer" ],
   io_type = [ [ "B", "n" ], [ "A", "B" ] ],
   return_type = "morphism",
   dual_operation = "RandomMorphismWithFixedSourceByInteger",
 ),
 
-RandomMorphismWithFixedSourceAndRangeByInteger = rec(
+RandomMorphismWithFixedSourceAndRangeByInteger = @rec(
   filter_list = [ "category", "object", "object", "integer" ],
   io_type = [ [ "A", "B", "n" ], [ "A", "B" ] ],
   return_type = "morphism",
@@ -3613,37 +3613,37 @@ RandomMorphismWithFixedSourceAndRangeByInteger = rec(
   end
 ),
 
-RandomObjectByList = rec(
+RandomObjectByList = @rec(
   filter_list = [ "category", "arbitrary_list" ],
   input_arguments_names = [ "cat", "L" ],
   return_type = "object"
 ),
 
-RandomMorphismByList = rec(
+RandomMorphismByList = @rec(
   filter_list = [ "category", "arbitrary_list" ],
   io_type = [ [ "L" ], [ "A", "B" ] ],
   return_type = "morphism"
 ),
 
-RandomMorphismWithFixedSourceByList = rec(
+RandomMorphismWithFixedSourceByList = @rec(
   filter_list = [ "category", "object", "arbitrary_list" ],
   io_type = [ [ "A", "L" ], [ "A", "B" ] ],
   return_type = "morphism",
 ),
 
-RandomMorphismWithFixedRangeByList = rec(
+RandomMorphismWithFixedRangeByList = @rec(
   filter_list = [ "category", "object", "arbitrary_list" ],
   io_type = [ [ "B", "L" ], [ "A", "B" ] ],
   return_type = "morphism"
 ),
 
-RandomMorphismWithFixedSourceAndRangeByList = rec(
+RandomMorphismWithFixedSourceAndRangeByList = @rec(
   filter_list = [ "category", "object", "object", "arbitrary_list" ],
   io_type = [ [ "A", "B", "L" ], [ "A", "B" ] ],
   return_type = "morphism"
 ),
 
-HomologyObject = rec(
+HomologyObject = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   input_arguments_names = [ "cat", "alpha", "beta" ],
   return_type = "object",
@@ -3661,7 +3661,7 @@ HomologyObject = rec(
   dual_arguments_reversed = true
 ),
 
-HomologyObjectFunctorialWithGivenHomologyObjects = rec(
+HomologyObjectFunctorialWithGivenHomologyObjects = @rec(
   filter_list = [ "category", "object", "5_tuple_of_morphisms", "object" ],
   io_type = [ [ "H_1", "L", "H_2" ], [ "H_1", "H_2" ] ],
   return_type = "morphism",
@@ -3713,18 +3713,18 @@ HomologyObjectFunctorialWithGivenHomologyObjects = rec(
   end
 ),
 
-IsomorphismFromHomologyObjectToItsConstructionAsAnImageObject = rec(
+IsomorphismFromHomologyObjectToItsConstructionAsAnImageObject = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "A", "B" ] ],
   return_type = "morphism" ),
 
-IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject = rec(
+IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject = @rec(
   filter_list = [ "category", "morphism", "morphism" ],
   io_type = [ [ "alpha", "beta" ], [ "A", "B" ] ],
   return_type = "morphism" ),
   
 ## SimplifyObject*
-SimplifyObject = rec(
+SimplifyObject = @rec(
   filter_list = [ "category", "object", "nonneg_integer_or_Inf" ],
   input_arguments_names = [ "cat", "A", "n" ],
   return_type = "object",
@@ -3749,7 +3749,7 @@ SimplifyObject = rec(
   end 
   ),
 
-SimplifyObject_IsoFromInputObject = rec(
+SimplifyObject_IsoFromInputObject = @rec(
   filter_list = [ "category", "object", "nonneg_integer_or_Inf" ],
   io_type = [ [ "A", "n" ], [ "A", "B" ] ],
   return_type = "morphism",
@@ -3766,7 +3766,7 @@ SimplifyObject_IsoFromInputObject = rec(
   pre_function = "SimplifyObject"
   ),
 
-SimplifyObject_IsoToInputObject = rec(
+SimplifyObject_IsoToInputObject = @rec(
   filter_list = [ "category", "object", "nonneg_integer_or_Inf" ],
   io_type = [ [ "A", "n" ], [ "B", "A" ] ],
   return_type = "morphism",
@@ -3776,7 +3776,7 @@ SimplifyObject_IsoToInputObject = rec(
   ),
 
 ## SimplifyMorphism
-SimplifyMorphism = rec(
+SimplifyMorphism = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "mor_range" ] ],
   return_type = "morphism",
@@ -3786,7 +3786,7 @@ SimplifyMorphism = rec(
   ),
 
 ## SimplifySource*
-SimplifySource = rec(
+SimplifySource = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "mor_range" ] ],
   return_type = "morphism",
@@ -3795,7 +3795,7 @@ SimplifySource = rec(
   pre_function = "SimplifyObject"
   ),
 
-SimplifySource_IsoToInputObject = rec(
+SimplifySource_IsoToInputObject = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "mor_source" ] ],
   return_type = "morphism",
@@ -3812,7 +3812,7 @@ SimplifySource_IsoToInputObject = rec(
   pre_function = "SimplifyObject"
   ),
   
-SimplifySource_IsoFromInputObject = rec(
+SimplifySource_IsoFromInputObject = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "Ap" ] ],
   return_type = "morphism",
@@ -3822,7 +3822,7 @@ SimplifySource_IsoFromInputObject = rec(
   ),
 
 ## SimplifyRange*
-SimplifyRange = rec(
+SimplifyRange = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "Bp" ] ],
   return_type = "morphism",
@@ -3831,7 +3831,7 @@ SimplifyRange = rec(
   pre_function = "SimplifyObject"
   ),
 
-SimplifyRange_IsoToInputObject = rec(
+SimplifyRange_IsoToInputObject = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "Bp", "mor_range" ] ],
   return_type = "morphism",
@@ -3848,7 +3848,7 @@ SimplifyRange_IsoToInputObject = rec(
   pre_function = "SimplifyObject"
   ),
   
-SimplifyRange_IsoFromInputObject = rec(
+SimplifyRange_IsoFromInputObject = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "mor_range", "Bp" ] ],
   return_type = "morphism",
@@ -3858,7 +3858,7 @@ SimplifyRange_IsoFromInputObject = rec(
   ),
 
 ## SimplifySourceAndRange*
-SimplifySourceAndRange = rec(
+SimplifySourceAndRange = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "Bp" ] ],
   return_type = "morphism",
@@ -3867,7 +3867,7 @@ SimplifySourceAndRange = rec(
   pre_function = "SimplifyObject"
   ),
 
-SimplifySourceAndRange_IsoToInputSource = rec(
+SimplifySourceAndRange_IsoToInputSource = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "mor_source" ] ],
   return_type = "morphism",
@@ -3876,7 +3876,7 @@ SimplifySourceAndRange_IsoToInputSource = rec(
   pre_function = "SimplifyObject"
   ),
   
-SimplifySourceAndRange_IsoFromInputSource = rec(
+SimplifySourceAndRange_IsoFromInputSource = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "Ap" ] ],
   return_type = "morphism",
@@ -3885,7 +3885,7 @@ SimplifySourceAndRange_IsoFromInputSource = rec(
   pre_function = "SimplifyObject"
   ),
 
-SimplifySourceAndRange_IsoToInputRange = rec(
+SimplifySourceAndRange_IsoToInputRange = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "Bp", "mor_range" ] ],
   return_type = "morphism",
@@ -3894,7 +3894,7 @@ SimplifySourceAndRange_IsoToInputRange = rec(
   pre_function = "SimplifyObject"
   ),
   
-SimplifySourceAndRange_IsoFromInputRange = rec(
+SimplifySourceAndRange_IsoFromInputRange = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "mor_range", "Bp" ] ],
   return_type = "morphism",
@@ -3904,7 +3904,7 @@ SimplifySourceAndRange_IsoFromInputRange = rec(
   ),
 
 ## SimplifyEndo*
-SimplifyEndo = rec(
+SimplifyEndo = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "Ap" ] ],
   return_type = "morphism",
@@ -3925,7 +3925,7 @@ SimplifyEndo = rec(
   end 
   ),
 
-SimplifyEndo_IsoFromInputObject = rec(
+SimplifyEndo_IsoFromInputObject = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "Ap" ] ],
   return_type = "morphism",
@@ -3934,7 +3934,7 @@ SimplifyEndo_IsoFromInputObject = rec(
   pre_function = "SimplifyEndo"
   ),
 
-SimplifyEndo_IsoToInputObject = rec(
+SimplifyEndo_IsoToInputObject = @rec(
   filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "mor_range" ] ],
   return_type = "morphism",
@@ -3943,61 +3943,61 @@ SimplifyEndo_IsoToInputObject = rec(
   pre_function = "SimplifyEndo"
   ),
 
-SomeReductionBySplitEpiSummand = rec(
+SomeReductionBySplitEpiSummand = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "Ap", "Bp" ] ],
   return_type = "morphism",
   ),
 
-SomeReductionBySplitEpiSummand_MorphismToInputRange = rec(
+SomeReductionBySplitEpiSummand_MorphismToInputRange = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "Bp", "B" ] ],
   return_type = "morphism",
   ),
 
-SomeReductionBySplitEpiSummand_MorphismFromInputRange = rec(
+SomeReductionBySplitEpiSummand_MorphismFromInputRange = @rec(
   filter_list = [ "category", "morphism" ],
   io_type = [ [ "alpha" ], [ "B", "Bp" ] ],
   return_type = "morphism",
   ),
 
-ProjectiveDimension = rec(
+ProjectiveDimension = @rec(
   filter_list = [ "category", "object" ],
   return_type = "nonneg_integer_or_Inf",
   dual_operation = "InjectiveDimension",
   ),
 
-InjectiveDimension = rec(
+InjectiveDimension = @rec(
   filter_list = [ "category", "object" ],
   return_type = "nonneg_integer_or_Inf",
   dual_operation = "ProjectiveDimension",
   ),
 
-AdditiveGenerators = rec(
+AdditiveGenerators = @rec(
   filter_list = [ "category" ],
   return_type = "list_of_objects",
   dual_operation = "AdditiveGenerators",
 ),
 
-IndecomposableProjectiveObjects = rec(
+IndecomposableProjectiveObjects = @rec(
   filter_list = [ "category" ],
   return_type = "list_of_objects",
   dual_operation = "IndecomposableInjectiveObjects",
 ),
 
-IndecomposableInjectiveObjects = rec(
+IndecomposableInjectiveObjects = @rec(
   filter_list = [ "category" ],
   return_type = "list_of_objects",
   dual_operation = "IndecomposableProjectiveObjects",
 ),
 
-ProjectiveCoverObject = rec(
+ProjectiveCoverObject = @rec(
   filter_list = [ "category", "object" ],
   return_type = "object",
   dual_operation = "InjectiveEnvelopeObject",
   is_merely_set_theoretic = true ),
 
-EpimorphismFromProjectiveCoverObject = rec(
+EpimorphismFromProjectiveCoverObject = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "A" ], [ "P", "A" ] ],
   with_given_object_position = "Source",
@@ -4005,20 +4005,20 @@ EpimorphismFromProjectiveCoverObject = rec(
   dual_operation = "MonomorphismIntoInjectiveEnvelopeObject",
   is_merely_set_theoretic = true ),
 
-EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject = rec(
+EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "A", "P" ], [ "P", "A" ] ],
   return_type = "morphism",
   dual_operation = "MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject",
   is_merely_set_theoretic = true ),
 
-InjectiveEnvelopeObject = rec(
+InjectiveEnvelopeObject = @rec(
   filter_list = [ "category", "object" ],
   return_type = "object",
   dual_operation = "ProjectiveCoverObject",
   is_merely_set_theoretic = true ),
 
-MonomorphismIntoInjectiveEnvelopeObject = rec(
+MonomorphismIntoInjectiveEnvelopeObject = @rec(
   filter_list = [ "category", "object" ],
   io_type = [ [ "A" ], [ "A", "I" ] ],
   with_given_object_position = "Range",
@@ -4026,7 +4026,7 @@ MonomorphismIntoInjectiveEnvelopeObject = rec(
   dual_operation = "EpimorphismFromProjectiveCoverObject",
   is_merely_set_theoretic = true ),
 
-MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject = rec(
+MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject = @rec(
   filter_list = [ "category", "object", "object" ],
   io_type = [ [ "A", "I" ], [ "A", "I" ] ],
   return_type = "morphism",
@@ -4036,28 +4036,28 @@ MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject = rec(
 ) );
 
 @InstallValueConst( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS, [
-rec(
+@rec(
   object_specification = [ "varobject" ],
   morphism_specification = [  ],
   limit_object_name = "DirectProduct",
   colimit_object_name = "Coproduct",
 ),
 
-rec(
+@rec(
   object_specification = [ "varobject" ],
   morphism_specification = [  ],
   limit_object_name = "DirectSum",
   colimit_object_name = "DirectSum",
 ),
 
-rec(
+@rec(
   object_specification = [ "fixedobject", "varobject" ],
   morphism_specification = [ [ 2, "varmorphism", 1 ] ],
   limit_object_name = "FiberProduct",
   colimit_object_name = "Pushout",
 ),
 
-rec(
+@rec(
   object_specification = [ "fixedobject", "fixedobject" ],
   morphism_specification = [ [ 1, "varmorphism", 2 ] ],
   limit_object_name = "Equalizer",
@@ -4066,7 +4066,7 @@ rec(
   colimit_injection_name = "ProjectionOntoCoequalizer",
 ),
 
-rec(
+@rec(
   object_specification = [ "fixedobject", "fixedobject" ],
   morphism_specification = [ [ 1, "fixedmorphism", 2 ], [ 1, "zeromorphism", 2 ] ],
   limit_object_name = "KernelObject",
@@ -4077,14 +4077,14 @@ rec(
   colimit_universal_morphism_name = "CokernelColift",
 ),
 
-rec(
+@rec(
   object_specification = [ ],
   morphism_specification = [ ],
   limit_object_name = "TerminalObject",
   colimit_object_name = "InitialObject",
 ),
 
-rec(
+@rec(
   object_specification = [ ],
   morphism_specification = [ ],
   limit_object_name = "ZeroObject",
@@ -4238,17 +4238,17 @@ rec(
         limit.diagram_input_type = diagram_input_type;
         
         #### set default projection/injection/universal morphism names
-        if number_of_targets > 0 && !IsBound( limit.limit_projection_name )
+        if number_of_targets > 0 && !@IsBound( limit.limit_projection_name )
             limit.limit_projection_name = @Concatenation( "ProjectionInFactorOf", limit.limit_object_name );
         end;
-        if !IsBound( limit.limit_universal_morphism_name )
+        if !@IsBound( limit.limit_universal_morphism_name )
             limit.limit_universal_morphism_name = @Concatenation( "UniversalMorphismInto", limit.limit_object_name );
         end;
 
-        if number_of_targets > 0 && !IsBound( limit.colimit_injection_name )
+        if number_of_targets > 0 && !@IsBound( limit.colimit_injection_name )
             limit.colimit_injection_name = @Concatenation( "InjectionOfCofactorOf", limit.colimit_object_name );
         end;
-        if !IsBound( limit.colimit_universal_morphism_name )
+        if !@IsBound( limit.colimit_universal_morphism_name )
             limit.colimit_universal_morphism_name = @Concatenation( "UniversalMorphismFrom", limit.colimit_object_name );
         end;
         
@@ -4300,7 +4300,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
     
     subset_only = ValueOption( "subset_only" ) == true;
     
-    if !IsBound( method_record[entry_name] )
+    if !@IsBound( method_record[entry_name] )
         Display( @Concatenation( "WARNING: The method record is missing a component named \"", entry_name, "\" which is expected by the validator.\n" ) );
         return;
     end;
@@ -4311,7 +4311,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
         if name ⥉ excluded_names
             continue;
         end;
-        if !IsBound( generated_entry[name] )
+        if !@IsBound( generated_entry[name] )
             if subset_only
                 continue;
             else
@@ -4325,7 +4325,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
         if name ⥉ excluded_names
             continue;
         end;
-        if !IsBound( method_record_entry[name] )
+        if !@IsBound( method_record_entry[name] )
             Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record is missing a component named \"", name, "\" which is expected by the validator.\n" ) );
         end;
     end;
@@ -4347,7 +4347,7 @@ end );
             Add( record.io_type[1], record.io_type[2][2] );
         end;
         record.dual_operation = @Concatenation( record.dual_operation, "WithGiven", coobject_name );
-        record.with_given_object_position = nothing;
+        @Unbind( record.with_given_object_position );
 
         return record;
     end;
@@ -4362,14 +4362,14 @@ end );
         record.dual_operation = orig_function_name;
         
         # reverse the output type, except if the input is reversed
-        if IsBound( record.io_type ) && !(IsBound( record.dual_arguments_reversed ) && record.dual_arguments_reversed)
+        if @IsBound( record.io_type ) && !(@IsBound( record.dual_arguments_reversed ) && record.dual_arguments_reversed)
             record.io_type[2] = Reversed( record.io_type[2] );
             record.io_type[2] = List( record.io_type[2], x -> ReplacedString( x, "source", "tmp" ) );
             record.io_type[2] = List( record.io_type[2], x -> ReplacedString( x, "range", "source" ) );
             record.io_type[2] = List( record.io_type[2], x -> ReplacedString( x, "tmp", "range" ) );
         end;
         
-        if IsBound( record.functorial )
+        if @IsBound( record.functorial )
             
             @Assert( 0, record.functorial == limit.limit_functorial_name );
             
@@ -4377,7 +4377,7 @@ end );
             
         end;
         
-        if IsBound( record.with_given_object_position )
+        if @IsBound( record.with_given_object_position )
             if record.with_given_object_position == "Source"
                 record.with_given_object_position = "Range";
             elseif record.with_given_object_position == "Range"
@@ -4385,11 +4385,11 @@ end );
             end;
         end;
 
-        if IsBound( record.output_source_getter_string )
+        if @IsBound( record.output_source_getter_string )
             record.output_source_getter_string = ReplacedString( record.output_source_getter_string, limit.limit_object_name, limit.colimit_object_name );
         end;
         
-        if IsBound( record.output_source_getter_preconditions )
+        if @IsBound( record.output_source_getter_preconditions )
             if record.output_source_getter_preconditions == [ [ limit.limit_object_name, 1 ] ]
                 record.output_source_getter_preconditions = [ [ limit.colimit_object_name, 1 ] ];
             else
@@ -4397,11 +4397,11 @@ end );
             end;
         end;
         
-        if IsBound( record.output_range_getter_string )
+        if @IsBound( record.output_range_getter_string )
             record.output_range_getter_string = ReplacedString( record.output_range_getter_string, limit.limit_object_name, limit.colimit_object_name );
         end;
         
-        if IsBound( record.output_range_getter_preconditions )
+        if @IsBound( record.output_range_getter_preconditions )
             if record.output_range_getter_preconditions == [ [ limit.limit_object_name, 1 ] ]
                 record.output_range_getter_preconditions = [ [ limit.colimit_object_name, 1 ] ];
             else
@@ -4474,7 +4474,7 @@ end );
 
         
         #### get base records
-        object_record =  rec(
+        object_record =  @rec(
             function_name = limit.limit_object_name,
             filter_list = object_filter_list,
             return_type = "object",
@@ -4483,7 +4483,7 @@ end );
         );
 
         if limit.number_of_targets > 0
-            projection_record = rec(
+            projection_record = @rec(
                 function_name = limit.limit_projection_name,
                 filter_list = projection_filter_list,
                 io_type = projection_io_type,
@@ -4494,7 +4494,7 @@ end );
         end;
 
         if limit.number_of_nontargets == 1
-            morphism_to_sink_record = rec(
+            morphism_to_sink_record = @rec(
                 function_name = @Concatenation( "MorphismFrom", limit.limit_object_name, "ToSink" ),
                 filter_list = morphism_to_sink_filter_list,
                 io_type = morphism_to_sink_io_type,
@@ -4504,7 +4504,7 @@ end );
             );
         end;
 
-        universal_morphism_record = rec(
+        universal_morphism_record = @rec(
             function_name = limit.limit_universal_morphism_name,
             filter_list = universal_morphism_filter_list,
             io_type = universal_morphism_io_type,
@@ -4513,7 +4513,7 @@ end );
             dual_operation = limit.colimit_universal_morphism_name,
         );
         
-        functorial_record = rec(
+        functorial_record = @rec(
             function_name = limit.limit_functorial_name,
             filter_list = @Concatenation( [ "category" ], limit.diagram_filter_list, limit.diagram_morphism_filter_list, limit.diagram_filter_list ),
             input_arguments_names = @Concatenation( [ "cat" ], limit.functorial_source_diagram_arguments_names, limit.diagram_morphism_input_type, limit.functorial_range_diagram_arguments_names ),
@@ -4521,12 +4521,12 @@ end );
             # object_name
             output_source_getter_string = ReplacedStringViaRecord(
                 "object_name( arguments... )",
-                rec( object_name = limit.limit_object_name, arguments = @Concatenation( [ "cat" ], limit.functorial_source_diagram_arguments_names ) )
+                @rec( object_name = limit.limit_object_name, arguments = @Concatenation( [ "cat" ], limit.functorial_source_diagram_arguments_names ) )
             ),
             output_source_getter_preconditions = [ [ limit.limit_object_name, 1 ] ],
             output_range_getter_string = ReplacedStringViaRecord(
                 "object_name( arguments... )",
-                rec( object_name = limit.limit_object_name, arguments = @Concatenation( [ "cat" ], limit.functorial_range_diagram_arguments_names ) )
+                @rec( object_name = limit.limit_object_name, arguments = @Concatenation( [ "cat" ], limit.functorial_range_diagram_arguments_names ) )
             ),
             output_range_getter_preconditions = [ [ limit.limit_object_name, 1 ] ],
             with_given_object_position = "both",
@@ -4534,7 +4534,7 @@ end );
             dual_arguments_reversed = true,
         );
         
-        functorial_with_given_record = rec(
+        functorial_with_given_record = @rec(
             function_name = limit.limit_functorial_with_given_name,
             filter_list = @Concatenation( [ "category", "object" ], limit.diagram_filter_list, limit.diagram_morphism_filter_list, limit.diagram_filter_list, [ "object" ] ),
             io_type = [ @Concatenation( [ "P" ], limit.functorial_source_diagram_arguments_names, limit.diagram_morphism_input_type, limit.functorial_range_diagram_arguments_names, [ "Pp" ] ), [ "P", "Pp" ] ],
@@ -4627,14 +4627,14 @@ end );
 CAP_INTERNAL_VALIDATE_LIMITS_IN_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD, CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS );
 
 
-@InstallValueConst( CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS, rec() );
+@InstallValueConst( CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS, @rec() );
 
 @InstallGlobalFunction( CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD,
   function( replacement_data )
     local current_name;
 
     for current_name in RecNames( replacement_data )
-        if IsBound( CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS[current_name] )
+        if @IsBound( CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS[current_name] )
             Error( @Concatenation( current_name, " already has a replacement" ) );
         end;
         CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS[current_name] = replacement_data[current_name];
@@ -4656,11 +4656,11 @@ end );
         
         current_rec = method_name_record[current_recname];
         
-        if !IsBound( current_rec.property_of )
+        if !@IsBound( current_rec.property_of )
             continue;
         end;
         
-        if !IsBound( current_rec.dual_operation ) || current_rec.dual_operation == current_recname
+        if !@IsBound( current_rec.dual_operation ) || current_rec.dual_operation == current_recname
             
             current_entry = current_rec.installation_name;
             
@@ -4927,7 +4927,7 @@ end );
         end;
         
         # validity checks
-        if !IsBound( current_rec.return_type )
+        if !@IsBound( current_rec.return_type )
             Error( "<current_rec> has no return_type" );
         end;
         
@@ -4939,7 +4939,7 @@ end );
             Error( "The return_type of <current_rec> does !appear ⥉ CAP_INTERNAL_VALID_RETURN_TYPES. Note that proper filters are !supported anymore." );
         end;
         
-        if IsBound( current_rec.argument_list )
+        if @IsBound( current_rec.argument_list )
             
             Display( @Concatenation( 
                 "WARNING: the functionality previously provided by `argument_list` was removed. You will probably run into errors. ",
@@ -4959,7 +4959,7 @@ end );
             Error( "The filters \"other_category\", \"other_object\", \"other_morphism\", && \"other_twocell\" are !supported anymore. If you need those, please report this using the CAP_projects's issue tracker." );
         end;
         
-        if IsBound( current_rec.io_type )
+        if @IsBound( current_rec.io_type )
             
             io_type = current_rec.io_type;
             
@@ -4980,13 +4980,13 @@ end );
             
         end;
         
-        if IsBound( current_rec.output_source_getter_preconditions ) && !IsBound( current_rec.output_source_getter_string )
+        if @IsBound( current_rec.output_source_getter_preconditions ) && !@IsBound( current_rec.output_source_getter_string )
             
             Error( "output_source_getter_preconditions may only be set if output_source_getter_string is set" );
             
         end;
         
-        if IsBound( current_rec.output_range_getter_preconditions ) && !IsBound( current_rec.output_range_getter_string )
+        if @IsBound( current_rec.output_range_getter_preconditions ) && !@IsBound( current_rec.output_range_getter_string )
             
             Error( "output_range_getter_preconditions may only be set if output_range_getter_string is set" );
             
@@ -4994,9 +4994,9 @@ end );
         
         current_rec.function_name = current_recname;
         
-        if IsBound( current_rec.pre_function ) && IsString( current_rec.pre_function )
+        if @IsBound( current_rec.pre_function ) && IsString( current_rec.pre_function )
             
-            if IsBound( record[current_rec.pre_function] ) && IsBound( record[current_rec.pre_function].pre_function ) && IsFunction( record[current_rec.pre_function].pre_function )
+            if @IsBound( record[current_rec.pre_function] ) && @IsBound( record[current_rec.pre_function].pre_function ) && IsFunction( record[current_rec.pre_function].pre_function )
                 
                 current_rec.pre_function = record[current_rec.pre_function].pre_function;
                 
@@ -5008,9 +5008,9 @@ end );
             
         end;
         
-        if IsBound( current_rec.pre_function_full ) && IsString( current_rec.pre_function_full )
+        if @IsBound( current_rec.pre_function_full ) && IsString( current_rec.pre_function_full )
             
-            if IsBound( record[current_rec.pre_function_full] ) && IsBound( record[current_rec.pre_function_full].pre_function_full ) && IsFunction( record[current_rec.pre_function_full].pre_function_full )
+            if @IsBound( record[current_rec.pre_function_full] ) && @IsBound( record[current_rec.pre_function_full].pre_function_full ) && IsFunction( record[current_rec.pre_function_full].pre_function_full )
                 
                 current_rec.pre_function_full = record[current_rec.pre_function_full].pre_function_full;
                 
@@ -5022,9 +5022,9 @@ end );
             
         end;
         
-        if IsBound( current_rec.redirect_function ) && IsString( current_rec.redirect_function )
+        if @IsBound( current_rec.redirect_function ) && IsString( current_rec.redirect_function )
             
-            if IsBound( record[current_rec.redirect_function] ) && IsBound( record[current_rec.redirect_function].redirect_function ) && IsFunction( record[current_rec.redirect_function].redirect_function )
+            if @IsBound( record[current_rec.redirect_function] ) && @IsBound( record[current_rec.redirect_function].redirect_function ) && IsFunction( record[current_rec.redirect_function].redirect_function )
                 
                 current_rec.redirect_function = record[current_rec.redirect_function].redirect_function;
                 
@@ -5038,23 +5038,23 @@ end );
         
         number_of_arguments = Length( current_rec.filter_list );
         
-        if IsBound( current_rec.pre_function ) && NumberArgumentsFunction( current_rec.pre_function ) >= 0 && NumberArgumentsFunction( current_rec.pre_function ) != number_of_arguments
+        if @IsBound( current_rec.pre_function ) && NumberArgumentsFunction( current_rec.pre_function ) >= 0 && NumberArgumentsFunction( current_rec.pre_function ) != number_of_arguments
             Error( "the pre function of <current_rec> has the wrong number of arguments" );
         end;
         
-        if IsBound( current_rec.pre_function_full ) && NumberArgumentsFunction( current_rec.pre_function_full ) >= 0 && NumberArgumentsFunction( current_rec.pre_function_full ) != number_of_arguments
+        if @IsBound( current_rec.pre_function_full ) && NumberArgumentsFunction( current_rec.pre_function_full ) >= 0 && NumberArgumentsFunction( current_rec.pre_function_full ) != number_of_arguments
             Error( "the full pre function of <current_rec> has the wrong number of arguments" );
         end;
         
-        if IsBound( current_rec.redirect_function ) && NumberArgumentsFunction( current_rec.redirect_function ) >= 0 && NumberArgumentsFunction( current_rec.redirect_function ) != number_of_arguments
+        if @IsBound( current_rec.redirect_function ) && NumberArgumentsFunction( current_rec.redirect_function ) >= 0 && NumberArgumentsFunction( current_rec.redirect_function ) != number_of_arguments
             Error( "the redirect function of <current_rec> has the wrong number of arguments" );
         end;
         
-        if IsBound( current_rec.post_function ) && NumberArgumentsFunction( current_rec.post_function ) >= 0 && NumberArgumentsFunction( current_rec.post_function ) != number_of_arguments + 1
+        if @IsBound( current_rec.post_function ) && NumberArgumentsFunction( current_rec.post_function ) >= 0 && NumberArgumentsFunction( current_rec.post_function ) != number_of_arguments + 1
             Error( "the post function of <current_rec> has the wrong number of arguments" );
         end;
         
-        if IsBound( current_rec.dual_preprocessor_func ) && NumberArgumentsFunction( current_rec.dual_preprocessor_func ) >= 0 && NumberArgumentsFunction( current_rec.dual_preprocessor_func ) != number_of_arguments
+        if @IsBound( current_rec.dual_preprocessor_func ) && NumberArgumentsFunction( current_rec.dual_preprocessor_func ) >= 0 && NumberArgumentsFunction( current_rec.dual_preprocessor_func ) != number_of_arguments
             Error( "the dual preprocessor function of ", current_recname, " has the wrong number of arguments" );
         end;
         
@@ -5062,7 +5062,7 @@ end );
             Error( "Not all entries of filter_list of ", current_recname, " are strings. This is !supported anymore." );
         end;
         
-        if !IsBound( current_rec.install_convenience_without_category )
+        if !@IsBound( current_rec.install_convenience_without_category )
             
             if ForAny( [ "object", "morphism", "twocell", "list_of_objects", "list_of_morphisms", "list_of_twocells" ], filter -> filter ⥉ current_rec.filter_list )
                 
@@ -5076,7 +5076,7 @@ end );
             
         end;
         
-        if IsBound( current_rec.universal_object_position )
+        if @IsBound( current_rec.universal_object_position )
             
             Display( "WARNING: universal_object_position was renamed to with_given_object_position" );
             
@@ -5084,35 +5084,35 @@ end );
             
         end;
         
-        if IsBound( current_rec.with_given_object_position ) && !current_rec.with_given_object_position ⥉ [ "Source", "Range", "both" ]
+        if @IsBound( current_rec.with_given_object_position ) && !current_rec.with_given_object_position ⥉ [ "Source", "Range", "both" ]
             
             Error( "with_given_object_position must be one of the strings \"Source\", \"Range\", || \"both\", !", current_rec.with_given_object_position );
             
         end;
         
-        if !IsBound( current_rec.is_with_given )
+        if !@IsBound( current_rec.is_with_given )
             
             current_rec.is_with_given = false;
             
         end;
         
-        if !IsBound( current_rec.with_given_without_given_name_pair )
+        if !@IsBound( current_rec.with_given_without_given_name_pair )
             
             current_rec.with_given_without_given_name_pair = fail;
             
         end;
         
-        if IsBound( current_rec.dual_operation )
+        if @IsBound( current_rec.dual_operation )
             
             # check that dual of the dual is the original operation
             
-            if !IsBound( record[current_rec.dual_operation] )
+            if !@IsBound( record[current_rec.dual_operation] )
                 
                 Error( "the dual operation must be added ⥉ the same call to `CAP_INTERNAL_ENHANCE_NAME_RECORD`" );
                 
             end;
             
-            if !IsBound( record[current_rec.dual_operation].dual_operation )
+            if !@IsBound( record[current_rec.dual_operation].dual_operation )
                 
                 Error( "the dual operation of ", current_recname, ", i.e. ", current_rec.dual_operation, ", has no dual operation"  );
                 
@@ -5126,14 +5126,14 @@ end );
             
         end;
         
-        if !IsBound( current_rec.dual_arguments_reversed )
+        if !@IsBound( current_rec.dual_arguments_reversed )
             
             current_rec.dual_arguments_reversed = false;
             
         end;
         
         if Length( Filtered( [ "dual_preprocessor_func", "dual_arguments_reversed", "dual_with_given_objects_reversed" ],
-                             name -> IsBound( current_rec[name] ) && ( IsFunction( current_rec[name] ) || current_rec[name] == true )
+                             name -> @IsBound( current_rec[name] ) && ( IsFunction( current_rec[name] ) || current_rec[name] == true )
                            ) ) >= 2
             
             Error( "dual_preprocessor_func, dual_arguments_reversed == true && dual_with_given_objects_reversed == true are mutually exclusive" );
@@ -5154,9 +5154,9 @@ end );
             
         end;
         
-        if !IsBound( current_rec.input_arguments_names )
+        if !@IsBound( current_rec.input_arguments_names )
             
-            if IsBound( current_rec.io_type )
+            if @IsBound( current_rec.io_type )
                 
                 current_rec.input_arguments_names = @Concatenation( [ "cat" ], current_rec.io_type[1] );
                 
@@ -5186,7 +5186,7 @@ end );
             
         end;
         
-        if IsBound( current_rec.io_type )
+        if @IsBound( current_rec.io_type )
             
             @Assert( 0, StartsWith( current_rec.return_type, "morphism" ) && !IsString( current_rec.io_type[ 2 ] ) && IsList( current_rec.io_type[ 2 ] ) );
             
@@ -5285,7 +5285,7 @@ end );
         
         if ForAll( current_rec.filter_list, x -> x ⥉ [ "element_of_commutative_ring_of_linear_structure", "integer", "nonneg_integer_or_Inf", "category", "object", "object_in_range_category_of_homomorphism_structure", "list_of_objects" ] )
             
-            if !IsBound( current_rec.compatible_with_congruence_of_morphisms )
+            if !@IsBound( current_rec.compatible_with_congruence_of_morphisms )
                 
                 current_rec.compatible_with_congruence_of_morphisms = true;
                 
@@ -5306,7 +5306,7 @@ end );
         
         current_rec = record[current_recname];
         
-        if IsBound( current_rec.with_given_object_position )
+        if @IsBound( current_rec.with_given_object_position )
             
             if PositionSublist( current_recname, "WithGiven" ) != fail
                 
@@ -5341,7 +5341,7 @@ end );
                 
                 if with_given_object_position == "Source"
                     
-                    if !IsBound( without_given_rec.output_source_getter_string )
+                    if !@IsBound( without_given_rec.output_source_getter_string )
                         
                         without_given_rec.output_source_getter_string = @Concatenation( object_name, "( ", JoinStringsWithSeparator( without_given_rec.input_arguments_names[(1):(Length( object_filter_list ))], ", " ), " )" );
                         without_given_rec.output_source_getter_preconditions = [ [ object_name, 1 ] ];
@@ -5352,7 +5352,7 @@ end );
                 
                 if with_given_object_position == "Range"
                     
-                    if !IsBound( without_given_rec.output_range_getter_string )
+                    if !@IsBound( without_given_rec.output_range_getter_string )
                         
                         without_given_rec.output_range_getter_string = @Concatenation( object_name, "( ", JoinStringsWithSeparator( without_given_rec.input_arguments_names[(1):(Length( object_filter_list ))], ", " ), " )" );
                         without_given_rec.output_range_getter_preconditions = [ [ object_name, 1 ] ];
@@ -5366,7 +5366,7 @@ end );
             # plausibility checks for without_given_rec
             if with_given_object_position ⥉ [ "Source", "both" ]
                 
-                if !IsBound( without_given_rec.output_source_getter_string )
+                if !@IsBound( without_given_rec.output_source_getter_string )
                     
                     Error( "This is a WithoutGiven record, but output_source_getter_string is !set. This is !supported." );
                     
@@ -5376,7 +5376,7 @@ end );
             
             if with_given_object_position ⥉ [ "Range", "both" ]
                 
-                if !IsBound( without_given_rec.output_range_getter_string )
+                if !@IsBound( without_given_rec.output_range_getter_string )
                     
                     Error( "This is a WithoutGiven record, but output_range_getter_string is !set. This is !supported." );
                     
@@ -5420,7 +5420,7 @@ end );
                 
             end;
             
-            with_given_rec = rec(
+            with_given_rec = @rec(
                 return_type = without_given_rec.return_type,
             );
             
@@ -5430,13 +5430,13 @@ end );
                 with_given_rec.input_arguments_names = @Concatenation( without_given_rec.input_arguments_names, [ given_source_argument_name ] );
                 with_given_rec.output_source_getter_string = given_source_argument_name;
                 
-                if IsBound( without_given_rec.output_range_getter_string )
+                if @IsBound( without_given_rec.output_range_getter_string )
                     
                     with_given_rec.output_range_getter_string = without_given_rec.output_range_getter_string;
                     
                 end;
                 
-                if IsBound( without_given_rec.output_range_getter_preconditions )
+                if @IsBound( without_given_rec.output_range_getter_preconditions )
                     
                     with_given_rec.output_range_getter_preconditions = without_given_rec.output_range_getter_preconditions;
                     
@@ -5448,13 +5448,13 @@ end );
                 with_given_rec.input_arguments_names = @Concatenation( without_given_rec.input_arguments_names, [ given_range_argument_name ] );
                 with_given_rec.output_range_getter_string = given_range_argument_name;
                 
-                if IsBound( without_given_rec.output_source_getter_string )
+                if @IsBound( without_given_rec.output_source_getter_string )
                     
                     with_given_rec.output_source_getter_string = without_given_rec.output_source_getter_string;
                     
                 end;
                 
-                if IsBound( without_given_rec.output_source_getter_preconditions )
+                if @IsBound( without_given_rec.output_source_getter_preconditions )
                     
                     with_given_rec.output_source_getter_preconditions = without_given_rec.output_source_getter_preconditions;
                     
@@ -5489,11 +5489,11 @@ end );
             # now enhance the actual with_given_rec
             with_given_rec = record[with_given_name];
             
-            if IsBound( without_given_rec.pre_function ) && !IsBound( with_given_rec.pre_function )
+            if @IsBound( without_given_rec.pre_function ) && !@IsBound( with_given_rec.pre_function )
                 with_given_rec.pre_function = CAP_INTERNAL_PREPARE_INHERITED_PRE_FUNCTION( record[without_given_name].pre_function, with_given_object_position == "both" );
             end;
             
-            if IsBound( without_given_rec.pre_function_full ) && !IsBound( with_given_rec.pre_function_full )
+            if @IsBound( without_given_rec.pre_function_full ) && !@IsBound( with_given_rec.pre_function_full )
                 with_given_rec.pre_function_full = CAP_INTERNAL_PREPARE_INHERITED_PRE_FUNCTION( record[without_given_name].pre_function_full, with_given_object_position == "both" );
             end;
             
@@ -5539,7 +5539,7 @@ end );
                     
                 end;
                 
-                if !IsBound( without_given_rec.redirect_function )
+                if !@IsBound( without_given_rec.redirect_function )
                     
                     if Length( record[without_given_name].filter_list ) + 1 != Length( record[with_given_name].filter_list )
                         
@@ -5558,7 +5558,7 @@ end );
                     
                 end;
                 
-                if !IsBound( without_given_rec.post_function )
+                if !@IsBound( without_given_rec.post_function )
                     
                     without_given_rec.post_function = CAP_INTERNAL_CREATE_POST_FUNCTION( with_given_object_position, object_name, object_filter_list, (1):(Length( object_filter_list )) );
                     
@@ -5575,7 +5575,7 @@ end );
         
         current_rec = record[current_recname];
         
-        if IsBound( current_rec.dual_with_given_objects_reversed ) && current_rec.dual_with_given_objects_reversed
+        if @IsBound( current_rec.dual_with_given_objects_reversed ) && current_rec.dual_with_given_objects_reversed
             
             if !current_rec.is_with_given
                 
@@ -5596,11 +5596,11 @@ end );
         end;
         
         # set `output_source_getter` && `output_range_getter`
-        if IsBound( current_rec.output_source_getter_string )
+        if @IsBound( current_rec.output_source_getter_string )
             
             current_rec.output_source_getter = EvalString( ReplacedStringViaRecord(
                 "( arguments... ) -> getter",
-                rec(
+                @rec(
                     arguments = current_rec.input_arguments_names,
                     getter = current_rec.output_source_getter_string,
                 )
@@ -5608,7 +5608,7 @@ end );
             
             if current_rec.output_source_getter_string ⥉ current_rec.input_arguments_names
                 
-                if !IsBound( current_rec.output_source_getter_preconditions )
+                if !@IsBound( current_rec.output_source_getter_preconditions )
                     
                     current_rec.output_source_getter_preconditions = [ ];
                     
@@ -5623,7 +5623,7 @@ end );
             end;
             
             #= comment for Julia
-            if IsBound( current_rec.output_source_getter_preconditions )
+            if @IsBound( current_rec.output_source_getter_preconditions )
                 
                 if ForAny( current_rec.output_source_getter_preconditions, x -> IsList( x ) && Length( x ) == 3 )
                     
@@ -5642,7 +5642,7 @@ end );
                         @Concatenation( recnames, RecNames( CAP_INTERNAL_METHOD_NAME_RECORD ) ),
                         2,
                         CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS,
-                        rec( )
+                        @rec( )
                 );
                 
                 @Assert( 0, ForAll( collected_list, x -> Length( x ) == 3 && x[3] == fail ) );
@@ -5658,11 +5658,11 @@ end );
             end;
             # =#
             
-            if IsBound( current_rec.output_source_getter_preconditions )
+            if @IsBound( current_rec.output_source_getter_preconditions )
                 
                 can_always_compute_output_source_getter = IsEmpty( current_rec.output_source_getter_preconditions );
                 
-                if IsBound( current_rec.can_always_compute_output_source_getter )
+                if @IsBound( current_rec.can_always_compute_output_source_getter )
                     
                     if current_rec.can_always_compute_output_source_getter != can_always_compute_output_source_getter
                         
@@ -5680,11 +5680,11 @@ end );
             
         end;
         
-        if IsBound( current_rec.output_range_getter_string )
+        if @IsBound( current_rec.output_range_getter_string )
             
             current_rec.output_range_getter = EvalString( ReplacedStringViaRecord(
                 "( arguments... ) -> getter",
-                rec(
+                @rec(
                     arguments = current_rec.input_arguments_names,
                     getter = current_rec.output_range_getter_string,
                 )
@@ -5692,7 +5692,7 @@ end );
             
             if current_rec.output_range_getter_string ⥉ current_rec.input_arguments_names
                 
-                if !IsBound( current_rec.output_range_getter_preconditions )
+                if !@IsBound( current_rec.output_range_getter_preconditions )
                     
                     current_rec.output_range_getter_preconditions = [ ];
                     
@@ -5707,7 +5707,7 @@ end );
             end;
             
             #= comment for Julia
-            if IsBound( current_rec.output_range_getter_preconditions )
+            if @IsBound( current_rec.output_range_getter_preconditions )
                 
                 if ForAny( current_rec.output_range_getter_preconditions, x -> IsList( x ) && Length( x ) == 3 )
                     
@@ -5726,7 +5726,7 @@ end );
                         @Concatenation( recnames, RecNames( CAP_INTERNAL_METHOD_NAME_RECORD ) ),
                         2,
                         CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS,
-                        rec( )
+                        @rec( )
                 );
                 
                 @Assert( 0, ForAll( collected_list, x -> Length( x ) == 3 && x[3] == fail ) );
@@ -5742,11 +5742,11 @@ end );
             end;
             # =#
             
-            if IsBound( current_rec.output_range_getter_preconditions )
+            if @IsBound( current_rec.output_range_getter_preconditions )
                 
                 can_always_compute_output_range_getter = IsEmpty( current_rec.output_range_getter_preconditions );
                 
-                if IsBound( current_rec.can_always_compute_output_range_getter )
+                if @IsBound( current_rec.can_always_compute_output_range_getter )
                     
                     if current_rec.can_always_compute_output_range_getter != can_always_compute_output_range_getter
                         
@@ -5808,7 +5808,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
 
 # ! @Section section_name
 """,
-        rec(
+        @rec(
             package_name = package_name,
             package_subtitle = package_info.Subtitle,
             chapter_name = chapter_name,
@@ -5847,7 +5847,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
 @DeclareOperation( "Addfunction_name",
                   [ IsCapCategory, IsList ] );
 """,
-            rec(
+            @rec(
                 function_name = current_recname,
                 input_arguments = current_rec.input_arguments_names[(2):(Length( current_rec.input_arguments_names ))],
             )
@@ -5885,22 +5885,22 @@ CAP_INTERNAL_GENERATE_DOCUMENTATION_FROM_METHOD_NAME_RECORD(
     "Available Add functions"
 );
 
-@BindGlobal( "CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE", rec( ) );
+@BindGlobal( "CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE", @rec( ) );
 
 ##
 @InstallGlobalFunction( CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE,
   function ( record, package_name )
     local recname;
     
-    if !IsBound( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package_name] )
+    if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package_name] )
         
-        CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package_name] = rec( );
+        CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package_name] = @rec( );
         
     end;
     
     for recname in RecNames( record )
         
-        if IsBound( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package_name][recname] )
+        if @IsBound( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package_name][recname] )
             
             Error( recname, " is already registered for this package" );
             
@@ -5942,7 +5942,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
 
 # ! @Section section_name
 """,
-        rec(
+        @rec(
             package_name = package_name,
             package_subtitle = package_info.Subtitle,
             chapter_name = chapter_name,
@@ -6079,7 +6079,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
             current_string = ReplacedStringViaRecord(
                 "\n# ! * <Ref BookName=\"bookname\" Func=\"operation_name\" Label=\"label\" />", # GAPDoc does !care if we use `Func` || `Oper` for external refs
-                rec(
+                @rec(
                     bookname = bookname,
                     operation_name = name,
                     label = label,

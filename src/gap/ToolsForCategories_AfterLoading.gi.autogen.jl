@@ -7,7 +7,7 @@
 ## This file contains installations for ToolsForCategories functions
 ## that can only be installed after all dependencies have been loaded.
 
-if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound( NCurses.BrowseDenseList )
+if IsPackageMarkedForLoading( "Browse", ">= 1.5" )
 
     @InstallGlobalFunction( BrowseCachingStatistic,
       
@@ -23,7 +23,7 @@ if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound
         
         for current_cache_name in operations
             Add( names, [ current_cache_name ] );
-            if !IsBound( category.caches[current_cache_name] )
+            if !@IsBound( category.caches[current_cache_name] )
                 Add( value_matrix, [ "!installed", "-", "-", "-" ] );
                 continue;
             end;
@@ -43,7 +43,7 @@ if IsPackageMarkedForLoading( "Browse", ">=0" ) && IsBound( NCurses ) && IsBound
             Add( value_matrix, current_list );
         end;
         
-        NCurses.BrowseDenseList( value_matrix, rec( labelsCol = cols, labelsRow = names ) );
+        NCurses.BrowseDenseList( value_matrix, @rec( labelsCol = cols, labelsRow = names ) );
         
     end );
 
@@ -177,14 +177,14 @@ end );
 @InstallGlobalFunction( PackageOfCAPOperation, function ( operation_name )
   local packages;
     
-    if !IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name] )
+    if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name] )
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( operation_name, " is !a CAP operation" );
         
     end;
     
-    packages = Filtered( RecNames( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE ), package -> IsBound( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package][operation_name] ) );
+    packages = Filtered( RecNames( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE ), package -> @IsBound( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package][operation_name] ) );
     
     if Length( packages ) == 0
         

@@ -126,7 +126,7 @@ InstallMethod( @__MODULE__,  DirectSumOp,
     
     diagram = category_and_diagram[2];
     
-    if !( IsBound( category.supports_empty_limits ) && category.supports_empty_limits == true ) && diagram == [ ]
+    if !( @IsBound( category.supports_empty_limits ) && category.supports_empty_limits == true ) && diagram == [ ]
         return ZeroObject( category );
     end;
     
@@ -554,7 +554,7 @@ InstallMethod( @__MODULE__,  FiberProductEmbeddingInDirectSum,
 end );
 
 CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
-  rec(
+  @rec(
     FiberProductEmbeddingInDirectSum =
       [ [ "ProjectionInFactorOfFiberProduct", 2 ],
         [ "UniversalMorphismIntoDirectSum", 1 ],
@@ -892,7 +892,7 @@ InstallMethod( @__MODULE__,  PushoutProjectionFromDirectSum,
 end );
 
 CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
-  rec(
+  @rec(
     PushoutProjectionFromDirectSum =
       [ [ "InjectionOfCofactorOfPushout", 2 ],
         [ "UniversalMorphismFromDirectSum", 1 ],
@@ -931,7 +931,7 @@ InstallMethod( @__MODULE__,  InverseMorphismFromCoimageToImage,
 end );
 
 CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
-  rec(
+  @rec(
     MorphismFromCoimageToImage =
       [ [ "MorphismFromCoimageToImageWithGivenObjects", 1 ],
         [ "CoimageObject", 1 ],

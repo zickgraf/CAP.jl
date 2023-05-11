@@ -47,7 +47,7 @@ end );
     
     function_name = record.function_name;
     
-    if !IsBound( record.installation_name )
+    if !@IsBound( record.installation_name )
         
         CAP_operation = ValueGlobal( function_name );
         
@@ -60,25 +60,25 @@ end );
     add_name = @Concatenation( "Add", function_name );
     add_function = ValueGlobal( add_name );
     
-    if IsBound( record.pre_function )
+    if @IsBound( record.pre_function )
         pre_function = record.pre_function;
     else
         pre_function = function( arg... ) return [ true ]; end;
     end;
 
-    if IsBound( record.pre_function_full )
+    if @IsBound( record.pre_function_full )
         pre_function_full = record.pre_function_full;
     else
         pre_function_full = function( arg... ) return [ true ]; end;
     end;
     
-    if IsBound( record.redirect_function )
+    if @IsBound( record.redirect_function )
         redirect_function = record.redirect_function;
     else
         redirect_function = false;
     end;
     
-    if IsBound( record.post_function )
+    if @IsBound( record.post_function )
         post_function = record.post_function;
     else
         post_function = false;
@@ -203,7 +203,7 @@ end );
         end;
         
         # prepare for the checks in Finalize
-        if !IsBound( category.initially_known_categorical_properties )
+        if !@IsBound( category.initially_known_categorical_properties )
             
             category.initially_known_categorical_properties = ShallowCopy( ListKnownCategoricalProperties( category ) );
             
@@ -253,7 +253,7 @@ end );
         end;
         
         # Display a warning when overwriting primitive operations with derivations.
-        if (is_derivation || is_final_derivation || is_precompiled_derivation) && IsBound( category.primitive_operations[function_name] ) && category.primitive_operations[function_name]
+        if (is_derivation || is_final_derivation || is_precompiled_derivation) && @IsBound( category.primitive_operations[function_name] ) && category.primitive_operations[function_name]
             
             # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
             #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
@@ -495,13 +495,13 @@ end );
             
         end;
         
-        if !IsBound( category.added_functions[function_name] )
+        if !@IsBound( category.added_functions[function_name] )
             
             category.added_functions[function_name] = [ ];
             
         end;
         
-        if !IsBound( category.timing_statistics[function_name] )
+        if !@IsBound( category.timing_statistics[function_name] )
             
             category.timing_statistics[function_name] = [ ];
             
@@ -579,7 +579,7 @@ end );
             
         end
         """,
-        rec(
+        @rec(
             with_given_arguments = with_given_arguments_names,
             without_given_arguments = without_given_arguments_names,
             without_given_name = without_given_name,
@@ -590,7 +590,7 @@ end );
         
         with_given_arguments_strings = @Concatenation( without_given_arguments_names, [ without_given_rec.output_source_getter_string ] );
         
-        if !IsBound( without_given_rec.output_source_getter_preconditions )
+        if !@IsBound( without_given_rec.output_source_getter_preconditions )
             
             Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is !set.\n" );
             return;
@@ -603,7 +603,7 @@ end );
         
         with_given_arguments_strings = @Concatenation( without_given_arguments_names, [ without_given_rec.output_range_getter_string ] );
         
-        if !IsBound( without_given_rec.output_range_getter_preconditions )
+        if !@IsBound( without_given_rec.output_range_getter_preconditions )
             
             Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is !set.\n" );
             return;
@@ -621,14 +621,14 @@ end );
             [ without_given_rec.output_range_getter_string ]
         );
         
-        if !IsBound( without_given_rec.output_source_getter_preconditions )
+        if !@IsBound( without_given_rec.output_source_getter_preconditions )
             
             Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is !set.\n" );
             return;
             
         end;
         
-        if !IsBound( without_given_rec.output_range_getter_preconditions )
+        if !@IsBound( without_given_rec.output_range_getter_preconditions )
             
             Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is !set.\n" );
             return;
@@ -668,7 +668,7 @@ end );
             
         end
         """,
-        rec(
+        @rec(
             without_given_arguments = without_given_arguments_names,
             with_given_arguments = with_given_arguments_strings,
             with_given_name = with_given_name,
@@ -726,7 +726,7 @@ end );
         
         current_rec = record[current_recname];
         
-        if !IsBound( current_rec.function_name )
+        if !@IsBound( current_rec.function_name )
             
             Error( "the record has no entry `function_name`, probably you forgot to call CAP_INTERNAL_ENHANCE_NAME_RECORD" );
             

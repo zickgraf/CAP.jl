@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-@InstallValueConst( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD, rec( ) );
+@InstallValueConst( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD, @rec( ) );
 
 CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.EveryCategory = [
     "PreCompose",
