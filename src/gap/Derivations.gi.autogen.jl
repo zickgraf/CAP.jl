@@ -103,7 +103,7 @@ function( d, weight, C )
         installation_name, nr_arguments, cache_name, current_filters, current_implementation,
         function_called_before_installation;
   
-  Info( DerivationInfo, 1, @Concatenation( "install(",
+  @Info( DerivationInfo, 1, @Concatenation( "install(",
                                           StringGAP( weight ),
                                           ") ",
                                           TargetOperation( d ),
@@ -634,7 +634,7 @@ InstallMethod( @__MODULE__,  AddPrimitiveOperation,
                [ IsOperationWeightList, IsString, IsInt ],
 function( owl, op_name, weight )
     
-    Info( DerivationInfo, 1, @Concatenation( "install(",
+    @Info( DerivationInfo, 1, @Concatenation( "install(",
                                   StringGAP( weight ),
                                   ") ",
                                   op_name,

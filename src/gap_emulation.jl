@@ -779,11 +779,15 @@ function SetInfoLevel(infoclass::InfoClass, level::Int)
 	infoclass.level = level
 end
 
-function Info(infoclass::InfoClass, required_level::Int, args...)
-	if InfoLevel( infoclass ) >= required_level
-		Print("#I  ", args..., "\n")
-	end
+macro Info(infoclass, required_level, args...)
+	esc(quote
+		if InfoLevel( $infoclass ) >= $required_level
+			Print("#I  ", $(args...), "\n")
+		end
+	end)
 end
+
+export @Info
 
 # records
 function rec(; named_arguments...)

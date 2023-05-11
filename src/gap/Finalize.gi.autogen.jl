@@ -434,11 +434,11 @@ InstallMethod( @__MODULE__,  Finalize,
         # See the WARNING below for possible causes why it still might happen.
         old_weights = StructuralCopy( weight_list.operation_weights );
         
-        Info( DerivationInfo, 1, "Starting reevaluation of derivation weight list of the category name \"", Name( category ), "\"\n" );
+        @Info( DerivationInfo, 1, "Starting reevaluation of derivation weight list of the category name \"", Name( category ), "\"\n" );
         
         Reevaluate( weight_list );
         
-        Info( DerivationInfo, 1, "Finished reevaluation of derivation weight list of the category name \"", Name( category ), "\"\n" );
+        @Info( DerivationInfo, 1, "Finished reevaluation of derivation weight list of the category name \"", Name( category ), "\"\n" );
         
         categorical_properties = ListKnownCategoricalProperties( category );
         

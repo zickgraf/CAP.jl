@@ -234,11 +234,11 @@ end );
         
     end;
     
-    Info( CapLogicInfo, 1, @Concatenation( "Creating todo list for operation ", method_name ) );
+    @Info( CapLogicInfo, 1, @Concatenation( "Creating todo list for operation ", method_name ) );
     
     theorem_list = TheoremRecord( category )[method_name];
     
-    Info( CapLogicInfo, 1, @Concatenation( "Trying to create ", StringGAP( Length( theorem_list ) ), " theorems" ) );
+    @Info( CapLogicInfo, 1, @Concatenation( "Trying to create ", StringGAP( Length( theorem_list ) ), " theorems" ) );
     
     for current_theorem in theorem_list
         
@@ -312,13 +312,13 @@ end );
         
         if is_valid_theorem == false
             
-            Info( CapLogicInfo, 1, "Failed" );
+            @Info( CapLogicInfo, 1, "Failed" );
             
             continue;
             
         end;
         
-        Info( CapLogicInfo, 1, "Success" );
+        @Info( CapLogicInfo, 1, "Success" );
         
         range = SANITIZE_RECORD( current_theorem.Range, arguments, result_object );
         

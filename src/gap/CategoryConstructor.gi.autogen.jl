@@ -242,7 +242,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         """,
     );
     
-    Info( InfoCategoryConstructor, 2,  "Lifting the following operations for ", Name( CC ), ":\n" );
+    @Info( InfoCategoryConstructor, 2,  "Lifting the following operations for ", Name( CC ), ":\n" );
     
     for name in options.list_of_operations_to_install
         
@@ -253,14 +253,14 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
         if !IsEmpty( unknown_filters )
             
-            Info( InfoCategoryConstructor, 3, "can!yet handle the following filters required for ", name, ": ", unknown_filters );
+            @Info( InfoCategoryConstructor, 3, "can!yet handle the following filters required for ", name, ": ", unknown_filters );
             continue;
             
         end;
         
         if !IsBound( default_func_strings[info.return_type] )
             
-            Info( InfoCategoryConstructor, 3, "can!yet handle return_type=\"", info.return_type, "\" required for ", name );
+            @Info( InfoCategoryConstructor, 3, "can!yet handle return_type=\"", info.return_type, "\" required for ", name );
             continue;
             
         end;
@@ -419,7 +419,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             # if source && range can!be computed we can!do anything
             if PositionSublist( func_string, "top_source" ) != fail || PositionSublist( func_string, "top_range" ) != fail
                 
-                Info( InfoCategoryConstructor, 3, "can!compute source && range of ", name );
+                @Info( InfoCategoryConstructor, 3, "can!compute source && range of ", name );
                 continue;
                 
             end;
@@ -445,7 +445,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             
         end;
         
-        Info( InfoCategoryConstructor, 2, name );
+        @Info( InfoCategoryConstructor, 2, name );
         
         add = ValueGlobal( @Concatenation( "Add", name ) );
         
@@ -455,7 +455,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
     end;
     
-    Info( InfoCategoryConstructor, 2, "" );
+    @Info( InfoCategoryConstructor, 2, "" );
     
     return CC;
     
