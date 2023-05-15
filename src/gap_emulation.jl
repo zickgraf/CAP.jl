@@ -1122,6 +1122,14 @@ function Position(list::Vector, element::Any)
 	end
 end
 
+function Position(list::UnitRange, element::Any)
+	if element in list
+		element - list.start + 1
+	else
+		fail
+	end
+end
+
 function PositionSublist(string::String, substring::String)
 	range = findfirst(substring, string)
 	if isnothing(range)
