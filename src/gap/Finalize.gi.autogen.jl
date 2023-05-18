@@ -62,6 +62,12 @@ end );
     
     if IsString( args[1] )
         
+        if ValueOption( "Description" ) != fail
+            
+            Error( "passing the description both as an argument && as an option at the same time is !supported" );
+            
+        end;
+        
         description = args[1];
         can_compute = args[2];
         cannot_compute = args[3];
@@ -86,7 +92,7 @@ end );
         
     end;
     
-    CallFuncList( AddFinalDerivationBundle, @Concatenation( [ description, can_compute, cannot_compute, [ target_op, can_compute, func ] ], additional_functions ) );
+    CallFuncList( AddFinalDerivationBundle, @Concatenation( [ description, can_compute, cannot_compute, [ target_op, can_compute, func ] ], additional_functions ); Description = fail );
     
 end );
 
@@ -96,6 +102,12 @@ end );
     local description, can_compute, cannot_compute, additional_functions, weight, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, operations_to_install, union_of_collected_lists, derivations, used_op_names_with_multiples_and_category_getters, collected_list, dummy_func, dummy_derivation, final_derivation, i, current_additional_func, x;
     
     if IsString( args[1] )
+        
+        if ValueOption( "Description" ) != fail
+            
+            Error( "passing the description both as an argument && as an option at the same time is !supported" );
+            
+        end;
         
         description = args[1];
         can_compute = args[2];

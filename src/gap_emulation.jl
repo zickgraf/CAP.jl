@@ -1204,8 +1204,15 @@ end
 
 Append = append!
 
-function CallFuncList( func, list )
-	func(list...)
+function CallFuncList( func, list; kwargs...)
+	if length(kwargs) > 0
+		PushOptions(CAPRecord(Dict(kwargs)))
+	end
+	result = func(list...)
+	if length(kwargs) > 0
+		PopOptions()
+	end
+	result
 end
 
 IsEmpty = isempty

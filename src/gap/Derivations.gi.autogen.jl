@@ -277,7 +277,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
     
     Print( "WARNING: Calling AddDerivation without a description as the second argument is deprecated && will !be supported after 2024.03.31.\n" );
     
-    AddDerivation( graph, target_op, CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" ), used_ops_with_multiples_and_category_getters, func );
+    AddDerivation( graph, target_op, CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" ), used_ops_with_multiples_and_category_getters, func; Description = fail );
     
 end );
 
@@ -286,6 +286,12 @@ InstallMethod( @__MODULE__,  AddDerivation,
                
   function( graph, target_op, description, used_ops_with_multiples_and_category_getters, func )
     local weight, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, collected_list, used_op_names_with_multiples_and_category_getters, derivation, x;
+    
+    if ValueOption( "Description" ) != fail
+        
+        Error( "passing the description both as an argument && as an option at the same time is !supported" );
+        
+    end;
     
     # When compiling categories, a derivation does !cause overhead anymore, so we would like to simply set `Weight` to 0.
     # However, the weight 1 is currently needed to prevent the installation of cyclic derivations.
