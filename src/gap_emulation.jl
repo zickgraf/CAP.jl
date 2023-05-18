@@ -201,7 +201,16 @@ macro rec(keyvalues...)
 		key = x.args[1]
 		value = x.args[2]
 		@assert key isa Symbol
-		:($(Meta.quot(key)) => $value)
+		# turn dual_pre/postprocessor_func's into strings immediately
+		if key in [:dual_preprocessor_func, :dual_postprocessor_func]
+			# work around https://github.com/JuliaLang/julia/pull/49874
+			if value isa Expr && value.head === :function && length(value.args) === 2 && value.args[1] isa Expr && value.args[1].head === :...
+				value.args[1] = Expr(:tuple, value.args[1])
+			end
+			:($(Meta.quot(Symbol(key, "_string"))) => $(string(value)))
+		else
+			:($(Meta.quot(key)) => $value)
+		end
 	end, keyvalues)
 	esc(quote
 		CAPRecord(Dict{Symbol,Any}($(pairs...)))

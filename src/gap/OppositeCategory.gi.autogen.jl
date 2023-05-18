@@ -87,8 +87,8 @@ end );
     local only_primitive_operations, recnames, list_of_underlying_operations,
           operations_of_homomorphism_structure, operations_of_external_hom,
           current_recname, current_entry, dual_operation_name, filter_list, input_arguments_names, return_type, func_string,
-          dual_preprocessor_func_string, preprocessor_string, dual_arguments, tmp,
-          dual_postprocessor_func_string, postprocessor_string, output_source_getter_string, output_range_getter_string, return_statement,
+          preprocessor_string, dual_arguments, tmp,
+          postprocessor_string, output_source_getter_string, output_range_getter_string, return_statement,
           func, weight, current_add, list_of_attributes, attr, tester, setter;
     
     only_primitive_operations = ValueOption( "only_primitive_operations" ) == true;
@@ -185,17 +185,7 @@ end );
             end
             """;
         
-        if @IsBound( current_entry.dual_preprocessor_func )
-            
-            if IsOperation( current_entry.dual_preprocessor_func ) || IsKernelFunction( current_entry.dual_preprocessor_func )
-                
-                dual_preprocessor_func_string = NameFunction( current_entry.dual_preprocessor_func );
-                
-            else
-                
-                dual_preprocessor_func_string = StringGAP( current_entry.dual_preprocessor_func );
-                
-            end;
+        if @IsBound( current_entry.dual_preprocessor_func_string )
             
             preprocessor_string = ReplacedStringViaRecord(
                 """
@@ -205,7 +195,7 @@ end );
                 @Assert( 0, IsIdenticalObj( prep_arg[1], OppositeCategory( cat ) ) );
                 """,
                 @rec(
-                    dual_preprocessor_func_string = dual_preprocessor_func_string,
+                    dual_preprocessor_func_string = current_entry.dual_preprocessor_func_string,
                     input_arguments = input_arguments_names,
                 )
             );
@@ -272,19 +262,9 @@ end );
         
         dual_arguments = @Concatenation( [ "OppositeCategory( cat )" ], dual_arguments );
         
-        if @IsBound( current_entry.dual_postprocessor_func )
+        if @IsBound( current_entry.dual_postprocessor_func_string )
             
-            if IsOperation( current_entry.dual_postprocessor_func ) || IsKernelFunction( current_entry.dual_postprocessor_func )
-                
-                dual_postprocessor_func_string = NameFunction( current_entry.dual_postprocessor_func );
-                
-            else
-                
-                dual_postprocessor_func_string = StringGAP( current_entry.dual_postprocessor_func );
-                
-            end;
-            
-            postprocessor_string = @Concatenation( "dual_postprocessor_func = ", dual_postprocessor_func_string, ";" );
+            postprocessor_string = @Concatenation( "dual_postprocessor_func = ", current_entry.dual_postprocessor_func_string, ";" );
             
             return_statement = "return dual_postprocessor_func( result );";
             

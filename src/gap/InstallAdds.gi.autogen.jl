@@ -202,35 +202,6 @@ end );
             Error( "you must pass at least one function to the add method" );
         end;
         
-        # prepare for the checks in Finalize
-        if !@IsBound( category.initially_known_categorical_properties )
-            
-            category.initially_known_categorical_properties = ShallowCopy( ListKnownCategoricalProperties( category ) );
-            
-            InstallDerivationsUsingOperation( category.derivations_weight_list, "none" );
-            
-        end;
-        
-        if weight == -1
-            weight = 100;
-        end;
-        
-        # If there already is a faster method: do nothing but display a warning because this should !happen usually.
-        if weight > CurrentOperationWeight( category.derivations_weight_list, function_name )
-            
-            # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
-            #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
-            # * There are some derivations of weight 1 for thin categories which are triggered immediately && which CategoryConstructor tries to overwrite with weight 100.
-            if !WasCreatedAsOppositeCategory( category ) && CurrentOperationWeight( category.derivations_weight_list, function_name ) != 1
-                
-                Print( "WARNING: Ignoring a function added for ", function_name, " with weight ", weight, " to \"", Name( category ), "\" because there already is a function installed with weight ", CurrentOperationWeight( category.derivations_weight_list, function_name ), ".\n" );
-                
-            end;
-            
-            return;
-            
-        end;
-        
         is_derivation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "IsDerivation", false );
         
         is_final_derivation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "IsFinalDerivation", false );
@@ -252,6 +223,43 @@ end );
             
         end;
         
+        # prepare for the checks in Finalize
+        if !@IsBound( category.initially_known_categorical_properties )
+            
+            category.initially_known_categorical_properties = ShallowCopy( ListKnownCategoricalProperties( category ) );
+            
+            InstallDerivationsUsingOperation( category.derivations_weight_list, "none" );
+            
+        end;
+        
+        if weight == -1
+            weight = 100;
+        end;
+        
+        # If there already is a faster method: do nothing but display a warning because this should !happen usually.
+        if weight > CurrentOperationWeight( category.derivations_weight_list, function_name )
+            
+            # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
+            #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
+            # * There are some derivations of weight 1 for thin categories which are triggered immediately && which CategoryConstructor tries to overwrite with weight 100.
+            if !WasCreatedAsOppositeCategory( category ) && CurrentOperationWeight( category.derivations_weight_list, function_name ) != 1
+                
+                Print( "WARNING: Ignoring a function added for ", function_name, " with weight ", weight, " to \"", Name( category ), "\" because there already is a function installed with weight ", CurrentOperationWeight( category.derivations_weight_list, function_name ), "." );
+                
+                if is_precompiled_derivation
+                    
+                    Print( " Probably you have to rerun the precompilation to adjust the weights ⥉ the precompiled code." );
+                    
+                end;
+                
+                Print( "\n" );
+                
+            end;
+            
+            return;
+            
+        end;
+        
         # Display a warning when overwriting primitive operations with derivations.
         if (is_derivation || is_final_derivation || is_precompiled_derivation) && @IsBound( category.primitive_operations[function_name] ) && category.primitive_operations[function_name]
             
@@ -260,7 +268,15 @@ end );
             # * There is a test ⥉ Locales creating a category via CategoryConstructor (which uses weight 100) && then installs a really cheap method for UniqueMorphism which triggers a bunch of cheap derivations.
             if !WasCreatedAsOppositeCategory( category ) && weight > 4
                 
-                Print( "WARNING: Overriding a function for ", function_name, " primitively added to \"", Name( category ), "\" with a derivation.\n" );
+                Print( "WARNING: Overriding a function for ", function_name, " primitively added to \"", Name( category ), "\" with a derivation." );
+                
+                if is_precompiled_derivation
+                    
+                    Print( " Probably you have to rerun the precompilation to adjust the weights ⥉ the precompiled code." );
+                    
+                end;
+                
+                Print( "\n" );
                 
             end;
             

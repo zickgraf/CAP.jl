@@ -40,7 +40,9 @@
         "dual_arguments_reversed",
         "dual_with_given_objects_reversed",
         "dual_preprocessor_func",
+        "dual_preprocessor_func_string",
         "dual_postprocessor_func",
+        "dual_postprocessor_func_string",
         "functorial",
         "compatible_with_congruence_of_morphisms",
         "redirect_function",
@@ -5137,6 +5139,46 @@ end );
                            ) ) >= 2
             
             Error( "dual_preprocessor_func, dual_arguments_reversed == true && dual_with_given_objects_reversed == true are mutually exclusive" );
+            
+        end;
+        
+        if @IsBound( current_rec.dual_preprocessor_func )
+            
+            if @IsBound( current_rec.dual_preprocessor_func_string )
+                
+                Error( "dual_preprocessor_func && dual_preprocessor_func_string are mutually exclusive" );
+                
+            end;
+            
+            if IsOperation( current_rec.dual_preprocessor_func ) || IsKernelFunction( current_rec.dual_preprocessor_func )
+                
+                current_rec.dual_preprocessor_func_string = NameFunction( current_rec.dual_preprocessor_func );
+                
+            else
+                
+                current_rec.dual_preprocessor_func_string = StringGAP( current_rec.dual_preprocessor_func );
+                
+            end;
+            
+        end;
+        
+        if @IsBound( current_rec.dual_postprocessor_func )
+            
+            if @IsBound( current_rec.dual_postprocessor_func_string )
+                
+                Error( "dual_postprocessor_func && dual_postprocessor_func_string are mutually exclusive" );
+                
+            end;
+            
+            if IsOperation( current_rec.dual_postprocessor_func ) || IsKernelFunction( current_rec.dual_postprocessor_func )
+                
+                current_rec.dual_postprocessor_func_string = NameFunction( current_rec.dual_postprocessor_func );
+                
+            else
+                
+                current_rec.dual_postprocessor_func_string = StringGAP( current_rec.dual_postprocessor_func );
+                
+            end;
             
         end;
         
