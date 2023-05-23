@@ -56,7 +56,7 @@
         result = @Concatenation( result, "\n* " );
         result = @Concatenation( result, property );
         if property ⥉ Difference( list_of_potential_algorithmic_properties, list_of_algorithmic_properties )
-            result = @Concatenation( result, " (but !yet algorithmically)" );
+            result = @Concatenation( result, " (but not yet algorithmically)" );
         end;
     end;
     

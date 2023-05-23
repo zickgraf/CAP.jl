@@ -73,12 +73,12 @@ end );
 
 CAPAddPrepareFunction( GET_CAP_PREFUNCTION_PROJECTION_IN_FACTOR_OF_BINARY_DIRECT_PRODUCT_TO_PROJECTION_IN_FACTOR_OF_DIRECT_PRODUCT( DirectSum, "limit" ),
                        "ProjectionInFactorOfBinaryDirectSumToProjectionInFactorOfDirectSum",
-                       "turns a projection ⥉ factor of binary direct sum function into a projection ⥉ factor of n-ary direct sum function",
+                       "turns a projection in factor of binary direct sum function into a projection in factor of n-ary direct sum function",
                        [ "DirectSum" ] );
 
 CAPAddPrepareFunction( GET_CAP_PREFUNCTION_PROJECTION_IN_FACTOR_OF_BINARY_DIRECT_PRODUCT_TO_PROJECTION_IN_FACTOR_OF_DIRECT_PRODUCT( DirectProduct, "limit" ),
                        "ProjectionInFactorOfBinaryDirectProductToProjectionInFactorOfDirectProduct",
-                       "turns a projection ⥉ factor of binary direct product function into a projection ⥉ factor of n-ary direct product function",
+                       "turns a projection in factor of binary direct product function into a projection in factor of n-ary direct product function",
                        [ "DirectProduct" ] );
 
 CAPAddPrepareFunction( GET_CAP_PREFUNCTION_PROJECTION_IN_FACTOR_OF_BINARY_DIRECT_PRODUCT_TO_PROJECTION_IN_FACTOR_OF_DIRECT_PRODUCT( Coproduct, "colimit" ),

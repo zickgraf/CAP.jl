@@ -75,7 +75,7 @@
 
 ###################################
 ##
-#! @Section Identity 2-Cell && Composition of 2-Cells
+#! @Section Identity 2-Cell and Composition of 2-Cells
 #! @SectionLabel id2cellsandcomp
 ##
 ###################################
@@ -92,7 +92,7 @@
 #! The arguments are two $2$-cells 
 #! $c: \alpha \rightarrow \beta$,
 #! $d: \gamma \rightarrow \delta$
-#! between morphisms $\alpha, \beta: a \rightarrow b$ && $\gamma, \delta: b \rightarrow c$.
+#! between morphisms $\alpha, \beta: a \rightarrow b$ and $\gamma, \delta: b \rightarrow c$.
 #! The output is their horizontal composition
 #! $d \ast c: (\gamma \circ \alpha) \rightarrow (\delta \circ \beta)$.
 #! @Returns a $2$-cell
@@ -104,7 +104,7 @@
 #! The arguments are two $2$-cells
 #! $d: \gamma \rightarrow \delta$,
 #! $c: \alpha \rightarrow \beta$
-#! between morphisms $\alpha, \beta: a \rightarrow b$ && $\gamma, \delta: b \rightarrow c$.
+#! between morphisms $\alpha, \beta: a \rightarrow b$ and $\gamma, \delta: b \rightarrow c$.
 #! The output is their horizontal composition
 #! $d \ast c: (\gamma \circ \alpha) \rightarrow (\delta \circ \beta)$.
 #! @Returns a $2$-cell

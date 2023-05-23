@@ -19,17 +19,17 @@
 ##
 ######################################
 # 
-# InstallTrueMethod( IsSplitMonomorphism && IsSplitEpimorphism, IsCapCategoryMorphism && IsIsomorphism );
+# InstallTrueMethod( IsSplitMonomorphism and IsSplitEpimorphism, IsCapCategoryMorphism and IsIsomorphism );
 # 
-# InstallTrueMethod( IsAutomorphism, IsCapCategoryMorphism && IsOne );
+# InstallTrueMethod( IsAutomorphism, IsCapCategoryMorphism and IsOne );
 # 
-# InstallTrueMethod( IsIsomorphism && IsEndomorphism, IsCapCategoryMorphism && IsAutomorphism );
+# InstallTrueMethod( IsIsomorphism and IsEndomorphism, IsCapCategoryMorphism and IsAutomorphism );
 # 
-# InstallTrueMethod( IsMonomorphism, IsCapCategoryMorphism && IsSplitMonomorphism );
+# InstallTrueMethod( IsMonomorphism, IsCapCategoryMorphism and IsSplitMonomorphism );
 # 
-# InstallTrueMethod( IsEpimorphism, IsCapCategoryMorphism && IsSplitEpimorphism );
+# InstallTrueMethod( IsEpimorphism, IsCapCategoryMorphism and IsSplitEpimorphism );
 # 
-# InstallTrueMethod( IsIsomorphism, IsMonomorphism && IsEpimorphism && IsAbelianCategory );#TODO: weaker?
+# InstallTrueMethod( IsIsomorphism, IsMonomorphism and IsEpimorphism and IsAbelianCategory );#TODO: weaker?
 
 #######################################
 ##
@@ -94,7 +94,7 @@ InstallMethod( @__MODULE__,  Add,
             
             Error(
                 @Concatenation(
-                    "a morphism that lies ⥉ the CAP-category with the name\n",
+                    "a morphism that lies in the CAP-category with the name\n",
                     Name( CapCategory( morphism ) ),
                     "\n",
                     "was tried to be added to a different CAP-category with the name\n",
@@ -214,7 +214,7 @@ function( q, mor )
             
             if r == fail
                 
-                Error( "can!interpret ", StringGAP( q ), " as an element of the commutative ring of ", Name( cat ) );
+                Error( "cannot interpret ", StringGAP( q ), " as an element of the commutative ring of ", Name( cat ) );
                 
             end;
             
@@ -257,7 +257,7 @@ InstallMethod( @__MODULE__,  AddMorphismRepresentation,
     
     if @IsBound( category.initially_known_categorical_properties )
         
-        Error( "calling AddMorphismRepresentation after adding functions to the category is !supported" );
+        Error( "calling AddMorphismRepresentation after adding functions to the category is not supported" );
         
     end;
     
@@ -315,7 +315,7 @@ InstallMethod( @__MODULE__,  RandomMorphism,
     #= comment for Julia
     # work around https://github.com/gap-system/gap/issues/3642:
     # New implications of `MorphismFilter( category )` (e.g. installed via `AddMorphismRepresentation`)
-    # are !automatically set ⥉ `category.morphism_type`.
+    # are not automatically set in `category.morphism_type`.
     SetFilterObj( objectified_morphism, MorphismFilter( category ) );
     # =#
     
@@ -345,7 +345,7 @@ end );
     #= comment for Julia
     # work around https://github.com/gap-system/gap/issues/3642:
     # New implications of `MorphismFilter( category )` (e.g. installed via `AddMorphismRepresentation`)
-    # are !automatically set ⥉ `category.morphism_type`.
+    # are not automatically set in `category.morphism_type`.
     SetFilterObj( objectified_morphism, MorphismFilter( category ) );
     # =#
     
@@ -361,11 +361,11 @@ InstallMethod( @__MODULE__,  Simplify,
   function( morphism )
     local phi;
     
-    phi = PreCompose( [ SimplifyObject_IsoToInputObject( Source( morphism ), Inf ),
+    phi = PreCompose( [ SimplifyObject_IsoToInputObject( Source( morphism ), infinity ),
                          morphism,
-                         SimplifyObject_IsoFromInputObject( Range( morphism ), Inf ) ] );
+                         SimplifyObject_IsoFromInputObject( Range( morphism ), infinity ) ] );
     
-    return SimplifyMorphism( phi, Inf );
+    return SimplifyMorphism( phi, infinity );
     
 end );
 
@@ -375,7 +375,7 @@ InstallMethod( @__MODULE__,  CoefficientsOfMorphismWithGivenBasisOfExternalHom,
 
   function( cat, morphism, basis )
     
-    Display( "WARNING: CoefficientsOfMorphismWithGivenBasisOfExternalHom is deprecated && will !be supported after 2023.10.30. Please use CoefficientsOfMorphism instead!\n" );
+    Display( "WARNING: CoefficientsOfMorphismWithGivenBasisOfExternalHom is deprecated and will not be supported after 2023.10.30. Please use CoefficientsOfMorphism instead!\n" );
     
     return CoefficientsOfMorphism( cat, morphism );
     
@@ -393,7 +393,7 @@ InstallMethod( @__MODULE__,  CoefficientsOfMorphismWithGivenBasisOfExternalHom,
 ##
 ######################################
 
-# This method should usually !be selected when the two morphisms belong to the same category
+# This method should usually not be selected when the two morphisms belong to the same category
 InstallMethod( @__MODULE__,  IsEqualForMorphisms,
                     [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
 
@@ -407,14 +407,14 @@ InstallMethod( @__MODULE__,  IsEqualForMorphisms,
     end;
     
     if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
     else
-        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsEqualForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsEqualForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
 
-# This method should usually !be selected when the two morphisms belong to the same category
+# This method should usually not be selected when the two morphisms belong to the same category
 InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
                     [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
 
@@ -428,9 +428,9 @@ InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
     end;
     
     if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
     else
-        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsCongruentForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsCongruentForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
@@ -443,7 +443,7 @@ InstallMethod( @__MODULE__,  ==,
     
     if CapCategory( morphism_1 ).input_sanity_check_level > 0 || CapCategory( morphism_2 ).input_sanity_check_level > 0 
         if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
-            Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" && the morphism \"", StringGAP( morphism_2 ), "\" do !belong to the same CAP category" ) );
+            Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
         end;
     end;
     if !IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) ) || !IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) )
@@ -605,7 +605,7 @@ InstallMethod( @__MODULE__,  HomStructure,
 
 ##
 
-# usually the type signatures should be part of the gd file, but `CapJitAddTypeSignature` is !available there
+# usually the type signatures should be part of the gd file, but `CapJitAddTypeSignature` is not available there
 
 CapJitAddTypeSignature( "HomomorphismStructureOnObjectsExtendedByFullEmbedding", [ IsCapCategory, IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ], function ( input_types )
     
@@ -654,8 +654,8 @@ InstallMethod( @__MODULE__,  ExtendRangeOfHomomorphismStructureByFullEmbedding,
   function ( C, E, object_function, morphism_function, object_function_inverse, morphism_function_inverse )
     
     # C has a D-homomorphism structure
-    # object_function && morphism_function defined a full embedding ι: D → E
-    # object_function_inverse && morphism_function_inverse define the inverse of ι on its image
+    # object_function and morphism_function defined a full embedding ι: D → E
+    # object_function_inverse and morphism_function_inverse define the inverse of ι on its image
     
     InstallMethodForCompilerForCAP( DistinguishedObjectOfHomomorphismStructureExtendedByFullEmbedding,
                                     [ IsCapCategory && CategoryFilter( C ), IsCapCategory && CategoryFilter( E ) ],
@@ -812,8 +812,7 @@ InstallMethod( @__MODULE__,  StringGAP,
                
   function( morphism )
     
-    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    return @Concatenation( "A morphism ", "in ", Name( CapCategory( morphism ) ) );
+    return @Concatenation( "A morphism in ", Name( CapCategory( morphism ) ) );
     
 end );
 
@@ -823,9 +822,8 @@ InstallMethod( @__MODULE__,  ViewString,
                
   function ( morphism )
     
-    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    # do !reuse `StringGAP` because morphisms might use `StringGAP` as the attribute storing the morphism datum
-    return @Concatenation( "<A morphism ", "in ", Name( CapCategory( morphism ) ), ">" );
+    # do not reuse `StringGAP` because morphisms might use `StringGAP` as the attribute storing the morphism datum
+    return @Concatenation( "<A morphism in ", Name( CapCategory( morphism ) ), ">" );
     
 end );
 
@@ -834,9 +832,8 @@ InstallMethod( @__MODULE__,  DisplayString,
                
   function ( morphism )
     
-    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    # do !reuse `StringGAP` because morphisms might use `StringGAP` as the attribute storing the morphism datum
-    return @Concatenation( "A morphism ", "in ", Name( CapCategory( morphism ) ), ".\n" );
+    # do not reuse `StringGAP` because morphisms might use `StringGAP` as the attribute storing the morphism datum
+    return @Concatenation( "A morphism in ", Name( CapCategory( morphism ) ), ".\n" );
     
 end );
 
@@ -849,7 +846,7 @@ end );
     morphism_function = function( object )
       local string;
         
-        string = "morphism ⥉ ";
+        string = "morphism in ";
         
         Append( string, Name( CapCategory( object ) ) );
         

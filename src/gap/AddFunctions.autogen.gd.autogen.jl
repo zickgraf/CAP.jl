@@ -10,7 +10,7 @@
 #! @Section Available Add functions
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `AdditionForMorphisms`.
 #! $F: ( a, b ) \mapsto \mathtt[AdditionForMorphisms](a, b)$.
@@ -29,7 +29,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `AdditiveGenerators`.
 #! $F: (  ) \mapsto \mathtt[AdditiveGenerators]()$.
@@ -48,7 +48,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `AdditiveInverseForMorphisms`.
 #! $F: ( a ) \mapsto \mathtt[AdditiveInverseForMorphisms](a)$.
@@ -67,7 +67,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `AstrictionToCoimage`.
 #! $F: ( alpha ) \mapsto \mathtt[AstrictionToCoimage](alpha)$.
@@ -86,7 +86,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `AstrictionToCoimageWithGivenCoimageObject`.
 #! $F: ( alpha, C ) \mapsto \mathtt[AstrictionToCoimageWithGivenCoimageObject](alpha, C)$.
@@ -105,7 +105,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `BasisOfExternalHom`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[BasisOfExternalHom](arg2, arg3)$.
@@ -124,7 +124,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CanonicalIdentificationFromCoimageToImageObject`.
 #! $F: ( alpha ) \mapsto \mathtt[CanonicalIdentificationFromCoimageToImageObject](alpha)$.
@@ -143,7 +143,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CanonicalIdentificationFromImageObjectToCoimage`.
 #! $F: ( alpha ) \mapsto \mathtt[CanonicalIdentificationFromImageObjectToCoimage](alpha)$.
@@ -162,7 +162,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoastrictionToImage`.
 #! $F: ( alpha ) \mapsto \mathtt[CoastrictionToImage](alpha)$.
@@ -181,7 +181,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoastrictionToImageWithGivenImageObject`.
 #! $F: ( alpha, I ) \mapsto \mathtt[CoastrictionToImageWithGivenImageObject](alpha, I)$.
@@ -200,7 +200,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoefficientsOfMorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[CoefficientsOfMorphism](arg2)$.
@@ -219,7 +219,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `Coequalizer`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[Coequalizer](arg2, arg3)$.
@@ -238,7 +238,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoequalizerFunctorial`.
 #! $F: ( morphisms, mu, morphismsp ) \mapsto \mathtt[CoequalizerFunctorial](morphisms, mu, morphismsp)$.
@@ -257,7 +257,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoequalizerFunctorialWithGivenCoequalizers`.
 #! $F: ( P, morphisms, mu, morphismsp, Pp ) \mapsto \mathtt[CoequalizerFunctorialWithGivenCoequalizers](P, morphisms, mu, morphismsp, Pp)$.
@@ -276,7 +276,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoimageObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[CoimageObject](arg2)$.
@@ -295,7 +295,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoimageObjectFunctorial`.
 #! $F: ( alpha, mu, alphap ) \mapsto \mathtt[CoimageObjectFunctorial](alpha, mu, alphap)$.
@@ -314,7 +314,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoimageObjectFunctorialWithGivenCoimageObjects`.
 #! $F: ( C, alpha, mu, alphap, Cp ) \mapsto \mathtt[CoimageObjectFunctorialWithGivenCoimageObjects](C, alpha, mu, alphap, Cp)$.
@@ -333,7 +333,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoimageProjection`.
 #! $F: ( alpha ) \mapsto \mathtt[CoimageProjection](alpha)$.
@@ -352,7 +352,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoimageProjectionWithGivenCoimageObject`.
 #! $F: ( alpha, C ) \mapsto \mathtt[CoimageProjectionWithGivenCoimageObject](alpha, C)$.
@@ -371,7 +371,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CokernelColift`.
 #! $F: ( alpha, T, tau ) \mapsto \mathtt[CokernelColift](alpha, T, tau)$.
@@ -390,7 +390,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CokernelColiftWithGivenCokernelObject`.
 #! $F: ( alpha, T, tau, P ) \mapsto \mathtt[CokernelColiftWithGivenCokernelObject](alpha, T, tau, P)$.
@@ -409,7 +409,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CokernelObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[CokernelObject](arg2)$.
@@ -428,7 +428,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CokernelObjectFunctorial`.
 #! $F: ( alpha, mu, alphap ) \mapsto \mathtt[CokernelObjectFunctorial](alpha, mu, alphap)$.
@@ -447,7 +447,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CokernelObjectFunctorialWithGivenCokernelObjects`.
 #! $F: ( P, alpha, mu, alphap, Pp ) \mapsto \mathtt[CokernelObjectFunctorialWithGivenCokernelObjects](P, alpha, mu, alphap, Pp)$.
@@ -466,7 +466,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CokernelProjection`.
 #! $F: ( alpha ) \mapsto \mathtt[CokernelProjection](alpha)$.
@@ -485,7 +485,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CokernelProjectionWithGivenCokernelObject`.
 #! $F: ( alpha, P ) \mapsto \mathtt[CokernelProjectionWithGivenCokernelObject](alpha, P)$.
@@ -504,7 +504,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `Colift`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[Colift](alpha, beta)$.
@@ -523,7 +523,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ColiftAlongEpimorphism`.
 #! $F: ( epsilon, tau ) \mapsto \mathtt[ColiftAlongEpimorphism](epsilon, tau)$.
@@ -542,7 +542,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ColiftOrFail`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[ColiftOrFail](alpha, beta)$.
@@ -561,7 +561,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ComponentOfMorphismFromCoproduct`.
 #! $F: ( alpha, I, i ) \mapsto \mathtt[ComponentOfMorphismFromCoproduct](alpha, I, i)$.
@@ -580,7 +580,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ComponentOfMorphismFromDirectSum`.
 #! $F: ( alpha, S, i ) \mapsto \mathtt[ComponentOfMorphismFromDirectSum](alpha, S, i)$.
@@ -599,7 +599,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ComponentOfMorphismIntoDirectProduct`.
 #! $F: ( alpha, P, i ) \mapsto \mathtt[ComponentOfMorphismIntoDirectProduct](alpha, P, i)$.
@@ -618,7 +618,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ComponentOfMorphismIntoDirectSum`.
 #! $F: ( alpha, S, i ) \mapsto \mathtt[ComponentOfMorphismIntoDirectSum](alpha, S, i)$.
@@ -637,7 +637,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `Coproduct`.
 #! $F: ( arg2 ) \mapsto \mathtt[Coproduct](arg2)$.
@@ -656,7 +656,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoproductFunctorial`.
 #! $F: ( objects, L, objectsp ) \mapsto \mathtt[CoproductFunctorial](objects, L, objectsp)$.
@@ -675,7 +675,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `CoproductFunctorialWithGivenCoproducts`.
 #! $F: ( P, objects, L, objectsp, Pp ) \mapsto \mathtt[CoproductFunctorialWithGivenCoproducts](P, objects, L, objectsp, Pp)$.
@@ -694,7 +694,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `DirectProduct`.
 #! $F: ( arg2 ) \mapsto \mathtt[DirectProduct](arg2)$.
@@ -713,7 +713,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `DirectProductFunctorial`.
 #! $F: ( objects, L, objectsp ) \mapsto \mathtt[DirectProductFunctorial](objects, L, objectsp)$.
@@ -732,7 +732,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `DirectProductFunctorialWithGivenDirectProducts`.
 #! $F: ( P, objects, L, objectsp, Pp ) \mapsto \mathtt[DirectProductFunctorialWithGivenDirectProducts](P, objects, L, objectsp, Pp)$.
@@ -751,7 +751,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `DirectSum`.
 #! $F: ( arg2 ) \mapsto \mathtt[DirectSum](arg2)$.
@@ -770,7 +770,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `DirectSumFunctorial`.
 #! $F: ( objects, L, objectsp ) \mapsto \mathtt[DirectSumFunctorial](objects, L, objectsp)$.
@@ -789,7 +789,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `DirectSumFunctorialWithGivenDirectSums`.
 #! $F: ( P, objects, L, objectsp, Pp ) \mapsto \mathtt[DirectSumFunctorialWithGivenDirectSums](P, objects, L, objectsp, Pp)$.
@@ -808,7 +808,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `DistinguishedObjectOfHomomorphismStructure`.
 #! $F: (  ) \mapsto \mathtt[DistinguishedObjectOfHomomorphismStructure]()$.
@@ -827,7 +827,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `EmbeddingOfEqualizer`.
 #! $F: ( Y, morphisms ) \mapsto \mathtt[EmbeddingOfEqualizer](Y, morphisms)$.
@@ -846,7 +846,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `EmbeddingOfEqualizerWithGivenEqualizer`.
 #! $F: ( Y, morphisms, P ) \mapsto \mathtt[EmbeddingOfEqualizerWithGivenEqualizer](Y, morphisms, P)$.
@@ -865,7 +865,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `EpimorphismFromProjectiveCoverObject`.
 #! $F: ( A ) \mapsto \mathtt[EpimorphismFromProjectiveCoverObject](A)$.
@@ -884,7 +884,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject`.
 #! $F: ( A, P ) \mapsto \mathtt[EpimorphismFromProjectiveCoverObjectWithGivenProjectiveCoverObject](A, P)$.
@@ -903,7 +903,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `EpimorphismFromSomeProjectiveObject`.
 #! $F: ( A ) \mapsto \mathtt[EpimorphismFromSomeProjectiveObject](A)$.
@@ -922,7 +922,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject`.
 #! $F: ( A, P ) \mapsto \mathtt[EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject](A, P)$.
@@ -941,7 +941,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `Equalizer`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[Equalizer](arg2, arg3)$.
@@ -960,7 +960,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `EqualizerFunctorial`.
 #! $F: ( morphisms, mu, morphismsp ) \mapsto \mathtt[EqualizerFunctorial](morphisms, mu, morphismsp)$.
@@ -979,7 +979,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `EqualizerFunctorialWithGivenEqualizers`.
 #! $F: ( P, morphisms, mu, morphismsp, Pp ) \mapsto \mathtt[EqualizerFunctorialWithGivenEqualizers](P, morphisms, mu, morphismsp, Pp)$.
@@ -998,7 +998,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `FiberProduct`.
 #! $F: ( arg2 ) \mapsto \mathtt[FiberProduct](arg2)$.
@@ -1017,7 +1017,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `FiberProductFunctorial`.
 #! $F: ( morphisms, L, morphismsp ) \mapsto \mathtt[FiberProductFunctorial](morphisms, L, morphismsp)$.
@@ -1036,7 +1036,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `FiberProductFunctorialWithGivenFiberProducts`.
 #! $F: ( P, morphisms, L, morphismsp, Pp ) \mapsto \mathtt[FiberProductFunctorialWithGivenFiberProducts](P, morphisms, L, morphismsp, Pp)$.
@@ -1055,7 +1055,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `HomologyObject`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[HomologyObject](alpha, beta)$.
@@ -1074,7 +1074,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `HomologyObjectFunctorialWithGivenHomologyObjects`.
 #! $F: ( H_1, L, H_2 ) \mapsto \mathtt[HomologyObjectFunctorialWithGivenHomologyObjects](H_1, L, H_2)$.
@@ -1093,7 +1093,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `HomomorphismStructureOnMorphisms`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[HomomorphismStructureOnMorphisms](alpha, beta)$.
@@ -1112,7 +1112,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `HomomorphismStructureOnMorphismsWithGivenObjects`.
 #! $F: ( source, alpha, beta, range ) \mapsto \mathtt[HomomorphismStructureOnMorphismsWithGivenObjects](source, alpha, beta, range)$.
@@ -1131,7 +1131,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `HomomorphismStructureOnObjects`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[HomomorphismStructureOnObjects](arg2, arg3)$.
@@ -1150,7 +1150,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `HorizontalPostCompose`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[HorizontalPostCompose](arg2, arg3)$.
@@ -1169,7 +1169,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `HorizontalPreCompose`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[HorizontalPreCompose](arg2, arg3)$.
@@ -1188,7 +1188,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IdentityMorphism`.
 #! $F: ( a ) \mapsto \mathtt[IdentityMorphism](a)$.
@@ -1207,7 +1207,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IdentityTwoCell`.
 #! $F: ( arg2 ) \mapsto \mathtt[IdentityTwoCell](arg2)$.
@@ -1226,7 +1226,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ImageEmbedding`.
 #! $F: ( alpha ) \mapsto \mathtt[ImageEmbedding](alpha)$.
@@ -1245,7 +1245,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ImageEmbeddingWithGivenImageObject`.
 #! $F: ( alpha, I ) \mapsto \mathtt[ImageEmbeddingWithGivenImageObject](alpha, I)$.
@@ -1264,7 +1264,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ImageObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[ImageObject](arg2)$.
@@ -1283,7 +1283,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ImageObjectFunctorial`.
 #! $F: ( alpha, nu, alphap ) \mapsto \mathtt[ImageObjectFunctorial](alpha, nu, alphap)$.
@@ -1302,7 +1302,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ImageObjectFunctorialWithGivenImageObjects`.
 #! $F: ( I, alpha, nu, alphap, Ip ) \mapsto \mathtt[ImageObjectFunctorialWithGivenImageObjects](I, alpha, nu, alphap, Ip)$.
@@ -1321,7 +1321,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IndecomposableInjectiveObjects`.
 #! $F: (  ) \mapsto \mathtt[IndecomposableInjectiveObjects]()$.
@@ -1340,7 +1340,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IndecomposableProjectiveObjects`.
 #! $F: (  ) \mapsto \mathtt[IndecomposableProjectiveObjects]()$.
@@ -1359,7 +1359,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InitialObject`.
 #! $F: (  ) \mapsto \mathtt[InitialObject]()$.
@@ -1378,7 +1378,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InitialObjectFunctorial`.
 #! $F: (  ) \mapsto \mathtt[InitialObjectFunctorial]()$.
@@ -1397,7 +1397,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InitialObjectFunctorialWithGivenInitialObjects`.
 #! $F: ( P, Pp ) \mapsto \mathtt[InitialObjectFunctorialWithGivenInitialObjects](P, Pp)$.
@@ -1416,7 +1416,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectionOfCofactorOfCoproduct`.
 #! $F: ( objects, k ) \mapsto \mathtt[InjectionOfCofactorOfCoproduct](objects, k)$.
@@ -1435,7 +1435,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectionOfCofactorOfCoproductWithGivenCoproduct`.
 #! $F: ( objects, k, P ) \mapsto \mathtt[InjectionOfCofactorOfCoproductWithGivenCoproduct](objects, k, P)$.
@@ -1454,7 +1454,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectionOfCofactorOfDirectSum`.
 #! $F: ( objects, k ) \mapsto \mathtt[InjectionOfCofactorOfDirectSum](objects, k)$.
@@ -1473,7 +1473,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectionOfCofactorOfDirectSumWithGivenDirectSum`.
 #! $F: ( objects, k, P ) \mapsto \mathtt[InjectionOfCofactorOfDirectSumWithGivenDirectSum](objects, k, P)$.
@@ -1492,7 +1492,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectionOfCofactorOfPushout`.
 #! $F: ( morphisms, k ) \mapsto \mathtt[InjectionOfCofactorOfPushout](morphisms, k)$.
@@ -1511,7 +1511,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectionOfCofactorOfPushoutWithGivenPushout`.
 #! $F: ( morphisms, k, P ) \mapsto \mathtt[InjectionOfCofactorOfPushoutWithGivenPushout](morphisms, k, P)$.
@@ -1530,7 +1530,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectiveColift`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[InjectiveColift](alpha, beta)$.
@@ -1549,7 +1549,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectiveDimension`.
 #! $F: ( arg2 ) \mapsto \mathtt[InjectiveDimension](arg2)$.
@@ -1568,7 +1568,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InjectiveEnvelopeObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[InjectiveEnvelopeObject](arg2)$.
@@ -1587,7 +1587,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure`.
 #! $F: ( alpha ) \mapsto \mathtt[InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure](alpha)$.
@@ -1606,7 +1606,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects`.
 #! $F: ( source, alpha, range ) \mapsto \mathtt[InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects](source, alpha, range)$.
@@ -1625,7 +1625,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism`.
 #! $F: ( source, range, alpha ) \mapsto \mathtt[InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism](source, range, alpha)$.
@@ -1644,7 +1644,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InverseForMorphisms`.
 #! $F: ( alpha ) \mapsto \mathtt[InverseForMorphisms](alpha)$.
@@ -1663,7 +1663,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `InverseMorphismFromCoimageToImageWithGivenObjects`.
 #! $F: ( C, alpha, I ) \mapsto \mathtt[InverseMorphismFromCoimageToImageWithGivenObjects](C, alpha, I)$.
@@ -1682,7 +1682,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsAutomorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsAutomorphism](arg2)$.
@@ -1701,7 +1701,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsBijectiveObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsBijectiveObject](arg2)$.
@@ -1720,7 +1720,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsCodominating`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsCodominating](arg2, arg3)$.
@@ -1739,7 +1739,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsColiftable`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsColiftable](arg2, arg3)$.
@@ -1758,7 +1758,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsColiftableAlongEpimorphism`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsColiftableAlongEpimorphism](arg2, arg3)$.
@@ -1777,7 +1777,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsCongruentForMorphisms`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsCongruentForMorphisms](arg2, arg3)$.
@@ -1796,7 +1796,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsDominating`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsDominating](arg2, arg3)$.
@@ -1815,7 +1815,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEndomorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsEndomorphism](arg2)$.
@@ -1834,7 +1834,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEpimorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsEpimorphism](arg2)$.
@@ -1853,7 +1853,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualAsFactorobjects`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsEqualAsFactorobjects](arg2, arg3)$.
@@ -1872,7 +1872,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualAsSubobjects`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsEqualAsSubobjects](arg2, arg3)$.
@@ -1891,7 +1891,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualForCacheForMorphisms`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsEqualForCacheForMorphisms](arg2, arg3)$.
@@ -1910,7 +1910,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualForCacheForObjects`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsEqualForCacheForObjects](arg2, arg3)$.
@@ -1929,7 +1929,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualForMorphisms`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsEqualForMorphisms](arg2, arg3)$.
@@ -1948,7 +1948,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualForMorphismsOnMor`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsEqualForMorphismsOnMor](arg2, arg3)$.
@@ -1967,7 +1967,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualForObjects`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsEqualForObjects](arg2, arg3)$.
@@ -1986,7 +1986,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualToIdentityMorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsEqualToIdentityMorphism](arg2)$.
@@ -2005,7 +2005,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsEqualToZeroMorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsEqualToZeroMorphism](arg2)$.
@@ -2024,7 +2024,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsHomSetInhabited`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsHomSetInhabited](arg2, arg3)$.
@@ -2043,7 +2043,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsIdempotent`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsIdempotent](arg2)$.
@@ -2062,7 +2062,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsInitial`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsInitial](arg2)$.
@@ -2081,7 +2081,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsInjective`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsInjective](arg2)$.
@@ -2100,7 +2100,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsIsomorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsIsomorphism](arg2)$.
@@ -2119,7 +2119,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsLiftable`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsLiftable](arg2, arg3)$.
@@ -2138,7 +2138,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsLiftableAlongMonomorphism`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[IsLiftableAlongMonomorphism](arg2, arg3)$.
@@ -2157,7 +2157,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsMonomorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsMonomorphism](arg2)$.
@@ -2176,7 +2176,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsOne`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsOne](arg2)$.
@@ -2195,7 +2195,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsProjective`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsProjective](arg2)$.
@@ -2214,7 +2214,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsSplitEpimorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsSplitEpimorphism](arg2)$.
@@ -2233,7 +2233,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsSplitMonomorphism`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsSplitMonomorphism](arg2)$.
@@ -2252,7 +2252,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsTerminal`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsTerminal](arg2)$.
@@ -2271,7 +2271,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsWellDefinedForMorphisms`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsWellDefinedForMorphisms](arg2)$.
@@ -2290,7 +2290,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsWellDefinedForObjects`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsWellDefinedForObjects](arg2)$.
@@ -2309,7 +2309,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsWellDefinedForTwoCells`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsWellDefinedForTwoCells](arg2)$.
@@ -2328,7 +2328,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsZeroForMorphisms`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsZeroForMorphisms](arg2)$.
@@ -2347,7 +2347,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsZeroForObjects`.
 #! $F: ( arg2 ) \mapsto \mathtt[IsZeroForObjects](arg2)$.
@@ -2366,7 +2366,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromCoequalizerOfCoproductDiagramToPushout`.
 #! $F: ( D ) \mapsto \mathtt[IsomorphismFromCoequalizerOfCoproductDiagramToPushout](D)$.
@@ -2385,7 +2385,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct`.
 #! $F: ( A, D ) \mapsto \mathtt[IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct](A, D)$.
@@ -2404,7 +2404,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromCoimageToCokernelOfKernel`.
 #! $F: ( alpha ) \mapsto \mathtt[IsomorphismFromCoimageToCokernelOfKernel](alpha)$.
@@ -2423,7 +2423,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer`.
 #! $F: ( A, D ) \mapsto \mathtt[IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequalizer](A, D)$.
@@ -2442,7 +2442,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromCokernelOfKernelToCoimage`.
 #! $F: ( alpha ) \mapsto \mathtt[IsomorphismFromCokernelOfKernelToCoimage](alpha)$.
@@ -2461,7 +2461,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromCoproductToDirectSum`.
 #! $F: ( D ) \mapsto \mathtt[IsomorphismFromCoproductToDirectSum](D)$.
@@ -2480,7 +2480,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromDirectProductToDirectSum`.
 #! $F: ( D ) \mapsto \mathtt[IsomorphismFromDirectProductToDirectSum](D)$.
@@ -2499,7 +2499,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromDirectSumToCoproduct`.
 #! $F: ( D ) \mapsto \mathtt[IsomorphismFromDirectSumToCoproduct](D)$.
@@ -2518,7 +2518,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromDirectSumToDirectProduct`.
 #! $F: ( D ) \mapsto \mathtt[IsomorphismFromDirectSumToDirectProduct](D)$.
@@ -2537,7 +2537,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct`.
 #! $F: ( D ) \mapsto \mathtt[IsomorphismFromEqualizerOfDirectProductDiagramToFiberProduct](D)$.
@@ -2556,7 +2556,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct`.
 #! $F: ( A, D ) \mapsto \mathtt[IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct](A, D)$.
@@ -2575,7 +2575,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram`.
 #! $F: ( D ) \mapsto \mathtt[IsomorphismFromFiberProductToEqualizerOfDirectProductDiagram](D)$.
@@ -2594,7 +2594,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromHomologyObjectToItsConstructionAsAnImageObject`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[IsomorphismFromHomologyObjectToItsConstructionAsAnImageObject](alpha, beta)$.
@@ -2613,7 +2613,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromImageObjectToKernelOfCokernel`.
 #! $F: ( alpha ) \mapsto \mathtt[IsomorphismFromImageObjectToKernelOfCokernel](alpha)$.
@@ -2632,7 +2632,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromInitialObjectToZeroObject`.
 #! $F: (  ) \mapsto \mathtt[IsomorphismFromInitialObjectToZeroObject]()$.
@@ -2651,7 +2651,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject](alpha, beta)$.
@@ -2670,7 +2670,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromKernelOfCokernelToImageObject`.
 #! $F: ( alpha ) \mapsto \mathtt[IsomorphismFromKernelOfCokernelToImageObject](alpha)$.
@@ -2689,7 +2689,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer`.
 #! $F: ( A, D ) \mapsto \mathtt[IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProductToEqualizer](A, D)$.
@@ -2708,7 +2708,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromPushoutToCoequalizerOfCoproductDiagram`.
 #! $F: ( D ) \mapsto \mathtt[IsomorphismFromPushoutToCoequalizerOfCoproductDiagram](D)$.
@@ -2727,7 +2727,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromTerminalObjectToZeroObject`.
 #! $F: (  ) \mapsto \mathtt[IsomorphismFromTerminalObjectToZeroObject]()$.
@@ -2746,7 +2746,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromZeroObjectToInitialObject`.
 #! $F: (  ) \mapsto \mathtt[IsomorphismFromZeroObjectToInitialObject]()$.
@@ -2765,7 +2765,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromZeroObjectToTerminalObject`.
 #! $F: (  ) \mapsto \mathtt[IsomorphismFromZeroObjectToTerminalObject]()$.
@@ -2784,7 +2784,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `JointPairwiseDifferencesOfMorphismsFromCoproduct`.
 #! $F: ( A, D ) \mapsto \mathtt[JointPairwiseDifferencesOfMorphismsFromCoproduct](A, D)$.
@@ -2803,7 +2803,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `JointPairwiseDifferencesOfMorphismsIntoDirectProduct`.
 #! $F: ( A, D ) \mapsto \mathtt[JointPairwiseDifferencesOfMorphismsIntoDirectProduct](A, D)$.
@@ -2822,7 +2822,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `KernelEmbedding`.
 #! $F: ( alpha ) \mapsto \mathtt[KernelEmbedding](alpha)$.
@@ -2841,7 +2841,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `KernelEmbeddingWithGivenKernelObject`.
 #! $F: ( alpha, P ) \mapsto \mathtt[KernelEmbeddingWithGivenKernelObject](alpha, P)$.
@@ -2860,7 +2860,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `KernelLift`.
 #! $F: ( alpha, T, tau ) \mapsto \mathtt[KernelLift](alpha, T, tau)$.
@@ -2879,7 +2879,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `KernelLiftWithGivenKernelObject`.
 #! $F: ( alpha, T, tau, P ) \mapsto \mathtt[KernelLiftWithGivenKernelObject](alpha, T, tau, P)$.
@@ -2898,7 +2898,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `KernelObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[KernelObject](arg2)$.
@@ -2917,7 +2917,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `KernelObjectFunctorial`.
 #! $F: ( alpha, mu, alphap ) \mapsto \mathtt[KernelObjectFunctorial](alpha, mu, alphap)$.
@@ -2936,7 +2936,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `KernelObjectFunctorialWithGivenKernelObjects`.
 #! $F: ( P, alpha, mu, alphap, Pp ) \mapsto \mathtt[KernelObjectFunctorialWithGivenKernelObjects](P, alpha, mu, alphap, Pp)$.
@@ -2955,7 +2955,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `Lift`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[Lift](alpha, beta)$.
@@ -2974,7 +2974,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `LiftAlongMonomorphism`.
 #! $F: ( iota, tau ) \mapsto \mathtt[LiftAlongMonomorphism](iota, tau)$.
@@ -2993,7 +2993,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `LiftOrFail`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[LiftOrFail](alpha, beta)$.
@@ -3012,7 +3012,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MereExistenceOfSolutionOfLinearSystemInAbCategory`.
 #! $F: ( arg2, arg3, arg4 ) \mapsto \mathtt[MereExistenceOfSolutionOfLinearSystemInAbCategory](arg2, arg3, arg4)$.
@@ -3031,7 +3031,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MonomorphismIntoInjectiveEnvelopeObject`.
 #! $F: ( A ) \mapsto \mathtt[MonomorphismIntoInjectiveEnvelopeObject](A)$.
@@ -3050,7 +3050,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject`.
 #! $F: ( A, I ) \mapsto \mathtt[MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject](A, I)$.
@@ -3069,7 +3069,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MonomorphismIntoSomeInjectiveObject`.
 #! $F: ( A ) \mapsto \mathtt[MonomorphismIntoSomeInjectiveObject](A)$.
@@ -3088,7 +3088,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject`.
 #! $F: ( A, I ) \mapsto \mathtt[MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject](A, I)$.
@@ -3107,7 +3107,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismBetweenDirectSums`.
 #! $F: ( source_diagram, mat, range_diagram ) \mapsto \mathtt[MorphismBetweenDirectSums](source_diagram, mat, range_diagram)$.
@@ -3126,7 +3126,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismBetweenDirectSumsWithGivenDirectSums`.
 #! $F: ( S, source_diagram, mat, range_diagram, T ) \mapsto \mathtt[MorphismBetweenDirectSumsWithGivenDirectSums](S, source_diagram, mat, range_diagram, T)$.
@@ -3145,7 +3145,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismConstructor`.
 #! $F: ( arg2, arg3, arg4 ) \mapsto \mathtt[MorphismConstructor](arg2, arg3, arg4)$.
@@ -3164,7 +3164,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismDatum`.
 #! $F: ( arg2 ) \mapsto \mathtt[MorphismDatum](arg2)$.
@@ -3183,7 +3183,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromCoimageToImageWithGivenObjects`.
 #! $F: ( C, alpha, I ) \mapsto \mathtt[MorphismFromCoimageToImageWithGivenObjects](C, alpha, I)$.
@@ -3202,7 +3202,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromEqualizerToSink`.
 #! $F: ( Y, morphisms ) \mapsto \mathtt[MorphismFromEqualizerToSink](Y, morphisms)$.
@@ -3221,7 +3221,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromEqualizerToSinkWithGivenEqualizer`.
 #! $F: ( Y, morphisms, P ) \mapsto \mathtt[MorphismFromEqualizerToSinkWithGivenEqualizer](Y, morphisms, P)$.
@@ -3240,7 +3240,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromFiberProductToSink`.
 #! $F: ( morphisms ) \mapsto \mathtt[MorphismFromFiberProductToSink](morphisms)$.
@@ -3259,7 +3259,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromFiberProductToSinkWithGivenFiberProduct`.
 #! $F: ( morphisms, P ) \mapsto \mathtt[MorphismFromFiberProductToSinkWithGivenFiberProduct](morphisms, P)$.
@@ -3278,7 +3278,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromKernelObjectToSink`.
 #! $F: ( alpha ) \mapsto \mathtt[MorphismFromKernelObjectToSink](alpha)$.
@@ -3297,7 +3297,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromKernelObjectToSinkWithGivenKernelObject`.
 #! $F: ( alpha, P ) \mapsto \mathtt[MorphismFromKernelObjectToSinkWithGivenKernelObject](alpha, P)$.
@@ -3316,7 +3316,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromSourceToCoequalizer`.
 #! $F: ( Y, morphisms ) \mapsto \mathtt[MorphismFromSourceToCoequalizer](Y, morphisms)$.
@@ -3335,7 +3335,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromSourceToCoequalizerWithGivenCoequalizer`.
 #! $F: ( Y, morphisms, P ) \mapsto \mathtt[MorphismFromSourceToCoequalizerWithGivenCoequalizer](Y, morphisms, P)$.
@@ -3354,7 +3354,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromSourceToCokernelObject`.
 #! $F: ( alpha ) \mapsto \mathtt[MorphismFromSourceToCokernelObject](alpha)$.
@@ -3373,7 +3373,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromSourceToCokernelObjectWithGivenCokernelObject`.
 #! $F: ( alpha, P ) \mapsto \mathtt[MorphismFromSourceToCokernelObjectWithGivenCokernelObject](alpha, P)$.
@@ -3392,7 +3392,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromSourceToPushout`.
 #! $F: ( morphisms ) \mapsto \mathtt[MorphismFromSourceToPushout](morphisms)$.
@@ -3411,7 +3411,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromSourceToPushoutWithGivenPushout`.
 #! $F: ( morphisms, P ) \mapsto \mathtt[MorphismFromSourceToPushoutWithGivenPushout](morphisms, P)$.
@@ -3430,7 +3430,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `MultiplyWithElementOfCommutativeRingForMorphisms`.
 #! $F: ( r, a ) \mapsto \mathtt[MultiplyWithElementOfCommutativeRingForMorphisms](r, a)$.
@@ -3449,7 +3449,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ObjectConstructor`.
 #! $F: ( arg2 ) \mapsto \mathtt[ObjectConstructor](arg2)$.
@@ -3468,7 +3468,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ObjectDatum`.
 #! $F: ( arg2 ) \mapsto \mathtt[ObjectDatum](arg2)$.
@@ -3487,7 +3487,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PostCompose`.
 #! $F: ( beta, alpha ) \mapsto \mathtt[PostCompose](beta, alpha)$.
@@ -3506,7 +3506,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PostComposeList`.
 #! $F: ( list_of_morphisms ) \mapsto \mathtt[PostComposeList](list_of_morphisms)$.
@@ -3525,7 +3525,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PostInverseForMorphisms`.
 #! $F: ( alpha ) \mapsto \mathtt[PostInverseForMorphisms](alpha)$.
@@ -3544,7 +3544,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PreCompose`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[PreCompose](alpha, beta)$.
@@ -3563,7 +3563,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PreComposeList`.
 #! $F: ( list_of_morphisms ) \mapsto \mathtt[PreComposeList](list_of_morphisms)$.
@@ -3582,7 +3582,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PreInverseForMorphisms`.
 #! $F: ( alpha ) \mapsto \mathtt[PreInverseForMorphisms](alpha)$.
@@ -3601,7 +3601,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionInFactorOfDirectProduct`.
 #! $F: ( objects, k ) \mapsto \mathtt[ProjectionInFactorOfDirectProduct](objects, k)$.
@@ -3620,7 +3620,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionInFactorOfDirectProductWithGivenDirectProduct`.
 #! $F: ( objects, k, P ) \mapsto \mathtt[ProjectionInFactorOfDirectProductWithGivenDirectProduct](objects, k, P)$.
@@ -3639,7 +3639,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionInFactorOfDirectSum`.
 #! $F: ( objects, k ) \mapsto \mathtt[ProjectionInFactorOfDirectSum](objects, k)$.
@@ -3658,7 +3658,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionInFactorOfDirectSumWithGivenDirectSum`.
 #! $F: ( objects, k, P ) \mapsto \mathtt[ProjectionInFactorOfDirectSumWithGivenDirectSum](objects, k, P)$.
@@ -3677,7 +3677,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionInFactorOfFiberProduct`.
 #! $F: ( morphisms, k ) \mapsto \mathtt[ProjectionInFactorOfFiberProduct](morphisms, k)$.
@@ -3696,7 +3696,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionInFactorOfFiberProductWithGivenFiberProduct`.
 #! $F: ( morphisms, k, P ) \mapsto \mathtt[ProjectionInFactorOfFiberProductWithGivenFiberProduct](morphisms, k, P)$.
@@ -3715,7 +3715,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionOntoCoequalizer`.
 #! $F: ( Y, morphisms ) \mapsto \mathtt[ProjectionOntoCoequalizer](Y, morphisms)$.
@@ -3734,7 +3734,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionOntoCoequalizerWithGivenCoequalizer`.
 #! $F: ( Y, morphisms, P ) \mapsto \mathtt[ProjectionOntoCoequalizerWithGivenCoequalizer](Y, morphisms, P)$.
@@ -3753,7 +3753,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectiveCoverObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[ProjectiveCoverObject](arg2)$.
@@ -3772,7 +3772,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectiveDimension`.
 #! $F: ( arg2 ) \mapsto \mathtt[ProjectiveDimension](arg2)$.
@@ -3791,7 +3791,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectiveLift`.
 #! $F: ( alpha, beta ) \mapsto \mathtt[ProjectiveLift](alpha, beta)$.
@@ -3810,7 +3810,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `Pushout`.
 #! $F: ( arg2 ) \mapsto \mathtt[Pushout](arg2)$.
@@ -3829,7 +3829,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PushoutFunctorial`.
 #! $F: ( morphisms, L, morphismsp ) \mapsto \mathtt[PushoutFunctorial](morphisms, L, morphismsp)$.
@@ -3848,7 +3848,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PushoutFunctorialWithGivenPushouts`.
 #! $F: ( P, morphisms, L, morphismsp, Pp ) \mapsto \mathtt[PushoutFunctorialWithGivenPushouts](P, morphisms, L, morphismsp, Pp)$.
@@ -3867,7 +3867,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomMorphismByInteger`.
 #! $F: ( n ) \mapsto \mathtt[RandomMorphismByInteger](n)$.
@@ -3886,7 +3886,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomMorphismByList`.
 #! $F: ( L ) \mapsto \mathtt[RandomMorphismByList](L)$.
@@ -3905,7 +3905,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomMorphismWithFixedRangeByInteger`.
 #! $F: ( B, n ) \mapsto \mathtt[RandomMorphismWithFixedRangeByInteger](B, n)$.
@@ -3924,7 +3924,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomMorphismWithFixedRangeByList`.
 #! $F: ( B, L ) \mapsto \mathtt[RandomMorphismWithFixedRangeByList](B, L)$.
@@ -3943,7 +3943,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomMorphismWithFixedSourceAndRangeByInteger`.
 #! $F: ( A, B, n ) \mapsto \mathtt[RandomMorphismWithFixedSourceAndRangeByInteger](A, B, n)$.
@@ -3962,7 +3962,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomMorphismWithFixedSourceAndRangeByList`.
 #! $F: ( A, B, L ) \mapsto \mathtt[RandomMorphismWithFixedSourceAndRangeByList](A, B, L)$.
@@ -3981,7 +3981,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomMorphismWithFixedSourceByInteger`.
 #! $F: ( A, n ) \mapsto \mathtt[RandomMorphismWithFixedSourceByInteger](A, n)$.
@@ -4000,7 +4000,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomMorphismWithFixedSourceByList`.
 #! $F: ( A, L ) \mapsto \mathtt[RandomMorphismWithFixedSourceByList](A, L)$.
@@ -4019,7 +4019,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomObjectByInteger`.
 #! $F: ( n ) \mapsto \mathtt[RandomObjectByInteger](n)$.
@@ -4038,7 +4038,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `RandomObjectByList`.
 #! $F: ( L ) \mapsto \mathtt[RandomObjectByList](L)$.
@@ -4057,7 +4057,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyEndo`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifyEndo](mor, n)$.
@@ -4076,7 +4076,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyEndo_IsoFromInputObject`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifyEndo_IsoFromInputObject](mor, n)$.
@@ -4095,7 +4095,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyEndo_IsoToInputObject`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifyEndo_IsoToInputObject](mor, n)$.
@@ -4114,7 +4114,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyMorphism`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifyMorphism](mor, n)$.
@@ -4133,7 +4133,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyObject`.
 #! $F: ( A, n ) \mapsto \mathtt[SimplifyObject](A, n)$.
@@ -4152,7 +4152,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyObject_IsoFromInputObject`.
 #! $F: ( A, n ) \mapsto \mathtt[SimplifyObject_IsoFromInputObject](A, n)$.
@@ -4171,7 +4171,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyObject_IsoToInputObject`.
 #! $F: ( A, n ) \mapsto \mathtt[SimplifyObject_IsoToInputObject](A, n)$.
@@ -4190,7 +4190,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyRange`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifyRange](mor, n)$.
@@ -4209,7 +4209,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyRange_IsoFromInputObject`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifyRange_IsoFromInputObject](mor, n)$.
@@ -4228,7 +4228,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifyRange_IsoToInputObject`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifyRange_IsoToInputObject](mor, n)$.
@@ -4247,7 +4247,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifySource`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifySource](mor, n)$.
@@ -4266,7 +4266,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifySourceAndRange`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifySourceAndRange](mor, n)$.
@@ -4285,7 +4285,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifySourceAndRange_IsoFromInputRange`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifySourceAndRange_IsoFromInputRange](mor, n)$.
@@ -4304,7 +4304,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifySourceAndRange_IsoFromInputSource`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifySourceAndRange_IsoFromInputSource](mor, n)$.
@@ -4323,7 +4323,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifySourceAndRange_IsoToInputRange`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifySourceAndRange_IsoToInputRange](mor, n)$.
@@ -4342,7 +4342,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifySourceAndRange_IsoToInputSource`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifySourceAndRange_IsoToInputSource](mor, n)$.
@@ -4361,7 +4361,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifySource_IsoFromInputObject`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifySource_IsoFromInputObject](mor, n)$.
@@ -4380,7 +4380,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SimplifySource_IsoToInputObject`.
 #! $F: ( mor, n ) \mapsto \mathtt[SimplifySource_IsoToInputObject](mor, n)$.
@@ -4399,7 +4399,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SolveLinearSystemInAbCategory`.
 #! $F: ( arg2, arg3, arg4 ) \mapsto \mathtt[SolveLinearSystemInAbCategory](arg2, arg3, arg4)$.
@@ -4418,7 +4418,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SolveLinearSystemInAbCategoryOrFail`.
 #! $F: ( arg2, arg3, arg4 ) \mapsto \mathtt[SolveLinearSystemInAbCategoryOrFail](arg2, arg3, arg4)$.
@@ -4437,7 +4437,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SomeInjectiveObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[SomeInjectiveObject](arg2)$.
@@ -4456,7 +4456,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SomeProjectiveObject`.
 #! $F: ( arg2 ) \mapsto \mathtt[SomeProjectiveObject](arg2)$.
@@ -4475,7 +4475,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SomeReductionBySplitEpiSummand`.
 #! $F: ( alpha ) \mapsto \mathtt[SomeReductionBySplitEpiSummand](alpha)$.
@@ -4494,7 +4494,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SomeReductionBySplitEpiSummand_MorphismFromInputRange`.
 #! $F: ( alpha ) \mapsto \mathtt[SomeReductionBySplitEpiSummand_MorphismFromInputRange](alpha)$.
@@ -4513,7 +4513,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SomeReductionBySplitEpiSummand_MorphismToInputRange`.
 #! $F: ( alpha ) \mapsto \mathtt[SomeReductionBySplitEpiSummand_MorphismToInputRange](alpha)$.
@@ -4532,7 +4532,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SubtractionForMorphisms`.
 #! $F: ( a, b ) \mapsto \mathtt[SubtractionForMorphisms](a, b)$.
@@ -4551,7 +4551,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `SumOfMorphisms`.
 #! $F: ( source, list_of_morphisms, range ) \mapsto \mathtt[SumOfMorphisms](source, list_of_morphisms, range)$.
@@ -4570,7 +4570,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `TerminalObject`.
 #! $F: (  ) \mapsto \mathtt[TerminalObject]()$.
@@ -4589,7 +4589,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `TerminalObjectFunctorial`.
 #! $F: (  ) \mapsto \mathtt[TerminalObjectFunctorial]()$.
@@ -4608,7 +4608,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `TerminalObjectFunctorialWithGivenTerminalObjects`.
 #! $F: ( P, Pp ) \mapsto \mathtt[TerminalObjectFunctorialWithGivenTerminalObjects](P, Pp)$.
@@ -4627,7 +4627,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromCoequalizer`.
 #! $F: ( Y, morphisms, T, tau ) \mapsto \mathtt[UniversalMorphismFromCoequalizer](Y, morphisms, T, tau)$.
@@ -4646,7 +4646,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromCoequalizerWithGivenCoequalizer`.
 #! $F: ( Y, morphisms, T, tau, P ) \mapsto \mathtt[UniversalMorphismFromCoequalizerWithGivenCoequalizer](Y, morphisms, T, tau, P)$.
@@ -4665,7 +4665,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromCoproduct`.
 #! $F: ( objects, T, tau ) \mapsto \mathtt[UniversalMorphismFromCoproduct](objects, T, tau)$.
@@ -4684,7 +4684,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromCoproductWithGivenCoproduct`.
 #! $F: ( objects, T, tau, P ) \mapsto \mathtt[UniversalMorphismFromCoproductWithGivenCoproduct](objects, T, tau, P)$.
@@ -4703,7 +4703,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromDirectSum`.
 #! $F: ( objects, T, tau ) \mapsto \mathtt[UniversalMorphismFromDirectSum](objects, T, tau)$.
@@ -4722,7 +4722,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromDirectSumWithGivenDirectSum`.
 #! $F: ( objects, T, tau, P ) \mapsto \mathtt[UniversalMorphismFromDirectSumWithGivenDirectSum](objects, T, tau, P)$.
@@ -4741,7 +4741,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromImage`.
 #! $F: ( alpha, tau ) \mapsto \mathtt[UniversalMorphismFromImage](alpha, tau)$.
@@ -4760,7 +4760,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromImageWithGivenImageObject`.
 #! $F: ( alpha, tau, I ) \mapsto \mathtt[UniversalMorphismFromImageWithGivenImageObject](alpha, tau, I)$.
@@ -4779,7 +4779,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromInitialObject`.
 #! $F: ( T ) \mapsto \mathtt[UniversalMorphismFromInitialObject](T)$.
@@ -4798,7 +4798,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromInitialObjectWithGivenInitialObject`.
 #! $F: ( T, P ) \mapsto \mathtt[UniversalMorphismFromInitialObjectWithGivenInitialObject](T, P)$.
@@ -4817,7 +4817,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromPushout`.
 #! $F: ( morphisms, T, tau ) \mapsto \mathtt[UniversalMorphismFromPushout](morphisms, T, tau)$.
@@ -4836,7 +4836,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromPushoutWithGivenPushout`.
 #! $F: ( morphisms, T, tau, P ) \mapsto \mathtt[UniversalMorphismFromPushoutWithGivenPushout](morphisms, T, tau, P)$.
@@ -4855,7 +4855,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromZeroObject`.
 #! $F: ( T ) \mapsto \mathtt[UniversalMorphismFromZeroObject](T)$.
@@ -4874,7 +4874,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismFromZeroObjectWithGivenZeroObject`.
 #! $F: ( T, P ) \mapsto \mathtt[UniversalMorphismFromZeroObjectWithGivenZeroObject](T, P)$.
@@ -4893,7 +4893,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoCoimage`.
 #! $F: ( alpha, tau ) \mapsto \mathtt[UniversalMorphismIntoCoimage](alpha, tau)$.
@@ -4912,7 +4912,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoCoimageWithGivenCoimageObject`.
 #! $F: ( alpha, tau, C ) \mapsto \mathtt[UniversalMorphismIntoCoimageWithGivenCoimageObject](alpha, tau, C)$.
@@ -4931,7 +4931,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoDirectProduct`.
 #! $F: ( objects, T, tau ) \mapsto \mathtt[UniversalMorphismIntoDirectProduct](objects, T, tau)$.
@@ -4950,7 +4950,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoDirectProductWithGivenDirectProduct`.
 #! $F: ( objects, T, tau, P ) \mapsto \mathtt[UniversalMorphismIntoDirectProductWithGivenDirectProduct](objects, T, tau, P)$.
@@ -4969,7 +4969,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoDirectSum`.
 #! $F: ( objects, T, tau ) \mapsto \mathtt[UniversalMorphismIntoDirectSum](objects, T, tau)$.
@@ -4988,7 +4988,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoDirectSumWithGivenDirectSum`.
 #! $F: ( objects, T, tau, P ) \mapsto \mathtt[UniversalMorphismIntoDirectSumWithGivenDirectSum](objects, T, tau, P)$.
@@ -5007,7 +5007,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoEqualizer`.
 #! $F: ( Y, morphisms, T, tau ) \mapsto \mathtt[UniversalMorphismIntoEqualizer](Y, morphisms, T, tau)$.
@@ -5026,7 +5026,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoEqualizerWithGivenEqualizer`.
 #! $F: ( Y, morphisms, T, tau, P ) \mapsto \mathtt[UniversalMorphismIntoEqualizerWithGivenEqualizer](Y, morphisms, T, tau, P)$.
@@ -5045,7 +5045,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoFiberProduct`.
 #! $F: ( morphisms, T, tau ) \mapsto \mathtt[UniversalMorphismIntoFiberProduct](morphisms, T, tau)$.
@@ -5064,7 +5064,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoFiberProductWithGivenFiberProduct`.
 #! $F: ( morphisms, T, tau, P ) \mapsto \mathtt[UniversalMorphismIntoFiberProductWithGivenFiberProduct](morphisms, T, tau, P)$.
@@ -5083,7 +5083,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoTerminalObject`.
 #! $F: ( T ) \mapsto \mathtt[UniversalMorphismIntoTerminalObject](T)$.
@@ -5102,7 +5102,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoTerminalObjectWithGivenTerminalObject`.
 #! $F: ( T, P ) \mapsto \mathtt[UniversalMorphismIntoTerminalObjectWithGivenTerminalObject](T, P)$.
@@ -5121,7 +5121,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoZeroObject`.
 #! $F: ( T ) \mapsto \mathtt[UniversalMorphismIntoZeroObject](T)$.
@@ -5140,7 +5140,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `UniversalMorphismIntoZeroObjectWithGivenZeroObject`.
 #! $F: ( T, P ) \mapsto \mathtt[UniversalMorphismIntoZeroObjectWithGivenZeroObject](T, P)$.
@@ -5159,7 +5159,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `VerticalPostCompose`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[VerticalPostCompose](arg2, arg3)$.
@@ -5178,7 +5178,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `VerticalPreCompose`.
 #! $F: ( arg2, arg3 ) \mapsto \mathtt[VerticalPreCompose](arg2, arg3)$.
@@ -5197,7 +5197,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ZeroMorphism`.
 #! $F: ( a, b ) \mapsto \mathtt[ZeroMorphism](a, b)$.
@@ -5216,7 +5216,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ZeroObject`.
 #! $F: (  ) \mapsto \mathtt[ZeroObject]()$.
@@ -5235,7 +5235,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ZeroObjectFunctorial`.
 #! $F: (  ) \mapsto \mathtt[ZeroObjectFunctorial]()$.
@@ -5254,7 +5254,7 @@
                   [ IsCapCategory, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && a function $F$.
+#! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `ZeroObjectFunctorialWithGivenZeroObjects`.
 #! $F: ( P, Pp ) \mapsto \mathtt[ZeroObjectFunctorialWithGivenZeroObjects](P, Pp)$.

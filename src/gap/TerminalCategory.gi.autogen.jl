@@ -6,7 +6,7 @@
 
 #####################################
 ##
-## Reps for object && morphism
+## Reps for object and morphism
 ##
 #####################################
 
@@ -36,10 +36,10 @@
     for operation_name in list_of_operations_to_install
         info = CAP_INTERNAL_METHOD_NAME_RECORD[operation_name];
         
-        ## Do !install universal morphisms but their
-        ## with-given-universal-object counterpart && the universal object
-        ## because ⥉ many cases CategoryConstructor can!lift the non-WithGiven
-        ## versions due to !having generic output source/range getters
+        ## Do not install universal morphisms but their
+        ## with-given-universal-object counterpart and the universal object
+        ## because in many cases CategoryConstructor cannot lift the non-WithGiven
+        ## versions due to not having generic output source/range getters
         if info.return_type == "morphism" && IsList( info.with_given_without_given_name_pair ) && operation_name == info.with_given_without_given_name_pair[1]
             if !info.with_given_without_given_name_pair[2] ⥉ list_of_operations_to_install
                 Add( list_of_operations_to_install, info.with_given_without_given_name_pair[2] );
@@ -50,7 +50,7 @@
             end;
         end;
         
-        # Do !install boolean operations. For example `IsEndomorphism` is !always true for a morphism in a terminal category with multiple objects.
+        # Do not install boolean operations. For example `IsEndomorphism` is not always true for a morphism in a terminal category with multiple objects.
         if info.return_type == "bool"
             Add( skip, operation_name );
         end;
@@ -70,9 +70,9 @@
         excluded_properties = [ ];
     end;
     
-    ## We are here ⥉ the doctrine "IsCapCategory" where a terminal category is !initial.
-    ## However, ⥉ the doctrine "IsCategoryWithZeroObject" || "IsAdditiveCategory"
-    ## the terminal && initial categories are equivalent. Other constructors of the terminal category
+    ## We are here in the doctrine "IsCapCategory" where a terminal category is not initial.
+    ## However, in the doctrine "IsCategoryWithZeroObject" or "IsAdditiveCategory"
+    ## the terminal and initial categories are equivalent. Other constructors of the terminal category
     ## can still set IsInitialCategory == true manually, if the doctrine is clear from the context.
     Add( excluded_properties, "IsInitialCategory" );
     
@@ -95,7 +95,7 @@
     AddIsCongruentForMorphisms( T,
       function( T, morphism1, morphism2 )
         
-        ## equality of source && target is part of the specification of the input && checked by the pre-function
+        ## equality of source and target is part of the specification of the input and checked by the pre-function
         return true;
         
     end );
@@ -396,7 +396,7 @@ end );
     AddIsEqualForMorphisms( T,
       function( T, morphism1, morphism2 )
         
-        ## equality of source && target is part of the specification of the input && checked by the pre-function
+        ## equality of source and target is part of the specification of the input and checked by the pre-function
         return StringGAP( morphism1 ) == StringGAP( morphism2 );
         
     end );

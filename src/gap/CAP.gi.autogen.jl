@@ -167,25 +167,25 @@ end );
     ## plausibility checks
     if !IsSpecializationOfFilter( IsCapCategory, category_filter )
         
-        Print( "WARNING: filter ", category_filter, " does !imply `IsCapCategory`. This will probably cause errors.\n" );
+        Print( "WARNING: filter ", category_filter, " does not imply `IsCapCategory`. This will probably cause errors.\n" );
         
     end;
     
     if !IsSpecializationOfFilter( IsCapCategoryObject, object_filter )
         
-        Print( "WARNING: filter ", object_filter, " does !imply `IsCapCategoryObject`. This will probably cause errors.\n" );
+        Print( "WARNING: filter ", object_filter, " does not imply `IsCapCategoryObject`. This will probably cause errors.\n" );
         
     end;
     
     if !IsSpecializationOfFilter( IsCapCategoryMorphism, morphism_filter )
         
-        Print( "WARNING: filter ", morphism_filter, " does !imply `IsCapCategoryMorphism`. This will probably cause errors.\n" );
+        Print( "WARNING: filter ", morphism_filter, " does not imply `IsCapCategoryMorphism`. This will probably cause errors.\n" );
         
     end;
     
     if !IsSpecializationOfFilter( IsCapCategoryTwoCell, two_cell_filter )
         
-        Print( "WARNING: filter ", two_cell_filter, " does !imply `IsCapCategoryTwoCell`. This will probably cause errors.\n" );
+        Print( "WARNING: filter ", two_cell_filter, " does not imply `IsCapCategoryTwoCell`. This will probably cause errors.\n" );
         
     end;
     
@@ -571,13 +571,13 @@ InstallMethod( @__MODULE__,  CanCompute,
     
     if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[string] )
         
-        Error( string, " is !the name of a CAP operation" );
+        Error( string, " is not the name of a CAP operation" );
         
     end;
     
     weight_list = category.derivations_weight_list;
     
-    return CurrentOperationWeight( weight_list, string ) != Inf;
+    return CurrentOperationWeight( weight_list, string ) != infinity;
     
 end );
 
@@ -602,7 +602,7 @@ InstallMethod( @__MODULE__,  CheckConstructivenessOfCategory,
     
     if !@IsBound( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[string] )
       
-      Error( "the given string is !a property of a category" );
+      Error( "the given string is not a property of a category" );
     
     end;
     
@@ -697,7 +697,7 @@ end );
     
     if category.overhead != true
         
-        Display( "WARNING: <category> was created with `overhead = false` && thus can!collect timing statistics." );
+        Display( "WARNING: <category> was created with `overhead = false` and thus cannot collect timing statistics." );
         
     end;
     
@@ -710,7 +710,7 @@ end );
     
     if category.overhead != true
         
-        Display( "WARNING: <category> was created with `overhead = false` && thus can!collect timing statistics." );
+        Display( "WARNING: <category> was created with `overhead = false` and thus cannot collect timing statistics." );
         
     end;
     
@@ -724,7 +724,7 @@ end );
     
     if category.overhead != true
         
-        Display( "WARNING: <category> was created with `overhead = false` && thus can!collect timing statistics." );
+        Display( "WARNING: <category> was created with `overhead = false` and thus cannot collect timing statistics." );
         
     end;
     
@@ -742,7 +742,7 @@ end );
     
     if category.overhead != true
         
-        Display( "WARNING: <category> was created with `overhead = false` && thus can!collect timing statistics." );
+        Display( "WARNING: <category> was created with `overhead = false` and thus cannot collect timing statistics." );
         
     end;
     
@@ -781,7 +781,7 @@ end );
         
     elseif !category.timing_statistics_enabled
         
-        warning = "WARNING: timing statistics for this category are disabled, so the results shown may !be up to date. Use `EnableTimingStatistics( <category> )` to enable timing statistics.";
+        warning = "WARNING: timing statistics for this category are disabled, so the results shown may not be up to date. Use `EnableTimingStatistics( <category> )` to enable timing statistics.";
         
     else
         
@@ -822,7 +822,7 @@ end );
         
     end;
     
-    Display( @Concatenation( "Total time spent ⥉ primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
+    Display( @Concatenation( "Total time spent in primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
     
     for operation in info.operations
         
@@ -865,7 +865,7 @@ if IsPackageMarkedForLoading( "Browse", ">= 1.5" )
             
         end;
         
-        Add( header, @Concatenation( "Total time spent ⥉ primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
+        Add( header, @Concatenation( "Total time spent in primitive operations of this category: ", StringGAP( info.total_time_global ) , " ms" ) );
         Add( header, "" );
         
         value_matrix = [ ];
@@ -889,8 +889,8 @@ else
     @InstallGlobalFunction( "BrowseTimingStatistics",
       function( category )
         
-        Display( "`BrowseTimingStatistics` needs the function `NCurses.BrowseDenseList`, which should be available ⥉ the package \"Browse\"." );
-        Display( "Please load \"Browse\" before/together with \"CAP\" || use `DisplayTimingStatistics( <category> )` instead." );
+        Display( "`BrowseTimingStatistics` needs the function `NCurses.BrowseDenseList`, which should be available in the package \"Browse\"." );
+        Display( "Please load \"Browse\" before/together with \"CAP\" or use `DisplayTimingStatistics( <category> )` instead." );
         
     end );
     
@@ -1093,6 +1093,6 @@ InstallMethod( @__MODULE__,  CellFilter,
 
   function ( category )
     
-    Error( "Categories do !have an attribute `CellFilter` anymore." );
+    Error( "Categories do not have an attribute `CellFilter` anymore." );
     
 end );

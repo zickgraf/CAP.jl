@@ -18,12 +18,12 @@
         IsCapCategory );
 
 #! @Description
-#!  The &GAP; category of objects ⥉ a wrapper CAP category.
+#!  The &GAP; category of objects in a wrapper CAP category.
 @DeclareFilter( "IsWrapperCapCategoryObject",
         IsCapCategoryObject );
 
 #! @Description
-#!  The &GAP; category of morphisms ⥉ a wrapper CAP category.
+#!  The &GAP; category of morphisms in a wrapper CAP category.
 @DeclareFilter( "IsWrapperCapCategoryMorphism",
         IsCapCategoryMorphism );
 
@@ -75,7 +75,7 @@ end );
 ####################################
 
 #! @Description
-#!  Wrap an object <A>object</A> (in the category underlying the wrapper category <A>category</A>) to form an object ⥉ <A>category</A>.
+#!  Wrap an object <A>object</A> (in the category underlying the wrapper category <A>category</A>) to form an object in <A>category</A>.
 #! @Arguments category, object
 #! @Returns an object
 @DeclareOperation( "AsObjectInWrapperCategory",
@@ -91,8 +91,8 @@ CapJitAddTypeSignature( "AsObjectInWrapperCategory",
 end );
 
 #! @Description
-#!  Wrap a morphism <A>morphism</A> (in the category underlying the wrapper category `CapCategory(`<A>source</A>`)`) to form a morphism ⥉ `CapCategory(`<A>source</A>`)`
-#!  with given source && range.
+#!  Wrap a morphism <A>morphism</A> (in the category underlying the wrapper category `CapCategory(`<A>source</A>`)`) to form a morphism in `CapCategory(`<A>source</A>`)`
+#!  with given source and range.
 #! @Arguments source, morphism, range
 #! @Returns a morphism
 @DeclareOperation( "AsMorphismInWrapperCategory",
@@ -108,7 +108,7 @@ CapJitAddTypeSignature( "AsMorphismInWrapperCategory",
 end );
 
 #! @Description
-#!  Wrap a morphism <A>morphism</A> (in the category underlying the wrapper category <A>category</A>) to form a morphism ⥉ <A>category</A>.
+#!  Wrap a morphism <A>morphism</A> (in the category underlying the wrapper category <A>category</A>) to form a morphism in <A>category</A>.
 #! @Arguments category, morphism
 #! @Returns a morphism
 @DeclareOperation( "AsMorphismInWrapperCategory",
@@ -116,7 +116,7 @@ end );
 
 #! @Description
 #!  Convenience method for <Ref Oper="AsObjectInWrapperCategory" Label="for IsWrapperCapCategory, IsCapCategoryObject" />
-#!  && <Ref Oper="AsMorphismInWrapperCategory" Label="for IsWrapperCapCategory, IsCapCategoryMorphism" />.
+#!  and <Ref Oper="AsMorphismInWrapperCategory" Label="for IsWrapperCapCategory, IsCapCategoryMorphism" />.
 #! @Arguments cell, category
 @DeclareOperation( "/",
                 [ IsCapCategoryCell, IsWrapperCapCategory ] );
@@ -125,11 +125,11 @@ end );
 #!  Wraps a category <A>category</A> to form a new category subject to the options given via <A>options</A>,
 #!  which is a record with the following keys:
 #!  * `name` (optional): the name of the wrapper category
-#!  * `only_primitive_operations` (optional, default `false`): whether to only wrap primitive operations || all operations
+#!  * `only_primitive_operations` (optional, default `false`): whether to only wrap primitive operations or all operations
 #!
 #!  Additionally, the following options of <Ref Oper="CategoryConstructor" Label="for IsRecord" /> are supported:
 #!  `category_filter`, `category_object_filter`, `category_morphism_filter`.
-#!  The filters must imply `IsWrapperCapCategory`, `IsWrapperCapCategoryObject`, && `IsWrapperCapCategoryMorphism`, respectively.
+#!  The filters must imply `IsWrapperCapCategory`, `IsWrapperCapCategoryObject`, and `IsWrapperCapCategoryMorphism`, respectively.
 #! @Arguments category, options
 #! @Returns a category
 @DeclareOperation( "WrapperCategory",

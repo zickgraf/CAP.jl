@@ -22,7 +22,7 @@
         
         if !diagram_position ⥉ [ "Source", "Range" ]
             
-            Error( "diagram_position must be \"Source\" || \"Range\"" );
+            Error( "diagram_position must be \"Source\" or \"Range\"" );
             
         end;
         
@@ -32,7 +32,7 @@
             
             if limit.number_of_targets == 1
                 
-                Error( "this case is currently !supported" );
+                Error( "this case is currently not supported" );
                 
             elseif limit.number_of_targets > 1
                 
@@ -310,7 +310,7 @@ end );
         range_diagram_arguments_names = limit.functorial_range_diagram_arguments_names;
         
         # EqualizerFunctorialWithGivenEqualizers would have 8 arguments if the source objects would be given
-        # -> we have to work around this && derive the source objects from the morphism between the diagrams.
+        # -> we have to work around this and derive the source objects from the morphism between the diagrams.
         equalizer_preprocessing = "";
         
         if Length( limit.diagram_filter_list ) > 0
@@ -355,11 +355,11 @@ end );
                     
                     if limit.limit_object_name != "Equalizer"
                         
-                        Error( "This is a hack which might !be valid ⥉ general." );
+                        Error( "This is a hack which might not be valid in general." );
                         
                     end;
                     
-                    # we are ⥉ the Equalizer case, which needs special handling (see above)
+                    # we are in the Equalizer case, which needs special handling (see above)
                     equalizer_preprocessing = "local Y, Yp;\n    \n    Y = Source( mu );\n    Yp = Range( mu );\n    ";
                     
                 end;

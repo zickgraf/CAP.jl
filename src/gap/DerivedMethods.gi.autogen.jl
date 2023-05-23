@@ -11,23 +11,23 @@
 ###########################
 
 AddDerivationToCAP( IsLiftable,
-                    "Two morphisms with equal targets are mutually liftable ⥉ a terminal category",
+                    "Two morphisms with equal targets are mutually liftable in a terminal category",
                     [  ],
                     
   function( cat, morphism1, morphism2 )
         
-    ## equality of targets is part of the specification of the input && checked by the pre-function
+    ## equality of targets is part of the specification of the input and checked by the pre-function
     return true;
     
 end; CategoryFilter = IsTerminalCategory );
 
 AddDerivationToCAP( IsColiftable,
-                    "Two morphisms with equal sources are mutually coliftable ⥉ a terminal category",
+                    "Two morphisms with equal sources are mutually coliftable in a terminal category",
                     [  ],
                     
   function( cat, morphism1, morphism2 )
     
-    ## equality of sources is part of the specification of the input && checked by the pre-function
+    ## equality of sources is part of the specification of the input and checked by the pre-function
     return true;
     
 end; CategoryFilter = IsTerminalCategory );
@@ -54,7 +54,7 @@ AddDerivationToCAP( MorphismFromKernelObjectToSink,
 
 ##
 AddDerivationToCAP( KernelLift,
-                    "KernelLift using LiftAlongMonomorphism && KernelEmbedding",
+                    "KernelLift using LiftAlongMonomorphism and KernelEmbedding",
                     [ [ LiftAlongMonomorphism, 1 ],
                       [ KernelEmbedding, 1 ] ],
                     
@@ -66,7 +66,7 @@ AddDerivationToCAP( KernelLift,
 
 ##
 AddDerivationToCAP( KernelLiftWithGivenKernelObject,
-                    "KernelLift using LiftAlongMonomorphism && KernelEmbedding",
+                    "KernelLift using LiftAlongMonomorphism and KernelEmbedding",
                     [ [ LiftAlongMonomorphism, 1 ],
                       [ KernelEmbeddingWithGivenKernelObject, 1 ] ],
                     
@@ -93,7 +93,7 @@ AddDerivationToCAP( MorphismFromSourceToCokernelObject,
 
 ##
 AddDerivationToCAP( CokernelColift,
-                    "CokernelColift using ColiftAlongEpimorphism && CokernelProjection",
+                    "CokernelColift using ColiftAlongEpimorphism and CokernelProjection",
                     [ [ ColiftAlongEpimorphism, 1 ],
                       [ CokernelProjection, 1 ] ],
                     
@@ -105,7 +105,7 @@ AddDerivationToCAP( CokernelColift,
 
 ##
 AddDerivationToCAP( CokernelColiftWithGivenCokernelObject,
-                    "CokernelColift using ColiftAlongEpimorphism && CokernelProjection",
+                    "CokernelColift using ColiftAlongEpimorphism and CokernelProjection",
                     [ [ ColiftAlongEpimorphism, 1 ],
                       [ CokernelProjectionWithGivenCokernelObject, 1 ] ],
                     
@@ -413,7 +413,7 @@ AddDerivationToCAP( UniversalMorphismIntoZeroObjectWithGivenZeroObject,
     
 end; CategoryFilter = IsAdditiveCategory );
 
-## FiberProduct from DirectProduct && Equalizer
+## FiberProduct from DirectProduct and Equalizer
 
 ##
 AddDerivationToCAP( FiberProduct,
@@ -480,7 +480,7 @@ AddDerivationToCAP( UniversalMorphismIntoFiberProduct,
 
 ##
 AddDerivationToCAP( MorphismFromFiberProductToSink,
-                    "MorphismFromFiberProductToSink by composing the first projection with the first morphism ⥉ the diagram",
+                    "MorphismFromFiberProductToSink by composing the first projection with the first morphism in the diagram",
                     [ [ ProjectionInFactorOfFiberProduct, 1 ],
                       [ PreCompose, 1 ] ],
                     
@@ -493,7 +493,7 @@ AddDerivationToCAP( MorphismFromFiberProductToSink,
     
   end );
 
-## Pushout from Coproduct && Coequalizer
+## Pushout from Coproduct and Coequalizer
 
 ##
 AddDerivationToCAP( Pushout,
@@ -560,7 +560,7 @@ AddDerivationToCAP( UniversalMorphismFromPushout,
 
 ##
 AddDerivationToCAP( MorphismFromSourceToPushout,
-                    "MorphismFromSourceToPushout by composing the first morphism ⥉ the diagram with the first injection",
+                    "MorphismFromSourceToPushout by composing the first morphism in the diagram with the first injection",
                     [ [ InjectionOfCofactorOfPushout, 1 ],
                       [ PreCompose, 1 ] ],
                     
@@ -992,7 +992,7 @@ end );
 
 ##
 AddDerivationToCAP( UniversalMorphismFromImage,
-                    "UniversalMorphismFromImage using ImageEmbedding && LiftAlongMonomorphism",
+                    "UniversalMorphismFromImage using ImageEmbedding and LiftAlongMonomorphism",
                     [ [ ImageEmbedding, 1 ],
                       [ LiftAlongMonomorphism, 1 ] ],
                     
@@ -1007,7 +1007,7 @@ AddDerivationToCAP( UniversalMorphismFromImage,
 
 ##
 AddDerivationToCAP( UniversalMorphismFromImageWithGivenImageObject,
-                    "UniversalMorphismFromImage using ImageEmbedding && LiftAlongMonomorphism",
+                    "UniversalMorphismFromImage using ImageEmbedding and LiftAlongMonomorphism",
                     [ [ ImageEmbeddingWithGivenImageObject, 1 ],
                       [ LiftAlongMonomorphism, 1 ] ],
                     
@@ -1022,7 +1022,7 @@ end );
 
 ##
 AddDerivationToCAP( UniversalMorphismIntoCoimage,
-                    "UniversalMorphismIntoCoimage using CoimageProjection && ColiftAlongEpimorphism",
+                    "UniversalMorphismIntoCoimage using CoimageProjection and ColiftAlongEpimorphism",
                     [ [ CoimageProjection, 1 ],
                       [ ColiftAlongEpimorphism, 1 ] ],
                     
@@ -1037,7 +1037,7 @@ AddDerivationToCAP( UniversalMorphismIntoCoimage,
 
 ##
 AddDerivationToCAP( UniversalMorphismIntoCoimageWithGivenCoimageObject,
-                    "UniversalMorphismIntoCoimage using CoimageProjection && ColiftAlongEpimorphism",
+                    "UniversalMorphismIntoCoimage using CoimageProjection and ColiftAlongEpimorphism",
                     [ [ CoimageProjectionWithGivenCoimageObject, 1 ],
                       [ ColiftAlongEpimorphism, 1 ] ],
                     
@@ -1052,7 +1052,7 @@ end );
 
 ##
 AddDerivationToCAP( UniversalMorphismIntoCoimage,
-                    "UniversalMorphismIntoCoimage using UniversalMorphismFromImage && CanonicalIdentificationFromImageObjectToCoimage",
+                    "UniversalMorphismIntoCoimage using UniversalMorphismFromImage and CanonicalIdentificationFromImageObjectToCoimage",
                     [ [ UniversalMorphismFromImage, 1 ],
                       [ CanonicalIdentificationFromImageObjectToCoimage, 1 ],
                       [ InverseForMorphisms, 1 ],
@@ -1069,7 +1069,7 @@ AddDerivationToCAP( UniversalMorphismIntoCoimage,
 
 ##
 AddDerivationToCAP( UniversalMorphismIntoEqualizer,
-                    "UniversalMorphismIntoEqualizer using LiftAlongMonomorphism && EmbeddingOfEqualizer",
+                    "UniversalMorphismIntoEqualizer using LiftAlongMonomorphism and EmbeddingOfEqualizer",
                     [ [ LiftAlongMonomorphism, 1 ],
                       [ EmbeddingOfEqualizer, 1 ] ],
                     
@@ -1081,7 +1081,7 @@ AddDerivationToCAP( UniversalMorphismIntoEqualizer,
 
 ##
 AddDerivationToCAP( UniversalMorphismIntoEqualizerWithGivenEqualizer,
-                    "UniversalMorphismIntoEqualizer using LiftAlongMonomorphism && EmbeddingOfEqualizer",
+                    "UniversalMorphismIntoEqualizer using LiftAlongMonomorphism and EmbeddingOfEqualizer",
                     [ [ LiftAlongMonomorphism, 1 ],
                       [ EmbeddingOfEqualizerWithGivenEqualizer, 1 ] ],
                     
@@ -1093,7 +1093,7 @@ end );
 
 ##
 AddDerivationToCAP( MorphismFromEqualizerToSink,
-                    "MorphismFromEqualizerToSink by composing the embedding with the first morphism ⥉ the diagram",
+                    "MorphismFromEqualizerToSink by composing the embedding with the first morphism in the diagram",
                     [ [ EmbeddingOfEqualizer, 1 ],
                       [ PreCompose, 1 ] ],
                     
@@ -1108,7 +1108,7 @@ AddDerivationToCAP( MorphismFromEqualizerToSink,
 
 ##
 AddDerivationToCAP( UniversalMorphismFromCoequalizer,
-                    "UniversalMorphismFromCoequalizer using ColiftAlongEpimorphism && ProjectionOntoCoequalizer",
+                    "UniversalMorphismFromCoequalizer using ColiftAlongEpimorphism and ProjectionOntoCoequalizer",
                     [ [ ColiftAlongEpimorphism, 1 ],
                       [ ProjectionOntoCoequalizer, 1 ] ],
                     
@@ -1120,7 +1120,7 @@ AddDerivationToCAP( UniversalMorphismFromCoequalizer,
 
 ##
 AddDerivationToCAP( UniversalMorphismFromCoequalizerWithGivenCoequalizer,
-                    "UniversalMorphismFromCoequalizer using ColiftAlongEpimorphism && ProjectionOntoCoequalizer",
+                    "UniversalMorphismFromCoequalizer using ColiftAlongEpimorphism and ProjectionOntoCoequalizer",
                     [ [ ColiftAlongEpimorphism, 1 ],
                       [ ProjectionOntoCoequalizerWithGivenCoequalizer, 1 ] ],
                     
@@ -1132,7 +1132,7 @@ end );
 
 ##
 AddDerivationToCAP( MorphismFromSourceToCoequalizer,
-                    "MorphismFromSourceToCoequalizer by composing the first morphism ⥉ the diagram with the projection",
+                    "MorphismFromSourceToCoequalizer by composing the first morphism in the diagram with the projection",
                     [ [ ProjectionOntoCoequalizer, 1 ],
                       [ PreCompose, 1 ] ],
                     
@@ -1205,7 +1205,7 @@ end );
 
 ##
 AddDerivationToCAP( IsBijectiveObject,
-                    "IsBijectiveObject by checking if the object is both projective && injective",
+                    "IsBijectiveObject by checking if the object is both projective and injective",
                     [ [ IsProjective, 1 ],
                       [ IsInjective, 1 ] ],
                     
@@ -1256,7 +1256,7 @@ end );
 
 ##
 AddDerivationToCAP( IsEndomorphism,
-                    "IsEndomorphism by deciding whether source && range are equal as objects",
+                    "IsEndomorphism by deciding whether source and range are equal as objects",
                     [ [ IsEqualForObjects, 1 ] ],
                     
   function( cat, morphism )
@@ -1267,7 +1267,7 @@ end );
 
 ##
 AddDerivationToCAP( IsAutomorphism,
-                    "IsAutomorphism by checking IsEndomorphism && IsIsomorphism",
+                    "IsAutomorphism by checking IsEndomorphism and IsIsomorphism",
                     [ [ IsEndomorphism, 1 ],
                       [ IsIsomorphism, 1 ] ],
                     
@@ -1294,7 +1294,7 @@ end );
 
 ##
 AddDerivationToCAP( IsEqualToIdentityMorphism,
-                    "IsEqualToIdentityMorphism using IsEqualForMorphismsOnMor && IdentityMorphism",
+                    "IsEqualToIdentityMorphism using IsEqualForMorphismsOnMor and IdentityMorphism",
                     [ [ IsEqualForMorphismsOnMor, 1 ],
                       [ IdentityMorphism, 1 ] ],
                     
@@ -1306,7 +1306,7 @@ end );
 
 ##
 AddDerivationToCAP( IsEqualToZeroMorphism,
-                    "IsEqualToZeroMorphism using IsEqualForMorphisms && ZeroMorphism",
+                    "IsEqualToZeroMorphism using IsEqualForMorphisms and ZeroMorphism",
                     [ [ IsEqualForMorphisms, 1 ],
                       [ ZeroMorphism, 1 ] ],
                     
@@ -1390,7 +1390,7 @@ AddDerivationToCAP( IsEqualForMorphismsOnMor,
     
     # See https://github.com/homalg-project/CAP_project/issues/595 for a discussion
     # why we might (not) want to allow IsEqualForObjects to return fail.
-    # In any case, this currently is !officially supported, so CompilerForCAP can ignore this case.
+    # In any case, this currently is not officially supported, so CompilerForCAP can ignore this case.
     #% CAP_JIT_DROP_NEXT_STATEMENT
     if value_1 == fail || value_2 == fail
         
@@ -1488,7 +1488,7 @@ end );
 
 ##
 AddDerivationToCAP( IsIsomorphism,
-                    "IsIsomorphism by deciding if it is a mono && an epi",
+                    "IsIsomorphism by deciding if it is a mono and an epi",
                     [ [ IsMonomorphism, 1 ],
                       [ IsEpimorphism, 1 ] ],
                     
@@ -1500,7 +1500,7 @@ end; CategoryFilter = IsAbelianCategory );
 
 ##
 AddDerivationToCAP( IsIsomorphism,
-                    "IsIsomorphism by deciding if it is a split mono && a split epi",
+                    "IsIsomorphism by deciding if it is a split mono and a split epi",
                     [ [ IsSplitMonomorphism, 1 ],
                       [ IsSplitEpimorphism, 1 ] ],
                     
@@ -1512,7 +1512,7 @@ end );
 
 ##
 AddDerivationToCAP( IsIsomorphism,
-                    "IsIsomorphism by deciding if it is a split mono && an epi",
+                    "IsIsomorphism by deciding if it is a split mono and an epi",
                     [ [ IsSplitMonomorphism, 1 ],
                       [ IsEpimorphism, 1 ] ],
                     
@@ -1524,7 +1524,7 @@ end );
 
 ##
 AddDerivationToCAP( IsIsomorphism,
-                    "IsIsomorphism by deciding if it is a mono && a split epi",
+                    "IsIsomorphism by deciding if it is a mono and a split epi",
                     [ [ IsMonomorphism, 1 ],
                       [ IsSplitEpimorphism, 1 ] ],
                     
@@ -1560,7 +1560,7 @@ end );
 
 ##
 AddDerivationToCAP( IsEqualAsSubobjects,
-                    "IsEqualAsSubobjects(sub1, sub2) if sub1 dominates sub2 && vice versa",
+                    "IsEqualAsSubobjects(sub1, sub2) if sub1 dominates sub2 and vice versa",
                     [ [ IsDominating, 2 ] ],
                     
   function( cat, sub1, sub2 )
@@ -1571,7 +1571,7 @@ end );
 
 ##
 AddDerivationToCAP( IsEqualAsFactorobjects,
-                    "IsEqualAsFactorobjects(factor1, factor2) if factor1 dominates factor2 && vice versa",
+                    "IsEqualAsFactorobjects(factor1, factor2) if factor1 dominates factor2 and vice versa",
                     [ [ IsCodominating, 2 ] ],
                     
   function( cat, factor1, factor2 )
@@ -1593,7 +1593,7 @@ end );
 
 ##
 AddDerivationToCAP( IsDominating,
-                    "IsDominating using IsCodominating && duality by cokernel",
+                    "IsDominating using IsCodominating and duality by cokernel",
                     [ [ CokernelProjection, 2 ],
                       [ IsCodominating, 1 ] ],
                     
@@ -1639,7 +1639,7 @@ end );
 
 ##
 AddDerivationToCAP( IsCodominating,
-                    "IsCodominating using IsDominating && duality by kernel",
+                    "IsCodominating using IsDominating and duality by kernel",
                     [ [ KernelEmbedding, 2 ],
                       [ IsDominating, 1 ] ],
                     
@@ -1720,13 +1720,13 @@ end );
 
 ###########################
 ##
-## Methods returning a morphism where the source && range can directly be read of from the input
+## Methods returning a morphism where the source and range can directly be read of from the input
 ##
 ###########################
 
 ##
 AddDerivationToCAP( ZeroMorphism,
-                    "Zero morphism by composition of morphism into && from zero object",
+                    "Zero morphism by composition of morphism into and from zero object",
                     [ [ PreCompose, 1 ],
                       [ UniversalMorphismIntoZeroObject, 1 ],
                       [ UniversalMorphismFromZeroObject, 1 ] ],
@@ -1750,7 +1750,7 @@ AddDerivationToCAP( ZeroMorphism,
 
 ##
 AddDerivationToCAP( PostCompose,
-                    "PostCompose using PreCompose && swapping arguments",
+                    "PostCompose using PreCompose and swapping arguments",
                     [ [ PreCompose, 1 ] ],
                     
   function( cat, right_mor, left_mor )
@@ -1761,7 +1761,7 @@ end );
 
 ##
 AddDerivationToCAP( PreCompose,
-                    "PreCompose using PostCompose && swapping arguments",
+                    "PreCompose using PostCompose and swapping arguments",
                     [ [ PostCompose, 1 ] ],
                     
   function( cat, left_mor, right_mor )
@@ -1772,7 +1772,7 @@ end );
 
 ##
 AddDerivationToCAP( PreCompose,
-                    "PreCompose by wrapping the arguments ⥉ a list",
+                    "PreCompose by wrapping the arguments in a list",
                     [ [ PreComposeList, 1 ] ],
                     
   function( cat, left_mor, right_mor )
@@ -1794,7 +1794,7 @@ end );
 
 ##
 AddDerivationToCAP( PostCompose,
-                    "PostCompose by wrapping the arguments ⥉ a list",
+                    "PostCompose by wrapping the arguments in a list",
                     [ [ PostComposeList, 1 ] ],
                     
   function( cat, mor_right, mor_left )
@@ -1846,7 +1846,7 @@ end );
 
 ##
 AddDerivationToCAP( PreInverseForMorphisms,
-                    "PreInverseForMorphisms using IdentityMorphism && Lift",
+                    "PreInverseForMorphisms using IdentityMorphism and Lift",
                     [ [ IdentityMorphism, 1 ],
                       [ Lift, 1 ] ],
                     
@@ -1858,7 +1858,7 @@ end );
 
 ##
 AddDerivationToCAP( PostInverseForMorphisms,
-                    "PostInverseForMorphisms using IdentityMorphism && Colift",
+                    "PostInverseForMorphisms using IdentityMorphism and Colift",
                     [ [ IdentityMorphism, 1 ],
                       [ Colift, 1 ] ],
                     
@@ -1904,7 +1904,7 @@ end; CategoryFilter = IsAdditiveCategory );
 
 ##
 AddDerivationToCAP( SubtractionForMorphisms,
-                    "SubtractionForMorphisms(mor1, mor2) as the sum of mor1 && the additive inverse of mor2",
+                    "SubtractionForMorphisms(mor1, mor2) as the sum of mor1 and the additive inverse of mor2",
                     [ [ AdditionForMorphisms, 1 ],
                       [ AdditiveInverseForMorphisms, 1 ] ],
                     
@@ -1916,7 +1916,7 @@ end; CategoryFilter = IsAbCategory );
 
 ##
 AddDerivationToCAP( SumOfMorphisms,
-                    "SumOfMorphisms using AdditionForMorphisms && ZeroMorphism",
+                    "SumOfMorphisms using AdditionForMorphisms and ZeroMorphism",
                     [ [ AdditionForMorphisms, 2 ],
                       [ ZeroMorphism, 1 ] ],
                     
@@ -1977,7 +1977,7 @@ end );
 
 ##
 AddDerivationToCAP( RandomMorphismByInteger,
-                    "RandomMorphismByInteger using RandomObjectByInteger && RandomMorphismWithFixedSourceByInteger",
+                    "RandomMorphismByInteger using RandomObjectByInteger and RandomMorphismWithFixedSourceByInteger",
                     [ [ RandomObjectByInteger, 1 ],
                       [ RandomMorphismWithFixedSourceByInteger, 1 ] ],
                     
@@ -1989,7 +1989,7 @@ end );
 
 ##
 AddDerivationToCAP( RandomMorphismByInteger,
-                    "RandomMorphismByInteger using RandomObjectByInteger && RandomMorphismWithFixedRangeByInteger",
+                    "RandomMorphismByInteger using RandomObjectByInteger and RandomMorphismWithFixedRangeByInteger",
                     [ [ RandomObjectByInteger, 1 ],
                       [ RandomMorphismWithFixedRangeByInteger, 1 ] ],
                     
@@ -2001,7 +2001,7 @@ end );
 
 ##
 AddDerivationToCAP( RandomMorphismWithFixedSourceByInteger,
-                    "RandomMorphismWithFixedSourceByInteger using RandomObjectByInteger && RandomMorphismWithFixedSourceAndRangeByInteger",
+                    "RandomMorphismWithFixedSourceByInteger using RandomObjectByInteger and RandomMorphismWithFixedSourceAndRangeByInteger",
                     [ [ RandomObjectByInteger, 1 ],
                       [ RandomMorphismWithFixedSourceAndRangeByInteger, 1 ] ],
                     
@@ -2013,7 +2013,7 @@ end; CategoryFilter = IsAbCategory );
 
 ##
 AddDerivationToCAP( RandomMorphismWithFixedRangeByInteger,
-                    "RandomMorphismWithFixedRangeByInteger using RandomObjectByInteger && RandomMorphismWithFixedSourceAndRangeByInteger",
+                    "RandomMorphismWithFixedRangeByInteger using RandomObjectByInteger and RandomMorphismWithFixedSourceAndRangeByInteger",
                     [ [ RandomObjectByInteger, 1 ],
                       [ RandomMorphismWithFixedSourceAndRangeByInteger, 1 ] ],
                     
@@ -2025,7 +2025,7 @@ end; CategoryFilter = IsAbCategory );
 
 ##
 AddDerivationToCAP( RandomMorphismByInteger,
-                    "RandomMorphismByInteger using RandomObjectByInteger && RandomMorphismWithFixedSourceAndRangeByInteger",
+                    "RandomMorphismByInteger using RandomObjectByInteger and RandomMorphismWithFixedSourceAndRangeByInteger",
                     [ [ RandomObjectByInteger, 2 ],
                       [ RandomMorphismWithFixedSourceAndRangeByInteger, 1 ] ],
                     
@@ -2037,14 +2037,14 @@ end; CategoryFilter = IsAbCategory );
 
 ##
 AddDerivationToCAP( RandomMorphismByList,
-                    "RandomMorphismByList using RandomObjectByList && RandomMorphismWithFixedSourceByList",
+                    "RandomMorphismByList using RandomObjectByList and RandomMorphismWithFixedSourceByList",
                     [ [ RandomObjectByList, 1 ],
                       [ RandomMorphismWithFixedSourceByList, 1 ] ],
                     
   function( cat, L )
     
     if Length( L ) != 2 || !ForAll( L, IsList )
-        Error( "the list passed to 'RandomMorphismByList' ⥉ ", Name( cat ), " must be a list consisting of two lists!\n" );
+        Error( "the list passed to 'RandomMorphismByList' in ", Name( cat ), " must be a list consisting of two lists!\n" );
     end;
     
     return RandomMorphismWithFixedSourceByList( cat, RandomObjectByList( cat, L[1] ), L[2] );
@@ -2053,14 +2053,14 @@ end );
 
 ##
 AddDerivationToCAP( RandomMorphismByList,
-                    "RandomMorphismByList using RandomObjectByList && RandomMorphismWithFixedRangeByList",
+                    "RandomMorphismByList using RandomObjectByList and RandomMorphismWithFixedRangeByList",
                     [ [ RandomObjectByList, 1 ],
                       [ RandomMorphismWithFixedRangeByList, 1 ] ],
                     
   function( cat, L )
     
     if Length( L ) != 2 || !ForAll( L, IsList )
-        Error( "the list passed to 'RandomMorphismByList' ⥉ ", Name( cat ), " must be a list consisting of two lists!\n" );
+        Error( "the list passed to 'RandomMorphismByList' in ", Name( cat ), " must be a list consisting of two lists!\n" );
     end;
     
     return RandomMorphismWithFixedRangeByList( cat, RandomObjectByList( cat, L[1] ), L[2] );
@@ -2069,14 +2069,14 @@ end );
 
 ##
 AddDerivationToCAP( RandomMorphismWithFixedSourceByList,
-                    "RandomMorphismWithFixedSourceByList using RandomObjectByList && RandomMorphismWithFixedSourceAndRangeByList",
+                    "RandomMorphismWithFixedSourceByList using RandomObjectByList and RandomMorphismWithFixedSourceAndRangeByList",
                     [ [ RandomObjectByList, 1 ],
                       [ RandomMorphismWithFixedSourceAndRangeByList, 1 ] ],
                     
   function( cat, S, L )
     
     if Length( L ) != 2 || !ForAll( L, IsList )
-        Error( "the list passed to 'RandomMorphismWithFixedSourceByList' ⥉ ", Name( cat ), " must be a list consisting of two lists!\n" );
+        Error( "the list passed to 'RandomMorphismWithFixedSourceByList' in ", Name( cat ), " must be a list consisting of two lists!\n" );
     end;
     
     return RandomMorphismWithFixedSourceAndRangeByList( cat, S, RandomObjectByList( cat, L[1] ), L[2] );
@@ -2085,14 +2085,14 @@ end; CategoryFilter = IsAbCategory );
 
 ##
 AddDerivationToCAP( RandomMorphismWithFixedRangeByList,
-                    "RandomMorphismWithFixedRangeByList using RandomObjectByList && RandomMorphismWithFixedSourceAndRangeByList",
+                    "RandomMorphismWithFixedRangeByList using RandomObjectByList and RandomMorphismWithFixedSourceAndRangeByList",
                     [ [ RandomObjectByList, 1 ],
                       [ RandomMorphismWithFixedSourceAndRangeByList, 1 ] ],
                     
   function( cat, R, L )
     
     if Length( L ) != 2 || !ForAll( L, IsList )
-        Error( "the list passed to 'RandomMorphismWithFixedRangeByList' ⥉ ", Name( cat ), " must be a list consisting of two lists!\n" );
+        Error( "the list passed to 'RandomMorphismWithFixedRangeByList' in ", Name( cat ), " must be a list consisting of two lists!\n" );
     end;
     
     return RandomMorphismWithFixedSourceAndRangeByList( cat, RandomObjectByList( cat, L[1] ), R, L[2] );
@@ -2101,14 +2101,14 @@ end; CategoryFilter = IsAbCategory );
 
 ##
 AddDerivationToCAP( RandomMorphismByList,
-                    "RandomMorphismByList using RandomObjectByList && RandomMorphismWithFixedSourceAndRangeByList",
+                    "RandomMorphismByList using RandomObjectByList and RandomMorphismWithFixedSourceAndRangeByList",
                     [ [ RandomObjectByList, 2 ],
                       [ RandomMorphismWithFixedSourceAndRangeByList, 1 ] ],
                     
   function( cat, L )
     
     if Length( L ) != 3 || !ForAll( L, IsList )
-        Error( "the list passed to 'RandomMorphismByList' ⥉ ", Name( cat ), " must be a list consisting of three lists!\n" );
+        Error( "the list passed to 'RandomMorphismByList' in ", Name( cat ), " must be a list consisting of three lists!\n" );
     end;
     
     return RandomMorphismWithFixedSourceAndRangeByList( cat, RandomObjectByList( cat, L[1] ), RandomObjectByList( cat, L[2] ), L[3] );
@@ -2591,7 +2591,7 @@ end; CategoryFilter = cat -> @IsBound( cat.supports_empty_limits ) && cat.suppor
 
 ##
 AddDerivationToCAP( HomologyObjectFunctorialWithGivenHomologyObjects,
-                    "HomologyObjectFunctorialWithGivenHomologyObjects using functoriality of (co)kernels && images ⥉ abelian categories",
+                    "HomologyObjectFunctorialWithGivenHomologyObjects using functoriality of (co)kernels and images in abelian categories",
                     [ [ ImageEmbedding, 2 ],
                       [ PreCompose, 5 ],
                       [ KernelEmbedding, 2 ],
@@ -2642,8 +2642,8 @@ end; CategoryFilter = IsAbelianCategory );
 
 ###########################
 ##
-## Methods returning a morphism with source || range constructed within the method!
-## If there is a method available which only constructs this source || range,
+## Methods returning a morphism with source or range constructed within the method!
+## If there is a method available which only constructs this source or range,
 ## one has to be sure that this source is equal to that construction (by IsEqualForObjects)
 ##
 ###########################
@@ -2920,7 +2920,7 @@ end );
 
 ##
 AddDerivationToCAP( IsomorphismFromDirectProductToDirectSum,
-                    "IsomorphismFromDirectProductToDirectSum using direct product projections && universal property of direct sum",
+                    "IsomorphismFromDirectProductToDirectSum using direct product projections and universal property of direct sum",
                     [ [ ProjectionInFactorOfDirectProduct, 2 ],
                       [ DirectProduct, 1 ],
                       [ UniversalMorphismIntoDirectSum, 1 ] ],
@@ -2948,7 +2948,7 @@ end );
 
 ##
 AddDerivationToCAP( IsomorphismFromDirectSumToDirectProduct,
-                    "IsomorphismFromDirectSumToDirectProduct using direct sum projections && universal property of direct product",
+                    "IsomorphismFromDirectSumToDirectProduct using direct sum projections and universal property of direct product",
                     [ [ ProjectionInFactorOfDirectSum, 2 ],
                       [ DirectSum, 1 ],
                       [ UniversalMorphismIntoDirectProduct, 1 ] ],
@@ -2976,7 +2976,7 @@ end );
 
 ##
 AddDerivationToCAP( IsomorphismFromCoproductToDirectSum,
-                    "IsomorphismFromCoproductToDirectSum using cofactor injections && the universal property of the coproduct",
+                    "IsomorphismFromCoproductToDirectSum using cofactor injections and the universal property of the coproduct",
                     [ [ InjectionOfCofactorOfDirectSum, 2 ],
                       [ DirectSum, 1 ],
                       [ UniversalMorphismFromCoproduct, 1 ] ],
@@ -3004,7 +3004,7 @@ end );
 
 ##
 AddDerivationToCAP( IsomorphismFromDirectSumToCoproduct,
-                    "IsomorphismFromDirectSumToCoproduct using cofactor injections && the universal property of the direct sum",
+                    "IsomorphismFromDirectSumToCoproduct using cofactor injections and the universal property of the direct sum",
                     [ [ InjectionOfCofactorOfCoproduct, 2 ],
                       [ Coproduct, 1 ],
                       [ UniversalMorphismFromDirectSum, 1 ] ],
@@ -3033,7 +3033,7 @@ end );
 ## B -β→ C ←α- A, ℓ•β == α ⇔ ν(ℓ)•H(A,β) == ν(α)
 ##
 AddDerivationToCAP( Lift,
-                    "Derive Lift using the homomorphism structure && Lift ⥉ the range of the homomorphism structure",
+                    "Derive Lift using the homomorphism structure and Lift in the range of the homomorphism structure",
                     [ [ IdentityMorphism, 1 ],
                       [ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure, 1 ],
                       [ HomomorphismStructureOnMorphisms, 1 ],
@@ -3056,7 +3056,7 @@ end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
 
 ##
 AddDerivationToCAP( LiftOrFail,
-                    "Derive LiftOrFail using the homomorphism structure && LiftOrFail ⥉ the range of the homomorphism structure",
+                    "Derive LiftOrFail using the homomorphism structure and LiftOrFail in the range of the homomorphism structure",
                     [ [ IdentityMorphism, 1 ],
                       [ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure, 1 ],
                       [ HomomorphismStructureOnMorphisms, 1 ],
@@ -3087,7 +3087,7 @@ end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
 
 ##
 AddDerivationToCAP( IsLiftable,
-                    "Derive IsLiftable using the homomorphism structure && Liftable ⥉ the range of the homomorphism structure",
+                    "Derive IsLiftable using the homomorphism structure and Liftable in the range of the homomorphism structure",
                     [ [ IdentityMorphism, 1 ],
                       [ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure, 1 ],
                       [ HomomorphismStructureOnMorphisms, 1 ],
@@ -3110,7 +3110,7 @@ end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
 ## B ←β- C -α→ A, α•ℓ == β ⇔ ν(ℓ)•H(α,B) == ν(β)
 ##
 AddDerivationToCAP( Colift,
-                    "Derive Colift using the homomorphism structure && Lift ⥉ the range of the homomorphism structure",
+                    "Derive Colift using the homomorphism structure and Lift in the range of the homomorphism structure",
                     [ [ IdentityMorphism, 1 ],
                       [ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure, 1 ],
                       [ HomomorphismStructureOnMorphisms, 1 ],
@@ -3133,7 +3133,7 @@ end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
 
 ##
 AddDerivationToCAP( ColiftOrFail,
-                    "Derive ColiftOrFail using the homomorphism structure && LiftOrFail ⥉ the range of the homomorphism structure",
+                    "Derive ColiftOrFail using the homomorphism structure and LiftOrFail in the range of the homomorphism structure",
                     [ [ IdentityMorphism, 1 ],
                       [ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure, 1 ],
                       [ HomomorphismStructureOnMorphisms, 1 ],
@@ -3164,7 +3164,7 @@ end; CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
 
 ##
 AddDerivationToCAP( IsColiftable,
-                    "Derive IsColiftable using the homomorphism structure && IsLiftable ⥉ the range of the homomorphism structure",
+                    "Derive IsColiftable using the homomorphism structure and IsLiftable in the range of the homomorphism structure",
                     [ [ IdentityMorphism, 1 ],
                       [ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure, 1 ],
                       [ HomomorphismStructureOnMorphisms, 1 ],
@@ -3326,7 +3326,7 @@ end );
 
 ##
 AddDerivationToCAP( LiftOrFail,
-                    "LiftOrFail using IsLiftable && Lift",
+                    "LiftOrFail using IsLiftable and Lift",
                     [ [ IsLiftable, 1 ],
                       [ Lift, 1 ] ],
                     
@@ -3346,7 +3346,7 @@ end );
 
 ##
 AddDerivationToCAP( ColiftOrFail,
-                    "ColiftOrFail using IsColiftable && Colift",
+                    "ColiftOrFail using IsColiftable and Colift",
                     [ [ IsColiftable, 1 ],
                       [ Colift, 1 ] ],
                     
@@ -3366,7 +3366,7 @@ end );
 
 ##
 AddDerivationToCAP( SolveLinearSystemInAbCategoryOrFail,
-                    "SolveLinearSystemInAbCategoryOrFail using MereExistenceOfSolutionOfLinearSystemInAbCategory && SolveLinearSystemInAbCategory",
+                    "SolveLinearSystemInAbCategoryOrFail using MereExistenceOfSolutionOfLinearSystemInAbCategory and SolveLinearSystemInAbCategory",
                     [ [ MereExistenceOfSolutionOfLinearSystemInAbCategory, 1 ],
                       [ SolveLinearSystemInAbCategory, 1 ] ],
                     
@@ -3398,7 +3398,7 @@ end );
 
 ###########################
 ##
-## Methods returning a nonnegative integer || Inf
+## Methods returning a nonnegative integer or infinity
 ##
 ###########################
 
@@ -4311,7 +4311,7 @@ AddFinalDerivationBundle( "IsomorphismFromInitialObjectToZeroObject as the ident
                       IsomorphismFromZeroObjectToInitialObject,
                       InitialObject,
                       UniversalMorphismFromInitialObject
-                      ## NOTE: the combination of AddZeroObject && AddUniversalMorphismFromInitialObjectWithGivenInitialObject
+                      ## NOTE: the combination of AddZeroObject and AddUniversalMorphismFromInitialObjectWithGivenInitialObject
                       ## is okay because only having UniversalMorphismFromInitialObjectWithGivenInitialObject, you cannot
                       ## deduce an InitialObject
 #                       UniversalMorphismFromInitialObjectWithGivenInitialObject
@@ -4347,7 +4347,7 @@ AddFinalDerivationBundle( "IsomorphismFromTerminalObjectToZeroObject as the iden
                       IsomorphismFromZeroObjectToTerminalObject,
                       TerminalObject,
                       UniversalMorphismIntoTerminalObject
-                      ## NOTE: the combination of AddZeroObject && AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject
+                      ## NOTE: the combination of AddZeroObject and AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject
                       ## is okay because only having UniversalMorphismIntoTerminalObjectWithGivenTerminalObject, you cannot
                       ## deduce a TerminalObject
 #                       UniversalMorphismIntoTerminalObjectWithGivenTerminalObject
@@ -4466,7 +4466,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   function( cat, L )
     
     if Length( L ) != 1 || !IsInt( L[1] )
-        Error( "the list passed to 'RandomObjectByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+        Error( "the list passed to 'RandomObjectByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
     return RandomObjectByInteger( cat, L[1] );
@@ -4479,7 +4479,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   function( cat, S, R, L )
     
     if Length( L ) != 1 || !IsInt( L[1] )
-        Error( "the list passed to 'RandomMorphismWithFixedSourceAndRangeByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+        Error( "the list passed to 'RandomMorphismWithFixedSourceAndRangeByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
     return RandomMorphismWithFixedSourceAndRangeByInteger( cat, S, R, L[1] );
@@ -4492,7 +4492,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   function( cat, S, L )
     
     if Length( L ) != 1 || !IsInt( L[1] )
-        Error( "the list passed to 'RandomMorphismWithFixedSourceByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+        Error( "the list passed to 'RandomMorphismWithFixedSourceByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
     return RandomMorphismWithFixedSourceByInteger( cat, S, L[1] );
@@ -4505,7 +4505,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   function( cat, R, L )
     
     if Length( L ) != 1 || !IsInt( L[1] )
-        Error( "the list passed to 'RandomMorphismWithFixedRangeByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+        Error( "the list passed to 'RandomMorphismWithFixedRangeByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
     return RandomMorphismWithFixedRangeByInteger( cat, R, L[1] );
@@ -4518,7 +4518,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   function( cat, L )
     
     if Length( L ) != 1 || !IsInt( L[1] )
-        Error( "the list passed to 'RandomMorphismByList' ⥉ ", Name( cat ), " must consist of only one integer!\n" );
+        Error( "the list passed to 'RandomMorphismByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
     return RandomMorphismByInteger( cat, L[1] );
@@ -4621,7 +4621,7 @@ AddFinalDerivation( IsEqualForMorphisms,
 ## Final methods for BasisOfExternalHom & CoefficientsOfMorphism
 
 ##
-AddFinalDerivationBundle( "Adding BasisOfExternalHom && CoefficientsOfMorphism using homomorphism structure",
+AddFinalDerivationBundle( "Adding BasisOfExternalHom and CoefficientsOfMorphism using homomorphism structure",
                     [
                       [ HomomorphismStructureOnObjects, 1 ],
                       [ InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism, 2 ],

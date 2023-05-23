@@ -4,17 +4,17 @@
 # Declarations
 #
 #! @Chapter CAP Categories
-#!  Categories are the main GAP objects ⥉ CAP.
-#!  They are used to associate GAP objects which represent objects &&
+#!  Categories are the main GAP objects in CAP.
+#!  They are used to associate GAP objects which represent objects and
 #!  morphisms with their category. By associating a GAP object to the
 #!  category, one of two filters belonging to the category (ObjectFilter/MorphismFilter)
 #!  are set to true.
 #!  Via Add methods, functions for specific existential quantifiers can be
-#!  associated to the category && after that can be applied to GAP objects ⥉ the category.
+#!  associated to the category and after that can be applied to GAP objects in the category.
 #!  A GAP category object also knows which constructions
-#!  are currently possible ⥉ this category.
+#!  are currently possible in this category.
 #!
-#! Classically, a category consists of a class of objects, a set of morphisms, identity morphisms, && a composition function
+#! Classically, a category consists of a class of objects, a set of morphisms, identity morphisms, and a composition function
 #! satisfying some simple axioms. In CAP, we use a slightly different notion of a category.
 #!
 #! A CAP category $\mathbf[C]$ consists of the following data:
@@ -29,12 +29,12 @@
 #!   if $\alpha, \alpha' \in \mathrm[Hom]_[\mathbf[C]]( a, b )$,
 #!   $\beta, \beta' \in \mathrm[Hom]_[\mathbf[C]]( b, c )$,
 #!   $\alpha \sim_[a,b] \alpha'$
-#!   && $\beta \sim_[b,c] \beta'$,
+#!   and $\beta \sim_[b,c] \beta'$,
 #!   then $\beta \circ \alpha \sim_[a,c] \beta' \circ \alpha'$.
 #! * For all $a, b \in \mathrm[Obj]_[\mathbf[C]]$,
 #!   $\alpha \in \mathrm[Hom]_[\mathbf[C]]( a, b )$,
 #!   we have $$\left( \mathrm[id]_[b] \circ \alpha \right) \sim_[a,b] \alpha$$
-#!   &&
+#!   and
 #!   $$\alpha \sim_[a,b] \left( \alpha \circ \mathrm[id]_[a] \right).$$
 #! * For all $a,b,c,d \in \mathrm[Obj]_[\mathbf[C]]$,
 #!   $\alpha \in \mathrm[Hom]_[\mathbf[C]]( a, b )$,
@@ -78,17 +78,17 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
 
 #! @Description
 #!  The GAP category of CAP categories. Objects of this type handle
-#!  the CAP category information, the caching, && filters for objects in the CAP category.
-#!  Please note that the object itself is !related to methods, you only need it
-#!  as a handler && a presentation of the CAP category.
+#!  the CAP category information, the caching, and filters for objects in the CAP category.
+#!  Please note that the object itself is not related to methods, you only need it
+#!  as a handler and a presentation of the CAP category.
 #! @Arguments object
 @DeclareFilter( "IsCapCategory",
                  IsAttributeStoringRep );
 
 #! @Description
 #! The GAP category of CAP category cells.
-#! Every object, morphism, && $2$-cell
-#! of a CAP category lies ⥉ this GAP category.
+#! Every object, morphism, and $2$-cell
+#! of a CAP category lies in this GAP category.
 #! @Arguments object
 @DeclareFilter( "IsCapCategoryCell",
                  IsAttributeStoringRep );
@@ -131,8 +131,8 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
 #!  Adds a categorical property to the list of CAP
 #!  categorical properties. <A>list</A> must be a list
 #!  containing one entry, if the property is self dual,
-#!  || two, if the dual property has a different name.
-#!  If the first entry of the list is empty && the second
+#!  or two, if the dual property has a different name.
+#!  If the first entry of the list is empty and the second
 #!  is a property name, the property is assumed to have no
 #!  dual.
 #! @Arguments list
@@ -146,7 +146,7 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
         Error(
             "You must pass a pair (i.e. a list of length 2) of strings to `AddCategoricalProperty`. ",
             "The second entry is the property of the opposite category. ",
-            "If the opposite property is !implemented, you may pass `fail` instead."
+            "If the opposite property is not implemented, you may pass `fail` instead."
         );
         return;
     end;
@@ -298,7 +298,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! The argument is a string $s$.
 #! This operation creates a new CAP category from scratch.
 #! Its name is set to $s$.
-#! The category, its objects, its morphisms, && its two cells will lie ⥉ the corresponding given filters.
+#! The category, its objects, its morphisms, and its two cells will lie in the corresponding given filters.
 #! @Arguments s, category_filter, object_filter, morphism_filter, two_cell_filter
 #! @Returns a category
 @DeclareOperation( "CreateCapCategory",
@@ -308,10 +308,10 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! The argument is a string $s$.
 #! This operation creates a new CAP category from scratch.
 #! Its name is set to $s$.
-#! The category, its objects, its morphisms, && its two cells will lie ⥉ the corresponding given filters.
-#! The data types of the object/morphism/two cell datum can be given as described ⥉ <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />.
+#! The category, its objects, its morphisms, and its two cells will lie in the corresponding given filters.
+#! The data types of the object/morphism/two cell datum can be given as described in <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />.
 #! As a convenience, simply a filter can be given if this suffices to fully determine the data type.
-#! If a data type is !specified, pass `fail` instead.
+#! If a data type is not specified, pass `fail` instead.
 #! @Arguments s, category_filter, object_filter, morphism_filter, two_cell_filter, object_datum_type, morphism_datum_type, two_cell_datum_type
 #! @Returns a category
 @DeclareGlobalFunction( "CreateCapCategoryWithDataTypes" );
@@ -330,13 +330,13 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 @DeclareAttribute( "Name", IsCapCategory );
 
 #! Each category $C$ stores various filters.
-#! They are used to apply the right functions ⥉ the method selection.
+#! They are used to apply the right functions in the method selection.
 
 ## This filter is used by the installation
 ## of the Add methods for the terminal object.
 #! @Description
 #! The argument is a category $C$.
-#! The output is a filter ⥉ which $C$ lies.
+#! The output is a filter in which $C$ lies.
 #! @Arguments C
 #! @Returns a filter
 @DeclareAttribute( "CategoryFilter",
@@ -347,7 +347,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @Description
 #! The argument is a category $C$.
-#! The output is a filter ⥉ which all objects
+#! The output is a filter in which all objects
 #! of $C$ shall lie.
 #! @Arguments C
 #! @Returns a filter
@@ -356,7 +356,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @Description
 #! The argument is a category $C$.
-#! The output is a filter ⥉ which all morphisms
+#! The output is a filter in which all morphisms
 #! of $C$ shall lie.
 #! @Arguments C
 #! @Returns a filter
@@ -365,7 +365,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @Description
 #! The argument is a category $C$.
-#! The output is a filter ⥉ which all $2$-cells
+#! The output is a filter in which all $2$-cells
 #! of $C$ shall lie.
 #! @Arguments C
 #! @Returns a filter
@@ -375,32 +375,32 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! @Description
 #! The argument is a category $C$.
 #! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
-#! of object data of $C$ (or `fail` if this data type is !specified).
+#! of object data of $C$ (or `fail` if this data type is not specified).
 #! @Arguments C
-#! @Returns a data type || `fail`
+#! @Returns a data type or `fail`
 @DeclareAttribute( "ObjectDatumType",
                   IsCapCategory );
 
 #! @Description
 #! The argument is a category $C$.
 #! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
-#! of morphism data of $C$ (or `fail` if this data type is !specified).
+#! of morphism data of $C$ (or `fail` if this data type is not specified).
 #! @Arguments C
-#! @Returns a data type || `fail`
+#! @Returns a data type or `fail`
 @DeclareAttribute( "MorphismDatumType",
                   IsCapCategory );
 
 #! @Description
 #! The argument is a category $C$.
 #! The output is the data type (see <Ref BookName="CompilerForCAP" Func="CapJitInferredDataTypes" />)
-#! of two cell data of $C$ (or `fail` if this data type is !specified).
+#! of two cell data of $C$ (or `fail` if this data type is not specified).
 #! @Arguments C
-#! @Returns a data type || `fail`
+#! @Returns a data type or `fail`
 @DeclareAttribute( "TwoCellDatumType",
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category $C$ which is expected to lie ⥉ the
+#! The argument is a category $C$ which is expected to lie in the
 #! filter <C>IsLinearCategoryOverCommutativeRing</C>.
 #! The output is a commutative ring over which the category is linear.
 #! @Arguments C
@@ -409,7 +409,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
                   IsCapCategory );
 
 #! @Description
-#! The argument is a category $C$ which is expected to lie ⥉ the
+#! The argument is a category $C$ which is expected to lie in the
 #! filter <C>IsEquippedWithHomomorphismStructure</C>.
 #! The output is the range category $D$ of the defining functor
 #! $H: C^[\mathrm[op]] \times C \rightarrow D$ of the homomorphism structure.
@@ -420,7 +420,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @Description
 #! The argument is an additive category $C$.
-#! The output is a list $L$ of objects ⥉ $C$ such that every object ⥉ $C$ is a finite direct sum of objects ⥉ $L$.
+#! The output is a list $L$ of objects in $C$ such that every object in $C$ is a finite direct sum of objects in $L$.
 #! @Arguments C
 #! @Returns a list of objects
 @DeclareAttribute( "AdditiveGenerators",
@@ -428,8 +428,8 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @Description
 #!  The argument is an Abelian category $C$ with enough projectives.
-#!  The output is the set of indecomposable projective objects ⥉ $C$ up to isomorphism.
-#!  That is every projective object ⥉ $C$ is isomorphic to a finite direct sum over these objects.
+#!  The output is the set of indecomposable projective objects in $C$ up to isomorphism.
+#!  That is every projective object in $C$ is isomorphic to a finite direct sum over these objects.
 #! @Arguments C
 #! @Returns a list of objects
 @DeclareAttribute( "IndecomposableProjectiveObjects",
@@ -437,8 +437,8 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @Description
 #!  The argument is an Abelian category $C$ with enough injectives.
-#!  The output is the set of indecomposable injective objects ⥉ $C$ up to isomorphism.
-#!  That is every injective object ⥉ $C$ is isomorphic to a finite direct sum over these objects.
+#!  The output is the set of indecomposable injective objects in $C$ up to isomorphism.
+#!  That is every injective object in $C$ is isomorphic to a finite direct sum over these objects.
 #! @Arguments C
 #! @Returns a list of objects
 @DeclareAttribute( "IndecomposableInjectiveObjects",
@@ -499,12 +499,12 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @BeginGroup
 #! @Description
-#! The argument is a category <A>C</A> && a string <A>string</A>,
+#! The argument is a category <A>C</A> and a string <A>string</A>,
 #! which should be the name of a CAP operation, e.g., PreCompose.
-#! If applying this method is possible ⥉ $C$, the method returns <C>true</C>, <C>false</C> otherwise.
-#! If the string is !the name of a CAP operation, an error is raised.
+#! If applying this method is possible in $C$, the method returns <C>true</C>, <C>false</C> otherwise.
+#! If the string is not the name of a CAP operation, an error is raised.
 #! For debugging purposes one can also pass the CAP operation instead of its name.
-#! @Returns <C>true</C> || <C>false</C>
+#! @Returns <C>true</C> or <C>false</C>
 #! @Arguments C, string
 @DeclareOperation( "CanCompute",
                   [ IsCapCategory, IsString ] );
@@ -514,12 +514,12 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! @EndGroup
 
 #! @Description
-#! The arguments are a category $C$ && a string $s$.
+#! The arguments are a category $C$ and a string $s$.
 #! If $s$ is a categorical property (e.g. <C>"IsAbelianCategory"</C>),
 #! the output is a list of strings with CAP operations
-#! which are missing ⥉ $C$ to have the categorical property
+#! which are missing in $C$ to have the categorical property
 #! constructively.
-#! If $s$ is !a categorical property, an error is raised.
+#! If $s$ is not a categorical property, an error is raised.
 #! @Returns a list
 #! @Arguments C,s
 @DeclareOperation( "CheckConstructivenessOfCategory",
@@ -549,19 +549,19 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @Description
 #! The argument is a GAP object $x$.
-#! If $x$ is an object ⥉ a CAP category, the output consists of data which are needed to reconstruct $x$
+#! If $x$ is an object in a CAP category, the output consists of data which are needed to reconstruct $x$
 #! (e.g., by passing them to an appropriate constructor).
-#! If $x$ is a morphism ⥉ a CAP category, the output consists of a triple whose first entry is the source of $x$,
-#! the third entry is the range of $x$, && the second entry consists of data which are needed to reconstruct $x$
-#! (e.g., by passing them to an appropriate constructor, possibly together with the source && range of $x$).
+#! If $x$ is a morphism in a CAP category, the output consists of a triple whose first entry is the source of $x$,
+#! the third entry is the range of $x$, and the second entry consists of data which are needed to reconstruct $x$
+#! (e.g., by passing them to an appropriate constructor, possibly together with the source and range of $x$).
 #! @Returns a GAP object
 #! @Arguments x
 @DeclareAttribute( "Down",
                   IsObject );
 
 #! @Description
-#! The argument is a morphism ⥉ a CAP category, the output consists of data which are needed to reconstruct $x$
-#! (e.g., by passing it to an appropriate constructor, possibly together with its source && range).
+#! The argument is a morphism in a CAP category, the output consists of data which are needed to reconstruct $x$
+#! (e.g., by passing it to an appropriate constructor, possibly together with its source and range).
 #! @Returns a GAP object
 #! @Arguments x
 @DeclareAttribute( "DownOnlyMorphismData",
@@ -609,7 +609,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @BeginGroup
 #! @Description
-#!  Sets the caching of <A>category</A> to <C>weak</C>, <C>crisp</C> || <C>none</C>, respectively.
+#!  Sets the caching of <A>category</A> to <C>weak</C>, <C>crisp</C> or <C>none</C>, respectively.
 #! @Arguments category
 @DeclareGlobalFunction( "SetCachingOfCategoryWeak" );
 #! @Arguments category
@@ -621,7 +621,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! @BeginGroup
 #! @Description
 #!  Sets the default caching behaviour, all new categories will have their caching set to either
-#!  <C>weak</C>, <C>crisp</C>, || <C>none</C>. The default at startup is <C>weak</C>.
+#!  <C>weak</C>, <C>crisp</C>, or <C>none</C>. The default at startup is <C>weak</C>.
 #! @Arguments type
 @DeclareGlobalFunction( "SetDefaultCaching" );
 #! @Arguments
@@ -641,10 +641,10 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @BeginGroup
 #! @Description
-#!  Most operations can perform optional sanity checks on their arguments && results.
-#!  The checks can either be partial (set by default), full, || disabled.
+#!  Most operations can perform optional sanity checks on their arguments and results.
+#!  The checks can either be partial (set by default), full, or disabled.
 #!  With the following commands you can either enable the full checks, the partial checks or, for performance, disable the checks altogether.
-#!  You can do this for input checks, output checks || for both at once.
+#!  You can do this for input checks, output checks or for both at once.
 #! @Arguments category
 @DeclareGlobalFunction( "DisableInputSanityChecks" );
 #! @Arguments category
@@ -674,9 +674,9 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 #! @BeginGroup
 #! @Description
-#!   Enable, disable, reset, display, || browse timing statistics of the primitive operations of <A>category</A>.
+#!   Enable, disable, reset, display, or browse timing statistics of the primitive operations of <A>category</A>.
 #!   Caution: If a primitive operation calls another primitive operation, the runtime
-#!   of the later (including sanity checks etc.) is also included ⥉ the runtime of the former.
+#!   of the later (including sanity checks etc.) is also included in the runtime of the former.
 #! @Arguments category
 @DeclareGlobalFunction( "EnableTimingStatistics" );
 #! @Arguments category
@@ -705,8 +705,8 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #!  the output of primitively added functions must belong to the correct category.
 #!  If the automatic call of <C>Add</C> is enabled,
 #!  the output of primitively added functions only has to be a GAP object
-#!  lying ⥉ <C>IsAttributeStoringRep</C> (with suitable attributes <C>Source</C> && <C>Range</C>
-#!  if the output should be a morphism || a twocell).
+#!  lying in <C>IsAttributeStoringRep</C> (with suitable attributes <C>Source</C> and <C>Range</C>
+#!  if the output should be a morphism or a twocell).
 #! @Arguments C
 @DeclareGlobalFunction( "EnableAddForCategoricalOperations" );
 #! @Arguments C
@@ -720,19 +720,19 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 ##
 #############################################
 
-#!  For finding performance issues ⥉ primitive operations, you can collect timing statistics, see <Ref Sect="Section_Timing_statistics" />.
+#!  For finding performance issues in primitive operations, you can collect timing statistics, see <Ref Sect="Section_Timing_statistics" />.
 #!  You can use the package `CompilerForCAP` to compile your code.
 #!  Additionally, CAP has several settings which can improve the performance.
 #!  In the following some of these are listed.
-#!    * <C>DeactivateCachingOfCategory</C> || <C>DeactivateDefaultCaching</C>: see <Ref Sect="Section_Caching" />.
-#!        This can either improve || degrade the performance depending on the concrete example.
-#!    * <C>CapCategorySwitchLogicOff</C> (on by default) || <C>CapCategorySwitchLogicPropagationOff</C> (off by default): see <Ref Sect="Section_Logic_switcher" />.
-#!        This can either improve || degrade the performance depending on the concrete example.
+#!    * <C>DeactivateCachingOfCategory</C> or <C>DeactivateDefaultCaching</C>: see <Ref Sect="Section_Caching" />.
+#!        This can either improve or degrade the performance depending on the concrete example.
+#!    * <C>CapCategorySwitchLogicOff</C> (on by default) or <C>CapCategorySwitchLogicPropagationOff</C> (off by default): see <Ref Sect="Section_Logic_switcher" />.
+#!        This can either improve or degrade the performance depending on the concrete example.
 #!    * <C>DisableSanityChecks</C>: see <Ref Sect="Section_Sanity_checks" />.
 #!    * <C>DisableAddForCategoricalOperations</C>: see <Ref Sect="Section_Automatic_adds" />.
 #!    * <C>DeactivateToDoList</C>: see the package <C>ToolsForHomalg</C>.
 #!    * Use <C>CreateCapCategoryObjectWithAttributes</C> (<Ref Sect="Section_Adding_Objects_to_a_Category" />)
-#!        instead of <C>AddObject</C> &&
+#!        instead of <C>AddObject</C> and
 #!        <C>CreateCapCategoryMorphismWithAttributes</C> (<Ref Sect="Section_Adding_Morphisms_to_a_Category" />)
 #!        instead of <C>AddMorphism</C>.
 #!    * Pass the option <C>overhead = false</C> to <C>CreateCapCategory</C>.

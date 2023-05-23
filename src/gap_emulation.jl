@@ -300,6 +300,10 @@ function PrintString(int::Union{Int, BigInt})
 	string(int)
 end
 
+function PrintString(c::Char)
+	string("'", c, "'")
+end
+
 function QuotedPrintString(x::Any)
 	PrintString(x)
 end
@@ -1109,11 +1113,6 @@ function NumberArgumentsFunction(func::Function)
 	end
 end
 
-# fallback for unbound record entries
-function NumberArgumentsFunction(func::Nothing)
-	-1
-end
-
 function IsDuplicateFreeList(list::Vector)
 	allunique(list)
 end
@@ -1149,8 +1148,7 @@ function PositionSublist(string::String, substring::String)
 end
 
 function Error(args...)
-	print(args...)
-	throw("Error")
+	error(string(args...))
 end
 
 LowercaseString = lowercase
@@ -1319,6 +1317,8 @@ end
 function Maximum(int1::Union{Int, BigInt}, int2::Union{Int, BigInt})
 	max(int1, int2)
 end
+
+infinity = Inf
 
 # manually imported from ToolsForHomalg
 function ReplacedStringViaRecord( string, record )

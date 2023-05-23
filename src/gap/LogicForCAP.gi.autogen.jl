@@ -176,7 +176,7 @@ end );
                 
             else
                 
-                Error( "wrong object format: only int && all" );
+                Error( "wrong object format: only int and all" );
                 
             end;
             

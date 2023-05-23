@@ -6,7 +6,7 @@
 
 ##
 InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
-        "for a CAP category && a record of options",
+        "for a CAP category and a record of options",
         [ IsCapCategory, IsRecord ],
         
   function( C, options )
@@ -38,14 +38,14 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
             if !filter( options[option_name] )
                 
                 # COVERAGE_IGNORE_NEXT_LINE
-                Error( "The value of the option `", option_name, "` must lie ⥉ the filter ", filter );
+                Error( "The value of the option `", option_name, "` must lie in the filter ", filter );
                 
             end;
             
         else
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( "The following option is !known to `ReinterpretationOfCategory`: ", option_name );
+            Error( "The following option is not known to `ReinterpretationOfCategory`: ", option_name );
             
         end;
         
@@ -70,7 +70,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
         
         if !@IsBound( options[option] )
             
-            Error( "mandatory option ", option, " is !set" );
+            Error( "mandatory option ", option, " is not set" );
             
         end;
         

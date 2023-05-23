@@ -19,7 +19,7 @@
     
     if StartsWith( TargetOperation( final_derivation.derivations[1] ), "IsomorphismFrom" ) && Length( final_derivation.derivations ) == 1
         
-        Print( "WARNING: You are installing a final derivation for ", TargetOperation( final_derivation.derivations[1] ), " which does !include its inverse. You should probably use a bundled final derivation to also install its inverse.\n" );
+        Print( "WARNING: You are installing a final derivation for ", TargetOperation( final_derivation.derivations[1] ), " which does not include its inverse. You should probably use a bundled final derivation to also install its inverse.\n" );
         
     end;
     
@@ -27,16 +27,16 @@
         
         if !TargetOperation( derivation ) ⥉ final_derivation.cannot_compute
             
-            Print( "WARNING: A final derivation for ", TargetOperation( final_derivation.derivations[1] ), " installs ", TargetOperation( derivation ), " but does !list it in its exclude list.\n" );
+            Print( "WARNING: A final derivation for ", TargetOperation( final_derivation.derivations[1] ), " installs ", TargetOperation( derivation ), " but does not list it in its exclude list.\n" );
             
         end;
         
-        # see AddDerivation ⥉ Derivations.gi
+        # see AddDerivation in Derivations.gi
         method_name = TargetOperation( derivation );
         
         if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[method_name] )
             
-            Error( "trying to add a final derivation for a method !in CAP_INTERNAL_METHOD_NAME_RECORD" );
+            Error( "trying to add a final derivation for a method not in CAP_INTERNAL_METHOD_NAME_RECORD" );
             
         end;
         
@@ -64,7 +64,7 @@ end );
         
         if ValueOption( "Description" ) != fail
             
-            Error( "passing the description both as an argument && as an option at the same time is !supported" );
+            Error( "passing the description both as an argument and as an option at the same time is not supported" );
             
         end;
         
@@ -76,7 +76,7 @@ end );
         
     else
         
-        Print( "WARNING: Calling AddFinalDerivation without a description as the second argument is deprecated && will !be supported after 2024.03.31.\n" );
+        Print( "WARNING: Calling AddFinalDerivation without a description as the second argument is deprecated and will not be supported after 2024.03.31.\n" );
         
         description = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" );
         can_compute = args[1];
@@ -88,7 +88,7 @@ end );
     
     if !IsEmpty( additional_functions )
         
-        Display( "WARNING: AddFinalDerivation with additional functions is deprecated && will !be supported after 2023.10.28. Please use AddFinalDerivationBundle instead." );
+        Display( "WARNING: AddFinalDerivation with additional functions is deprecated and will not be supported after 2023.10.28. Please use AddFinalDerivationBundle instead." );
         
     end;
     
@@ -105,7 +105,7 @@ end );
         
         if ValueOption( "Description" ) != fail
             
-            Error( "passing the description both as an argument && as an option at the same time is !supported" );
+            Error( "passing the description both as an argument and as an option at the same time is not supported" );
             
         end;
         
@@ -116,7 +116,7 @@ end );
         
     else
         
-        Print( "WARNING: Calling AddFinalDerivationBundle without a description as the first argument is deprecated && will !be supported after 2024.03.31.\n" );
+        Print( "WARNING: Calling AddFinalDerivationBundle without a description as the first argument is deprecated and will not be supported after 2024.03.31.\n" );
         
         description = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" );
         can_compute = args[1];
@@ -141,13 +141,13 @@ end );
         
         if !(IsList( additional_functions[i] ) && Length( additional_functions[i] ) ⥉ [ 2, 3 ])
             
-            Error( "additional functions must be given as pairs [ <operation>, <function> ] || triples [ <operation>, <function>, <preconditions> ]" );
+            Error( "additional functions must be given as pairs [ <operation>, <function> ] or triples [ <operation>, <function>, <preconditions> ]" );
             
         end;
         
         if IsList( Last( additional_functions[i] ) )
             
-            Error( "passing lists of functions to `AddFinalDerivation` is !supported anymore" );
+            Error( "passing lists of functions to `AddFinalDerivation` is not supported anymore" );
             
         end;
         
@@ -155,7 +155,7 @@ end );
     
     operations_in_graph = Operations( CAP_INTERNAL_DERIVATION_GRAPH );
     
-    ## Find symbols ⥉ functions
+    ## Find symbols in functions
     operations_to_install = [ ];
     
     union_of_collected_lists = [ ];
@@ -166,13 +166,13 @@ end );
         
         used_op_names_with_multiples_and_category_getters = fail;
         
-        # see AddDerivation ⥉ Derivations.gi
+        # see AddDerivation in Derivations.gi
         #= comment for Julia
         collected_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION( Last( current_additional_func ), operations_in_graph, loop_multiplier, CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS, category_getters );
         
         if Length( current_additional_func ) == 2
             
-            Print( "WARNING: a final derivation for ", NameFunction( current_additional_func[1] ), " has no explicit preconditions. Calling AddFinalDerivation(Bundle) without explicit preconditions is deprecated && will !be supported after 2024.03.31.\n" );
+            Print( "WARNING: a final derivation for ", NameFunction( current_additional_func[1] ), " has no explicit preconditions. Calling AddFinalDerivation(Bundle) without explicit preconditions is deprecated and will not be supported after 2024.03.31.\n" );
             
             current_additional_func = [ current_additional_func[1], collected_list, current_additional_func[2] ];
             
@@ -193,7 +193,7 @@ end );
             
             if (Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] == current_additional_func[1]
                 
-                Error( "A final derivation for ", NameFunction( current_additional_func[1] ), " has itself as a precondition. This is !supported because we can!compute a well-defined weight.\n" );
+                Error( "A final derivation for ", NameFunction( current_additional_func[1] ), " has itself as a precondition. This is not supported because we cannot compute a well-defined weight.\n" );
                 
             end;
             
@@ -213,7 +213,7 @@ end );
                 
             else
                 
-                Error( "The list of preconditions must be a list of pairs || triples." );
+                Error( "The list of preconditions must be a list of pairs or triples." );
                 
             end;
             
@@ -228,7 +228,7 @@ end );
             Print(
                 "WARNING: You have installed a final derivation for ", NameFunction( current_additional_func[1] ), " with preconditions ", used_op_names_with_multiples_and_category_getters,
                 " but the automated detection has detected the following list of preconditions: ", collected_list, ".\n",
-                "If this is a bug ⥉ the automated detection, please report it.\n"
+                "If this is a bug in the automated detection, please report it.\n"
             );
             
         end;
@@ -244,7 +244,7 @@ end );
         ) );
         
         # Operations may use operations from the same final derivation as long as the latter are installed before the former.
-        # In this case, the used operations are no preconditions && thus should !go into union_of_collected_lists.
+        # In this case, the used operations are no preconditions and thus should not go into union_of_collected_lists.
         used_op_names_with_multiples_and_category_getters = Filtered( used_op_names_with_multiples_and_category_getters, x -> !x[1] ⥉ operations_to_install );
         
         Add( operations_to_install, NameFunction( current_additional_func[1] ) );
@@ -253,7 +253,7 @@ end );
         
     end;
     
-    # see AddDerivation ⥉ Derivations.gi
+    # see AddDerivation in Derivations.gi
     used_op_names_with_multiples_and_category_getters = [ ];
     
     for x in can_compute
@@ -264,7 +264,7 @@ end );
             
         end;
         
-        # CAP_INTERNAL_FINAL_DERIVATION_SANITY_CHECK ensures that all installed operations appear ⥉ cannot_compute
+        # CAP_INTERNAL_FINAL_DERIVATION_SANITY_CHECK ensures that all installed operations appear in cannot_compute
         if (Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] ⥉ cannot_compute
             
             Error( "A final derivation for ", TargetOperation( derivations[1] ), " has precondition ", x[1], " which is also in its exclude list.\n" );
@@ -287,7 +287,7 @@ end );
             
         else
             
-            Error( "The list of preconditions must be a list of pairs || triples." );
+            Error( "The list of preconditions must be a list of pairs or triples." );
             
         end;
         
@@ -301,7 +301,7 @@ end );
         Print(
             "WARNING: You have installed a final derivation for ", TargetOperation( derivations[1] ), " with preconditions ", used_op_names_with_multiples_and_category_getters,
             " but the following list of preconditions was expected: ", union_of_collected_lists, ".\n",
-            "If this is a bug ⥉ the automated detection, please report it.\n"
+            "If this is a bug in the automated detection, please report it.\n"
         );
         
     end;
@@ -309,7 +309,7 @@ end );
     dummy_func = x -> x;
     SetNameFunction( dummy_func, "internal dummy function of a final derivation" );
     
-    # only used to check if we can install all the derivations ⥉ `derivations`
+    # only used to check if we can install all the derivations in `derivations`
     dummy_derivation = MakeDerivation(
         "dummy derivation",
         dummy_func,
@@ -385,13 +385,13 @@ InstallMethod( @__MODULE__,  Finalize,
                 
             end;
             
-            if ForAny( current_final_derivation.cannot_compute, operation_name -> CurrentOperationWeight( weight_list, operation_name ) < Inf )
+            if ForAny( current_final_derivation.cannot_compute, operation_name -> CurrentOperationWeight( weight_list, operation_name ) < infinity )
                 
                 continue;
                 
             end;
             
-            if OperationWeightUsingDerivation( weight_list, current_final_derivation.dummy_derivation ) == Inf
+            if OperationWeightUsingDerivation( weight_list, current_final_derivation.dummy_derivation ) == infinity
                 
                 continue;
                 
@@ -423,11 +423,11 @@ InstallMethod( @__MODULE__,  Finalize,
                 
                 weight = OperationWeightUsingDerivation( weight_list, derivation );
                 
-                @Assert( 0, weight != Inf );
+                @Assert( 0, weight != infinity );
                 
-                # When installing a final derivation bundle, the installation of the first operations ⥉ the bundle
+                # When installing a final derivation bundle, the installation of the first operations in the bundle
                 # might trigger (normal) derivations of later operations it the bundle, which might be cheaper
-                # the derivations provided ⥉ the bundle.
+                # the derivations provided in the bundle.
                 if weight <= CurrentOperationWeight( weight_list, TargetOperation( derivation ) )
                     
                     InstallDerivationForCategory( derivation, weight, category; IsFinalDerivation = true );
@@ -463,10 +463,10 @@ InstallMethod( @__MODULE__,  Finalize,
         
         if weight_list.operation_weights != old_weights
             
-            Print( "WARNING: The installed derivations of the category named \"", Name( category ), "\" have changed by reevaluation, which is !expected at this point.\n" );
+            Print( "WARNING: The installed derivations of the category named \"", Name( category ), "\" have changed by reevaluation, which is not expected at this point.\n" );
             Print( "This might be due to one of the following reasons:\n" );
             Print( "* The category might have gained a new setting like `supports_empty_limits` since adding the first function. Such settings should always be set before adding functions.\n" );
-            Print( "* The category filter of some derivation might !fulfill the specification.\n" );
+            Print( "* The category filter of some derivation might not fulfill the specification.\n" );
             
             diff = Difference( categorical_properties, category.initially_known_categorical_properties );
             
@@ -476,7 +476,7 @@ InstallMethod( @__MODULE__,  Finalize,
                 
             end;
             
-            Print( "For debugging, call `ActivateDerivationInfo( )`, retry, && look at the derivations between \"Starting reevaluation of ...\" && \"Finished reevaluation of ...\".\n" );
+            Print( "For debugging, call `ActivateDerivationInfo( )`, retry, and look at the derivations between \"Starting reevaluation of ...\" and \"Finished reevaluation of ...\".\n" );
             
         end;
         

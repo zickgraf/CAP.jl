@@ -151,7 +151,7 @@ end );
             continue;
         end;
         
-        if ForAny( category_weight_list, list -> CurrentOperationWeight( list, current_recname ) == Inf )
+        if ForAny( category_weight_list, list -> CurrentOperationWeight( list, current_recname ) == infinity )
             continue;
         end;
         
@@ -195,7 +195,7 @@ InstallMethodWithCrispCache( ProductOp,
         Error( "all categories for the product must be finalized" );
     end;
     
-    ## this is the convention ⥉ CapCat
+    ## this is the convention in CapCat
     if Length( category_list ) == 1
       
       return category_list[1];
@@ -350,7 +350,7 @@ InstallMethod( @__MODULE__,  getindex,
     
     if Length( category ) < index
         
-        Error( "index too high, can!compute this Component" );
+        Error( "index too high, cannot compute this Component" );
         
     end;
     
@@ -366,7 +366,7 @@ InstallMethod( @__MODULE__,  getindex,
     
     if Length( cell ) < index
         
-        Error( "index too high, can!compute this Component" );
+        Error( "index too high, cannot compute this Component" );
         
     end;
     
@@ -382,7 +382,7 @@ InstallMethod( @__MODULE__,  getindex,
     
     if Length( cell ) < index
         
-        Error( "index too high, can!compute this Component" );
+        Error( "index too high, cannot compute this Component" );
         
     end;
     
@@ -398,7 +398,7 @@ InstallMethod( @__MODULE__,  getindex,
     
     if Length( cell ) < index
         
-        Error( "index too high, can!compute this Component" );
+        Error( "index too high, cannot compute this Component" );
         
     end;
     

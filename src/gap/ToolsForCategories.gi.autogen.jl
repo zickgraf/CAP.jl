@@ -15,7 +15,7 @@
     
     if !IsString( string )
         
-        Error( string, " is !a string" );
+        Error( string, " is not a string" );
         
     end;
     
@@ -47,7 +47,7 @@
         
         return @rec( filter = IsInt );
         
-    elseif string == "nonneg_integer_or_Inf"
+    elseif string == "nonneg_integer_or_infinity"
         
         return @rec( filter = IsCyclotomic );
         
@@ -147,7 +147,7 @@
         
     elseif string == "object_or_fail" || string == "morphism_or_fail" || string == "list_or_morphisms_or_fail"
         
-        # can!be express "or fail" yet
+        # cannot be express "or fail" yet
         return fail;
         
     elseif string == "element_of_commutative_ring_of_linear_structure"
@@ -237,7 +237,7 @@
         
     else
         
-        Error( "filter type ", string, " is !recognized, see the documentation for allowed values" );
+        Error( "filter type ", string, " is not recognized, see the documentation for allowed values" );
         
     end;
     
@@ -293,13 +293,13 @@ end );
         
     elseif IsSpecializationOfFilter( IsNTuple, data_type.filter )
         
-        # `IsNTuple` deliberately does !imply `IsList` because we want to treat tuples && lists ⥉ different ways ⥉ CompilerForCAP.
+        # `IsNTuple` deliberately does not imply `IsList` because we want to treat tuples and lists in different ways in CompilerForCAP.
         # However, on the GAP level tuples are just dense lists.
         return IsDenseList;
         
     elseif IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), data_type.filter )
         
-        # Some things (e.g. integers) do !lie ⥉ the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
+        # Some things (e.g. integers) do not lie in the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
         return IsRingElement;
         
     else
@@ -395,7 +395,7 @@ end );
   function( data_type, human_readable_identifier_list )
     local generic_help_string, filter, asserts_value_is_of_element_type, generic_assert_value_is_of_element_type;
     
-    generic_help_string = " You can access the value via the local variable 'value' ⥉ a break loop.";
+    generic_help_string = " You can access the value via the local variable 'value' in a break loop.";
     
     filter = data_type.filter;
     
@@ -405,7 +405,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -421,7 +421,7 @@ end );
         
         # In principle, we have to create an assertion function for each integer to get the human readable identifier correct.
         # The "correct" approach would be to generate those on demand but that would imply that we have to create assertion functions at runtime.
-        # Thus, we take the pragmatic approach: We generate an assertion function for the first few entries, && a generic assertion function for all other entries.
+        # Thus, we take the pragmatic approach: We generate an assertion function for the first few entries, and a generic assertion function for all other entries.
         # For nested lists the number of assertion functions grows exponentially, so we choose a quite small number (4).
         asserts_value_is_of_element_type = List( (1):(4), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_type, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
         
@@ -432,17 +432,17 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
             for i in (1):(Length( value ))
                 
                 #= comment for Julia
-                # Julia does !have non-dense lists
+                # Julia does not have non-dense lists
                 if !@IsBound( value[i] )
                     
-                    CallFuncList( Error, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is !bound.", generic_help_string ] ) );
+                    CallFuncList( Error, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is not bound.", generic_help_string ] ) );
                     
                 end;
                 # =#
@@ -471,7 +471,7 @@ end );
             # tuples are modeled as lists
             if !IsDenseList( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsDenseList (implementation filter of IsNTuple).", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter IsDenseList (implementation filter of IsNTuple).", generic_help_string ] ) );
                 
             end;
             
@@ -495,13 +495,13 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
             if !IsIdenticalObj( value, data_type.category )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " is !the expected category although it lies ⥉ the category filter of the expected category. This should never happen, please report this using the CAP_project's issue tracker.", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " is not the expected category although it lies in the category filter of the expected category. This should never happen, please report this using the CAP_project's issue tracker.", generic_help_string ] ) );
                 
             end;
             
@@ -513,7 +513,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -527,7 +527,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -541,7 +541,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -553,10 +553,10 @@ end );
         
         return function( value )
             
-            # Some things (e.g. integers) do !lie ⥉ the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
+            # Some things (e.g. integers) do not lie in the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
             if !IsRingElement( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter IsRingElement.", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter IsRingElement.", generic_help_string ] ) );
                 
             end;
             
@@ -568,7 +568,7 @@ end );
             
             if !filter( value )
                 
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the expected filter ", filter, ".", generic_help_string ] ) );
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
@@ -707,7 +707,7 @@ end );
     # make List etc. look like loops
     for i in [ "List", "ListN", "Perform", "Apply", "Iterated" ]
         
-        # beginning space || new line is important here to avoid scanning things like CallFuncList
+        # beginning space or new line is important here to avoid scanning things like CallFuncList
         func_as_string = ReplacedString( func_as_string, @Concatenation( " ", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
         func_as_string = ReplacedString( func_as_string, @Concatenation( "\n", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
         
@@ -733,7 +733,7 @@ end );
         
         if current_symbol ⥉ symbol_list
             
-            # function can!end with a symbol
+            # function cannot end with a symbol
             @Assert( 0, i < Length( func_as_list ) );
             
             if @IsBound( category_getters[func_as_list[i + 1]] )
@@ -772,7 +772,7 @@ end );
     
     if loop_power != 0
         
-        Error( "The automated detection of CAP operations could !detect loops properly. If the reserved word `for` appears ⥉ <func_as_string> (e.g. ⥉ a string), this is probably the cause. If not, please report this as a bug mentioning <func_as_string>." );
+        Error( "The automated detection of CAP operations could not detect loops properly. If the reserved word `for` appears in <func_as_string> (e.g. in a string), this is probably the cause. If not, please report this as a bug mentioning <func_as_string>." );
         
     end;
     
@@ -863,13 +863,13 @@ end );
             else
                 list_position = Position( input_list, current_output[ 2 ] );
                 if list_position == fail
-                    Error( "unable to find ", current_output[ 2 ], " ⥉ input_list" );
+                    Error( "unable to find ", current_output[ 2 ], " in input_list" );
                 end;
                 list_position = function_input[ list_position ];
             end;
             
             if list_position == fail
-                Error( "list index variable !found" );
+                Error( "list index variable not found" );
             end;
             
             if LowercaseString( current_output[ 3 ] ) == "source"
@@ -900,7 +900,7 @@ end );
     
     if !IsCapCategory( category )
       
-      Error( "the input is !a category" );
+      Error( "the input is not a category" );
       
     end;
     
@@ -957,7 +957,7 @@ end );
     for current_cache_name in operations
         Print( current_cache_name, ": " );
         if !@IsBound( category.caches[current_cache_name] )
-            Print( "!installed yet\n" );
+            Print( "not installed yet\n" );
             continue;
         end;
         current_cache = category.caches[current_cache_name];
@@ -986,7 +986,7 @@ end );
         
         Print(
           @Concatenation(
-          "WARNING: ", alias_name, " is deprecated && will !be supported after ", deprecation_date, ". Please use ", function_name, " instead.\n"
+          "WARNING: ", alias_name, " is deprecated and will not be supported after ", deprecation_date, ". Please use ", function_name, " instead.\n"
           )
         );
         
@@ -1163,7 +1163,7 @@ end );
     if ForAny( known_methods, m -> Length( m.filters ) == Length( filters ) && ( IsSpecializationOfFilter( m.filters[1], filters[1] ) || IsSpecializationOfFilter( filters[1], m.filters[1] ) ) )
         
         # COVERAGE_IGNORE_NEXT_LINE
-        Error( "there is already a method known for ", operation_name, " with a category filter which implies the current category filter || is implied by it" );
+        Error( "there is already a method known for ", operation_name, " with a category filter which implies the current category filter or is implied by it" );
         
     end;
     
@@ -1179,7 +1179,7 @@ end );
     #= comment for Julia
     if IsCategory( ValueGlobal( name ) ) && Length( input_filters ) == 1
         
-        Error( "adding type signatures for GAP categories applied to a single argument is !supported" );
+        Error( "adding type signatures for GAP categories applied to a single argument is not supported" );
         
     end;
     
@@ -1188,14 +1188,14 @@ end );
         if !IsList( input_filters )
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( "<input_filters> must be a list || the string \"any\"" );
+            Error( "<input_filters> must be a list or the string \"any\"" );
             
         end;
         
         if !ForAll( input_filters, filter -> IsFilter( filter ) )
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( "<input_filters> must be a list of filters || the string \"any\"" );
+            Error( "<input_filters> must be a list of filters or the string \"any\"" );
             
         end;
         
@@ -1205,9 +1205,9 @@ end );
                 
                 # COVERAGE_IGNORE_BLOCK_START
                 Print(
-                    "WARNING: You are adding a type signature for ", name, " which can get a function as input but you do !compute the signature of the function. ",
-                    "This will work for references to global functions but !for literal functions. ",
-                    "See `List` ⥉ `CompilerForCAP/gap/InferDataTypes.gi` for an example of how to handle the signature of functions properly.\n"
+                    "WARNING: You are adding a type signature for ", name, " which can get a function as input but you do not compute the signature of the function. ",
+                    "This will work for references to global functions but not for literal functions. ",
+                    "See `List` in `CompilerForCAP/gap/InferDataTypes.gi` for an example of how to handle the signature of functions properly.\n"
                 );
                 # COVERAGE_IGNORE_BLOCK_END
                 
@@ -1226,14 +1226,14 @@ end );
     if ForAny( CAP_JIT_INTERNAL_TYPE_SIGNATURES[name], signature -> IsSpecializationOfFilterList( signature[1], input_filters ) || IsSpecializationOfFilterList( input_filters, signature[1] ) )
         
         # COVERAGE_IGNORE_NEXT_LINE
-        Error( "there already exists a signature for ", name, " with filters implying the current filters || being implied by them" );
+        Error( "there already exists a signature for ", name, " with filters implying the current filters or being implied by them" );
         
     end;
     
     if !ForAny( [ IsFilter, IsRecord, IsFunction ], f -> f( output_data_type ) )
         
         # COVERAGE_IGNORE_NEXT_LINE
-        Error( "<output_data_type> must be a filter, a record, || a function" );
+        Error( "<output_data_type> must be a filter, a record, or a function" );
         
     end;
     
@@ -1258,14 +1258,14 @@ end );
         if !IsList( input_filters )
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( "<input_filters> must be a list || the string \"any\"" );
+            Error( "<input_filters> must be a list or the string \"any\"" );
             
         end;
         
         if !ForAll( input_filters, filter -> IsString( filter ) )
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( "<input_filters> must be a list of strings || the string \"any\"" );
+            Error( "<input_filters> must be a list of strings or the string \"any\"" );
             
         end;
         
@@ -1421,7 +1421,7 @@ end );
         if package_info == fail
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( dep, " is !the name of an available package" );
+            Error( dep, " is not the name of an available package" );
             
         end;
         
@@ -1533,7 +1533,7 @@ end );
 
 ##
 #= comment for Julia
-# We want `args` to be a list but ⥉ Julia it's a tuple -> we need a separate implementation for Julia
+# We want `args` to be a list but in Julia it's a tuple -> we need a separate implementation for Julia
 @InstallGlobalFunction( NTupleGAP, function ( n, args... )
     
     @Assert( 0, Length( args ) == n );
@@ -1583,7 +1583,7 @@ end );
         if !(IsRecord( info ) && @IsBound( info.remaining_constructors_in_tower ) && @IsBound( info.precompiled_functions_adder ))
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( "the entries of `underlying_category.compiler_hints.precompiled_towers` must be records with components `remaining_constructors_in_tower` && `precompiled_functions_adder`" );
+            Error( "the entries of `underlying_category.compiler_hints.precompiled_towers` must be records with components `remaining_constructors_in_tower` and `precompiled_functions_adder`" );
             
         end;
         
@@ -1656,7 +1656,7 @@ end );
 
 ##
 #= comment for Julia
-# Julia does !have non-dense lists && thus needs a separate implementation
+# Julia does not have non-dense lists and thus needs a separate implementation
 @InstallGlobalFunction( ListWithKeys, function ( list, func )
   local res, i;
     
@@ -1664,7 +1664,7 @@ end );
     
     res = EmptyPlist( Length( list ) );
     
-    # hack to save type adjustments && conversions (e.g. to blist)
+    # hack to save type adjustments and conversions (e.g. to blist)
     if Length( list ) > 0
         
         res[Length( list )] = 1;
@@ -1798,7 +1798,7 @@ end );
 
 ##
 #= comment for Julia
-# Julia does !have non-dense lists && thus needs a separate implementation
+# Julia does not have non-dense lists and thus needs a separate implementation
 @InstallGlobalFunction( FilteredWithKeys, function ( list, func )
   local res, i, elm, j;
     

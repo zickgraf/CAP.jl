@@ -18,13 +18,13 @@
         IsCapCategory );
 
 #! @Description
-#!  The &GAP; type of an object ⥉ a terminal category with a single object.
+#!  The &GAP; type of an object in a terminal category with a single object.
 #! @Arguments T
 @DeclareFilter( "IsObjectInCapTerminalCategoryWithSingleObject",
         IsCapCategoryObject );
 
 #! @Description
-#!  The &GAP; type of a morphism ⥉ a terminal category with a single object.
+#!  The &GAP; type of a morphism in a terminal category with a single object.
 #! @Arguments T
 @DeclareFilter( "IsMorphismInCapTerminalCategoryWithSingleObject",
         IsCapCategoryMorphism );
@@ -36,13 +36,13 @@
         IsCapCategory );
 
 #! @Description
-#!  The &GAP; type of an object ⥉ a terminal category with multiple objects.
+#!  The &GAP; type of an object in a terminal category with multiple objects.
 #! @Arguments T
 @DeclareFilter( "IsObjectInCapTerminalCategoryWithMultipleObjects",
         IsCapCategoryObject );
 
 #! @Description
-#!  The &GAP; type of a morphism ⥉ a terminal category with multiple objects.
+#!  The &GAP; type of a morphism in a terminal category with multiple objects.
 #! @Arguments T
 @DeclareFilter( "IsMorphismInCapTerminalCategoryWithMultipleObjects",
         IsCapCategoryMorphism );
@@ -70,8 +70,8 @@ AddCategoricalProperty( [ "IsTerminalCategory", "IsTerminalCategory" ] );
 
 #! @Description
 #!  This function takes a record of options suited for CategoryConstructor. 
-#!  It makes common adjustments for TerminalCategoryWithSingleObject && TerminalCategoryWithMultipleObjects
-#!  to the list of operations to install && the categorical properties of the given record,
+#!  It makes common adjustments for TerminalCategoryWithSingleObject and TerminalCategoryWithMultipleObjects
+#!  to the list of operations to install and the categorical properties of the given record,
 #!  before passing it on to CategoryConstructor.
 #! @Arguments options
 #! @Returns a &CAP; category
@@ -84,13 +84,13 @@ AddCategoricalProperty( [ "IsTerminalCategory", "IsTerminalCategory" ] );
 #########################################
 
 #! @Description
-#!  The unique object ⥉ a terminal category with a single object.
+#!  The unique object in a terminal category with a single object.
 #! @Returns a &CAP; object
 @DeclareAttribute( "UniqueObject",
                   IsCapTerminalCategoryWithSingleObject );
 
 #! @Description
-#!  The unique morphism ⥉ a terminal category with a single object.
+#!  The unique morphism in a terminal category with a single object.
 #! @Returns a &CAP; morphism
 @DeclareAttribute( "UniqueMorphism",
                   IsCapTerminalCategoryWithSingleObject );

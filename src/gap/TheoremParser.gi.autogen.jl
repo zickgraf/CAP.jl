@@ -10,7 +10,7 @@
 ##
 #################################
 
-## Returns true if string represents an integer &&
+## Returns true if string represents an integer and
 ## converting is save, false otherwise.
 @InstallGlobalFunction( STRING_REPRESENTS_INTEGER,
             
@@ -70,7 +70,7 @@ end );
     
 end );
 
-## If string is true || false, method returns
+## If string is true or false, method returns
 ## the corresponding bool. If string represents an int,
 ## method returns this int. Fail otherwise.
 @BindGlobal( "CONVERT_STRING_TO_BOOL_OR_INT",
@@ -95,9 +95,9 @@ end );
     
 end );
 
-## Splits theorem at | && vdash,
+## Splits theorem at | and vdash,
 ## returns a list with three entries,
-## && throws an error otherwise.
+## and throws an error otherwise.
 @BindGlobal( "SPLIT_THEOREM",
             
   function( theorem_string )
@@ -132,7 +132,7 @@ end );
 end );
 
 ## Returns an empty list if string is empty.
-## Splits string at ',' if !in ( ) || [ ].
+## Splits string at ',' if not in ( ) or [ ].
 @BindGlobal( "SPLIT_KOMMAS_NOT_IN_BRACKETS",
             
   function( string )
@@ -185,7 +185,7 @@ end );
 
 ## If string is of form command( some ) it returns
 ## a record with command entry is the command string
-## && arguments is the list of arguments
+## and arguments is the list of arguments
 @BindGlobal( "COMMAND_AND_ARGUMENTS",
             
   function( command_string )
@@ -362,7 +362,7 @@ end );
 end );
 
 ## Returns the part of string before the first occourence of substring.
-## If substring is !present, the whole string is returned
+## If substring is not present, the whole string is returned
 @BindGlobal( "REMOVE_PART_AFTER_FIRST_SUBSTRING",
             
   function( string, substring )
@@ -382,7 +382,7 @@ end );
     
 end );
 
-## Returns the number of occourences of substring ⥉ string
+## Returns the number of occourences of substring in string
 @BindGlobal( "COUNT_SUBSTRING_APPEARANCE",
             
   function( string, substring )
@@ -408,7 +408,7 @@ end );
     
     if nr_substring_close_bracket > 2
         
-        part = @Concatenation( "this is !a valid part: ", part );
+        part = @Concatenation( "this is not a valid part: ", part );
         
         Error( part );
         
@@ -470,7 +470,7 @@ end );
         
     elseif func != "Source" && func != "Range"
         
-        Error( "in logic file: ", func, " is neither a CAP operation nor `Source` || `Range`" );
+        Error( "in logic file: ", func, " is neither a CAP operation nor `Source` or `Range`" );
         
     end;
     
@@ -488,7 +488,7 @@ end );
     
     if Length( split_source_part ) != 2
         
-        Error( "this should !happen, too many (" );
+        Error( "this should not happen, too many (" );
         
     end;
     
@@ -585,7 +585,7 @@ end );
         
         if !@IsBound( bound_variable )
             
-            variables = @Concatenation( "variable ", variables, " was !recognized" );
+            variables = @Concatenation( "variable ", variables, " was not recognized" );
             
         end;
         
@@ -687,7 +687,7 @@ end );
         
     end;
     
-    ## find function, && therefore return variables
+    ## find function, and therefore return variables
     ## check range first
     
     theorem_record = FIND_PART_WHICH_CONTAINS_FUNCTION( range_part );
@@ -821,7 +821,7 @@ end );
 end );
 
 #= comment for Julia
-# "$" ⥉ strings triggers interpolation ⥉ Julia
+# "$" in strings triggers interpolation in Julia
 @BindGlobal( "REMOVE_CHARACTERS_FROM_LATEX",
             
   function( string )
@@ -1338,7 +1338,7 @@ end );
     
     if IsString( split_record )
         
-        Error( @Concatenation( split_record ), " ⥉ ", rule );
+        Error( @Concatenation( split_record ), " in ", rule );
         
     end;
     
@@ -1348,7 +1348,7 @@ end );
     
     range = split_record.range;
     
-    ## Sanitize variables && find type
+    ## Sanitize variables and find type
     variables = SPLIT_KOMMAS_NOT_IN_BRACKETS( variables );
     
     variables = FIND_VARIABLE_TYPES( variables );
@@ -1522,7 +1522,7 @@ end );
                 
                 if Length( bound_variable_list_content ) < 2
                     
-                    Error( "could !split bound variable list correctly" );
+                    Error( "could not split bound variable list correctly" );
                     
                 end;
                 

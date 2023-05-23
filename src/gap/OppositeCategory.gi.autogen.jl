@@ -94,7 +94,7 @@ end );
     only_primitive_operations = ValueOption( "only_primitive_operations" ) == true;
     
     ## Take care of attributes
-    ## TODO: if there are more instances, set markers ⥉ the MethodRecord
+    ## TODO: if there are more instances, set markers in the MethodRecord
     list_of_attributes = [ CommutativeRingOfLinearCategory ];
     
     for attr in list_of_attributes
@@ -141,7 +141,7 @@ end );
         
         if !HasRangeCategoryOfHomomorphismStructure( category )
             
-            Error( "<category> has operations related to the homomorphism structure but no range category is set. This is !supported." );
+            Error( "<category> has operations related to the homomorphism structure but no range category is set. This is not supported." );
             
         end;
         
@@ -224,7 +224,7 @@ end );
                     
                     return @Concatenation( "MorphismDatum( cat, ", argument_name, " )" );
                     
-                elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_Inf"
+                elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_infinity"
                     
                     return argument_name;
                     
@@ -238,7 +238,7 @@ end );
                     
                 else
                     
-                    Error( "this case is !handled yet" );
+                    Error( "this case is not handled yet" );
                     
                 end;
                 
@@ -337,13 +337,13 @@ end );
                 
                 return_statement = "return result;";
                 
-            elseif return_type == "nonneg_integer_or_Inf"
+            elseif return_type == "nonneg_integer_or_infinity"
                 
                 return_statement = "return result;";
 
             else
                 
-                Error( "this case is !handled yet" );
+                Error( "this case is not handled yet" );
                 
             end;
             
@@ -362,7 +362,7 @@ end );
         
         weight = CurrentOperationWeight( category.derivations_weight_list, dual_operation_name );
         
-        @Assert( 0, weight < Inf );
+        @Assert( 0, weight < infinity );
         
         current_add = ValueGlobal( @Concatenation( "Add", current_recname ) );
         
@@ -404,7 +404,7 @@ InstallMethod( @__MODULE__,  Opposite,
     SetOpposite( opposite_category, category );
     
     # A category might have multiple different instances of opposite categories.
-    # Only the first instance is used for attributes (of the category && its objects && morphisms).
+    # Only the first instance is used for attributes (of the category and its objects and morphisms).
     if !HasOpposite( category )
         
         SetOpposite( category, opposite_category );
@@ -439,7 +439,7 @@ InstallMethod( @__MODULE__,  Opposite,
         CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( object, OppositeCategory( cat ), [ "the object datum given to the object constructor of <cat>" ] );
         
         # A category might have multiple different instances of opposite categories.
-        # Only the first instance is used for attributes (of the category && its objects && morphisms).
+        # Only the first instance is used for attributes (of the category and its objects and morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
         if HasOpposite( object ) && IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
             
@@ -460,7 +460,7 @@ InstallMethod( @__MODULE__,  Opposite,
         end;
         
         # A category might have multiple different instances of opposite categories.
-        # Only the first instance is used for attributes (of the category && its objects && morphisms).
+        # Only the first instance is used for attributes (of the category and its objects and morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
         if IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
             
@@ -497,7 +497,7 @@ InstallMethod( @__MODULE__,  Opposite,
         end;
         
         # A category might have multiple different instances of opposite categories.
-        # Only the first instance is used for attributes (of the category && its objects && morphisms).
+        # Only the first instance is used for attributes (of the category and its objects and morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
         if HasOpposite( morphism ) && IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
             
@@ -519,7 +519,7 @@ InstallMethod( @__MODULE__,  Opposite,
         end;
         
         # A category might have multiple different instances of opposite categories.
-        # Only the first instance is used for attributes (of the category && its objects && morphisms).
+        # Only the first instance is used for attributes (of the category and its objects and morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
         if IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
             
@@ -640,7 +640,7 @@ InstallMethod( @__MODULE__,  DisplayString,
         
   function( object )
     
-    return @Concatenation( DisplayString( Opposite( object ) ), "\nAn object ⥉ ", Name( CapCategory( object ) ), " given by the above data\n" );
+    return @Concatenation( DisplayString( Opposite( object ) ), "\nAn object in ", Name( CapCategory( object ) ), " given by the above data\n" );
     
 end );
 
@@ -650,6 +650,6 @@ InstallMethod( @__MODULE__,  DisplayString,
         
   function( morphism )
     
-    return @Concatenation( DisplayString( Opposite( morphism ) ), "\nA morphism ⥉ ", Name( CapCategory( morphism ) ), " given by the above data\n" );
+    return @Concatenation( DisplayString( Opposite( morphism ) ), "\nA morphism in ", Name( CapCategory( morphism ) ), " given by the above data\n" );
     
 end );

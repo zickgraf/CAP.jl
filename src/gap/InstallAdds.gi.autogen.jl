@@ -100,7 +100,7 @@ end );
         add_value_to_category_function = ReturnTrue;
     end;
     
-    # declare operation with category as first argument && install convenience method
+    # declare operation with category as first argument and install convenience method
     if record.install_convenience_without_category
         
         replaced_filter_list = CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS( filter_list );
@@ -195,7 +195,7 @@ end );
             output_data_type, assert_is_value_of_return_type, install_func, name, current_function_number, i;
         
         if IsFinalized( category )
-            Error( "can!add methods anymore, category is finalized" );
+            Error( "cannot add methods anymore, category is finalized" );
         end;
         
         if Length( method_list ) == 0
@@ -210,7 +210,7 @@ end );
             
             @Assert( 0, is_derivation );
             
-            # `is_derivation` is used below ⥉ the sense of a non-final derivation
+            # `is_derivation` is used below in the sense of a non-final derivation
             is_derivation = false;
             
         end;
@@ -219,7 +219,7 @@ end );
         
         if Length( Positions( [ is_derivation, is_final_derivation, is_precompiled_derivation ], true ) ) > 1
             
-            Error( "at most one of the options `IsDerivation`, `IsFinalDerivation` && `IsPrecompiledDerivation` may be set" );
+            Error( "at most one of the options `IsDerivation`, `IsFinalDerivation` and `IsPrecompiledDerivation` may be set" );
             
         end;
         
@@ -236,19 +236,19 @@ end );
             weight = 100;
         end;
         
-        # If there already is a faster method: do nothing but display a warning because this should !happen usually.
+        # If there already is a faster method: do nothing but display a warning because this should not happen usually.
         if weight > CurrentOperationWeight( category.derivations_weight_list, function_name )
             
             # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
             #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
-            # * There are some derivations of weight 1 for thin categories which are triggered immediately && which CategoryConstructor tries to overwrite with weight 100.
+            # * There are some derivations of weight 1 for thin categories which are triggered immediately and which CategoryConstructor tries to overwrite with weight 100.
             if !WasCreatedAsOppositeCategory( category ) && CurrentOperationWeight( category.derivations_weight_list, function_name ) != 1
                 
                 Print( "WARNING: Ignoring a function added for ", function_name, " with weight ", weight, " to \"", Name( category ), "\" because there already is a function installed with weight ", CurrentOperationWeight( category.derivations_weight_list, function_name ), "." );
                 
                 if is_precompiled_derivation
                     
-                    Print( " Probably you have to rerun the precompilation to adjust the weights ⥉ the precompiled code." );
+                    Print( " Probably you have to rerun the precompilation to adjust the weights in the precompiled code." );
                     
                 end;
                 
@@ -265,14 +265,14 @@ end );
             
             # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
             #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
-            # * There is a test ⥉ Locales creating a category via CategoryConstructor (which uses weight 100) && then installs a really cheap method for UniqueMorphism which triggers a bunch of cheap derivations.
+            # * There is a test in Locales creating a category via CategoryConstructor (which uses weight 100) and then installs a really cheap method for UniqueMorphism which triggers a bunch of cheap derivations.
             if !WasCreatedAsOppositeCategory( category ) && weight > 4
                 
                 Print( "WARNING: Overriding a function for ", function_name, " primitively added to \"", Name( category ), "\" with a derivation." );
                 
                 if is_precompiled_derivation
                     
-                    Print( " Probably you have to rerun the precompilation to adjust the weights ⥉ the precompiled code." );
+                    Print( " Probably you have to rerun the precompilation to adjust the weights in the precompiled code." );
                     
                 end;
                 
@@ -289,8 +289,8 @@ end );
         if !category.category_as_first_argument ⥉ [ false, true ]
             
             Print(
-                "WARNING: Please set the component `category_as_first_argument` of the category with name \"", Name( category ), "\" explicitly to `true` || `false`. ",
-                "Currently, the default value is `false` (which will now be set automatically), but this will change ⥉ the future.\n"
+                "WARNING: Please set the component `category_as_first_argument` of the category with name \"", Name( category ), "\" explicitly to `true` or `false`. ",
+                "Currently, the default value is `false` (which will now be set automatically), but this will change in the future.\n"
             );
             
             category.category_as_first_argument = false;
@@ -421,7 +421,7 @@ end );
                     if !IsFinalized( category ) && !category.primitive_operations[function_name]
                         
                         Print(
-                            "WARNING: You are calling an operation ⥉ an unfinalized category with name \"", Name( category ),
+                            "WARNING: You are calling an operation in an unfinalized category with name \"", Name( category ),
                             "\". This is fine for debugging purposes, but for production use you should finalize the category by calling `Finalize` (with the option `FinalizeCategory = true` if needed).\n"
                         );
                         
@@ -556,7 +556,7 @@ end );
         
         if !is_derivation
             
-            # Final derivations are !handled by the original derivation mechanism && are thus just like primitive operations for it.
+            # Final derivations are not handled by the original derivation mechanism and are thus just like primitive operations for it.
             # make sure to reset options
             AddPrimitiveOperation( category.derivations_weight_list, function_name, weight; IsFinalDerivation = false, IsPrecompiledDerivation = false );
             
@@ -608,7 +608,7 @@ end );
         
         if !@IsBound( without_given_rec.output_source_getter_preconditions )
             
-            Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is !set.\n" );
+            Print( "WARNING: Cannot install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is not set.\n" );
             return;
             
         end;
@@ -621,7 +621,7 @@ end );
         
         if !@IsBound( without_given_rec.output_range_getter_preconditions )
             
-            Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is !set.\n" );
+            Print( "WARNING: Cannot install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is not set.\n" );
             return;
             
         end;
@@ -639,19 +639,19 @@ end );
         
         if !@IsBound( without_given_rec.output_source_getter_preconditions )
             
-            Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is !set.\n" );
+            Print( "WARNING: Cannot install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is not set.\n" );
             return;
             
         end;
         
         if !@IsBound( without_given_rec.output_range_getter_preconditions )
             
-            Print( "WARNING: Can!install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is !set.\n" );
+            Print( "WARNING: Cannot install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is not set.\n" );
             return;
             
         end;
         
-        # merge output_source_getter_preconditions && output_range_getter_preconditions
+        # merge output_source_getter_preconditions and output_range_getter_preconditions
         additional_preconditions = without_given_rec.output_source_getter_preconditions;
         
         for x in without_given_rec.output_range_getter_preconditions
@@ -748,7 +748,7 @@ end );
             
         end;
         
-        ## keep track of it ⥉ method name rec
+        ## keep track of it in method name rec
         CAP_INTERNAL_METHOD_NAME_RECORD[current_recname] = current_rec;
         
         CapInternalInstallAdd( current_rec );

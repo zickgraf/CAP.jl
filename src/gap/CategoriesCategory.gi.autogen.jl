@@ -397,7 +397,7 @@ end );
     range_category = AsCapCategory( Range( functor ) );
     input_signature = InputSignature( functor );
 
-    # n-ary functor && unary argument (possibly ⥉ product category)
+    # n-ary functor and unary argument (possibly in product category)
     if Length( arguments ) == 1 && functor.number_arguments > 1
         
         if source_category.input_sanity_check_level > 0
@@ -431,7 +431,7 @@ end );
         
         if source_category.input_sanity_check_level > 0
             if !Length( input_signature ) == Length( arguments )
-                Error( @Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
+                Error( @Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does not coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
             end;
 
             for i in (1):(Length( input_signature ))
@@ -455,7 +455,7 @@ end );
 
         if source_category.input_sanity_check_level > 0
             if !Length( input_signature ) == Length( arguments )
-                Error( @Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does !coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
+                Error( @Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does not coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
             end;
 
             for i in (1):(Length( input_signature ))
@@ -493,7 +493,7 @@ end );
         
     else
         
-        Error( "Second argument of ApplyFunctor must be a category object || morphism" );
+        Error( "Second argument of ApplyFunctor must be a category object or morphism" );
         
     end;
     
@@ -511,7 +511,7 @@ AddPreCompose( cat,
     
     new_functor = CapFunctor( @Concatenation( "Precomposition of ",
                                                  Name( left_functor ),
-                                                 " && ",
+                                                 " and ",
                                                  Name( right_functor ) ),
                                   AsCapCategory( Source( left_functor ) ),
                                   AsCapCategory( Range( right_functor ) ) );
@@ -674,7 +674,7 @@ AddVerticalPreCompose( cat,
     
     new_natural_transformation = NaturalTransformation( @Concatenation( "Vertical composition of ",
                                                          Name( above_transformation ),
-                                                         " && ",
+                                                         " and ",
                                                          Name( below_transformation ) ),
                                                          Source( above_transformation ),
                                                          Range( below_transformation ) );
@@ -740,7 +740,7 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     
     if IsBoundGlobal( install_name ) && !IsOperation( ValueGlobal( install_name ) )
         
-        Error( @Concatenation( "can!install functor under name ", install_name ) );
+        Error( @Concatenation( "cannot install functor under name ", install_name ) );
         
     end;
     
@@ -754,7 +754,7 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     
     if IsBoundGlobal( object_name ) && !IsOperation( ValueGlobal( object_name ) )
         
-        Error( @Concatenation( "can!install functor object function under name ", object_name ) );
+        Error( @Concatenation( "cannot install functor object function under name ", object_name ) );
         
     end;
     
@@ -770,7 +770,7 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     
     if IsBoundGlobal( morphism_name ) && !IsOperation( ValueGlobal( morphism_name ) )
         
-        Error( @Concatenation( "can!install functor morphism function under name ", morphism_name ) );
+        Error( @Concatenation( "cannot install functor morphism function under name ", morphism_name ) );
         
     end;
     
@@ -838,7 +838,7 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroObjects,
     local CZ, zero_obj;
     
     if !CanCompute( category, "IsZeroForObjects" )
-        Error( "the category can!compute IsZeroForObjects\n" );
+        Error( "the category cannot compute IsZeroForObjects\n" );
     end;
     
     CZ = CapFunctor( "functor canonicalizing zero objects", category, category );
@@ -913,7 +913,7 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroMorphisms,
     local CZ;
     
     if !CanCompute( category, "IsZeroForMorphisms" )
-        Error( "the category can!compute IsZeroForMorphisms\n" );
+        Error( "the category cannot compute IsZeroForMorphisms\n" );
     end;
     
     CZ = CapFunctor( "functor canonicalizing zero morphisms", category, category );
@@ -991,7 +991,7 @@ InstallMethod( @__MODULE__,  NaturalTransformation,
     ##equality of categories is given by IsIdenticalObj.
     if !IsIdenticalObj( Source( source ), Source( range ) ) || !IsIdenticalObj( Range( source ), Range( range ) )
         
-        Error( "a natural transformation between these functors does !exist" );
+        Error( "a natural transformation between these functors does not exist" );
         
     end;
     
@@ -1127,7 +1127,7 @@ InstallMethod( @__MODULE__,  InstallNaturalTransformation,
     
     if IsBoundGlobal( install_name ) && !IsOperation( ValueGlobal( install_name ) )
         
-        Error( @Concatenation( "can!install natural transformation under name ", install_name ) );
+        Error( @Concatenation( "cannot install natural transformation under name ", install_name ) );
         
     end;
     
@@ -1166,7 +1166,7 @@ InstallMethodWithCacheFromObject( HorizontalPreComposeNaturalTransformationWithF
     
     composition = NaturalTransformation( @Concatenation( "Horizontal composition of natural transformation ",
                                                          Name( natural_transformation ),
-                                                         " && functor ",
+                                                         " and functor ",
                                                          Name( functor ) ),
                                                          PreCompose( Source( natural_transformation ), functor ),
                                                          PreCompose( Range( natural_transformation ), functor ) );
@@ -1192,7 +1192,7 @@ InstallMethodWithCacheFromObject( HorizontalPreComposeFunctorWithNaturalTransfor
     
     composition = NaturalTransformation( @Concatenation( "Horizontal composition of functor ",
                                                          Name( functor ),
-                                                         " && natural transformation ",
+                                                         " and natural transformation ",
                                                          Name( natural_transformation ) ),
                                                          PreCompose( functor, Source( natural_transformation ) ),
                                                          PreCompose( functor, Range( natural_transformation ) ) );

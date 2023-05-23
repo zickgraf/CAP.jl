@@ -136,14 +136,14 @@ InstallMethod( @__MODULE__,  DerivationResultWeight,
                [ IsDerivedMethod, IsDenseList ],
 function( d, op_weights )
   local w, used_op_multiples, i, op_w, mult;
-  Display( "WARNING: DerivationResultWeight is deprecated && will !be supported after 2023.08.26.\n" );
+  Display( "WARNING: DerivationResultWeight is deprecated and will not be supported after 2023.08.26.\n" );
   w = DerivationWeight( d );
   used_op_multiples = UsedOperationsWithMultiplesAndCategoryGetters( d );
   for i in (1):(Length( used_op_multiples ))
     op_w = op_weights[ i ];
     mult = used_op_multiples[ i ][ 2 ];
-    if op_w == Inf
-      return Inf;
+    if op_w == infinity
+      return infinity;
     end;
     w = w + op_w * mult;
   end;
@@ -165,7 +165,7 @@ function( operations )
     G.derivations_by_used_ops[op_name] = [];
   end;
   
-  # derivations !using any operations
+  # derivations not using any operations
   G.derivations_by_used_ops.none = [];
   
   return G;
@@ -211,7 +211,7 @@ function( G, d )
     
     if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[method_name] )
         
-        Error( "trying to add a derivation to CAP_INTERNAL_DERIVATION_GRAPH for a method !in CAP_INTERNAL_METHOD_NAME_RECORD" );
+        Error( "trying to add a derivation to CAP_INTERNAL_DERIVATION_GRAPH for a method not in CAP_INTERNAL_METHOD_NAME_RECORD" );
         
     end;
     
@@ -251,7 +251,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
   function( graph, target_op, func )
     local loop_multiplier, category_getters, operations_in_graph, collected_list;
     
-    Print( "WARNING: a derivation for ", NameFunction( target_op ), " has no explicit preconditions. Calling AddDerivation without explicit preconditions is deprecated && will !be supported after 2024.03.31.\n" );
+    Print( "WARNING: a derivation for ", NameFunction( target_op ), " has no explicit preconditions. Calling AddDerivation without explicit preconditions is deprecated and will not be supported after 2024.03.31.\n" );
     
     loop_multiplier = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "WeightLoopMultiple", 2 );
     category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", @rec( ) );
@@ -271,11 +271,11 @@ InstallMethod( @__MODULE__,  AddDerivation,
     
     if IsStringRep( used_ops_with_multiples_and_category_getters ) || (IsString( used_ops_with_multiples_and_category_getters ) && !IsEmpty( used_ops_with_multiples_and_category_getters ))
         
-        Error( "calling AddDerivation with a description as the second argument but without explicit preconditions is !supported." );
+        Error( "calling AddDerivation with a description as the second argument but without explicit preconditions is not supported." );
         
     end;
     
-    Print( "WARNING: Calling AddDerivation without a description as the second argument is deprecated && will !be supported after 2024.03.31.\n" );
+    Print( "WARNING: Calling AddDerivation without a description as the second argument is deprecated and will not be supported after 2024.03.31.\n" );
     
     AddDerivation( graph, target_op, CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" ), used_ops_with_multiples_and_category_getters, func; Description = fail );
     
@@ -289,11 +289,11 @@ InstallMethod( @__MODULE__,  AddDerivation,
     
     if ValueOption( "Description" ) != fail
         
-        Error( "passing the description both as an argument && as an option at the same time is !supported" );
+        Error( "passing the description both as an argument and as an option at the same time is not supported" );
         
     end;
     
-    # When compiling categories, a derivation does !cause overhead anymore, so we would like to simply set `Weight` to 0.
+    # When compiling categories, a derivation does not cause overhead anymore, so we would like to simply set `Weight` to 0.
     # However, the weight 1 is currently needed to prevent the installation of cyclic derivations.
     weight = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Weight", 1 );
     category_filter = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryFilter", IsCapCategory );
@@ -316,7 +316,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
         
         if (Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] == target_op
             
-            Error( "A derivation for ", NameFunction( target_op ), " has itself as a precondition. This is !supported because we can!compute a well-defined weight.\n" );
+            Error( "A derivation for ", NameFunction( target_op ), " has itself as a precondition. This is not supported because we cannot compute a well-defined weight.\n" );
             
         end;
         
@@ -336,7 +336,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
             
         else
             
-            Error( "The list of preconditions must be a list of pairs || triples." );
+            Error( "The list of preconditions must be a list of pairs or triples." );
             
         end;
         
@@ -353,7 +353,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
         Print(
             "WARNING: You have installed a derivation for ", NameFunction( target_op ), " with preconditions ", used_op_names_with_multiples_and_category_getters,
             " but the automated detection has detected the following list of preconditions: ", collected_list, ".\n",
-            "If this is a bug ⥉ the automated detection, please report it.\n"
+            "If this is a bug in the automated detection, please report it.\n"
         );
         
     end;
@@ -392,7 +392,7 @@ end );
   function( target_op, without_given_func, with_given_func )
     local without_given_name, with_given_name;
     
-    Print( "WARNING: AddWithGivenDerivationPairToCAP is deprecated && will !be supported after 2024.03.31. Please use AddDerivationToCAP twice instead.\n" );
+    Print( "WARNING: AddWithGivenDerivationPairToCAP is deprecated and will not be supported after 2024.03.31. Please use AddDerivationToCAP twice instead.\n" );
     
     without_given_name = NameFunction( target_op );
     
@@ -424,7 +424,7 @@ function( C, G )
     operation_derivations = @rec( );
     
     for op_name in Operations( G )
-        operation_weights[op_name] = Inf;
+        operation_weights[op_name] = infinity;
         operation_derivations[op_name] = fail;
     end;
     
@@ -457,7 +457,7 @@ function( owl, op_name )
   if @IsBound( owl.operation_weights[op_name] )
       return owl.operation_weights[op_name];
   end;
-  return Inf;
+  return infinity;
 end );
 
 InstallMethod( @__MODULE__,  OperationWeightUsingDerivation,
@@ -486,15 +486,15 @@ function( owl, d )
         
         if !@IsBound( operation_weights[operation_name] )
             
-            return Inf;
+            return infinity;
             
         end;
         
         operation_weight = operation_weights[operation_name];
         
-        if operation_weight == Inf
+        if operation_weight == infinity
             
-            return Inf;
+            return infinity;
             
         end;
         
@@ -521,7 +521,7 @@ end );
     
     new_weight = OperationWeightUsingDerivation( owl, d );
     
-    if new_weight == Inf
+    if new_weight == infinity
         return fail;
     end;
     
@@ -675,13 +675,13 @@ function( owl, op_name )
     if mult != fail
       Print( "+ ", mult, " * " );
     end;
-    if w == Inf
-      Print( "(!installed)" );
+    if w == infinity
+      Print( "(not installed)" );
     else
       Print( "(", w, ")" );
     end;
     Print( " ", op );
-    if w != Inf
+    if w != infinity
       Print( " " );
       if d == fail
         Print( "[primitive]" );
@@ -866,7 +866,7 @@ end );
     elseif IsCapCategoryCell( cell )
         weight_list = CapCategory( cell ).derivations_weight_list;
     else
-        Error( "Input must be a category || a cell" );
+        Error( "Input must be a category or a cell" );
     end;
     
     list_of_methods = Operations( CAP_INTERNAL_DERIVATION_GRAPH );
@@ -880,7 +880,7 @@ end );
         
         current_weight = CurrentOperationWeight( weight_list, i );
         
-        if current_weight < Inf
+        if current_weight < infinity
             Add( can_compute, [ i, current_weight ] );
         else
             Add( cannot_compute, i );
@@ -916,12 +916,12 @@ end );
     end;
     
     if !IsString( name )
-        Error( "Usage is <category>,<string> || <category>,<CAP operation>\n" );
+        Error( "Usage is <category>,<string> or <category>,<CAP operation>\n" );
         return;
     end;
     
     if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[name] )
-        Error( name, " is !the name of a CAP operation." );
+        Error( name, " is not the name of a CAP operation." );
         return;
     end;
     
@@ -929,7 +929,7 @@ end );
     
     current_weight = CurrentOperationWeight( category_weight_list, name );
     
-    if current_weight < Inf
+    if current_weight < infinity
     
         current_derivation = DerivationOfOperation( category_weight_list, name );
         
@@ -943,7 +943,7 @@ end );
                 
             else
                 
-                Print( "It was installed as a final || precompiled derivation.\n" );
+                Print( "It was installed as a final or precompiled derivation.\n" );
                 
             end;
             
@@ -978,7 +978,7 @@ end );
                 else
                     
                     weight_list = x[3](category).derivations_weight_list;
-                    category_getter_string = @Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
+                    category_getter_string = @Concatenation( " in category obtained by applying ", StringGAP( x[3] ) );
                     
                 end;
                 
@@ -1018,7 +1018,7 @@ end );
         
     else
         
-        Print( TextAttr.b4, name, TextAttr.reset, " is currently !installed for ", Name( category ), ".\n\n" );
+        Print( TextAttr.b4, name, TextAttr.reset, " is currently not installed for ", Name( category ), ".\n\n" );
         
     end;
     
@@ -1053,7 +1053,7 @@ end );
         if IsProperty( category_filter ) && Tester( category_filter )( category ) && !category_filter( category )
             continue;
         elseif IsProperty( category_filter ) && !Tester( category_filter )( category )
-            Print( "If ", Name( category ), " would be ", JoinStringsWithSeparator( Filtered( NamesFilter( category_filter ), name -> !StartsWith( name, "Has" ) ), " && " ), " then\n" );
+            Print( "If ", Name( category ), " would be ", JoinStringsWithSeparator( Filtered( NamesFilter( category_filter ), name -> !StartsWith( name, "Has" ) ), " and " ), " then\n" );
             Print( TextAttr.b4, name, TextAttr.reset, " could be derived by\n" );
         elseif IsFunction( category_filter ) && !category_filter( category )
             Print( "If ", Name( category ), " would fulfill the conditions given by\n\n" );
@@ -1073,13 +1073,13 @@ end );
             else
                 
                 weight_list = x[3](category).derivations_weight_list;
-                category_getter_string = @Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
+                category_getter_string = @Concatenation( " in category obtained by applying ", StringGAP( x[3] ) );
                 
             end;
             
             weight = CurrentOperationWeight( weight_list, x[1] );
             
-            if weight < Inf
+            if weight < infinity
                 Print( "* ", TextAttr.b2, x[1], TextAttr.reset, " (", x[2], "x)", category_getter_string, ", (already installed with weight ", weight,")" );
             else
                 Print( "* ", TextAttr.b1, x[1], TextAttr.reset, " (", x[2], "x)", category_getter_string );
@@ -1109,13 +1109,13 @@ end );
                 else
                     
                     weight_list = x[3](category).derivations_weight_list;
-                    category_getter_string = @Concatenation( " ⥉ category obtained by applying ", StringGAP( x[3] ) );
+                    category_getter_string = @Concatenation( " in category obtained by applying ", StringGAP( x[3] ) );
                     
                 end;
                 
                 weight = CurrentOperationWeight( weight_list, x[1] );
                 
-                if weight == Inf
+                if weight == infinity
                     
                     Print( "* ", x[1], "\n" );
                     found = true;
@@ -1130,7 +1130,7 @@ end );
                 
             end;
             
-            Print( "\nand the following additional operations could !be computed\n" );
+            Print( "\nand the following additional operations could not be computed\n" );
             
             found = false;
             
@@ -1138,7 +1138,7 @@ end );
                 
                 weight = CurrentOperationWeight( category_weight_list, x );
                 
-                if weight < Inf
+                if weight < infinity
                     
                     Print( "* ", x, "\n" );
                     found = true;
@@ -1187,7 +1187,7 @@ end );
     end;
     
     if !IsCapCategory( cat )
-        Error( "input must be category || cell" );
+        Error( "input must be category or cell" );
     end;
     
     names = Filtered( RecNames( cat.primitive_operations ), x -> cat.primitive_operations[x] );
@@ -1222,7 +1222,7 @@ end );
     end;
     
     if !IsCapCategory( category )
-        Error( "input is !a category (cell)" );
+        Error( "input is not a category (cell)" );
         return;
     end;
     
@@ -1232,7 +1232,7 @@ end );
     
     list_of_methods = AsSortedList( list_of_methods );
     
-    list_of_methods = Filtered( list_of_methods, i -> CurrentOperationWeight( weight_list, i ) < Inf );
+    list_of_methods = Filtered( list_of_methods, i -> CurrentOperationWeight( weight_list, i ) < infinity );
     
     if filter != fail
         list_of_methods = Filtered( list_of_methods, i -> PositionSublist( i, filter ) != fail );

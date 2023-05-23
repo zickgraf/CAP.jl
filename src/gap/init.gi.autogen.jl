@@ -18,12 +18,12 @@
                             "IsEqualForMorphismsOnMor",
                             "IsEqualForCacheForObjects",
                             "IsEqualForCacheForMorphisms",
-                            # it is unclear how `IsEqualForCacheForObjects` && `IsEqualForCacheForMorphisms`
+                            # it is unclear how `IsEqualForCacheForObjects` and `IsEqualForCacheForMorphisms`
                             # would behave on non-well-defined objects/morphisms, so exclude `IsWellDefined*`
                             "IsWellDefinedForObjects",
                             "IsWellDefinedForMorphisms",
                             "IsWellDefinedForTwoCells",
-                            # do !cache operations returning random data
+                            # do not cache operations returning random data
                             "RandomObjectByInteger",
                             "RandomMorphismByInteger",
                             "RandomMorphismWithFixedSourceByInteger",
@@ -34,9 +34,9 @@
                             "RandomMorphismWithFixedSourceByList",
                             "RandomMorphismWithFixedRangeByList",
                             "RandomMorphismWithFixedSourceAndRangeByList",
-                            # by default, do !cache constructors && object/morphism data
-                            # because ⥉ general these operations are cheap,
-                            # so caching would !improve the performance
+                            # by default, do not cache constructors and object/morphism data
+                            # because in general these operations are cheap,
+                            # so caching would not improve the performance
                             "ObjectConstructor",
                             "ObjectDatum",
                             "MorphismConstructor",

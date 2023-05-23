@@ -24,7 +24,7 @@ if IsPackageMarkedForLoading( "Browse", ">= 1.5" )
         for current_cache_name in operations
             Add( names, [ current_cache_name ] );
             if !@IsBound( category.caches[current_cache_name] )
-                Add( value_matrix, [ "!installed", "-", "-", "-" ] );
+                Add( value_matrix, [ "not installed", "-", "-", "-" ] );
                 continue;
             end;
             current_cache = category.caches[current_cache_name];
@@ -55,10 +55,10 @@ end;
   function( cell, category, human_readable_identifier_list )
     local generic_help_string;
     
-    generic_help_string = " You can access the category cell && category via the local variables 'cell' && 'category' ⥉ a break loop.";
+    generic_help_string = " You can access the category cell and category via the local variables 'cell' and 'category' in a break loop.";
     
     if !IsCapCategoryCell( cell )
-        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the filter IsCapCategoryCell.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the filter IsCapCategoryCell.", generic_help_string ] ) );
     end;
     
     if !HasCapCategory( cell )
@@ -66,7 +66,7 @@ end;
     end;
     
     if category != false && !IsIdenticalObj( CapCategory( cell ), category )
-        CallFuncList( Error, @Concatenation( [ "The CapCategory of " ], human_readable_identifier_list, [ " is !identical to the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( [ "The CapCategory of " ], human_readable_identifier_list, [ " is not identical to the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
     end;
     
 end );
@@ -77,10 +77,10 @@ end );
   function( object, category, human_readable_identifier_list )
     local generic_help_string;
     
-    generic_help_string = " You can access the object && category via the local variables 'object' && 'category' ⥉ a break loop.";
+    generic_help_string = " You can access the object and category via the local variables 'object' and 'category' in a break loop.";
     
     if !IsCapCategoryObject( object )
-        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the filter IsCapCategoryObject.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the filter IsCapCategoryObject.", generic_help_string ] ) );
     end;
     
     if !HasCapCategory( object )
@@ -88,11 +88,11 @@ end );
     end;
     
     if category != false && !IsIdenticalObj( CapCategory( object ), category )
-        CallFuncList( Error, @Concatenation( [ "The CapCategory of " ], human_readable_identifier_list, [ " is !identical to the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( [ "The CapCategory of " ], human_readable_identifier_list, [ " is not identical to the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
     end;
     
     if category != false && !ObjectFilter( category )( object )
-        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the object filter of the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the object filter of the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
     end;
     
 end );
@@ -103,10 +103,10 @@ end );
   function( morphism, category, human_readable_identifier_list )
     local generic_help_string;
     
-    generic_help_string = " You can access the morphism && category via the local variables 'morphism' && 'category' ⥉ a break loop.";
+    generic_help_string = " You can access the morphism and category via the local variables 'morphism' and 'category' in a break loop.";
     
     if !IsCapCategoryMorphism( morphism )
-        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the filter IsCapCategoryMorphism.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the filter IsCapCategoryMorphism.", generic_help_string ] ) );
     end;
     
     if !HasCapCategory( morphism )
@@ -114,11 +114,11 @@ end );
     end;
     
     if category != false && !IsIdenticalObj( CapCategory( morphism ), category )
-        CallFuncList( Error, @Concatenation( [ "the CAP-category of " ], human_readable_identifier_list, [ " is !identical to the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( [ "the CAP-category of " ], human_readable_identifier_list, [ " is not identical to the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
     end;
     
     if category != false && !MorphismFilter( category )( morphism )
-        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the morphism filter of the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the morphism filter of the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
     end;
     
     if !HasSource( morphism )
@@ -141,10 +141,10 @@ end );
   function( two_cell, category, human_readable_identifier_list )
     local generic_help_string;
     
-    generic_help_string = " You can access the 2-cell && category via the local variables 'two_cell' && 'category' ⥉ a break loop.";
+    generic_help_string = " You can access the 2-cell and category via the local variables 'two_cell' and 'category' in a break loop.";
     
     if !IsCapCategoryTwoCell( two_cell )
-        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the filter IsCapCategoryTwoCell.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the filter IsCapCategoryTwoCell.", generic_help_string ] ) );
     end;
     
     if !HasCapCategory( two_cell )
@@ -152,11 +152,11 @@ end );
     end;
     
     if category != false && !IsIdenticalObj( CapCategory( two_cell ), category )
-        CallFuncList( Error, @Concatenation( [ "the CapCategory of " ], human_readable_identifier_list, [ " is !identical to the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( [ "the CapCategory of " ], human_readable_identifier_list, [ " is not identical to the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
     end;
     
     if category != false && !TwoCellFilter( category )( two_cell )
-        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does !lie ⥉ the 2-cell filter of the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
+        CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the 2-cell filter of the category named \033[1m", Name( category ), "\033[0m.", generic_help_string ] ) );
     end;
     
     if !HasSource( two_cell )
@@ -180,7 +180,7 @@ end );
     if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name] )
         
         # COVERAGE_IGNORE_NEXT_LINE
-        Error( operation_name, " is !a CAP operation" );
+        Error( operation_name, " is not a CAP operation" );
         
     end;
     

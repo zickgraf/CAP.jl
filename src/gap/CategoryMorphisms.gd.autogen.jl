@@ -5,11 +5,11 @@
 #
 #! @Chapter Morphisms
 #!  Any GAP object satisfying <C>IsCapCategoryMorphism</C> can be added to a category
-#!  && then becomes a morphism ⥉ this category.
-#!  Any morphism can belong to one || no category.
+#!  and then becomes a morphism in this category.
+#!  Any morphism can belong to one or no category.
 #!  After a GAP object is added to the category, it knows which things can be
-#!  computed ⥉ its category && to which category it belongs.
-#!  It knows categorical properties && attributes, && the functions for existential quantifiers
+#!  computed in its category and to which category it belongs.
+#!  It knows categorical properties and attributes, and the functions for existential quantifiers
 #!  can be applied to the morphism.
 
 ###################################
@@ -64,12 +64,12 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ###################################
 
 #! @Description
-#! The arguments are two objects $S$ && $T$ ⥉ a category,
-#! && a morphism datum $a$ (type && semantics of the morphism datum depend on the category).
-#! The output is a morphism ⥉ $\mathrm[Hom](S,T)$ defined by $a$.
-#! Note that by default this CAP operation is !cached. You can change this behaviour
+#! The arguments are two objects $S$ and $T$ in a category,
+#! and a morphism datum $a$ (type and semantics of the morphism datum depend on the category).
+#! The output is a morphism in $\mathrm[Hom](S,T)$ defined by $a$.
+#! Note that by default this CAP operation is not cached. You can change this behaviour
 #! by calling `SetCachingToWeak( C, "MorphismConstructor" )` resp. `SetCachingToCrisp( C, "MorphismConstructor" )`.
-#! @Returns a morphism ⥉ $\mathrm[Hom](S,T)$
+#! @Returns a morphism in $\mathrm[Hom](S,T)$
 #! @Arguments S, a, T
 @DeclareOperation( "MorphismConstructor",
                   [ IsCapCategoryObject, IsObject, IsCapCategoryObject ] );
@@ -78,7 +78,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The argument is a CAP category morphism <A>mor</A>.
 #! The output is a datum which can be used to construct <A>mor</A>, that is,
 #! `IsEqualForMorphisms( `<A>mor</A>`, MorphismConstructor( Source( `<A>mor</A>` ), MorphismDatum( `<A>mor</A>` ), Range( `<A>mor</A>` ) ) )`.
-#! Note that by default this CAP operation is !cached. You can change this behaviour
+#! Note that by default this CAP operation is not cached. You can change this behaviour
 #! by calling `SetCachingToWeak( C, "MorphismDatum" )` resp. `SetCachingToCrisp( C, "MorphismDatum" )`.
 #! @Returns depends on the category
 #! @Arguments mor
@@ -160,124 +160,124 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ##
 ###################################
 
-#! CAP provides two principal methods to generate random morphisms with || without fixed source && range:
+#! CAP provides two principal methods to generate random morphisms with or without fixed source and range:
 #!  * <E>By integers</E>: The integer is simply a parameter that can be used to create a random morphism.
 #!  * <E>By lists</E>: The list is used when creating a random morphism would need more than one parameter. Lists offer more
 #!    flexibility at the expense of the genericity of the methods. This happens because lists that are valid as input in
-#!    some category may be !valid for other categories. Hence, these operations are !thought to be used in
+#!    some category may be not valid for other categories. Hence, these operations are not thought to be used in
 #!    generic categorical algorithms.
 
 #! @Description
-#! The arguments are an object $a$ ⥉ a category $C$ && an integer $n$.
+#! The arguments are an object $a$ in a category $C$ and an integer $n$.
 #! The output is a random morphism $\alpha: a \rightarrow b$ for some object $b$ in $C$.
-#! If $C$ is equipped with the methods <C>RandomObjectByInteger</C> && <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>
-#! && $C$ is an Ab-category, then <C>RandomMorphismWithFixedSourceByInteger</C>$(C,a,n)$ can be derived as
+#! If $C$ is equipped with the methods <C>RandomObjectByInteger</C> and <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>
+#! and $C$ is an Ab-category, then <C>RandomMorphismWithFixedSourceByInteger</C>$(C,a,n)$ can be derived as
 #! <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>($C$,$a$,$b$,$1$+<C>Log2Int</C>($n$)) where
 #! $b$ is computed via <C>RandomObjectByInteger</C>($C$,$n$).
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments a, n
 @DeclareOperation( "RandomMorphismWithFixedSourceByInteger",
                   [ IsCapCategoryObject, IsInt ] );
 
 #! @Description
-#! The arguments are an object $a$ ⥉ a category $C$ && a list $L$.
+#! The arguments are an object $a$ in a category $C$ and a list $L$.
 #! The output is a random morphism $\alpha: a \rightarrow b$ for some object $b$ in $C$.
-#! If $C$ is equipped with the methods <C>RandomObjectByList</C> && <C>RandomMorphismWithFixedSourceAndRangeByList</C>
-#! && $C$ is an Ab-category, then <C>RandomMorphismWithFixedSourceByList</C>$(C,a,L)$ can be derived as
+#! If $C$ is equipped with the methods <C>RandomObjectByList</C> and <C>RandomMorphismWithFixedSourceAndRangeByList</C>
+#! and $C$ is an Ab-category, then <C>RandomMorphismWithFixedSourceByList</C>$(C,a,L)$ can be derived as
 #! <C>RandomMorphismWithFixedSourceAndRangeByList</C>($C,a,b,L[2]$) where
 #! $b$ is computed via <C>RandomObjectByList</C>($C,L[1]$).
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments a, L
 @DeclareOperation( "RandomMorphismWithFixedSourceByList",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
-#! The arguments are an object $b$ ⥉ a category $C$ && an integer $n$.
+#! The arguments are an object $b$ in a category $C$ and an integer $n$.
 #! The output is a random morphism $\alpha: a \rightarrow b$ for some object $a$ in $C$.
-#! If $C$ is equipped with the methods <C>RandomObjectByInteger</C> && <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>
-#! && $C$ is an Ab-category, then <C>RandomMorphismWithFixedRangeByInteger</C>$(C,b,n)$ can be derived as
+#! If $C$ is equipped with the methods <C>RandomObjectByInteger</C> and <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>
+#! and $C$ is an Ab-category, then <C>RandomMorphismWithFixedRangeByInteger</C>$(C,b,n)$ can be derived as
 #! <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>($C$,$a$,$b$,$1$+<C>Log2Int</C>($n$)) where
 #! $a$ is computed via <C>RandomObjectByInteger</C>($C$,$n$).
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments b, n
 @DeclareOperation( "RandomMorphismWithFixedRangeByInteger",
                   [ IsCapCategoryObject, IsInt ] );
 
 #! @Description
-#! The arguments are an object $b$ ⥉ a category $C$ && a list $L$.
+#! The arguments are an object $b$ in a category $C$ and a list $L$.
 #! The output is a random morphism $\alpha: a \rightarrow b$ for some object $a$ in $C$.
-#! If $C$ is equipped with the methods <C>RandomObjectByList</C> && <C>RandomMorphismWithFixedSourceAndRangeByList</C>
-#! && $C$ is an Ab-category, then <C>RandomMorphismWithFixedRangeByList</C>$(C,b,L)$ can be derived as
+#! If $C$ is equipped with the methods <C>RandomObjectByList</C> and <C>RandomMorphismWithFixedSourceAndRangeByList</C>
+#! and $C$ is an Ab-category, then <C>RandomMorphismWithFixedRangeByList</C>$(C,b,L)$ can be derived as
 #! <C>RandomMorphismWithFixedSourceAndRangeByList</C>($C,a,b,L[2]$) where
 #! $a$ is computed via <C>RandomObjectByList</C>($C,L[1]$).
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments b, L
 @DeclareOperation( "RandomMorphismWithFixedRangeByList",
                   [ IsCapCategoryObject, IsList ] );
 
 #! @Description
-#! The arguments are two objects $a$ && $b$ ⥉ a category $C$ && an integer $n$.
-#! The output is a random morphism $\alpha: a \rightarrow b$ ⥉ $C$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! The arguments are two objects $a$ and $b$ in a category $C$ and an integer $n$.
+#! The output is a random morphism $\alpha: a \rightarrow b$ in $C$.
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments a, b, n
 @DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByInteger",
                   [ IsCapCategoryObject, IsCapCategoryObject, IsInt ] );
 
 #! @Description
-#! This operation is !a CAP basic operation
-#! The arguments are two objects $a$ && $b$ ⥉ a category $C$ && a list $L$.
-#! The output is a random morphism $\alpha: a \rightarrow b$ ⥉ $C$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! This operation is not a CAP basic operation
+#! The arguments are two objects $a$ and $b$ in a category $C$ and a list $L$.
+#! The output is a random morphism $\alpha: a \rightarrow b$ in $C$.
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments a, b, L
 @DeclareOperation( "RandomMorphismWithFixedSourceAndRangeByList",
                   [ IsCapCategoryObject, IsCapCategoryObject, IsList ] );
 
 #! @Description
-#! The arguments are a category $C$ && an integer $n$.
-#! The output is a random morphism ⥉ $C$.
-#! The operation can be derived ⥉ three different ways:
-#! - If $C$ is equipped with the methods <C>RandomObjectByInteger</C> && <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>
-#!   && $C$ is an Ab-category, then <C>RandomMorphism</C>$(C,n)$ can be derived as
+#! The arguments are a category $C$ and an integer $n$.
+#! The output is a random morphism in $C$.
+#! The operation can be derived in three different ways:
+#! - If $C$ is equipped with the methods <C>RandomObjectByInteger</C> and <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>
+#!   and $C$ is an Ab-category, then <C>RandomMorphism</C>$(C,n)$ can be derived as
 #!   <C>RandomMorphismWithFixedSourceAndRangeByInteger</C>($C,a,b$,$1$+<C>Log2Int</C>($n$)) where
-#!   $a$ && $b$ are computed via <C>RandomObjectByInteger</C>($C,n$).
-#! - If $C$ is equipped with the methods <C>RandomObjectByInteger</C> && <C>RandomMorphismWithFixedSourceByInteger</C>,
+#!   $a$ and $b$ are computed via <C>RandomObjectByInteger</C>($C,n$).
+#! - If $C$ is equipped with the methods <C>RandomObjectByInteger</C> and <C>RandomMorphismWithFixedSourceByInteger</C>,
 #!   then <C>RandomMorphism</C>$(C,n)$ can be derived as
 #!   <C>RandomMorphismWithFixedSourceByInteger</C>($C,a,1$+<C>Log2Int</C>($n$)) where
 #!   $a$ is computed via <C>RandomObjectByInteger</C>($C,n$).
-#! - If $C$ is equipped with the methods <C>RandomObjectByInteger</C> && <C>RandomMorphismWithFixedRangeByInteger</C>,
+#! - If $C$ is equipped with the methods <C>RandomObjectByInteger</C> and <C>RandomMorphismWithFixedRangeByInteger</C>,
 #!   then <C>RandomMorphism</C>$(C,n)$ can be derived as
 #!   <C>RandomMorphismWithFixedRangeByInteger</C>($C,b,1$+<C>Log2Int</C>($n$)) where
 #!   $b$ is computed via <C>RandomObjectByInteger</C>($C,n$).
-#! @Returns a morphism ⥉ $C$
+#! @Returns a morphism in $C$
 #! @Arguments C, n
 @DeclareOperation( "RandomMorphismByInteger",
                   [ IsCapCategory, IsInt ] );
 
 #! @Description
-#! The arguments are a category $C$ && a list $L$.
-#! The output is a random morphism ⥉ $C$.
-#! The operation can be derived ⥉ three different ways:
-#! - If $C$ is equipped with the methods <C>RandomObjectByList</C> && <C>RandomMorphismWithFixedSourceAndRangeByList</C>
-#!   && $C$ is an Ab-category, then <C>RandomMorphism</C>$(C,L)$ can be derived as
+#! The arguments are a category $C$ and a list $L$.
+#! The output is a random morphism in $C$.
+#! The operation can be derived in three different ways:
+#! - If $C$ is equipped with the methods <C>RandomObjectByList</C> and <C>RandomMorphismWithFixedSourceAndRangeByList</C>
+#!   and $C$ is an Ab-category, then <C>RandomMorphism</C>$(C,L)$ can be derived as
 #!   <C>RandomMorphismWithFixedSourceAndRangeByList</C>($C,a,b,L[3]$)) where
-#!   $a$ && $b$ are computed via <C>RandomObjectByList</C>($C,L[i]$) for $i=1,2$ respectively.
-#! - If $C$ is equipped with the methods <C>RandomObjectByList</C> && <C>RandomMorphismWithFixedSourceByList</C>,
+#!   $a$ and $b$ are computed via <C>RandomObjectByList</C>($C,L[i]$) for $i=1,2$ respectively.
+#! - If $C$ is equipped with the methods <C>RandomObjectByList</C> and <C>RandomMorphismWithFixedSourceByList</C>,
 #!   then <C>RandomMorphism</C>$(C,L)$ can be derived as
 #!   <C>RandomMorphismWithFixedSourceByList</C>($C,a,L[2]$) where
 #!   $a$ is computed via <C>RandomObjectByList</C>($C,L[1]$).
-#! - If $C$ is equipped with the methods <C>RandomObjectByList</C> && <C>RandomMorphismWithFixedRangeByList</C>,
+#! - If $C$ is equipped with the methods <C>RandomObjectByList</C> and <C>RandomMorphismWithFixedRangeByList</C>,
 #!   then <C>RandomMorphism</C>$(C,L)$ can be derived as
 #!   <C>RandomMorphismWithFixedRangeByList</C>($C,b,L[2]$) where
 #!   $b$ is computed via <C>RandomObjectByList</C>($C,L[1]$).
-#! @Returns a morphism ⥉ $C$
+#! @Returns a morphism in $C$
 #! @Arguments C, L
 @DeclareOperation( "RandomMorphismByList",
                   [ IsCapCategory, IsList ] );
 
 #! @BeginGroup
 #! @Description
-#! These are convenient methods && they, depending on the input, delegate to one of the above methods.
-# @Returns an object, morphism ⥉ $C$
+#! These are convenient methods and they, depending on the input, delegate to one of the above methods.
+# @Returns an object, morphism in $C$
 #! @Arguments a, n
 @DeclareOperation( "RandomMorphismWithFixedSource", [ IsCapCategoryObject, IsInt ] );
 #! @Arguments a, L
@@ -306,7 +306,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ##
 ###################################
 
-#! Non-categorical properties are !stable under equivalences of categories.
+#! Non-categorical properties are not stable under equivalences of categories.
 
 #! @Description
 #! The argument is a morphism $\alpha: a \rightarrow b$.
@@ -326,7 +326,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 @DeclareProperty( "IsEqualToZeroMorphism",
                  IsCapCategoryMorphism );
 
-## This is !a categorical property because non-endomorphisms 
+## This is not a categorical property because non-endomorphisms 
 ## can be mapped to endomorphisms under equivalences of categories.
 #! @Description
 #! The argument is a morphism $\alpha$.
@@ -337,7 +337,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 @DeclareProperty( "IsEndomorphism",
                  IsCapCategoryMorphism );
 
-## This is !a categorical property because non-endomorphisms 
+## This is not a categorical property because non-endomorphisms 
 ## can be mapped to endomorphisms under equivalences of categories.
 #! @Description
 #! The argument is a morphism $\alpha$.
@@ -364,7 +364,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 #! @Description
 #!  Adds <A>morphism</A> as a morphism to <A>category</A>.
-#!  If <A>morphism</A> already lies ⥉ the filter <C>IsCapCategoryMorphism</C>,
+#!  If <A>morphism</A> already lies in the filter <C>IsCapCategoryMorphism</C>,
 #!  the operation <Ref Oper="Add" Label="for IsCapCategory, IsCapCategoryMorphism" />
 #!  can be used instead.
 #! @Arguments category, morphism
@@ -375,7 +375,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #!  **Deprecated**: use <Ref Func="CreateCapCategoryWithDataTypes" /> instead.
 #!  The argument <A>filter</A> is used to create a morphism type for the
-#!  category <A>category</A>, which is then used ⥉ <C>ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes</C>
+#!  category <A>category</A>, which is then used in <C>ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes</C>
 #!  to objectify morphisms for this category. <A>filter</A> must imply `IsCapCategoryMorphism`.
 @DeclareOperation( "AddMorphismRepresentation",
                   [ IsCapCategory, IsObject ] );
@@ -385,10 +385,10 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #!  Objectifies the morphism <A>morphism</A> with the type created
 #!  for morphisms in the category <A>category</A>. The type
 #!  is created by passing a morphism filter to <Ref Func="CreateCapCategoryWithDataTypes" />.
-#!  Morphisms which are objectified using this method do !have to be passed
+#!  Morphisms which are objectified using this method do not have to be passed
 #!  to the <C>AddMorphism</C> function.
-#!  The arguments <C>source</C> && <C>range</C> are assumed to be objectified.
-#!  The optional arguments behave like the corresponding arguments ⥉ <C>ObjectifyWithAttributes</C>.
+#!  The arguments <C>source</C> and <C>range</C> are assumed to be objectified.
+#!  The optional arguments behave like the corresponding arguments in <C>ObjectifyWithAttributes</C>.
 #!  Also returns the objectified morphism.
 #! @Returns a morphism
 @DeclareGlobalFunction( "ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes" );
@@ -401,7 +401,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 ###################################
 ##
-#! @Section Equality && Congruence for Morphisms
+#! @Section Equality and Congruence for Morphisms
 ##
 ###################################
 
@@ -465,7 +465,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The arguments are two morphisms $\alpha, \beta: a \rightarrow b$.
 #! The output is the addition $\alpha + \beta$.
 #! Note: The addition has to be compatible with the congruence of morphisms.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments alpha, beta
 @DeclareOperation( "AdditionForMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -474,7 +474,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The arguments are two morphisms $\alpha, \beta: a \rightarrow b$.
 #! The output is the addition $\alpha - \beta$.
 #! Note: The addition has to be compatible with the congruence of morphisms.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments alpha, beta
 @DeclareOperation( "SubtractionForMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -483,7 +483,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The argument is a morphism $\alpha: a \rightarrow b$.
 #! The output is its additive inverse $-\alpha$.
 #! Note: The addition has to be compatible with the congruence of morphisms.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments alpha
 @DeclareAttribute( "AdditiveInverseForMorphisms",
                   IsCapCategoryMorphism );
@@ -493,10 +493,10 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 #! @Description
 #! The arguments are an element $r$ of a commutative ring
-#! && a morphism $\alpha: a \rightarrow b$.
+#! and a morphism $\alpha: a \rightarrow b$.
 #! The output is the multiplication with the ring element $r \cdot \alpha$.
 #! Note: The multiplication has to be compatible with the congruence of morphisms.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments r, alpha
 @DeclareOperation( "MultiplyWithElementOfCommutativeRingForMorphisms",
                   [ IsRingElement, IsCapCategoryMorphism ] );
@@ -504,14 +504,14 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #! This is a convenience method. It has two arguments.
 #! The first argument is either a rational number $q$
-#! || an element $r$ of a commutative ring $R$.
-#! The second argument is a morphism $\alpha: a \rightarrow b$ ⥉ a linear category
+#! or an element $r$ of a commutative ring $R$.
+#! The second argument is a morphism $\alpha: a \rightarrow b$ in a linear category
 #! over the commutative ring $R$.
 #! In the case where the first element is a rational number, this method tries to interpret $q$ as an element $r$ of $R$ via
 #! <C>R.interpret_rationals_func</C>. If no such interpretation
 #! exists, this method throws an error.
 #! The output is the multiplication with the ring element $r \cdot \alpha$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments r, alpha
 @DeclareOperation( "*",
                   [ IsRingElement, IsCapCategoryMorphism ] );
@@ -527,9 +527,9 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ###################################
 
 #! @Description
-#! The arguments are two objects $a$ && $b$.
+#! The arguments are two objects $a$ and $b$.
 #! The output is the zero morphism $0: a \rightarrow b$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments a, b
 @DeclareOperation( "ZeroMorphism",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
@@ -537,14 +537,14 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 ###################################
 ##
-#! @Section Subobject && Factorobject Operations
+#! @Section Subobject and Factorobject Operations
 ##
 ###################################
 
 #! Subobjects of an object $c$ are monomorphisms
-#! with range $c$ && a special function for comparision.
+#! with range $c$ and a special function for comparision.
 #! Similarly, factorobjects of an object $c$ are epimorphisms
-#! with source $c$ && a special function for comparision.
+#! with source $c$ and a special function for comparision.
 
 ## TODO
 # @Description
@@ -634,14 +634,14 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 ###################################
 ##
-#! @Section Identity Morphism && Composition of Morphisms
+#! @Section Identity Morphism and Composition of Morphisms
 ##
 ###################################
 
 #! @Description
 #! The argument is an object $a$.
 #! The output is its identity morphism $\mathrm[id]_a$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,a)$
+#! @Returns a morphism in $\mathrm[Hom](a,a)$
 #! @Arguments a
 @DeclareAttribute( "IdentityMorphism",
                                           IsCapCategoryObject );
@@ -650,7 +650,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #! The arguments are two morphisms $\alpha: a \rightarrow b$, $\beta: b \rightarrow c$.
 #! The output is the composition $\beta \circ \alpha: a \rightarrow c$.
-#! @Returns a morphism ⥉ $\mathrm[Hom]( a, c )$
+#! @Returns a morphism in $\mathrm[Hom]( a, c )$
 #! @Arguments alpha, beta
 @DeclareOperation( "PreCompose",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -661,17 +661,17 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! $L == ( \alpha_1: a_1 \rightarrow a_2, \alpha_2: a_2 \rightarrow a_3, \dots, \alpha_n: a_n \rightarrow a_[n+1] )$.
 #! The output is the composition
 #! $\alpha_[n] \circ ( \alpha_[n-1] \circ ( \dots ( \alpha_2 \circ \alpha_1 ) ) )$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a_1, a_[n+1])$
+#! @Returns a morphism in $\mathrm[Hom](a_1, a_[n+1])$
 #! @Arguments L
 @DeclareOperation( "PreCompose",
                   [ IsList ] );
 
 #! @Description
 #! The argument is a list of morphisms
-#! $L == ( \alpha_1: a_1 \rightarrow a_2, \alpha_2: a_2 \rightarrow a_3, \dots, \alpha_n: a_n \rightarrow a_[n+1] )$ ⥉ $C$.
+#! $L == ( \alpha_1: a_1 \rightarrow a_2, \alpha_2: a_2 \rightarrow a_3, \dots, \alpha_n: a_n \rightarrow a_[n+1] )$ in $C$.
 #! The output is the composition
 #! $\alpha_[n] \circ ( \alpha_[n-1] \circ ( \dots ( \alpha_2 \circ \alpha_1 ) ) )$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a_1, a_[n+1])$
+#! @Returns a morphism in $\mathrm[Hom](a_1, a_[n+1])$
 #! @Arguments C, L
 @DeclareOperation( "PreComposeList",
                   [ IsList ] );
@@ -680,7 +680,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #! The arguments are two morphisms $\beta: b \rightarrow c$, $\alpha: a \rightarrow b$.
 #! The output is the composition $\beta \circ \alpha: a \rightarrow c$.
-#! @Returns a morphism ⥉ $\mathrm[Hom]( a, c )$
+#! @Returns a morphism in $\mathrm[Hom]( a, c )$
 #! @Arguments beta, alpha
 @DeclareOperation( "PostCompose",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -691,7 +691,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! $L == ( \alpha_n: a_n \rightarrow a_[n+1], \alpha_[n-1]: a_[n-1] \rightarrow a_n, \dots, \alpha_1: a_1 \rightarrow a_2 )$.
 #! The output is the composition
 #! $((\alpha_[n] \circ  \alpha_[n-1]) \circ \dots  \alpha_2) \circ \alpha_1$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a_1, a_[n+1])$
+#! @Returns a morphism in $\mathrm[Hom](a_1, a_[n+1])$
 #! @Arguments L
 @DeclareOperation( "PostCompose",
                   [ IsList ] );
@@ -701,16 +701,16 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! $L == ( \alpha_n: a_n \rightarrow a_[n+1], \alpha_[n-1]: a_[n-1] \rightarrow a_n, \dots, \alpha_1: a_1 \rightarrow a_2 )$.
 #! The output is the composition
 #! $((\alpha_[n] \circ  \alpha_[n-1]) \circ \dots  \alpha_2) \circ \alpha_1$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a_1, a_[n+1])$
+#! @Returns a morphism in $\mathrm[Hom](a_1, a_[n+1])$
 #! @Arguments C, L
 @DeclareOperation( "PostComposeList",
                   [ IsList ] );
 
 #! @Description
-#! The arguments are two objects <A>s</A>, <A>r</A> && a list <A>morphisms</A> of morphisms from <A>s</A> to <A>r</A>.
-#! The output is the sum of all elements ⥉ <A>morphisms</A>, || the zero-morphism from <A>s</A> to <A>r</A> 
+#! The arguments are two objects <A>s</A>, <A>r</A> and a list <A>morphisms</A> of morphisms from <A>s</A> to <A>r</A>.
+#! The output is the sum of all elements in <A>morphisms</A>, or the zero-morphism from <A>s</A> to <A>r</A> 
 #! if <A>morphisms</A> is empty.
-#! @Returns a morphism ⥉ $\mathrm[Hom](s,r)$
+#! @Returns a morphism in $\mathrm[Hom](s,r)$
 #! @Arguments s, morphisms, r
 @DeclareOperation( "SumOfMorphisms",
                   [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
@@ -771,36 +771,36 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! \end[center]
 #! @EndLatexOnly
 
-#! Note that such lifts (or colifts) do !have to be unique. So ⥉ general,
-#! we do !expect that algorithms computing lifts (or colifts) do this ⥉ a functorial way.
-#! Thus the operations $\mathtt[Lift]$ && $\mathtt[Colift]$ are !regarded as 
+#! Note that such lifts (or colifts) do not have to be unique. So in general,
+#! we do not expect that algorithms computing lifts (or colifts) do this in a functorial way.
+#! Thus the operations $\mathtt[Lift]$ and $\mathtt[Colift]$ are not regarded as 
 #! categorical operations, but only as set-theoretic operations.
 
 #! @Description
 #! The arguments are a monomorphism $\iota: k \hookrightarrow a$
-#! && a morphism $\tau: t \rightarrow a$
+#! and a morphism $\tau: t \rightarrow a$
 #! such that there is a morphism $u: t \rightarrow k$ with
 #! $\iota \circ u \sim_[t,a] \tau$.
 #! The output is such a $u$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](t,k)$
+#! @Returns a morphism in $\mathrm[Hom](t,k)$
 #! @Arguments iota, tau
 @DeclareOperation( "LiftAlongMonomorphism",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
 #! The arguments are an epimorphism $\epsilon: a \rightarrow c$
-#! && a morphism $\tau: a \rightarrow t$
+#! and a morphism $\tau: a \rightarrow t$
 #! such that there is a morphism $u: c \rightarrow t$ with
 #! $u \circ \epsilon \sim_[a,t] \tau$.
 #! The output is such a $u$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](c,t)$
+#! @Returns a morphism in $\mathrm[Hom](c,t)$
 #! @Arguments epsilon, tau
 @DeclareOperation( "ColiftAlongEpimorphism",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
 #! The arguments are a monomorphism $\iota: k \hookrightarrow a$
-#! && a morphism $\tau: t \rightarrow a$.
+#! and a morphism $\tau: t \rightarrow a$.
 #! The output is <C>true</C> if there exists
 #! a morphism $u: t \rightarrow k$ with
 #! $\iota \circ u \sim_[t,a] \tau$.
@@ -812,7 +812,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 #! @Description
 #! The arguments are an epimorphism $\epsilon: a \rightarrow c$
-#! && a morphism $\tau: a \rightarrow t$.
+#! and a morphism $\tau: a \rightarrow t$.
 #! The output is <C>true</C> if there exists
 #! a morphism $u: c \rightarrow t$ with
 #! $u \circ \epsilon \sim_[a,t] \tau$.
@@ -828,7 +828,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The output is such a lift $\alpha / \beta: a \rightarrow b$.
 #! Recall that a lift $\alpha / \beta: a \rightarrow b$ of $\alpha$ along $\beta$ is
 #! a morphism such that $\beta \circ (\alpha / \beta) \sim_[a,c] \alpha$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b)$
+#! @Returns a morphism in $\mathrm[Hom](a,b)$
 #! @Arguments alpha, beta
 @DeclareOperation( "Lift",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -836,10 +836,10 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #! The arguments are two morphisms $\alpha: a \rightarrow c$, $\beta: b \rightarrow c$.
 #! The output is a lift $\alpha / \beta: a \rightarrow b$ of $\alpha$ along $\beta$
-#! if such a lift exists || $\mathtt[fail]$ if it doesn't.
+#! if such a lift exists or $\mathtt[fail]$ if it doesn't.
 #! Recall that a lift $\alpha / \beta: a \rightarrow b$ of $\alpha$ along $\beta$ is
 #! a morphism such that $\beta \circ (\alpha / \beta) \sim_[a,c] \alpha$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](a,b) + \[ \mathtt[fail] \]$
+#! @Returns a morphism in $\mathrm[Hom](a,b) + \[ \mathtt[fail] \]$
 #! @Arguments alpha, beta
 @DeclareOperation( "LiftOrFail",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -861,7 +861,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The output is such a colift $\alpha \backslash \beta: c \rightarrow b$.
 #! Recall that a colift $\alpha \backslash \beta: c \rightarrow b$ of $\beta$ along $\alpha$ is
 #! a morphism such that $(\alpha \backslash \beta) \circ \alpha \sim_[a,b] \beta$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](c,b)$
+#! @Returns a morphism in $\mathrm[Hom](c,b)$
 #! @Arguments alpha, beta
 @DeclareOperation( "Colift",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -870,10 +870,10 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #! The arguments are two morphisms $\alpha: a \rightarrow c$, $\beta: a \rightarrow b$.
 #! The output is a colift $\alpha \backslash \beta: c \rightarrow b$ of $\beta$ along $\alpha$
-#! if such a colift exists || $\mathtt[fail]$ if it doesn't.
+#! if such a colift exists or $\mathtt[fail]$ if it doesn't.
 #! Recall that a colift $\alpha \backslash \beta: c \rightarrow b$ of $\beta$ along $\alpha$ is
 #! a morphism such that $(\alpha \backslash \beta) \circ \alpha \sim_[a,b] \beta$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](c,b) + \[ \mathtt[fail] \]$
+#! @Returns a morphism in $\mathrm[Hom](c,b) + \[ \mathtt[fail] \]$
 #! @Arguments alpha, beta
 @DeclareOperation( "ColiftOrFail",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -899,7 +899,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! Let $\alpha: a \rightarrow b$ be a morphism. An inverse of $\alpha$
 #! is a morphism $\alpha^[-1]: b \rightarrow a$ such that
 #! $\alpha \circ \alpha^[-1] \sim_[b,b] \mathrm[id]_b$
-#! && $\alpha^[-1] \circ \alpha \sim_[a,a] \mathrm[id]_a$.
+#! and $\alpha^[-1] \circ \alpha \sim_[a,a] \mathrm[id]_a$.
 
 #! @BeginLatexOnly
 #! \begin[center]
@@ -909,7 +909,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! \node (a) at (0,0) [$a$];
 #! \node (b) at (\w,0) [$b$];
 #! \draw[-latex] (a) to node[pos=0.45, above] [$\alpha$] (b);
-#! \draw[-latex] (b) to [out == -135, ⥉ == -45] node[pos=0.45, below] [$\alpha^[-1]$] (a);
+#! \draw[-latex] (b) to [out == -135, in == -45] node[pos=0.45, below] [$\alpha^[-1]$] (a);
 #! \draw [-latex] (a.135) arc (45:45+280:4mm) node[pos=0.5,left] [$\mathrm[id]_a$] (a);
 #! \draw [-latex] (b.45) arc (-240:-240-280:4mm) node[pos=0.5,right] [$\mathrm[id]_b$] (b);
 #! \end[tikzpicture]
@@ -919,7 +919,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #! The argument is an isomorphism $\alpha: a \rightarrow b$.
 #! The output is its inverse $\alpha^[-1]: b \rightarrow a$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](b,a)$
+#! @Returns a morphism in $\mathrm[Hom](b,a)$
 #! @Arguments alpha
 @DeclareOperation( "InverseForMorphisms",
                   [ IsCapCategoryMorphism ] );
@@ -928,8 +928,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The argument is a split-epimorphism $\alpha: a \rightarrow b$.
 #! The output is a pre-inverse $\iota: b \rightarrow a$ of $\alpha$,
 #! i.e., $\iota$ satisfies $\alpha \circ \iota \sim_[b,b] \mathrm[id]_b$.
-#! The morphism $\iota$ is also known as a section || a right-inverse of $\alpha$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](b,a)$
+#! The morphism $\iota$ is also known as a section or a right-inverse of $\alpha$.
+#! @Returns a morphism in $\mathrm[Hom](b,a)$
 #! @Arguments alpha
 @DeclareOperation( "PreInverseForMorphisms",
                   [ IsCapCategoryMorphism ] );
@@ -938,8 +938,8 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The argument is a split-monomorphism $\alpha: a \rightarrow b$.
 #! The output is a post-inverse $\pi: b \rightarrow a$ of $\alpha$,
 #! i.e., $\pi$ satisfies $\pi \circ \alpha \sim_[a,a] \mathrm[id]_a$.
-#! The morphism $\pi$ is also known as a contraction || a left-inverse of $\alpha$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](b,a)$
+#! The morphism $\pi$ is also known as a contraction or a left-inverse of $\alpha$.
+#! @Returns a morphism in $\mathrm[Hom](b,a)$
 #! @Arguments alpha
 @DeclareOperation( "PostInverseForMorphisms",
                   [ IsCapCategoryMorphism ] );
@@ -953,14 +953,14 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #!  By default, CAP uses caches to store the values of Categorical operations.
 #!  To get a value out of the cache, one needs to compare the input of a basic operation
-#!  with its previous input. To compare morphisms ⥉ the category, IsEqualForCacheForMorphisms is
+#!  with its previous input. To compare morphisms in the category, IsEqualForCacheForMorphisms is
 #!  used. By default, IsEqualForCacheForMorphisms falls back to IsEqualForCache (see ToolsForHomalg),
-#!  which ⥉ turn defaults to recursive comparison for lists && `IsIdenticalObj` in all other cases.
+#!  which in turn defaults to recursive comparison for lists and `IsIdenticalObj` in all other cases.
 #!  If you add a function via `AddIsEqualForCacheForMorphisms`, that function is used instead.
 #!  A function $F: a,b \mapsto bool$ is expected there. The output has to be
-#!  true || false. Fail is !allowed ⥉ this context.
+#!  true or false. Fail is not allowed in this context.
 #! @Arguments phi, psi
-#! @Returns true || false
+#! @Returns true or false
 @DeclareOperation( "IsEqualForCacheForMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
@@ -984,7 +984,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ###################################
 
 #! @Description
-#!  The arguments are two objects <A>A</A> && <A>B</A>.
+#!  The arguments are two objects <A>A</A> and <A>B</A>.
 #!  The output is <C>true</C> if there exists a morphism from <A>A</A> to <A>B</A>,
 #!  otherwise the output is <C>false</C>.
 #! @Arguments A, B
@@ -1001,79 +1001,79 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! Homomorphism structures are way to "oversee" the homomorphisms between two given objects.
 #! Let $C$, $D$ be categories.
 #! A $D$-homomorphism structure for $C$ consists of the following data:
-#! * a functor $H: C^[\mathrm[op]] \times C \rightarrow D$ (when $C$ && $D$ are Ab-categories, $H$ is assumed to be bilinear).
+#! * a functor $H: C^[\mathrm[op]] \times C \rightarrow D$ (when $C$ and $D$ are Ab-categories, $H$ is assumed to be bilinear).
 #! * an object $1 \in D$, called the distinguished object,
-#! * a bijection $\nu: \mathrm[Hom]_[C](a,b) \simeq \mathrm[Hom]_[D](1, H(a,b))$ natural ⥉ $a,b \in C$.
+#! * a bijection $\nu: \mathrm[Hom]_[C](a,b) \simeq \mathrm[Hom]_[D](1, H(a,b))$ natural in $a,b \in C$.
 
 #! @Description
-#! The arguments are two objects $a, b$ ⥉ $C$.
+#! The arguments are two objects $a, b$ in $C$.
 #! The output is the value of the homomorphism structure on objects $H(a,b)$.
-#! @Returns an object ⥉ $D$
+#! @Returns an object in $D$
 #! @Arguments a,b
 @DeclareOperation( "HomomorphismStructureOnObjects",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
-#! The arguments are two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$ ⥉ $C$.
+#! The arguments are two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$ in $C$.
 #! The output is the value of the homomorphism structure on morphisms $H(\alpha, \beta )$.
-#! @Returns a morphism ⥉ $\mathrm[Hom]_[D](H(a',b), H(a,b'))$
+#! @Returns a morphism in $\mathrm[Hom]_[D](H(a',b), H(a,b'))$
 #! @Arguments alpha, beta
 @DeclareOperation( "HomomorphismStructureOnMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
-#! The arguments are an object $s == H(a',b)$ ⥉ $D$,
-#! two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$ ⥉ $C$,
-#! && an object $r == H(a,b')$ ⥉ $D$.
+#! The arguments are an object $s == H(a',b)$ in $D$,
+#! two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$ in $C$,
+#! and an object $r == H(a,b')$ in $D$.
 #! The output is the value of the homomorphism structure on morphisms $H(\alpha, \beta )$.
-#! @Returns a morphism ⥉ $\mathrm[Hom]_[D](H(a',b), H(a,b'))$
+#! @Returns a morphism in $\mathrm[Hom]_[D](H(a',b), H(a,b'))$
 #! @Arguments s, alpha, beta, r
 @DeclareOperation( "HomomorphismStructureOnMorphismsWithGivenObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
 #! The argument is a category $C$.
-#! The output is the distinguished object $1$ ⥉ $D$ of the homomorphism structure.
-#! @Returns an object ⥉ $D$
+#! The output is the distinguished object $1$ in $D$ of the homomorphism structure.
+#! @Returns an object in $D$
 #! @Arguments C
 @DeclareAttribute( "DistinguishedObjectOfHomomorphismStructure",
                   IsCapCategory );
 
 #! @Description
-#! The argument is a morphism  $\alpha: a \rightarrow a'$ ⥉ $C$.
+#! The argument is a morphism  $\alpha: a \rightarrow a'$ in $C$.
 #! The output is the corresponding morphism
-#! $\nu( \alpha ): 1 \rightarrow H(a,a')$ ⥉ $D$ of the homomorphism structure.
-#! @Returns a morphism ⥉ $\mathrm[Hom]_[D](1, H(a,a'))$
+#! $\nu( \alpha ): 1 \rightarrow H(a,a')$ in $D$ of the homomorphism structure.
+#! @Returns a morphism in $\mathrm[Hom]_[D](1, H(a,a'))$
 #! @Arguments alpha
 @DeclareAttribute( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
                   IsCapCategoryMorphism );
 
 #! @Description
-#! The arguments are the distinguished object $1$, a morphism  $\alpha: a \rightarrow a'$, && the object $r == H(a,a')$.
+#! The arguments are the distinguished object $1$, a morphism  $\alpha: a \rightarrow a'$, and the object $r == H(a,a')$.
 #! The output is the corresponding morphism
-#! $\nu( \alpha ): 1 \rightarrow r$ ⥉ $D$ of the homomorphism structure.
-#! @Returns a morphism ⥉ $\mathrm[Hom]_[D](1, r)$
+#! $\nu( \alpha ): 1 \rightarrow r$ in $D$ of the homomorphism structure.
+#! @Returns a morphism in $\mathrm[Hom]_[D](1, r)$
 #! @Arguments distinguished_object, alpha, r
 @DeclareOperation( "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
 #! The arguments are
-#! objects $a,a'$ ⥉ $C$
-#! && a morphism $\iota: 1 \rightarrow H(a,a')$ ⥉ $D$.
+#! objects $a,a'$ in $C$
+#! and a morphism $\iota: 1 \rightarrow H(a,a')$ in $D$.
 #! The output is the corresponding morphism
-#! $\nu^[-1](\iota): a \rightarrow a'$ ⥉ $C$ of the homomorphism structure.
-#! @Returns a morphism ⥉ $\mathrm[Hom]_[C](a,a')$
+#! $\nu^[-1](\iota): a \rightarrow a'$ in $C$ of the homomorphism structure.
+#! @Returns a morphism in $\mathrm[Hom]_[C](a,a')$
 #! @Arguments a,a',iota
 @DeclareOperation( "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
                   [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
-#! The arguments are three lists $\alpha$, $\beta$, && $\gamma$.
+#! The arguments are three lists $\alpha$, $\beta$, and $\gamma$.
 #! The first list $\alpha$ (the left coefficients) is a list of list of morphisms $\alpha_[ij]: A_i \rightarrow B_j$,
-#! where $i == 1 \dots m$ && $j == 1 \dots n$ for integers $m,n \geq 1$.
+#! where $i == 1 \dots m$ and $j == 1 \dots n$ for integers $m,n \geq 1$.
 #! The second list $\beta$ (the right coefficients) is a list of list of morphisms $\beta_[ij]: C_j \rightarrow D_i$,
-#! where $i == 1 \dots m$ && $j == 1 \dots n$.
+#! where $i == 1 \dots m$ and $j == 1 \dots n$.
 #! The third list $\gamma$ (the right side) is a list of morphisms $\gamma_i: A_i \rightarrow D_i$,
 #! where $i == 1, \dots, m$.
 #! Assumes that a solution to the linear system defined by $\alpha$, $\beta$, $\gamma$ exists, i.e.,
@@ -1090,7 +1090,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! Like <C>SolveLinearSystemInAbCategory</C>,
 #! but without the assumption that a solution exists.
 #! If no solution exists, `fail` is returned.
-#! @Returns a list of morphisms $[X_1, \dots, X_n]$ || `fail`
+#! @Returns a list of morphisms $[X_1, \dots, X_n]$ or `fail`
 #! @Arguments alpha, beta, gamma
 @DeclareOperation( "SolveLinearSystemInAbCategoryOrFail",
                    [ IsList, IsList, IsList ] );
@@ -1106,34 +1106,34 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 #! @Description
 #! This is a convenience method.
-#! The arguments are two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$ ⥉ $C$.
+#! The arguments are two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$ in $C$.
 #! The output is <C>HomomorphismStructureOnMorphisms</C> called on $\alpha$, $\beta$.
-#! @Returns a morphism ⥉ $\mathrm[Hom]_[D](H(a',b), H(a,b'))$
+#! @Returns a morphism in $\mathrm[Hom]_[D](H(a',b), H(a,b'))$
 #! @Arguments alpha, beta
 @DeclareOperation( "HomStructure",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
 
 #! @Description
 #! This is a convenience method.
-#! The arguments are a morphism $\alpha: a \rightarrow a'$ && an object $b$ ⥉ $C$.
+#! The arguments are a morphism $\alpha: a \rightarrow a'$ and an object $b$ in $C$.
 #! The output is <C>HomomorphismStructureOnMorphisms</C> called on $\alpha$, $\mathrm[id]_b$.
-#! @Returns a morphism ⥉ $\mathrm[Hom]_[D](H(a',b), H(a,b))$
+#! @Returns a morphism in $\mathrm[Hom]_[D](H(a',b), H(a,b))$
 #! @Arguments alpha, b
 @DeclareOperation( "HomStructure",
                   [ IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
 #! This is a convenience method.
-#! The arguments are an object $a$ && a morphism $\beta: b \rightarrow b'$ ⥉ $C$.
+#! The arguments are an object $a$ and a morphism $\beta: b \rightarrow b'$ in $C$.
 #! The output is <C>HomomorphismStructureOnMorphisms</C> called on $\mathrm[id]_a$, $\beta$.
-#! @Returns a morphism ⥉ $\mathrm[Hom]_[D](H(a,b), H(a,b'))$
+#! @Returns a morphism in $\mathrm[Hom]_[D](H(a,b), H(a,b'))$
 #! @Arguments a, beta
 @DeclareOperation( "HomStructure",
                   [ IsCapCategoryObject, IsCapCategoryMorphism ] );
 
 #! @Description
 #! This is a convenience method.
-#! The arguments are two objects $a$ && $b$ ⥉ $C$.
+#! The arguments are two objects $a$ and $b$ in $C$.
 #! The output is <C>HomomorphismStructureOnObjects</C> called on $a,b$.
 #! @Returns an object
 #! @Arguments a, b
@@ -1162,18 +1162,18 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #! If $\iota\colon D \to E$ is a full embedding of categories, every $D$-homomorphism structure for a category $C$
 #! extends to a $E$-homomorphism structure for $C$. This operations accepts four functions
-#! && installs operations `DistinguishedObjectOfHomomorphismStructureExtendedByFullEmbedding`,
+#! and installs operations `DistinguishedObjectOfHomomorphismStructureExtendedByFullEmbedding`,
 #! `HomomorphismStructureOnObjectsExtendedByFullEmbedding` etc. which correspond to the $E$-homomorphism structure for $C$.
-#! Note: To distinguish embeddings ⥉ different categories, ⥉ addition to $C$ also $E$ is passed to the operations.
+#! Note: To distinguish embeddings in different categories, in addition to $C$ also $E$ is passed to the operations.
 #! When using this with different embeddings with the range category $E$, only the last embedding will be used.
 #! The arguments are:
-#! * `object_function` gets the categories $C$ && $E$ && an object ⥉ $D$.
-#! * `morphism_function` gets the categories $C$ && $E$, an object ⥉ $E$, a morphism ⥉ $D$ && another object ⥉ $E$.
-#!   The objects are the results of `object_function` applied to the source && range of the morphism.
-#! * `object_function_inverse` gets the categories $C$ && $E$ && an object ⥉ $E$.
-#! * `morphism_function_inverse` gets the categories $C$ && $E$, an object ⥉ $D$, a morphism ⥉ $E$ && another object ⥉ $D$.
-#!   The objects are the results of `object_function_inverse` applied to the source && range of the morphism.
-#! `object_function` && `morphism_function` define the embedding. `object_function_inverse` && `morphism_function_inverse` define
+#! * `object_function` gets the categories $C$ and $E$ and an object in $D$.
+#! * `morphism_function` gets the categories $C$ and $E$, an object in $E$, a morphism in $D$ and another object in $E$.
+#!   The objects are the results of `object_function` applied to the source and range of the morphism.
+#! * `object_function_inverse` gets the categories $C$ and $E$ and an object in $E$.
+#! * `morphism_function_inverse` gets the categories $C$ and $E$, an object in $D$, a morphism in $E$ and another object in $D$.
+#!   The objects are the results of `object_function_inverse` applied to the source and range of the morphism.
+#! `object_function` and `morphism_function` define the embedding. `object_function_inverse` and `morphism_function_inverse` define
 #! the inverse of the embedding on its image.
 #! @Returns nothing
 #! @Arguments C, E, object_function, morphism_function, object_function_inverse, morphism_function_inverse
@@ -1221,31 +1221,31 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 
 #! @Description
-#! The arguments are objects $a,b$ ⥉ a $k$-linear category $C$.
+#! The arguments are objects $a,b$ in a $k$-linear category $C$.
 #! The output is a list $L$ of morphisms which is a basis of $\mathrm[Hom]_[C](a,b)$ in
 #! the sense that any given morphism $\alpha: a \to b$ can uniquely be written as a
 #! linear combination of $L$ with the coefficients in
 #! <C>CoefficientsOfMorphismWithGivenBasisOfExternalHom</C>($\alpha,L$).
-#! @Returns a list of morphisms ⥉ $\mathrm[Hom]_[C](a,b)$
+#! @Returns a list of morphisms in $\mathrm[Hom]_[C](a,b)$
 #! @Arguments a, b
 @DeclareOperation( "BasisOfExternalHom",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
-#! The arguments are a morphism  $\alpha: a \to b$ ⥉ a $k$-linear category $C$ &&
+#! The arguments are a morphism  $\alpha: a \to b$ in a $k$-linear category $C$ and
 #! a list <A>L</A><C>=BasisOfExternalHom</C>($a,b$).
 #! The output is a list of coefficients of $\alpha$ with respect to $L$.
-#! @Returns a list of elements ⥉ $k$
+#! @Returns a list of elements in $k$
 #! @Arguments alpha, L
 @DeclareOperation( "CoefficientsOfMorphismWithGivenBasisOfExternalHom",
                   [ IsCapCategoryMorphism, IsList ] );
 
 #! @Description
 #! This is a convenience method.
-#! The argument is a morphism  $\alpha: a \to b$ ⥉ a $k$-linear category $C$.
+#! The argument is a morphism  $\alpha: a \to b$ in a $k$-linear category $C$.
 #! The output is a list of coefficients of $\alpha$ with respect to the list
 #! <C>BasisOfExternalHom</C>(<A>a</A>,<A>b</A>).
-#! @Returns a list of elements ⥉ $k$
+#! @Returns a list of elements in $k$
 #! @Arguments alpha
 @DeclareAttribute( "CoefficientsOfMorphism",
                   IsCapCategoryMorphism );
@@ -1258,22 +1258,22 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ###################################
 
 #! Let $\phi: A \rightarrow B$ be a morphism.
-#! There are several different natural ways to look at $\phi$ as an object ⥉ an ambient category:
+#! There are several different natural ways to look at $\phi$ as an object in an ambient category:
 
 #! - $\mathrm[Hom]( A, B )$, the set of homomorphisms with the equivalence relation $\mathtt[IsCongruentForMorphisms]$ regarded as a category,
 #! - $\sum_[A]\mathrm[Hom]( A, B )$, the category of morphisms where the range is fixed,
 #! - $\sum_[B]\mathrm[Hom]( A, B )$, the category of morphisms where the source is fixed,
 #! - $\sum_[A,B]\mathrm[Hom]( A, B )$, the category of morphisms where neither source nor range is fixed,
 
-#! && furthermore, if $\phi$ happens to be an endomorphism $A \rightarrow A$,
+#! and furthermore, if $\phi$ happens to be an endomorphism $A \rightarrow A$,
 #! we also have
 
 #! - $\sum_[A]\mathrm[Hom](A,A)$, the category of endomorphisms.
 
-#! Let $\mathbf[C]$ be one of the categories above ⥉ which $\phi$ may reside as an object,
-#! && let $i$ be a non-negative integer || $\infty$.
+#! Let $\mathbf[C]$ be one of the categories above in which $\phi$ may reside as an object,
+#! and let $i$ be a non-negative integer or $\infty$.
 #! CAP provides commands for passing from $\phi$ to $\phi_i$, where $\phi_i$ is isomorphic to $\phi$
-#! ⥉ $\mathbf[C]$, but "simpler".
+#! in $\mathbf[C]$, but "simpler".
 #! The idea is that the greater the $i$, the "simpler" the $\phi_i$ (but this could mean the harder the computation),
 #! with $\infty$ as a possible value.
 #! The case $i == 0$ defaults to the identity operator for all simplifications.
@@ -1283,47 +1283,47 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! $\ $
 #!
 #!
-#! If we regard $\phi$ as an object ⥉ the category $\mathrm[Hom]( A, B )$,
-#! $\phi_i$ is again ⥉ $\mathrm[Hom]( A, B )$ such that $\phi \sim_[A,B] \phi_i$.
+#! If we regard $\phi$ as an object in the category $\mathrm[Hom]( A, B )$,
+#! $\phi_i$ is again in $\mathrm[Hom]( A, B )$ such that $\phi \sim_[A,B] \phi_i$.
 #! This case is handled by the following commands:
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is a simplified morphism $\phi_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A,B)$
+#! @Returns a morphism in $\mathrm[Hom](A,B)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifyMorphism",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! $\ $
 #!
-#! If we regard $\phi$ as an object ⥉ the category $\sum_[A]\mathrm[Hom]( A, B )$,
-#! then $\phi_i$ is a morphism of type $A_i \rightarrow B$ && there is an isomorphism
+#! If we regard $\phi$ as an object in the category $\sum_[A]\mathrm[Hom]( A, B )$,
+#! then $\phi_i$ is a morphism of type $A_i \rightarrow B$ and there is an isomorphism
 #! $\sigma_i: A \rightarrow A_i$ such that
 #! $\phi_i \circ \sigma_i \sim_[A,B] \phi$.
 #! This case is handled by the following commands:
 
 ## SimplifySource
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is a simplified morphism with simplified source $\phi_i: A_i \rightarrow B$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A_i,B)$
+#! @Returns a morphism in $\mathrm[Hom](A_i,B)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifySource",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $(\sigma_i)^[-1]: A_i \rightarrow A$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A_i,A)$
+#! @Returns a morphism in $\mathrm[Hom](A_i,A)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifySource_IsoToInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $\sigma_i: A \rightarrow A_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A,A_i)$
+#! @Returns a morphism in $\mathrm[Hom](A,A_i)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifySource_IsoFromInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
@@ -1331,32 +1331,32 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ## SimplifyRange
 #! $\ $
 #!
-#! If we regard $\phi$ as an object ⥉ the category $\sum_[B]\mathrm[Hom]( A, B )$,
-#! then $\phi_i$ is a morphism of type $A \rightarrow B_i$ && there is an isomorphism
+#! If we regard $\phi$ as an object in the category $\sum_[B]\mathrm[Hom]( A, B )$,
+#! then $\phi_i$ is a morphism of type $A \rightarrow B_i$ and there is an isomorphism
 #! $\rho_i: B \rightarrow B_i$ such that
 #! $ \rho_i^[-1] \circ \phi_i\sim_[A,B] \phi$.
 #! This case is handled by the following commands:
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is a simplified morphism with simplified range $\phi_i: A \rightarrow B_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A,B_i)$
+#! @Returns a morphism in $\mathrm[Hom](A,B_i)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifyRange",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $(\rho_i)^[-1]: B_i \rightarrow B$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](B_i,B)$
+#! @Returns a morphism in $\mathrm[Hom](B_i,B)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifyRange_IsoToInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $\rho_i: B \rightarrow B_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](B,B_i)$
+#! @Returns a morphism in $\mathrm[Hom](B,B_i)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifyRange_IsoFromInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
@@ -1364,49 +1364,49 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ## SimplifySourceAndRange*
 #! $\ $
 #!
-#! If we regard $\phi$ as an object ⥉ the category $\sum_[A, B]\mathrm[Hom]( A, B )$,
-#! then $\phi_i$ is a morphism of type $A_i \rightarrow B_i$ && there is are isomorphisms
-#! $\sigma_i: A \rightarrow A_i$ &&
+#! If we regard $\phi$ as an object in the category $\sum_[A, B]\mathrm[Hom]( A, B )$,
+#! then $\phi_i$ is a morphism of type $A_i \rightarrow B_i$ and there is are isomorphisms
+#! $\sigma_i: A \rightarrow A_i$ and
 #! $\rho_i: B \rightarrow B_i$ such that
 #! $ \rho_i^[-1] \circ \phi_i \circ \sigma_i \sim_[A,B] \phi$.
 #! This case is handled by the following commands:
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
-#! The output is a simplified morphism with simplified source && range $\phi_i: A_i \rightarrow B_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A_i,B_i)$
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
+#! The output is a simplified morphism with simplified source and range $\phi_i: A_i \rightarrow B_i$.
+#! @Returns a morphism in $\mathrm[Hom](A_i,B_i)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifySourceAndRange",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $(\rho_i)^[-1]: B_i \rightarrow B$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](B_i,B)$
+#! @Returns a morphism in $\mathrm[Hom](B_i,B)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifySourceAndRange_IsoToInputRange",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $\rho_i: B \rightarrow B_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](B,B_i)$
+#! @Returns a morphism in $\mathrm[Hom](B,B_i)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifySourceAndRange_IsoFromInputRange",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $(\sigma_i)^[-1]: A_i \rightarrow A$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A_i,A)$
+#! @Returns a morphism in $\mathrm[Hom](A_i,A)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifySourceAndRange_IsoToInputSource",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are a morphism $\phi: A \rightarrow B$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are a morphism $\phi: A \rightarrow B$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $\sigma_i: A \rightarrow A_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A,A_i)$
+#! @Returns a morphism in $\mathrm[Hom](A,A_i)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifySourceAndRange_IsoFromInputSource",
                   [ IsCapCategoryMorphism, IsObject ] );
@@ -1414,33 +1414,33 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ## SimplifyEndo*
 #! $\ $
 #!
-#! If $\phi:A \rightarrow A$ is an endomorphism, we may regard it as an object ⥉ the category $\sum_[A]\mathrm[Hom]( A, A )$.
+#! If $\phi:A \rightarrow A$ is an endomorphism, we may regard it as an object in the category $\sum_[A]\mathrm[Hom]( A, A )$.
 #! In this case
-#! $\phi_i$ is a morphism of type $A_i \rightarrow A_i$ && there is an isomorphism
+#! $\phi_i$ is a morphism of type $A_i \rightarrow A_i$ and there is an isomorphism
 #! $\sigma_i: A \rightarrow A_i$ such that
 #! $ \sigma_i^[-1] \circ \phi_i \circ \sigma_i \sim_[A,A] \phi$.
 #! This case is handled by the following commands:
 
 #! @Description
-#! The arguments are an endomorphism $\phi: A \rightarrow A$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are an endomorphism $\phi: A \rightarrow A$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is a simplified endomorphism $\phi_i: A_i \rightarrow A_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A_i,A_i)$
+#! @Returns a morphism in $\mathrm[Hom](A_i,A_i)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifyEndo",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are an endomorphism $\phi: A \rightarrow A$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are an endomorphism $\phi: A \rightarrow A$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $(\sigma_i)^[-1]: A_i \rightarrow A$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A_i,A)$
+#! @Returns a morphism in $\mathrm[Hom](A_i,A)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifyEndo_IsoToInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
 
 #! @Description
-#! The arguments are an endomorphism $\phi: A \rightarrow A$ && a non-negative integer $i$ || <C>Inf</C>.
+#! The arguments are an endomorphism $\phi: A \rightarrow A$ and a non-negative integer $i$ or <C>infinity</C>.
 #! The output is the isomorphism $\sigma_i: A \rightarrow A_i$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A,A_i)$
+#! @Returns a morphism in $\mathrm[Hom](A,A_i)$
 #! @Arguments phi, i
 @DeclareOperation( "SimplifyEndo_IsoFromInputObject",
                   [ IsCapCategoryMorphism, IsObject ] );
@@ -1450,10 +1450,10 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! This is a convenient method.
 #! The argument is a morphism $\phi: A \rightarrow B$.
 #! The output is a "simplified" version of $\phi$ that may change the
-#! source && range of $\phi$ (up to isomorphism).
+#! source and range of $\phi$ (up to isomorphism).
 #! To be precise, the output is an $\infty$-th simplified morphism
 #! of $(\iota_A^[\infty])^[-1]\circ \phi \circ \iota_A^[\infty]$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A_[\infty],B_[\infty])$
+#! @Returns a morphism in $\mathrm[Hom](A_[\infty],B_[\infty])$
 #! @Arguments phi
 @DeclareAttribute( "Simplify",
                   IsCapCategoryMorphism );
@@ -1464,9 +1464,9 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 ##
 ###################################
 
-#! Let $\alpha: A \rightarrow B$ be a morphism ⥉ an additive category.
+#! Let $\alpha: A \rightarrow B$ be a morphism in an additive category.
 #! Suppose we are given direct sum decompositions
-#! of $A \simeq A' \oplus A''$ && $B \simeq B' \oplus B''$
+#! of $A \simeq A' \oplus A''$ and $B \simeq B' \oplus B''$
 #! such that
 
 #! @BeginLatexOnly
@@ -1509,7 +1509,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! \end[center]
 #! @EndLatexOnly
 
-#! &&
+#! and
 
 #! @BeginLatexOnly
 #! \begin[center]
@@ -1531,7 +1531,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! @Description
 #! The argument is a morphism $\alpha: A \rightarrow B$.
 #! The output is some reduction of $\alpha$ by split epi summands $\alpha': A' \rightarrow B'$.
-#! @Returns a morphism ⥉ $\mathrm[Hom](A',B')$
+#! @Returns a morphism in $\mathrm[Hom](A',B')$
 #! @Arguments alpha
 @DeclareAttribute( "SomeReductionBySplitEpiSummand",
                   IsCapCategoryMorphism );
@@ -1540,7 +1540,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The argument is a morphism $\alpha: A \rightarrow B$.
 #! The output is the morphism $\beta': B' \rightarrow B$
 #! linking $\alpha$ with some reduction by split epi summands.
-#! @Returns a morphism ⥉ $\mathrm[Hom](B',B)$
+#! @Returns a morphism in $\mathrm[Hom](B',B)$
 #! @Arguments alpha
 @DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismToInputRange",
                   IsCapCategoryMorphism );
@@ -1549,7 +1549,7 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 #! The argument is a morphism $\alpha: A \rightarrow B$.
 #! The output is the morphism $\beta: B \rightarrow B'$
 #! linking $\alpha$ with some reduction by split epi summands.
-#! @Returns a morphism ⥉ $\mathrm[Hom](B,B')$
+#! @Returns a morphism in $\mathrm[Hom](B,B')$
 #! @Arguments alpha
 @DeclareAttribute( "SomeReductionBySplitEpiSummand_MorphismFromInputRange",
                   IsCapCategoryMorphism );

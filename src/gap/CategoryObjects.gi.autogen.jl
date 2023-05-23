@@ -35,7 +35,7 @@
 ##
 ###################################
 
-# This method should usually !be selected when the two morphisms belong to the same category
+# This method should usually not be selected when the two morphisms belong to the same category
 InstallMethod( @__MODULE__,  IsEqualForObjects,
                     [ IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ],
 
@@ -49,9 +49,9 @@ InstallMethod( @__MODULE__,  IsEqualForObjects,
     end;
 
     if !IsIdenticalObj( CapCategory( object_1 ), CapCategory( object_2 ) )
-        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" do !belong to the same CAP category" ) );
+        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" and the object \"", StringGAP( object_2 ), "\" do not belong to the same CAP category" ) );
     else
-        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" belong to the same CAP category, but no specific method IsEqualForObjects is installed. Maybe you forgot to finalize the category?" ) );
+        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" and the object \"", StringGAP( object_2 ), "\" belong to the same CAP category, but no specific method IsEqualForObjects is installed. Maybe you forgot to finalize the category?" ) );
     end;
     
 end );
@@ -63,7 +63,7 @@ InstallMethod( @__MODULE__,  ==,
 
     if CapCategory( object_1 ).input_sanity_check_level > 0 || CapCategory( object_2 ).input_sanity_check_level > 0 
         if !IsIdenticalObj( CapCategory( object_1 ), CapCategory( object_2 ) )
-            Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" && the object \"", StringGAP( object_2 ), "\" do !belong to the same CAP category" ) );
+            Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" and the object \"", StringGAP( object_2 ), "\" do not belong to the same CAP category" ) );
         end;
     end;
                
@@ -146,7 +146,7 @@ InstallMethod( @__MODULE__,  Add,
             
             Error(
                 @Concatenation(
-                    "an object that lies ⥉ the CAP-category with the name\n",
+                    "an object that lies in the CAP-category with the name\n",
                     Name( CapCategory( object ) ),
                     "\n",
                     "was tried to be added to a different CAP-category with the name\n",
@@ -191,7 +191,7 @@ InstallMethod( @__MODULE__,  /,
     
     if !CanCompute( cat, "ObjectConstructor" )
         
-        Error( "You are calling the generic \"/\" method, but <cat> does !have an object constructor. Please add one || install a special version of \"/\"." );
+        Error( "You are calling the generic \"/\" method, but <cat> does not have an object constructor. Please add one or install a special version of \"/\"." );
         
     end;
     
@@ -238,7 +238,7 @@ InstallMethod( @__MODULE__,  AddObjectRepresentation,
     
     if @IsBound( category.initially_known_categorical_properties )
         
-        Error( "calling AddObjectRepresentation after adding functions to the category is !supported" );
+        Error( "calling AddObjectRepresentation after adding functions to the category is not supported" );
         
     end;
     
@@ -267,7 +267,7 @@ InstallMethod( @__MODULE__,  RandomObject, [ IsCapCategory, IsList ], RandomObje
     #= comment for Julia
     # work around https://github.com/gap-system/gap/issues/3642:
     # New implications of `ObjectFilter( category )` (e.g. installed via `AddObjectRepresentation`)
-    # are !automatically set ⥉ `category.object_type`.
+    # are not automatically set in `category.object_type`.
     SetFilterObj( obj, ObjectFilter( category ) );
     # =#
     
@@ -292,7 +292,7 @@ end );
     #= comment for Julia
     # work around https://github.com/gap-system/gap/issues/3642:
     # New implications of `ObjectFilter( category )` (e.g. installed via `AddObjectRepresentation`)
-    # are !automatically set ⥉ `category.object_type`.
+    # are not automatically set in `category.object_type`.
     SetFilterObj( obj, ObjectFilter( category ) );
     # =#
     
@@ -305,7 +305,7 @@ InstallMethod( @__MODULE__,  Simplify,
                [ IsCapCategoryObject ],
   function( object )
     
-    return SimplifyObject( object, Inf );
+    return SimplifyObject( object, infinity );
     
 end );
 
@@ -320,8 +320,7 @@ InstallMethod( @__MODULE__,  StringGAP,
                
   function( object )
     
-    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    return @Concatenation( "An object ", "in ", Name( CapCategory( object ) ) );
+    return @Concatenation( "An object in ", Name( CapCategory( object ) ) );
     
 end );
 
@@ -331,9 +330,8 @@ InstallMethod( @__MODULE__,  ViewString,
                
   function ( object )
     
-    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    # do !reuse `StringGAP` because objects might use `StringGAP` as the attribute storing the object datum
-    return @Concatenation( "<An object ", "in ", Name( CapCategory( object ) ), ">" );
+    # do not reuse `StringGAP` because objects might use `StringGAP` as the attribute storing the object datum
+    return @Concatenation( "<An object in ", Name( CapCategory( object ) ), ">" );
     
 end );
 
@@ -342,9 +340,8 @@ InstallMethod( @__MODULE__,  DisplayString,
                
   function ( object )
     
-    # avoid space ⥉ front of "in" to distinguish it from the keyword "in"
-    # do !reuse `StringGAP` because objects might use `StringGAP` as the attribute storing the object datum
-    return @Concatenation( "An object ", "in ", Name( CapCategory( object ) ), ".\n" );
+    # do not reuse `StringGAP` because objects might use `StringGAP` as the attribute storing the object datum
+    return @Concatenation( "An object in ", Name( CapCategory( object ) ), ".\n" );
     
 end );
 
@@ -357,7 +354,7 @@ end );
     object_function = function( object )
       local string;
         
-        string = "object ⥉ ";
+        string = "object in ";
         
         Append( string, Name( CapCategory( object ) ) );
         

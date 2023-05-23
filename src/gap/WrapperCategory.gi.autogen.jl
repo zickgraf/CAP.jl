@@ -12,7 +12,7 @@ InstallMethod( @__MODULE__,  UnderlyingCategory,
   function( D )
     
     Print(
-      "WARNING: UnderlyingCategory for IsWrapperCapCategory is deprecated && will !be supported after 2023.06.13. Please use ModelingCategory instead.\n"
+      "WARNING: UnderlyingCategory for IsWrapperCapCategory is deprecated and will not be supported after 2023.06.13. Please use ModelingCategory instead.\n"
     );
     
     return ModelingCategory( D );
@@ -21,7 +21,7 @@ end );
 
 ##
 InstallMethod( @__MODULE__,  AsObjectInWrapperCategory,
-        "for a wrapper CAP category && a CAP object",
+        "for a wrapper CAP category and a CAP object",
         [ IsWrapperCapCategory, IsCapCategoryObject ],
         
   function( D, object )
@@ -36,7 +36,7 @@ end );
 
 ##
 InstallMethod( @__MODULE__,  AsMorphismInWrapperCategory,
-        "for two CAP objects in a wrapper category && a CAP morphism",
+        "for two CAP objects in a wrapper category and a CAP morphism",
         [ IsWrapperCapCategoryObject, IsCapCategoryMorphism, IsWrapperCapCategoryObject ],
         
   function( source, morphism, range )
@@ -47,7 +47,7 @@ end );
 
 ##
 InstallMethod( @__MODULE__,  AsMorphismInWrapperCategory,
-        "for two CAP objects in a wrapper category && a CAP morphism",
+        "for two CAP objects in a wrapper category and a CAP morphism",
         [ IsWrapperCapCategory, IsWrapperCapCategoryObject, IsCapCategoryMorphism, IsWrapperCapCategoryObject ],
         
   function( D, source, morphism, range )
@@ -64,7 +64,7 @@ end );
 
 ##
 InstallMethodWithCache( AsMorphismInWrapperCategory,
-        "for a wrapper CAP category && a CAP morphism",
+        "for a wrapper CAP category and a CAP morphism",
         [ IsWrapperCapCategory, IsCapCategoryMorphism ],
         
   function( D, morphism )
@@ -79,7 +79,7 @@ end );
 
 ##
 InstallMethod( @__MODULE__,  /,
-        "for an object && a wrapper CAP category",
+        "for an object and a wrapper CAP category",
         [ IsObject, IsWrapperCapCategory ],
         
   function( data, C )
@@ -90,7 +90,7 @@ end );
 
 ##
 InstallMethod( @__MODULE__,  /,
-        "for a CAP category object && a wrapper CAP category",
+        "for a CAP category object and a wrapper CAP category",
          [ IsCapCategoryObject, IsWrapperCapCategory ],
         
   function( object, cat )
@@ -105,7 +105,7 @@ end );
 
 ##
 InstallMethod( @__MODULE__,  /,
-        "for a CAP category morphism && a wrapper CAP category",
+        "for a CAP category morphism and a wrapper CAP category",
         [ IsCapCategoryMorphism, IsWrapperCapCategory ],
         
   function( morphism, cat )
@@ -120,13 +120,13 @@ end );
 
 ##
 InstallMethod( @__MODULE__,  WrapperCategory,
-        "for a CAP category && a record of options",
+        "for a CAP category and a record of options",
         [ IsCapCategory, IsRecord ],
         
   function( C, options )
     local combined_options, known_options_with_filters, filter, reinterpretation_options, option_name;
     
-    # options which should either all || none be set for consistency && will be delegated to ReinterpretationOfCategory if set
+    # options which should either all or none be set for consistency and will be delegated to ReinterpretationOfCategory if set
     combined_options = [
         "object_constructor",
         "object_datum",
@@ -140,7 +140,7 @@ InstallMethod( @__MODULE__,  WrapperCategory,
     
     if Length( SetGAP( List( combined_options, name -> @IsBound( options[name] ) ) ) ) > 1
         
-        Display( "WARNING: To avoid inconsistencies, either all || none of the following options should be set ⥉ a call to `WrapperCategory`. This is !the case." );
+        Display( "WARNING: To avoid inconsistencies, either all or none of the following options should be set in a call to `WrapperCategory`. This is not the case." );
         Display( combined_options );
         
     end;
@@ -149,7 +149,7 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         
         if options.wrap_range_of_hom_structure && !IsIdenticalObj( C, RangeCategoryOfHomomorphismStructure( C ) )
             
-            Error( "Wrapping the range of the hom structure is !supported anymore (except if the category has itself as the range of its hom structure). Please remove `wrap_range_of_hom_structure`." );
+            Error( "Wrapping the range of the hom structure is not supported anymore (except if the category has itself as the range of its hom structure). Please remove `wrap_range_of_hom_structure`." );
             
         end;
         
@@ -162,13 +162,13 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         options = ShallowCopy( options );
         @Unbind( options.wrap_range_of_hom_structure );
         
-        Print( "WARNING: The option wrap_range_of_hom_structure is deprecated && will !be supported after 2024.05.02.\n" );
+        Print( "WARNING: The option wrap_range_of_hom_structure is deprecated and will not be supported after 2024.05.02.\n" );
         
     end;
     
     if @IsBound( options.object_constructor )
         
-        Print( "WARNING: Setting object_constructor etc. for WrapperCategory is deprecated && will !be supported after 2024.05.02. Use ReinterpretationOfCategory instead.\n" );
+        Print( "WARNING: Setting object_constructor etc. for WrapperCategory is deprecated and will not be supported after 2024.05.02. Use ReinterpretationOfCategory instead.\n" );
         
         return ReinterpretationOfCategory( C, options );
         
@@ -192,14 +192,14 @@ InstallMethod( @__MODULE__,  WrapperCategory,
             if !filter( options[option_name] )
                 
                 # COVERAGE_IGNORE_NEXT_LINE
-                Error( "The value of the option `", option_name, "` must lie ⥉ the filter ", filter );
+                Error( "The value of the option `", option_name, "` must lie in the filter ", filter );
                 
             end;
             
         else
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( "The following option is !known to `WrapperCategory`: ", option_name );
+            Error( "The following option is not known to `WrapperCategory`: ", option_name );
             
         end;
         
@@ -308,7 +308,7 @@ InstallMethod( @__MODULE__,  DisplayString,
         
   function( a )
     
-    return @Concatenation( DisplayString( ObjectDatum( a ) ), "\nAn object ⥉ ", Name( CapCategory( a ) ), " given by the above data\n" );
+    return @Concatenation( DisplayString( ObjectDatum( a ) ), "\nAn object in ", Name( CapCategory( a ) ), " given by the above data\n" );
     
 end );
 
@@ -319,6 +319,6 @@ InstallMethod( @__MODULE__,  DisplayString,
         
   function( phi )
     
-    return @Concatenation( DisplayString( MorphismDatum( phi ) ), "\nA morphism ⥉ ", Name( CapCategory( phi ) ), " given by the above data\n" );
+    return @Concatenation( DisplayString( MorphismDatum( phi ) ), "\nA morphism in ", Name( CapCategory( phi ) ), " given by the above data\n" );
     
 end );

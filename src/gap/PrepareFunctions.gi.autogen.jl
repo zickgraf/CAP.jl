@@ -39,7 +39,7 @@
     
     for current_operation in prepare_function_symbol_list
         if !CanCompute( category, current_operation )
-            Print( "Warning: Operation ", current_operation, " is !installed for category ", Name( category ), "\n",
+            Print( "Warning: Operation ", current_operation, " is not installed for category ", Name( category ), "\n",
                    "         but is needed for another categorical operation\n" );
         end;
     end;
@@ -68,7 +68,7 @@ end );
     
     for current_precondition in precondition_list
         if !current_precondition ⥉ operation_names
-            Error( @Concatenation( "Precondition ", current_precondition, " !in list of known category functions" ) );
+            Error( @Concatenation( "Precondition ", current_precondition, " not in list of known category functions" ) );
         end;
     end;
     

@@ -19,7 +19,7 @@
         "list_of_morphisms_or_fail",
         "object_datum",
         "morphism_datum",
-        "nonneg_integer_or_Inf",
+        "nonneg_integer_or_infinity",
         "list_of_elements_of_commutative_ring_of_linear_structure",
     ]
 #! @EndCode
@@ -53,7 +53,7 @@
 #! @EndCode
 );
 
-# additional components which are deprecated || undocumented
+# additional components which are deprecated or undocumented
 @BindGlobal( "CAP_INTERNAL_LEGACY_METHOD_NAME_RECORD_COMPONENTS",
     [
         "property_of",
@@ -114,7 +114,7 @@ LiftAlongMonomorphism = @rec(
     
     if value == fail
         
-        return [ false, "can!decide whether the two morphisms have equal ranges" ];
+        return [ false, "cannot decide whether the two morphisms have equal ranges" ];
         
     elseif value == false
         
@@ -138,7 +138,7 @@ IsLiftableAlongMonomorphism = @rec(
     
     if value == fail
         
-        return [ false, "can!decide whether the two morphisms have equal ranges" ];
+        return [ false, "cannot decide whether the two morphisms have equal ranges" ];
         
     elseif value == false
         
@@ -163,7 +163,7 @@ ColiftAlongEpimorphism = @rec(
     
     if value == fail
         
-        return [ false, "can!decide whether the two morphisms have equal sources" ];
+        return [ false, "cannot decide whether the two morphisms have equal sources" ];
         
     elseif value == false
         
@@ -187,7 +187,7 @@ IsColiftableAlongEpimorphism = @rec(
     
     if value == fail
         
-        return [ false, "can!decide whether the two morphisms have equal sources" ];
+        return [ false, "cannot decide whether the two morphisms have equal sources" ];
         
     elseif value == false
         
@@ -212,7 +212,7 @@ Lift = @rec(
     
     if value == fail
         
-        return [ false, "can!decide whether the two morphisms have equal ranges" ];
+        return [ false, "cannot decide whether the two morphisms have equal ranges" ];
         
     elseif value == false
         
@@ -259,7 +259,7 @@ Colift = @rec(
     
     if value == fail
         
-        return [ false, "can!decide whether the two morphisms have equal sources" ];
+        return [ false, "cannot decide whether the two morphisms have equal sources" ];
         
     elseif value == false
         
@@ -306,7 +306,7 @@ ProjectiveLift = @rec(
     
     if value == fail
         
-        return [ false, "can!decide whether the two morphisms have equal ranges" ];
+        return [ false, "cannot decide whether the two morphisms have equal ranges" ];
         
     elseif value == false
         
@@ -332,7 +332,7 @@ InjectiveColift = @rec(
     
     if value == fail
         
-        return [ false, "can!decide whether the two morphisms have equal sources" ];
+        return [ false, "cannot decide whether the two morphisms have equal sources" ];
         
     elseif value == false
         
@@ -508,11 +508,11 @@ PreCompose = @rec(
     
     if is_equal_for_objects == fail
       
-      return [ false, "can!decide whether morphisms are composable" ];
+      return [ false, "cannot decide whether morphisms are composable" ];
       
     elseif is_equal_for_objects == false
         
-        return [ false, "morphisms !composable" ];
+        return [ false, "morphisms not composable" ];
         
     end;
     
@@ -536,11 +536,11 @@ SumOfMorphisms = @rec(
         
         if is_equal_for_sources == fail || is_equal_for_ranges == fail
             
-            return [ false, "can!decide whether morphisms are compatible with the provided source && range objects" ];
+            return [ false, "cannot decide whether morphisms are compatible with the provided source and range objects" ];
             
         elseif is_equal_for_sources == false || is_equal_for_ranges == false
             
-            return [ false, "some of the morphisms are !compatible with the provided source && range objects" ];
+            return [ false, "some of the morphisms are not compatible with the provided source and range objects" ];
             
         end;
         
@@ -565,7 +565,7 @@ PreComposeList = @rec(
     
     if IsEmpty( list_of_morphisms )
         
-        return [ false, "the list of morphisms must !be empty" ];
+        return [ false, "the list of morphisms must not be empty" ];
         
     end;
     
@@ -575,11 +575,11 @@ PreComposeList = @rec(
         
         if is_equal_for_objects == fail
             
-            return [ false, "can!decide whether morphisms are composable" ];
+            return [ false, "cannot decide whether morphisms are composable" ];
             
         elseif is_equal_for_objects == false
             
-            return [ false, "morphisms !composable" ];
+            return [ false, "morphisms not composable" ];
             
         end;
         
@@ -608,11 +608,11 @@ PostCompose = @rec(
     
     if is_equal_for_objects == fail
       
-      return [ false, "can!decide whether morphisms are composable" ];
+      return [ false, "cannot decide whether morphisms are composable" ];
       
     elseif is_equal_for_objects == false
         
-        return [ false, "morphisms !composable" ];
+        return [ false, "morphisms not composable" ];
         
     end;
     
@@ -632,7 +632,7 @@ PostComposeList = @rec(
     
     if IsEmpty( list_of_morphisms )
         
-        return [ false, "the list of morphisms must !be empty" ];
+        return [ false, "the list of morphisms must not be empty" ];
         
     end;
     
@@ -642,11 +642,11 @@ PostComposeList = @rec(
         
         if is_equal_for_objects == fail
             
-            return [ false, "can!decide whether morphisms are composable" ];
+            return [ false, "cannot decide whether morphisms are composable" ];
             
         elseif is_equal_for_objects == false
             
-            return [ false, "morphisms !composable" ];
+            return [ false, "morphisms not composable" ];
             
         end;
         
@@ -788,11 +788,11 @@ UniversalMorphismIntoDirectSum = @rec(
         
         if current_return == fail
             
-            return [ false, "can!decide whether sources of morphisms ⥉ given source diagram are equal to the test object" ];
+            return [ false, "cannot decide whether sources of morphisms in given source diagram are equal to the test object" ];
             
         elseif current_return == false
             
-            return [ false, "sources of morphisms must be equal to the test object ⥉ given source diagram" ];
+            return [ false, "sources of morphisms must be equal to the test object in given source diagram" ];
             
         end;
         
@@ -819,11 +819,11 @@ UniversalMorphismIntoDirectSumWithGivenDirectSum = @rec(
         
         if current_return == fail
             
-            return [ false, "can!decide whether sources of morphisms ⥉ given source diagram are equal to the test object" ];
+            return [ false, "cannot decide whether sources of morphisms in given source diagram are equal to the test object" ];
             
         elseif current_return == false
             
-            return [ false, "sources of morphisms must be equal to the test object ⥉ given source diagram" ];
+            return [ false, "sources of morphisms must be equal to the test object in given source diagram" ];
             
         end;
         
@@ -864,11 +864,11 @@ UniversalMorphismFromDirectSum = @rec(
         
         if current_return == fail
             
-            return [ false, "can!decide whether ranges of morphisms ⥉ given sink diagram are equal to the test object" ];
+            return [ false, "cannot decide whether ranges of morphisms in given sink diagram are equal to the test object" ];
             
         elseif current_return == false
             
-            return [ false, "ranges of morphisms must be equal to the test object ⥉ given sink diagram" ];
+            return [ false, "ranges of morphisms must be equal to the test object in given sink diagram" ];
             
         end;
         
@@ -895,11 +895,11 @@ UniversalMorphismFromDirectSumWithGivenDirectSum = @rec(
         
         if current_return == fail
             
-            return [ false, "can!decide whether ranges of morphisms ⥉ given sink diagram are equal to the test object" ];
+            return [ false, "cannot decide whether ranges of morphisms in given sink diagram are equal to the test object" ];
             
         elseif current_return == false
             
-            return [ false, "ranges of morphisms must be equal to the test object ⥉ given sink diagram" ];
+            return [ false, "ranges of morphisms must be equal to the test object in given sink diagram" ];
             
         end;
         
@@ -987,11 +987,11 @@ UniversalMorphismIntoDirectProduct = @rec(
         
         if current_return == fail
             
-            return [ false, "can!decide whether sources of morphisms ⥉ given source diagram are equal to the test object" ];
+            return [ false, "cannot decide whether sources of morphisms in given source diagram are equal to the test object" ];
             
         elseif current_return == false
             
-            return [ false, "sources of morphisms must be equal to the test object ⥉ given source diagram" ];
+            return [ false, "sources of morphisms must be equal to the test object in given source diagram" ];
             
         end;
         
@@ -1018,11 +1018,11 @@ UniversalMorphismIntoDirectProductWithGivenDirectProduct = @rec(
         
         if current_return == fail
             
-            return [ false, "can!decide whether sources of morphisms ⥉ given source diagram are equal to the test object" ];
+            return [ false, "cannot decide whether sources of morphisms in given source diagram are equal to the test object" ];
             
         elseif current_return == false
             
-            return [ false, "sources of morphisms must be equal to the test object ⥉ given source diagram" ];
+            return [ false, "sources of morphisms must be equal to the test object in given source diagram" ];
             
         end;
         
@@ -1052,7 +1052,7 @@ IsCongruentForMorphisms = @rec(
     
     if value_1 == fail
       
-      return [ false, "can!decide whether sources are equal" ];
+      return [ false, "cannot decide whether sources are equal" ];
       
     end;
     
@@ -1060,7 +1060,7 @@ IsCongruentForMorphisms = @rec(
     
     if value_2 == fail
       
-      return [ false, "can!decide whether ranges are equal" ];
+      return [ false, "cannot decide whether ranges are equal" ];
       
     end;
     
@@ -1071,11 +1071,11 @@ IsCongruentForMorphisms = @rec(
         
     elseif value_1
         
-        return [ false, "ranges are !equal" ];
+        return [ false, "ranges are not equal" ];
         
     else
         
-        return [ false, "sources are !equal" ];
+        return [ false, "sources are not equal" ];
         
     end;
     
@@ -1121,7 +1121,7 @@ IsEqualForMorphisms = @rec(
     
     if value_1 == fail
       
-      return [ false, "can!decide whether sources are equal" ];
+      return [ false, "cannot decide whether sources are equal" ];
       
     end;
     
@@ -1129,7 +1129,7 @@ IsEqualForMorphisms = @rec(
     
     if value_2 == fail
       
-      return [ false, "can!decide whether ranges are equal" ];
+      return [ false, "cannot decide whether ranges are equal" ];
       
     end;
     
@@ -1140,11 +1140,11 @@ IsEqualForMorphisms = @rec(
         
     elseif value_1
         
-        return [ false, "ranges are !equal" ];
+        return [ false, "ranges are not equal" ];
         
     else
         
-        return [ false, "sources are !equal" ];
+        return [ false, "sources are not equal" ];
         
     end;
     
@@ -1254,7 +1254,7 @@ AdditionForMorphisms = @rec(
     
     if value_1 == fail
       
-      return [ false, "can!decide whether sources are equal" ];
+      return [ false, "cannot decide whether sources are equal" ];
       
     end;
     
@@ -1262,7 +1262,7 @@ AdditionForMorphisms = @rec(
     
     if value_2 == fail
       
-      return [ false, "can!decide whether ranges are equal" ];
+      return [ false, "cannot decide whether ranges are equal" ];
       
     end;
     
@@ -1273,11 +1273,11 @@ AdditionForMorphisms = @rec(
         
     elseif value_1
         
-        return [ false, "ranges are !equal" ];
+        return [ false, "ranges are not equal" ];
         
     else
         
-        return [ false, "sources are !equal" ];
+        return [ false, "sources are not equal" ];
         
     end;
     
@@ -1298,7 +1298,7 @@ SubtractionForMorphisms = @rec(
     
     if value_1 == fail
       
-      return [ false, "can!decide whether sources are equal" ];
+      return [ false, "cannot decide whether sources are equal" ];
       
     end;
     
@@ -1306,7 +1306,7 @@ SubtractionForMorphisms = @rec(
     
     if value_2 == fail
       
-      return [ false, "can!decide whether ranges are equal" ];
+      return [ false, "cannot decide whether ranges are equal" ];
       
     end;
     
@@ -1317,11 +1317,11 @@ SubtractionForMorphisms = @rec(
         
     elseif value_1
         
-        return [ false, "ranges are !equal" ];
+        return [ false, "ranges are not equal" ];
         
     else
         
-        return [ false, "sources are !equal" ];
+        return [ false, "sources are not equal" ];
         
     end;
     
@@ -1338,7 +1338,7 @@ MultiplyWithElementOfCommutativeRingForMorphisms = @rec(
     
     if !r ⥉ CommutativeRingOfLinearCategory( cat )
       
-      return [ false, "the first argument is !an element of the ring of the category of the morphism" ];
+      return [ false, "the first argument is not an element of the ring of the category of the morphism" ];
       
     end;
     
@@ -1392,11 +1392,11 @@ UniversalMorphismFromCoproduct = @rec(
         
         if current_return == fail
             
-            return [ false, "can!decide whether ranges of morphisms ⥉ given sink diagram are equal to the test object" ];
+            return [ false, "cannot decide whether ranges of morphisms in given sink diagram are equal to the test object" ];
             
         elseif current_return == false
             
-            return [ false, "ranges of morphisms must be equal to the test object ⥉ given sink diagram" ];
+            return [ false, "ranges of morphisms must be equal to the test object in given sink diagram" ];
             
         end;
         
@@ -1423,11 +1423,11 @@ UniversalMorphismFromCoproductWithGivenCoproduct = @rec(
         
         if current_return == fail
             
-            return [ false, "can!decide whether ranges of morphisms ⥉ given sink diagram are equal to the test object" ];
+            return [ false, "cannot decide whether ranges of morphisms in given sink diagram are equal to the test object" ];
             
         elseif current_return == false
             
-            return [ false, "ranges of morphisms must be equal to the test object ⥉ given sink diagram" ];
+            return [ false, "ranges of morphisms must be equal to the test object in given sink diagram" ];
             
         end;
         
@@ -1471,11 +1471,11 @@ IsDominating = @rec(
     
     if is_equal_for_objects == fail
         
-        return [ false, "can!decide whether those are subobjects of the same object" ];
+        return [ false, "cannot decide whether those are subobjects of the same object" ];
     
     elseif is_equal_for_objects == false
         
-        return [ false, "subobjects of different objects are !comparable by dominates" ];
+        return [ false, "subobjects of different objects are not comparable by dominates" ];
         
     end;
     
@@ -1496,11 +1496,11 @@ IsCodominating = @rec(
     
     if is_equal_for_objects == fail
         
-        return [ false, "can!decide whether those are factors of the same object" ];
+        return [ false, "cannot decide whether those are factors of the same object" ];
     
     elseif is_equal_for_objects == false
         
-        return [ false, "factors of different objects are !comparable by codominates" ];
+        return [ false, "factors of different objects are not comparable by codominates" ];
         
     end;
     
@@ -1529,7 +1529,7 @@ Equalizer = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the equalizer diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the equalizer diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the equalizer diagram must have equal sources" ];
         end;
@@ -1543,7 +1543,7 @@ Equalizer = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the equalizer diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the equalizer diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the equalizer diagram must have equal ranges" ];
         end;
@@ -1613,7 +1613,7 @@ UniversalMorphismIntoEqualizer = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the equalizer diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the equalizer diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the equalizer diagram must have equal sources" ];
         end;
@@ -1627,7 +1627,7 @@ UniversalMorphismIntoEqualizer = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the equalizer diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the equalizer diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the equalizer diagram must have equal ranges" ];
         end;
@@ -1639,9 +1639,9 @@ UniversalMorphismIntoEqualizer = @rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( tau ) );
         
         if current_value == fail
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": cannot decide whether source and range are equal" ) ];
         elseif current_value == false
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source and range are not equal" ) ];
         end;
         
     end;
@@ -1693,7 +1693,7 @@ FiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the fiber product diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber product diagram must have equal ranges" ];
         end;
@@ -1717,7 +1717,7 @@ ProjectionInFactorOfFiberProduct = @rec(
     local base, current_morphism, current_value;
     
     if projection_number < 1 || projection_number > Length( diagram )
-        return[ false, @Concatenation( "there does !exist a ", StringGAP( projection_number ), "th projection" ) ];
+        return[ false, @Concatenation( "there does not exist a ", StringGAP( projection_number ), "th projection" ) ];
     end;
     
     base = Range( diagram[1] );
@@ -1727,7 +1727,7 @@ ProjectionInFactorOfFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the fiber product diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber product diagram must have equal ranges" ];
         end;
@@ -1749,7 +1749,7 @@ ProjectionInFactorOfFiberProductWithGivenFiberProduct = @rec(
     local base, current_morphism, current_value;
     
     if projection_number < 1 || projection_number > Length( diagram )
-        return[ false, @Concatenation( "there does !exist a ", StringGAP( projection_number ), "th projection" ) ];
+        return[ false, @Concatenation( "there does not exist a ", StringGAP( projection_number ), "th projection" ) ];
     end;
     
     base = Range( diagram[1] );
@@ -1759,7 +1759,7 @@ ProjectionInFactorOfFiberProductWithGivenFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the fiber product diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber product diagram must have equal ranges" ];
         end;
@@ -1788,7 +1788,7 @@ MorphismFromFiberProductToSink = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the fiber product diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber product diagram must have equal ranges" ];
         end;
@@ -1816,7 +1816,7 @@ MorphismFromFiberProductToSinkWithGivenFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the fiber product diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber product diagram must have equal ranges" ];
         end;
@@ -1839,7 +1839,7 @@ UniversalMorphismIntoFiberProduct = @rec(
     local base, current_morphism, current_value, current_morphism_position;
     
     if Length( diagram ) != Length( source )
-        return [ false, "fiber product diagram && test diagram must have equal length" ];
+        return [ false, "fiber product diagram and test diagram must have equal length" ];
     end;
     
     if IsEmpty( diagram )
@@ -1855,7 +1855,7 @@ UniversalMorphismIntoFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the fiber product diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber product diagram must have equal ranges" ];
         end;
@@ -1867,9 +1867,9 @@ UniversalMorphismIntoFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), test_object );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the test source have sources equal to the test object" ];
+            return [ false, "cannot decide whether the given morphisms of the test source have sources equal to the test object" ];
         elseif current_value == false
-            return [ false, "the given morphisms of the test source do !have sources equal to the test object" ];
+            return [ false, "the given morphisms of the test source do not have sources equal to the test object" ];
         end;
         
     end;
@@ -1879,9 +1879,9 @@ UniversalMorphismIntoFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": cannot decide whether source and range are equal" ) ];
         elseif current_value == false
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source and range are not equal" ) ];
         end;
         
     end;
@@ -1901,7 +1901,7 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = @rec(
     local base, current_morphism, current_value, current_morphism_position;
     
     if Length( diagram ) != Length( source )
-        return [ false, "fiber product diagram && test diagram must have equal length" ];
+        return [ false, "fiber product diagram and test diagram must have equal length" ];
     end;
     
     if IsEmpty( diagram )
@@ -1917,7 +1917,7 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the fiber product diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the fiber product diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber product diagram must have equal ranges" ];
         end;
@@ -1929,9 +1929,9 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), test_object );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the test source have sources equal to the test object" ];
+            return [ false, "cannot decide whether the given morphisms of the test source have sources equal to the test object" ];
         elseif current_value == false
-            return [ false, "the given morphisms of the test source do !have sources equal to the test object" ];
+            return [ false, "the given morphisms of the test source do not have sources equal to the test object" ];
         end;
         
     end;
@@ -1941,9 +1941,9 @@ UniversalMorphismIntoFiberProductWithGivenFiberProduct = @rec(
         current_value = IsEqualForObjects( cat, Source( diagram[ current_morphism_position ] ), Range( source[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": cannot decide whether source and range are equal" ) ];
         elseif current_value == false
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source and range are not equal" ) ];
         end;
         
     end;
@@ -1975,7 +1975,7 @@ Coequalizer = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the coequalizer diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the coequalizer diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the coequalizer diagram must have equal sources" ];
         end;
@@ -1987,7 +1987,7 @@ Coequalizer = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the coequalizer diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the coequalizer diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the coequalizer diagram must have equal ranges" ];
         end;
@@ -2059,7 +2059,7 @@ UniversalMorphismFromCoequalizer = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), base );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the coequalizer diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the coequalizer diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the coequalizer diagram must have equal sources" ];
         end;
@@ -2071,7 +2071,7 @@ UniversalMorphismFromCoequalizer = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the coequalizer diagram have equal ranges" ];
+            return [ false, "cannot decide whether the given morphisms of the coequalizer diagram have equal ranges" ];
         elseif current_value == false
             return [ false, "the given morphisms of the coequalizer diagram must have equal ranges" ];
         end;
@@ -2083,9 +2083,9 @@ UniversalMorphismFromCoequalizer = @rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( tau ) );
         
         if current_value == fail
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether range && source are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": cannot decide whether range and source are equal" ) ];
         elseif current_value == false
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": range && source are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": range and source are not equal" ) ];
         end;
         
     end;
@@ -2137,7 +2137,7 @@ Pushout = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the pushout diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the pushout diagram must have equal sources" ];
         end;
@@ -2161,7 +2161,7 @@ InjectionOfCofactorOfPushout = @rec(
     local cobase, current_morphism, current_value;
     
     if injection_number < 1 || injection_number > Length( diagram )
-        return[ false, @Concatenation( "there does !exist a ", StringGAP( injection_number ), "th injection" ) ];
+        return[ false, @Concatenation( "there does not exist a ", StringGAP( injection_number ), "th injection" ) ];
     end;
     
     cobase = Source( diagram[1] );
@@ -2171,7 +2171,7 @@ InjectionOfCofactorOfPushout = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the pushout diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the pushout diagram must have equal sources" ];
         end;
@@ -2193,7 +2193,7 @@ InjectionOfCofactorOfPushoutWithGivenPushout = @rec(
     local cobase, current_morphism, current_value;
     
     if injection_number < 1 || injection_number > Length( diagram )
-        return[ false, @Concatenation( "there does !exist a ", StringGAP( injection_number ), "th injection" ) ];
+        return[ false, @Concatenation( "there does not exist a ", StringGAP( injection_number ), "th injection" ) ];
     end;
     
     cobase = Source( diagram[1] );
@@ -2203,7 +2203,7 @@ InjectionOfCofactorOfPushoutWithGivenPushout = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the pushout diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the pushout diagram must have equal sources" ];
         end;
@@ -2232,7 +2232,7 @@ MorphismFromSourceToPushout = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the pushout diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the pushout diagram must have equal sources" ];
         end;
@@ -2260,7 +2260,7 @@ MorphismFromSourceToPushoutWithGivenPushout = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the pushout diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the pushout diagram must have equal sources" ];
         end;
@@ -2283,7 +2283,7 @@ UniversalMorphismFromPushout = @rec(
     local cobase, current_morphism, current_value, current_morphism_position;
     
     if Length( diagram ) != Length( sink )
-        return [ false, "pushout diagram && test diagram must have equal length" ];
+        return [ false, "pushout diagram and test diagram must have equal length" ];
     end;
     
     if IsEmpty( diagram )
@@ -2299,7 +2299,7 @@ UniversalMorphismFromPushout = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the pushout diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber pushout must have equal sources" ];
         end;
@@ -2311,9 +2311,9 @@ UniversalMorphismFromPushout = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), test_object );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the test sink have ranges equal to the test object" ];
+            return [ false, "cannot decide whether the given morphisms of the test sink have ranges equal to the test object" ];
         elseif current_value == false
-            return [ false, "the given morphisms of the test sink do !have ranges equal to the test object" ];
+            return [ false, "the given morphisms of the test sink do not have ranges equal to the test object" ];
         end;
         
     end;
@@ -2323,9 +2323,9 @@ UniversalMorphismFromPushout = @rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": cannot decide whether source and range are equal" ) ];
         elseif current_value == false
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source and range are not equal" ) ];
         end;
         
     end;
@@ -2345,7 +2345,7 @@ UniversalMorphismFromPushoutWithGivenPushout = @rec(
     local cobase, current_morphism, current_value, current_morphism_position;
     
     if Length( diagram ) != Length( sink )
-        return [ false, "pushout diagram && test diagram must have equal length" ];
+        return [ false, "pushout diagram and test diagram must have equal length" ];
     end;
     
     if IsEmpty( diagram )
@@ -2361,7 +2361,7 @@ UniversalMorphismFromPushoutWithGivenPushout = @rec(
         current_value = IsEqualForObjects( cat, Source( current_morphism ), cobase );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the pushout diagram have equal sources" ];
+            return [ false, "cannot decide whether the given morphisms of the pushout diagram have equal sources" ];
         elseif current_value == false
             return [ false, "the given morphisms of the fiber pushout must have equal sources" ];
         end;
@@ -2373,9 +2373,9 @@ UniversalMorphismFromPushoutWithGivenPushout = @rec(
         current_value = IsEqualForObjects( cat, Range( current_morphism ), test_object );
         
         if current_value == fail
-            return [ false, "can!decide whether the given morphisms of the test sink have ranges equal to the test object" ];
+            return [ false, "cannot decide whether the given morphisms of the test sink have ranges equal to the test object" ];
         elseif current_value == false
-            return [ false, "the given morphisms of the test sink do !have ranges equal to the test object" ];
+            return [ false, "the given morphisms of the test sink do not have ranges equal to the test object" ];
         end;
         
     end;
@@ -2385,9 +2385,9 @@ UniversalMorphismFromPushoutWithGivenPushout = @rec(
         current_value = IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( sink[ current_morphism_position ] ) );
         
         if current_value == fail
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": can!decide whether source && range are equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": cannot decide whether source and range are equal" ) ];
         elseif current_value == false
-            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source && range are !equal" ) ];
+            return [ false, @Concatenation( "in diagram position ", StringGAP( current_morphism_position ), ": source and range are not equal" ) ];
         end;
         
     end;
@@ -2461,23 +2461,23 @@ UniversalMorphismIntoCoimage = @rec(
     
     value = IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) );
     if value == fail
-        return [ false, "can!decide whether source of morphism && test factorization are equal" ];
+        return [ false, "cannot decide whether source of morphism and test factorization are equal" ];
     elseif value == false
-        return [ false, "source of morphism && test factorization are !equal" ];
+        return [ false, "source of morphism and test factorization are not equal" ];
     end;
     
     value = IsEqualForObjects( cat, Range( morphism ), Range( test_factorization[ 2 ] ) );
     if value == fail
-        return [ false, "can!decide whether range of morphism && test factorization are equal" ];
+        return [ false, "cannot decide whether range of morphism and test factorization are equal" ];
     elseif value == false
-        return [ false, "range of morphism && test factorization are !equal" ];
+        return [ false, "range of morphism and test factorization are not equal" ];
     end;
     
     value = IsEqualForObjects( cat, Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
     if value == fail
-        return [ false, "can!decide whether source && range of test factorization are equal" ];
+        return [ false, "cannot decide whether source and range of test factorization are equal" ];
     elseif value == false
-        return [ false, "source && range of test factorization are !equal" ];
+        return [ false, "source and range of test factorization are not equal" ];
     end;
     
     return [ true ];
@@ -2494,23 +2494,23 @@ UniversalMorphismIntoCoimageWithGivenCoimageObject = @rec(
     
     value = IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) );
     if value == fail
-        return [ false, "can!decide whether source of morphism && test factorization are equal" ];
+        return [ false, "cannot decide whether source of morphism and test factorization are equal" ];
     elseif value == false
-        return [ false, "source of morphism && test factorization are !equal" ];
+        return [ false, "source of morphism and test factorization are not equal" ];
     end;
     
     value = IsEqualForObjects( cat, Range( morphism ), Range( test_factorization[ 2 ] ) );
     if value == fail
-        return [ false, "can!decide whether range of morphism && test factorization are equal" ];
+        return [ false, "cannot decide whether range of morphism and test factorization are equal" ];
     elseif value == false
-        return [ false, "range of morphism && test factorization are !equal" ];
+        return [ false, "range of morphism and test factorization are not equal" ];
     end;
     
     value = IsEqualForObjects( cat, Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
     if value == fail
-        return [ false, "can!decide whether source && range of test factorization are equal" ];
+        return [ false, "cannot decide whether source and range of test factorization are equal" ];
     elseif value == false
-        return [ false, "source && range of test factorization are !equal" ];
+        return [ false, "source and range of test factorization are not equal" ];
     end;
     
     return [ true ];
@@ -2613,13 +2613,13 @@ IsOne = @rec(
     
     if is_equal_for_objects == fail
       
-      return [ false, "can!decide whether morphism is the identity" ];
+      return [ false, "cannot decide whether morphism is the identity" ];
       
     end;
     
     if is_equal_for_objects == false
         
-        return [ false, "source && range of the given morphism are !equal" ];
+        return [ false, "source and range of the given morphism are not equal" ];
         
     end;
     
@@ -2641,7 +2641,7 @@ IsSplitEpimorphism = @rec(
 IsIdempotent = @rec(
    pre_function = function( cat, morphism )
     
-    # do !use IsEndomorphism( morphism ) here because you don't know if
+    # do not use IsEndomorphism( morphism ) here because you don't know if
     # the user has given an own IsEndomorphism function
     if !IsEqualForObjects( cat, Source( morphism ), Range( morphism ) )
       
@@ -2722,23 +2722,23 @@ UniversalMorphismFromImage = @rec(
     
     value = IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) );
     if value == fail
-        return [ false, "can!decide whether source of morphism && test factorization are equal" ];
+        return [ false, "cannot decide whether source of morphism and test factorization are equal" ];
     elseif value == false
-        return [ false, "source of morphism && test factorization are !equal" ];
+        return [ false, "source of morphism and test factorization are not equal" ];
     end;
     
     value = IsEqualForObjects( cat, Range( morphism ), Range( test_factorization[ 2 ] ) );
     if value == fail
-        return [ false, "can!decide whether range of morphism && test factorization are equal" ];
+        return [ false, "cannot decide whether range of morphism and test factorization are equal" ];
     elseif value == false
-        return [ false, "range of morphism && test factorization are !equal" ];
+        return [ false, "range of morphism and test factorization are not equal" ];
     end;
     
     value = IsEqualForObjects( cat, Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
     if value == fail
-        return [ false, "can!decide whether source && range of test factorization are equal" ];
+        return [ false, "cannot decide whether source and range of test factorization are equal" ];
     elseif value == false
-        return [ false, "source && range of test factorization are !equal" ];
+        return [ false, "source and range of test factorization are not equal" ];
     end;
     
     return [ true ];
@@ -2755,23 +2755,23 @@ UniversalMorphismFromImageWithGivenImageObject = @rec(
     
     value = IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) );
     if value == fail
-        return [ false, "can!decide whether source of morphism && test factorization are equal" ];
+        return [ false, "cannot decide whether source of morphism and test factorization are equal" ];
     elseif value == false
-        return [ false, "source of morphism && test factorization are !equal" ];
+        return [ false, "source of morphism and test factorization are not equal" ];
     end;
     
     value = IsEqualForObjects( cat, Range( morphism ), Range( test_factorization[ 2 ] ) );
     if value == fail
-        return [ false, "can!decide whether range of morphism && test factorization are equal" ];
+        return [ false, "cannot decide whether range of morphism and test factorization are equal" ];
     elseif value == false
-        return [ false, "range of morphism && test factorization are !equal" ];
+        return [ false, "range of morphism and test factorization are not equal" ];
     end;
     
     value = IsEqualForObjects( cat, Range( test_factorization[ 1 ] ), Source( test_factorization[ 2 ] ) );
     if value == fail
-        return [ false, "can!decide whether source && range of test factorization are equal" ];
+        return [ false, "cannot decide whether source and range of test factorization are equal" ];
     elseif value == false
-        return [ false, "source && range of test factorization are !equal" ];
+        return [ false, "source and range of test factorization are not equal" ];
     end;
     
     return [ true ];
@@ -3078,9 +3078,9 @@ HorizontalPreCompose = @rec(
     
     value = IsEqualForObjects( cat, Range( Source( twocell_1 ) ), Source( Source( twocell_2 ) ) );
     if value == fail
-        return [ false, "can!decide whether 2-cells are horizontally composable" ];
+        return [ false, "cannot decide whether 2-cells are horizontally composable" ];
     elseif value == false
-        return [ false, "2-cells are !horizontally composable" ];
+        return [ false, "2-cells are not horizontally composable" ];
     end;
     
     return [ true ];
@@ -3096,9 +3096,9 @@ HorizontalPostCompose = @rec(
     
     value = IsEqualForObjects( cat, Range( Source( twocell_1 ) ), Source( Source( twocell_2 ) ) );
     if value == fail
-        return [ false, "can!decide whether 2-cells are horizontally composable" ];
+        return [ false, "cannot decide whether 2-cells are horizontally composable" ];
     elseif value == false
-        return [ false, "2-cells are !horizontally composable" ];
+        return [ false, "2-cells are not horizontally composable" ];
     end;
     
     return [ true ];
@@ -3114,9 +3114,9 @@ VerticalPreCompose = @rec(
     
     value = IsEqualForMorphisms( Range( twocell_1 ), Source( twocell_2 ) );
     if value == fail
-        return [ false, "can!decide whether 2-cells are vertically composable" ];
+        return [ false, "cannot decide whether 2-cells are vertically composable" ];
     elseif value == false
-        return [ false, "2-cells are !vertically composable" ];
+        return [ false, "2-cells are not vertically composable" ];
     end;
     
     return [ true ];
@@ -3132,9 +3132,9 @@ VerticalPostCompose = @rec(
     
     value = IsEqualForMorphisms( Range( twocell_1 ), Source( twocell_2 ) );
     if value == fail
-        return [ false, "can!decide whether 2-cells are vertically composable" ];
+        return [ false, "cannot decide whether 2-cells are vertically composable" ];
     elseif value == false
-        return [ false, "2-cells are !vertically composable" ];
+        return [ false, "2-cells are not vertically composable" ];
     end;
     
     return [ true ];
@@ -3344,7 +3344,7 @@ MorphismBetweenDirectSums = @rec(
       
       if Length( listlist ) != Length( source_diagram )
           
-          return [ false, "the number of rows does !match the length of the source diagram" ];
+          return [ false, "the number of rows does not match the length of the source diagram" ];
           
       end;
       
@@ -3352,7 +3352,7 @@ MorphismBetweenDirectSums = @rec(
           
           if Length( listlist[i] ) != Length( range_diagram )
               
-              return [ false, @Concatenation( "the ", StringGAP(i), "-th row has !the same length as the range diagram" ) ];
+              return [ false, @Concatenation( "the ", StringGAP(i), "-th row has not the same length as the range diagram" ) ];
               
           end;
           
@@ -3362,11 +3362,11 @@ MorphismBetweenDirectSums = @rec(
               
               if result == fail
                   
-                  return [ false, @Concatenation( "can!decide whether the sources of the morphisms ⥉ the ", StringGAP(i), "-th row are equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
+                  return [ false, @Concatenation( "cannot decide whether the sources of the morphisms in the ", StringGAP(i), "-th row are equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
                   
               elseif result == false
                   
-                  return [ false, @Concatenation( "the sources of the morphisms ⥉ the ", StringGAP(i), "-th row must be equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
+                  return [ false, @Concatenation( "the sources of the morphisms in the ", StringGAP(i), "-th row must be equal to the ", StringGAP(i), "-th entry of the source diagram" ) ];
                   
               end;
               
@@ -3374,11 +3374,11 @@ MorphismBetweenDirectSums = @rec(
               
               if result == fail
                   
-                  return [ false, @Concatenation( "can!decide whether the ranges of the morphisms ⥉ the ", StringGAP(j), "-th column are equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
+                  return [ false, @Concatenation( "cannot decide whether the ranges of the morphisms in the ", StringGAP(j), "-th column are equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
                   
               elseif result == false
                   
-                  return [ false, @Concatenation( "the ranges of the morphisms ⥉ the ", StringGAP(j), "-th column must be equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
+                  return [ false, @Concatenation( "the ranges of the morphisms in the ", StringGAP(j), "-th column must be equal to the ", StringGAP(j), "-th entry of the range diagram" ) ];
                   
               end;
               
@@ -3507,15 +3507,15 @@ SolveLinearSystemInAbCategory = @rec(
     end;
     
     if !Length( left_coeffs ) == Length( right_coeffs )
-        return [ false, "the list of left coefficients && the list of right coefficients do !have the same length" ];
+        return [ false, "the list of left coefficients and the list of right coefficients do not have the same length" ];
     end;
     
     if !Length( left_coeffs ) == Length( rhs )
-        return [ false, "the list of left coefficients does !have the same length as the right hand side" ];
+        return [ false, "the list of left coefficients does not have the same length as the right hand side" ];
     end;
     
     if !ForAll( @Concatenation( left_coeffs, right_coeffs ), x -> IsList( x ) && Length( x ) == Length( left_coeffs[1] ) )
-        return [ false, "the left coefficients && the right coefficients must be given by lists of lists of the same length containing morphisms ⥉ the current category" ];
+        return [ false, "the left coefficients and the right coefficients must be given by lists of lists of the same length containing morphisms in the current category" ];
     end;
     
     return [ true ];
@@ -3535,13 +3535,13 @@ SolveLinearSystemInAbCategory = @rec(
     nr_columns_left = Length( left_coeffs[1] );
     
     if !ForAll( (1):(nr_columns_left), j -> ForAll( left_coeffs, x -> IsEqualForObjects( cat, Range( x[j] ), Range( left_coeffs[1][j] ) ) != false ) )
-        return [ false, "all ranges ⥉ a column of the left coefficients must be equal" ];
+        return [ false, "all ranges in a column of the left coefficients must be equal" ];
     end;
     
     nr_columns_right = Length( right_coeffs[1] );
     
     if !ForAll( (1):(nr_columns_right), j -> ForAll( right_coeffs, x -> IsEqualForObjects( cat, Source( x[j] ), Source( right_coeffs[1][j] ) ) != false ) )
-        return [ false, "all sources ⥉ a column of the right coefficients must be equal" ];
+        return [ false, "all sources in a column of the right coefficients must be equal" ];
     end;
     
     return [ true ];
@@ -3727,7 +3727,7 @@ IsomorphismFromItsConstructionAsAnImageObjectToHomologyObject = @rec(
   
 ## SimplifyObject*
 SimplifyObject = @rec(
-  filter_list = [ "category", "object", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "object", "nonneg_integer_or_infinity" ],
   input_arguments_names = [ "cat", "A", "n" ],
   return_type = "object",
   dual_operation = "SimplifyObject",
@@ -3743,7 +3743,7 @@ SimplifyObject = @rec(
   pre_function = function( cat, A, n )
     
     if !( IsPosInt( n ) || IsInfinity( n ) )
-        return [ false, "the second argument must be a non-negative integer || Inf" ];
+        return [ false, "the second argument must be a non-negative integer or infinity" ];
     end;
     
     return [ true ];
@@ -3752,7 +3752,7 @@ SimplifyObject = @rec(
   ),
 
 SimplifyObject_IsoFromInputObject = @rec(
-  filter_list = [ "category", "object", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "object", "nonneg_integer_or_infinity" ],
   io_type = [ [ "A", "n" ], [ "A", "B" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyObject_IsoToInputObject",
@@ -3769,7 +3769,7 @@ SimplifyObject_IsoFromInputObject = @rec(
   ),
 
 SimplifyObject_IsoToInputObject = @rec(
-  filter_list = [ "category", "object", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "object", "nonneg_integer_or_infinity" ],
   io_type = [ [ "A", "n" ], [ "B", "A" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyObject_IsoFromInputObject",
@@ -3779,7 +3779,7 @@ SimplifyObject_IsoToInputObject = @rec(
 
 ## SimplifyMorphism
 SimplifyMorphism = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "mor_range" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyMorphism",
@@ -3789,7 +3789,7 @@ SimplifyMorphism = @rec(
 
 ## SimplifySource*
 SimplifySource = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "mor_range" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyRange",
@@ -3798,7 +3798,7 @@ SimplifySource = @rec(
   ),
 
 SimplifySource_IsoToInputObject = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "mor_source" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyRange_IsoFromInputObject",
@@ -3815,7 +3815,7 @@ SimplifySource_IsoToInputObject = @rec(
   ),
   
 SimplifySource_IsoFromInputObject = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "Ap" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyRange_IsoToInputObject",
@@ -3825,7 +3825,7 @@ SimplifySource_IsoFromInputObject = @rec(
 
 ## SimplifyRange*
 SimplifyRange = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "Bp" ] ],
   return_type = "morphism",
   dual_operation = "SimplifySource",
@@ -3834,7 +3834,7 @@ SimplifyRange = @rec(
   ),
 
 SimplifyRange_IsoToInputObject = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "Bp", "mor_range" ] ],
   return_type = "morphism",
   dual_operation = "SimplifySource_IsoFromInputObject",
@@ -3851,7 +3851,7 @@ SimplifyRange_IsoToInputObject = @rec(
   ),
   
 SimplifyRange_IsoFromInputObject = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "mor_range", "Bp" ] ],
   return_type = "morphism",
   dual_operation = "SimplifySource_IsoToInputObject",
@@ -3861,7 +3861,7 @@ SimplifyRange_IsoFromInputObject = @rec(
 
 ## SimplifySourceAndRange*
 SimplifySourceAndRange = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "Bp" ] ],
   return_type = "morphism",
   dual_operation = "SimplifySourceAndRange",
@@ -3870,7 +3870,7 @@ SimplifySourceAndRange = @rec(
   ),
 
 SimplifySourceAndRange_IsoToInputSource = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "mor_source" ] ],
   return_type = "morphism",
   dual_operation = "SimplifySourceAndRange_IsoFromInputRange",
@@ -3879,7 +3879,7 @@ SimplifySourceAndRange_IsoToInputSource = @rec(
   ),
   
 SimplifySourceAndRange_IsoFromInputSource = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "Ap" ] ],
   return_type = "morphism",
   dual_operation = "SimplifySourceAndRange_IsoToInputRange",
@@ -3888,7 +3888,7 @@ SimplifySourceAndRange_IsoFromInputSource = @rec(
   ),
 
 SimplifySourceAndRange_IsoToInputRange = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "Bp", "mor_range" ] ],
   return_type = "morphism",
   dual_operation = "SimplifySourceAndRange_IsoFromInputSource",
@@ -3897,7 +3897,7 @@ SimplifySourceAndRange_IsoToInputRange = @rec(
   ),
   
 SimplifySourceAndRange_IsoFromInputRange = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "mor_range", "Bp" ] ],
   return_type = "morphism",
   dual_operation = "SimplifySourceAndRange_IsoToInputSource",
@@ -3907,7 +3907,7 @@ SimplifySourceAndRange_IsoFromInputRange = @rec(
 
 ## SimplifyEndo*
 SimplifyEndo = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "Ap" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyEndo",
@@ -3915,7 +3915,7 @@ SimplifyEndo = @rec(
   pre_function = function( cat, endo, n )
     
     if !( IsPosInt( n ) || IsInfinity( n ) )
-        return [ false, "the second argument must be a non-negative integer || Inf" ];
+        return [ false, "the second argument must be a non-negative integer or infinity" ];
     end;
     
     if !IsEndomorphism( endo )
@@ -3928,7 +3928,7 @@ SimplifyEndo = @rec(
   ),
 
 SimplifyEndo_IsoFromInputObject = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "mor_source", "Ap" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyEndo_IsoToInputObject",
@@ -3937,7 +3937,7 @@ SimplifyEndo_IsoFromInputObject = @rec(
   ),
 
 SimplifyEndo_IsoToInputObject = @rec(
-  filter_list = [ "category", "morphism", "nonneg_integer_or_Inf" ],
+  filter_list = [ "category", "morphism", "nonneg_integer_or_infinity" ],
   io_type = [ [ "mor", "n" ], [ "Ap", "mor_range" ] ],
   return_type = "morphism",
   dual_operation = "SimplifyEndo_IsoFromInputObject",
@@ -3965,13 +3965,13 @@ SomeReductionBySplitEpiSummand_MorphismFromInputRange = @rec(
 
 ProjectiveDimension = @rec(
   filter_list = [ "category", "object" ],
-  return_type = "nonneg_integer_or_Inf",
+  return_type = "nonneg_integer_or_infinity",
   dual_operation = "InjectiveDimension",
   ),
 
 InjectiveDimension = @rec(
   filter_list = [ "category", "object" ],
-  return_type = "nonneg_integer_or_Inf",
+  return_type = "nonneg_integer_or_infinity",
   dual_operation = "ProjectiveDimension",
   ),
 
@@ -4105,39 +4105,39 @@ MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject = @rec(
         
         #### check that given diagram is well-defined
         if !(IsDenseList( object_specification ) && IsDenseList( morphism_specification ))
-            Error( "the given diagram is !well-defined" );
+            Error( "the given diagram is not well-defined" );
         end;
 
         if Length( object_specification ) == 0 && Length( morphism_specification ) > 0
-            Error( "the given diagram is !well-defined" );
+            Error( "the given diagram is not well-defined" );
         end;
         
         if !(ForAll( object_specification, object -> object ⥉ [ "fixedobject", "varobject" ] ))
-            Error( "the given diagram is !well-defined" );
+            Error( "the given diagram is not well-defined" );
         end;
 
         for morphism in morphism_specification
             if !(IsList( morphism ) && Length( morphism ) == 3)
-                Error( "the given diagram is !well-defined" );
+                Error( "the given diagram is not well-defined" );
             end;
             source_position = morphism[1];
             type = morphism[2];
             range_position = morphism[3];
 
             if !(IsInt( source_position ) && source_position >= 1 && source_position <= Length( object_specification ))
-                Error( "the given diagram is !well-defined" );
+                Error( "the given diagram is not well-defined" );
             end;
 
             if !(IsInt( range_position ) && range_position >= 1 && range_position <= Length( object_specification ))
-                Error( "the given diagram is !well-defined" );
+                Error( "the given diagram is not well-defined" );
             end;
 
             if !type ⥉ [ "fixedmorphism", "varmorphism", "zeromorphism" ]
-                Error( "the given diagram is !well-defined" );
+                Error( "the given diagram is not well-defined" );
             end;
 
             if type == "fixedmorphism" && (object_specification[source_position] == "varobject" || object_specification[range_position] == "varobject")
-                Error( "the given diagram is !well-defined" );
+                Error( "the given diagram is not well-defined" );
             end;
         end;
 
@@ -4156,7 +4156,7 @@ MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject = @rec(
         limit.number_of_unbound_morphisms = number_of_unbound_morphisms;
 
         if !ForAll( unbound_morphism_positions, i -> morphism_specification[i][2] == "fixedmorphism" || i == Length( unbound_morphism_positions ) )
-            Error( "diagrams of the given type are !supported" );
+            Error( "diagrams of the given type are not supported" );
         end;
 
         # objects
@@ -4182,7 +4182,7 @@ MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject = @rec(
         limit.number_of_unbound_objects = number_of_unbound_objects;
 
         if !ForAll( unbound_object_positions, i -> object_specification[i] == "fixedobject" || i == Length( unbound_object_positions ) )
-            Error( "diagrams of the given type are !supported" );
+            Error( "diagrams of the given type are not supported" );
         end;
 
         # (non-)targets
@@ -4214,7 +4214,7 @@ MonomorphismIntoInjectiveEnvelopeObjectWithGivenInjectiveEnvelopeObject = @rec(
         limit.nontarget_positions = nontarget_positions;
         limit.number_of_nontargets = number_of_nontargets;
 
-        #### get filter list && input type of the diagram
+        #### get filter list and input type of the diagram
         diagram_filter_list = [ ];
         diagram_input_type = [ ];
         if number_of_unbound_objects == 1
@@ -4317,10 +4317,10 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
             if subset_only
                 continue;
             else
-                Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" which is !expected by the validator.\n" ) );
+                Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" in the method record has a component named \"", name, "\" which is not expected by the validator.\n" ) );
             end;
         elseif method_record_entry[name] != generated_entry[name]
-            Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record has a component named \"", name, "\" with value \"", StringGAP( method_record_entry[name] ), "\". The value expected by the validator is \"", StringGAP( generated_entry[name] ), "\".\n" ) );
+            Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" in the method record has a component named \"", name, "\" with value \"", StringGAP( method_record_entry[name] ), "\". The value expected by the validator is \"", StringGAP( generated_entry[name] ), "\".\n" ) );
         end;
     end;
     for name in RecNames( generated_entry )
@@ -4328,7 +4328,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
             continue;
         end;
         if !@IsBound( method_record_entry[name] )
-            Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" ⥉ the method record is missing a component named \"", name, "\" which is expected by the validator.\n" ) );
+            Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" in the method record is missing a component named \"", name, "\" which is expected by the validator.\n" ) );
         end;
     end;
 end );
@@ -4395,7 +4395,7 @@ end );
             if record.output_source_getter_preconditions == [ [ limit.limit_object_name, 1 ] ]
                 record.output_source_getter_preconditions = [ [ limit.colimit_object_name, 1 ] ];
             else
-                Error( "this case is !supported yet" );
+                Error( "this case is not supported yet" );
             end;
         end;
         
@@ -4407,7 +4407,7 @@ end );
             if record.output_range_getter_preconditions == [ [ limit.limit_object_name, 1 ] ]
                 record.output_range_getter_preconditions = [ [ limit.colimit_object_name, 1 ] ];
             else
-                Error( "this case is !supported yet" );
+                Error( "this case is not supported yet" );
             end;
         end;
         
@@ -4416,7 +4416,7 @@ end );
 
     for limit in limits
         
-        #### get filter lists && io types
+        #### get filter lists and io types
         object_filter_list = @Concatenation( [ "category" ], StructuralCopy( limit.diagram_filter_list ) );
         
         # only used if limit.number_of_targets > 0
@@ -4452,7 +4452,7 @@ end );
                 projection_io_type[2] = [ "P", "morphisms_k_range" ];
             end;
         else
-            Error( "Warning: can!express io_type" );
+            Error( "Warning: cannot express io_type" );
         end;
 
         # only used if limit.number_of_nontargets == 1
@@ -4548,8 +4548,8 @@ end );
         if limit.number_of_unbound_morphisms == 0
             
             # The diagram has only objects as input -> all operations are compatible with the congruence of morphisms:
-            # For the universal morphisms && functorials, this follows from the universal property.
-            # All other operations are automatically compatible because they do !have morphisms as input.
+            # For the universal morphisms and functorials, this follows from the universal property.
+            # All other operations are automatically compatible because they do not have morphisms as input.
             
             # if limit.number_of_targets == 0, the universal morphism has no test morphism as input anyway
             if limit.number_of_targets > 0
@@ -4563,7 +4563,7 @@ end );
         else
             
             # The universal object might depend on the morphism datum.
-            # Thus, the operations are ⥉ general !compatible with the congruence of morphisms.
+            # Thus, the operations are in general not compatible with the congruence of morphisms.
             
             object_record.compatible_with_congruence_of_morphisms = false;
             projection_record.compatible_with_congruence_of_morphisms = false;
@@ -4705,7 +4705,7 @@ end );
     if drop_both
         
         return function( arg_list... )
-            # drop second && last argument
+            # drop second and last argument
             return CallFuncList( func, arg_list[@Concatenation( [ 1 ], (3):(Length( arg_list ) - 1) )] );
         end;
         
@@ -4729,8 +4729,8 @@ end );
     
     with_given_name_function = ValueGlobal( with_given_name );
     
-    # Check if `object_function` is declared as an attribute && can actually be used as one ⥉ our context.
-    # We do !print a warning if somethings is declared as an attribute but can!be used as one ⥉ our context because this might actually happen, see for example `UniqueMorphism`.
+    # Check if `object_function` is declared as an attribute and can actually be used as one in our context.
+    # We do not print a warning if somethings is declared as an attribute but cannot be used as one in our context because this might actually happen, see for example `UniqueMorphism`.
     is_attribute = IsAttribute( object_function ) && Length( object_filter_list ) <= 2 && IsSpecializationOfFilter( IsAttributeStoringRep, CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( Last( object_filter_list ) ) );
     
     if !is_attribute
@@ -4743,7 +4743,7 @@ end );
             without_given_weight = CurrentOperationWeight( category.derivations_weight_list, without_given_name );
             with_given_weight = CurrentOperationWeight( category.derivations_weight_list, with_given_name );
             
-            # If the WithGiven version is more expensive than the WithoutGiven version, redirection makes no sense &&
+            # If the WithGiven version is more expensive than the WithoutGiven version, redirection makes no sense and
             # might even lead to inifite loops if the WithGiven version is derived from the WithoutGiven version.
             if with_given_weight > without_given_weight
                 
@@ -4771,7 +4771,7 @@ end );
         
         if !Length( object_arguments_positions ) ⥉ [ 1, 2 ]
             
-            Error( "we can only handle attributes of the category || of a single object/morphism/twocell" );
+            Error( "we can only handle attributes of the category or of a single object/morphism/twocell" );
             
         end;
         
@@ -4785,7 +4785,7 @@ end );
             without_given_weight = CurrentOperationWeight( category.derivations_weight_list, without_given_name );
             with_given_weight = CurrentOperationWeight( category.derivations_weight_list, with_given_name );
             
-            # If the WithGiven version is more expensive than the WithoutGiven version, redirection makes no sense &&
+            # If the WithGiven version is more expensive than the WithoutGiven version, redirection makes no sense and
             # might even lead to inifite loops if the WithGiven version is derived from the WithoutGiven version.
             if with_given_weight > without_given_weight
                 
@@ -4831,15 +4831,15 @@ end );
     elseif source_range_object == "Range"
         object_getter = Range;
     else
-        Error( "the first argument of CAP_INTERNAL_CREATE_POST_FUNCTION must be 'Source' || 'Range'" );
+        Error( "the first argument of CAP_INTERNAL_CREATE_POST_FUNCTION must be 'Source' or 'Range'" );
     end;
     
     object_function = ValueGlobal( object_function_name );
     
     cache_key_length = Length( object_arguments_positions );
     
-    # Check if `object_function` is declared as an attribute && can actually be used as one ⥉ our context.
-    # We do !print a warning if somethings is declared as an attribute but can!be used as one ⥉ our context because this might actually happen, see for example `UniqueMorphism`.
+    # Check if `object_function` is declared as an attribute and can actually be used as one in our context.
+    # We do not print a warning if somethings is declared as an attribute but cannot be used as one in our context because this might actually happen, see for example `UniqueMorphism`.
     is_attribute = IsAttribute( object_function ) && Length( object_filter_list ) <= 2 && IsSpecializationOfFilter( IsAttributeStoringRep, CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( Last( object_filter_list ) ) );
     
     if !is_attribute
@@ -4862,7 +4862,7 @@ end );
         
         if !Length( object_arguments_positions ) ⥉ [ 1, 2 ]
             
-            Error( "we can only handle attributes of the category || of a single object/morphism/twocell" );
+            Error( "we can only handle attributes of the category or of a single object/morphism/twocell" );
             
         end;
         
@@ -4923,7 +4923,7 @@ end );
         
         if !IsEmpty( diff )
             
-            Print( "WARNING: The following method name record components are !known: " );
+            Print( "WARNING: The following method name record components are not known: " );
             Display( diff );
             
         end;
@@ -4934,18 +4934,18 @@ end );
         end;
         
         if current_rec.return_type ⥉ [ "other_object", "other_morphism" ]
-            Error( "The return types \"other_object\" && \"other_morphism\" are !supported anymore. If you need those, please report this using the CAP_projects's issue tracker." );
+            Error( "The return types \"other_object\" and \"other_morphism\" are not supported anymore. If you need those, please report this using the CAP_projects's issue tracker." );
         end;
         
         if !current_rec.return_type ⥉ CAP_INTERNAL_VALID_RETURN_TYPES
-            Error( "The return_type of <current_rec> does !appear ⥉ CAP_INTERNAL_VALID_RETURN_TYPES. Note that proper filters are !supported anymore." );
+            Error( "The return_type of <current_rec> does not appear in CAP_INTERNAL_VALID_RETURN_TYPES. Note that proper filters are not supported anymore." );
         end;
         
         if @IsBound( current_rec.argument_list )
             
             Display( @Concatenation( 
                 "WARNING: the functionality previously provided by `argument_list` was removed. You will probably run into errors. ",
-                "Please use the category as the first argument instead of method selections objects/morphisms && adjust pre, post && redirect functions as well as derivations appropriately. ",
+                "Please use the category as the first argument instead of method selections objects/morphisms and adjust pre, post and redirect functions as well as derivations appropriately. ",
                 "Search for `category_as_first_argument` in the documentation for more details."
             ) );
             
@@ -4958,7 +4958,7 @@ end );
         end;
         
         if ForAny( current_rec.filter_list, x -> x ⥉ [ "other_category", "other_object", "other_morphism", "other_twocell" ] )
-            Error( "The filters \"other_category\", \"other_object\", \"other_morphism\", && \"other_twocell\" are !supported anymore. If you need those, please report this using the CAP_projects's issue tracker." );
+            Error( "The filters \"other_category\", \"other_object\", \"other_morphism\", and \"other_twocell\" are not supported anymore. If you need those, please report this using the CAP_projects's issue tracker." );
         end;
         
         if @IsBound( current_rec.io_type )
@@ -4966,14 +4966,14 @@ end );
             io_type = current_rec.io_type;
             
             if !IsList( io_type ) || Length( io_type ) != 2
-                Error( "the io_type of <current_rec> is !a list of length 2" );
+                Error( "the io_type of <current_rec> is not a list of length 2" );
             end;
             
             if !ForAll( io_type[1], x -> IsString( x ) )
                 Error( "the input type of <current_rec> contains non-strings" );
             end;
             
-            # the category is excluded ⥉ the io_type
+            # the category is excluded in the io_type
             if Length( io_type[1] ) != Length( current_rec.filter_list ) - 1
                 
                 Error( "the input type of <current_rec> has the wrong length" );
@@ -5004,7 +5004,7 @@ end );
                 
             else
                 
-                Error( "Could !find pre function for ", current_recname, ". ", current_rec.pre_function, " is !the name of an operation in the record, has no pre function, || has itself a string as pre function." );
+                Error( "Could not find pre function for ", current_recname, ". ", current_rec.pre_function, " is not the name of an operation in the record, has no pre function, or has itself a string as pre function." );
                 
             end;
             
@@ -5018,7 +5018,7 @@ end );
                 
             else
                 
-                Error( "Could !find full pre function for ", current_recname, ". ", current_rec.pre_function_full, " is !the name of an operation in the record, has no full pre function, || has itself a string as full pre function." );
+                Error( "Could not find full pre function for ", current_recname, ". ", current_rec.pre_function_full, " is not the name of an operation in the record, has no full pre function, or has itself a string as full pre function." );
                 
             end;
             
@@ -5032,7 +5032,7 @@ end );
                 
             else
                 
-                Error( "Could !find redirect function for ", current_recname, ". ", current_rec.redirect_function, " is !the name of an operation in the record, has no redirect function, || has itself a string as redirect function." );
+                Error( "Could not find redirect function for ", current_recname, ". ", current_rec.redirect_function, " is not the name of an operation in the record, has no redirect function, or has itself a string as redirect function." );
                 
             end;
             
@@ -5061,7 +5061,7 @@ end );
         end;
         
         if !ForAll( current_rec.filter_list, IsString )
-            Error( "Not all entries of filter_list of ", current_recname, " are strings. This is !supported anymore." );
+            Error( "Not all entries of filter_list of ", current_recname, " are strings. This is not supported anymore." );
         end;
         
         if !@IsBound( current_rec.install_convenience_without_category )
@@ -5088,7 +5088,7 @@ end );
         
         if @IsBound( current_rec.with_given_object_position ) && !current_rec.with_given_object_position ⥉ [ "Source", "Range", "both" ]
             
-            Error( "with_given_object_position must be one of the strings \"Source\", \"Range\", || \"both\", !", current_rec.with_given_object_position );
+            Error( "with_given_object_position must be one of the strings \"Source\", \"Range\", or \"both\", not ", current_rec.with_given_object_position );
             
         end;
         
@@ -5110,7 +5110,7 @@ end );
             
             if !@IsBound( record[current_rec.dual_operation] )
                 
-                Error( "the dual operation must be added ⥉ the same call to `CAP_INTERNAL_ENHANCE_NAME_RECORD`" );
+                Error( "the dual operation must be added in the same call to `CAP_INTERNAL_ENHANCE_NAME_RECORD`" );
                 
             end;
             
@@ -5138,7 +5138,7 @@ end );
                              name -> @IsBound( current_rec[name] ) && ( IsFunction( current_rec[name] ) || current_rec[name] == true )
                            ) ) >= 2
             
-            Error( "dual_preprocessor_func, dual_arguments_reversed == true && dual_with_given_objects_reversed == true are mutually exclusive" );
+            Error( "dual_preprocessor_func, dual_arguments_reversed == true and dual_with_given_objects_reversed == true are mutually exclusive" );
             
         end;
         
@@ -5146,7 +5146,7 @@ end );
             
             if @IsBound( current_rec.dual_preprocessor_func_string )
                 
-                Error( "dual_preprocessor_func && dual_preprocessor_func_string are mutually exclusive" );
+                Error( "dual_preprocessor_func and dual_preprocessor_func_string are mutually exclusive" );
                 
             end;
             
@@ -5166,7 +5166,7 @@ end );
             
             if @IsBound( current_rec.dual_postprocessor_func_string )
                 
-                Error( "dual_postprocessor_func && dual_postprocessor_func_string are mutually exclusive" );
+                Error( "dual_postprocessor_func and dual_postprocessor_func_string are mutually exclusive" );
                 
             end;
             
@@ -5236,7 +5236,7 @@ end );
             
             if Length( output_list ) != 2
                 
-                Error( "the output type is !a list of length 2" );
+                Error( "the output type is not a list of length 2" );
                 
             end;
             
@@ -5282,13 +5282,13 @@ end );
                     else
                         list_position = Position( input_list, current_output[ 2 ] );
                         if list_position == fail
-                            Error( "unable to find ", current_output[ 2 ], " ⥉ input_list" );
+                            Error( "unable to find ", current_output[ 2 ], " in input_list" );
                         end;
                         list_position = argument_names[ list_position ];
                     end;
                     
                     if list_position == fail
-                        Error( "list index variable !found" );
+                        Error( "list index variable not found" );
                     end;
                     
                     if LowercaseString( current_output[ 3 ] ) == "source"
@@ -5325,7 +5325,7 @@ end );
             
         end;
         
-        if ForAll( current_rec.filter_list, x -> x ⥉ [ "element_of_commutative_ring_of_linear_structure", "integer", "nonneg_integer_or_Inf", "category", "object", "object_in_range_category_of_homomorphism_structure", "list_of_objects" ] )
+        if ForAll( current_rec.filter_list, x -> x ⥉ [ "element_of_commutative_ring_of_linear_structure", "integer", "nonneg_integer_or_infinity", "category", "object", "object_in_range_category_of_homomorphism_structure", "list_of_objects" ] )
             
             if !@IsBound( current_rec.compatible_with_congruence_of_morphisms )
                 
@@ -5335,7 +5335,7 @@ end );
             
             if current_rec.compatible_with_congruence_of_morphisms != true
                 
-                Error( current_recname, " does !depend on morphisms but is still marked as !compatible with the congruence of morphisms" );
+                Error( current_recname, " does not depend on morphisms but is still marked as not compatible with the congruence of morphisms" );
                 
             end;
             
@@ -5364,7 +5364,7 @@ end );
             
             if Length( with_given_names ) != 1
                 
-                Error( "Could !find unique WithGiven version for ", without_given_name );
+                Error( "Could not find unique WithGiven version for ", without_given_name );
                 
             end;
             
@@ -5410,7 +5410,7 @@ end );
                 
                 if !@IsBound( without_given_rec.output_source_getter_string )
                     
-                    Error( "This is a WithoutGiven record, but output_source_getter_string is !set. This is !supported." );
+                    Error( "This is a WithoutGiven record, but output_source_getter_string is not set. This is not supported." );
                     
                 end;
                 
@@ -5420,7 +5420,7 @@ end );
                 
                 if !@IsBound( without_given_rec.output_range_getter_string )
                     
-                    Error( "This is a WithoutGiven record, but output_range_getter_string is !set. This is !supported." );
+                    Error( "This is a WithoutGiven record, but output_range_getter_string is not set. This is not supported." );
                     
                 end;
                 
@@ -5428,7 +5428,7 @@ end );
             
             if !without_given_rec.return_type ⥉ [ "morphism", "morphism_in_range_category_of_homomorphism_structure" ]
                 
-                Error( "This is a WithoutGiven record, but return_type is neither \"morphism\" nor \"morphism_in_range_category_of_homomorphism_structure\". This is !supported." );
+                Error( "This is a WithoutGiven record, but return_type is neither \"morphism\" nor \"morphism_in_range_category_of_homomorphism_structure\". This is not supported." );
                 
             end;
             
@@ -5547,7 +5547,7 @@ end );
                 
                 if with_given_object_position == "both"
                     
-                    Error( "with_given_object_position is \"both\", but the WithGiven name suggests that only a single object of name ", object_name, " is given. This is !supported." );
+                    Error( "with_given_object_position is \"both\", but the WithGiven name suggests that only a single object of name ", object_name, " is given. This is not supported." );
                     
                 end;
                 
@@ -5559,7 +5559,7 @@ end );
                     
                     if !StartsWith( without_given_rec.output_source_getter_string, object_name )
                         
-                        Error( "the output_source_getter_string of the WithoutGiven record does !call the detected object ", object_name );
+                        Error( "the output_source_getter_string of the WithoutGiven record does not call the detected object ", object_name );
                         
                     end;
                     
@@ -5569,7 +5569,7 @@ end );
                     
                     if !StartsWith( without_given_rec.output_range_getter_string, object_name )
                         
-                        Error( "the output_range_getter_string of the WithoutGiven record does !call the detected object ", object_name );
+                        Error( "the output_range_getter_string of the WithoutGiven record does not call the detected object ", object_name );
                         
                     end;
                     
@@ -5577,7 +5577,7 @@ end );
                 
                 if !StartsWith( without_given_rec.filter_list, object_filter_list )
                     
-                    Error( "the object arguments must be the first arguments of the without given method, but the corresponding filters do !match" );
+                    Error( "the object arguments must be the first arguments of the without given method, but the corresponding filters do not match" );
                     
                 end;
                 
@@ -5588,7 +5588,7 @@ end );
                         Display( @Concatenation(
                             "WARNING: You seem to be relying on automatically installed redirect functions. ",
                             "For this, the with given method must have exactly one additional argument compared to the without given method. ",
-                            "This is !the case, so no automatic redirect function will be installed. ",
+                            "This is not the case, so no automatic redirect function will be installed. ",
                             "Install a custom redirect function to prevent this warning."
                         ) );
                         
@@ -5631,13 +5631,13 @@ end );
             
             if with_given_object_position != "both"
                 
-                Error( "dual_with_given_objects_reversed may only be set if both source && range are given" );
+                Error( "dual_with_given_objects_reversed may only be set if both source and range are given" );
                 
             end;
             
         end;
         
-        # set `output_source_getter` && `output_range_getter`
+        # set `output_source_getter` and `output_range_getter`
         if @IsBound( current_rec.output_source_getter_string )
             
             current_rec.output_source_getter = EvalString( ReplacedStringViaRecord(
@@ -5658,7 +5658,7 @@ end );
                 
                 if !IsEmpty( current_rec.output_source_getter_preconditions )
                     
-                    Error( "<current_rec.output_source_getter_preconditions> does !match the automatically detected value" );
+                    Error( "<current_rec.output_source_getter_preconditions> does not match the automatically detected value" );
                     
                 end;
                 
@@ -5669,13 +5669,13 @@ end );
                 
                 if ForAny( current_rec.output_source_getter_preconditions, x -> IsList( x ) && Length( x ) == 3 )
                     
-                    Print( "WARNING: preconditions ⥉ other categories are !yet supported, please report this using the CAP_projects's issue tracker.\n" );
+                    Print( "WARNING: preconditions in other categories are not yet supported, please report this using the CAP_projects's issue tracker.\n" );
                     
                 end;
                 
                 if ForAny( current_rec.output_source_getter_preconditions, x -> !IsList( x ) || Length( x ) != 2 || !IsString( x[1] ) || !IsInt( x[2] ) )
                     
-                    Error( "Preconditions must be pairs of names of CAP operations && integers." );
+                    Error( "Preconditions must be pairs of names of CAP operations and integers." );
                     
                 end;
                 
@@ -5708,7 +5708,7 @@ end );
                     
                     if current_rec.can_always_compute_output_source_getter != can_always_compute_output_source_getter
                         
-                        Error( "<current_rec.can_always_compute_output_source_getter> does !match the automatically detected value" );
+                        Error( "<current_rec.can_always_compute_output_source_getter> does not match the automatically detected value" );
                         
                     end;
                     
@@ -5742,7 +5742,7 @@ end );
                 
                 if !IsEmpty( current_rec.output_range_getter_preconditions )
                     
-                    Error( "<current_rec.output_range_getter_preconditions> does !match the automatically detected value" );
+                    Error( "<current_rec.output_range_getter_preconditions> does not match the automatically detected value" );
                     
                 end;
                 
@@ -5753,13 +5753,13 @@ end );
                 
                 if ForAny( current_rec.output_range_getter_preconditions, x -> IsList( x ) && Length( x ) == 3 )
                     
-                    Print( "WARNING: preconditions ⥉ other categories are !yet supported, please report this using the CAP_projects's issue tracker.\n" );
+                    Print( "WARNING: preconditions in other categories are not yet supported, please report this using the CAP_projects's issue tracker.\n" );
                     
                 end;
                 
                 if ForAny( current_rec.output_range_getter_preconditions, x -> !IsList( x ) || Length( x ) != 2 || !IsString( x[1] ) || !IsInt( x[2] ) )
                     
-                    Error( "Preconditions must be pairs of names of CAP operations && integers." );
+                    Error( "Preconditions must be pairs of names of CAP operations and integers." );
                     
                 end;
                 
@@ -5792,7 +5792,7 @@ end );
                     
                     if current_rec.can_always_compute_output_range_getter != can_always_compute_output_range_getter
                         
-                        Error( "<current_rec.can_always_compute_output_range_getter> does !match the automatically detected value" );
+                        Error( "<current_rec.can_always_compute_output_range_getter> does not match the automatically detected value" );
                         
                     end;
                     
@@ -5816,7 +5816,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
 
 # TODO
 # CAP_INTERNAL_METHOD_NAME_RECORD above should be renamed to CAP_INTERNAL_CORE_METHOD_NAME_RECORD.
-# CAP_INTERNAL_METHOD_NAME_RECORD should be an empty record at the beginning, which is populated ⥉ CAP_INTERNAL_INSTALL_ADDS_FROM_RECORD
+# CAP_INTERNAL_METHOD_NAME_RECORD should be an empty record at the beginning, which is populated in CAP_INTERNAL_INSTALL_ADDS_FROM_RECORD
 @BindGlobal( "CAP_INTERNAL_CORE_METHOD_NAME_RECORD", StructuralCopy( CAP_INTERNAL_METHOD_NAME_RECORD ) );
 
 ##
@@ -5833,11 +5833,11 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
     
     if package_info == fail
         
-        Error( "could !find package info" );
+        Error( "could not find package info" );
         
     end;
     
-    # the space between # && ! prevents AutoDoc from parsing these strings && is removed below
+    # the space between # and ! prevents AutoDoc from parsing these strings and is removed below
     current_string = ReplacedStringViaRecord(
 """# SPDX-License-Identifier: GPL-2.0-or-later
 # package_name: package_subtitle
@@ -5867,11 +5867,11 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
         
         current_rec = record[current_recname];
         
-        # the space between # && ! prevents AutoDoc from parsing these strings && is removed below
+        # the space between # and ! prevents AutoDoc from parsing these strings and is removed below
         current_string = ReplacedStringViaRecord(
 """
 # ! @Description
-# ! The arguments are a category $C$ && a function $F$.
+# ! The arguments are a category $C$ and a function $F$.
 # ! This operation adds the given function $F$
 # ! to the category for the basic operation `function_name`.
 # ! $F: ( input_arguments... ) \mapsto \mathtt[function_name](input_arguments...)$.
@@ -5909,7 +5909,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD( CAP_INTERNAL_METHOD_NAME_RECORD );
         WriteFileForHomalg( output_path, output_string );
         
         Display( @Concatenation(
-            "WARNING: The file ", filename, " ⥉ package ", package_name, " differs from the automatically generated one. ",
+            "WARNING: The file ", filename, " in package ", package_name, " differs from the automatically generated one. ",
             "You can view the automatically generated file at the following path: ",
             output_path
         ) );
@@ -5967,11 +5967,11 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
     
     if package_info == fail
         
-        Error( "could !find package info" );
+        Error( "could not find package info" );
         
     end;
     
-    # the space between # && ! prevents AutoDoc from parsing these strings && is removed below
+    # the space between # and ! prevents AutoDoc from parsing these strings and is removed below
     current_string = ReplacedStringViaRecord(
 """# SPDX-License-Identifier: GPL-2.0-or-later
 # package_name: package_subtitle
@@ -5994,7 +5994,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
     
     output_string = @Concatenation( output_string, current_string );
     
-    # We do !want to include operations from optional dependencies because those might !be available.
+    # We do not want to include operations from optional dependencies because those might not be available.
     transitively_needed_other_packages = TransitivelyNeededOtherPackages( package_name );
     
     previous_operations = [ ];
@@ -6011,7 +6011,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
         @Assert( 0, IsCapCategory( category ) );
         @Assert( 0, IsString( subsection_title ) );
         
-        # the space between # && ! prevents AutoDoc from parsing these strings && is removed below
+        # the space between # and ! prevents AutoDoc from parsing these strings and is removed below
         current_string = @Concatenation( "\n# ! @Subsection ", subsection_title );
         output_string = @Concatenation( output_string, current_string );
         
@@ -6025,7 +6025,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
             if !IsSubset( ListInstalledOperationsOfCategory( category ), previous_operations )
                 
-                Error( "the operations of the ", i - 1, "-th category are !a subset of the operations of the ", i, "-th category" );
+                Error( "the operations of the ", i - 1, "-th category are not a subset of the operations of the ", i, "-th category" );
                 
             end;
             
@@ -6050,7 +6050,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
             if bookname == fail
                 
-                Display( @Concatenation( "WARNING: Could !find package for CAP operation ", name, ", skipping." ) );
+                Display( @Concatenation( "WARNING: Could not find package for CAP operation ", name, ", skipping." ) );
                 continue;
                 
             end;
@@ -6067,13 +6067,13 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
             if info == fail
                 
-                Error( "Could !get HELP_BOOK_INFO for book ", bookname, ". You probably have to execute `make doc` for the corresponding package." );
+                Error( "Could not get HELP_BOOK_INFO for book ", bookname, ". You probably have to execute `make doc` for the corresponding package." );
                 
             end;
             
             if IsOperation( ValueGlobal( name ) )
                 
-                # the "for Is" makes sure we only match operations with a filter && !functions
+                # the "for Is" makes sure we only match operations with a filter and not functions
                 label = "for Is";
                 
             else
@@ -6088,12 +6088,12 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
             
             if Length(match) < nr
                 
-                Error( "Could !get HELP_GET_MATCHES for book ", bookname, ", operation ", name, ", && label ", SIMPLE_STRING( label ) );
+                Error( "Could not get HELP_GET_MATCHES for book ", bookname, ", operation ", name, ", and label ", SIMPLE_STRING( label ) );
                 
             end;
             
             res = GetHelpDataRef(info, match[nr][2]);
-            res[1] = SubstitutionSublist(res[1], " (!loaded): ", ": ", "one");
+            res[1] = SubstitutionSublist(res[1], " (not loaded): ", ": ", "one");
             
             if IsOperation( ValueGlobal( name ) )
                 
@@ -6103,7 +6103,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
                 
                 if !(StartsWith( res[1], test_string ) || StartsWith( res[1], test_string_legacy ))
                     
-                    Error( res[1], " does !start with ", test_string, ", matching wrong operation?" );
+                    Error( res[1], " does not start with ", test_string, ", matching wrong operation?" );
                     
                 end;
                 
@@ -6113,7 +6113,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
                 
                 if !res[1] == test_string
                     
-                    Error( res[1], " is !equal to ", test_string, ", matching wrong function?" );
+                    Error( res[1], " is not equal to ", test_string, ", matching wrong function?" );
                     
                 end;
                 
@@ -6147,7 +6147,7 @@ CAP_INTERNAL_REGISTER_METHOD_NAME_RECORD_OF_PACKAGE( CAP_INTERNAL_METHOD_NAME_RE
         WriteFileForHomalg( output_path, output_string );
         
         Display( @Concatenation(
-            "WARNING: The file ", filename, " ⥉ package ", package_name, " differs from the automatically generated one. ",
+            "WARNING: The file ", filename, " in package ", package_name, " differs from the automatically generated one. ",
             "You can view the automatically generated file at the following path: ",
             output_path
         ) );

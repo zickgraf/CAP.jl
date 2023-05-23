@@ -49,14 +49,14 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             if !filter( options[option_name] )
                 
                 # COVERAGE_IGNORE_NEXT_LINE
-                Error( "The value of the option `", option_name, "` must lie ⥉ the filter ", filter );
+                Error( "The value of the option `", option_name, "` must lie in the filter ", filter );
                 
             end;
             
         else
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( "The following option is !known to `CategoryConstructor`: ", option_name );
+            Error( "The following option is not known to `CategoryConstructor`: ", option_name );
             
         end;
         
@@ -109,7 +109,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
     end;
     
-    ## add constructors && data
+    ## add constructors and data
     if @IsBound( options.object_constructor )
         
         AddObjectConstructor( CC, options.object_constructor );
@@ -153,14 +153,14 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         if "IsEqualToIdentityMorphism" ⥉ options.list_of_operations_to_install
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Display( "WARNING: You want to lift `IsEqualToIdentityMorphism` but !`IsEqualForMorphisms` ⥉ CategoryConstructor. Since the specification of the former depends on the latter, this is probably an error." );
+            Display( "WARNING: You want to lift `IsEqualToIdentityMorphism` but not `IsEqualForMorphisms` in CategoryConstructor. Since the specification of the former depends on the latter, this is probably an error." );
             
         end;
         
         if "IsEqualToZeroMorphism" ⥉ options.list_of_operations_to_install
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Display( "WARNING: You want to lift `IsEqualToZeroMorphism` but !`IsEqualForMorphisms` ⥉ CategoryConstructor. Since the specification of the former depends on the latter, this is probably an error." );
+            Display( "WARNING: You want to lift `IsEqualToZeroMorphism` but not `IsEqualForMorphisms` in CategoryConstructor. Since the specification of the former depends on the latter, this is probably an error." );
             
         end;
         
@@ -248,19 +248,19 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
         info = CAP_INTERNAL_METHOD_NAME_RECORD[name];
         
-        # check if filters && return_type are known
-        unknown_filters = Filtered( info.filter_list, filter -> !filter ⥉ [ "category", "object", "morphism", "integer", "element_of_commutative_ring_of_linear_structure", "nonneg_integer_or_Inf", "list_of_objects", "list_of_morphisms", "pair_of_morphisms" ] );
+        # check if filters and return_type are known
+        unknown_filters = Filtered( info.filter_list, filter -> !filter ⥉ [ "category", "object", "morphism", "integer", "element_of_commutative_ring_of_linear_structure", "nonneg_integer_or_infinity", "list_of_objects", "list_of_morphisms", "pair_of_morphisms" ] );
         
         if !IsEmpty( unknown_filters )
             
-            @Info( InfoCategoryConstructor, 3, "can!yet handle the following filters required for ", name, ": ", unknown_filters );
+            @Info( InfoCategoryConstructor, 3, "cannot yet handle the following filters required for ", name, ": ", unknown_filters );
             continue;
             
         end;
         
         if !@IsBound( default_func_strings[info.return_type] )
             
-            @Info( InfoCategoryConstructor, 3, "can!yet handle return_type=\"", info.return_type, "\" required for ", name );
+            @Info( InfoCategoryConstructor, 3, "cannot yet handle return_type=\"", info.return_type, "\" required for ", name );
             continue;
             
         end;
@@ -288,7 +288,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         else
             
             # COVERAGE_IGNORE_NEXT_LINE
-            Error( create_func_name, " must be a function || the string \"default\"" );
+            Error( create_func_name, " must be a function or the string \"default\"" );
             
         end;
         
@@ -310,7 +310,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
             if !@IsBound( options.underlying_category_getter_string ) || !@IsBound( options.underlying_object_getter_string ) || !@IsBound( options.underlying_morphism_getter_string )
                 
                 # COVERAGE_IGNORE_NEXT_LINE
-                Error( "for generating underlying_arguments you must pass category, object && morphism getter strings" );
+                Error( "for generating underlying_arguments you must pass category, object and morphism getter strings" );
                 
             end;
             
@@ -332,7 +332,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                     
                     return @Concatenation( options.underlying_morphism_getter_string, "( cat, ", argument_name, " )" );
                     
-                elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_Inf"
+                elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_infinity"
                     
                     return argument_name;
                     
@@ -375,7 +375,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                     
                 else
                     
-                    Display( "WARNING: option `top_object_getter_string` is !set ⥉ a call to `CategoryConstructor`, using default value `ObjectConstructor`. This fallback will !be supported after 2023.08.12." );
+                    Display( "WARNING: option `top_object_getter_string` is not set in a call to `CategoryConstructor`, using default value `ObjectConstructor`. This fallback will not be supported after 2023.08.12." );
                     func_string = ReplacedStringViaRecord( func_string, @rec(
                         top_object_getter = "ObjectConstructor",
                     ) );
@@ -416,10 +416,10 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                 
             end;
             
-            # if source && range can!be computed we can!do anything
+            # if source and range cannot be computed we cannot do anything
             if PositionSublist( func_string, "top_source" ) != fail || PositionSublist( func_string, "top_range" ) != fail
                 
-                @Info( InfoCategoryConstructor, 3, "can!compute source && range of ", name );
+                @Info( InfoCategoryConstructor, 3, "cannot compute source and range of ", name );
                 continue;
                 
             end;
@@ -434,7 +434,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                     
                 else
                     
-                    Display( "WARNING: option `top_morphism_getter_string` is !set ⥉ a call to `CategoryConstructor`, using default value `MorphismConstructor`. This fallback will !be supported after 2023.08.12." );
+                    Display( "WARNING: option `top_morphism_getter_string` is not set in a call to `CategoryConstructor`, using default value `MorphismConstructor`. This fallback will not be supported after 2023.08.12." );
                     func_string = ReplacedStringViaRecord( func_string, @rec(
                         top_morphism_getter = "MorphismConstructor",
                     ) );
