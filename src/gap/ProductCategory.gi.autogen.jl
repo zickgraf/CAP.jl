@@ -78,11 +78,11 @@ InstallMethod( @__MODULE__,  Components,
         i = i + 1;
     end;
     
-    if IsCapCategoryCell( arg_list[ 1 ] ) || IsCapCategory( arg_list[ 1 ] )
+    if (IsCapCategoryCell( arg_list[ 1 ] ) || IsCapCategory( arg_list[ 1 ] ))
         
         nr_components = Length( arg_list[ 1 ] );
         
-    elseif IsList( arg_list[ 1 ] )
+    elseif (IsList( arg_list[ 1 ] ))
         
         nr_components = Length( arg_list[ 1 ][ 1 ] );
         
@@ -94,19 +94,19 @@ InstallMethod( @__MODULE__,  Components,
         
         current_argument = arg_list[ i ];
         
-        if IsCapCategoryCell( current_argument ) || IsCapCategory( current_argument )
+        if (IsCapCategoryCell( current_argument ) || IsCapCategory( current_argument ))
             
             for j in (1):(nr_components)
                 new_args[ j ][ i ] = current_argument[ j ];
             end;
             
-        elseif IsInt( current_argument )
+        elseif (IsInt( current_argument ))
             
             for j in (1):(nr_components)
                 new_args[ j ][ i ] = current_argument;
             end;
             
-        elseif IsList( current_argument )
+        elseif (IsList( current_argument ))
             
             current_mat = TransposedMat( List( current_argument, Components ) );
             
@@ -143,15 +143,15 @@ end );
         
         current_entry = CAP_INTERNAL_METHOD_NAME_RECORD[current_recname];
         
-        if !ForAll( current_entry.filter_list, filter -> filter ⥉ [ "category", "object", "morphism", "twocell", "integer", "list_of_objects", "list_of_morphisms", "list_of_twocells" ] )
+        if (@not ForAll( current_entry.filter_list, filter -> filter in [ "category", "object", "morphism", "twocell", "integer", "list_of_objects", "list_of_morphisms", "list_of_twocells" ] ))
             continue;
         end;
         
-        if !current_entry.return_type ⥉ [ "object", "morphism", "twocell", "bool" ]
+        if (@not current_entry.return_type in [ "object", "morphism", "twocell", "bool" ])
             continue;
         end;
         
-        if ForAny( category_weight_list, list -> CurrentOperationWeight( list, current_recname ) == infinity )
+        if (ForAny( category_weight_list, list -> CurrentOperationWeight( list, current_recname ) == infinity ))
             continue;
         end;
         
@@ -164,7 +164,7 @@ end );
                 
                 result_list = List( product_args, i -> CallFuncList( ValueGlobal( current_name ), i ) );
                 
-                if ForAll( result_list, IsBool )
+                if (ForAll( result_list, IsBool ))
                     return ForAll( result_list, i -> i == true );
                 end;
                 
@@ -191,12 +191,12 @@ InstallMethodWithCrispCache( ProductOp,
   function( category_list, selector )
     local product_category, namestring;
     
-    if !ForAll( category_list, IsFinalized )
+    if (@not ForAll( category_list, IsFinalized ))
         Error( "all categories for the product must be finalized" );
     end;
     
     ## this is the convention in CapCat
-    if Length( category_list ) == 1
+    if (Length( category_list ) == 1)
       
       return category_list[1];
       
@@ -296,15 +296,15 @@ InstallMethod( @__MODULE__,  /,
           [ IsList, IsCapProductCategory ],
   function( list, category )
 
-    if IsCapCategoryObject( list[ 1 ] )
+    if (IsCapCategoryObject( list[ 1 ] ))
 
       return ProductOp_OnObjects( list, category );
 
-    elseif IsCapCategoryMorphism( list[ 1 ] )
+    elseif (IsCapCategoryMorphism( list[ 1 ] ))
 
       return ProductOp_OnMorphisms( list, category );
 
-    elseif IsCapCategoryTwoCell( list[ 1 ] )
+    elseif (IsCapCategoryTwoCell( list[ 1 ] ))
 
       return ProductOp_OnTwoCells( list, category );
 
@@ -348,7 +348,7 @@ InstallMethod( @__MODULE__,  getindex,
                
   function( category, index )
     
-    if Length( category ) < index
+    if (Length( category ) < index)
         
         Error( "index too high, cannot compute this Component" );
         
@@ -364,7 +364,7 @@ InstallMethod( @__MODULE__,  getindex,
                
   function( cell, index )
     
-    if Length( cell ) < index
+    if (Length( cell ) < index)
         
         Error( "index too high, cannot compute this Component" );
         
@@ -380,7 +380,7 @@ InstallMethod( @__MODULE__,  getindex,
                
   function( cell, index )
     
-    if Length( cell ) < index
+    if (Length( cell ) < index)
         
         Error( "index too high, cannot compute this Component" );
         
@@ -396,7 +396,7 @@ InstallMethod( @__MODULE__,  getindex,
                
   function( cell, index )
     
-    if Length( cell ) < index
+    if (Length( cell ) < index)
         
         Error( "index too high, cannot compute this Component" );
         
@@ -581,7 +581,7 @@ MakeReadWriteGlobal( "Product" );
 ## HEHE!
 Product = function( arg... )
   
-  if ( ForAll( arg, IsCapCategory ) || ForAll( arg, IsCapCategoryObject ) || ForAll( arg, IsCapCategoryMorphism ) ) && Length( arg ) > 0
+  if (( ForAll( arg, IsCapCategory ) || ForAll( arg, IsCapCategoryObject ) || ForAll( arg, IsCapCategoryMorphism ) ) && Length( arg ) > 0)
       
       return ProductOp( arg, arg[ 1 ] );
       
@@ -607,7 +607,7 @@ InstallMethod( @__MODULE__,  IsEqualForCache,
     
     length = Length( list1 );
     
-    if length != Length( list2 )
+    if (length != Length( list2 ))
         
         return false;
         
@@ -630,7 +630,7 @@ InstallMethod( @__MODULE__,  IsEqualForCache,
     
     length = Length( list1 );
     
-    if length != Length( list2 )
+    if (length != Length( list2 ))
         
         return false;
         
@@ -653,7 +653,7 @@ InstallMethod( @__MODULE__,  IsEqualForCache,
     
     length = Length( list1 );
     
-    if length != Length( list2 )
+    if (length != Length( list2 ))
         
         return false;
         
@@ -676,7 +676,7 @@ InstallMethod( @__MODULE__,  IsEqualForCache,
     
     length = Length( list1 );
     
-    if length != Length( list2 )
+    if (length != Length( list2 ))
         
         return false;
         

@@ -80,7 +80,7 @@
   function( arg... )
     local level;
     
-    if Length( arg ) == 0
+    if (Length( arg ) == 0)
         level = 1;
     else
         level = arg[ 1 ];
@@ -121,7 +121,7 @@ end );
     
     name = implication_record.Function;
     
-    if !@IsBound( theorem_record[name] )
+    if (@not @IsBound( theorem_record[name] ))
         
         theorem_record[name] = [ ];
         
@@ -136,7 +136,7 @@ end );
   function( record, arguments, result_object )
     local object, index_list, i, value_function, value;
     
-    if !@IsBound( record.Object )
+    if (@not @IsBound( record.Object ))
         
         object = "result";
         
@@ -146,19 +146,19 @@ end );
         
     end;
     
-    if IsString( object ) && LowercaseString( object ) == "result"
+    if (IsString( object ) && LowercaseString( object ) == "result")
         
         object = [ result_object ];
         
-    elseif IsString( object ) && LowercaseString( object ) == "all"
+    elseif (IsString( object ) && LowercaseString( object ) == "all")
         
         object = arguments;
         
-    elseif IsInt( object )
+    elseif (IsInt( object ))
         
         object = [ arguments[ object ] ];
         
-    elseif IsList( object )
+    elseif (IsList( object ))
         
         index_list = object;
         
@@ -166,11 +166,11 @@ end );
         
         for i in index_list
             
-            if IsInt( i )
+            if (IsInt( i ))
                 
                 object = List( object, j -> j[ i ] );
                 
-            elseif IsString( i ) && LowercaseString( i ) == "all"
+            elseif (IsString( i ) && LowercaseString( i ) == "all")
                 
                 object = @Concatenation( object );
                 
@@ -188,7 +188,7 @@ end );
         
     end;
     
-    if @IsBound( record.ValueFunction )
+    if (@IsBound( record.ValueFunction ))
         
         value_function = record.ValueFunction;
         
@@ -198,7 +198,7 @@ end );
         
     end;
     
-    if @IsBound( record.Value )
+    if (@IsBound( record.Value ))
         
         value = record.Value;
         
@@ -208,7 +208,7 @@ end );
         
     end;
     
-    if !@IsBound( record.compare_function )
+    if (@not @IsBound( record.compare_function ))
         
         return List( object, i -> [ i, value_function, value ] );
         
@@ -228,7 +228,7 @@ end );
           entry, current_source, sanitized_source_list, current_argument_type, i;
     
     
-    if !@IsBound( TheoremRecord( category )[method_name] )
+    if (@not @IsBound( TheoremRecord( category )[method_name] ))
         
         return;
         
@@ -245,7 +245,7 @@ end );
         ## check wether argument list matches here
         current_argument_type = current_theorem.Variable_list;
         
-        if Length( current_argument_type ) != Length( arguments )
+        if (Length( current_argument_type ) != Length( arguments ))
             
             Error( "while installing todo for logical theorems: got ", Length( arguments ), " arguments but expected ", Length( current_argument_type ) );
             
@@ -255,11 +255,11 @@ end );
         
         for i in (1):(Length( current_argument_type ))
             
-            if current_argument_type[ i ] == 0
+            if (current_argument_type[ i ] == 0)
                 continue;
             end;
             
-            if !IsList( arguments[ i ] ) || !Length( arguments[ i ] ) == current_argument_type[ i ]
+            if (!(IsList( arguments[ i ] )) || @not Length( arguments[ i ] ) == current_argument_type[ i ])
                 
                 is_valid_theorem = false;
                 
@@ -269,7 +269,7 @@ end );
             
         end;
         
-        if !is_valid_theorem
+        if (@not is_valid_theorem)
             continue;
         end;
         
@@ -281,12 +281,12 @@ end );
             
             sanitized_source_list = SANITIZE_RECORD( current_source, arguments, result_object );
             
-            if @IsBound( current_source.Type ) && LowercaseString( current_source.Type ) == "testdirect"
+            if (@IsBound( current_source.Type ) && LowercaseString( current_source.Type ) == "testdirect")
                 
                 for sanitized_source in sanitized_source_list
                     
-                    if ( Length( sanitized_source ) == 3 && !sanitized_source[ 2 ]( sanitized_source[ 1 ] ) == sanitized_source[ 3 ] ) ||
-                       ( Length( sanitized_source ) == 4 && !sanitized_source[ 4 ]( sanitized_source[ 2 ]( sanitized_source[ 1 ] ), sanitized_source[ 3 ] ) )
+                    if (( Length( sanitized_source ) == 3 && @not sanitized_source[ 2 ]( sanitized_source[ 1 ] ) == sanitized_source[ 3 ] ) ||
+                       ( Length( sanitized_source ) == 4 && @not sanitized_source[ 4 ]( sanitized_source[ 2 ]( sanitized_source[ 1 ] ), sanitized_source[ 3 ] ) ))
                         
                         is_valid_theorem = false;
                         
@@ -310,7 +310,7 @@ end );
             
         end;
         
-        if is_valid_theorem == false
+        if (is_valid_theorem == false)
             
             @Info( CapLogicInfo, 1, "Failed" );
             
@@ -325,7 +325,7 @@ end );
         ## NO ALL ALLOWED HERE!
         range = range[ 1 ];
         
-        if Length( todo_list_source ) == 0
+        if (Length( todo_list_source ) == 0)
             
             Setter( range[ 2 ] )( range[ 1 ], range[ 3 ] );
             
@@ -375,7 +375,7 @@ end );
     
     INSTALL_PREDICATE_IMPLICATION( category, immediate_record );
     
-    if !@IsBound( category.predicate_implication )
+    if (@not @IsBound( category.predicate_implication ))
         
         category.predicate_implication = [ ];
         
@@ -391,11 +391,11 @@ end );
   function( category, immediate_record )
     local cell_filter;
     
-    if LowercaseString( immediate_record.CellType ) == "obj"
+    if (LowercaseString( immediate_record.CellType ) == "obj")
         
         cell_filter = ObjectFilter( category );
         
-    elseif LowercaseString( immediate_record.CellType ) == "mor"
+    elseif (LowercaseString( immediate_record.CellType ) == "mor")
         
         cell_filter = MorphismFilter( category );
         
@@ -423,8 +423,8 @@ end );
     
     Add( category.logical_implication_files.EvalRules.IsCapCategory, filename );
     
-    if @IsBound( category.logical_implication_files.EvalRules.general_rules_already_read ) &&
-       category.logical_implication_files.EvalRules.general_rules_already_read == true
+    if (@IsBound( category.logical_implication_files.EvalRules.general_rules_already_read ) &&
+       category.logical_implication_files.EvalRules.general_rules_already_read == true)
         
         theorem_list = READ_EVAL_RULE_FILE( filename );
         
@@ -444,7 +444,7 @@ end );
   function( category, rule_record )
     local command;
     
-    if !@IsBound( rule_record.starting_command )
+    if (@not @IsBound( rule_record.starting_command ))
         
         return;
         
@@ -452,13 +452,13 @@ end );
     
     command = rule_record.starting_command ;
     
-    if !@IsBound( category.eval_rules )
+    if (@not @IsBound( category.eval_rules ))
         
         category.eval_rules = @rec( );
         
     end;
     
-    if !@IsBound( category.eval_rules[command] )
+    if (@not @IsBound( category.eval_rules[command] ))
         
         category.eval_rules[command] = [ ];
         

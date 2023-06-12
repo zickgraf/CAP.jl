@@ -41,7 +41,7 @@ CAPAddPrepareFunction( CAP_PREFUNCTION_BINARY_DIRECT_PRODUCT_TO_DIRECT_PRODUCT,
         return function( cat, diagram, projection_number )
           local projection, left_hand_side_diagram, left_hand_side_direct_product, i, current_factor, current_projection;
             
-            if projection_number == 1
+            if (projection_number == 1)
                 projection = IdentityMorphism( diagram[ 1 ] );
             else
                 left_hand_side_diagram = diagram[ (1):(( projection_number - 1 )) ];
@@ -51,7 +51,7 @@ CAPAddPrepareFunction( CAP_PREFUNCTION_BINARY_DIRECT_PRODUCT_TO_DIRECT_PRODUCT,
             end;
             
             for i in (( projection_number + 1 )):(Length( diagram ))
-                if limit_or_colimit == "limit"
+                if (limit_or_colimit == "limit")
                     current_factor = Source( projection );
                 else
                     current_factor = Range( projection );
@@ -59,7 +59,7 @@ CAPAddPrepareFunction( CAP_PREFUNCTION_BINARY_DIRECT_PRODUCT_TO_DIRECT_PRODUCT,
                 
                 current_projection = projection_in_factor_of_binary_direct_product_func( cat, current_factor, diagram[ i ], 1 );
 
-                if limit_or_colimit == "limit"
+                if (limit_or_colimit == "limit")
                     projection = PreCompose( current_projection, projection );
                 else
                     projection = PreCompose( projection, current_projection );

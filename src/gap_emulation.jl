@@ -7,6 +7,24 @@ import Base.getindex
 import Base.copy
 import Base.in
 
+# In GAP, `not` binds loser than anything except `and` and `or`.
+# We emulate this behaviour via a macro. However, a macro binds loser
+# than `&&` or `||`, so we have to manually terminate the macro
+# at the first `&&` or `||`. Additionally, in expressions of the form
+# `a and not b or c`, `@not` would capture `c` and we would get
+# `a and (! b or c)` instead of `(a and ! b) or c`. Thus, we display
+# an error if we encounter an `||` in `@not`.
+macro not(expr)
+	if expr isa Expr && expr.head === :||
+		throw("Found expression of the form `not ... or ...`. This is not supported because `not` in GAP has a different precedence than `!` in Julia. Please use parenthesis, i.e. write `not (...) or ...`.")
+	elseif expr isa Expr && expr.head === :&&
+		esc(:(!($(expr.args[1])) && $(expr.args[2])))
+	else
+		esc(:(!($expr)))
+	end
+end
+
+export @not
 
 function PrintString end
 function DirectSum end
@@ -106,9 +124,6 @@ function NTupleGAP(n, args...)
 end
 
 Iterator = iterate
-
-# we want "in" to bind stronger than "!"
-⥉ = in
 
 struct Fail end
 

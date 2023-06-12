@@ -18,7 +18,7 @@ InstallMethod( @__MODULE__,  DummyCategory,
     category_constructor_options.category_morphism_filter = IsDummyCategoryMorphism;
     category_constructor_options.supports_empty_limits = true;
     
-    if "ObjectConstructor" ⥉ options.list_of_operations_to_install
+    if ("ObjectConstructor" in options.list_of_operations_to_install)
         
         category_constructor_options.object_constructor = function ( cat, object_datum )
             
@@ -28,7 +28,7 @@ InstallMethod( @__MODULE__,  DummyCategory,
         
     end;
     
-    if "MorphismConstructor" ⥉ options.list_of_operations_to_install
+    if ("MorphismConstructor" in options.list_of_operations_to_install)
         
         category_constructor_options.morphism_constructor = function ( cat, source, morphism_datum, range )
             
@@ -38,7 +38,7 @@ InstallMethod( @__MODULE__,  DummyCategory,
         
     end;
     
-    if "ObjectDatum" ⥉ options.list_of_operations_to_install
+    if ("ObjectDatum" in options.list_of_operations_to_install)
         
         category_constructor_options.object_datum = function ( cat, object )
             
@@ -48,7 +48,7 @@ InstallMethod( @__MODULE__,  DummyCategory,
         
     end;
     
-    if "MorphismDatum" ⥉ options.list_of_operations_to_install
+    if ("MorphismDatum" in options.list_of_operations_to_install)
         
         category_constructor_options.morphism_datum = function ( cat, morphism )
             

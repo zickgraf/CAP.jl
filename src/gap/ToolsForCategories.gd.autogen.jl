@@ -59,7 +59,7 @@
 #!  The function searches for the appearance of the strings in symbol list on the function function
 #!  and returns a list of pairs, containing the name of the symbol and the number of appearance.
 #!  If the symbol appears in a loop, the number of appearance is counted times the loop multiple.
-#!  Moreover, if appearances of found strings should be replaced by collections of other strings,
+#!  Moreover, if appearances of found strings should be replaced by collections of other strings,)
 #!  these can be specified in the replacement record.
 @DeclareGlobalFunction( "CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION" );
 
@@ -67,7 +67,7 @@
 #! @Returns merge list
 #! @Description
 #!  The function takes two lists containing pairs of symbols (strings) and multiples.
-#!  The lists are merged that pairs where the string only appears in one list is
+#!  The lists are merged that pairs where the string only appears in one list is)
 #!  added to the return list, if a pair with a string appears in both lists, the resulting
 #!  lists only contains this pair once, with the higher multiple from both lists.
 @DeclareGlobalFunction( "CAP_INTERNAL_MERGE_PRECONDITIONS_LIST" );

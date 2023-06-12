@@ -209,7 +209,7 @@ AddDerivationToCAP( ProjectionInFactorOfDirectSum,
     
     morphisms = List( (1):(Length( list )), function( i )
         
-        if i == projection_number
+        if (i == projection_number)
             
             return IdentityMorphism( cat, list[projection_number] );
             
@@ -237,7 +237,7 @@ AddDerivationToCAP( ProjectionInFactorOfDirectSumWithGivenDirectSum,
     
     morphisms = List( (1):(Length( list )), function( i )
         
-        if i == projection_number
+        if (i == projection_number)
             
             return IdentityMorphism( cat, list[projection_number] );
             
@@ -265,7 +265,7 @@ AddDerivationToCAP( InjectionOfCofactorOfDirectSum,
     
     morphisms = List( (1):(Length( list )), function( i )
         
-        if i == injection_number
+        if (i == injection_number)
             
             return IdentityMorphism( cat, list[injection_number] );
             
@@ -293,7 +293,7 @@ AddDerivationToCAP( InjectionOfCofactorOfDirectSumWithGivenDirectSum,
     
     morphisms = List( (1):(Length( list )), function( i )
         
-        if i == injection_number
+        if (i == injection_number)
             
             return IdentityMorphism( cat, list[injection_number] );
             
@@ -1392,13 +1392,13 @@ AddDerivationToCAP( IsEqualForMorphismsOnMor,
     # why we might (not) want to allow IsEqualForObjects to return fail.
     # In any case, this currently is not officially supported, so CompilerForCAP can ignore this case.
     #% CAP_JIT_DROP_NEXT_STATEMENT
-    if value_1 == fail || value_2 == fail
+    if (value_1 == fail || value_2 == fail)
         
         return fail;
         
     end;
     
-    if value_1 && value_2
+    if (value_1 && value_2)
         
         return IsEqualForMorphisms( cat, morphism_1, morphism_2 );
         
@@ -2043,7 +2043,7 @@ AddDerivationToCAP( RandomMorphismByList,
                     
   function( cat, L )
     
-    if Length( L ) != 2 || !ForAll( L, IsList )
+    if (Length( L ) != 2 || @not ForAll( L, IsList ))
         Error( "the list passed to 'RandomMorphismByList' in ", Name( cat ), " must be a list consisting of two lists!\n" );
     end;
     
@@ -2059,7 +2059,7 @@ AddDerivationToCAP( RandomMorphismByList,
                     
   function( cat, L )
     
-    if Length( L ) != 2 || !ForAll( L, IsList )
+    if (Length( L ) != 2 || @not ForAll( L, IsList ))
         Error( "the list passed to 'RandomMorphismByList' in ", Name( cat ), " must be a list consisting of two lists!\n" );
     end;
     
@@ -2075,7 +2075,7 @@ AddDerivationToCAP( RandomMorphismWithFixedSourceByList,
                     
   function( cat, S, L )
     
-    if Length( L ) != 2 || !ForAll( L, IsList )
+    if (Length( L ) != 2 || @not ForAll( L, IsList ))
         Error( "the list passed to 'RandomMorphismWithFixedSourceByList' in ", Name( cat ), " must be a list consisting of two lists!\n" );
     end;
     
@@ -2091,7 +2091,7 @@ AddDerivationToCAP( RandomMorphismWithFixedRangeByList,
                     
   function( cat, R, L )
     
-    if Length( L ) != 2 || !ForAll( L, IsList )
+    if (Length( L ) != 2 || @not ForAll( L, IsList ))
         Error( "the list passed to 'RandomMorphismWithFixedRangeByList' in ", Name( cat ), " must be a list consisting of two lists!\n" );
     end;
     
@@ -2107,7 +2107,7 @@ AddDerivationToCAP( RandomMorphismByList,
                     
   function( cat, L )
     
-    if Length( L ) != 3 || !ForAll( L, IsList )
+    if (Length( L ) != 3 || @not ForAll( L, IsList ))
         Error( "the list passed to 'RandomMorphismByList' in ", Name( cat ), " must be a list consisting of three lists!\n" );
     end;
     
@@ -2560,7 +2560,7 @@ AddDerivationToCAP( MorphismBetweenDirectSumsWithGivenDirectSums,
   function( cat, S, diagram_S, morphism_matrix, diagram_T, T )
     local test_diagram_product, test_diagram_coproduct;
     
-    if morphism_matrix == [ ] || morphism_matrix[1] == [ ]
+    if (morphism_matrix == [ ] || morphism_matrix[1] == [ ])
         return ZeroMorphism( cat, S, T );
     end;
     
@@ -2675,7 +2675,7 @@ AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsIntoDirectProduct,
     
     number_of_morphisms = Length( diagram );
     
-    if number_of_morphisms == 1
+    if (number_of_morphisms == 1)
         
         return UniversalMorphismIntoTerminalObject( cat, A );
         
@@ -2724,7 +2724,7 @@ AddDerivationToCAP( JointPairwiseDifferencesOfMorphismsFromCoproduct,
     
     number_of_morphisms = Length( diagram );
  
-    if number_of_morphisms == 1
+    if (number_of_morphisms == 1)
         
         return UniversalMorphismFromInitialObject( cat, A );
         
@@ -3074,7 +3074,7 @@ AddDerivationToCAP( LiftOrFail,
     
     l = LiftOrFail( range_cat, a, b );
     
-    if l == fail
+    if (l == fail)
       
       return fail;
       
@@ -3151,7 +3151,7 @@ AddDerivationToCAP( ColiftOrFail,
     
     l = LiftOrFail( range_cat, b, a );
     
-    if l == fail
+    if (l == fail)
       
       return fail;
       
@@ -3224,7 +3224,7 @@ AddDerivationToCAP( LiftOrFail,
     right_divide = SolveLinearSystemInAbCategoryOrFail( cat,
                       left_coefficients, right_coefficients, right_side );
     
-    if right_divide == fail
+    if (right_divide == fail)
       
       return fail;
       
@@ -3294,7 +3294,7 @@ AddDerivationToCAP( ColiftOrFail,
     left_divide = SolveLinearSystemInAbCategoryOrFail( cat,
                       left_coefficients, right_coefficients, right_side );
     
-    if left_divide == fail
+    if (left_divide == fail)
       
       return fail;
       
@@ -3332,7 +3332,7 @@ AddDerivationToCAP( LiftOrFail,
                     
   function( cat, alpha, beta )
     
-    if IsLiftable( cat, alpha, beta )
+    if (IsLiftable( cat, alpha, beta ))
         
         return Lift( cat, alpha, beta );
         
@@ -3352,7 +3352,7 @@ AddDerivationToCAP( ColiftOrFail,
                     
   function( cat, alpha, beta )
     
-    if IsColiftable( cat, alpha, beta )
+    if (IsColiftable( cat, alpha, beta ))
         
         return Colift( cat, alpha, beta );
         
@@ -3372,7 +3372,7 @@ AddDerivationToCAP( SolveLinearSystemInAbCategoryOrFail,
                     
   function( cat, left_coefficients, right_coefficients, right_side )
     
-    if MereExistenceOfSolutionOfLinearSystemInAbCategory( cat, left_coefficients, right_coefficients, right_side )
+    if (MereExistenceOfSolutionOfLinearSystemInAbCategory( cat, left_coefficients, right_coefficients, right_side ))
         
         return SolveLinearSystemInAbCategory( cat, left_coefficients, right_coefficients, right_side );
         
@@ -3416,7 +3416,7 @@ AddDerivationToCAP( ProjectiveDimension,
     
     syzygy_obj = obj;
 
-    while !IsProjective( cat, syzygy_obj )
+    while @not IsProjective( cat, syzygy_obj )
       syzygy_obj = KernelObject( cat, EpimorphismFromSomeProjectiveObject( cat, syzygy_obj ) );
       dim = dim + 1;
     end;
@@ -3439,7 +3439,7 @@ AddDerivationToCAP( InjectiveDimension,
     
     cosyzygy_obj = obj;
 
-    while !IsInjective( cat, cosyzygy_obj )
+    while @not IsInjective( cat, cosyzygy_obj )
       cosyzygy_obj = CokernelObject( cat, MonomorphismIntoSomeInjectiveObject( cat, cosyzygy_obj ) );
       dim = dim + 1;
     end;
@@ -3881,7 +3881,7 @@ AddDerivationToCAP( SolveLinearSystemInAbCategoryOrFail,
     ## the actual computation of the solution
     lift = LiftOrFail( range_cat, nu, H );
     
-    if lift == fail
+    if (lift == fail)
         
         return fail;
         
@@ -4465,7 +4465,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   [ [ RandomObjectByInteger, 1 ] ],
   function( cat, L )
     
-    if Length( L ) != 1 || !IsInt( L[1] )
+    if (Length( L ) != 1 || @not IsInt( L[1] ))
         Error( "the list passed to 'RandomObjectByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
@@ -4478,7 +4478,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   [ [ RandomMorphismWithFixedSourceAndRangeByInteger, 1 ] ],
   function( cat, S, R, L )
     
-    if Length( L ) != 1 || !IsInt( L[1] )
+    if (Length( L ) != 1 || @not IsInt( L[1] ))
         Error( "the list passed to 'RandomMorphismWithFixedSourceAndRangeByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
@@ -4491,7 +4491,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   [ [ RandomMorphismWithFixedSourceByInteger, 1 ] ],
   function( cat, S, L )
     
-    if Length( L ) != 1 || !IsInt( L[1] )
+    if (Length( L ) != 1 || @not IsInt( L[1] ))
         Error( "the list passed to 'RandomMorphismWithFixedSourceByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
@@ -4504,7 +4504,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   [ [ RandomMorphismWithFixedRangeByInteger, 1 ] ],
   function( cat, R, L )
     
-    if Length( L ) != 1 || !IsInt( L[1] )
+    if (Length( L ) != 1 || @not IsInt( L[1] ))
         Error( "the list passed to 'RandomMorphismWithFixedRangeByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
@@ -4517,7 +4517,7 @@ AddFinalDerivationBundle( "Derive all <ByList> random methods from <ByInteger> r
   [ [ RandomMorphismByInteger, 1 ] ],
   function( cat, L )
     
-    if Length( L ) != 1 || !IsInt( L[1] )
+    if (Length( L ) != 1 || @not IsInt( L[1] ))
         Error( "the list passed to 'RandomMorphismByList' in ", Name( cat ), " must consist of only one integer!\n" );
     end;
     
@@ -4675,13 +4675,13 @@ AddFinalDerivationBundle( "Adding BasisOfExternalHom and CoefficientsOfMorphism 
     function( cat )
       local range_cat, required_methods;
       
-      if !( HasIsLinearCategoryOverCommutativeRing( cat ) && IsLinearCategoryOverCommutativeRing( cat ) )
+      if (!( HasIsLinearCategoryOverCommutativeRing( cat ) && IsLinearCategoryOverCommutativeRing( cat ) ))
         
         return false;
         
       end;
       
-      if !HasRangeCategoryOfHomomorphismStructure( cat )
+      if (@not HasRangeCategoryOfHomomorphismStructure( cat ))
         
         return false;
         
@@ -4689,19 +4689,19 @@ AddFinalDerivationBundle( "Adding BasisOfExternalHom and CoefficientsOfMorphism 
       
       range_cat = RangeCategoryOfHomomorphismStructure( cat );
       
-      if IsIdenticalObj( cat, range_cat )
+      if (IsIdenticalObj( cat, range_cat ))
         
         return false;
         
       end;
       
-      if !( HasIsLinearCategoryOverCommutativeRing( range_cat ) && IsLinearCategoryOverCommutativeRing( range_cat ) )
+      if (!( HasIsLinearCategoryOverCommutativeRing( range_cat ) && IsLinearCategoryOverCommutativeRing( range_cat ) ))
         
         return false;
         
       end;
       
-      if !IsIdenticalObj( CommutativeRingOfLinearCategory( cat ), CommutativeRingOfLinearCategory( range_cat ) )
+      if (@not IsIdenticalObj( CommutativeRingOfLinearCategory( cat ), CommutativeRingOfLinearCategory( range_cat ) ))
         
         return false;
         

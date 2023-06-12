@@ -7,7 +7,7 @@
   
   function( category, object_or_fail )
     
-    if object_or_fail == fail
+    if (object_or_fail == fail)
         return;
     end;
     
@@ -19,7 +19,7 @@ end );
   
   function( category, morphism_or_fail )
     
-    if morphism_or_fail == fail
+    if (morphism_or_fail == fail)
         return;
     end;
     
@@ -47,7 +47,7 @@ end );
     
     function_name = record.function_name;
     
-    if !@IsBound( record.installation_name )
+    if (@not @IsBound( record.installation_name ))
         
         CAP_operation = ValueGlobal( function_name );
         
@@ -60,25 +60,25 @@ end );
     add_name = @Concatenation( "Add", function_name );
     add_function = ValueGlobal( add_name );
     
-    if @IsBound( record.pre_function )
+    if (@IsBound( record.pre_function ))
         pre_function = record.pre_function;
     else
         pre_function = function( arg... ) return [ true ]; end;
     end;
 
-    if @IsBound( record.pre_function_full )
+    if (@IsBound( record.pre_function_full ))
         pre_function_full = record.pre_function_full;
     else
         pre_function_full = function( arg... ) return [ true ]; end;
     end;
     
-    if @IsBound( record.redirect_function )
+    if (@IsBound( record.redirect_function ))
         redirect_function = record.redirect_function;
     else
         redirect_function = false;
     end;
     
-    if @IsBound( record.post_function )
+    if (@IsBound( record.post_function ))
         post_function = record.post_function;
     else
         post_function = false;
@@ -86,38 +86,38 @@ end );
     
     filter_list = record.filter_list;
     
-    if record.return_type == "object"
+    if (record.return_type == "object")
         add_value_to_category_function = AddObject;
-    elseif record.return_type == "morphism"
+    elseif (record.return_type == "morphism")
         add_value_to_category_function = AddMorphism;
-    elseif record.return_type == "twocell"
+    elseif (record.return_type == "twocell")
         add_value_to_category_function = AddTwoCell;
-    elseif record.return_type == "object_or_fail"
+    elseif (record.return_type == "object_or_fail")
         add_value_to_category_function = CAP_INTERNAL_ADD_OBJECT_OR_FAIL;
-    elseif record.return_type == "morphism_or_fail"
+    elseif (record.return_type == "morphism_or_fail")
         add_value_to_category_function = CAP_INTERNAL_ADD_MORPHISM_OR_FAIL;
     else
         add_value_to_category_function = ReturnTrue;
     end;
     
     # declare operation with category as first argument and install convenience method
-    if record.install_convenience_without_category
+    if (record.install_convenience_without_category)
         
         replaced_filter_list = CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS( filter_list );
         
-        if filter_list[2] ⥉ [ "object", "morphism", "twocell" ]
+        if (filter_list[2] in [ "object", "morphism", "twocell" ])
             
             get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, @Concatenation( [ CapCategory( arg[1] ) ], arg ) );
             
-        elseif filter_list[2] == "list_of_objects" || filter_list[2] == "list_of_morphisms"
+        elseif (filter_list[2] == "list_of_objects" || filter_list[2] == "list_of_morphisms")
             
             get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, @Concatenation( [ CapCategory( arg[1][1] ) ], arg ) );
             
-        elseif filter_list[3] ⥉ [ "object", "morphism", "twocell" ]
+        elseif (filter_list[3] in [ "object", "morphism", "twocell" ])
             
             get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, @Concatenation( [ CapCategory( arg[2] ) ], arg ) );
             
-        elseif filter_list[4] == "list_of_objects" || filter_list[4] == "list_of_morphisms"
+        elseif (filter_list[4] == "list_of_objects" || filter_list[4] == "list_of_morphisms")
             
             get_convenience_function = oper -> ( arg... ) -> CallFuncList( oper, @Concatenation( [ CapCategory( arg[3][1] ) ], arg ) );
             
@@ -133,13 +133,13 @@ end );
     
     # convenience for Julia lists
     #= comment for Julia
-    if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" )
+    if (IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ))
         
-        if "list_of_objects" ⥉ filter_list || "list_of_morphisms" ⥉ filter_list || "list_of_twocells" ⥉ filter_list
+        if ("list_of_objects" in filter_list || "list_of_morphisms" in filter_list || "list_of_twocells" in filter_list)
             
             replaced_filter_list = CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA( filter_list );
             
-            @Assert( 0, ValueGlobal( "IsJuliaObject" ) ⥉ replaced_filter_list );
+            @Assert( 0, ValueGlobal( "IsJuliaObject" ) in replaced_filter_list );
             
             InstallOtherMethod( CAP_operation,
                     replaced_filter_list,
@@ -194,11 +194,11 @@ end );
             input_sanity_check_functions, output_human_readable_identifier_list, output_sanity_check_function,
             output_data_type, assert_is_value_of_return_type, install_func, name, current_function_number, i;
         
-        if IsFinalized( category )
+        if (IsFinalized( category ))
             Error( "cannot add methods anymore, category is finalized" );
         end;
         
-        if Length( method_list ) == 0
+        if (Length( method_list ) == 0)
             Error( "you must pass at least one function to the add method" );
         end;
         
@@ -206,7 +206,7 @@ end );
         
         is_final_derivation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "IsFinalDerivation", false );
         
-        if is_final_derivation
+        if (is_final_derivation)
             
             @Assert( 0, is_derivation );
             
@@ -217,14 +217,14 @@ end );
         
         is_precompiled_derivation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "IsPrecompiledDerivation", false );
         
-        if Length( Positions( [ is_derivation, is_final_derivation, is_precompiled_derivation ], true ) ) > 1
+        if (Length( Positions( [ is_derivation, is_final_derivation, is_precompiled_derivation ], true ) ) > 1)
             
             Error( "at most one of the options `IsDerivation`, `IsFinalDerivation` and `IsPrecompiledDerivation` may be set" );
             
         end;
         
         # prepare for the checks in Finalize
-        if !@IsBound( category.initially_known_categorical_properties )
+        if (@not @IsBound( category.initially_known_categorical_properties ))
             
             category.initially_known_categorical_properties = ShallowCopy( ListKnownCategoricalProperties( category ) );
             
@@ -232,21 +232,21 @@ end );
             
         end;
         
-        if weight == -1
+        if (weight == -1)
             weight = 100;
         end;
         
         # If there already is a faster method: do nothing but display a warning because this should not happen usually.
-        if weight > CurrentOperationWeight( category.derivations_weight_list, function_name )
+        if (weight > CurrentOperationWeight( category.derivations_weight_list, function_name ))
             
             # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
             #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
             # * There are some derivations of weight 1 for thin categories which are triggered immediately and which CategoryConstructor tries to overwrite with weight 100.
-            if !WasCreatedAsOppositeCategory( category ) && CurrentOperationWeight( category.derivations_weight_list, function_name ) != 1
+            if (@not WasCreatedAsOppositeCategory( category ) && CurrentOperationWeight( category.derivations_weight_list, function_name ) != 1)
                 
                 Print( "WARNING: Ignoring a function added for ", function_name, " with weight ", weight, " to \"", Name( category ), "\" because there already is a function installed with weight ", CurrentOperationWeight( category.derivations_weight_list, function_name ), "." );
                 
-                if is_precompiled_derivation
+                if (is_precompiled_derivation)
                     
                     Print( " Probably you have to rerun the precompilation to adjust the weights in the precompiled code." );
                     
@@ -261,16 +261,16 @@ end );
         end;
         
         # Display a warning when overwriting primitive operations with derivations.
-        if (is_derivation || is_final_derivation || is_precompiled_derivation) && @IsBound( category.primitive_operations[function_name] ) && category.primitive_operations[function_name]
+        if ((is_derivation || is_final_derivation || is_precompiled_derivation) && @IsBound( category.primitive_operations[function_name] ) && category.primitive_operations[function_name])
             
             # * Not all derivations are properly dualized, so it can happen that a derivation for the dual of an operation is cheaper then the operation.
             #   This would automatically be fixed by https://github.com/homalg-project/CAP_project/issues/1078.
             # * There is a test in Locales creating a category via CategoryConstructor (which uses weight 100) and then installs a really cheap method for UniqueMorphism which triggers a bunch of cheap derivations.
-            if !WasCreatedAsOppositeCategory( category ) && weight > 4
+            if (@not WasCreatedAsOppositeCategory( category ) && weight > 4)
                 
                 Print( "WARNING: Overriding a function for ", function_name, " primitively added to \"", Name( category ), "\" with a derivation." );
                 
-                if is_precompiled_derivation
+                if (is_precompiled_derivation)
                     
                     Print( " Probably you have to rerun the precompilation to adjust the weights in the precompiled code." );
                     
@@ -286,7 +286,7 @@ end );
         
         ## Nr arguments sanity check
         
-        if !category.category_as_first_argument ⥉ [ false, true ]
+        if (@not category.category_as_first_argument in [ false, true ])
             
             Print(
                 "WARNING: Please set the component `category_as_first_argument` of the category with name \"", Name( category ), "\" explicitly to `true` or `false`. ",
@@ -300,7 +300,7 @@ end );
         # backwards compatibility for categories with `category.category_as_first_argument == false`
         needs_wrapping = category.category_as_first_argument == false && !(is_derivation || is_final_derivation);
         
-        if needs_wrapping
+        if (needs_wrapping)
             
             number_of_proposed_arguments = Length( filter_list ) - 1;
             
@@ -314,16 +314,16 @@ end );
             
             current_function_argument_number = NumberArgumentsFunction( method_list[ current_function_number ][ 1 ] );
             
-            if current_function_argument_number >= 0 && current_function_argument_number != number_of_proposed_arguments
+            if (current_function_argument_number >= 0 && current_function_argument_number != number_of_proposed_arguments)
                 Error( "In ", add_name, ": given function ", StringGAP( current_function_number ), " has ", StringGAP( current_function_argument_number ),
                        " arguments but should have ", StringGAP( number_of_proposed_arguments ) );
             end;
             
-            if !needs_wrapping
+            if (@not needs_wrapping)
                 
                 current_additional_filter_list_length = Length( method_list[ current_function_number ][ 2 ] );
                 
-                if current_additional_filter_list_length > 0 && current_additional_filter_list_length != number_of_proposed_arguments
+                if (current_additional_filter_list_length > 0 && current_additional_filter_list_length != number_of_proposed_arguments)
                     Error( "In ", add_name, ": the additional filter list of given function ", StringGAP( current_function_number ), " has length ",
                            StringGAP( current_additional_filter_list_length ), " but should have length ", StringGAP( number_of_proposed_arguments ), " (or 0)" );
                 end;
@@ -332,7 +332,7 @@ end );
                 
                 method_list[ current_function_number ][ 1 ] = CAP_INTERNAL_CREATE_NEW_FUNC_WITH_ONE_MORE_ARGUMENT_WITH_RETURN( method_list[ current_function_number ][ 1 ] );
                 
-                if !IsEmpty( method_list[ current_function_number ][ 2 ] )
+                if (@not IsEmpty( method_list[ current_function_number ][ 2 ] ))
                     
                     method_list[ current_function_number ][ 2 ] = @Concatenation( [ IsCapCategory ], method_list[ current_function_number ][ 2 ] );
                     
@@ -350,7 +350,7 @@ end );
             
             data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter_string, category );
             
-            if data_type != fail
+            if (data_type != fail)
                 
                 return CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type, [ "the ", i, "-th argument of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" ] );
                 
@@ -365,7 +365,7 @@ end );
         # prepare output sanity check
         output_human_readable_identifier_list = [ "the result of the function \033[1m", record.function_name, "\033[0m of the category named \033[1m", Name( category ), "\033[0m" ];
         
-        if EndsWith( record.return_type, "_or_fail" )
+        if (EndsWith( record.return_type, "_or_fail" ))
             
             output_data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( record.return_type[(1):(Length( record.return_type ) - 8)], category );
             
@@ -375,15 +375,15 @@ end );
             
         end;
         
-        if output_data_type != fail
+        if (output_data_type != fail)
             
             assert_is_value_of_return_type = CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( output_data_type, output_human_readable_identifier_list );
             
-            if EndsWith( record.return_type, "_or_fail" )
+            if (EndsWith( record.return_type, "_or_fail" ))
                 
                 output_sanity_check_function = function( result )
                     
-                    if result != fail
+                    if (result != fail)
                         
                         assert_is_value_of_return_type( result );
                         
@@ -410,7 +410,7 @@ end );
             
             new_filter_list = CAP_INTERNAL_MERGE_FILTER_LISTS( replaced_filter_list, additional_filters );
             
-            if category.overhead
+            if (category.overhead)
                 
                 InstallMethodWithCache( CAP_operation,
                                 new_filter_list,
@@ -418,7 +418,7 @@ end );
                   function( arg... )
                     local redirect_return, pre_func_return, collect_timing_statistics, start_time, result, end_time, i;
                     
-                    if !IsFinalized( category ) && !category.primitive_operations[function_name]
+                    if (@not IsFinalized( category ) && @not category.primitive_operations[function_name])
                         
                         Print(
                             "WARNING: You are calling an operation in an unfinalized category with name \"", Name( category ),
@@ -427,38 +427,38 @@ end );
                         
                     end;
                     
-                    if redirect_function != false
+                    if (redirect_function != false)
                         redirect_return = CallFuncList( redirect_function, arg );
-                        if redirect_return[ 1 ] == true
-                            if category.predicate_logic
+                        if (redirect_return[ 1 ] == true)
+                            if (category.predicate_logic)
                                 INSTALL_TODO_FOR_LOGICAL_THEOREMS( record.function_name, arg[(2):(Length( arg ))], redirect_return[ 2 ], category );
                             end;
                             return redirect_return[ 2 ];
                         end;
                     end;
                     
-                    if category.input_sanity_check_level > 0
+                    if (category.input_sanity_check_level > 0)
                         for i in (1):(Length( input_sanity_check_functions ))
                             input_sanity_check_functions[ i ]( arg[ i ] );
                         end;
                         
                         pre_func_return = CallFuncList( pre_function, arg );
-                        if pre_func_return[ 1 ] == false
+                        if (pre_func_return[ 1 ] == false)
                             CAP_INTERNAL_DISPLAY_ERROR_FOR_FUNCTION_OF_CATEGORY( record.function_name, category, pre_func_return[ 2 ] );
                         end;
                         
-                        if category.input_sanity_check_level > 1
+                        if (category.input_sanity_check_level > 1)
                             pre_func_return = CallFuncList( pre_function_full, arg );
-                            if pre_func_return[ 1 ] == false
+                            if (pre_func_return[ 1 ] == false)
                                 CAP_INTERNAL_DISPLAY_ERROR_FOR_FUNCTION_OF_CATEGORY( record.function_name, category, pre_func_return[ 2 ] );
                             end;
                         end;
                         
                     end;
                     
-                    collect_timing_statistics = category.timing_statistics_enabled && !is_derivation && !is_final_derivation;
+                    collect_timing_statistics = category.timing_statistics_enabled && @not is_derivation && @not is_final_derivation;
                     
-                    if collect_timing_statistics
+                    if (collect_timing_statistics)
                         
                         start_time = Runtime( );
                         
@@ -466,7 +466,7 @@ end );
                     
                     result = CallFuncList( func_to_install, arg );
                     
-                    if collect_timing_statistics
+                    if (collect_timing_statistics)
                         
                         end_time = Runtime( );
                         
@@ -474,19 +474,19 @@ end );
                         
                     end;
                     
-                    if category.predicate_logic
+                    if (category.predicate_logic)
                         INSTALL_TODO_FOR_LOGICAL_THEOREMS( record.function_name, arg[(2):(Length( arg ))], result, category );
                     end;
                     
-                    if !is_derivation && !is_final_derivation
-                        if category.add_primitive_output
+                    if (@not is_derivation && @not is_final_derivation)
+                        if (category.add_primitive_output)
                             add_value_to_category_function( category, result );
-                        elseif category.output_sanity_check_level > 0
+                        elseif (category.output_sanity_check_level > 0)
                             output_sanity_check_function( result );
                         end;
                     end;
                     
-                    if post_function != false
+                    if (post_function != false)
                         
                         CallFuncList( post_function, @Concatenation( arg, [ result ] ) );
                         
@@ -511,13 +511,13 @@ end );
             
         end;
         
-        if !@IsBound( category.added_functions[function_name] )
+        if (@not @IsBound( category.added_functions[function_name] ))
             
             category.added_functions[function_name] = [ ];
             
         end;
         
-        if !@IsBound( category.timing_statistics[function_name] )
+        if (@not @IsBound( category.timing_statistics[function_name] ))
             
             category.timing_statistics[function_name] = [ ];
             
@@ -528,17 +528,17 @@ end );
             name = Name( category );
             
             # set name for debugging purposes
-            if NameFunction( i[ 1 ] ) ⥉ [ "unknown", "_EVALSTRINGTMP" ]
+            if (NameFunction( i[ 1 ] ) in [ "unknown", "_EVALSTRINGTMP" ])
                 
-                if is_derivation
+                if (is_derivation)
                     
                     SetNameFunction( i[ 1 ], @Concatenation( "Derivation (first added to ", name, ") of ", function_name ) );
                     
-                elseif is_final_derivation
+                elseif (is_final_derivation)
                     
                     SetNameFunction( i[ 1 ], @Concatenation( "Final derivation (first added to ", name, ") of ", function_name ) );
                     
-                elseif is_precompiled_derivation
+                elseif (is_precompiled_derivation)
                     
                     SetNameFunction( i[ 1 ], @Concatenation( "Precompiled derivation added to ", name, " for ", function_name ) );
                     
@@ -554,7 +554,7 @@ end );
             
         end;
         
-        if !is_derivation
+        if (@not is_derivation)
             
             # Final derivations are not handled by the original derivation mechanism and are thus just like primitive operations for it.
             # make sure to reset options
@@ -562,7 +562,7 @@ end );
             
         end;
         
-        if is_derivation || is_final_derivation || is_precompiled_derivation
+        if (is_derivation || is_final_derivation || is_precompiled_derivation)
             
             category.primitive_operations[function_name] = false;
             
@@ -602,11 +602,11 @@ end );
         )
     ) );
     
-    if with_given_object_position == "Source"
+    if (with_given_object_position == "Source")
         
         with_given_arguments_strings = @Concatenation( without_given_arguments_names, [ without_given_rec.output_source_getter_string ] );
         
-        if !@IsBound( without_given_rec.output_source_getter_preconditions )
+        if (@not @IsBound( without_given_rec.output_source_getter_preconditions ))
             
             Print( "WARNING: Cannot install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is not set.\n" );
             return;
@@ -615,11 +615,11 @@ end );
         
         additional_preconditions = without_given_rec.output_source_getter_preconditions;
         
-    elseif with_given_object_position == "Range"
+    elseif (with_given_object_position == "Range")
         
         with_given_arguments_strings = @Concatenation( without_given_arguments_names, [ without_given_rec.output_range_getter_string ] );
         
-        if !@IsBound( without_given_rec.output_range_getter_preconditions )
+        if (@not @IsBound( without_given_rec.output_range_getter_preconditions ))
             
             Print( "WARNING: Cannot install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is not set.\n" );
             return;
@@ -628,7 +628,7 @@ end );
         
         additional_preconditions = without_given_rec.output_range_getter_preconditions;
         
-    elseif with_given_object_position == "both"
+    elseif (with_given_object_position == "both")
         
         with_given_arguments_strings = @Concatenation(
             [ without_given_arguments_names[1] ],
@@ -637,14 +637,14 @@ end );
             [ without_given_rec.output_range_getter_string ]
         );
         
-        if !@IsBound( without_given_rec.output_source_getter_preconditions )
+        if (@not @IsBound( without_given_rec.output_source_getter_preconditions ))
             
             Print( "WARNING: Cannot install with given derivation pair for ", without_given_name, " because <without_given_rec.output_source_getter_preconditions> is not set.\n" );
             return;
             
         end;
         
-        if !@IsBound( without_given_rec.output_range_getter_preconditions )
+        if (@not @IsBound( without_given_rec.output_range_getter_preconditions ))
             
             Print( "WARNING: Cannot install with given derivation pair for ", without_given_name, " because <without_given_rec.output_range_getter_preconditions> is not set.\n" );
             return;
@@ -658,7 +658,7 @@ end );
             
             pos = PositionProperty( additional_preconditions, y -> y[1] == x[1] );
             
-            if pos == fail
+            if (pos == fail)
                 
                 Add( additional_preconditions, x );
                 
@@ -716,7 +716,7 @@ end );
         
         current_rec = record[current_recname];
         
-        if current_rec.is_with_given
+        if (current_rec.is_with_given)
             
             without_given_rec = record[current_rec.with_given_without_given_name_pair[1]];
             with_given_rec = record[current_rec.with_given_without_given_name_pair[2]];
@@ -742,7 +742,7 @@ end );
         
         current_rec = record[current_recname];
         
-        if !@IsBound( current_rec.function_name )
+        if (@not @IsBound( current_rec.function_name ))
             
             Error( "the record has no entry `function_name`, probably you forgot to call CAP_INTERNAL_ENHANCE_NAME_RECORD" );
             

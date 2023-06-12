@@ -9,7 +9,7 @@
     local list_of_mathematical_properties, list_of_potential_algorithmic_properties,
           list_of_algorithmic_properties, list_of_maximal_algorithmic_properties, property, result;
     
-    if !IsCapCategory( category )
+    if (@not IsCapCategory( category ))
         Error( "first argument must be a category" );
         return;
     end;
@@ -24,7 +24,7 @@
     
     list_of_maximal_algorithmic_properties = MaximalObjects( list_of_algorithmic_properties, ( p1, p2 ) ->
                                                IsSubset( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p2], CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p1] ) ||
-                                               p1 ⥉ ListImpliedFilters( ValueGlobal( p2 ) ) );
+                                               p1 in ListImpliedFilters( ValueGlobal( p2 ) ) );
     
     StableSortBy( list_of_maximal_algorithmic_properties, p -> Length( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[p] ) );
     
@@ -32,7 +32,7 @@
     result = @Concatenation( result, " primitive operations were used to derive " );
     result = @Concatenation( result, StringGAP( Length( ListInstalledOperationsOfCategory( category ) ) ) );
     result = @Concatenation( result, " operations for this category" );
-    if !IsEmpty( list_of_maximal_algorithmic_properties )
+    if (@not IsEmpty( list_of_maximal_algorithmic_properties ))
         result = @Concatenation( result, " which algorithmically" );
     end;
     for property in list_of_maximal_algorithmic_properties
@@ -42,10 +42,10 @@
     
     list_of_mathematical_properties = Difference( list_of_mathematical_properties, list_of_algorithmic_properties );
     
-    list_of_mathematical_properties = MaximalObjects( list_of_mathematical_properties, ( p1, p2 ) -> p1 ⥉ ListImpliedFilters( ValueGlobal( p2 ) ) );
+    list_of_mathematical_properties = MaximalObjects( list_of_mathematical_properties, ( p1, p2 ) -> p1 in ListImpliedFilters( ValueGlobal( p2 ) ) );
     
-    if !IsEmpty( list_of_mathematical_properties )
-        if !IsEmpty( list_of_algorithmic_properties )
+    if (@not IsEmpty( list_of_mathematical_properties ))
+        if (@not IsEmpty( list_of_algorithmic_properties ))
             result = @Concatenation( result, "\nand furthermore" );
         else
             result = @Concatenation( result, " which" );
@@ -55,7 +55,7 @@
     for property in list_of_mathematical_properties
         result = @Concatenation( result, "\n* " );
         result = @Concatenation( result, property );
-        if property ⥉ Difference( list_of_potential_algorithmic_properties, list_of_algorithmic_properties )
+        if (property in Difference( list_of_potential_algorithmic_properties, list_of_algorithmic_properties ))
             result = @Concatenation( result, " (but not yet algorithmically)" );
         end;
     end;

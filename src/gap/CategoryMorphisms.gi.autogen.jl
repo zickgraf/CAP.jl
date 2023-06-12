@@ -66,7 +66,7 @@ InstallMethod( @__MODULE__,  Add,
     
     filter = MorphismFilter( category );
     
-    if !filter( morphism )
+    if (@not filter( morphism ))
         
         SetFilterObj( morphism, filter );
         
@@ -76,7 +76,7 @@ InstallMethod( @__MODULE__,  Add,
     
     AddObject( category, Range( morphism ) );
     
-    if category.predicate_logic
+    if (category.predicate_logic)
         
         INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Source", [ morphism ], Source( morphism ), category );
         
@@ -84,9 +84,9 @@ InstallMethod( @__MODULE__,  Add,
       
     end;
     
-    if HasCapCategory( morphism )
+    if (HasCapCategory( morphism ))
         
-        if IsIdenticalObj( CapCategory( morphism ), category )
+        if (IsIdenticalObj( CapCategory( morphism ), category ))
             
             return;
             
@@ -202,17 +202,17 @@ function( q, mor )
     
     ring = CommutativeRingOfLinearCategory( cat );
     
-    if IsIdenticalObj( ring, Integers ) || IsIdenticalObj( ring, Rationals )
+    if (IsIdenticalObj( ring, Integers ) || IsIdenticalObj( ring, Rationals ))
         
         r = q;
         
     else
         
-        if @IsBound( ring.interpret_rationals_func )
+        if (@IsBound( ring.interpret_rationals_func ))
             
             r = ring.interpret_rationals_func( q );
             
-            if r == fail
+            if (r == fail)
                 
                 Error( "cannot interpret ", StringGAP( q ), " as an element of the commutative ring of ", Name( cat ) );
                 
@@ -249,13 +249,13 @@ InstallMethod( @__MODULE__,  AddMorphismRepresentation,
                
   function( category, representation )
     
-    if !IsSpecializationOfFilter( IsCapCategoryMorphism, representation )
+    if (@not IsSpecializationOfFilter( IsCapCategoryMorphism, representation ))
         
         Error( "the morphism representation must imply IsCapCategoryMorphism" );
         
     end;
     
-    if @IsBound( category.initially_known_categorical_properties )
+    if (@IsBound( category.initially_known_categorical_properties ))
         
         Error( "calling AddMorphismRepresentation after adding functions to the category is not supported" );
         
@@ -307,7 +307,7 @@ InstallMethod( @__MODULE__,  RandomMorphism,
     
     objectified_morphism = CallFuncList( ObjectifyWithAttributes, arg_list );
     
-    if category.predicate_logic
+    if (category.predicate_logic)
         INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Source", [ objectified_morphism ], source, category );
         INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Range", [ objectified_morphism ], range, category );
     end;
@@ -337,7 +337,7 @@ end );
     
     objectified_morphism = CallFuncList( ObjectifyWithAttributes, arg_list );
     
-    if category.predicate_logic
+    if (category.predicate_logic)
         INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Source", [ objectified_morphism ], source, category );
         INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Range", [ objectified_morphism ], range, category );
     end;
@@ -399,14 +399,14 @@ InstallMethod( @__MODULE__,  IsEqualForMorphisms,
 
   function( cat, morphism_1, morphism_2 )
     
-    if !HasCapCategory( morphism_1 )
+    if (@not HasCapCategory( morphism_1 ))
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
     end;
-    if !HasCapCategory( morphism_2 )
+    if (@not HasCapCategory( morphism_2 ))
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
     end;
     
-    if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
+    if (@not IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) ))
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
     else
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsEqualForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
@@ -420,14 +420,14 @@ InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
 
   function( cat, morphism_1, morphism_2 )
     
-    if !HasCapCategory( morphism_1 )
+    if (@not HasCapCategory( morphism_1 ))
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
     end;
-    if !HasCapCategory( morphism_2 )
+    if (@not HasCapCategory( morphism_2 ))
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
     end;
     
-    if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
+    if (@not IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) ))
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
     else
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsCongruentForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
@@ -441,12 +441,12 @@ InstallMethod( @__MODULE__,  ==,
                
   function( morphism_1, morphism_2 )
     
-    if CapCategory( morphism_1 ).input_sanity_check_level > 0 || CapCategory( morphism_2 ).input_sanity_check_level > 0 
-        if !IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) )
+    if (CapCategory( morphism_1 ).input_sanity_check_level > 0 || CapCategory( morphism_2 ).input_sanity_check_level > 0 )
+        if (@not IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) ))
             Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
         end;
     end;
-    if !IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) ) || !IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) )
+    if (!(IsEqualForObjects( Source( morphism_1 ), Source( morphism_2 ) )) || @not IsEqualForObjects( Range( morphism_1 ), Range( morphism_2 ) ))
         
         return false;
         
@@ -470,7 +470,7 @@ end );
         
     end;
     
-    if @IsBound( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS )
+    if (@IsBound( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS ))
         
         for i in category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS
             
@@ -488,13 +488,13 @@ InstallMethod( @__MODULE__,  AddPropertyToMatchAtIsCongruentForMorphisms,
                
   function( category, name )
     
-    if !@IsBound( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS )
+    if (@not @IsBound( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS ))
         
         category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS = [ ];
         
     end;
     
-    if Position( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS, name ) == fail
+    if (Position( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS, name ) == fail)
         
         Add( category.PROPAGATION_LIST_FOR_EQUAL_MORPHISMS, name );
         

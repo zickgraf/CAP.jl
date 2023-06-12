@@ -126,7 +126,7 @@ InstallMethod( @__MODULE__,  DirectSumOp,
     
     diagram = category_and_diagram[2];
     
-    if !( @IsBound( category.supports_empty_limits ) && category.supports_empty_limits == true ) && diagram == [ ]
+    if (!( @IsBound( category.supports_empty_limits ) && category.supports_empty_limits == true ) && diagram == [ ])
         return ZeroObject( category );
     end;
     
@@ -160,7 +160,7 @@ InstallMethod( @__MODULE__,  MorphismBetweenDirectSums,
     
     nr_rows = Size( morphism_matrix );
     
-    if nr_rows == 0
+    if (nr_rows == 0)
         
         Error( "The given matrix must not be empty" );
         
@@ -168,7 +168,7 @@ InstallMethod( @__MODULE__,  MorphismBetweenDirectSums,
     
     nr_cols = Size( morphism_matrix[1] );
     
-    if nr_cols == 0
+    if (nr_cols == 0)
         
         Error( "The given matrix must not be empty" );
         
@@ -190,7 +190,7 @@ InstallMethod( @__MODULE__,  MorphismBetweenDirectSums,
     
     nr_rows = Size( morphism_matrix );
     
-    if nr_rows == 0
+    if (nr_rows == 0)
         
         Error( "The given matrix must not be empty" );
         
@@ -198,7 +198,7 @@ InstallMethod( @__MODULE__,  MorphismBetweenDirectSums,
     
     nr_cols = Size( morphism_matrix[1] );
     
-    if nr_cols == 0
+    if (nr_cols == 0)
         
         Error( "The given matrix must not be empty" );
         
@@ -226,24 +226,24 @@ end );
   
   function( arg... )
     
-    if IsCapCategory( arg[1] )
+    if (IsCapCategory( arg[1] ))
         
         return CallFuncList( EqualizerOp, arg );
         
     end;
     
-    if Length( arg ) == 1 &&
+    if (Length( arg ) == 1 &&
        IsList( arg[1] ) &&
-       ForAll( arg[1], IsCapCategoryMorphism )
+       ForAll( arg[1], IsCapCategoryMorphism ))
        
        return EqualizerOp( CapCategory( arg[1][1] ), arg[1] );
        
     end;
     
-    if Length( arg ) == 2 &&
+    if (Length( arg ) == 2 &&
        IsCapCategoryObject( arg[1] ) &&
        IsList( arg[2] ) &&
-       ForAll( arg[2], IsCapCategoryMorphism )
+       ForAll( arg[2], IsCapCategoryMorphism ))
        
        return EqualizerOp( CapCategory( arg[1] ), arg[1], arg[2] );
        
@@ -259,7 +259,7 @@ InstallMethod( @__MODULE__,  EqualizerOp,
         
   function ( list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -274,7 +274,7 @@ InstallMethod( @__MODULE__,  EqualizerOp,
         
   function ( cat, list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -290,7 +290,7 @@ InstallMethod( @__MODULE__,  EmbeddingOfEqualizer,
         
   function ( list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -305,7 +305,7 @@ InstallMethod( @__MODULE__,  EmbeddingOfEqualizer,
         
   function ( cat, list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -321,7 +321,7 @@ InstallMethod( @__MODULE__,  EmbeddingOfEqualizerWithGivenEqualizer,
         
   function ( list_of_morphisms, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -336,7 +336,7 @@ InstallMethod( @__MODULE__,  EmbeddingOfEqualizerWithGivenEqualizer,
         
   function ( cat, list_of_morphisms, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -352,7 +352,7 @@ InstallMethod( @__MODULE__,  MorphismFromEqualizerToSink,
         
   function ( list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -367,7 +367,7 @@ InstallMethod( @__MODULE__,  MorphismFromEqualizerToSink,
         
   function ( cat, list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -383,7 +383,7 @@ InstallMethod( @__MODULE__,  MorphismFromEqualizerToSinkWithGivenEqualizer,
         
   function ( list_of_morphisms, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -398,7 +398,7 @@ InstallMethod( @__MODULE__,  MorphismFromEqualizerToSinkWithGivenEqualizer,
         
   function ( cat, list_of_morphisms, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -414,7 +414,7 @@ InstallMethod( @__MODULE__,  UniversalMorphismIntoEqualizer,
         
   function ( list_of_morphisms, tau )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -429,7 +429,7 @@ InstallMethod( @__MODULE__,  UniversalMorphismIntoEqualizer,
         
   function ( cat, list_of_morphisms, tau )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -445,7 +445,7 @@ InstallMethod( @__MODULE__,  UniversalMorphismIntoEqualizerWithGivenEqualizer,
         
   function ( list_of_morphisms, tau, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -460,7 +460,7 @@ InstallMethod( @__MODULE__,  UniversalMorphismIntoEqualizerWithGivenEqualizer,
         
   function ( cat, list_of_morphisms, tau, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -485,15 +485,15 @@ end );
   
   function( arg... )
     
-    if IsCapCategory( arg[1] )
+    if (IsCapCategory( arg[1] ))
         
         return CallFuncList( FiberProductOp, arg );
         
     end;
     
-    if Length( arg ) == 1 &&
+    if (Length( arg ) == 1 &&
        IsList( arg[1] ) &&
-       ForAll( arg[1], IsCapCategoryMorphism )
+       ForAll( arg[1], IsCapCategoryMorphism ))
        
        return FiberProductOp( CapCategory( arg[1][1] ), arg[1] );
        
@@ -577,24 +577,24 @@ CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
   
   function( arg... )
     
-    if IsCapCategory( arg[1] )
+    if (IsCapCategory( arg[1] ))
         
         return CallFuncList( CoequalizerOp, arg );
         
     end;
     
-    if Length( arg ) == 1 &&
+    if (Length( arg ) == 1 &&
        IsList( arg[1] ) &&
-       ForAll( arg[1], IsCapCategoryMorphism )
+       ForAll( arg[1], IsCapCategoryMorphism ))
        
        return CoequalizerOp( CapCategory( arg[1][1] ), arg[1] );
        
      end;
     
-    if Length( arg ) == 2 &&
+    if (Length( arg ) == 2 &&
        IsCapCategoryObject( arg[2] ) &&
        IsList( arg[2] ) &&
-       ForAll( arg[2], IsCapCategoryMorphism )
+       ForAll( arg[2], IsCapCategoryMorphism ))
        
        return CoequalizerOp( CapCategory( arg[1] ), arg[1], arg[2] );
        
@@ -610,7 +610,7 @@ InstallMethod( @__MODULE__,  CoequalizerOp,
         
   function ( list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -625,7 +625,7 @@ InstallMethod( @__MODULE__,  CoequalizerOp,
         
   function ( cat, list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -641,7 +641,7 @@ InstallMethod( @__MODULE__,  ProjectionOntoCoequalizer,
         
   function ( list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -656,7 +656,7 @@ InstallMethod( @__MODULE__,  ProjectionOntoCoequalizer,
         
   function ( cat, list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -672,7 +672,7 @@ InstallMethod( @__MODULE__,  ProjectionOntoCoequalizerWithGivenCoequalizer,
         
   function ( list_of_morphisms, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -687,7 +687,7 @@ InstallMethod( @__MODULE__,  ProjectionOntoCoequalizerWithGivenCoequalizer,
         
   function ( cat, list_of_morphisms, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -703,7 +703,7 @@ InstallMethod( @__MODULE__,  MorphismFromSourceToCoequalizer,
         
   function ( list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -718,7 +718,7 @@ InstallMethod( @__MODULE__,  MorphismFromSourceToCoequalizer,
         
   function ( cat, list_of_morphisms )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -734,7 +734,7 @@ InstallMethod( @__MODULE__,  MorphismFromSourceToCoequalizerWithGivenCoequalizer
         
   function ( list_of_morphisms, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -749,7 +749,7 @@ InstallMethod( @__MODULE__,  MorphismFromSourceToCoequalizerWithGivenCoequalizer
         
   function ( cat, list_of_morphisms, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -765,7 +765,7 @@ InstallMethod( @__MODULE__,  UniversalMorphismFromCoequalizer,
         
   function ( list_of_morphisms, tau )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -780,7 +780,7 @@ InstallMethod( @__MODULE__,  UniversalMorphismFromCoequalizer,
         
   function ( cat, list_of_morphisms, tau )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -796,7 +796,7 @@ InstallMethod( @__MODULE__,  UniversalMorphismFromCoequalizerWithGivenCoequalize
         
   function ( list_of_morphisms, tau, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         
@@ -811,7 +811,7 @@ InstallMethod( @__MODULE__,  UniversalMorphismFromCoequalizerWithGivenCoequalize
         
   function ( cat, list_of_morphisms, tau, E )
     
-    if IsEmpty( list_of_morphisms )
+    if (IsEmpty( list_of_morphisms ))
         
         Error( "the list of morphisms must not be empty" );
         

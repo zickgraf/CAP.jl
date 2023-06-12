@@ -66,9 +66,9 @@ end );
     cache = fail;
     
     #= comment for Julia
-    if @IsBound( category.caches[name] ) && IsCachingObject( category.caches[name] )
+    if (@IsBound( category.caches[name] ) && IsCachingObject( category.caches[name] ))
         
-        if category.caches[name].nr_keys != number
+        if (category.caches[name].nr_keys != number)
             
             Error( "you have requested a cache for \"", name, "\" with ", number,
                    " keys but the existing cache with the same name has ", category.caches[name].nr_keys, " keys" );
@@ -79,7 +79,7 @@ end );
         
     end;
     
-    if @IsBound( category.caches[name] ) && IsString( category.caches[name] )
+    if (@IsBound( category.caches[name] ) && IsString( category.caches[name] ))
         
         cache_type = category.caches[name];
         
@@ -89,11 +89,11 @@ end );
         
     end;
     
-    if cache_type == "weak"
+    if (cache_type == "weak")
         cache = CreateWeakCachingObject( number );
-    elseif cache_type == "crisp"
+    elseif (cache_type == "crisp")
         cache = CreateCrispCachingObject( number );
-    elseif cache_type == "none"
+    elseif (cache_type == "none")
         cache = CreateCrispCachingObject( number );
         DeactivateCachingObject( cache );
     else
@@ -165,43 +165,43 @@ end );
     local filter, obj, operation_name;
     
     ## plausibility checks
-    if !IsSpecializationOfFilter( IsCapCategory, category_filter )
+    if (@not IsSpecializationOfFilter( IsCapCategory, category_filter ))
         
         Print( "WARNING: filter ", category_filter, " does not imply `IsCapCategory`. This will probably cause errors.\n" );
         
     end;
     
-    if !IsSpecializationOfFilter( IsCapCategoryObject, object_filter )
+    if (@not IsSpecializationOfFilter( IsCapCategoryObject, object_filter ))
         
         Print( "WARNING: filter ", object_filter, " does not imply `IsCapCategoryObject`. This will probably cause errors.\n" );
         
     end;
     
-    if !IsSpecializationOfFilter( IsCapCategoryMorphism, morphism_filter )
+    if (@not IsSpecializationOfFilter( IsCapCategoryMorphism, morphism_filter ))
         
         Print( "WARNING: filter ", morphism_filter, " does not imply `IsCapCategoryMorphism`. This will probably cause errors.\n" );
         
     end;
     
-    if !IsSpecializationOfFilter( IsCapCategoryTwoCell, two_cell_filter )
+    if (@not IsSpecializationOfFilter( IsCapCategoryTwoCell, two_cell_filter ))
         
         Print( "WARNING: filter ", two_cell_filter, " does not imply `IsCapCategoryTwoCell`. This will probably cause errors.\n" );
         
     end;
     
-    if IsFilter( object_datum_type )
+    if (IsFilter( object_datum_type ))
         
         object_datum_type = @rec( filter = object_datum_type );
         
     end;
     
-    if IsFilter( morphism_datum_type )
+    if (IsFilter( morphism_datum_type ))
         
         morphism_datum_type = @rec( filter = morphism_datum_type );
         
     end;
     
-    if IsFilter( two_cell_datum_type )
+    if (IsFilter( two_cell_datum_type ))
         
         two_cell_datum_type = @rec( filter = two_cell_datum_type );
         
@@ -270,7 +270,7 @@ end );
     
     obj.overhead = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "overhead", true );
     
-    if obj.overhead
+    if (obj.overhead)
         
         obj.predicate_logic = true;
         
@@ -287,9 +287,9 @@ end );
     obj.add_primitive_output = false;
     
     # convenience for Julia lists
-    if IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" )
+    if (IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ))
         
-        if object_datum_type != fail && object_datum_type.filter == IsList
+        if (object_datum_type != fail && object_datum_type.filter == IsList)
             
             InstallOtherMethod( ObjectConstructor,
                                 [ CategoryFilter( obj ), ValueGlobal( "IsJuliaObject" ) ],
@@ -302,7 +302,7 @@ end );
             
         end;
         
-        if morphism_datum_type != fail && morphism_datum_type.filter == IsList
+        if (morphism_datum_type != fail && morphism_datum_type.filter == IsList)
             
             InstallOtherMethod( MorphismConstructor,
                                 [ ObjectFilter( obj ), ValueGlobal( "IsJuliaObject" ), ObjectFilter( obj ) ],
@@ -350,7 +350,7 @@ InstallMethod( @__MODULE__,  AddCategoryToFamily,
                
   function( category, family )
     
-    if !@IsBound( category.families )
+    if (@not @IsBound( category.families ))
         
         category.families = [ ];
         
@@ -373,25 +373,25 @@ InstallMethod( @__MODULE__,  SetCaching,
   function( category, function_name, caching_info )
     local current_cache;
     
-    if !caching_info ⥉ [ "weak", "crisp", "none" ]
+    if (@not caching_info in [ "weak", "crisp", "none" ])
         
         Error( "wrong caching type" );
         
     end;
     
-    if !@IsBound( category.caches[function_name] ) || IsString( category.caches[function_name] )
+    if (!(@IsBound( category.caches[function_name] )) || IsString( category.caches[function_name] ))
         
         category.caches[function_name] = caching_info;
         
-    elseif IsCachingObject( category.caches[function_name] )
+    elseif (IsCachingObject( category.caches[function_name] ))
         
         current_cache = category.caches[function_name];
         
-        if caching_info == "weak"
+        if (caching_info == "weak")
             SetCachingObjectWeak( current_cache );
-        elseif caching_info == "crisp"
+        elseif (caching_info == "crisp")
             SetCachingObjectCrisp( current_cache );
-        elseif caching_info == "none"
+        elseif (caching_info == "none")
             DeactivateCachingObject( current_cache );
         end;
         
@@ -452,7 +452,7 @@ InstallMethod( @__MODULE__,  CachingObject,
   function( category, type )
     local current_name;
     
-    if !type ⥉ [ "weak", "crisp", "none" ]
+    if (@not type in [ "weak", "crisp", "none" ])
         Error( "wrong type for caching" );
     end;
     
@@ -460,7 +460,7 @@ InstallMethod( @__MODULE__,  CachingObject,
     
     for current_name in RecNames( category.caches )
         
-        if current_name ⥉ CAP_INTERNAL.operation_names_with_cache_disabled_by_default
+        if (current_name in CAP_INTERNAL.operation_names_with_cache_disabled_by_default)
             continue;
         end;
         
@@ -500,7 +500,7 @@ end );
   function( type )
     local current_name;
 
-    if !type ⥉ [ "weak", "crisp", "none" ]
+    if (@not type in [ "weak", "crisp", "none" ])
         Error( "wrong type for caching" );
     end;
 
@@ -569,7 +569,7 @@ InstallMethod( @__MODULE__,  CanCompute,
   function( category, string )
     local weight_list;
     
-    if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[string] )
+    if (@not @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[string] ))
         
         Error( string, " is not the name of a CAP operation" );
         
@@ -600,7 +600,7 @@ InstallMethod( @__MODULE__,  CheckConstructivenessOfCategory,
   function( category, string )
     local category_property, result_list;
     
-    if !@IsBound( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[string] )
+    if (@not @IsBound( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[string] ))
       
       Error( "the given string is not a property of a category" );
     
@@ -610,7 +610,7 @@ InstallMethod( @__MODULE__,  CheckConstructivenessOfCategory,
     
     for category_property in CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[string]
       
-      if !CanCompute( category, category_property )
+      if (@not CanCompute( category, category_property ))
         
         Add( result_list, category_property );
         
@@ -695,7 +695,7 @@ end );
 @InstallGlobalFunction( "EnableTimingStatistics",
   function( category )
     
-    if category.overhead != true
+    if (category.overhead != true)
         
         Display( "WARNING: <category> was created with `overhead = false` and thus cannot collect timing statistics." );
         
@@ -708,7 +708,7 @@ end );
 @InstallGlobalFunction( "DisableTimingStatistics",
   function( category )
     
-    if category.overhead != true
+    if (category.overhead != true)
         
         Display( "WARNING: <category> was created with `overhead = false` and thus cannot collect timing statistics." );
         
@@ -722,7 +722,7 @@ end );
   function( category )
     local recname;
     
-    if category.overhead != true
+    if (category.overhead != true)
         
         Display( "WARNING: <category> was created with `overhead = false` and thus cannot collect timing statistics." );
         
@@ -740,7 +740,7 @@ end );
   function( category )
     local header, warning, operations, total_time_global, times, execs, total_time, time_per_exec, recname;
     
-    if category.overhead != true
+    if (category.overhead != true)
         
         Display( "WARNING: <category> was created with `overhead = false` and thus cannot collect timing statistics." );
         
@@ -756,7 +756,7 @@ end );
         
         times = category.timing_statistics[recname];
         
-        if Length( times ) > 0
+        if (Length( times ) > 0)
             
             execs = Length( times );
             total_time = Sum( times );
@@ -775,11 +775,11 @@ end );
         
     end;
     
-    if IsEmpty( operations )
+    if (IsEmpty( operations ))
         
         warning = "No timing statistics recorded, use `EnableTimingStatistics( <category> )` to enable timing statistics.";
         
-    elseif !category.timing_statistics_enabled
+    elseif (@not category.timing_statistics_enabled)
         
         warning = "WARNING: timing statistics for this category are disabled, so the results shown may not be up to date. Use `EnableTimingStatistics( <category> )` to enable timing statistics.";
         
@@ -806,7 +806,7 @@ end );
     
     Display( "####" );
     
-    if IsEmpty( info.operations )
+    if (IsEmpty( info.operations ))
         
         Display( info.warning );
         
@@ -816,7 +816,7 @@ end );
     
     Display( info.header );
     
-    if info.warning != fail
+    if (info.warning != fail)
         
         Display( info.warning );
         
@@ -841,7 +841,7 @@ end );
     
 end );
 
-if IsPackageMarkedForLoading( "Browse", ">= 1.5" )
+if (IsPackageMarkedForLoading( "Browse", ">= 1.5" ))
     
     @InstallGlobalFunction( "BrowseTimingStatistics",
       function( category )
@@ -849,7 +849,7 @@ if IsPackageMarkedForLoading( "Browse", ">= 1.5" )
         
         info = CAP_INTERNAL_PREPARE_TIMING_STATISTICS_FOR_DISPLAY( category );
         
-        if IsEmpty( info.operations )
+        if (IsEmpty( info.operations ))
             
             Display( info.warning );
             
@@ -859,7 +859,7 @@ if IsPackageMarkedForLoading( "Browse", ">= 1.5" )
         
         header = [ info.header ];
         
-        if info.warning != fail
+        if (info.warning != fail)
             
             Add( header, info.warning );
             
@@ -1019,7 +1019,7 @@ InstallMethod( @__MODULE__,  DownToBottom,
     
     equality_func = function( a, b )
       
-      if IsList( a ) && IsList( b ) && Size( a ) == Size( b )
+      if (IsList( a ) && IsList( b ) && Size( a ) == Size( b ))
         
         return ForAll( (1):(Size( a )), i -> equality_func(a[i], b[i]) );
         
@@ -1031,7 +1031,7 @@ InstallMethod( @__MODULE__,  DownToBottom,
       
     end;
     
-    while !equality_func( objp, Down( objp ) )
+    while @not equality_func( objp, Down( objp ) )
       
       objp = Down( objp );
       
@@ -1068,7 +1068,7 @@ end );
   
   function( category )
     
-    if !IsCapCategory( category )
+    if (@not IsCapCategory( category ))
         Error( "Argument must be a category" );
     end;
     
@@ -1080,7 +1080,7 @@ end );
   
   function( category )
     
-    if !IsCapCategory( category )
+    if (@not IsCapCategory( category ))
         Error( "Argument must be a category" );
     end;
     

@@ -40,18 +40,18 @@
         ## with-given-universal-object counterpart and the universal object
         ## because in many cases CategoryConstructor cannot lift the non-WithGiven
         ## versions due to not having generic output source/range getters
-        if info.return_type == "morphism" && IsList( info.with_given_without_given_name_pair ) && operation_name == info.with_given_without_given_name_pair[1]
-            if !info.with_given_without_given_name_pair[2] ⥉ list_of_operations_to_install
+        if (info.return_type == "morphism" && IsList( info.with_given_without_given_name_pair ) && operation_name == info.with_given_without_given_name_pair[1])
+            if (@not info.with_given_without_given_name_pair[2] in list_of_operations_to_install)
                 Add( list_of_operations_to_install, info.with_given_without_given_name_pair[2] );
             end;
-            if @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[info.with_given_without_given_name_pair[2]].with_given_object_name )
+            if (@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[info.with_given_without_given_name_pair[2]].with_given_object_name ))
                 Add( skip, operation_name );
                 Add( list_of_operations_to_install, CAP_INTERNAL_METHOD_NAME_RECORD[info.with_given_without_given_name_pair[2]].with_given_object_name );
             end;
         end;
         
         # Do not install boolean operations. For example `IsEndomorphism` is not always true for a morphism in a terminal category with multiple objects.
-        if info.return_type == "bool"
+        if (info.return_type == "bool")
             Add( skip, operation_name );
         end;
       
@@ -63,7 +63,7 @@
     
     properties = SetGAP( List( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, a -> a[1] ) );
     
-    if @IsBound( completed_record.excluded_properties )
+    if (@IsBound( completed_record.excluded_properties ))
         excluded_properties = completed_record.excluded_properties;
         @Unbind( completed_record.excluded_properties );
     else
@@ -76,13 +76,13 @@
     ## can still set IsInitialCategory == true manually, if the doctrine is clear from the context.
     Add( excluded_properties, "IsInitialCategory" );
     
-    properties = Filtered( properties, p -> !ForAny( excluded_properties, e -> e == p || e ⥉ ListImpliedFilters( ValueGlobal( p ) ) ) );
+    properties = Filtered( properties, p -> @not ForAny( excluded_properties, e -> e == p || e in ListImpliedFilters( ValueGlobal( p ) ) ) );
     
     Add( properties, "IsTerminalCategory" );
     
     completed_record.properties = properties;
     
-    if !@IsBound( completed_record.commutative_ring_of_linear_category )
+    if (@not @IsBound( completed_record.commutative_ring_of_linear_category ))
         completed_record.commutative_ring_of_linear_category = Integers;
     end;
     

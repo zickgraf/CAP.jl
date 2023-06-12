@@ -13,17 +13,17 @@
 @InstallGlobalFunction( "CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING", function ( string, args... )
   local category, is_ring_element, ring, n;
     
-    if !IsString( string )
+    if (@not IsString( string ))
         
         Error( string, " is not a string" );
         
     end;
     
-    if Length( args ) > 1
+    if (Length( args ) > 1)
         
         Error( "CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING must be called with at most two arguments" );
         
-    elseif Length( args ) == 1
+    elseif (Length( args ) == 1)
         
         category = args[1];
         
@@ -33,65 +33,65 @@
         
     end;
     
-    if string == "pair_of_morphisms"
+    if (string == "pair_of_morphisms")
         
         string = "2_tuple_of_morphisms";
         
     end;
     
-    if string == "bool"
+    if (string == "bool")
         
         return @rec( filter = IsBool );
         
-    elseif string == "integer"
+    elseif (string == "integer")
         
         return @rec( filter = IsInt );
         
-    elseif string == "nonneg_integer_or_infinity"
+    elseif (string == "nonneg_integer_or_infinity")
         
         return @rec( filter = IsCyclotomic );
         
-    elseif string == "category"
+    elseif (string == "category")
         
         return CapJitDataTypeOfCategory( category );
         
-    elseif string == "object"
+    elseif (string == "object")
         
         return CapJitDataTypeOfObjectOfCategory( category );
         
-    elseif string == "morphism"
+    elseif (string == "morphism")
         
         return CapJitDataTypeOfMorphismOfCategory( category );
         
-    elseif string == "twocell"
+    elseif (string == "twocell")
         
         return CapJitDataTypeOfTwoCellOfCategory( category );
         
-    elseif string == "list_of_objects"
+    elseif (string == "list_of_objects")
         
         return @rec( filter = IsList, element_type = CapJitDataTypeOfObjectOfCategory( category ) );
         
-    elseif string == "list_of_morphisms"
+    elseif (string == "list_of_morphisms")
         
         return @rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) );
         
-    elseif string == "list_of_lists_of_morphisms"
+    elseif (string == "list_of_lists_of_morphisms")
         
         return @rec( filter = IsList, element_type = @rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) ) );
         
-    elseif string == "list_of_twocells"
+    elseif (string == "list_of_twocells")
         
         return @rec( filter = IsList, element_type = CapJitDataTypeOfTwoCellOfCategory( category ) );
         
-    elseif string == "object_in_range_category_of_homomorphism_structure"
+    elseif (string == "object_in_range_category_of_homomorphism_structure")
         
-        if category != false && !HasRangeCategoryOfHomomorphismStructure( category )
+        if (category != false && @not HasRangeCategoryOfHomomorphismStructure( category ))
             
             Display( @Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
             
         end;
         
-        if category == false || !HasRangeCategoryOfHomomorphismStructure( category )
+        if (category == false || @not HasRangeCategoryOfHomomorphismStructure( category ))
             
             return CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( "object" );
             
@@ -101,15 +101,15 @@
             
         end;
         
-    elseif string == "morphism_in_range_category_of_homomorphism_structure"
+    elseif (string == "morphism_in_range_category_of_homomorphism_structure")
         
-        if category != false && !HasRangeCategoryOfHomomorphismStructure( category )
+        if (category != false && @not HasRangeCategoryOfHomomorphismStructure( category ))
             
             Display( @Concatenation( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of a homomorphism structure but the category has no RangeCategoryOfHomomorphismStructure (yet)" ) );
             
         end;
         
-        if category == false || !HasRangeCategoryOfHomomorphismStructure( category )
+        if (category == false || @not HasRangeCategoryOfHomomorphismStructure( category ))
             
             return CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( "morphism" );
             
@@ -119,9 +119,9 @@
             
         end;
         
-    elseif string == "object_datum"
+    elseif (string == "object_datum")
         
-        if category != false
+        if (category != false)
             
             # might be `fail`
             return ObjectDatumType( category );
@@ -132,9 +132,9 @@
             
         end;
         
-    elseif string == "morphism_datum"
+    elseif (string == "morphism_datum")
         
-        if category != false
+        if (category != false)
             
             # might be `fail`
             return MorphismDatumType( category );
@@ -145,20 +145,20 @@
             
         end;
         
-    elseif string == "object_or_fail" || string == "morphism_or_fail" || string == "list_or_morphisms_or_fail"
+    elseif (string == "object_or_fail" || string == "morphism_or_fail" || string == "list_or_morphisms_or_fail")
         
         # cannot be express "or fail" yet
         return fail;
         
-    elseif string == "element_of_commutative_ring_of_linear_structure"
+    elseif (string == "element_of_commutative_ring_of_linear_structure")
         
-        if category != false && !HasCommutativeRingOfLinearCategory( category )
+        if (category != false && @not HasCommutativeRingOfLinearCategory( category ))
             
             Print( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of the linear structure over a commutative ring but the category has no CommutativeRingOfLinearCategory (yet).\n" );
             
         end;
         
-        if category == false || !HasCommutativeRingOfLinearCategory( category )
+        if (category == false || @not HasCommutativeRingOfLinearCategory( category ))
             
             is_ring_element = IsRingElement;
             
@@ -166,7 +166,7 @@
             
             ring = CommutativeRingOfLinearCategory( category );
             
-            if IsBoundGlobal( "IsHomalgRing" ) && ValueGlobal( "IsHomalgRing" )( ring )
+            if (IsBoundGlobal( "IsHomalgRing" ) && ValueGlobal( "IsHomalgRing" )( ring ))
                 
                 is_ring_element = ValueGlobal( "IsHomalgRingElement" );
                 
@@ -182,15 +182,15 @@
             filter = is_ring_element,
         );
         
-    elseif string == "list_of_elements_of_commutative_ring_of_linear_structure"
+    elseif (string == "list_of_elements_of_commutative_ring_of_linear_structure")
         
-        if category != false && !HasCommutativeRingOfLinearCategory( category )
+        if (category != false && @not HasCommutativeRingOfLinearCategory( category ))
             
             Print( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of the linear structure over a commutative ring but the category has no CommutativeRingOfLinearCategory (yet).\n" );
             
         end;
         
-        if category == false || !HasCommutativeRingOfLinearCategory( category )
+        if (category == false || @not HasCommutativeRingOfLinearCategory( category ))
             
             is_ring_element = IsRingElement;
             
@@ -198,7 +198,7 @@
             
             ring = CommutativeRingOfLinearCategory( category );
             
-            if IsBoundGlobal( "IsHomalgRing" ) && ValueGlobal( "IsHomalgRing" )( ring )
+            if (IsBoundGlobal( "IsHomalgRing" ) && ValueGlobal( "IsHomalgRing" )( ring ))
                 
                 is_ring_element = ValueGlobal( "IsHomalgRingElement" );
                 
@@ -217,7 +217,7 @@
             ),
         );
         
-    elseif string == "arbitrary_list"
+    elseif (string == "arbitrary_list")
         
         return @rec(
             filter = IsList,
@@ -226,7 +226,7 @@
             )
         );
         
-    elseif EndsWith( string, "_tuple_of_morphisms" ) && ForAll( string[(1):(Length( string ) - Length( "_tuple_of_morphisms" ))], IsDigitChar )
+    elseif (EndsWith( string, "_tuple_of_morphisms" ) && ForAll( string[(1):(Length( string ) - Length( "_tuple_of_morphisms" ))], IsDigitChar ))
         
         n = IntGAP( string[(1):(Length( string ) - Length( "_tuple_of_morphisms" ))] );
         
@@ -248,11 +248,11 @@ end );
   function( list, args... )
     local category;
     
-    if Length( args ) > 1
+    if (Length( args ) > 1)
         
         Error( "CAP_INTERNAL_GET_DATA_TYPES_FROM_STRINGS must be called with at most two arguments" );
         
-    elseif Length( args ) == 1
+    elseif (Length( args ) == 1)
         
         category = args[1];
         
@@ -271,11 +271,11 @@ end );
   function( filter_string, args... )
     local category, data_type;
     
-    if Length( args ) > 1
+    if (Length( args ) > 1)
         
         Error( "CAP_INTERNAL_REPLACED_STRING_WITH_FILTER must be called with at most two arguments" );
         
-    elseif Length( args ) == 1
+    elseif (Length( args ) == 1)
         
         category = args[1];
         
@@ -287,17 +287,17 @@ end );
     
     data_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter_string, category );
     
-    if data_type == fail
+    if (data_type == fail)
         
         return IsObject;
         
-    elseif IsSpecializationOfFilter( IsNTuple, data_type.filter )
+    elseif (IsSpecializationOfFilter( IsNTuple, data_type.filter ))
         
         # `IsNTuple` deliberately does not imply `IsList` because we want to treat tuples and lists in different ways in CompilerForCAP.
         # However, on the GAP level tuples are just dense lists.
         return IsDenseList;
         
-    elseif IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), data_type.filter )
+    elseif (IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), data_type.filter ))
         
         # Some things (e.g. integers) do not lie in the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
         return IsRingElement;
@@ -315,11 +315,11 @@ end );
   function( list, args... )
     local category;
     
-    if Length( args ) > 1
+    if (Length( args ) > 1)
         
         Error( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS must be called with at most two arguments" );
         
-    elseif Length( args ) == 1
+    elseif (Length( args ) == 1)
         
         category = args[1];
         
@@ -338,11 +338,11 @@ end );
   function( list, args... )
     local category;
     
-    if Length( args ) > 1
+    if (Length( args ) > 1)
         
         Error( "CAP_INTERNAL_REPLACED_STRINGS_WITH_FILTERS_FOR_JULIA must be called with at most two arguments" );
         
-    elseif Length( args ) == 1
+    elseif (Length( args ) == 1)
         
         category = args[1];
         
@@ -357,7 +357,7 @@ end );
         
         filter = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( l, category );
         
-        if filter == IsList
+        if (filter == IsList)
             
             return ValueGlobal( "IsJuliaObject" );
             
@@ -377,12 +377,12 @@ end );
     local i;
     filter_list = ShallowCopy( filter_list );
     
-    if Length( filter_list ) < Length( additional_filters )
+    if (Length( filter_list ) < Length( additional_filters ))
         Error( "too many additional filters" );
     end;
     
     for i in (1):(Length( additional_filters ))
-        if @IsBound( additional_filters[ i ] )
+        if (@IsBound( additional_filters[ i ] ))
             filter_list[ i ] = filter_list[ i ] && additional_filters[ i ];
         end;
     end;
@@ -399,17 +399,17 @@ end );
     
     filter = data_type.filter;
     
-    if IsSpecializationOfFilter( IsFunction, filter )
+    if (IsSpecializationOfFilter( IsFunction, filter ))
         
         return function( value )
             
-            if !filter( value )
+            if (@not filter( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
-            if NumberArgumentsFunction( value ) >= 0 && NumberArgumentsFunction( value ) != Length( data_type.signature[1] )
+            if (NumberArgumentsFunction( value ) >= 0 && NumberArgumentsFunction( value ) != Length( data_type.signature[1] ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " has ", NumberArgumentsFunction( value ), " arguments but ", Length( data_type.signature[1] ), " were expected.", generic_help_string ] ) );
                 
@@ -417,7 +417,7 @@ end );
             
         end;
         
-    elseif IsSpecializationOfFilter( IsList, filter )
+    elseif (IsSpecializationOfFilter( IsList, filter ))
         
         # In principle, we have to create an assertion function for each integer to get the human readable identifier correct.
         # The "correct" approach would be to generate those on demand but that would imply that we have to create assertion functions at runtime.
@@ -430,7 +430,7 @@ end );
         return function( value )
           local i;
             
-            if !filter( value )
+            if (@not filter( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
@@ -440,14 +440,14 @@ end );
                 
                 #= comment for Julia
                 # Julia does not have non-dense lists
-                if !@IsBound( value[i] )
+                if (@not @IsBound( value[i] ))
                     
                     CallFuncList( Error, @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list, [ " is not bound.", generic_help_string ] ) );
                     
                 end;
                 # =#
                 
-                if i <= 4
+                if (i <= 4)
                     
                     asserts_value_is_of_element_type[i]( value[i] );
                     
@@ -461,7 +461,7 @@ end );
             
         end;
         
-    elseif IsSpecializationOfFilter( IsNTuple, filter )
+    elseif (IsSpecializationOfFilter( IsNTuple, filter ))
         
         asserts_value_is_of_element_type = List( (1):(Length( data_type.element_types )), i -> CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( data_type.element_types[i], @Concatenation( [ "the ", i, "-th entry of " ], human_readable_identifier_list ) ) );
         
@@ -469,13 +469,13 @@ end );
           local i;
             
             # tuples are modeled as lists
-            if !IsDenseList( value )
+            if (@not IsDenseList( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter IsDenseList (implementation filter of IsNTuple).", generic_help_string ] ) );
                 
             end;
             
-            if Length( value ) != Length( data_type.element_types )
+            if (Length( value ) != Length( data_type.element_types ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " has length ", Length( value ), " but ", Length( data_type.element_types ), " was expected.", generic_help_string ] ) );
                 
@@ -489,17 +489,17 @@ end );
             
         end;
         
-    elseif IsSpecializationOfFilter( IsCapCategory, filter )
+    elseif (IsSpecializationOfFilter( IsCapCategory, filter ))
         
         return function( value )
             
-            if !filter( value )
+            if (@not filter( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
             end;
             
-            if !IsIdenticalObj( value, data_type.category )
+            if (@not IsIdenticalObj( value, data_type.category ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " is not the expected category although it lies in the category filter of the expected category. This should never happen, please report this using the CAP_project's issue tracker.", generic_help_string ] ) );
                 
@@ -507,11 +507,11 @@ end );
             
         end;
         
-    elseif IsSpecializationOfFilter( IsCapCategoryObject, filter )
+    elseif (IsSpecializationOfFilter( IsCapCategoryObject, filter ))
         
         return function( value )
             
-            if !filter( value )
+            if (@not filter( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
@@ -521,11 +521,11 @@ end );
             
         end;
         
-    elseif IsSpecializationOfFilter( IsCapCategoryMorphism, filter )
+    elseif (IsSpecializationOfFilter( IsCapCategoryMorphism, filter ))
         
         return function( value )
             
-            if !filter( value )
+            if (@not filter( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
@@ -535,11 +535,11 @@ end );
             
         end;
         
-    elseif IsSpecializationOfFilter( IsCapCategoryTwoCell, filter )
+    elseif (IsSpecializationOfFilter( IsCapCategoryTwoCell, filter ))
         
         return function( value )
             
-            if !filter( value )
+            if (@not filter( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
@@ -549,12 +549,12 @@ end );
             
         end;
         
-    elseif IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), filter )
+    elseif (IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), filter ))
         
         return function( value )
             
             # Some things (e.g. integers) do not lie in the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
-            if !IsRingElement( value )
+            if (@not IsRingElement( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter IsRingElement.", generic_help_string ] ) );
                 
@@ -566,7 +566,7 @@ end );
         
         return function( value )
             
-            if !filter( value )
+            if (@not filter( value ))
                 
                 CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter ", filter, ".", generic_help_string ] ) );
                 
@@ -585,7 +585,7 @@ end );
     
     value = ValueOption( option_name );
     
-    if value == fail
+    if (value == fail)
         return default;
     end;
     
@@ -608,11 +608,11 @@ end );
         
         while bracket_count != 0
             
-            if function_string[ current_scan_position ] == '('
+            if (function_string[ current_scan_position ] == '(')
                 
                 bracket_count = bracket_count + 1;
                 
-            elseif function_string[ current_scan_position ] == ')'
+            elseif (function_string[ current_scan_position ] == ')')
                 
                 bracket_count = bracket_count - 1;
                 
@@ -646,7 +646,7 @@ end );
         
         current_appearance = appearance_list[ current_appearance_nr ];
         
-        if @IsBound( replacement_record[current_appearance[1]] )
+        if (@IsBound( replacement_record[current_appearance[1]] ))
             
             Add( remove_list, current_appearance_nr );
             
@@ -654,7 +654,7 @@ end );
                 
                 pos = PositionProperty( appearance_list, x -> x[1] == current_replacement[1] && x[3] == current_appearance[3] );
                 
-                if pos == fail
+                if (pos == fail)
                     
                     Add( new_appearances, [ current_replacement[ 1 ], current_replacement[ 2 ] * current_appearance[ 2 ], current_appearance[3] ] );
                     
@@ -686,7 +686,7 @@ end );
   function( func, symbol_list, loop_multiple, replacement_record, category_getters )
     local func_as_string, func_stream, func_as_list, loop_power, symbol_appearance_list, current_symbol, category_getter, pos, i;
     
-    if IsOperation( func )
+    if (IsOperation( func ))
         
         func_as_string = NameFunction( func );
         
@@ -731,12 +731,12 @@ end );
         
         current_symbol = func_as_list[i];
         
-        if current_symbol ⥉ symbol_list
+        if (current_symbol in symbol_list)
             
             # function cannot end with a symbol
             @Assert( 0, i < Length( func_as_list ) );
             
-            if @IsBound( category_getters[func_as_list[i + 1]] )
+            if (@IsBound( category_getters[func_as_list[i + 1]] ))
                 
                 category_getter = category_getters[func_as_list[i + 1]];
                 
@@ -748,7 +748,7 @@ end );
             
             pos = PositionProperty( symbol_appearance_list, x -> x[1] == current_symbol && x[3] == category_getter );
             
-            if pos == fail
+            if (pos == fail)
                 
                 Add( symbol_appearance_list, [ current_symbol, loop_multiple^loop_power, category_getter ] );
                 
@@ -758,11 +758,11 @@ end );
                 
             end;
             
-        elseif current_symbol ⥉ [ "for", "while", "CAP_INTERNAL_FUNCTIONAL_LOOP" ]
+        elseif (current_symbol in [ "for", "while", "CAP_INTERNAL_FUNCTIONAL_LOOP" ])
             
             loop_power = loop_power + 1;
             
-        elseif current_symbol == "od"
+        elseif (current_symbol == "od")
             
             loop_power = loop_power - 1;
             
@@ -770,7 +770,7 @@ end );
         
     end;
     
-    if loop_power != 0
+    if (loop_power != 0)
         
         Error( "The automated detection of CAP operations could not detect loops properly. If the reserved word `for` appears in <func_as_string> (e.g. in a string), this is probably the cause. If not, please report this as a bug mentioning <func_as_string>." );
         
@@ -793,7 +793,7 @@ end );
         
         pos = PositionProperty( list2, x -> x[1] == current_precondition[1] && x[3] == current_precondition[3] );
         
-        if pos == fail
+        if (pos == fail)
             
             Add( list2, current_precondition );
             
@@ -814,7 +814,7 @@ end );
   function( translation_list, function_input )
     local input_list, output_list, current_output, return_list, input_position, list_position, i;
     
-    if !Length( translation_list ) == 2
+    if (@not Length( translation_list ) == 2)
         Error( "invalid translation list" );
     end;
     
@@ -832,7 +832,7 @@ end );
         
         input_position = Position( input_list, current_output[ 1 ] );
         
-        if input_position == fail
+        if (input_position == fail)
             
             return_list[ i ] = fail;
             
@@ -840,41 +840,41 @@ end );
             
         end;
         
-        if Length( current_output ) == 1
+        if (Length( current_output ) == 1)
             
            return_list[ i ] = function_input[ input_position ];
            
-        elseif Length( current_output ) == 2
+        elseif (Length( current_output ) == 2)
             
-            if LowercaseString( current_output[ 2 ] ) == "source"
+            if (LowercaseString( current_output[ 2 ] ) == "source")
                 return_list[ i ] = Source( function_input[ input_position ] );
-            elseif LowercaseString( current_output[ 2 ] ) == "range"
+            elseif (LowercaseString( current_output[ 2 ] ) == "range")
                 return_list[ i ] = Range( function_input[ input_position ] );
-            elseif Position( input_list, current_output[ 2 ] ) != fail
+            elseif (Position( input_list, current_output[ 2 ] ) != fail)
                 return_list[ i ] = function_input[ input_position ][ function_input[ Position( input_list, current_output[ 2 ] ) ] ];
             else
                 Error( "wrong input type" );
             end;
             
-        elseif Length( current_output ) == 3
+        elseif (Length( current_output ) == 3)
             
-            if ForAll( current_output[ 2 ], i -> i ⥉ "0123456789" )
+            if (ForAll( current_output[ 2 ], i -> i in "0123456789" ))
                 list_position = IntGAP( current_output[ 2 ] );
             else
                 list_position = Position( input_list, current_output[ 2 ] );
-                if list_position == fail
+                if (list_position == fail)
                     Error( "unable to find ", current_output[ 2 ], " in input_list" );
                 end;
                 list_position = function_input[ list_position ];
             end;
             
-            if list_position == fail
+            if (list_position == fail)
                 Error( "list index variable not found" );
             end;
             
-            if LowercaseString( current_output[ 3 ] ) == "source"
+            if (LowercaseString( current_output[ 3 ] ) == "source")
                 return_list[ i ] = Source( function_input[ input_position ][ list_position ] );
-            elseif LowercaseString( current_output[ 3 ] ) == "range"
+            elseif (LowercaseString( current_output[ 3 ] ) == "range")
                 return_list[ i ] = Range( function_input[ input_position ][ list_position ] );
             else
                 Error( "wrong output syntax" );
@@ -898,7 +898,7 @@ end );
   function( category )
     local list, name;
     
-    if !IsCapCategory( category )
+    if (@not IsCapCategory( category ))
       
       Error( "the input is not a category" );
       
@@ -908,7 +908,7 @@ end );
     
     for name in SetGAP( Filtered( @Concatenation( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ), x -> x != fail ) )
       
-      if Tester( ValueGlobal( name ) )( category ) && ValueGlobal( name )( category )
+      if (Tester( ValueGlobal( name ) )( category ) && ValueGlobal( name )( category ))
         
         Add( list, name );
       
@@ -944,7 +944,7 @@ end );
     
     operations = arg;
     
-    if Length( operations ) == 0
+    if (Length( operations ) == 0)
         operations = RecNames( category.caches );
     end;
     
@@ -956,18 +956,18 @@ end );
     
     for current_cache_name in operations
         Print( current_cache_name, ": " );
-        if !@IsBound( category.caches[current_cache_name] )
+        if (@not @IsBound( category.caches[current_cache_name] ))
             Print( "not installed yet\n" );
             continue;
         end;
         current_cache = category.caches[current_cache_name];
-        if IsDisabledCache( current_cache )
+        if (IsDisabledCache( current_cache ))
             Print( "disabled\n" );
             continue;
         end;
-        if IsWeakCache( current_cache )
+        if (IsWeakCache( current_cache ))
             Print( "weak cache, " );
-        elseif IsCrispCache( current_cache )
+        elseif (IsCrispCache( current_cache ))
             Print( "crisp cache, " );
         end;
         Print( "hits: ", StringGAP( current_cache.hit_counter ), ", misses: ", StringGAP( current_cache.miss_counter ), ", " );
@@ -992,7 +992,7 @@ end );
         
         result = CallFuncListWrap( ValueGlobal( function_name ), args );
         
-        if !IsEmpty( result )
+        if (@not IsEmpty( result ))
             
             return result[1];
             
@@ -1006,13 +1006,13 @@ end );
 ##
 @InstallGlobalFunction( "IsSpecializationOfFilter", function ( filter1, filter2 )
     
-    if IsString( filter1 )
+    if (IsString( filter1 ))
         
         filter1 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter1 );
         
     end;
     
-    if IsString( filter2 )
+    if (IsString( filter2 ))
         
         filter2 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter2 );
         
@@ -1025,11 +1025,11 @@ end );
 ##
 @InstallGlobalFunction( "IsSpecializationOfFilterList", function ( filter_list1, filter_list2 )
     
-    if filter_list1 == "any"
+    if (filter_list1 == "any")
         
         return true;
         
-    elseif filter_list2 == "any"
+    elseif (filter_list2 == "any")
         
         return false;
         
@@ -1051,11 +1051,11 @@ end );
     operation = First( args );
     method = Last( args );
     
-    if IsList( args[Length( args ) - 1] )
+    if (IsList( args[Length( args ) - 1] ))
         
         filters = args[Length( args ) - 1];
         
-    elseif IsList( args[Length( args ) - 2] )
+    elseif (IsList( args[Length( args ) - 2] ))
         
         filters = args[Length( args ) - 2];
         
@@ -1082,11 +1082,11 @@ end );
     operation = First( args );
     method = Last( args );
     
-    if IsList( args[Length( args ) - 1] )
+    if (IsList( args[Length( args ) - 1] ))
         
         filters = args[Length( args ) - 1];
         
-    elseif IsList( args[Length( args ) - 2] )
+    elseif (IsList( args[Length( args ) - 2] ))
         
         filters = args[Length( args ) - 2];
         
@@ -1109,21 +1109,21 @@ end );
   function( operation, filters, method )
     local operation_name, wrapper_operation_name, known_methods;
     
-    if !IsOperation( operation ) || !IsList( filters ) || !IsFunction( method )
+    if (!(IsOperation( operation )) || !(IsList( filters )) || @not IsFunction( method ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "usage: CapJitAddKnownMethod( <operation>, <list of filters>, <method> )" );
         
     end;
     
-    if IsEmpty( filters )
+    if (IsEmpty( filters ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "there must be at least one filter" );
         
     end;
     
-    if !IsSpecializationOfFilter( IsCapCategory, filters[1] )
+    if (@not IsSpecializationOfFilter( IsCapCategory, filters[1] ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "the first filter must imply IsCapCategory" );
@@ -1132,7 +1132,7 @@ end );
     
     operation_name = NameFunction( operation );
     
-    if @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name] ) && Length( filters ) == Length( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name].filter_list )
+    if (@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name] ) && Length( filters ) == Length( CAP_INTERNAL_METHOD_NAME_RECORD[operation_name].filter_list ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( operation_name, " is already installed as a CAP operation with the same number of arguments" );
@@ -1140,11 +1140,11 @@ end );
     end;
     
     # check if we deal with a KeyDependentOperation
-    if EndsWith( operation_name, "Op" )
+    if (EndsWith( operation_name, "Op" ))
         
         wrapper_operation_name = operation_name[(1):(Length( operation_name ) - 2)];
         
-        if IsBoundGlobal( wrapper_operation_name ) && ValueGlobal( wrapper_operation_name ) ⥉ WRAPPER_OPERATIONS
+        if (IsBoundGlobal( wrapper_operation_name ) && ValueGlobal( wrapper_operation_name ) in WRAPPER_OPERATIONS)
             
             operation_name = wrapper_operation_name;
             
@@ -1152,7 +1152,7 @@ end );
         
     end;
     
-    if !@IsBound( CAP_JIT_INTERNAL_KNOWN_METHODS[operation_name] )
+    if (@not @IsBound( CAP_JIT_INTERNAL_KNOWN_METHODS[operation_name] ))
         
         CAP_JIT_INTERNAL_KNOWN_METHODS[operation_name] = [ ];
         
@@ -1160,7 +1160,7 @@ end );
     
     known_methods = CAP_JIT_INTERNAL_KNOWN_METHODS[operation_name];
     
-    if ForAny( known_methods, m -> Length( m.filters ) == Length( filters ) && ( IsSpecializationOfFilter( m.filters[1], filters[1] ) || IsSpecializationOfFilter( filters[1], m.filters[1] ) ) )
+    if (ForAny( known_methods, m -> Length( m.filters ) == Length( filters ) && ( IsSpecializationOfFilter( m.filters[1], filters[1] ) || IsSpecializationOfFilter( filters[1], m.filters[1] ) ) ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "there is already a method known for ", operation_name, " with a category filter which implies the current category filter or is implied by it" );
@@ -1177,31 +1177,31 @@ end );
 @InstallGlobalFunction( "CapJitAddTypeSignature", function ( name, input_filters, output_data_type )
     
     #= comment for Julia
-    if IsCategory( ValueGlobal( name ) ) && Length( input_filters ) == 1
+    if (IsCategory( ValueGlobal( name ) ) && Length( input_filters ) == 1)
         
         Error( "adding type signatures for GAP categories applied to a single argument is not supported" );
         
     end;
     
-    if input_filters != "any"
+    if (input_filters != "any")
         
-        if !IsList( input_filters )
+        if (@not IsList( input_filters ))
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "<input_filters> must be a list or the string \"any\"" );
             
         end;
         
-        if !ForAll( input_filters, filter -> IsFilter( filter ) )
+        if (@not ForAll( input_filters, filter -> IsFilter( filter ) ))
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "<input_filters> must be a list of filters or the string \"any\"" );
             
         end;
         
-        if ForAny( input_filters, f -> IsSpecializationOfFilter( IsFunction, f ) ) && (!IsFunction( output_data_type ) || NumberArgumentsFunction( output_data_type ) != 2)
+        if (ForAny( input_filters, f -> IsSpecializationOfFilter( IsFunction, f ) ) && (!(IsFunction( output_data_type )) || NumberArgumentsFunction( output_data_type ) != 2))
             
-            if !name ⥉ [ "CreateCapCategoryObjectWithAttributes", "CreateCapCategoryMorphismWithAttributes" ]
+            if (@not name in [ "CreateCapCategoryObjectWithAttributes", "CreateCapCategoryMorphismWithAttributes" ])
                 
                 # COVERAGE_IGNORE_BLOCK_START
                 Print(
@@ -1217,27 +1217,27 @@ end );
         
     end;
     
-    if !@IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES[name] )
+    if (@not @IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES[name] ))
         
         CAP_JIT_INTERNAL_TYPE_SIGNATURES[name] = [ ];
         
     end;
     
-    if ForAny( CAP_JIT_INTERNAL_TYPE_SIGNATURES[name], signature -> IsSpecializationOfFilterList( signature[1], input_filters ) || IsSpecializationOfFilterList( input_filters, signature[1] ) )
+    if (ForAny( CAP_JIT_INTERNAL_TYPE_SIGNATURES[name], signature -> IsSpecializationOfFilterList( signature[1], input_filters ) || IsSpecializationOfFilterList( input_filters, signature[1] ) ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "there already exists a signature for ", name, " with filters implying the current filters or being implied by them" );
         
     end;
     
-    if !ForAny( [ IsFilter, IsRecord, IsFunction ], f -> f( output_data_type ) )
+    if (@not ForAny( [ IsFilter, IsRecord, IsFunction ], f -> f( output_data_type ) ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "<output_data_type> must be a filter, a record, or a function" );
         
     end;
     
-    if IsFilter( output_data_type )
+    if (IsFilter( output_data_type ))
         
         output_data_type = @rec( filter = output_data_type );
         
@@ -1253,16 +1253,16 @@ end );
 
 @InstallGlobalFunction( "CapJitAddTypeSignatureDeferred", function ( package_name, name, input_filters, output_data_type )
     
-    if input_filters != "any"
+    if (input_filters != "any")
         
-        if !IsList( input_filters )
+        if (@not IsList( input_filters ))
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "<input_filters> must be a list or the string \"any\"" );
             
         end;
         
-        if !ForAll( input_filters, filter -> IsString( filter ) )
+        if (@not ForAll( input_filters, filter -> IsString( filter ) ))
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "<input_filters> must be a list of strings or the string \"any\"" );
@@ -1271,14 +1271,14 @@ end );
         
     end;
     
-    if !IsString( output_data_type )
+    if (@not IsString( output_data_type ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "<output_data_type> must be a string" );
         
     end;
     
-    if !@IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name] )
+    if (@not @IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name] ))
         
         CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name] = [ ];
         
@@ -1292,7 +1292,7 @@ end );
 @InstallGlobalFunction( CapJitDataTypeOfCategory, function ( cat )
   local type;
     
-    if cat == false
+    if (cat == false)
         
         type = @rec(
             filter = IsCapCategory,
@@ -1315,7 +1315,7 @@ end );
 @InstallGlobalFunction( CapJitDataTypeOfObjectOfCategory, function ( cat )
   local type;
     
-    if cat == false
+    if (cat == false)
         
         type = @rec(
             filter = IsCapCategoryObject,
@@ -1338,7 +1338,7 @@ end );
 @InstallGlobalFunction( CapJitDataTypeOfMorphismOfCategory, function ( cat )
   local type;
     
-    if cat == false
+    if (cat == false)
         
         type = @rec(
             filter = IsCapCategoryMorphism,
@@ -1361,7 +1361,7 @@ end );
 @InstallGlobalFunction( CapJitDataTypeOfTwoCellOfCategory, function ( cat )
   local type;
     
-    if cat == false
+    if (cat == false)
         
         type = @rec(
             filter = IsCapCategoryTwoCell,
@@ -1389,7 +1389,7 @@ end );
     while true
         x = y;
         y = func( x );
-        if predicate( x, y )
+        if (predicate( x, y ))
             break;
         end;
     end;
@@ -1418,7 +1418,7 @@ end );
         
         package_info = First( PackageInfo( dep ) );
         
-        if package_info == fail
+        if (package_info == fail)
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( dep, " is not the name of an available package" );
@@ -1427,7 +1427,7 @@ end );
         
         for p in package_info.Dependencies.NeededOtherPackages
             
-            if !p[1] ⥉ collected_dependencies
+            if (@not p[1] in collected_dependencies)
                 
                 Add( collected_dependencies, p[1] );
                 
@@ -1563,13 +1563,13 @@ end );
 @InstallGlobalFunction( HandlePrecompiledTowers, function ( category, underlying_category, constructor_name )
   local precompiled_towers, remaining_constructors_in_tower, precompiled_functions_adder, info;
     
-    if !@IsBound( underlying_category.compiler_hints ) || !@IsBound( underlying_category.compiler_hints.precompiled_towers )
+    if (!(@IsBound( underlying_category.compiler_hints )) || @not @IsBound( underlying_category.compiler_hints.precompiled_towers ))
         
         return;
         
     end;
     
-    if !IsList( underlying_category.compiler_hints.precompiled_towers )
+    if (@not IsList( underlying_category.compiler_hints.precompiled_towers ))
         
         # COVERAGE_IGNORE_NEXT_LINE
         Error( "`underlying_category.compiler_hints.precompiled_towers` must be a list" );
@@ -1580,7 +1580,7 @@ end );
     
     for info in underlying_category.compiler_hints.precompiled_towers
         
-        if !(IsRecord( info ) && @IsBound( info.remaining_constructors_in_tower ) && @IsBound( info.precompiled_functions_adder ))
+        if (!(IsRecord( info ) && @IsBound( info.remaining_constructors_in_tower ) && @IsBound( info.precompiled_functions_adder )))
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "the entries of `underlying_category.compiler_hints.precompiled_towers` must be records with components `remaining_constructors_in_tower` and `precompiled_functions_adder`" );
@@ -1590,25 +1590,25 @@ end );
         remaining_constructors_in_tower = info.remaining_constructors_in_tower;
         precompiled_functions_adder = info.precompiled_functions_adder;
         
-        if !IsList( remaining_constructors_in_tower ) || IsEmpty( remaining_constructors_in_tower )
+        if (!(IsList( remaining_constructors_in_tower )) || IsEmpty( remaining_constructors_in_tower ))
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "`remaining_constructors_in_tower` must be a non-empty list" );
             
         end;
         
-        if !IsFunction( precompiled_functions_adder ) || NumberArgumentsFunction( precompiled_functions_adder ) != 1
+        if (!(IsFunction( precompiled_functions_adder )) || NumberArgumentsFunction( precompiled_functions_adder ) != 1)
             
             # COVERAGE_IGNORE_NEXT_LINE
             Error( "`precompiled_functions_adder` must be a function accepting a single argument" );
             
         end;
         
-        if remaining_constructors_in_tower[1] == constructor_name
+        if (remaining_constructors_in_tower[1] == constructor_name)
             
-            if Length( remaining_constructors_in_tower ) == 1
+            if (Length( remaining_constructors_in_tower ) == 1)
                 
-                if ValueOption( "no_precompiled_code" ) != true
+                if (ValueOption( "no_precompiled_code" ) != true)
                     
                     # add precompiled functions
                     CallFuncList( precompiled_functions_adder, [ category ] );
@@ -1629,15 +1629,15 @@ end );
         
     end;
     
-    if !IsEmpty( precompiled_towers )
+    if (@not IsEmpty( precompiled_towers ))
         
-        if !@IsBound( category.compiler_hints )
+        if (@not @IsBound( category.compiler_hints ))
             
             category.compiler_hints = @rec( );
             
         end;
         
-        if !@IsBound( category.compiler_hints.precompiled_towers )
+        if (@not @IsBound( category.compiler_hints.precompiled_towers ))
             
             category.compiler_hints.precompiled_towers = [ ];
             
@@ -1665,7 +1665,7 @@ end );
     res = EmptyPlist( Length( list ) );
     
     # hack to save type adjustments and conversions (e.g. to blist)
-    if Length( list ) > 0
+    if (Length( list ) > 0)
         
         res[Length( list )] = 1;
         
@@ -1688,7 +1688,7 @@ end );
     
     # see implementation of `Sum`
     
-    if IsEmpty( list )
+    if (IsEmpty( list ))
         
         sum = 0;
         
@@ -1714,7 +1714,7 @@ end );
     
     # adapted implementation of `Product`
     
-    if IsEmpty( list )
+    if (IsEmpty( list ))
         
         product = 1;
         
@@ -1742,7 +1742,7 @@ end );
     
     for i in (1):(Length( list ))
         
-        if !func( i, list[i] )
+        if (@not func( i, list[i] ))
             
             return false;
             
@@ -1762,7 +1762,7 @@ end );
     
     for i in (1):(Length( list ))
         
-        if func( i, list[i] )
+        if (func( i, list[i] ))
             
             return true;
             
@@ -1784,7 +1784,7 @@ end );
     
     for i in (1):(Length( list ))
         
-        if func( i, list[i] )
+        if (func( i, list[i] ))
             
             nr = nr + 1;
             
@@ -1812,7 +1812,7 @@ end );
         
         elm = list[j];
         
-        if func( j, elm )
+        if (func( j, elm ))
             
             i = i + 1;
             
@@ -1837,7 +1837,7 @@ end );
         
         elm = list[i];
         
-        if func( i, elm )
+        if (func( i, elm ))
             
             return elm;
             
@@ -1859,7 +1859,7 @@ end );
         
         elm = list[i];
         
-        if func( i, elm )
+        if (func( i, elm ))
             
             return elm;
             

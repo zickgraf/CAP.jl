@@ -14,7 +14,7 @@
 ## converting is save, false otherwise.
 @InstallGlobalFunction( STRING_REPRESENTS_INTEGER,
             
-  i -> ForAll( i, j -> j ⥉ "0123456789" )
+  i -> ForAll( i, j -> j in "0123456789" )
   
 );
 
@@ -24,7 +24,7 @@
             
   function( string )
     
-    if STRING_REPRESENTS_INTEGER( string )
+    if (STRING_REPRESENTS_INTEGER( string ))
         
         return IntGAP( string );
         
@@ -52,7 +52,7 @@ end );
         
         current_pos = PositionSublist( string, substring );
         
-        if current_pos == fail
+        if (current_pos == fail)
             
             Add( list, string );
             
@@ -79,11 +79,11 @@ end );
     
     string = LowercaseString( NormalizedWhitespace( string ) );
     
-    if string == "true"
+    if (string == "true")
         
         return true;
         
-    elseif string == "false"
+    elseif (string == "false")
         
         return false;
         
@@ -107,7 +107,7 @@ end );
     
     theorem_string = SplitString( theorem_string, "|" );
     
-    if Length( theorem_string ) != 2
+    if (Length( theorem_string ) != 2)
         
         return "no unique | found";
         
@@ -117,7 +117,7 @@ end );
     
     theorem_string = SPLIT_STRING_MULTIPLE( theorem_string[ 2 ], "vdash" );
     
-    if Length( theorem_string ) != 2
+    if (Length( theorem_string ) != 2)
         
         return "no unique vdash found";
         
@@ -132,13 +132,13 @@ end );
 end );
 
 ## Returns an empty list if string is empty.
-## Splits string at ',' if not in ( ) or [ ].
+## Splits string at ',' if not (in ( )) or [ ].
 @BindGlobal( "SPLIT_KOMMAS_NOT_IN_BRACKETS",
             
   function( string )
     local positions, bracket_count, return_list, first, last, i;
     
-    if Length( string ) == 0
+    if (Length( string ) == 0)
         
         return [ ];
         
@@ -150,15 +150,15 @@ end );
     
     for i in (1):(Length( string ))
         
-        if string[ i ] ⥉ [ '(', '[' ]
+        if (string[ i ] in [ '(', '[' ])
             
             bracket_count = bracket_count + 1;
             
-        elseif string[ i ] ⥉ [ ')', ']' ]
+        elseif (string[ i ] in [ ')', ']' ])
             
             bracket_count = bracket_count - 1;
             
-        elseif bracket_count == 0 && string[ i ] == ','
+        elseif (bracket_count == 0 && string[ i ] == ',')
             
             Add( positions, i );
             
@@ -193,7 +193,7 @@ end );
     
     i = PositionSublist( command_string, "(" );
     
-    if i == fail
+    if (i == fail)
         
         return fail;
         
@@ -222,7 +222,7 @@ end );
     
     NormalizeWhitespace( string );
     
-    if string[ 1 ] == '[' && string[ Length( string ) ] == ']'
+    if (string[ 1 ] == '[' && string[ Length( string ) ] == ']')
         
         return SPLIT_KOMMAS_NOT_IN_BRACKETS( string[(2):(Length( string ) - 1)] );
         
@@ -241,7 +241,7 @@ end );
     
     listing = FIND_LISTING( single_part );
     
-    if listing != fail
+    if (listing != fail)
         
         return List( listing, SPLIT_SINGLE_PART_RECURSIVE );
         
@@ -249,7 +249,7 @@ end );
     
     listing = SPLIT_KOMMAS_NOT_IN_BRACKETS( single_part );
     
-    if listing == [ ]
+    if (listing == [ ])
         
         return List( listing, SPLIT_SINGLE_PART_RECURSIVE );
         
@@ -257,7 +257,7 @@ end );
     
     listing = COMMAND_AND_ARGUMENTS( single_part );
     
-    if listing == fail
+    if (listing == fail)
         
         return single_part;
         
@@ -280,7 +280,7 @@ end );
     
     Perform( part, NormalizedWhitespace );
     
-    if Length( part ) == 2
+    if (Length( part ) == 2)
         
         return_rec.bound_variables = part[ 1 ];
         
@@ -323,7 +323,7 @@ end );
         
         position = PositionSublist( list[ arg ], "[" );
         
-        if position == fail
+        if (position == fail)
             
             Add( new_list, NormalizedWhitespace( list[ arg ] ) );
             
@@ -370,7 +370,7 @@ end );
     
     position = PositionSublist( string, substring );
     
-    if position == fail
+    if (position == fail)
         
         return string;
         
@@ -400,13 +400,13 @@ end );
     
     nr_substring_close_bracket = COUNT_SUBSTRING_APPEARANCE( part, "(" );
     
-    if nr_substring_close_bracket < 2
+    if (nr_substring_close_bracket < 2)
         
         return fail;
         
     end;
     
-    if nr_substring_close_bracket > 2
+    if (nr_substring_close_bracket > 2)
         
         part = @Concatenation( "this is not a valid part: ", part );
         
@@ -426,7 +426,7 @@ end );
     
     position_equal = PositionSublist( variables, "=" );
     
-    if position_equal != fail
+    if (position_equal != fail)
         
         variables = SplitString( variables, "=" );
         
@@ -444,7 +444,7 @@ end );
     
     position_close_bracket = PositionSublist( variables, ")" );
     
-    if position_close_bracket == fail
+    if (position_close_bracket == fail)
         
         Error( "some ) should have been found" );
         
@@ -460,15 +460,15 @@ end );
     
     return_record.Function = func;
     
-    if @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[func] )
+    if (@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[func] ))
         
-        if Length( return_record.Variables ) != Length( CAP_INTERNAL_METHOD_NAME_RECORD[func].filter_list ) - 1
+        if (Length( return_record.Variables ) != Length( CAP_INTERNAL_METHOD_NAME_RECORD[func].filter_list ) - 1)
             
             Error( "in logic file: ", func, " gets ", Length( return_record.Variables ), " arguments but ", Length( CAP_INTERNAL_METHOD_NAME_RECORD[func].filter_list ) - 1, " were expected" );
             
         end;
         
-    elseif func != "Source" && func != "Range"
+    elseif (func != "Source" && func != "Range")
         
         Error( "in logic file: ", func, " is neither a CAP operation nor `Source` or `Range`" );
         
@@ -486,7 +486,7 @@ end );
     
     split_source_part = SplitString( source_part, "(" );
     
-    if Length( split_source_part ) != 2
+    if (Length( split_source_part ) != 2)
         
         Error( "this should not happen, too many (" );
         
@@ -499,7 +499,7 @@ end );
     
     variables = SplitString( split_source_part[ 2 ], "=" );
     
-    if Length( variables ) == 2
+    if (Length( variables ) == 2)
         
         value = CONVERT_STRING_TO_BOOL_OR_INT( variables[ 2 ] );
         
@@ -517,7 +517,7 @@ end );
     
     position_exists = PositionSublist( predicate, "exists" );
     
-    if Minimum( [ position_forall, position_exists ] ) != fail
+    if (Minimum( [ position_forall, position_exists ] ) != fail)
         
         first = Minimum( [ position_forall, position_exists ] ) + 7;
         
@@ -535,7 +535,7 @@ end );
         
         bound_variable = Position( range_variables, bound_variable[ 2 ] );
         
-        if position_forall != fail
+        if (position_forall != fail)
             
             bound_variable = [ bound_variable, "all" ];
             
@@ -553,9 +553,9 @@ end );
         
         for i in (1):(Length( range_variables ))
             
-            if IsString( range_variables[ i ] )
+            if (IsString( range_variables[ i ] ))
                 
-                if variables == range_variables[ i ]
+                if (variables == range_variables[ i ])
                     
                     bound_variable = i;
                     
@@ -567,7 +567,7 @@ end );
                 
                 bound_variable = Position( range_variables[ i ], variables );
                 
-                if bound_variable != fail
+                if (bound_variable != fail)
                     
                     bound_variable = [ i, bound_variable ];
                     
@@ -583,7 +583,7 @@ end );
             
         end;
         
-        if !@IsBound( bound_variable )
+        if (@not @IsBound( bound_variable ))
             
             variables = @Concatenation( "variable ", variables, " was not recognized" );
             
@@ -605,7 +605,7 @@ end );
     
     source_part = PositionSublist( theorem_string, "|" );
     
-    if source_part == fail
+    if (source_part == fail)
         
         Error( "no | found" );
         
@@ -613,7 +613,7 @@ end );
     
     range_part = PositionSublist( theorem_string, "vdash" );
     
-    if range_part == fail
+    if (range_part == fail)
         
         Error( "no \vdash found" );
         
@@ -643,7 +643,7 @@ end );
     
     RemoveCharacters( source_part_copy, " \n\t\r" );
     
-    if source_part_copy == "()"
+    if (source_part_copy == "()")
         
         source_part = [ ];
         
@@ -661,7 +661,7 @@ end );
     
     while i < Length( source_part )
         
-        if COUNT_SUBSTRING_APPEARANCE( source_part[ i ], "(" ) > COUNT_SUBSTRING_APPEARANCE( source_part[ i ], ")" )
+        if (COUNT_SUBSTRING_APPEARANCE( source_part[ i ], "(" ) > COUNT_SUBSTRING_APPEARANCE( source_part[ i ], ")" ))
             
             source_part[ i ] = @Concatenation( source_part[ i ], source_part[ i + 1 ] );
             
@@ -677,7 +677,7 @@ end );
     
     for i in (1):(Length( source_part ))
         
-        if source_part[ i ][ 1 ] == '('
+        if (source_part[ i ][ 1 ] == '(')
             
             length = Length( source_part[ i ] );
             
@@ -694,7 +694,7 @@ end );
     
     sources_list = [ ];
     
-    if theorem_record != fail
+    if (theorem_record != fail)
         ## Range contains the function
         
         theorem_record.Range = theorem_record.TheoremPart;
@@ -717,7 +717,7 @@ end );
         
         current_source_rec = FIND_PART_WHICH_CONTAINS_FUNCTION( i );
         
-        if current_source_rec != fail
+        if (current_source_rec != fail)
             
             result_function_variables = current_source_rec.Variables;
             
@@ -737,13 +737,13 @@ end );
         
     end;
     
-    if !@IsBound( theorem_record.Function )
+    if (@not @IsBound( theorem_record.Function ))
         
         Error( "no function found. This is the wrong parser" );
         
     end;
     
-    if !@IsBound( theorem_record.Range )
+    if (@not @IsBound( theorem_record.Range ))
         
         theorem_record.Range = FIND_PREDICATE_VARIABLES( range_part, result_function_variables );
         
@@ -757,7 +757,7 @@ end );
     
     for i in (1):(Length( result_function_variables ))
         
-        if !IsString( result_function_variables[ i ] )
+        if (@not IsString( result_function_variables[ i ] ))
             
             continue;
             
@@ -765,7 +765,7 @@ end );
         
         int_conversion = STRING_REPRESENTS_INTEGER( result_function_variables[ i ] );
         
-        if int_conversion == false
+        if (int_conversion == false)
             
             continue;
             
@@ -779,7 +779,7 @@ end );
     
     for i in (1):(Length( result_function_variables ))
         
-        if IsList( result_function_variables[ i ] ) && !IsString( result_function_variables[ i ] )
+        if (IsList( result_function_variables[ i ] ) && @not IsString( result_function_variables[ i ] ))
             
             result_function_variables[ i ] = Length( result_function_variables[ i ] );
             
@@ -806,7 +806,7 @@ end );
     
     position_end = PositionSublist( string, substring_end );
     
-    if position_begin == fail || position_end == fail
+    if (position_begin == fail || position_end == fail)
         
         return fail;
         
@@ -843,15 +843,15 @@ end );
   function( filename, type )
     local parser, file, lines, theorem_list, substring, without_align;
     
-    if LowercaseString( type ) == "implication"
+    if (LowercaseString( type ) == "implication")
         
         parser = PARSE_PREDICATE_IMPLICATION_FROM_LATEX;
         
-    elseif LowercaseString( type ) == "theorem"
+    elseif (LowercaseString( type ) == "theorem")
         
         parser = PARSE_THEOREM_FROM_LATEX;
         
-    elseif LowercaseString( type ) == "eval_rule"
+    elseif (LowercaseString( type ) == "eval_rule")
         
         parser = PARSE_EVAL_RULE_FROM_LATEX;
         
@@ -879,7 +879,7 @@ end );
         
         substring = RETURN_STRING_BETWEEN_SUBSTRINGS( file, "begin[sequent]", "end[sequent]" );
         
-        if substring == fail
+        if (substring == fail)
             
             break;
             
@@ -889,7 +889,7 @@ end );
         
         without_align = RETURN_STRING_BETWEEN_SUBSTRINGS( substring[ 1 ], "begin[align*]", "end[align*]" );
         
-        if without_align == fail
+        if (without_align == fail)
             
             without_align = substring[ 1 ];
             
@@ -942,7 +942,7 @@ end );
     
     source_part = List( source_part, i -> NormalizedWhitespace( REMOVE_PART_AFTER_FIRST_SUBSTRING( i, "(" ) ) );
     
-    if Length( source_part ) == 0
+    if (Length( source_part ) == 0)
         
         Error( "no source part found" );
         
@@ -982,19 +982,19 @@ end );
     local appearance_list, current_result, i, j, name_position, return_list;
     
     ## command_case
-    if IsRecord( tree )
+    if (IsRecord( tree ))
         
         return SEARCH_FOR_VARIABLE_NAME_APPEARANCE( tree.arguments, names );
         
     end;
     
-    if IsString( tree )
+    if (IsString( tree ))
         
         name_position = Position( names, tree );
         
         return_list = List( names, i -> [ ] );
         
-        if name_position != fail
+        if (name_position != fail)
             
             return_list[ name_position ] = [ [ ] ];
             
@@ -1004,7 +1004,7 @@ end );
         
     end;
     
-    if IsList( tree ) && !IsString( tree )
+    if (IsList( tree ) && @not IsString( tree ))
         
         return_list = List( names, i -> [ ] );
         
@@ -1034,19 +1034,19 @@ end );
   function( tree, names, replacements )
     local return_rec, entry;
     
-    if IsString( tree ) && Position( names, tree ) != fail
+    if (IsString( tree ) && Position( names, tree ) != fail)
         
         return replacements[ Position( names, tree ) ];
         
     end;
     
-    if IsList( tree )
+    if (IsList( tree ))
         
         return List( tree, i -> REPLACE_VARIABLE( i, names, replacements ) );
         
     end;
     
-    if IsRecord( tree )
+    if (IsRecord( tree ))
         
         return_rec = ShallowCopy( tree );
         
@@ -1065,11 +1065,11 @@ end );
   function( tree )
     local int;
 
-    if IsString( tree )
+    if (IsString( tree ))
        
        int = STRING_REPRESENTS_INTEGER( tree );
        
-       if int == false
+       if (int == false)
            
            return tree;
            
@@ -1081,13 +1081,13 @@ end );
        
     end;
 
-    if IsList( tree )
+    if (IsList( tree ))
        
        return List( tree, REPLACE_INTEGER_VARIABLE );
        
     end;
     
-    if IsRecord( tree )
+    if (IsRecord( tree ))
         
         int = ShallowCopy( tree );
         
@@ -1106,29 +1106,29 @@ end );
   function( tree )
     local appearance_list, current_result, i, j, int;
     
-    if IsList( tree ) && Length( tree ) == 2 && IsString( tree[ 1 ] ) && IsList( tree[ 2 ] ) && !IsString( tree[ 2 ] )
+    if (IsList( tree ) && Length( tree ) == 2 && IsString( tree[ 1 ] ) && IsList( tree[ 2 ] ) && @not IsString( tree[ 2 ] ))
         
         return SEARCH_FOR_INT_VARIABLE_APPEARANCE( tree[ 2 ] );
         
     end;
     
-    if IsList( tree )
+    if (IsList( tree ))
         
         appearance_list = [ ];
         
         for i in (1):(Length( tree ))
             
-            if IsString( tree[ i ] )
+            if (IsString( tree[ i ] ))
                 
                 int = STRING_REPRESENTS_INTEGER( tree[ i ] );
                 
-                if int != false
+                if (int != false)
                     
                     Add( appearance_list, [ [ i ], IntGAP( tree[ i ] ) ] );
                     
                 end;
                 
-            elseif IsList( tree[ i ] )
+            elseif (IsList( tree[ i ] ))
                 
                 current_result = SEARCH_FOR_INT_VARIABLE_APPEARANCE( tree[ i ] );
                 
@@ -1156,7 +1156,7 @@ end );
     
     command_list = [ ];
     
-    if IsList( tree ) && Length( tree ) == 2 && IsString( tree[ 1 ] ) && IsList( tree[ 2 ] ) && Position( variable_names, tree[ 1 ] ) == fail 
+    if (IsList( tree ) && Length( tree ) == 2 && IsString( tree[ 1 ] ) && IsList( tree[ 2 ] ) && Position( variable_names, tree[ 1 ] ) == fail )
         
         command_list = [ [ [ ], tree[ 1 ] ] ];
         
@@ -1164,7 +1164,7 @@ end );
         
     end;
     
-    if IsList( tree )
+    if (IsList( tree ))
         
         for i in (1):(Length( tree ))
             
@@ -1195,11 +1195,11 @@ end );
     
     for i in (1):(Length( var_list ))
         
-        if Length( var_list[ i ] ) == 1
+        if (Length( var_list[ i ] ) == 1)
             
             for j in (i + 1):(Length( var_list ))
                 
-                if @IsBound( var_list[ j ][ 2 ] )
+                if (@IsBound( var_list[ j ][ 2 ] ))
                     
                     var_list[ i ][ 2 ] = var_list[ j ][ 2 ];
                     
@@ -1211,7 +1211,7 @@ end );
             
         end;
         
-        if !@IsBound( var_list[ i ][ 2 ] )
+        if (@not @IsBound( var_list[ i ][ 2 ] ))
             
             Error( "no type for variable found" );
             
@@ -1232,11 +1232,11 @@ end );
   function( tree )
     local i, var_list, current_var;
     
-    if IsString( tree )
+    if (IsString( tree ))
         
         return [ [ [ ], tree ] ];
         
-    elseif IsList( tree )
+    elseif (IsList( tree ))
         
         var_list = [ ];
         
@@ -1252,7 +1252,7 @@ end );
         
         return var_list;
         
-    elseif IsRecord( tree )
+    elseif (IsRecord( tree ))
         
         return GIVE_VARIABLE_NAMES_WITH_POSITIONS_RECURSIVE( tree.arguments );
         
@@ -1266,7 +1266,7 @@ end );
             
   function( variable_name )
     
-    if PositionSublist( variable_name, "[" ) == fail
+    if (PositionSublist( variable_name, "[" ) == fail)
         
         return false;
         
@@ -1281,7 +1281,7 @@ end );
   function( variable_name )
     local length;
     
-    if !IS_LIST_WITH_INDEX( variable_name )
+    if (@not IS_LIST_WITH_INDEX( variable_name ))
         
         return [ variable_name ];
         
@@ -1303,15 +1303,15 @@ end );
             
   function( record )
     
-    if IsRecord( record )
+    if (IsRecord( record ))
         
         return @rec( command = record.command, arguments = REPLACE_INTEGER_STRINGS_BY_INTS_AND_VARIABLES_BY_FAIL_RECURSIVE( record.arguments ) );
         
-    elseif IsList( record ) && !IsString( record )
+    elseif (IsList( record ) && @not IsString( record ))
         
         return List( record, REPLACE_INTEGER_STRINGS_BY_INTS_AND_VARIABLES_BY_FAIL_RECURSIVE );
         
-    elseif IsString( record ) && STRING_REPRESENTS_INTEGER( record )
+    elseif (IsString( record ) && STRING_REPRESENTS_INTEGER( record ))
         
         return Int_SAVE( record );
         
@@ -1336,7 +1336,7 @@ end );
     
     split_record = SPLIT_THEOREM( rule );
     
-    if IsString( split_record )
+    if (IsString( split_record ))
         
         Error( @Concatenation( split_record ), " in ", rule );
         
@@ -1353,11 +1353,11 @@ end );
     
     variables = FIND_VARIABLE_TYPES( variables );
     
-    object_variables = Filtered( variables, i -> i[ 2 ] ⥉ [ "obj", "mor" ] );
+    object_variables = Filtered( variables, i -> i[ 2 ] in [ "obj", "mor" ] );
     
-    list_variables = Filtered( variables, i -> i[ 2 ] ⥉ [ "listobj", "listmor" ] );
+    list_variables = Filtered( variables, i -> i[ 2 ] in [ "listobj", "listmor" ] );
     
-    int_variables = Filtered( variables, i -> i[ 2 ] ⥉ [ "int" ] );
+    int_variables = Filtered( variables, i -> i[ 2 ] in [ "int" ] );
     
     list_variables = List( list_variables, i -> i[ 1 ] );
     
@@ -1367,7 +1367,7 @@ end );
     
     range = SplitString( range, "=" );
     
-    if Length( range ) != 2
+    if (Length( range ) != 2)
         
         Error( "range must contain exactly one =" );
         
@@ -1395,7 +1395,7 @@ end );
         
         possible_positions = Filtered( variables_with_positions, i -> i[ 2 ] == variable[ 1 ] );
         
-        if possible_positions == [ ]
+        if (possible_positions == [ ])
             
             continue;
             
@@ -1418,7 +1418,7 @@ end );
         
         for j in (i + 1):(Length( variables_with_positions ))
             
-            if variables_with_positions[ i ][ 2 ] == variables_with_positions[ j ][ 2 ]
+            if (variables_with_positions[ i ][ 2 ] == variables_with_positions[ j ][ 2 ])
                 
                 Add( equal_variable_pairs[ i ], variables_with_positions[ j ][ 1 ] );
                 
@@ -1432,11 +1432,11 @@ end );
     
     for variable in variables_with_positions
         
-        if IS_LIST_WITH_INDEX( variable[ 2 ] )
+        if (IS_LIST_WITH_INDEX( variable[ 2 ] ))
             
             current_variable_and_index = SPLIT_INTO_LIST_NAME_AND_INDEX( variable[ 2 ] );
             
-            if STRING_REPRESENTS_INTEGER( current_variable_and_index[ 2 ] )
+            if (STRING_REPRESENTS_INTEGER( current_variable_and_index[ 2 ] ))
                 
                 additional_position = Int_SAVE( current_variable_and_index[ 2 ] );
                 
@@ -1454,7 +1454,7 @@ end );
     
     return_rec.equal_variable_positions = equal_variable_pairs;
     
-    if IS_LIST_WITH_INDEX( range_replace )
+    if (IS_LIST_WITH_INDEX( range_replace ))
         
         range_replace_list_and_index = SPLIT_INTO_LIST_NAME_AND_INDEX( range_replace );
         
@@ -1470,7 +1470,7 @@ end );
     
     ## Starting with sources
     
-    if source == "()"
+    if (source == "()")
         
         source_list = [ ];
         
@@ -1488,7 +1488,7 @@ end );
     
     for source in source_list
         
-        if source.bound_variables != fail
+        if (source.bound_variables != fail)
            
             bound_variable_string = source.bound_variables;
             
@@ -1496,7 +1496,7 @@ end );
             
             bound_variable_name = bound_variable_string[ 1 ];
             
-            if COUNT_SUBSTRING_APPEARANCE( bound_variable_string[ 2 ], "[" ) == 0
+            if (COUNT_SUBSTRING_APPEARANCE( bound_variable_string[ 2 ], "[" ) == 0)
                 
                 source.bound_variable_list_name = bound_variable_string[ 2 ];
                 
@@ -1508,7 +1508,7 @@ end );
                     
                     bound_variable_list_content = SPLIT_STRING_MULTIPLE( bound_variable_list_content, i );
                     
-                    if Length( bound_variable_list_content ) > 1
+                    if (Length( bound_variable_list_content ) > 1)
                         
                         break;
                         
@@ -1520,7 +1520,7 @@ end );
                     
                 end;
                 
-                if Length( bound_variable_list_content ) < 2
+                if (Length( bound_variable_list_content ) < 2)
                     
                     Error( "could not split bound variable list correctly" );
                     
@@ -1530,7 +1530,7 @@ end );
                 
                 for i in [ 1, 2 ]
                     
-                    if STRING_REPRESENTS_INTEGER( bound_variable_list_content[ i ] )
+                    if (STRING_REPRESENTS_INTEGER( bound_variable_list_content[ i ] ))
                         
                         bound_variable_list_boundaries[ i ] = Int_SAVE( bound_variable_list_content[ i ] );
                         

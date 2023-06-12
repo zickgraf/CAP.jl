@@ -31,11 +31,11 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     
     for option_name in RecNames( options )
         
-        if @IsBound( known_options_with_filters[option_name] )
+        if (@IsBound( known_options_with_filters[option_name] ))
             
             filter = known_options_with_filters[option_name];
             
-            if !filter( options[option_name] )
+            if (@not filter( options[option_name] ))
                 
                 # COVERAGE_IGNORE_NEXT_LINE
                 Error( "The value of the option `", option_name, "` must lie in the filter ", filter );
@@ -68,7 +68,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     
     for option in mandatory_options
         
-        if !@IsBound( options[option] )
+        if (@not @IsBound( options[option] ))
             
             Error( "mandatory option ", option, " is not set" );
             
@@ -101,7 +101,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
         morphism_datum = options.morphism_datum,
     );
     
-    if HasCommutativeRingOfLinearCategory( C )
+    if (HasCommutativeRingOfLinearCategory( C ))
         
         category_constructor_options.commutative_ring_of_linear_category = CommutativeRingOfLinearCategory( C );
         
@@ -109,7 +109,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     
     category_constructor_options.properties = ListKnownCategoricalProperties( C );
     
-    if @IsBound( options.only_primitive_operations ) && options.only_primitive_operations
+    if (@IsBound( options.only_primitive_operations ) && options.only_primitive_operations)
         
         list_of_operations_to_install = ListPrimitivelyInstalledOperationsOfCategory( C );
         
@@ -121,7 +121,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
     
     category_constructor_options.list_of_operations_to_install = list_of_operations_to_install;
     
-    if @IsBound( C.supports_empty_limits )
+    if (@IsBound( C.supports_empty_limits ))
         
         category_constructor_options.supports_empty_limits = C.supports_empty_limits;
         
@@ -193,7 +193,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
         
     end );
     
-    if "BasisOfExternalHom" ⥉ list_of_operations_to_install
+    if ("BasisOfExternalHom" in list_of_operations_to_install)
         
         AddBasisOfExternalHom( D,
           function( cat, a, b )
@@ -205,7 +205,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
         
     end;
     
-    if "CoefficientsOfMorphism" ⥉ list_of_operations_to_install
+    if ("CoefficientsOfMorphism" in list_of_operations_to_install)
         
         AddCoefficientsOfMorphism( D,
           function( cat, alpha )
@@ -226,11 +226,11 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
         "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
     ];
     
-    if HasRangeCategoryOfHomomorphismStructure( C ) && !IsEmpty( Intersection( list_of_operations_to_install, operations_of_homomorphism_structure ) )
+    if (HasRangeCategoryOfHomomorphismStructure( C ) && @not IsEmpty( Intersection( list_of_operations_to_install, operations_of_homomorphism_structure ) ))
         
         HC = RangeCategoryOfHomomorphismStructure( C );
         
-        if IsIdenticalObj( C, HC )
+        if (IsIdenticalObj( C, HC ))
             
             # The range of the homomorphism structure of C is C itself,
             # so the range of the homomorphism structure of D should be D itself.
@@ -287,7 +287,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
         SetRangeCategoryOfHomomorphismStructure( D, HC );
         SetIsEquippedWithHomomorphismStructure( D, true );
         
-        if "DistinguishedObjectOfHomomorphismStructure" ⥉ list_of_operations_to_install
+        if ("DistinguishedObjectOfHomomorphismStructure" in list_of_operations_to_install)
             AddDistinguishedObjectOfHomomorphismStructure( D,
               function( cat )
                 
@@ -296,7 +296,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
             end );
         end;
         
-        if "HomomorphismStructureOnObjects" ⥉ list_of_operations_to_install
+        if ("HomomorphismStructureOnObjects" in list_of_operations_to_install)
             AddHomomorphismStructureOnObjects( D,
               function( cat, a, b )
                 
@@ -305,7 +305,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
             end );
         end;
         
-        if "HomomorphismStructureOnMorphisms" ⥉ list_of_operations_to_install
+        if ("HomomorphismStructureOnMorphisms" in list_of_operations_to_install)
             AddHomomorphismStructureOnMorphisms( D,
               function( cat, alpha, beta )
                 
@@ -314,7 +314,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
             end );
         end;
         
-        if "HomomorphismStructureOnMorphismsWithGivenObjects" ⥉ list_of_operations_to_install
+        if ("HomomorphismStructureOnMorphismsWithGivenObjects" in list_of_operations_to_install)
             AddHomomorphismStructureOnMorphismsWithGivenObjects( D,
               function( cat, s, alpha, beta, r )
                 
@@ -323,7 +323,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
             end );
         end;
         
-        if "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure" ⥉ list_of_operations_to_install
+        if ("InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure" in list_of_operations_to_install)
             AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure( D,
               function( cat, alpha )
                 
@@ -332,7 +332,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
             end );
         end;
         
-        if "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects" ⥉ list_of_operations_to_install
+        if ("InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects" in list_of_operations_to_install)
             AddInterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects( D,
               function( cat, s, alpha, r )
                 
@@ -341,7 +341,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
             end );
         end;
         
-        if "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism" ⥉ list_of_operations_to_install
+        if ("InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism" in list_of_operations_to_install)
             AddInterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism( D,
               function( cat, a, b, iota )
                 

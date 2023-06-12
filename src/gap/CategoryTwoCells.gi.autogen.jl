@@ -19,9 +19,9 @@ InstallMethod( @__MODULE__,  Add,
   function( category, twocell )
     local obj_filter, filter;
     
-    if HasCapCategory( twocell )
+    if (HasCapCategory( twocell ))
         
-        if IsIdenticalObj( CapCategory( twocell ), category )
+        if (IsIdenticalObj( CapCategory( twocell ), category ))
             
             return;
             

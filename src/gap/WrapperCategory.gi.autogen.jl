@@ -95,7 +95,7 @@ InstallMethod( @__MODULE__,  /,
         
   function( object, cat )
     
-    if !IsIdenticalObj( CapCategory( object ), ModelingCategory( cat ) )
+    if (@not IsIdenticalObj( CapCategory( object ), ModelingCategory( cat ) ))
         TryNextMethod( );
     end;
     
@@ -110,7 +110,7 @@ InstallMethod( @__MODULE__,  /,
         
   function( morphism, cat )
     
-    if !IsIdenticalObj( CapCategory( morphism ), ModelingCategory( cat ) )
+    if (@not IsIdenticalObj( CapCategory( morphism ), ModelingCategory( cat ) ))
         TryNextMethod( );
     end;
     
@@ -138,22 +138,22 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         "modeling_tower_morphism_datum",
     ];
     
-    if Length( SetGAP( List( combined_options, name -> @IsBound( options[name] ) ) ) ) > 1
+    if (Length( SetGAP( List( combined_options, name -> @IsBound( options[name] ) ) ) ) > 1)
         
         Display( "WARNING: To avoid inconsistencies, either all or none of the following options should be set in a call to `WrapperCategory`. This is not the case." );
         Display( combined_options );
         
     end;
     
-    if @IsBound( options.wrap_range_of_hom_structure )
+    if (@IsBound( options.wrap_range_of_hom_structure ))
         
-        if options.wrap_range_of_hom_structure && !IsIdenticalObj( C, RangeCategoryOfHomomorphismStructure( C ) )
+        if (options.wrap_range_of_hom_structure && @not IsIdenticalObj( C, RangeCategoryOfHomomorphismStructure( C ) ))
             
             Error( "Wrapping the range of the hom structure is not supported anymore (except if the category has itself as the range of its hom structure). Please remove `wrap_range_of_hom_structure`." );
             
         end;
         
-        if !options.wrap_range_of_hom_structure && IsIdenticalObj( C, RangeCategoryOfHomomorphismStructure( C ) )
+        if (@not options.wrap_range_of_hom_structure && IsIdenticalObj( C, RangeCategoryOfHomomorphismStructure( C ) ))
             
             Error( "If the category has itself as the range of its hom structure, the range of the hom structure is always wrapped. Please remove `wrap_range_of_hom_structure`." );
             
@@ -166,7 +166,7 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         
     end;
     
-    if @IsBound( options.object_constructor )
+    if (@IsBound( options.object_constructor ))
         
         Print( "WARNING: Setting object_constructor etc. for WrapperCategory is deprecated and will not be supported after 2024.05.02. Use ReinterpretationOfCategory instead.\n" );
         
@@ -185,11 +185,11 @@ InstallMethod( @__MODULE__,  WrapperCategory,
     
     for option_name in RecNames( options )
         
-        if @IsBound( known_options_with_filters[option_name] )
+        if (@IsBound( known_options_with_filters[option_name] ))
             
             filter = known_options_with_filters[option_name];
             
-            if !filter( options[option_name] )
+            if (@not filter( options[option_name] ))
                 
                 # COVERAGE_IGNORE_NEXT_LINE
                 Error( "The value of the option `", option_name, "` must lie in the filter ", filter );
@@ -216,19 +216,19 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         modeling_tower_morphism_datum = ( D, m ) -> m,
     );
     
-    if @IsBound( options.name )
+    if (@IsBound( options.name ))
         
         reinterpretation_options.name = options.name;
         
-    elseif HasName( C )
+    elseif (HasName( C ))
         
         reinterpretation_options.name = @Concatenation( "WrapperCategory( ", Name( C ), " )" );
         
     end;
     
-    if @IsBound( options.category_filter )
+    if (@IsBound( options.category_filter ))
         
-        if !IsSpecializationOfFilter( IsWrapperCapCategory, options.category_filter )
+        if (@not IsSpecializationOfFilter( IsWrapperCapCategory, options.category_filter ))
             
             Error( "<options.category_filter> must imply IsWrapperCapCategory" );
             
@@ -242,9 +242,9 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         
     end;
     
-    if @IsBound( options.category_object_filter )
+    if (@IsBound( options.category_object_filter ))
         
-        if !IsSpecializationOfFilter( IsWrapperCapCategoryObject, options.category_object_filter )
+        if (@not IsSpecializationOfFilter( IsWrapperCapCategoryObject, options.category_object_filter ))
             
             Error( "<options.category_object_filter> must imply IsWrapperCapCategoryObject" );
             
@@ -258,9 +258,9 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         
     end;
     
-    if @IsBound( options.category_morphism_filter )
+    if (@IsBound( options.category_morphism_filter ))
         
-        if !IsSpecializationOfFilter( IsWrapperCapCategoryMorphism, options.category_morphism_filter )
+        if (@not IsSpecializationOfFilter( IsWrapperCapCategoryMorphism, options.category_morphism_filter ))
             
             Error( "<options.category_morphism_filter> must imply IsWrapperCapCategoryMorphism" );
             
@@ -274,7 +274,7 @@ InstallMethod( @__MODULE__,  WrapperCategory,
         
     end;
     
-    if @IsBound( options.only_primitive_operations )
+    if (@IsBound( options.only_primitive_operations ))
         
         reinterpretation_options.only_primitive_operations = options.only_primitive_operations;
         

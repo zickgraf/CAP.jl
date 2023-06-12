@@ -67,13 +67,13 @@ end );
   
   function( obj )
     
-    if IsCapCategory( obj )
+    if (IsCapCategory( obj ))
         return OppositeCategory( obj );
-    elseif IsCapCategoryObject( obj )
+    elseif (IsCapCategoryObject( obj ))
         return ObjectDatum( CapCategory( obj ), obj );
-    elseif IsCapCategoryMorphism( obj )
+    elseif (IsCapCategoryMorphism( obj ))
         return MorphismDatum( CapCategory( obj ), obj );
-    elseif IsList( obj )
+    elseif (IsList( obj ))
         return List( obj, CAP_INTERNAL_OPPOSITE_RECURSIVE );
     else
         return obj;
@@ -101,7 +101,7 @@ end );
         
         tester = Tester( attr );
         
-        if !tester( opposite_category ) && tester( category )
+        if (@not tester( opposite_category ) && tester( category ))
             
             setter = Setter( attr );
             
@@ -121,7 +121,7 @@ end );
                           "VerticalPostCompose",
                           "IdenticalTwoCell" ] );
     
-    if only_primitive_operations
+    if (only_primitive_operations)
         list_of_underlying_operations = ListPrimitivelyInstalledOperationsOfCategory( category );
     else
         list_of_underlying_operations = ListInstalledOperationsOfCategory( category );
@@ -137,9 +137,9 @@ end );
         "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
         ];
     
-    if !IsEmpty( Intersection( list_of_underlying_operations, operations_of_homomorphism_structure ) )
+    if (@not IsEmpty( Intersection( list_of_underlying_operations, operations_of_homomorphism_structure ) ))
         
-        if !HasRangeCategoryOfHomomorphismStructure( category )
+        if (@not HasRangeCategoryOfHomomorphismStructure( category ))
             
             Error( "<category> has operations related to the homomorphism structure but no range category is set. This is not supported." );
             
@@ -155,13 +155,13 @@ end );
         current_entry = CAP_INTERNAL_METHOD_NAME_RECORD[current_recname];
         
         ## Conservative
-        if !@IsBound( current_entry.dual_operation )
+        if (@not @IsBound( current_entry.dual_operation ))
             continue;
         end;
         
         dual_operation_name = current_entry.dual_operation;
         
-        if !dual_operation_name ⥉ list_of_underlying_operations
+        if (@not dual_operation_name in list_of_underlying_operations)
             continue;
         end;
         
@@ -185,7 +185,7 @@ end );
             end
             """;
         
-        if @IsBound( current_entry.dual_preprocessor_func_string )
+        if (@IsBound( current_entry.dual_preprocessor_func_string ))
             
             preprocessor_string = ReplacedStringViaRecord(
                 """
@@ -216,23 +216,23 @@ end );
                 filter = filter_list[i];
                 argument_name = input_arguments_names[i];
                 
-                if filter == "object"
+                if (filter == "object")
                     
                     return @Concatenation( "ObjectDatum( cat, ", argument_name, " )" );
                     
-                elseif filter == "morphism"
+                elseif (filter == "morphism")
                     
                     return @Concatenation( "MorphismDatum( cat, ", argument_name, " )" );
                     
-                elseif filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_infinity"
+                elseif (filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_infinity")
                     
                     return argument_name;
                     
-                elseif filter == "list_of_objects"
+                elseif (filter == "list_of_objects")
                     
                     return @Concatenation( "List( ", argument_name, ", x -> ObjectDatum( cat, x ) )" );
                     
-                elseif filter == "list_of_morphisms"
+                elseif (filter == "list_of_morphisms")
                     
                     return @Concatenation( "List( ", argument_name, ", x -> MorphismDatum( cat, x ) )" );
                     
@@ -244,13 +244,13 @@ end );
                 
             end );
             
-            if current_entry.dual_arguments_reversed
+            if (current_entry.dual_arguments_reversed)
                 
                 dual_arguments = Reversed( dual_arguments );
                 
             end;
             
-            if current_entry.is_with_given && @IsBound( current_entry.dual_with_given_objects_reversed ) && current_entry.dual_with_given_objects_reversed
+            if (current_entry.is_with_given && @IsBound( current_entry.dual_with_given_objects_reversed ) && current_entry.dual_with_given_objects_reversed)
                 
                 tmp = dual_arguments[1];
                 dual_arguments[1] = dual_arguments[Length( dual_arguments)];
@@ -262,7 +262,7 @@ end );
         
         dual_arguments = @Concatenation( [ "OppositeCategory( cat )" ], dual_arguments );
         
-        if @IsBound( current_entry.dual_postprocessor_func_string )
+        if (@IsBound( current_entry.dual_postprocessor_func_string ))
             
             postprocessor_string = @Concatenation( "dual_postprocessor_func = ", current_entry.dual_postprocessor_func_string, ";" );
             
@@ -272,15 +272,15 @@ end );
             
             postprocessor_string = "";
             
-            if return_type == "object"
+            if (return_type == "object")
                 
                 return_statement = "return ObjectConstructor( cat, result );";
                 
-            elseif return_type == "morphism"
+            elseif (return_type == "morphism")
                 
                 return_statement = "return MorphismConstructor( cat, output_source_getter, result, output_range_getter );";
                 
-                if @IsBound( current_entry.output_source_getter_string ) && @IsBound( current_entry.can_always_compute_output_source_getter ) && current_entry.can_always_compute_output_source_getter
+                if (@IsBound( current_entry.output_source_getter_string ) && @IsBound( current_entry.can_always_compute_output_source_getter ) && current_entry.can_always_compute_output_source_getter)
                     
                     output_source_getter_string = current_entry.output_source_getter_string;
                     
@@ -290,7 +290,7 @@ end );
                     
                 end;
                 
-                if @IsBound( current_entry.output_range_getter_string ) && @IsBound( current_entry.can_always_compute_output_range_getter ) && current_entry.can_always_compute_output_range_getter
+                if (@IsBound( current_entry.output_range_getter_string ) && @IsBound( current_entry.can_always_compute_output_range_getter ) && current_entry.can_always_compute_output_range_getter)
                     
                     output_range_getter_string = current_entry.output_range_getter_string;
                     
@@ -305,39 +305,39 @@ end );
                     output_range_getter = output_range_getter_string,
                 ) );
                 
-            elseif return_type == "object_or_fail"
+            elseif (return_type == "object_or_fail")
                 
                 return_statement = """
-                    if result == fail
+                    if (result == fail)
                         return fail;
                     else
                         return ObjectConstructor( cat, result );
                     end;
                 """;
                 
-            elseif return_type == "morphism_or_fail"
+            elseif (return_type == "morphism_or_fail")
                 
                 return_statement = """
-                    if result == fail
+                    if (result == fail)
                         return fail;
                     else
                         return MorphismConstructor( cat, ObjectConstructor( cat, Range( result ) ), result, ObjectConstructor( cat, Source( result ) ) );
                     end;
                 """;
                 
-            elseif return_type == "list_of_morphisms"
+            elseif (return_type == "list_of_morphisms")
                 
                 return_statement = "return List( result, mor -> MorphismConstructor( cat, ObjectConstructor( cat, Range( mor ) ), mor, ObjectConstructor( cat, Source( mor ) ) ) );";
                 
-            elseif return_type == "list_of_objects"
+            elseif (return_type == "list_of_objects")
                 
                 return_statement = "return List( result, obj -> ObjectConstructor( cat, obj ) );";
                 
-            elseif return_type == "bool"
+            elseif (return_type == "bool")
                 
                 return_statement = "return result;";
                 
-            elseif return_type == "nonneg_integer_or_infinity"
+            elseif (return_type == "nonneg_integer_or_infinity")
                 
                 return_statement = "return result;";
 
@@ -380,7 +380,7 @@ InstallMethod( @__MODULE__,  Opposite,
   function( category, name )
     local opposite_category, known_properties, opposite_property_pairs, pair;
     
-    if !IsFinalized( category )
+    if (@not IsFinalized( category ))
         Error( "Input category must be finalized to create opposite category" );
     end;
     
@@ -388,7 +388,7 @@ InstallMethod( @__MODULE__,  Opposite,
     
     opposite_category.category_as_first_argument = true;
     
-    if @IsBound( category.supports_empty_limits )
+    if (@IsBound( category.supports_empty_limits ))
         
         opposite_category.supports_empty_limits = category.supports_empty_limits;
         
@@ -405,7 +405,7 @@ InstallMethod( @__MODULE__,  Opposite,
     
     # A category might have multiple different instances of opposite categories.
     # Only the first instance is used for attributes (of the category and its objects and morphisms).
-    if !HasOpposite( category )
+    if (@not HasOpposite( category ))
         
         SetOpposite( category, opposite_category );
         
@@ -418,13 +418,13 @@ InstallMethod( @__MODULE__,  Opposite,
     for pair in opposite_property_pairs
         
         # plausibility check
-        if !Reversed( pair ) ⥉ opposite_property_pairs
+        if (@not Reversed( pair ) in opposite_property_pairs)
             
             Error( "The pair of categorical properties <pair> was registered using `AddCategoricalProperty`, but the reversed pair was not." );
             
         end;
         
-        if pair[1] ⥉ known_properties
+        if (pair[1] in known_properties)
             
             Setter( ValueGlobal( pair[2] ) )( opposite_category, true );
             
@@ -441,7 +441,7 @@ InstallMethod( @__MODULE__,  Opposite,
         # A category might have multiple different instances of opposite categories.
         # Only the first instance is used for attributes (of the category and its objects and morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        if HasOpposite( object ) && IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
+        if (HasOpposite( object ) && IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat ))
             
             return Opposite( object );
             
@@ -451,7 +451,7 @@ InstallMethod( @__MODULE__,  Opposite,
                                                                 Opposite, object );
         
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        if CapCategory( object ).predicate_logic
+        if (CapCategory( object ).predicate_logic)
             
             #= comment for Julia
             INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_OBJECT( object );
@@ -462,7 +462,7 @@ InstallMethod( @__MODULE__,  Opposite,
         # A category might have multiple different instances of opposite categories.
         # Only the first instance is used for attributes (of the category and its objects and morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        if IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
+        if (IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat ))
             
             SetOpposite( object, opposite_object );
             
@@ -484,13 +484,13 @@ InstallMethod( @__MODULE__,  Opposite,
         #% CAP_JIT_DROP_NEXT_STATEMENT
         CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( morphism, OppositeCategory( cat ), [ "the morphism datum given to the morphism constructor of <cat>" ] );
         
-        if IsEqualForObjects( OppositeCategory( cat ), Source( morphism ), Opposite( range ) ) == false
+        if (IsEqualForObjects( OppositeCategory( cat ), Source( morphism ), Opposite( range ) ) == false)
             
             Error( "the source of the morphism datum must be equal to <Opposite( range )>" );
             
         end;
         
-        if IsEqualForObjects( OppositeCategory( cat ), Range( morphism ), Opposite( source ) ) == false
+        if (IsEqualForObjects( OppositeCategory( cat ), Range( morphism ), Opposite( source ) ) == false)
             
             Error( "the range of the morphism datum must be equal to <Opposite( source )>" );
             
@@ -499,7 +499,7 @@ InstallMethod( @__MODULE__,  Opposite,
         # A category might have multiple different instances of opposite categories.
         # Only the first instance is used for attributes (of the category and its objects and morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        if HasOpposite( morphism ) && IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
+        if (HasOpposite( morphism ) && IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat ))
             
             return Opposite( morphism );
             
@@ -510,7 +510,7 @@ InstallMethod( @__MODULE__,  Opposite,
                                                                                       Opposite, morphism );
         
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        if CapCategory( morphism ).predicate_logic
+        if (CapCategory( morphism ).predicate_logic)
             
             #= comment for Julia
             INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_MORPHISM( morphism );
@@ -521,7 +521,7 @@ InstallMethod( @__MODULE__,  Opposite,
         # A category might have multiple different instances of opposite categories.
         # Only the first instance is used for attributes (of the category and its objects and morphisms).
         #% CAP_JIT_DROP_NEXT_STATEMENT
-        if IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat )
+        if (IsIdenticalObj( Opposite( OppositeCategory( cat ) ), cat ))
             
             SetOpposite( morphism, opposite_morphism );
             
@@ -541,7 +541,7 @@ InstallMethod( @__MODULE__,  Opposite,
     
     Finalize( opposite_category );
     
-    if category.predicate_logic
+    if (category.predicate_logic)
         
         #= comment for Julia
         INSTALL_TODO_LIST_ENTRIES_FOR_OPPOSITE_CATEGORY( category );

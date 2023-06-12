@@ -36,26 +36,26 @@ function( name, target_op, used_op_names_with_multiples_and_category_getters, we
   local wrapped_category_filter;
     
     #= comment for Julia
-    if PositionSublist( StringGAP( category_filter ), "CanCompute" ) != fail
+    if (PositionSublist( StringGAP( category_filter ), "CanCompute" ) != fail)
         
         Print( "WARNING: The CategoryFilter of a derivation for ", NameFunction( target_op ), " uses `CanCompute`. Please register all preconditions explicitly.\n" );
         
     end;
     # =#
     
-    if NumberArgumentsFunction( category_filter ) == 0 || NumberArgumentsFunction( category_filter ) > 1
+    if (NumberArgumentsFunction( category_filter ) == 0 || NumberArgumentsFunction( category_filter ) > 1)
         
         Error( "the CategoryFilter of a derivation must accept exactly one argument" );
         
     end;
     
-    if ForAny( used_op_names_with_multiples_and_category_getters, x -> x[3] != fail ) && category_filter == IsCapCategory
+    if (ForAny( used_op_names_with_multiples_and_category_getters, x -> x[3] != fail ) && category_filter == IsCapCategory)
         
         Print( "WARNING: A derivation for ", NameFunction( target_op ), " depends on other categories (e.g. RangeCategoryOfHomomorphismStructure) but does no test via the CategoryFilter if the other categories are available (e.g. by testing HasRangeCategoryOfHomomorphismStructure).\n" );
         
     end;
     
-    if IsProperty( category_filter )
+    if (IsProperty( category_filter ))
         
         # for Julia
         wrapped_category_filter = cat -> Tester( category_filter )( cat ) && category_filter( cat );
@@ -120,7 +120,7 @@ function( d, weight, C )
   add_name = @Concatenation( "Add", method_name );
   add_method = ValueGlobal( add_name );
   
-  if HasFunctionCalledBeforeInstallation( d )
+  if (HasFunctionCalledBeforeInstallation( d ))
       
       FunctionCalledBeforeInstallation( d )( C );
       
@@ -142,7 +142,7 @@ function( d, op_weights )
   for i in (1):(Length( used_op_multiples ))
     op_w = op_weights[ i ];
     mult = used_op_multiples[ i ][ 2 ];
-    if op_w == infinity
+    if (op_w == infinity)
       return infinity;
     end;
     w = w + op_w * mult;
@@ -205,11 +205,11 @@ InstallMethod( @__MODULE__,  AddDerivation,
 function( G, d )
   local method_name, filter_list, number_of_proposed_arguments, current_function_argument_number, target_op, x;
   
-  if IsIdenticalObj( G, CAP_INTERNAL_DERIVATION_GRAPH )
+  if (IsIdenticalObj( G, CAP_INTERNAL_DERIVATION_GRAPH ))
     
     method_name = TargetOperation( d );
     
-    if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[method_name] )
+    if (@not @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[method_name] ))
         
         Error( "trying to add a derivation to CAP_INTERNAL_DERIVATION_GRAPH for a method not in CAP_INTERNAL_METHOD_NAME_RECORD" );
         
@@ -221,7 +221,7 @@ function( G, d )
     
     current_function_argument_number = NumberArgumentsFunction( DerivationFunction( d ) );
     
-    if current_function_argument_number >= 0 && current_function_argument_number != number_of_proposed_arguments
+    if (current_function_argument_number >= 0 && current_function_argument_number != number_of_proposed_arguments)
         Error( "While adding a derivation for ", method_name, ": given function has ", StringGAP( current_function_argument_number ),
                " arguments but should have ", StringGAP( number_of_proposed_arguments ) );
     end;
@@ -237,7 +237,7 @@ function( G, d )
     Add( G.derivations_by_used_ops[x[1]], d );
   end;
   
-  if IsEmpty( UsedOperationsWithMultiplesAndCategoryGetters( d ) )
+  if (IsEmpty( UsedOperationsWithMultiplesAndCategoryGetters( d ) ))
     
     Add( G.derivations_by_used_ops.none, d );
     
@@ -269,7 +269,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
                
   function( graph, target_op, used_ops_with_multiples_and_category_getters, func )
     
-    if IsStringRep( used_ops_with_multiples_and_category_getters ) || (IsString( used_ops_with_multiples_and_category_getters ) && !IsEmpty( used_ops_with_multiples_and_category_getters ))
+    if (IsStringRep( used_ops_with_multiples_and_category_getters ) || (IsString( used_ops_with_multiples_and_category_getters ) && @not IsEmpty( used_ops_with_multiples_and_category_getters )))
         
         Error( "calling AddDerivation with a description as the second argument but without explicit preconditions is not supported." );
         
@@ -287,7 +287,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
   function( graph, target_op, description, used_ops_with_multiples_and_category_getters, func )
     local weight, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, collected_list, used_op_names_with_multiples_and_category_getters, derivation, x;
     
-    if ValueOption( "Description" ) != fail
+    if (ValueOption( "Description" ) != fail)
         
         Error( "passing the description both as an argument and as an option at the same time is not supported" );
         
@@ -308,25 +308,25 @@ InstallMethod( @__MODULE__,  AddDerivation,
     
     for x in used_ops_with_multiples_and_category_getters
         
-        if Length( x ) < 2 || !IsFunction( x[1] ) || !IsInt( x[2] )
+        if (Length( x ) < 2 || !(IsFunction( x[1] )) || @not IsInt( x[2] ))
             
             Error( "preconditions must be of the form `[op, mult, getter]`, where `getter` is optional" );
             
         end;
         
-        if (Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] == target_op
+        if ((Length( x ) == 2 || (Length( x ) == 3 && x[3] == fail)) && x[1] == target_op)
             
             Error( "A derivation for ", NameFunction( target_op ), " has itself as a precondition. This is not supported because we cannot compute a well-defined weight.\n" );
             
         end;
         
-        if Length( x ) == 2
+        if (Length( x ) == 2)
             
             Add( used_op_names_with_multiples_and_category_getters, [ NameFunction( x[1] ), x[2], fail ] );
             
-        elseif Length( x ) == 3
+        elseif (Length( x ) == 3)
             
-            if x != fail && !(IsFunction( x[3] ) && NumberArgumentsFunction( x[3] ) == 1)
+            if (x != fail && !(IsFunction( x[3] ) && NumberArgumentsFunction( x[3] ) == 1))
                 
                 Error( "the category getter must be a single-argument function" );
                 
@@ -345,7 +345,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
     #= comment for Julia
     collected_list = CAP_INTERNAL_FIND_APPEARANCE_OF_SYMBOL_IN_FUNCTION( func, operations_in_graph, loop_multiplier, CAP_INTERNAL_METHOD_RECORD_REPLACEMENTS, category_getters );
     
-    if Length( collected_list ) != Length( used_op_names_with_multiples_and_category_getters ) || !ForAll( collected_list, c -> c ⥉ used_op_names_with_multiples_and_category_getters )
+    if (Length( collected_list ) != Length( used_op_names_with_multiples_and_category_getters ) || @not ForAll( collected_list, c -> c in used_op_names_with_multiples_and_category_getters ))
         
         SortBy( used_op_names_with_multiples_and_category_getters, x -> x[1] );
         SortBy( collected_list, x -> x[1] );
@@ -366,7 +366,7 @@ InstallMethod( @__MODULE__,  AddDerivation,
                                   func,
                                   category_filter );
     
-    if function_called_before_installation != false
+    if (function_called_before_installation != false)
         
         SetFunctionCalledBeforeInstallation( derivation, function_called_before_installation );
         
@@ -454,7 +454,7 @@ end );
 InstallMethod( @__MODULE__,  CurrentOperationWeight,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
-  if @IsBound( owl.operation_weights[op_name] )
+  if (@IsBound( owl.operation_weights[op_name] ))
       return owl.operation_weights[op_name];
   end;
   return infinity;
@@ -472,7 +472,7 @@ function( owl, d )
     
     for x in UsedOperationsWithMultiplesAndCategoryGetters( d )
         
-        if x[3] == fail
+        if (x[3] == fail)
             
             operation_weights = category_operation_weights;
             
@@ -484,7 +484,7 @@ function( owl, d )
         
         operation_name = x[1];
         
-        if !@IsBound( operation_weights[operation_name] )
+        if (@not @IsBound( operation_weights[operation_name] ))
             
             return infinity;
             
@@ -492,7 +492,7 @@ function( owl, d )
         
         operation_weight = operation_weights[operation_name];
         
-        if operation_weight == infinity
+        if (operation_weight == infinity)
             
             return infinity;
             
@@ -515,13 +515,13 @@ end );
 @BindGlobal( "TryToInstallDerivation", function ( owl, d )
   local new_weight, target, current_weight, current_derivation, derivations_of_target, new_pos, current_pos;
     
-    if !IsApplicableToCategory( d, CategoryOfOperationWeightList( owl ) )
+    if (@not IsApplicableToCategory( d, CategoryOfOperationWeightList( owl ) ))
         return fail;
     end;
     
     new_weight = OperationWeightUsingDerivation( owl, d );
     
-    if new_weight == infinity
+    if (new_weight == infinity)
         return fail;
     end;
     
@@ -530,7 +530,7 @@ end );
     current_weight = CurrentOperationWeight( owl, target );
     current_derivation = DerivationOfOperation( owl, target );
     
-    if current_derivation != fail
+    if (current_derivation != fail)
         
         derivations_of_target = DerivationsOfOperation( DerivationGraph( owl ), target );
         
@@ -542,9 +542,9 @@ end );
         
     end;
 
-    if new_weight < current_weight || (new_weight == current_weight && current_derivation != fail && new_pos < current_pos)
+    if (new_weight < current_weight || (new_weight == current_weight && current_derivation != fail && new_pos < current_pos))
         
-        if !IsIdenticalObj( current_derivation, d )
+        if (@not IsIdenticalObj( current_derivation, d ))
             
             InstallDerivationForCategory( d, new_weight, CategoryOfOperationWeightList( owl ) );
             
@@ -571,7 +571,7 @@ function( owl, op_name )
     Q = StringMinHeap();
     Add( Q, op_name, 0 );
     
-    while !IsEmptyHeap( Q )
+    while @not IsEmptyHeap( Q )
         
         node = ExtractMin( Q );
         
@@ -581,11 +581,11 @@ function( owl, op_name )
             
             new_weight = TryToInstallDerivation( owl, d );
             
-            if new_weight != fail
+            if (new_weight != fail)
                 
                 target = TargetOperation( d );
                 
-                if Contains( Q, target )
+                if (Contains( Q, target ))
                     
                     DecreaseKey( Q, target, new_weight );
                     
@@ -614,7 +614,7 @@ function( owl )
             
             new_weight = TryToInstallDerivation( owl, d );
             
-            if new_weight != fail
+            if (new_weight != fail)
                 
                 InstallDerivationsUsingOperation( owl, TargetOperation( d ) );
                 
@@ -634,7 +634,7 @@ InstallMethod( @__MODULE__,  Saturate,
     while true
         current_weight_list = StructuralCopy( owl.operation_weights );
         Reevaluate( owl );
-        if current_weight_list == owl.operation_weights
+        if (current_weight_list == owl.operation_weights)
             break;
         end;
     end;
@@ -666,24 +666,24 @@ function( owl, op_name )
     local w, mult, op, d;
     mult = node[ 2 ];
     op = node[ 1 ];
-    if op == fail
+    if (op == fail)
       Print( "  ", mult );
       return;
     end;
     w = CurrentOperationWeight( owl, op );
     d = DerivationOfOperation( owl, op );
-    if mult != fail
+    if (mult != fail)
       Print( "+ ", mult, " * " );
     end;
-    if w == infinity
+    if (w == infinity)
       Print( "(not installed)" );
     else
       Print( "(", w, ")" );
     end;
     Print( " ", op );
-    if w != infinity
+    if (w != infinity)
       Print( " " );
-      if d == fail
+      if (d == fail)
         Print( "[primitive]" );
       else
         Print( "[derived:", DerivationName( d ), "]" );
@@ -693,11 +693,11 @@ function( owl, op_name )
   get_children = function( node )
     local op, d;
     op = node[ 1 ];
-    if op == fail
+    if (op == fail)
       return [];
     end;
     d = DerivationOfOperation( owl, op );
-    if d == fail
+    if (d == fail)
       return [];
     else
       return @Concatenation( [ [ fail, DerivationWeight( d ) ] ],
@@ -764,7 +764,7 @@ function( H )
   Remove( array );
   key = H.str( node );
   @Unbind( H.node_indices[key] );
-  if !IsEmpty( array )
+  if (@not IsEmpty( array ))
     Heapify( H, 1 );
   end;
   return node;
@@ -816,13 +816,13 @@ function( H, i )
   left = 2 * i;
   right = 2 * i + 1;
   smallest = i;
-  if left <= HeapSize( H ) && key( array[ left ] ) < key( array[ smallest ] )
+  if (left <= HeapSize( H ) && key( array[ left ] ) < key( array[ smallest ] ))
     smallest = left;
   end;
-  if right <= HeapSize( H ) && key( array[ right ] ) < key( array[ smallest ] )
+  if (right <= HeapSize( H ) && key( array[ right ] ) < key( array[ smallest ] ))
     smallest = right;
   end;
-  if smallest != i
+  if (smallest != i)
     Swap( H, i, smallest );
     Heapify( H, smallest );
   end;
@@ -861,9 +861,9 @@ end );
   function( cell )
     local weight_list, list_of_methods, i, current_weight, can_compute, cannot_compute;
     
-    if IsCapCategory( cell )
+    if (IsCapCategory( cell ))
         weight_list = cell.derivations_weight_list;
-    elseif IsCapCategoryCell( cell )
+    elseif (IsCapCategoryCell( cell ))
         weight_list = CapCategory( cell ).derivations_weight_list;
     else
         Error( "Input must be a category or a cell" );
@@ -880,7 +880,7 @@ end );
         
         current_weight = CurrentOperationWeight( weight_list, i );
         
-        if current_weight < infinity
+        if (current_weight < infinity)
             Add( can_compute, [ i, current_weight ] );
         else
             Add( cannot_compute, i );
@@ -911,16 +911,16 @@ end );
   function( category, name )
     local category_weight_list, current_weight, current_derivation, currently_installed_funcs, to_delete, weight_list, category_getter_string, possible_derivations, category_filter, weight, found, i, x, final_derivation;
     
-    if IsFunction( name )
+    if (IsFunction( name ))
         name = NameFunction( name );
     end;
     
-    if !IsString( name )
+    if (@not IsString( name ))
         Error( "Usage is <category>,<string> or <category>,<CAP operation>\n" );
         return;
     end;
     
-    if !@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[name] )
+    if (@not @IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[name] ))
         Error( name, " is not the name of a CAP operation." );
         return;
     end;
@@ -929,15 +929,15 @@ end );
     
     current_weight = CurrentOperationWeight( category_weight_list, name );
     
-    if current_weight < infinity
+    if (current_weight < infinity)
     
         current_derivation = DerivationOfOperation( category_weight_list, name );
         
         Print( Name( category ), " can already compute ", TextAttr.b4, name, TextAttr.reset, " with weight " , current_weight, ".\n" );
         
-        if current_derivation == fail
+        if (current_derivation == fail)
             
-            if @IsBound( category.primitive_operations[name] ) && category.primitive_operations[name] == true
+            if (@IsBound( category.primitive_operations[name] ) && category.primitive_operations[name] == true)
                 
                 Print( "It was given as a primitive operation.\n" );
                 
@@ -954,7 +954,7 @@ end );
             
             for i in (1):(Length( currently_installed_funcs ))
                 
-                if ForAny( ((i+1)):(Length( currently_installed_funcs )), j -> currently_installed_funcs[i][2] == currently_installed_funcs[j][2] )
+                if (ForAny( ((i+1)):(Length( currently_installed_funcs )), j -> currently_installed_funcs[i][2] == currently_installed_funcs[j][2] ))
                     
                     Add( to_delete, i );
                     
@@ -970,7 +970,7 @@ end );
             
             for x in UsedOperationsWithMultiplesAndCategoryGetters( current_derivation )
                 
-                if x[3] == fail
+                if (x[3] == fail)
                     
                     weight_list = category_weight_list;
                     category_getter_string = "";
@@ -994,7 +994,7 @@ end );
         
         Print( "\nThe following function" );
         
-        if Length( currently_installed_funcs ) > 1
+        if (Length( currently_installed_funcs ) > 1)
             Print( "s were" );
         else
             Print( " was" );
@@ -1030,7 +1030,7 @@ end );
         
         for current_derivation in final_derivation.derivations
             
-            if TargetOperation( current_derivation ) == name
+            if (TargetOperation( current_derivation ) == name)
                 
                 Add( possible_derivations, @rec(
                     derivation = current_derivation,
@@ -1050,12 +1050,12 @@ end );
         
         # `SizeScreen()[1] - 3` is taken from the code for package banners
         Print( ListWithIdenticalEntries( SizeScreen()[1] - 3, '-' ), "\n" );
-        if IsProperty( category_filter ) && Tester( category_filter )( category ) && !category_filter( category )
+        if (IsProperty( category_filter ) && Tester( category_filter )( category ) && @not category_filter( category ))
             continue;
-        elseif IsProperty( category_filter ) && !Tester( category_filter )( category )
-            Print( "If ", Name( category ), " would be ", JoinStringsWithSeparator( Filtered( NamesFilter( category_filter ), name -> !StartsWith( name, "Has" ) ), " and " ), " then\n" );
+        elseif (IsProperty( category_filter ) && @not Tester( category_filter )( category ))
+            Print( "If ", Name( category ), " would be ", JoinStringsWithSeparator( Filtered( NamesFilter( category_filter ), name -> @not StartsWith( name, "Has" ) ), " and " ), " then\n" );
             Print( TextAttr.b4, name, TextAttr.reset, " could be derived by\n" );
-        elseif IsFunction( category_filter ) && !category_filter( category )
+        elseif (IsFunction( category_filter ) && @not category_filter( category ))
             Print( "If ", Name( category ), " would fulfill the conditions given by\n\n" );
             Display( category_filter );
             Print( "\nthen ", TextAttr.b4, name, TextAttr.reset, " could be derived by\n" );
@@ -1065,7 +1065,7 @@ end );
         
         for x in UsedOperationsWithMultiplesAndCategoryGetters( current_derivation.derivation )
             
-            if x[3] == fail
+            if (x[3] == fail)
                 
                 weight_list = category_weight_list;
                 category_getter_string = "";
@@ -1079,7 +1079,7 @@ end );
             
             weight = CurrentOperationWeight( weight_list, x[1] );
             
-            if weight < infinity
+            if (weight < infinity)
                 Print( "* ", TextAttr.b2, x[1], TextAttr.reset, " (", x[2], "x)", category_getter_string, ", (already installed with weight ", weight,")" );
             else
                 Print( "* ", TextAttr.b1, x[1], TextAttr.reset, " (", x[2], "x)", category_getter_string );
@@ -1093,7 +1093,7 @@ end );
         
         @Assert( 0, @IsBound( current_derivation.can_compute ) == @IsBound( current_derivation.cannot_compute ) );
         
-        if @IsBound( current_derivation.can_compute )
+        if (@IsBound( current_derivation.can_compute ))
             
             Print( "\n\nas a final derivation\nif the following additional operations could be computed\n" );
             
@@ -1101,7 +1101,7 @@ end );
             
             for x in current_derivation.can_compute
                 
-                if x[3] == fail
+                if (x[3] == fail)
                     
                     weight_list = category_weight_list;
                     category_getter_string = "";
@@ -1115,7 +1115,7 @@ end );
                 
                 weight = CurrentOperationWeight( weight_list, x[1] );
                 
-                if weight == infinity
+                if (weight == infinity)
                     
                     Print( "* ", x[1], "\n" );
                     found = true;
@@ -1124,7 +1124,7 @@ end );
                 
             end;
             
-            if !found
+            if (@not found)
                 
                 Print( "(none)\n" );
                 
@@ -1138,7 +1138,7 @@ end );
                 
                 weight = CurrentOperationWeight( category_weight_list, x );
                 
-                if weight < infinity
+                if (weight < infinity)
                     
                     Print( "* ", x, "\n" );
                     found = true;
@@ -1147,7 +1147,7 @@ end );
                 
             end;
             
-            if !found
+            if (@not found)
                 
                 Print( "(none)\n" );
                 
@@ -1170,29 +1170,29 @@ end );
   function( arg... )
     local cat, filter, names;
     
-    if Length( arg ) < 1
+    if (Length( arg ) < 1)
         Error( "first argument needs to be <category>" );
     end;
     
     cat = arg[ 1 ];
     
-    if Length( arg ) > 1
+    if (Length( arg ) > 1)
         filter = arg[ 2 ];
     else
         filter = fail;
     end;
     
-    if IsCapCategoryCell( cat )
+    if (IsCapCategoryCell( cat ))
         cat = CapCategory( cat );
     end;
     
-    if !IsCapCategory( cat )
+    if (@not IsCapCategory( cat ))
         Error( "input must be category or cell" );
     end;
     
     names = Filtered( RecNames( cat.primitive_operations ), x -> cat.primitive_operations[x] );
     
-    if filter != fail
+    if (filter != fail)
         names = Filtered( names, i -> PositionSublist( i, filter ) != fail );
     end;
     
@@ -1205,23 +1205,23 @@ end );
   function( arg... )
     local category, filter, weight_list, list_of_methods, list_of_installed_methods;
     
-    if Length( arg ) < 1
+    if (Length( arg ) < 1)
         Error( "first argument needs to be <category>" );
     end;
     
     category = arg[ 1 ];
     
-    if Length( arg ) > 1
+    if (Length( arg ) > 1)
         filter = arg[ 2 ];
     else
         filter = fail;
     end;
     
-    if IsCapCategoryCell( category )
+    if (IsCapCategoryCell( category ))
         category = CapCategory( category );
     end;
     
-    if !IsCapCategory( category )
+    if (@not IsCapCategory( category ))
         Error( "input is not a category (cell)" );
         return;
     end;
@@ -1234,7 +1234,7 @@ end );
     
     list_of_methods = Filtered( list_of_methods, i -> CurrentOperationWeight( weight_list, i ) < infinity );
     
-    if filter != fail
+    if (filter != fail)
         list_of_methods = Filtered( list_of_methods, i -> PositionSublist( i, filter ) != fail );
     end;
     

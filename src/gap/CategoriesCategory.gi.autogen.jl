@@ -54,13 +54,13 @@ end );
     
     return List( (1):(Length( list )), function ( i )
         
-        if IsCapCategory( list[ i ] )
+        if (IsCapCategory( list[ i ] ))
             return [ list[ i ], false ]; ##true means opposite
-        elseif IsCapCategoryAsCatObject( list[ i ] )
+        elseif (IsCapCategoryAsCatObject( list[ i ] ))
             return [ AsCapCategory( list[ i ] ), false ];
-        elseif IsList( list[ i ] ) && Length( list[ i ] ) == 2 && IsCapCategory( list[ i ][ 1 ] ) && ( !IsBool( list[i][2] ) )
+        elseif (IsList( list[ i ] ) && Length( list[ i ] ) == 2 && IsCapCategory( list[ i ][ 1 ] ) && ( @not IsBool( list[i][2] ) ))
             return [ list[ i ][1], true ];
-        elseif IsList( list[ i ] ) && Length( list[ i ] ) == 2 && IsCapCategoryAsCatObject( list[ i ][ 1 ] ) && ( !IsBool( list[i][2] ) )
+        elseif (IsList( list[ i ] ) && Length( list[ i ] ) == 2 && IsCapCategoryAsCatObject( list[ i ][ 1 ] ) && ( @not IsBool( list[i][2] ) ))
             return [ AsCapCategory( list[ i ][ 1 ] ), true ];
         else
             return list[i];
@@ -79,7 +79,7 @@ end );
     
     for i in list
         
-        if i[ 2 ] == false
+        if (i[ 2 ] == false)
             Add( source_list, i[ 1 ] );
         else
             Add( source_list, Opposite( i[ 1 ] ) );
@@ -191,15 +191,15 @@ InstallMethod( @__MODULE__,  RangeOfFunctor,
     
     for i in list
         
-        if IsFunction( i )
+        if (IsFunction( i ))
             
             Add( sanitized_list, [ i, [ ] ] );
             
-        elseif IsList( i ) && Length( i ) == 1
+        elseif (IsList( i ) && Length( i ) == 1)
             
             Add( sanitized_list, [ i[ 1 ], [ ] ] );
             
-        elseif IsList( i ) && Length( i ) == 2
+        elseif (IsList( i ) && Length( i ) == 2)
             
             Add( sanitized_list, i );
             
@@ -222,15 +222,15 @@ end );
     
     filter_list = List( InputSignature( functor ), i -> i[ 1 ] );
     
-    if type == "object"
+    if (type == "object")
         
         filter_list = List( filter_list, ObjectFilter );
         
-    elseif type == "morphism"
+    elseif (type == "morphism")
         
         filter_list = List( filter_list, MorphismFilter );
         
-    elseif type == "twocell"
+    elseif (type == "twocell")
         
         filter_list = List( filter_list, TwoCellFilter );
         
@@ -299,7 +299,7 @@ InstallMethod( @__MODULE__,  AddObjectFunction,
     
     filter_list = CAP_INTERNAL_FUNCTOR_CREATE_FILTER_LIST( functor, "object" );
     
-    if !@IsBound( functor.object_function_list )
+    if (@not @IsBound( functor.object_function_list ))
         
         functor.object_function_list = sanitized_list;
         
@@ -340,7 +340,7 @@ InstallMethod( @__MODULE__,  AddMorphismFunction,
     
     filter_list = @Concatenation( [ ObjectFilter( range_cat ) ], filter_list, [ ObjectFilter( range_cat ) ] );
     
-    if !@IsBound( functor.morphism_function_list )
+    if (@not @IsBound( functor.morphism_function_list ))
         
         functor.morphism_function_list = sanitized_list;
         
@@ -398,39 +398,39 @@ end );
     input_signature = InputSignature( functor );
 
     # n-ary functor and unary argument (possibly in product category)
-    if Length( arguments ) == 1 && functor.number_arguments > 1
+    if (Length( arguments ) == 1 && functor.number_arguments > 1)
         
-        if source_category.input_sanity_check_level > 0
+        if (source_category.input_sanity_check_level > 0)
             CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], source_category, [ "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
 
         arguments = ShallowCopy( Components( arguments[ 1 ] ) );
         
         for i in (1):(Length( arguments ))
-            if input_signature[ i ][ 2 ] == true
+            if (input_signature[ i ][ 2 ] == true)
                 arguments[ i ] = Opposite( arguments[ i ] );
             end;
         end;
         
-    elseif Length( arguments ) == 1 && input_signature[ 1 ][ 2 ] == true
-        if source_category.input_sanity_check_level > 0
+    elseif (Length( arguments ) == 1 && input_signature[ 1 ][ 2 ] == true)
+        if (source_category.input_sanity_check_level > 0)
             CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], false, [ "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
 
-        if IsIdenticalObj( CapCategory( arguments[ 1 ] ), Opposite( input_signature[ 1 ][ 1 ] ) )
+        if (IsIdenticalObj( CapCategory( arguments[ 1 ] ), Opposite( input_signature[ 1 ][ 1 ] ) ))
             arguments[ 1 ] = Opposite( arguments[ 1 ] );
         end;
-    elseif Length( arguments ) == 1
-        if source_category.input_sanity_check_level > 0
+    elseif (Length( arguments ) == 1)
+        if (source_category.input_sanity_check_level > 0)
             CAP_INTERNAL_ASSERT_IS_CELL_OF_CATEGORY( arguments[ 1 ], source_category, [ "the argument passed to the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
     end;
     
     
-    if IsCapCategoryObject( arguments[ 1 ] )
+    if (IsCapCategoryObject( arguments[ 1 ] ))
         
-        if source_category.input_sanity_check_level > 0
-            if !Length( input_signature ) == Length( arguments )
+        if (source_category.input_sanity_check_level > 0)
+            if (@not Length( input_signature ) == Length( arguments ))
                 Error( @Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does not coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
             end;
 
@@ -441,20 +441,20 @@ end );
         
         computed_value = CallFuncList( FunctorObjectOperation( functor ), arguments );
 
-        if range_category.output_sanity_check_level > 0 && !range_category.add_primitive_output
+        if (range_category.output_sanity_check_level > 0 && @not range_category.add_primitive_output)
             CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( computed_value, range_category, [ "the result of the object function of the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
         
-        if range_category.add_primitive_output
+        if (range_category.add_primitive_output)
             
             AddObject( range_category, computed_value );
             
         end;
         
-    elseif IsCapCategoryMorphism( arguments[ 1 ] )
+    elseif (IsCapCategoryMorphism( arguments[ 1 ] ))
 
-        if source_category.input_sanity_check_level > 0
-            if !Length( input_signature ) == Length( arguments )
+        if (source_category.input_sanity_check_level > 0)
+            if (@not Length( input_signature ) == Length( arguments ))
                 Error( @Concatenation("expected number of arguments (=", StringGAP( Length( input_signature ) ), ") does not coincide with the provided number of arguments (=", StringGAP( Length( arguments ) ), ")" ) );
             end;
 
@@ -468,7 +468,7 @@ end );
         range_list = List( arguments, Range );
         
         for i in (1):(Length( arguments ))
-            if InputSignature( functor )[ i ][ 2 ] == true
+            if (InputSignature( functor )[ i ][ 2 ] == true)
                 tmp = source_list[ i ];
                 source_list[ i ] = range_list[ i ];
                 range_list[ i ] = tmp;
@@ -481,11 +481,11 @@ end );
         
         computed_value = CallFuncList( FunctorMorphismOperation( functor ), @Concatenation( [ source_value ], arguments, [ range_value ] ) );
 
-        if range_category.output_sanity_check_level > 0 && !range_category.add_primitive_output
+        if (range_category.output_sanity_check_level > 0 && @not range_category.add_primitive_output)
             CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( computed_value, range_category, [ "the result of the morphism function of the functor named \033[1m", Name(functor), "\033[0m" ] );
         end;
         
-        if range_category.add_primitive_output
+        if (range_category.add_primitive_output)
             
             AddMorphism( range_category, computed_value );
             
@@ -732,13 +732,13 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     local object_name, morphism_name, object_filters, object_product_filters, morphism_filters,
           morphism_product_filters, current_filters, install_list;
     
-    if @IsBound( functor.is_already_installed )
+    if (@IsBound( functor.is_already_installed ))
         
         return;
         
     end;
     
-    if IsBoundGlobal( install_name ) && !IsOperation( ValueGlobal( install_name ) )
+    if (IsBoundGlobal( install_name ) && @not IsOperation( ValueGlobal( install_name ) ))
         
         Error( @Concatenation( "cannot install functor under name ", install_name ) );
         
@@ -746,13 +746,13 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     
     object_name = @Concatenation( install_name, "OnObjects" );
     
-    if HasObjectFunctionName( functor )
+    if (HasObjectFunctionName( functor ))
         
         object_name = ObjectFunctionName( functor );
         
     end;
     
-    if IsBoundGlobal( object_name ) && !IsOperation( ValueGlobal( object_name ) )
+    if (IsBoundGlobal( object_name ) && @not IsOperation( ValueGlobal( object_name ) ))
         
         Error( @Concatenation( "cannot install functor object function under name ", object_name ) );
         
@@ -762,13 +762,13 @@ InstallMethod( @__MODULE__,  InstallFunctor,
     
     morphism_name = @Concatenation( install_name, "OnMorphisms" );
     
-    if HasMorphismFunctionName( functor )
+    if (HasMorphismFunctionName( functor ))
         
         morphism_name = MorphismFunctionName( functor );
         
     end;
     
-    if IsBoundGlobal( morphism_name ) && !IsOperation( ValueGlobal( morphism_name ) )
+    if (IsBoundGlobal( morphism_name ) && @not IsOperation( ValueGlobal( morphism_name ) ))
         
         Error( @Concatenation( "cannot install functor morphism function under name ", morphism_name ) );
         
@@ -789,13 +789,13 @@ InstallMethod( @__MODULE__,  InstallFunctor,
         [ morphism_name, morphism_filters ]
         ];
     
-    if object_filters != object_product_filters
+    if (object_filters != object_product_filters)
         
         Append( install_list, [ [ install_name, object_product_filters ], [ object_name, object_product_filters ] ] );
         
     end;
     
-    if morphism_filters != morphism_product_filters
+    if (morphism_filters != morphism_product_filters)
         
         Append( install_list, [ [ install_name, morphism_product_filters ], [ morphism_name, morphism_product_filters ] ] );
         
@@ -837,7 +837,7 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroObjects,
   function( category )
     local CZ, zero_obj;
     
-    if !CanCompute( category, "IsZeroForObjects" )
+    if (@not CanCompute( category, "IsZeroForObjects" ))
         Error( "the category cannot compute IsZeroForObjects\n" );
     end;
     
@@ -848,7 +848,7 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroObjects,
     AddObjectFunction( CZ,
             function( obj )
               
-              if IsZeroForObjects( obj )
+              if (IsZeroForObjects( obj ))
                   return zero_obj;
               end;
               
@@ -858,9 +858,9 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroObjects,
     AddMorphismFunction( CZ,
             function( new_source, mor, new_range )
               
-              if IsZeroForObjects( Source( mor ) )
+              if (IsZeroForObjects( Source( mor ) ))
                   return UniversalMorphismFromZeroObjectWithGivenZeroObject( new_range, new_source );
-              elseif IsZeroForObjects( Range( mor ) )
+              elseif (IsZeroForObjects( Range( mor ) ))
                   return UniversalMorphismIntoZeroObjectWithGivenZeroObject( new_source, new_range );
               end;
               
@@ -891,7 +891,7 @@ InstallMethod( @__MODULE__,  NaturalIsomorphismFromIdentityToCanonicalizeZeroObj
             iso,
             function( source, obj, range )
               
-              if IsZeroForObjects( range )
+              if (IsZeroForObjects( range ))
                   return UniversalMorphismIntoZeroObjectWithGivenZeroObject( source, range );
               end;
               
@@ -912,7 +912,7 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroMorphisms,
   function( category )
     local CZ;
     
-    if !CanCompute( category, "IsZeroForMorphisms" )
+    if (@not CanCompute( category, "IsZeroForMorphisms" ))
         Error( "the category cannot compute IsZeroForMorphisms\n" );
     end;
     
@@ -923,7 +923,7 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroMorphisms,
     AddMorphismFunction( CZ,
             function( new_source, mor, new_range )
               
-              if IsZeroForMorphisms( mor )
+              if (IsZeroForMorphisms( mor ))
                   return ZeroMorphism( new_source, new_range );
               end;
               
@@ -989,7 +989,7 @@ InstallMethod( @__MODULE__,  NaturalTransformation,
     
     ##formally, this has to be IsEqualForObjects (of CAT), but
     ##equality of categories is given by IsIdenticalObj.
-    if !IsIdenticalObj( Source( source ), Source( range ) ) || !IsIdenticalObj( Range( source ), Range( range ) )
+    if (!(IsIdenticalObj( Source( source ), Source( range ) )) || @not IsIdenticalObj( Range( source ), Range( range ) ))
         
         Error( "a natural transformation between these functors does not exist" );
         
@@ -1044,7 +1044,7 @@ InstallMethod( @__MODULE__,  AddNaturalTransformationFunction,
     
     filter_list = @Concatenation( [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ], filter_list, [ ObjectFilter( AsCapCategory( Range( Source( trafo ) ) ) ) ] );
     
-    if !@IsBound( trafo.function_list )
+    if (@not @IsBound( trafo.function_list ))
         
         trafo.function_list = sanitized_list;
         
@@ -1081,18 +1081,18 @@ end );
     
     arguments = arg[(2):(Length( arg ))];
     
-    if Length( arguments ) == 1 && source_functor.number_arguments > 1
+    if (Length( arguments ) == 1 && source_functor.number_arguments > 1)
         
         arguments = Components( arguments[ 1 ] );
         
         for i in (1):(Length( arguments ))
-            if InputSignature( source_functor )[ i ][ 2 ] == true
+            if (InputSignature( source_functor )[ i ][ 2 ] == true)
                 arguments[ i ] = Opposite( arguments[ i ] );
             end;
         end;
         
-    elseif Length( arguments ) == 1 && InputSignature( source_functor )[ 1 ][ 2 ] == true &&
-         IsIdenticalObj( CapCategory( arguments[ 1 ] ), Opposite( InputSignature( source_functor )[ 1 ][ 1 ] ) )
+    elseif (Length( arguments ) == 1 && InputSignature( source_functor )[ 1 ][ 2 ] == true &&
+         IsIdenticalObj( CapCategory( arguments[ 1 ] ), Opposite( InputSignature( source_functor )[ 1 ][ 1 ] ) ))
          arguments[ 1 ] = Opposite( arguments[ 1 ] );
     end;
     
@@ -1105,7 +1105,7 @@ end );
     Add( AsCapCategory( Range( source_functor ) ), computed_value );
     
     ## TODO: this should be replaced by an "a => b" todo_list with more properties
-    if HasIsIsomorphism( trafo ) && IsIsomorphism( trafo )
+    if (HasIsIsomorphism( trafo ) && IsIsomorphism( trafo ))
         SetIsIsomorphism( computed_value, true );
     end;
     
@@ -1119,13 +1119,13 @@ InstallMethod( @__MODULE__,  InstallNaturalTransformation,
   function( trafo, install_name )
     local object_filters, object_product_filters, current_filters;
     
-    if @IsBound( trafo.is_already_installed )
+    if (@IsBound( trafo.is_already_installed ))
         
         return;
         
     end;
     
-    if IsBoundGlobal( install_name ) && !IsOperation( ValueGlobal( install_name ) )
+    if (IsBoundGlobal( install_name ) && @not IsOperation( ValueGlobal( install_name ) ))
         
         Error( @Concatenation( "cannot install natural transformation under name ", install_name ) );
         

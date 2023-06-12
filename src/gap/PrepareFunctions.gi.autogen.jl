@@ -13,22 +13,22 @@
   function( prepare_function, category, func )
     local current_prepare_function, prepare_function_symbol_list, current_operation;
     
-    if !IsString( prepare_function )
+    if (@not IsString( prepare_function ))
         Error( "first argument must be a string" );
         return;
     end;
     
-    if !IsCapCategory( category )
+    if (@not IsCapCategory( category ))
         Error( "second argument must be a category" );
         return;
     end;
     
-    if !IsFunction( func )
+    if (@not IsFunction( func ))
         Error( "third argument must be a function" );
         return;
     end;
     
-    if !@IsBound( CAP_PREPARE_FUNCTION_RECORD[prepare_function] )
+    if (@not @IsBound( CAP_PREPARE_FUNCTION_RECORD[prepare_function] ))
         Error( "No compatible prepare function found, see ListCAPPrepareFunctions(); for a list of prepare functions" );
         return;
     end;
@@ -38,7 +38,7 @@
     current_prepare_function = current_prepare_function[ 1 ];
     
     for current_operation in prepare_function_symbol_list
-        if !CanCompute( category, current_operation )
+        if (@not CanCompute( category, current_operation ))
             Print( "Warning: Operation ", current_operation, " is not installed for category ", Name( category ), "\n",
                    "         but is needed for another categorical operation\n" );
         end;
@@ -53,13 +53,13 @@ end );
     local precondition_list, operation_names, used_symbol_list, current_precondition;
     
     #= comment for Julia
-    if Length( arg ) == 1
+    if (Length( arg ) == 1)
         precondition_list = arg[ 1 ];
     else
         precondition_list = [ ];
     end;
     
-    if !IsList( precondition_list )
+    if (@not IsList( precondition_list ))
         Error( "optional fourth argument must be a list" );
         return;
     end;
@@ -67,7 +67,7 @@ end );
     operation_names = Operations( CAP_INTERNAL_DERIVATION_GRAPH );
     
     for current_precondition in precondition_list
-        if !current_precondition ⥉ operation_names
+        if (@not current_precondition in operation_names)
             Error( @Concatenation( "Precondition ", current_precondition, " not in list of known category functions" ) );
         end;
     end;
@@ -92,7 +92,7 @@ end );
         current_entry = CAP_PREPARE_FUNCTION_RECORD[current_rec_name];
         Print( "Prepare function: ", current_rec_name, "\n" );
         Print( "  ", current_entry[ 2 ],"\n" );
-        if Length( current_entry[ 3 ] ) > 0
+        if (Length( current_entry[ 3 ] ) > 0)
             Print( "\nNeeds:\n" );
             for current_precondition in current_entry[ 3 ]
                 Print( "* ", current_precondition, "\n" );

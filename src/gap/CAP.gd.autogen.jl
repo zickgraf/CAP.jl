@@ -142,7 +142,7 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
   function( property_pair )
     local property;
     
-    if !IsList( property_pair ) || Length( property_pair ) != 2 || !IsString( property_pair[1] ) || !( IsString( property_pair[2] ) || property_pair[2] == fail )
+    if (!(IsList( property_pair )) || Length( property_pair ) != 2 || !(IsString( property_pair[1] )) || !( IsString( property_pair[2] ) || property_pair[2] == fail ))
         Error(
             "You must pass a pair (i.e. a list of length 2) of strings to `AddCategoricalProperty`. ",
             "The second entry is the property of the opposite category. ",
@@ -153,7 +153,7 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
     
     Add( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, property_pair );
     
-    if !IsBoundGlobal( property_pair[1] )
+    if (@not IsBoundGlobal( property_pair[1] ))
         
         Print( "WARNING: please declare ", property_pair[1], " as a property of IsCapCategory with corresponding documentation before adding it as a categorical property.\n" );
         
