@@ -844,7 +844,9 @@ end
 
 function ListImpliedFilters(prop)
 	@assert IsProperty( prop )
-	union(prop.implied_properties, map(p -> ListImpliedFilters(p), prop.implied_properties)...)
+	
+	flatten = prop -> union(prop.implied_properties, map(flatten, prop.implied_properties)...)
+	map(attr -> attr.name, flatten(prop))
 end
 
 # families
