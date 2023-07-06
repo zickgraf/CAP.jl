@@ -994,7 +994,7 @@ function Concatenation(lists...)
 		lists = lists[1]
 	end
 	
-	if isa(lists[1], String)
+	if !isempty(lists) && isa(lists[1], String)
 		string(lists...)
 	else
 		vcat(map(collect, lists)...)
@@ -1050,6 +1050,13 @@ function ListOp end
 
 function List(obj, func)
 	ListOp(obj, func)
+end
+
+function ListN(args...)
+	f = args[end]
+	lists = args[1:end-1]
+	@assert ForAll( lists, l -> length(l) == length(lists[1]) )
+	map(x -> f(x...), zip(lists...))
 end
 
 ForAll(list, func) = all(func, list)
@@ -1245,6 +1252,11 @@ function SetNameFunction(f, name)
 end
 
 IsIdenticalObj = ===
+
+function Immutable(L::Vector)
+	# Julia has no immutable lists
+	L
+end
 
 function First(list)
 	if isempty(list)
