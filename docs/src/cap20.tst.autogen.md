@@ -81,4 +81,16 @@ true
 julia> Colift( id_z, fn_z )
 <A morphism in TerminalCategoryWithSingleObject( )>
 
+julia> DirectProduct( T, [ ] )
+<An object in TerminalCategoryWithSingleObject( )>
+
+julia> Equalizer( T, z, [ ] )
+<An object in TerminalCategoryWithSingleObject( )>
+
+julia> Coproduct( T, [ ] )
+<An object in TerminalCategoryWithSingleObject( )>
+
+julia> Coequalizer( T, z, [ ] )
+<An object in TerminalCategoryWithSingleObject( )>
+
 ```

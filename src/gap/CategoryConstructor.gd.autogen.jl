@@ -26,9 +26,8 @@
 #!  Creates a &CAP; category subject to the options given via <A>options</A>,
 #!  which is a record with the following keys:
 #!  * `name` (optional): name of the category
-#!  * `category_filter` (optional): filter set for the category via `SetFilterObj`
-#!  * `category_object_filter` (optional): filter added via <Ref Oper="AddObjectRepresentation" Label="for IsCapCategory, IsObject" /> to the category
-#!  * `category_morphism_filter` (optional): filter added via <Ref Oper="AddMorphismRepresentation" Label="for IsCapCategory, IsObject" /> to the category
+#!  * `category_filter`, `category_object_filter`, `category_morphism_filter` (mandatory): passed to <Ref Func="CreateCapCategoryWithDataTypes" />
+#!  * `object_datum_type`, `morphism_datum_type` (optional): passed to <Ref Func="CreateCapCategoryWithDataTypes" />
 #!  * `commutative_ring_of_linear_category` (optional): ring attached as <Ref Attr="CommutativeRingOfLinearCategory" Label="for IsCapCategory" /> to the category
 #!  * `properties` (optional): list of categorical properties the category will have, see `CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST`
 #!  * `object_constructor` (optional): function added as an installation of <Ref Oper="ObjectConstructor" Label="for IsCapCategory, IsObject" /> to the category
@@ -36,6 +35,7 @@
 #!  * `morphism_constructor` (optional): function added as an installation of <Ref Oper="MorphismConstructor" Label="for IsCapCategoryObject, IsObject, IsCapCategoryObject" /> to the category
 #!  * `morphism_datum` (optional): function added as an installation of <Ref Oper="MorphismDatum" Label="for IsCapCategoryMorphism" /> to the category
 #!  * `list_of_operations_to_install` (mandatory): a list of names of &CAP; operations which should be installed for the category
+#!  * `is_computable` (optional): whether the category can decide `IsCongruentForMorphisms`
 #!  * `supports_empty_limits` (optional): whether the category supports empty lists in inputs to operations of limits and colimits
 #!  * `underlying_category_getter_string` (optional): see below
 #!  * `underlying_object_getter_string` (optional): see below

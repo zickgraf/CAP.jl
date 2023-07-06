@@ -69,19 +69,19 @@
         
     elseif (string == "list_of_objects")
         
-        return @rec( filter = IsList, element_type = CapJitDataTypeOfObjectOfCategory( category ) );
+        return CapJitDataTypeOfListOf( CapJitDataTypeOfObjectOfCategory( category ) );
         
     elseif (string == "list_of_morphisms")
         
-        return @rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) );
+        return CapJitDataTypeOfListOf( CapJitDataTypeOfMorphismOfCategory( category ) );
         
     elseif (string == "list_of_lists_of_morphisms")
         
-        return @rec( filter = IsList, element_type = @rec( filter = IsList, element_type = CapJitDataTypeOfMorphismOfCategory( category ) ) );
+        return CapJitDataTypeOfListOf( CapJitDataTypeOfListOf( CapJitDataTypeOfMorphismOfCategory( category ) ) );
         
     elseif (string == "list_of_twocells")
         
-        return @rec( filter = IsList, element_type = CapJitDataTypeOfTwoCellOfCategory( category ) );
+        return CapJitDataTypeOfListOf( CapJitDataTypeOfTwoCellOfCategory( category ) );
         
     elseif (string == "object_in_range_category_of_homomorphism_structure")
         
@@ -210,21 +210,11 @@
             
         end;
         
-        return @rec(
-            filter = IsList,
-            element_type = @rec(
-                filter = is_ring_element,
-            ),
-        );
+        return CapJitDataTypeOfListOf( is_ring_element );
         
     elseif (string == "arbitrary_list")
         
-        return @rec(
-            filter = IsList,
-            element_type = @rec(
-                filter = IsObject,
-            )
-        );
+        return CapJitDataTypeOfListOf( IsObject );
         
     elseif (EndsWith( string, "_tuple_of_morphisms" ) && ForAll( string[(1):(Length( string ) - Length( "_tuple_of_morphisms" ))], IsDigitChar ))
         
@@ -1119,14 +1109,7 @@ end );
     if (IsEmpty( filters ))
         
         # COVERAGE_IGNORE_NEXT_LINE
-        Error( "there must be at least one filter" );
-        
-    end;
-    
-    if (@not IsSpecializationOfFilter( IsCapCategory, filters[1] ))
-        
-        # COVERAGE_IGNORE_NEXT_LINE
-        Error( "the first filter must imply IsCapCategory" );
+        Error( "installing methods without filters is currently not supported" );
         
     end;
     
@@ -1160,10 +1143,32 @@ end );
     
     known_methods = CAP_JIT_INTERNAL_KNOWN_METHODS[operation_name];
     
-    if (ForAny( known_methods, m -> Length( m.filters ) == Length( filters ) && ( IsSpecializationOfFilter( m.filters[1], filters[1] ) || IsSpecializationOfFilter( filters[1], m.filters[1] ) ) ))
+    if (IsSpecializationOfFilter( "category", filters[1] ))
         
-        # COVERAGE_IGNORE_NEXT_LINE
-        Error( "there is already a method known for ", operation_name, " with a category filter which implies the current category filter or is implied by it" );
+        if (ForAny( known_methods, m -> Length( m.filters ) == Length( filters ) && ( IsSpecializationOfFilter( m.filters[1], filters[1] ) || IsSpecializationOfFilter( filters[1], m.filters[1] ) ) ))
+            
+            # COVERAGE_IGNORE_NEXT_LINE
+            Error( "there is already a method known for ", operation_name, " with a category filter which implies the current category filter or is implied by it" );
+            
+        end;
+        
+    else
+        
+        if (IsSpecializationOfFilter( filters[1], "category" ))
+            
+            # COVERAGE_IGNORE_NEXT_LINE
+            Error( "The first filter is implied by `IsCapCategory`, this is not supported." );
+            
+        end;
+        
+        if (ForAny( known_methods,
+            m -> Length( m.filters ) == Length( filters ) && ForAll( (1):(Length( filters )), i -> IsSpecializationOfFilter( m.filters[i], filters[i] ) || IsSpecializationOfFilter( filters[i], m.filters[i] ) )
+        ))
+            
+            # COVERAGE_IGNORE_NEXT_LINE
+            Error( "there is already a method known for ", operation_name, " with a comparable filter list (see documentation of `CapJitAddKnownMethod`)" );
+            
+        end;
         
     end;
     
@@ -1285,6 +1290,56 @@ end );
     end;
     
     Add( CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name], [ name, input_filters, output_data_type ] );
+    
+end );
+
+##
+@InstallGlobalFunction( CapJitDataTypeOfListOf, function ( element_type )
+    
+    if (IsFilter( element_type ))
+        
+        element_type = @rec( filter = element_type );
+        
+    end;
+    
+    if (@not IsRecord( element_type ))
+        
+        # COVERAGE_IGNORE_NEXT_LINE
+        Error( "<element_type> must be a filter or a record" );
+        
+    end;
+    
+    return @rec( filter = IsList, element_type = element_type );
+    
+end );
+
+##
+@InstallGlobalFunction( CapJitDataTypeOfNTupleOf, function ( n, element_types... )
+    
+    @Assert( 0, Length( element_types ) == n );
+    
+    element_types = List( element_types, function ( t )
+        
+        if (IsFilter( t ))
+            
+            return @rec( filter = t );
+            
+        else
+            
+            return t;
+            
+        end;
+        
+    end );
+    
+    if (@not ForAll( element_types, t -> IsRecord( t ) ))
+        
+        # COVERAGE_IGNORE_NEXT_LINE
+        Error( "<element_types...> must be filters or records" );
+        
+    end;
+    
+    return @rec( filter = IsNTuple, element_types = element_types );
     
 end );
 

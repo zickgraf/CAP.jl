@@ -9,7 +9,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                [ IsRecord ],
                
   function( options )
-    local known_options_with_filters, name, filter, CC, default_func_strings, info, unknown_filters, create_func_name, create_func, func_string, underlying_arguments, add, func, option_name, prop;
+    local known_options_with_filters, name, object_datum_type, morphism_datum_type, is_computable, filter, CC, default_func_strings, info, unknown_filters, create_func_name, create_func, func_string, underlying_arguments, add, func, option_name, prop;
     
     ## check given options
     known_options_with_filters = @rec(
@@ -17,6 +17,8 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         category_filter = IsFilter,
         category_object_filter = IsFilter,
         category_morphism_filter = IsFilter,
+        object_datum_type = IsObject, # IsFilter || IsRecord
+        morphism_datum_type = IsObject, # IsFilter || IsRecord
         commutative_ring_of_linear_category = R -> IsRing( R ) && HasIsCommutative( R ) && IsCommutative( R ),
         properties = IsList,
         object_constructor = IsFunction,
@@ -24,6 +26,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         morphism_constructor = IsFunction,
         morphism_datum = IsFunction,
         list_of_operations_to_install = IsList,
+        is_computable = IsBool,
         supports_empty_limits = IsBool,
         underlying_category_getter_string = IsString,
         underlying_object_getter_string = IsString,
@@ -73,7 +76,43 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         
     end;
     
-    CC = CreateCapCategory( name, options.category_filter, options.category_object_filter, options.category_morphism_filter, IsCapCategoryTwoCell );
+    if (@IsBound( options.object_datum_type ))
+        
+        object_datum_type = options.object_datum_type;
+        
+    else
+        
+        object_datum_type = fail;
+        
+    end;
+    
+    if (@IsBound( options.morphism_datum_type ))
+        
+        morphism_datum_type = options.morphism_datum_type;
+        
+    else
+        
+        morphism_datum_type = fail;
+        
+    end;
+    
+    if (@IsBound( options.is_computable ))
+        
+        is_computable = options.is_computable;
+        
+    else
+        
+        # use default value in CreateCapCategory
+        is_computable = fail;
+        
+    end;
+    
+    CC = CreateCapCategoryWithDataTypes(
+        name, options.category_filter,
+        options.category_object_filter, options.category_morphism_filter, IsCapCategoryTwoCell,
+        object_datum_type, morphism_datum_type, fail
+       ; is_computable = is_computable
+    );
     
     CC.category_as_first_argument = true;
     

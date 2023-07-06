@@ -29,8 +29,8 @@ InstallMethod( @__MODULE__,  AsObjectInWrapperCategory,
     #% CAP_JIT_DROP_NEXT_STATEMENT
     CAP_INTERNAL_ASSERT_IS_OBJECT_OF_CATEGORY( object, ModelingCategory( D ), [ "the object given to AsObjectInWrapperCategory" ] );
     
-    return ObjectifyObjectForCAPWithAttributes( @rec( ), D,
-            UnderlyingCell, object );
+    return CreateCapCategoryObjectWithAttributes( D,
+                                                  UnderlyingCell, object );
     
 end );
 
@@ -206,6 +206,8 @@ InstallMethod( @__MODULE__,  WrapperCategory,
     end;
     
     reinterpretation_options = @rec(
+        object_datum_type = CapJitDataTypeOfObjectOfCategory( C ),
+        morphism_datum_type = CapJitDataTypeOfMorphismOfCategory( C ),
         object_constructor = ( cat, d ) -> AsObjectInWrapperCategory( cat, d ),
         object_datum = ( D, o ) -> UnderlyingCell( o ),
         morphism_constructor = ( D, s, d, t ) -> AsMorphismInWrapperCategory( D, s, d, t ),

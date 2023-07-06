@@ -148,17 +148,17 @@ false
 julia> id == MorphismConstructor( a, "xyz", a )
 true
 
-julia> z = ZeroMorphism( a, a )
+julia> zero = ZeroMorphism( a, a )
 <A morphism in TerminalCategoryWithMultipleObjects( )>
 
-julia> Display( z )
+julia> Display( zero )
 a
 |
 | ZeroMorphism
 v
 a
 
-julia> id == z
+julia> id == zero
 true
 
 julia> IsLiftable( m, n )
@@ -186,5 +186,17 @@ b
 | Colift
 v
 b
+
+julia> DirectProduct( T, [ ] )
+<An object in TerminalCategoryWithMultipleObjects( )>
+
+julia> Equalizer( T, z, [ ] )
+<An object in TerminalCategoryWithMultipleObjects( )>
+
+julia> Coproduct( T, [ ] )
+<An object in TerminalCategoryWithMultipleObjects( )>
+
+julia> Coequalizer( T, z, [ ] )
+<An object in TerminalCategoryWithMultipleObjects( )>
 
 ```

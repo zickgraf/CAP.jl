@@ -408,6 +408,31 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 @DeclareAttribute( "CommutativeRingOfLinearCategory",
                   IsCapCategory );
 
+# display a warning when trying to overwrite an existing CommutativeRingOfLinearCategory with a different one
+#= comment for Julia, which does not have "TryNextMethod"
+InstallMethod( @__MODULE__,  SetCommutativeRingOfLinearCategory,
+               [ IsCapCategory, IsObject ],
+               
+  function( category, ring )
+    
+    if (!(IsRing( ring ) && HasIsCommutative( ring ) && IsCommutative( ring )))
+        
+        Error( "CommutativeRingOfLinearCategory must be a commutative ring" );
+        
+    end;
+    
+    if (HasCommutativeRingOfLinearCategory( category ) && @not IsIdenticalObj( ring, CommutativeRingOfLinearCategory( category ) ))
+        
+        Print( "WARNING: Trying to set CommutativeRingOfLinearCategory to a ring with name \"", StringGAP( ring ), "\" but a different ring with name \"", StringGAP( CommutativeRingOfLinearCategory( category ) ), "\" is already set.\n" );
+        
+    end;
+    
+    # delegate to system setter
+    TryNextMethod( );
+    
+end );
+# =#
+
 #! @Description
 #! The argument is a category $C$ which is expected to lie in the
 #! filter <C>IsEquippedWithHomomorphismStructure</C>.
@@ -417,6 +442,31 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 #! @Returns a category
 @DeclareAttribute( "RangeCategoryOfHomomorphismStructure",
                   IsCapCategory );
+
+# display a warning when trying to overwrite an existing RangeCategoryOfHomomorphismStructure with a different one
+#= comment for Julia, which does not have "TryNextMethod"
+InstallMethod( @__MODULE__,  SetRangeCategoryOfHomomorphismStructure,
+               [ IsCapCategory, IsObject ],
+               
+  function( category, range_category )
+    
+    if (@not IsCapCategory( range_category ))
+        
+        Error( "RangeCategoryOfHomomorphismStructure must be a CAP category" );
+        
+    end;
+    
+    if (HasRangeCategoryOfHomomorphismStructure( category ) && @not IsIdenticalObj( range_category, RangeCategoryOfHomomorphismStructure( category ) ))
+        
+        Print( "WARNING: Trying to set RangeCategoryOfHomomorphismStructure to a category with name \"", Name( range_category ), "\" but a different range category with name \"", Name( RangeCategoryOfHomomorphismStructure( category ) ), "\" is already set.\n" );
+        
+    end;
+    
+    # delegate to system setter
+    TryNextMethod( );
+    
+end );
+# =#
 
 #! @Description
 #! The argument is an additive category $C$.

@@ -384,7 +384,7 @@ InstallMethod( @__MODULE__,  Opposite,
         Error( "Input category must be finalized to create opposite category" );
     end;
     
-    opposite_category = CreateCapCategory( name, WasCreatedAsOppositeCategory, IsCapCategoryOppositeObject, IsCapCategoryOppositeMorphism, IsCapCategoryTwoCell );
+    opposite_category = CreateCapCategory( name, WasCreatedAsOppositeCategory, IsCapCategoryOppositeObject, IsCapCategoryOppositeMorphism, IsCapCategoryTwoCell; is_computable = category.is_computable );
     
     opposite_category.category_as_first_argument = true;
     
@@ -447,8 +447,8 @@ InstallMethod( @__MODULE__,  Opposite,
             
         end;
         
-        opposite_object = ObjectifyObjectForCAPWithAttributes( @rec( ), cat,
-                                                                Opposite, object );
+        opposite_object = CreateCapCategoryObjectWithAttributes( cat,
+                                                                  Opposite, object );
         
         #% CAP_JIT_DROP_NEXT_STATEMENT
         if (CapCategory( object ).predicate_logic)

@@ -27,6 +27,8 @@
 
 InstallTrueMethod( IsEnrichedOverCommutativeRegularSemigroup, IsAbCategory );
 
+InstallTrueMethod( IsAbCategory, IsLinearCategoryOverCommutativeRing );
+
 InstallTrueMethod( IsAbCategory, IsAdditiveCategory );
 
 InstallTrueMethod( IsAdditiveCategory, IsPreAbelianCategory );
@@ -289,7 +291,7 @@ end );
     # convenience for Julia lists
     if (IsPackageMarkedForLoading( "JuliaInterface", ">= 0.2" ))
         
-        if (object_datum_type != fail && object_datum_type.filter == IsList)
+        if (object_datum_type != fail && object_datum_type.filter in [ IsList, IsNTuple ])
             
             InstallOtherMethod( ObjectConstructor,
                                 [ CategoryFilter( obj ), ValueGlobal( "IsJuliaObject" ) ],
@@ -302,7 +304,7 @@ end );
             
         end;
         
-        if (morphism_datum_type != fail && morphism_datum_type.filter == IsList)
+        if (morphism_datum_type != fail && morphism_datum_type.filter in [ IsList, IsNTuple ])
             
             InstallOtherMethod( MorphismConstructor,
                                 [ ObjectFilter( obj ), ValueGlobal( "IsJuliaObject" ), ObjectFilter( obj ) ],
