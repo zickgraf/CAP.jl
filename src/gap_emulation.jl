@@ -1137,6 +1137,10 @@ function NumberArgumentsFunction(func::Function)
 	end
 end
 
+function DuplicateFreeList(list::Vector)
+	unique(list)
+end
+
 function IsDuplicateFreeList(list::Vector)
 	allunique(list)
 end
