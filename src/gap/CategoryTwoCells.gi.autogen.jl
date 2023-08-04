@@ -8,9 +8,14 @@
 
 ####################################
 ##
-## Add function
+## Operations
 ##
 ####################################
+
+InstallMethod( @__MODULE__,  Target,
+               [ IsCapCategoryTwoCell ],
+               
+  Range );
 
 ##
 InstallMethod( @__MODULE__,  Add,

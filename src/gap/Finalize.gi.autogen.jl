@@ -359,13 +359,15 @@ InstallMethod( @__MODULE__,  Finalize,
         
     end;
     
-    derivation_list = ShallowCopy( CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list );
-    
-    if (@not category.is_computable)
+    # Warn about categories marked as being computable but not having an implementation of IsCongruentForMorphisms.
+    # Since IsCongruentForMorphisms currently is derived from IsEqualForMorphisms, the latter also has to be taken into account.
+    if (category.is_computable && @not CanCompute( category, "IsEqualForMorphisms" ) && @not CanCompute( category, "IsCongruentForMorphisms"))
         
-        derivation_list = Filtered( derivation_list, der -> @not ForAny( der.derivations, x -> TargetOperation( x ) == "IsCongruentForMorphisms" ) );
+        Print( "WARNING: The category with name \"", Name( category ), "\" is marked as being computable but has no implementation of `IsCongruentForMorphisms`.\n" );
         
     end;
+    
+    derivation_list = ShallowCopy( CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list );
     
     weight_list = category.derivations_weight_list;
     
@@ -504,6 +506,12 @@ InstallMethod( @__MODULE__,  Finalize,
         end;
         
         ResumeMethodReordering( );
+        
+    end;
+    
+    if (@not category.is_computable && CanCompute( category, "IsCongruentForMorphisms" ))
+        
+        Print( "WARNING: The category with name \"", Name( category ), "\" is marked as being not computable but has an implementation of `IsCongruentForMorphisms`.\n" );
         
     end;
     

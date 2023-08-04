@@ -72,8 +72,6 @@
 #!  lists only contains this pair once, with the higher multiple from both lists.
 @DeclareGlobalFunction( "CAP_INTERNAL_MERGE_PRECONDITIONS_LIST" );
 
-@DeclareGlobalFunction( "CAP_INTERNAL_GET_CORRESPONDING_OUTPUT_OBJECTS" );
-
 #! @Arguments data_type, human_readable_identifier_list
 #! @Description
 #!  Returns a unary function which throws an error if its argument is not of type <A>data_type</A>.
@@ -375,7 +373,7 @@
 
 #= comment for Julia
 # In Julia we have to distinguish between (small) integers and big integers. In GAP there is no difference.
-DeclareSynonym( "IsBigInt", IsInt );
+@BindGlobal( "IsBigInt", IsInt );
 # CompilerForCAP has to distinguish between BigInt and IdFunc
 @DeclareGlobalFunction( "BigInt" );
 @InstallGlobalFunction( BigInt, IdFunc );

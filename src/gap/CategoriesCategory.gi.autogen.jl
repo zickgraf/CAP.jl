@@ -22,9 +22,14 @@
   function(  )
     local cat;
     
-    cat = CreateCapCategory( "Cat", IsCapCategory, IsCapCategoryAsCatObject, IsCapFunctor, IsCapNaturalTransformation );
+    cat = CreateCapCategory( "Cat",
+                              IsCapCategory,
+                              IsCapCategoryAsCatObject,
+                              IsCapFunctor,
+                              IsCapNaturalTransformation
+                             ; is_computable = false );
     
-    cat.category_as_first_argument = false;
+    cat.category_as_first_argument = true;
     
     INSTALL_CAP_CAT_FUNCTIONS( cat );
     
@@ -40,7 +45,7 @@ InstallMethod( @__MODULE__,  AsCatObject,
     local cat_obj;
     
     cat_obj = CreateCapCategoryObjectWithAttributes( CapCat,
-                                        AsCapCategory, category );
+                                                      AsCapCategory, category );
     
     SetIsWellDefined( cat_obj, true );
     
@@ -96,23 +101,21 @@ InstallMethod( @__MODULE__,  CapFunctor,
                [ IsString, IsList, IsCapCategory ],
                
   function( name, source_list, range )
-    local source, functor, objectified_functor;
-    
-    functor = @rec( );
+    local source, objectified_functor;
     
     source_list = CAP_INTERNAL_NICE_FUNCTOR_INPUT_LIST( source_list );
     
-    functor.input_source_list = source_list;
-    
-    functor.number_arguments = Length( source_list );
-    
     source = CAP_INTERNAL_CREATE_FUNCTOR_SOURCE( source_list );
     
-    objectified_functor = ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( functor, CapCat,
-                                                    AsCatObject( source ),
-                                                    AsCatObject( range ),
-                                                    Name, name,
-                                                    InputSignature, source_list );
+    objectified_functor = CreateCapCategoryMorphismWithAttributes( CapCat,
+                                                                    AsCatObject( source ),
+                                                                    AsCatObject( range ),
+                                                                    Name, name,
+                                                                    InputSignature, source_list );
+    
+    objectified_functor.input_source_list = source_list;
+    
+    objectified_functor.number_arguments = Length( source_list );
     
     return objectified_functor;
     
@@ -501,20 +504,17 @@ end );
     
 end );
 
-@BindGlobal( "INSTALL_CAP_CAT_FUNCTIONS", function ( cat )
+@BindGlobal( "INSTALL_CAP_CAT_FUNCTIONS", function ( category )
 
 ##
-AddPreCompose( cat,
+AddPreCompose( category,
                
-  function( left_functor, right_functor )
+  function( cat, left_functor, right_functor )
     local new_functor;
     
-    new_functor = CapFunctor( @Concatenation( "Precomposition of ",
-                                                 Name( left_functor ),
-                                                 " and ",
-                                                 Name( right_functor ) ),
-                                  AsCapCategory( Source( left_functor ) ),
-                                  AsCapCategory( Range( right_functor ) ) );
+    new_functor = CapFunctor( @Concatenation( "Precomposition of ", Name( left_functor ), " and ", Name( right_functor ) ),
+                               AsCapCategory( Source( left_functor ) ),
+                               AsCapCategory( Range( right_functor ) ) );
     
     AddObjectFunction( new_functor,
       
@@ -535,13 +535,13 @@ AddPreCompose( cat,
 end );
 
 ##
-AddIdentityMorphism( cat,
+AddIdentityMorphism( category,
                      
-  function( category )
+  function( cat, object )
     local new_functor;
     
-    new_functor = CapFunctor( @Concatenation( "Identity functor of ", Name( AsCapCategory( category ) ) ),
-                                                 category, category );
+    new_functor = CapFunctor( @Concatenation( "Identity functor of ", Name( AsCapCategory( object ) ) ),
+                                                 object, object );
     
     AddObjectFunction( new_functor,
                        
@@ -556,21 +556,21 @@ AddIdentityMorphism( cat,
 end );
 
 ##
-AddTerminalObject( cat,
+AddTerminalObject( category,
                    
-  function( )
+  function( cat )
     
     return AsCatObject( TerminalCategoryWithSingleObject( ) );
     
 end );
 
 ##
-AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject( cat,
+AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject( category,
                                
-  function( category, terminal_cat )
+  function( cat, object, terminal_cat )
     local new_functor;
     
-    new_functor = CapFunctor( @Concatenation( "The terminal of ", Name( AsCapCategory( category ) ) ), category, terminal_cat );
+    new_functor = CapFunctor( @Concatenation( "The terminal of ", Name( AsCapCategory( object ) ) ), object, terminal_cat );
     
     AddObjectFunction( new_functor,
                        
@@ -585,18 +585,18 @@ AddUniversalMorphismIntoTerminalObjectWithGivenTerminalObject( cat,
 end );
 
 ##
-AddDirectProduct( cat,
+AddDirectProduct( category,
                   
-  function( object_product_list )
+  function( cat, object_product_list )
     
     return AsCatObject( CallFuncList( Product, List( object_product_list, AsCapCategory ) ) );
     
 end );
 
 ##
-AddProjectionInFactorOfDirectProductWithGivenDirectProduct( cat,
+AddProjectionInFactorOfDirectProductWithGivenDirectProduct( category,
                             
-  function( object_product_list, projection_number, direct_product )
+  function( cat, object_product_list, projection_number, direct_product )
     local projection_functor;
     
     projection_functor = CapFunctor( 
@@ -626,9 +626,9 @@ AddProjectionInFactorOfDirectProductWithGivenDirectProduct( cat,
 end );
 
 ##
-AddUniversalMorphismIntoDirectProductWithGivenDirectProduct( cat,
+AddUniversalMorphismIntoDirectProductWithGivenDirectProduct( category,
                                        
-  function( diagram, test_object, sink, direct_product )
+  function( cat, diagram, test_object, sink, direct_product )
     local name_string, universal_functor;
     
     name_string = @Concatenation( 
@@ -667,9 +667,9 @@ AddUniversalMorphismIntoDirectProductWithGivenDirectProduct( cat,
 end );
 
 ##
-AddVerticalPreCompose( cat,
+AddVerticalPreCompose( category,
                
-  function( above_transformation, below_transformation )
+  function( cat, above_transformation, below_transformation )
     local new_natural_transformation;
     
     new_natural_transformation = NaturalTransformation( @Concatenation( "Vertical composition of ",
@@ -693,9 +693,9 @@ AddVerticalPreCompose( cat,
 end );
 
 ##
-AddHorizontalPreCompose( cat,
+AddHorizontalPreCompose( category,
   
-  function( left_natural_transformation, right_natural_transformation )
+  function( cat, left_natural_transformation, right_natural_transformation )
     local pre_compose_transfo_functor, pre_compose_functor_transfo;
     
     pre_compose_transfo_functor = 
@@ -709,13 +709,15 @@ AddHorizontalPreCompose( cat,
 end );
 
 ##
-AddIsWellDefinedForObjects( cat,
+AddIsWellDefinedForObjects( category,
 
-  IsCapCategoryAsCatObject
+  function( cat, object )
+  
+    return IsCapCategoryAsCatObject( object );
+  
+end );
 
-);
-
-Finalize( cat );
+Finalize( category );
 
 end );
 

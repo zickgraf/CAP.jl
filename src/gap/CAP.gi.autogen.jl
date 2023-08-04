@@ -276,8 +276,6 @@ end );
         
         obj.predicate_logic = true;
         
-        AddCategoryToFamily( obj, "general" );
-        
     else
         
         obj.predicate_logic = false;
@@ -338,27 +336,6 @@ InstallMethod( @__MODULE__,  TheoremRecord,
   function( category )
     
     return @rec( );
-    
-end );
-
-######################################################
-##
-## Add functions
-##
-######################################################
-
-InstallMethod( @__MODULE__,  AddCategoryToFamily,
-               [ IsCapCategory, IsString ],
-               
-  function( category, family )
-    
-    if (@not @IsBound( category.families ))
-        
-        category.families = [ ];
-        
-    end;
-    
-    Add( category.families, LowercaseString( family ) );
     
 end );
 

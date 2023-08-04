@@ -389,7 +389,20 @@ end );
     
     filter = data_type.filter;
     
-    if (IsSpecializationOfFilter( IsFunction, filter ))
+    # `IsBool( fail ) == true`, but we do not want to include `fail`
+    if (IsSpecializationOfFilter( IsBool, filter ))
+        
+        return function( value )
+            
+            if (!(value == true || value == false))
+                
+                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " is neither `true` nor `false`.", generic_help_string ] ) );
+                
+            end;
+            
+        end;
+        
+    elseif (IsSpecializationOfFilter( IsFunction, filter ))
         
         return function( value )
             
@@ -796,89 +809,6 @@ end );
     end;
     
     return list2;
-    
-end );
-
-@InstallGlobalFunction( CAP_INTERNAL_GET_CORRESPONDING_OUTPUT_OBJECTS,
-  
-  function( translation_list, function_input )
-    local input_list, output_list, current_output, return_list, input_position, list_position, i;
-    
-    if (@not Length( translation_list ) == 2)
-        Error( "invalid translation list" );
-    end;
-    
-    output_list = translation_list[ 2 ];
-    
-    output_list = List( output_list, i -> SplitString( i, "_" ) );
-    
-    input_list = translation_list[ 1 ];
-    
-    return_list = [ ];
-    
-    for i in (1):(Length( output_list ))
-        
-        current_output = output_list[ i ];
-        
-        input_position = Position( input_list, current_output[ 1 ] );
-        
-        if (input_position == fail)
-            
-            return_list[ i ] = fail;
-            
-            continue;
-            
-        end;
-        
-        if (Length( current_output ) == 1)
-            
-           return_list[ i ] = function_input[ input_position ];
-           
-        elseif (Length( current_output ) == 2)
-            
-            if (LowercaseString( current_output[ 2 ] ) == "source")
-                return_list[ i ] = Source( function_input[ input_position ] );
-            elseif (LowercaseString( current_output[ 2 ] ) == "range")
-                return_list[ i ] = Range( function_input[ input_position ] );
-            elseif (Position( input_list, current_output[ 2 ] ) != fail)
-                return_list[ i ] = function_input[ input_position ][ function_input[ Position( input_list, current_output[ 2 ] ) ] ];
-            else
-                Error( "wrong input type" );
-            end;
-            
-        elseif (Length( current_output ) == 3)
-            
-            if (ForAll( current_output[ 2 ], i -> i in "0123456789" ))
-                list_position = IntGAP( current_output[ 2 ] );
-            else
-                list_position = Position( input_list, current_output[ 2 ] );
-                if (list_position == fail)
-                    Error( "unable to find ", current_output[ 2 ], " in input_list" );
-                end;
-                list_position = function_input[ list_position ];
-            end;
-            
-            if (list_position == fail)
-                Error( "list index variable not found" );
-            end;
-            
-            if (LowercaseString( current_output[ 3 ] ) == "source")
-                return_list[ i ] = Source( function_input[ input_position ][ list_position ] );
-            elseif (LowercaseString( current_output[ 3 ] ) == "range")
-                return_list[ i ] = Range( function_input[ input_position ][ list_position ] );
-            else
-                Error( "wrong output syntax" );
-            end;
-            
-        else
-            
-            Error( "wrong entry length" );
-            
-        end;
-        
-    end;
-    
-    return return_list;
     
 end );
 

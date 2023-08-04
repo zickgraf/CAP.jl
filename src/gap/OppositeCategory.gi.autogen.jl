@@ -484,13 +484,13 @@ InstallMethod( @__MODULE__,  Opposite,
         #% CAP_JIT_DROP_NEXT_STATEMENT
         CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( morphism, OppositeCategory( cat ), [ "the morphism datum given to the morphism constructor of <cat>" ] );
         
-        if (IsEqualForObjects( OppositeCategory( cat ), Source( morphism ), Opposite( range ) ) == false)
+        if (@not IsEqualForObjects( OppositeCategory( cat ), Source( morphism ), Opposite( range ) ))
             
             Error( "the source of the morphism datum must be equal to <Opposite( range )>" );
             
         end;
         
-        if (IsEqualForObjects( OppositeCategory( cat ), Range( morphism ), Opposite( source ) ) == false)
+        if (@not IsEqualForObjects( OppositeCategory( cat ), Range( morphism ), Opposite( source ) ))
             
             Error( "the range of the morphism datum must be equal to <Opposite( source )>" );
             
@@ -505,9 +505,9 @@ InstallMethod( @__MODULE__,  Opposite,
             
         end;
         
-        opposite_morphism = ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( @rec( ), cat,
-                                                                                      source, range,
-                                                                                      Opposite, morphism );
+        opposite_morphism = CreateCapCategoryMorphismWithAttributes( cat,
+                                                                      source, range,
+                                                                      Opposite, morphism );
         
         #% CAP_JIT_DROP_NEXT_STATEMENT
         if (CapCategory( morphism ).predicate_logic)

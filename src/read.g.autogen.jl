@@ -46,8 +46,6 @@ include( "gap/PrintingFunctions.gi.autogen.jl" );
 
 include( "gap/PrepareFunctions.gi.autogen.jl" );
 
-include( "gap/PreFunctions.gi.autogen.jl" );
-
 include( "gap/CategoryConstructor.gi.autogen.jl" );
 
 include( "gap/TerminalCategory.gi.autogen.jl" );

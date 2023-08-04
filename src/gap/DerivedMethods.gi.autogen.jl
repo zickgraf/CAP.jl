@@ -1388,16 +1388,6 @@ AddDerivationToCAP( IsEqualForMorphismsOnMor,
     
     value_2 = IsEqualForObjects( cat, Range( morphism_1 ), Range( morphism_2 ) );
     
-    # See https://github.com/homalg-project/CAP_project/issues/595 for a discussion
-    # why we might (not) want to allow IsEqualForObjects to return fail.
-    # In any case, this currently is not officially supported, so CompilerForCAP can ignore this case.
-    #% CAP_JIT_DROP_NEXT_STATEMENT
-    if (value_1 == fail || value_2 == fail)
-        
-        return fail;
-        
-    end;
-    
     if (value_1 && value_2)
         
         return IsEqualForMorphisms( cat, morphism_1, morphism_2 );
@@ -3047,7 +3037,7 @@ AddDerivationToCAP( Lift,
     
     a = InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure( cat, alpha );
     
-    b = HomomorphismStructureOnMorphisms( cat, IdentityMorphism( Source( alpha ) ), beta );
+    b = HomomorphismStructureOnMorphisms( cat, IdentityMorphism( cat, Source( alpha ) ), beta );
     
     return InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism( cat, Source( alpha ), Source( beta ), Lift( range_cat, a, b ) );
     
@@ -3070,7 +3060,7 @@ AddDerivationToCAP( LiftOrFail,
     
     a = InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure( cat, alpha );
     
-    b = HomomorphismStructureOnMorphisms( cat, IdentityMorphism( Source( alpha ) ), beta );
+    b = HomomorphismStructureOnMorphisms( cat, IdentityMorphism( cat, Source( alpha ) ), beta );
     
     l = LiftOrFail( range_cat, a, b );
     
@@ -3100,7 +3090,7 @@ AddDerivationToCAP( IsLiftable,
     
     a = InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure( cat, alpha );
     
-    b = HomomorphismStructureOnMorphisms( cat, IdentityMorphism( Source( alpha ) ), beta );
+    b = HomomorphismStructureOnMorphisms( cat, IdentityMorphism( cat, Source( alpha ) ), beta );
     
     return IsLiftable( range_cat, a, b );
     
@@ -3147,7 +3137,7 @@ AddDerivationToCAP( ColiftOrFail,
     
     b = InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure( cat, beta );
     
-    a = HomomorphismStructureOnMorphisms( cat, alpha, IdentityMorphism( Range( beta ) ) );
+    a = HomomorphismStructureOnMorphisms( cat, alpha, IdentityMorphism( cat, Range( beta ) ) );
     
     l = LiftOrFail( range_cat, b, a );
     
@@ -3177,7 +3167,7 @@ AddDerivationToCAP( IsColiftable,
     
     b = InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure( cat, beta );
     
-    a = HomomorphismStructureOnMorphisms( cat, alpha, IdentityMorphism( Range( beta ) ) );
+    a = HomomorphismStructureOnMorphisms( cat, alpha, IdentityMorphism( cat, Range( beta ) ) );
     
     return IsLiftable( range_cat, b, a );
     
@@ -4573,42 +4563,14 @@ AddFinalDerivationBundle( "IsomorphismFromHomologyObjectToItsConstructionAsAnIma
   end,
 ]; CategoryFilter = IsAbelianCategory );
 
-
-## Final method for IsEqualForObjects
-##
-AddFinalDerivation( IsEqualForObjects,
-                    "",
-                    [ ],
-                    [ IsEqualForObjects ],
-                    
-  ReturnFail );
-
-## Final methods for IsEqual/IsEqualForMorphisms
-##
-AddFinalDerivation( IsCongruentForMorphisms,
-                    "Only IsIdenticalObj for comparing",
-                    [ ],
-                    [ IsCongruentForMorphisms,
-                      IsEqualForMorphisms ],
-                      
-  ReturnFail );
-
-##
-AddFinalDerivation( IsEqualForMorphisms,
-                    "Only IsIdenticalObj for comparing",
-                    [ ],
-                    [ IsCongruentForMorphisms,
-                      IsEqualForMorphisms ],
-                      
-  ReturnFail );
-
+## Final methods for IsEqual/IsCongruentForMorphisms
 ##
 AddFinalDerivation( IsCongruentForMorphisms,
                     "Use IsEqualForMorphisms for IsCongruentForMorphisms",
                     [ [ IsEqualForMorphisms, 1 ] ],
                     [ IsCongruentForMorphisms ],
                     
-  ( cat, mor1, mor2 ) -> IsEqualForMorphisms( cat, mor1, mor2 ) );
+  ( cat, mor1, mor2 ) -> IsEqualForMorphisms( cat, mor1, mor2 ); CategoryFilter = cat -> cat.is_computable );
 
 ##
 AddFinalDerivation( IsEqualForMorphisms,

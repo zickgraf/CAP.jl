@@ -173,10 +173,9 @@ end );
     
     morphism_constructor = function( cat, source, input, range )
         
-        return ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes(
-                       @rec( ), cat,
-                       source,
-                       range );
+        return CreateCapCategoryMorphismWithAttributes( cat,
+                                                        source,
+                                                        range );
         
     end;
     
@@ -333,11 +332,10 @@ end );
     
     morphism_constructor = function( cat, source, string, range )
         
-        return ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes(
-                       @rec( ), cat,
-                       source,
-                       range,
-                       StringGAP, string );
+        return CreateCapCategoryMorphismWithAttributes( cat,
+                                                        source,
+                                                        range,
+                                                        StringGAP, string );
         
     end;
     

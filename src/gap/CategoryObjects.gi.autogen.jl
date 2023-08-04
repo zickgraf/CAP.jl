@@ -35,23 +35,41 @@
 ##
 ###################################
 
-# This method should usually not be selected when the two morphisms belong to the same category
+# This method should not be selected when the two objects belong to the same category and the category can compute IsEqualForObjects.
 InstallMethod( @__MODULE__,  IsEqualForObjects,
                     [ IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ],
 
   function( cat, object_1, object_2 )
-
+    
     if (@not HasCapCategory( object_1 ))
+        
         Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" has no CAP category" ) );
+        
     end;
+    
     if (@not HasCapCategory( object_2 ))
+        
         Error( @Concatenation( "the object \"", StringGAP( object_2 ), "\" has no CAP category" ) );
+        
     end;
-
+    
     if (@not IsIdenticalObj( CapCategory( object_1 ), CapCategory( object_2 ) ))
+        
         Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" and the object \"", StringGAP( object_2 ), "\" do not belong to the same CAP category" ) );
+        
     else
-        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" and the object \"", StringGAP( object_2 ), "\" belong to the same CAP category, but no specific method IsEqualForObjects is installed. Maybe you forgot to finalize the category?" ) );
+        
+        # convenience: as long as the objects are identical, everything "just works"
+        if (IsIdenticalObj( object_1, object_2 ))
+            
+            return true;
+            
+        else
+            
+            Error( "Cannot decide whether the object \"", StringGAP( object_1 ), "\" and the object \"", StringGAP( object_2 ), "\" are equal. You can fix this error by installing `IsEqualForObjects` in <cat> or possibly avoid it by enabling strict caching." );
+            
+        end;
+        
     end;
     
 end );

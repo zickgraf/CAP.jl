@@ -58,6 +58,11 @@
 ##
 ######################################
 
+InstallMethod( @__MODULE__,  Target,
+               [ IsCapCategoryMorphism ],
+               
+  Range );
+
 InstallMethod( @__MODULE__,  Add,
                [ IsCapCategory, IsCapCategoryMorphism ],
                
@@ -393,44 +398,88 @@ InstallMethod( @__MODULE__,  CoefficientsOfMorphismWithGivenBasisOfExternalHom,
 ##
 ######################################
 
-# This method should usually not be selected when the two morphisms belong to the same category
+# This method should usually not be selected when the two morphisms belong to the same category and the category can compute IsEqualForMorphisms.
 InstallMethod( @__MODULE__,  IsEqualForMorphisms,
                     [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
 
   function( cat, morphism_1, morphism_2 )
     
     if (@not HasCapCategory( morphism_1 ))
+        
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
+        
     end;
+    
     if (@not HasCapCategory( morphism_2 ))
+        
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
+        
     end;
     
     if (@not IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) ))
+        
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
+        
     else
-        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsEqualForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
+        
+        # convenience: as long as the morphisms are identical, everything "just works"
+        if (IsIdenticalObj( morphism_1, morphism_2 ))
+            
+            return true;
+            
+        else
+            
+            Error( "Cannot decide whether the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" are equal. You can fix this error by installing `IsEqualForMorphisms` in <cat> or possibly avoid it by enabling strict caching." );
+            
+        end;
+        
     end;
     
 end );
 
-# This method should usually not be selected when the two morphisms belong to the same category
+# This method should usually not be selected when the two morphisms belong to the same category and the category can compute IsCongruentForMorphisms.
 InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
                     [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
 
   function( cat, morphism_1, morphism_2 )
     
     if (@not HasCapCategory( morphism_1 ))
+        
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" has no CAP category" ) );
+        
     end;
+    
     if (@not HasCapCategory( morphism_2 ))
+        
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" has no CAP category" ) );
+        
     end;
     
     if (@not IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) ))
+        
         Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
+        
     else
-        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" belong to the same CAP category, but no specific method IsCongruentForMorphisms is installed. Maybe you forgot to finalize the category?" ) );
+        
+        if (CapCategory( morphism_1 ).is_computable)
+            
+            # convenience: as long as the morphisms are identical, everything "just works"
+            if (IsIdenticalObj( morphism_1, morphism_2 ))
+                
+                return true;
+                
+            else
+                
+                Error( "Cannot decide whether the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" are congruent. You can fix this error by installing `IsCongruentForMorphisms` in <cat>." );
+                
+            end;
+            
+        else
+            
+            Error( "cannot decide congruence of morphisms in a non-computable category" );
+            
+        end;
+        
     end;
     
 end );

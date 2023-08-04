@@ -52,6 +52,3 @@ DeclareGlobalVariable( "CATEGORIES_LOGIC_FILES" );
 #############################
 
 @DeclareGlobalFunction( "INSTALL_LOGICAL_IMPLICATIONS_HELPER" );
-
-@DeclareAttribute( "CAP_CATEGORY_SOURCE_RANGE_THEOREM_INSTALL_HELPER",
-                  IsCapCategoryMorphism );
