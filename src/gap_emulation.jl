@@ -284,10 +284,10 @@ function PrintObj(obj::CAPDict)
 end
 
 function PrintString(obj::CAPDict)
-	StringGAPOperation(obj)
+	StringGAP_OPERATION(obj)
 end
 
-function StringGAPOperation(obj::CAPDict)
+function StringGAP_OPERATION(obj::CAPDict)
 	"<object>"
 end
 
@@ -339,31 +339,31 @@ function PrintString(list::Vector)
 end
 
 function PrintString(list::UnitRange)
-	StringGAPOperation(list)
+	StringGAP_OPERATION(list)
 end
 
-function StringGAPOperation(x::Union{Int, BigInt})
+function StringGAP_OPERATION(x::Union{Int, BigInt})
 	string(x)
 end
 
-function QuotedStringGAPOperation(x::Any)
-	StringGAPOperation(x)
+function QuotedStringGAP_OPERATION(x::Any)
+	StringGAP_OPERATION(x)
 end
 
-function QuotedStringGAPOperation(x::String)
+function QuotedStringGAP_OPERATION(x::String)
 	string("\"", x, "\"")
 end
 
-function StringGAPOperation(list::Vector)
+function StringGAP_OPERATION(list::Vector)
 	# https://github.com/gap-system/gap/pull/5418
 	if length(list) == 0
 		"[ ]"
 	else
-		string("[ ", join(map(x -> QuotedStringGAPOperation(x), list), ", "), " ]")
+		string("[ ", join(map(x -> QuotedStringGAP_OPERATION(x), list), ", "), " ]")
 	end
 end
 
-function StringGAPOperation(range::UnitRange)
+function StringGAP_OPERATION(range::UnitRange)
 	if range.stop < range.start
 		# https://github.com/gap-system/gap/pull/5418
 		string("[ ]")
@@ -762,7 +762,7 @@ function (attr::Attribute)(args...; kwargs...)
 	attr.operation(args...; kwargs...)
 end
 
-function StringGAPOperation(attr::Attribute)
+function StringGAP_OPERATION(attr::Attribute)
 	string("<Attribute \"", attr.name, "\">")
 end
 
@@ -774,7 +774,7 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 		return nothing
 	end
 	symbol = Symbol(name)
-	symbol_op = Symbol(name * "Operation")
+	symbol_op = Symbol(name * "_OPERATION")
 	symbol_tester = Symbol("Has" * name)
 	symbol_getter = Symbol("Get" * name)
 	symbol_setter = Symbol("Set" * name)
@@ -957,17 +957,17 @@ end
 
 @DeclareAttribute("Length", IsAttributeStoringRep)
 
-function LengthOperation(x::Union{Vector, UnitRange, StepRange, Tuple, String})
+function Length_OPERATION(x::Union{Vector, UnitRange, StepRange, Tuple, String})
 	length(x)
 end
 
 @DeclareAttribute("IntGAP", IsAttributeStoringRep)
 
-function IntGAPOperation(string::String)
+function IntGAP_OPERATION(string::String)
 	parse(Int, string)
 end
 
-function IntGAPOperation(float::Float64)
+function IntGAP_OPERATION(float::Float64)
 	Int(floor(float))
 end
 
