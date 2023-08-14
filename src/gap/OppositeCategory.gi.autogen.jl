@@ -236,6 +236,10 @@ end );
                     
                     return @Concatenation( "List( ", argument_name, ", x -> MorphismDatum( cat, x ) )" );
                     
+                elseif (filter == "list_of_integers_and_list_of_morphisms")
+                    
+                    return @Concatenation( "PairGAP( ", argument_name, "[1], List( ", argument_name, "[2], x -> MorphismDatum( cat, x ) ) )" );
+                    
                 else
                     
                     Error( "this case is not handled yet" );

@@ -10,8 +10,6 @@ julia> list_of_operations_to_install = [
             "MorphismConstructor",
             "ObjectDatum",
             "MorphismDatum",
-            "IsEqualForObjects",
-            "IsEqualForMorphisms",
             "IsCongruentForMorphisms",
             "PreCompose",
             "IdentityMorphism",

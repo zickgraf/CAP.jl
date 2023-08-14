@@ -212,6 +212,12 @@
         
         return CapJitDataTypeOfListOf( is_ring_element );
         
+    elseif (string == "list_of_integers_and_list_of_morphisms")
+        
+        return CapJitDataTypeOfNTupleOf( 2,
+                       CapJitDataTypeOfListOf( @rec( filter = IsInt ) ),
+                       CapJitDataTypeOfListOf( CapJitDataTypeOfMorphismOfCategory( category ) ) );
+        
     elseif (string == "arbitrary_list")
         
         return CapJitDataTypeOfListOf( IsObject );

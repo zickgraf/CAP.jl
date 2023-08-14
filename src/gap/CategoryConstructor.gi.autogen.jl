@@ -288,7 +288,7 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
         info = CAP_INTERNAL_METHOD_NAME_RECORD[name];
         
         # check if filters and return_type are known
-        unknown_filters = Filtered( info.filter_list, filter -> @not filter in [ "category", "object", "morphism", "integer", "element_of_commutative_ring_of_linear_structure", "nonneg_integer_or_infinity", "list_of_objects", "list_of_morphisms", "pair_of_morphisms" ] );
+        unknown_filters = Filtered( info.filter_list, filter -> @not filter in [ "category", "object", "morphism", "integer", "element_of_commutative_ring_of_linear_structure", "nonneg_integer_or_infinity", "list_of_objects", "list_of_morphisms", "pair_of_morphisms", "list_of_integers_and_list_of_morphisms" ] );
         
         if (@not IsEmpty( unknown_filters ))
             
@@ -386,6 +386,10 @@ InstallMethod( @__MODULE__,  CategoryConstructor,
                 elseif (filter == "pair_of_morphisms")
                     
                     return @Concatenation( "PairGAP( ", options.underlying_morphism_getter_string, "( cat, ", argument_name, "[1] ), ", options.underlying_morphism_getter_string, "( cat, ", argument_name, "[2] ) )" );
+                    
+                elseif (filter == "list_of_integers_and_list_of_morphisms")
+                    
+                    return @Concatenation( "PairGAP( ", argument_name, "[1], List( ", argument_name, "[2], x -> ", options.underlying_morphism_getter_string, "( cat, x ) ) )" );
                     
                 else
                     

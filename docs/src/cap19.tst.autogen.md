@@ -11,7 +11,7 @@ TerminalCategoryWithMultipleObjects( )
 julia> Display( T )
 A CAP category with name TerminalCategoryWithMultipleObjects( ):
 
-63 primitive operations were used to derive 304 operations for this category which algorithmically
+65 primitive operations were used to derive 306 operations for this category which algorithmically
 * IsCategoryWithDecidableColifts
 * IsCategoryWithDecidableLifts
 * IsEquippedWithHomomorphismStructure
@@ -76,7 +76,13 @@ julia> aa = ObjectConstructor( T, "a" )
 julia> Display( aa )
 a
 
-julia> a == aa
+julia> IsEqualForObjects( a, aa )
+true
+
+julia> IsIsomorphicForObjects( a, aa )
+true
+
+julia> IsIsomorphism( SomeIsomorphismBetweenObjects( a, aa ) )
 true
 
 julia> b = "b" / T
@@ -85,8 +91,14 @@ julia> b = "b" / T
 julia> Display( b )
 b
 
-julia> a == b
+julia> IsEqualForObjects( a, b )
 false
+
+julia> IsIsomorphicForObjects( a, b )
+true
+
+julia> IsIsomorphism( SomeIsomorphismBetweenObjects( a, b ) )
+true
 
 julia> t = TensorProduct( a, b )
 <An object in TerminalCategoryWithMultipleObjects( )>
