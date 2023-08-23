@@ -248,6 +248,8 @@ InstallMethod( @__MODULE__,  AddObjectRepresentation,
                
   function( category, representation )
     
+    Print( "WARNING: AddObjectRepresentation is deprecated and will not be supported after 2024.08.21. Please use CreateCapCategory with four arguments instead.\n" );
+    
     if (@not IsSpecializationOfFilter( IsCapCategoryObject, representation ))
         
         Error( "the object representation must imply IsCapCategoryObject" );
@@ -283,6 +285,7 @@ InstallMethod( @__MODULE__,  RandomObject, [ IsCapCategory, IsList ], RandomObje
     obj = CallFuncList( ObjectifyWithAttributes, arg_list );
     
     #= comment for Julia
+    # This can be removed once AddObjectRepresentation is removed.
     # work around https://github.com/gap-system/gap/issues/3642:
     # New implications of `ObjectFilter( category )` (e.g. installed via `AddObjectRepresentation`)
     # are not automatically set in `category.object_type`.
@@ -308,6 +311,7 @@ end );
     obj = CallFuncList( ObjectifyWithAttributes, arg_list );
     
     #= comment for Julia
+    # This can be removed once AddObjectRepresentation is removed.
     # work around https://github.com/gap-system/gap/issues/3642:
     # New implications of `ObjectFilter( category )` (e.g. installed via `AddObjectRepresentation`)
     # are not automatically set in `category.object_type`.

@@ -1776,9 +1776,9 @@ AddDerivationToCAP( PostCompose,
                     "PostCompose using PreCompose and swapping arguments",
                     [ [ PreCompose, 1 ] ],
                     
-  function( cat, right_mor, left_mor )
+  function( cat, post_mor, pre_mor )
     
-    return PreCompose( cat, left_mor, right_mor );
+    return PreCompose( cat, pre_mor, post_mor );
     
 end );
 
@@ -1787,9 +1787,9 @@ AddDerivationToCAP( PreCompose,
                     "PreCompose using PostCompose and swapping arguments",
                     [ [ PostCompose, 1 ] ],
                     
-  function( cat, left_mor, right_mor )
+  function( cat, pre_mor, post_mor )
     
-    return PostCompose( cat, right_mor, left_mor );
+    return PostCompose( cat, post_mor, pre_mor );
     
 end );
 
@@ -1798,9 +1798,9 @@ AddDerivationToCAP( PreCompose,
                     "PreCompose by wrapping the arguments in a list",
                     [ [ PreComposeList, 1 ] ],
                     
-  function( cat, left_mor, right_mor )
+  function( cat, pre_mor, post_mor )
     
-    return PreComposeList( cat, [ left_mor, right_mor ] );
+    return PreComposeList( cat, [ pre_mor, post_mor ] );
     
 end );
 
@@ -1820,9 +1820,9 @@ AddDerivationToCAP( PostCompose,
                     "PostCompose by wrapping the arguments in a list",
                     [ [ PostComposeList, 1 ] ],
                     
-  function( cat, mor_right, mor_left )
+  function( cat, post_mor, pre_mor )
     
-    return PostComposeList( cat, [ mor_right, mor_left ] );
+    return PostComposeList( cat, [ post_mor, pre_mor ] );
     
 end );
 
@@ -1951,6 +1951,21 @@ AddDerivationToCAP( SumOfMorphisms,
     return Iterated( mors, ( alpha, beta ) -> AdditionForMorphisms( cat, alpha, beta ), zero_morphism );
     
 end; CategoryFilter = IsAbCategory );
+
+##
+AddDerivationToCAP( LinearCombinationOfMorphisms,
+                    "LinearCombinationOfMorphisms using SumOfMorphisms and MultiplyWithElementOfCommutativeRingForMorphisms",
+                    [ [ MultiplyWithElementOfCommutativeRingForMorphisms, 2 ],
+                      [ SumOfMorphisms, 1 ] ],
+                    
+  function( cat, obj1, coeffs, mors, obj2 )
+    local morphisms;
+    
+    morphisms = ListN( coeffs, mors, ( r, alpha ) -> MultiplyWithElementOfCommutativeRingForMorphisms( cat, r, alpha ) );
+    
+    return SumOfMorphisms( cat, obj1, morphisms, obj2 );
+    
+end; CategoryFilter = IsLinearCategoryOverCommutativeRing );
 
 ##
 AddDerivationToCAP( LiftAlongMonomorphism,

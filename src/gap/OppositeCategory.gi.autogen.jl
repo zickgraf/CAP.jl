@@ -224,7 +224,7 @@ end );
                     
                     return @Concatenation( "MorphismDatum( cat, ", argument_name, " )" );
                     
-                elseif (filter == "integer" || filter == "element_of_commutative_ring_of_linear_structure" || filter == "nonneg_integer_or_infinity")
+                elseif (filter in [ "integer", "element_of_commutative_ring_of_linear_structure", "nonneg_integer_or_infinity", "list_of_elements_of_commutative_ring_of_linear_structure" ])
                     
                     return argument_name;
                     

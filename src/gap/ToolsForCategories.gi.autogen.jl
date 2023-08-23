@@ -1551,6 +1551,21 @@ end );
 end );
 
 ##
+@InstallGlobalFunction( TransposedMatWithGivenDimensions, function ( nr_rows, nr_cols, listlist )
+    
+    if (!( Length( listlist ) == nr_rows && ForAll( listlist, row -> Length( row ) == nr_cols ) ))
+        Error( "the arguments passed to 'TransposedMatWithGivenDimensions' are inconsistent!\n" );
+    end;
+    
+    if (nr_rows == 0)
+        return List( (1):(nr_cols), i -> [ ] );
+    else
+        return TransposedMat( listlist );
+    end;
+    
+end );
+
+##
 @InstallGlobalFunction( HandlePrecompiledTowers, function ( category, underlying_category, constructor_name )
   local precompiled_towers, remaining_constructors_in_tower, precompiled_functions_adder, info;
     

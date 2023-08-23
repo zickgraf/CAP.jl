@@ -5,21 +5,6 @@
 #
 
 ##
-InstallMethod( @__MODULE__,  UnderlyingCategory,
-        "for a wrapper CAP category",
-        [ IsWrapperCapCategory ],
-        
-  function( D )
-    
-    Print(
-      "WARNING: UnderlyingCategory for IsWrapperCapCategory is deprecated and will not be supported after 2023.06.13. Please use ModelingCategory instead.\n"
-    );
-    
-    return ModelingCategory( D );
-    
-end );
-
-##
 InstallMethod( @__MODULE__,  AsObjectInWrapperCategory,
         "for a wrapper CAP category and a CAP object",
         [ IsWrapperCapCategory, IsCapCategoryObject ],
@@ -54,6 +39,14 @@ InstallMethod( @__MODULE__,  AsMorphismInWrapperCategory,
     
     #% CAP_JIT_DROP_NEXT_STATEMENT
     CAP_INTERNAL_ASSERT_IS_MORPHISM_OF_CATEGORY( morphism, ModelingCategory( D ), [ "the morphism given to AsMorphismInWrapperCategory" ] );
+    
+    if (@not IsEqualForObjects( ModelingCategory( D ), ObjectDatum( D, source ), Source( morphism ) ))
+        Error( "ObjectDatum( source ) and Source( morphism ) do not coincide\n" );
+    end;
+    
+    if (@not IsEqualForObjects( ModelingCategory( D ), ObjectDatum( D, range ), Range( morphism ) ))
+        Error( "ObjectDatum( range ) and Range( morphism ) do not coincide\n" );
+    end;
     
     return CreateCapCategoryMorphismWithAttributes( D,
                                                     source,

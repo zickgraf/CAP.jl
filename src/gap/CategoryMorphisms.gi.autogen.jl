@@ -254,6 +254,8 @@ InstallMethod( @__MODULE__,  AddMorphismRepresentation,
                
   function( category, representation )
     
+    Print( "WARNING: AddMorphismRepresentation is deprecated and will not be supported after 2024.08.21. Please use CreateCapCategory with four arguments instead.\n" );
+    
     if (@not IsSpecializationOfFilter( IsCapCategoryMorphism, representation ))
         
         Error( "the morphism representation must imply IsCapCategoryMorphism" );
@@ -318,6 +320,7 @@ InstallMethod( @__MODULE__,  RandomMorphism,
     end;
     
     #= comment for Julia
+    # This can be removed once AddMorphismRepresentation is removed.
     # work around https://github.com/gap-system/gap/issues/3642:
     # New implications of `MorphismFilter( category )` (e.g. installed via `AddMorphismRepresentation`)
     # are not automatically set in `category.morphism_type`.
@@ -348,6 +351,7 @@ end );
     end;
     
     #= comment for Julia
+    # This can be removed once AddMorphismRepresentation is removed.
     # work around https://github.com/gap-system/gap/issues/3642:
     # New implications of `MorphismFilter( category )` (e.g. installed via `AddMorphismRepresentation`)
     # are not automatically set in `category.morphism_type`.
@@ -550,12 +554,6 @@ InstallMethod( @__MODULE__,  AddPropertyToMatchAtIsCongruentForMorphisms,
     end;
     
 end );
-
-# deprecated legacy aliases
-InstallDeprecatedAlias( "IsIdenticalToIdentityMorphism", "IsEqualToIdentityMorphism", "2023.05.17" );
-InstallDeprecatedAlias( "AddIsIdenticalToIdentityMorphism", "AddIsEqualToIdentityMorphism", "2023.05.17" );
-InstallDeprecatedAlias( "IsIdenticalToZeroMorphism", "IsEqualToZeroMorphism", "2023.05.17" );
-InstallDeprecatedAlias( "AddIsIdenticalToZeroMorphism", "AddIsEqualToZeroMorphism", "2023.05.17" );
 
 ######################################
 ##

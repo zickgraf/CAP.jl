@@ -10,7 +10,7 @@ InstallMethod( @__MODULE__,  DummyCategory,
         [ IsRecord ],
         
   function( options )
-    local category_constructor_options, dummy_function, C;
+    local category_constructor_options, dummy_function, C, operation_name;
     
     category_constructor_options = ShallowCopy( options );
     category_constructor_options.category_filter = IsDummyCategory;
@@ -76,6 +76,16 @@ InstallMethod( @__MODULE__,  DummyCategory,
     C = CategoryConstructor( category_constructor_options );
     
     Finalize( C );
+    
+    for operation_name in options.list_of_operations_to_install
+        
+        if (@not CanCompute( C, operation_name ))
+            
+            Print( "WARNING: The dummy category cannot compute ", operation_name, ", probably because the operation is not supported by CategoryConstructor yet.\n" );
+            
+        end;
+        
+    end;
     
     return C;
     
