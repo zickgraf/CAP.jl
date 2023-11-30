@@ -308,6 +308,8 @@ InstallMethod( @__MODULE__,  RandomMorphism,
   function( morphism, category, source, range, additional_arguments_list... )
     local arg_list, objectified_morphism;
     
+    Print( "WARNING: ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes is deprecated and will not be supported after 2024.08.29. Please use CreateCapCategoryMorphismWithAttributes instead.\n" );
+    
     arg_list = @Concatenation(
         [ morphism, category.morphism_type, CapCategory, category, Source, source, Range, range ], additional_arguments_list
     );
@@ -336,8 +338,6 @@ end );
                        
   function( category, source, range, additional_arguments_list... )
     local arg_list, objectified_morphism;
-    
-    # inline ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( @rec( ), category, source, range, additional_arguments_list... );
     
     arg_list = @Concatenation(
         [ @rec( ), category.morphism_type, CapCategory, category, Source, source, Range, range ], additional_arguments_list
@@ -573,6 +573,62 @@ end );
 # end );
 
 ##
+InstallMethod( @__MODULE__,  PreComposeList,
+               [ IsCapCategory, IsList ],
+               
+  function( cat, morphism_list )
+    
+    if (IsEmpty( morphism_list ))
+        Error( "the given list of morphisms is empty\n" );
+    end;
+    
+    return PreComposeList( cat, Source( First( morphism_list ) ), morphism_list, Range( Last( morphism_list ) ) );
+    
+end );
+
+##
+InstallMethod( @__MODULE__,  PostComposeList,
+               [ IsCapCategory, IsList ],
+               
+  function( cat, morphism_list )
+    
+    if (IsEmpty( morphism_list ))
+        Error( "the given list of morphisms is empty\n" );
+    end;
+    
+    return PostComposeList( cat, Source( Last( morphism_list ) ), morphism_list, Range( First( morphism_list ) ) );
+    
+end );
+
+##
+InstallMethod( @__MODULE__,  PreComposeList,
+               [ IsList ],
+               
+  function( morphism_list )
+    
+    if (IsEmpty( morphism_list ))
+        Error( "the given list of morphisms is empty\n" );
+    end;
+    
+    return PreComposeList( CapCategory( morphism_list[1] ), morphism_list );
+    
+end );
+
+##
+InstallMethod( @__MODULE__,  PostComposeList,
+               [ IsList ],
+               
+  function( morphism_list )
+    
+    if (IsEmpty( morphism_list ))
+        Error( "the given list of morphisms is empty\n" );
+    end;
+    
+    return PostComposeList( CapCategory( morphism_list[1] ), morphism_list );
+    
+end );
+
+##
 InstallMethod( @__MODULE__,  PreCompose,
                [ IsList ],
                
@@ -780,6 +836,11 @@ InstallMethod( @__MODULE__,  ExtendRangeOfHomomorphismStructureByIdentityAsFullE
   function ( C )
     local object_function, morphism_function, object_function_inverse, morphism_function_inverse;
     
+    if (@IsBound( C.range_category_of_hom_structure_already_extended_by_identity ))
+        ## the range of the hom-structure has already been extended by identity
+        return;
+    end;
+    
     object_function = function ( category, range_category, object )
         #% CAP_JIT_RESOLVE_FUNCTION
         
@@ -809,6 +870,8 @@ InstallMethod( @__MODULE__,  ExtendRangeOfHomomorphismStructureByIdentityAsFullE
     end;
     
     ExtendRangeOfHomomorphismStructureByFullEmbedding( C, RangeCategoryOfHomomorphismStructure( C ), object_function, morphism_function, object_function_inverse, morphism_function_inverse );
+    
+    C.range_category_of_hom_structure_already_extended_by_identity = true;
     
 end );
 

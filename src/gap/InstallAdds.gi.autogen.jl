@@ -286,21 +286,12 @@ end );
         
         ## Nr arguments sanity check
         
-        if (@not category.category_as_first_argument in [ false, true ])
-            
-            Print(
-                "WARNING: Please set the component `category_as_first_argument` of the category with name \"", Name( category ), "\" explicitly to `true` or `false`. ",
-                "Currently, the default value is `false` (which will now be set automatically), but this will change in the future.\n"
-            );
-            
-            category.category_as_first_argument = false;
-            
-        end;
-        
         # backwards compatibility for categories with `category.category_as_first_argument == false`
-        needs_wrapping = category.category_as_first_argument == false && !(is_derivation || is_final_derivation);
+        needs_wrapping = @IsBound( category.category_as_first_argument ) && category.category_as_first_argument == false && !(is_derivation || is_final_derivation);
         
         if (needs_wrapping)
+            
+            Print( "WARNING: Setting `category.category_as_first_argument` to `false` is deprecated and will not be supported after 2024.08.29.\n" );
             
             number_of_proposed_arguments = Length( filter_list ) - 1;
             
@@ -696,6 +687,7 @@ end );
         @Concatenation( with_given_name, " by calling ", without_given_name, " with the WithGiven argument(s) dropped" ),
         [ [ ValueGlobal( without_given_name ), 1 ] ],
         with_given_via_without_given_function
+       ; is_with_given_derivation = true
     );
     
     AddDerivationToCAP(
@@ -703,6 +695,7 @@ end );
         @Concatenation( without_given_name, " by calling ", with_given_name, " with the WithGiven object(s)" ),
         @Concatenation( [ [ ValueGlobal( with_given_name ), 1 ] ], List( additional_preconditions, x -> [ ValueGlobal( x[1] ), x[2] ] ) ),
         without_given_via_with_given_function
+       ; is_with_given_derivation = true
     );
     
 end );

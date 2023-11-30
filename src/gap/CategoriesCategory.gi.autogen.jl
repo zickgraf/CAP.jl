@@ -29,8 +29,6 @@
                               IsCapNaturalTransformation
                              ; is_computable = false );
     
-    cat.category_as_first_argument = true;
-    
     INSTALL_CAP_CAT_FUNCTIONS( cat );
     
     return cat;

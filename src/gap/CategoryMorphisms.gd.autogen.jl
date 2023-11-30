@@ -388,20 +388,13 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
 
 #! @Arguments morphism, category, source, range[, attr1, val1, attr2, val2, ...]
 #! @Description
-#!  Objectifies the morphism <A>morphism</A> with the type created
-#!  for morphisms in the category <A>category</A>. The type
-#!  is created by passing a morphism filter to <Ref Func="CreateCapCategoryWithDataTypes" />.
-#!  Morphisms which are objectified using this method do not have to be passed
-#!  to the <C>AddMorphism</C> function.
-#!  The arguments <C>source</C> and <C>range</C> are assumed to be objectified.
-#!  The optional arguments behave like the corresponding arguments in <C>ObjectifyWithAttributes</C>.
-#!  Also returns the objectified morphism.
+#!  **Deprecated**: use <Ref Func="CreateCapCategoryMorphismWithAttributes" /> instead.
 #! @Returns a morphism
 @DeclareGlobalFunction( "ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes" );
 
-#! @Arguments morphism, category, source, range[, attr1, val1, attr2, val2, ...]
+#! @Arguments category, source, range[, attr1, val1, attr2, val2, ...]
 #! @Description
-#!  Shorthand for `ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes( @rec( ), category, source, range[, attr1, val1, attr2, val2, ...] )`.
+#!  Creates a morphism in <A>category</A> with the given attributes.
 #! @Returns a morphism
 @DeclareGlobalFunction( "CreateCapCategoryMorphismWithAttributes" );
 
@@ -673,14 +666,15 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
                   [ IsList ] );
 
 #! @Description
-#! The argument is a list of morphisms
+#! The arguments are two objects <A>s</A> == $a_1$, <A>r</A> == $a_[n+1]$, and a list of morphisms
 #! $L == ( \alpha_1: a_1 \rightarrow a_2, \alpha_2: a_2 \rightarrow a_3, \dots, \alpha_n: a_n \rightarrow a_[n+1] )$ in $C$.
 #! The output is the composition
 #! $\alpha_[n] \circ ( \alpha_[n-1] \circ ( \dots ( \alpha_2 \circ \alpha_1 ) ) )$.
-#! @Returns a morphism in $\mathrm[Hom](a_1, a_[n+1])$
-#! @Arguments C, L
+#! If $L$ is empty, then $s$ must be equal to $r$ and the output is congruent to the identity morphism of $s$.
+#! @Returns a morphism in $\mathrm[Hom](s, r)$
+#! @Arguments s, L, r
 @DeclareOperation( "PreComposeList",
-                  [ IsList ] );
+                  [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 
 #! @Description
@@ -703,14 +697,15 @@ DeclareGlobalVariable( "PROPAGATION_LIST_FOR_EQUAL_MORPHISMS" );
                   [ IsList ] );
 
 #! @Description
-#! The argument is a list of morphisms
+#! The arguments are two objects <A>s</A> == $a_1$, <A>r</A> == $a_[n+1]$, and a list of morphisms
 #! $L == ( \alpha_n: a_n \rightarrow a_[n+1], \alpha_[n-1]: a_[n-1] \rightarrow a_n, \dots, \alpha_1: a_1 \rightarrow a_2 )$.
 #! The output is the composition
 #! $((\alpha_[n] \circ  \alpha_[n-1]) \circ \dots  \alpha_2) \circ \alpha_1$.
-#! @Returns a morphism in $\mathrm[Hom](a_1, a_[n+1])$
-#! @Arguments C, L
+#! If $L$ is empty, then $s$ must be equal to $r$ and the output is congruent to the identity morphism of $s$.
+#! @Returns a morphism in $\mathrm[Hom](s, r)$
+#! @Arguments s, L, r
 @DeclareOperation( "PostComposeList",
-                  [ IsList ] );
+                  [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
 
 #! @Description
 #! The arguments are two objects <A>s</A>, <A>r</A> and a list <A>morphisms</A> of morphisms from <A>s</A> to <A>r</A>.

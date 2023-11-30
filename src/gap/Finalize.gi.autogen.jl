@@ -367,7 +367,15 @@ InstallMethod( @__MODULE__,  Finalize,
         
     end;
     
-    derivation_list = ShallowCopy( CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list );
+    if (ValueOption( "disable_derivations" ) == true)
+        
+        derivation_list = [ ];
+        
+    else
+        
+        derivation_list = ShallowCopy( CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list );
+        
+    end;
     
     weight_list = category.derivations_weight_list;
     

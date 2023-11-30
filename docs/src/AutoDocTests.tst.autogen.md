@@ -79,7 +79,7 @@ TerminalCategoryWithMultipleObjects( )
 julia> Display( T )
 A CAP category with name TerminalCategoryWithMultipleObjects( ):
 
-65 primitive operations were used to derive 307 operations for this category which algorithmically
+65 primitive operations were used to derive 311 operations for this category which algorithmically
 * IsCategoryWithDecidableColifts
 * IsCategoryWithDecidableLifts
 * IsEquippedWithHomomorphismStructure
@@ -293,7 +293,7 @@ TerminalCategoryWithSingleObject( )
 julia> Display( T )
 A CAP category with name TerminalCategoryWithSingleObject( ):
 
-63 primitive operations were used to derive 307 operations for this category which algorithmically
+63 primitive operations were used to derive 311 operations for this category which algorithmically
 * IsCategoryWithDecidableColifts
 * IsCategoryWithDecidableLifts
 * IsEquippedWithHomomorphismStructure

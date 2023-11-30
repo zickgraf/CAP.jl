@@ -126,44 +126,6 @@
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
-#! to the category for the basic operation `CanonicalIdentificationFromCoimageToImageObject`.
-#! $F: ( alpha ) \mapsto \mathtt[CanonicalIdentificationFromCoimageToImageObject](alpha)$.
-#! @Returns nothing
-#! @Arguments C, F
-@DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
-                  [ IsCapCategory, IsFunction ] );
-
-@DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
-                  [ IsCapCategory, IsFunction, IsInt ] );
-
-@DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
-                  [ IsCapCategory, IsList, IsInt ] );
-
-@DeclareOperation( "AddCanonicalIdentificationFromCoimageToImageObject",
-                  [ IsCapCategory, IsList ] );
-
-#! @Description
-#! The arguments are a category $C$ and a function $F$.
-#! This operation adds the given function $F$
-#! to the category for the basic operation `CanonicalIdentificationFromImageObjectToCoimage`.
-#! $F: ( alpha ) \mapsto \mathtt[CanonicalIdentificationFromImageObjectToCoimage](alpha)$.
-#! @Returns nothing
-#! @Arguments C, F
-@DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
-                  [ IsCapCategory, IsFunction ] );
-
-@DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
-                  [ IsCapCategory, IsFunction, IsInt ] );
-
-@DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
-                  [ IsCapCategory, IsList, IsInt ] );
-
-@DeclareOperation( "AddCanonicalIdentificationFromImageObjectToCoimage",
-                  [ IsCapCategory, IsList ] );
-
-#! @Description
-#! The arguments are a category $C$ and a function $F$.
-#! This operation adds the given function $F$
 #! to the category for the basic operation `CoastrictionToImage`.
 #! $F: ( alpha ) \mapsto \mathtt[CoastrictionToImage](alpha)$.
 #! @Returns nothing
@@ -1665,20 +1627,39 @@
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
-#! to the category for the basic operation `InverseMorphismFromCoimageToImageWithGivenObjects`.
-#! $F: ( C, alpha, I ) \mapsto \mathtt[InverseMorphismFromCoimageToImageWithGivenObjects](C, alpha, I)$.
+#! to the category for the basic operation `InverseOfMorphismFromCoimageToImage`.
+#! $F: ( alpha ) \mapsto \mathtt[InverseOfMorphismFromCoimageToImage](alpha)$.
 #! @Returns nothing
 #! @Arguments C, F
-@DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddInverseOfMorphismFromCoimageToImage",
                   [ IsCapCategory, IsFunction ] );
 
-@DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddInverseOfMorphismFromCoimageToImage",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-@DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddInverseOfMorphismFromCoimageToImage",
                   [ IsCapCategory, IsList, IsInt ] );
 
-@DeclareOperation( "AddInverseMorphismFromCoimageToImageWithGivenObjects",
+@DeclareOperation( "AddInverseOfMorphismFromCoimageToImage",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `InverseOfMorphismFromCoimageToImageWithGivenObjects`.
+#! $F: ( I, alpha, C ) \mapsto \mathtt[InverseOfMorphismFromCoimageToImageWithGivenObjects](I, alpha, C)$.
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddInverseOfMorphismFromCoimageToImageWithGivenObjects",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddInverseOfMorphismFromCoimageToImageWithGivenObjects",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddInverseOfMorphismFromCoimageToImageWithGivenObjects",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddInverseOfMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategory, IsList ] );
 
 #! @Description
@@ -3223,6 +3204,25 @@
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
+#! to the category for the basic operation `MorphismFromCoimageToImage`.
+#! $F: ( alpha ) \mapsto \mathtt[MorphismFromCoimageToImage](alpha)$.
+#! @Returns nothing
+#! @Arguments C, F
+@DeclareOperation( "AddMorphismFromCoimageToImage",
+                  [ IsCapCategory, IsFunction ] );
+
+@DeclareOperation( "AddMorphismFromCoimageToImage",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+@DeclareOperation( "AddMorphismFromCoimageToImage",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+@DeclareOperation( "AddMorphismFromCoimageToImage",
+                  [ IsCapCategory, IsList ] );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
 #! to the category for the basic operation `MorphismFromCoimageToImageWithGivenObjects`.
 #! $F: ( C, alpha, I ) \mapsto \mathtt[MorphismFromCoimageToImageWithGivenObjects](C, alpha, I)$.
 #! @Returns nothing
@@ -3547,7 +3547,7 @@
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PostComposeList`.
-#! $F: ( list_of_morphisms ) \mapsto \mathtt[PostComposeList](list_of_morphisms)$.
+#! $F: ( source, list_of_morphisms, range ) \mapsto \mathtt[PostComposeList](source, list_of_morphisms, range)$.
 #! @Returns nothing
 #! @Arguments C, F
 @DeclareOperation( "AddPostComposeList",
@@ -3604,7 +3604,7 @@
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
 #! to the category for the basic operation `PreComposeList`.
-#! $F: ( list_of_morphisms ) \mapsto \mathtt[PreComposeList](list_of_morphisms)$.
+#! $F: ( source, list_of_morphisms, range ) \mapsto \mathtt[PreComposeList](source, list_of_morphisms, range)$.
 #! @Returns nothing
 #! @Arguments C, F
 @DeclareOperation( "AddPreComposeList",

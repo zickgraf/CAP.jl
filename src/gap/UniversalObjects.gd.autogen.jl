@@ -880,21 +880,6 @@
                   [ IsCapCategoryObject, IsList, IsList, IsList, IsCapCategoryObject ] );
 
 #! @Description
-#! This is a deprecated convenience method.
-#! The arguments are a list
-#! $M == ( \phi_[1,1], \phi_[1,2], \dots, \phi_[1,n], \phi_[2,1], \dots, \phi_[m,n] )$
-#! of morphisms $\phi_[i,j]: A_i \rightarrow B_j$,
-#! an integer $m$,
-#! and an integer $n$.
-#! The output is the morphism
-#! $\bigoplus_[i=1]^[m]A_i \rightarrow \bigoplus_[j=1]^n B_j$
-#! defined by the list $M$ regarded as a matrix of dimension $m \times n$.
-#! @Returns a morphism in $\mathrm[Hom](\bigoplus_[i=1]^[m]A_i, \bigoplus_[j=1]^n B_j)$
-#! @Arguments M, m, n
-@DeclareOperation( "MorphismBetweenDirectSums",
-                           [ IsList, IsInt, IsInt ] );
-
-#! @Description
 #! The arguments are a morphism $\alpha: A \rightarrow S$,
 #! a list $D == (S_1, \dots, S_n)$ of objects with $S == \bigoplus_[j=1]^n S_j$,
 #! and an integer $k$.
@@ -2324,7 +2309,7 @@
 #! The output is the canonical morphism (in a preabelian category)
 #! $C \rightarrow I$.
 #! @Returns a morphism in $\mathrm[Hom](C,I)$
-#! @Arguments alpha
+#! @Arguments C, alpha, I
 @DeclareOperation( "MorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
@@ -2334,7 +2319,7 @@
 #! $\mathrm[im](\alpha) \rightarrow \mathrm[coim](\alpha)$.
 #! @Returns a morphism in $\mathrm[Hom](\mathrm[im](\alpha), \mathrm[coim](\alpha))$
 #! @Arguments alpha
-@DeclareAttribute( "InverseMorphismFromCoimageToImage",
+@DeclareAttribute( "InverseOfMorphismFromCoimageToImage",
                   IsCapCategoryMorphism );
 
 #! @Description
@@ -2344,8 +2329,8 @@
 #! The output is the inverse of the canonical morphism (in an abelian category)
 #! $I \rightarrow C$.
 #! @Returns a morphism in $\mathrm[Hom](I,C)$
-#! @Arguments C, alpha, I
-@DeclareOperation( "InverseMorphismFromCoimageToImageWithGivenObjects",
+#! @Arguments I, alpha, C
+@DeclareOperation( "InverseOfMorphismFromCoimageToImageWithGivenObjects",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
@@ -2447,24 +2432,6 @@
 #! If this canonical morphism is an isomorphism, we call it
 #! the <Emph>canonical identification</Emph> (between image and coimage).
 
-
-#! @Description
-#! The argument is a morphism $\alpha: A \rightarrow B$.
-#! The output is the canonical identification
-#! $c: \mathrm[im]( \alpha ) \rightarrow \mathrm[coim]( \alpha )$.
-#! @Returns a morphism in $\mathrm[Hom](\mathrm[im]( \alpha ), \mathrm[coim]( \alpha ) )$
-#! @Arguments alpha
-@DeclareAttribute( "CanonicalIdentificationFromImageObjectToCoimage",
-                  IsCapCategoryMorphism );
-
-#! @Description
-#! The argument is a morphism $\alpha: A \rightarrow B$.
-#! The output is the canonical identification
-#! $c: \mathrm[coim]( \alpha ) \rightarrow \mathrm[im]( \alpha )$.
-#! @Returns a morphism in $\mathrm[Hom](\mathrm[coim]( \alpha ), \mathrm[im]( \alpha ) )$
-#! @Arguments alpha
-@DeclareAttribute( "CanonicalIdentificationFromCoimageToImageObject",
-                  IsCapCategoryMorphism );
 
 #! @Description
 #! The arguments are three morphisms

@@ -56,4 +56,4 @@ include( "gap/ReinterpretationOfCategory.gd.autogen.jl" );
 
 include( "gap/WrapperCategory.gd.autogen.jl" );
 
-include( "gap/DummyCategory.gd.autogen.jl" );
+include( "gap/DummyImplementations.gd.autogen.jl" );

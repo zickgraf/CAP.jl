@@ -36,6 +36,8 @@ include( "gap/DerivedMethods.gi.autogen.jl" );
 
 include( "gap/LimitConvenienceOutput.gi.autogen.jl" );
 
+include( "gap/DerivedMethods.autogen.gi.autogen.jl" );
+
 include( "gap/OppositeCategory.gi.autogen.jl" );
 
 include( "gap/ProductCategory.gi.autogen.jl" );
@@ -54,7 +56,7 @@ include( "gap/ReinterpretationOfCategory.gi.autogen.jl" );
 
 include( "gap/WrapperCategory.gi.autogen.jl" );
 
-include( "gap/DummyCategory.gi.autogen.jl" );
+include( "gap/DummyImplementations.gi.autogen.jl" );
 
 include( "gap/ToolsForCategories_AfterLoading.gi.autogen.jl" );
 

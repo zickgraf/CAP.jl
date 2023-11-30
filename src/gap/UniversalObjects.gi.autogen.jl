@@ -588,7 +588,7 @@ CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
      end;
     
     if (Length( arg ) == 2 &&
-       IsCapCategoryObject( arg[2] ) &&
+       IsCapCategoryObject( arg[1] ) &&
        IsList( arg[2] ) &&
        ForAll( arg[2], IsCapCategoryMorphism ))
        
@@ -895,50 +895,6 @@ CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
         [ "Pushout", 1 ] ],
   )
 );
-
-####################################
-##
-## Coimage
-##
-####################################
-
-####################################
-## Convenience methods
-####################################
-
-##
-InstallMethod( @__MODULE__,  MorphismFromCoimageToImage,
-               [ IsCapCategoryMorphism ],
-               
-  function( morphism )
-    
-    return MorphismFromCoimageToImageWithGivenObjects( CoimageObject( morphism ), morphism, ImageObject( morphism ) );
-    
-end );
-
-##
-InstallMethod( @__MODULE__,  InverseMorphismFromCoimageToImage,
-               [ IsCapCategoryMorphism ],
-               
-  function( morphism )
-    
-    return InverseMorphismFromCoimageToImageWithGivenObjects( CoimageObject( morphism ), morphism, ImageObject( morphism ) );
-    
-end );
-
-CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
-  @rec(
-    MorphismFromCoimageToImage =
-      [ [ "MorphismFromCoimageToImageWithGivenObjects", 1 ],
-        [ "CoimageObject", 1 ],
-        [ "ImageObject", 1 ] ],
-    InverseMorphismFromCoimageToImage =
-      [ [ "InverseMorphismFromCoimageToImageWithGivenObjects", 1 ],
-        [ "CoimageObject", 1 ],
-        [ "ImageObject", 1 ] ],
-  )
- );
-
 
 ####################################
 ##

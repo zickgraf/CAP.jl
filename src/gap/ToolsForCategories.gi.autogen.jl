@@ -166,9 +166,9 @@
             
             ring = CommutativeRingOfLinearCategory( category );
             
-            if (IsBoundGlobal( "IsHomalgRing" ) && ValueGlobal( "IsHomalgRing" )( ring ))
+            if (HasRingElementFilter( ring ))
                 
-                is_ring_element = ValueGlobal( "IsHomalgRingElement" );
+                is_ring_element = RingElementFilter( ring );
                 
             else
                 
@@ -198,9 +198,9 @@
             
             ring = CommutativeRingOfLinearCategory( category );
             
-            if (IsBoundGlobal( "IsHomalgRing" ) && ValueGlobal( "IsHomalgRing" )( ring ))
+            if (HasRingElementFilter( ring ))
                 
-                is_ring_element = ValueGlobal( "IsHomalgRingElement" );
+                is_ring_element = RingElementFilter( ring );
                 
             else
                 
@@ -292,11 +292,6 @@ end );
         # `IsNTuple` deliberately does not imply `IsList` because we want to treat tuples and lists in different ways in CompilerForCAP.
         # However, on the GAP level tuples are just dense lists.
         return IsDenseList;
-        
-    elseif (IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), data_type.filter ))
-        
-        # Some things (e.g. integers) do not lie in the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
-        return IsRingElement;
         
     else
         
@@ -558,19 +553,6 @@ end );
             
         end;
         
-    elseif (IsBoundGlobal( "IsHomalgRingElement" ) && IsSpecializationOfFilter( ValueGlobal( "IsHomalgRingElement" ), filter ))
-        
-        return function( value )
-            
-            # Some things (e.g. integers) do not lie in the filter `IsHomalgRingElement` but are actually elements of homalg rings (e.g. `HomalgRingOfIntegers( )`).
-            if (@not IsRingElement( value ))
-                
-                CallFuncList( Error, @Concatenation( human_readable_identifier_list, [ " does not lie in the expected filter IsRingElement.", generic_help_string ] ) );
-                
-            end;
-            
-        end;
-        
     else
         
         return function( value )
@@ -599,46 +581,6 @@ end );
     end;
     
     return value;
-end );
-
-##
-@BindGlobal( "CAP_INTERNAL_MAKE_LOOP_SYMBOL_LOOK_LIKE_LOOP",
-  
-  function( function_string, loop_symbol )
-    local current_position, current_scan_position, bracket_count;
-    
-    current_position = PositionSublist( function_string, loop_symbol );
-    
-    while current_position != fail
-        
-        current_scan_position = current_position + Length( loop_symbol ) + 1;
-        
-        bracket_count = 1;
-        
-        while bracket_count != 0
-            
-            if (function_string[ current_scan_position ] == '(')
-                
-                bracket_count = bracket_count + 1;
-                
-            elseif (function_string[ current_scan_position ] == ')')
-                
-                bracket_count = bracket_count - 1;
-                
-            end;
-            
-            current_scan_position = current_scan_position + 1;
-            
-        end;
-        
-        function_string = @Concatenation( function_string[(1):(current_scan_position - 1)], " od ", function_string[(current_scan_position):(Length( function_string ))] );
-        
-        current_position = PositionSublist( function_string, loop_symbol, current_position + 1 );
-        
-    end;
-    
-    return function_string;
-    
 end );
 
 @BindGlobal( "CAP_INTERNAL_REPLACE_ADDITIONAL_SYMBOL_APPEARANCE",
@@ -713,17 +655,6 @@ end );
         
     end;
     
-    # make List etc. look like loops
-    for i in [ "List", "ListN", "Perform", "Apply", "Iterated" ]
-        
-        # beginning space or new line is important here to avoid scanning things like CallFuncList
-        func_as_string = ReplacedString( func_as_string, @Concatenation( " ", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
-        func_as_string = ReplacedString( func_as_string, @Concatenation( "\n", i, "(" ), " CAP_INTERNAL_FUNCTIONAL_LOOP" );
-        
-    end;
-    
-    func_as_string = CAP_INTERNAL_MAKE_LOOP_SYMBOL_LOOK_LIKE_LOOP( func_as_string, "CAP_INTERNAL_FUNCTIONAL_LOOP" );
-    
     RemoveCharacters( func_as_string, "()[];," );
     
     NormalizeWhitespace( func_as_string );
@@ -735,6 +666,12 @@ end );
     symbol_appearance_list = [ ];
     
     symbol_list = @Concatenation( symbol_list, RecNames( replacement_record ) );
+    
+    # remove first "function" and last "end"
+    @Assert( 0, func_as_list[1] == "function" );
+    @Assert( 0, Last( func_as_list ) == "end" );
+    
+    func_as_list = func_as_list[(2):(Length( func_as_list ) - 1)];
     
     for i in (1):(Length( func_as_list ))
         
@@ -767,11 +704,15 @@ end );
                 
             end;
             
-        elseif (current_symbol in [ "for", "while", "CAP_INTERNAL_FUNCTIONAL_LOOP" ])
+        # Technically, the head of a "for" loop is only executed once.
+        # We could simply start the detection at "do", but this would exclude the header of "while" loops
+        # which indeed is executed multiple times.
+        elseif (current_symbol in [ "for", "while", "repeat", "function" ])
             
             loop_power = loop_power + 1;
             
-        elseif (current_symbol == "od")
+        # Technically, the part after "until" is also executed multiple times.
+        elseif (current_symbol in [ "od", "until", "end" ])
             
             loop_power = loop_power - 1;
             
@@ -930,21 +871,42 @@ end );
 end );
 
 ##
-@InstallGlobalFunction( "IsSpecializationOfFilter", function ( filter1, filter2 )
+@InstallGlobalFunction( "IsSpecializationOfFilter", function ( filter_1, filter_2 )
+  local data_type_1, data_type_2;
     
-    if (IsString( filter1 ))
+    if (IsString( filter_1 ))
         
-        filter1 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter1 );
+        data_type_1 = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter_1 );
+        
+        if (data_type_1 == fail)
+            
+            filter_1 = IsObject;
+            
+        else
+            
+            filter_1 = data_type_1.filter;
+            
+        end;
         
     end;
     
-    if (IsString( filter2 ))
+    if (IsString( filter_2 ))
         
-        filter2 = CAP_INTERNAL_REPLACED_STRING_WITH_FILTER( filter2 );
+        data_type_2 = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( filter_2 );
+        
+        if (data_type_2 == fail)
+            
+            filter_2 = IsObject;
+            
+        else
+            
+            filter_2 = data_type_2.filter;
+            
+        end;
         
     end;
     
-    return IS_SUBSET_FLAGS( WITH_IMPS_FLAGS( FLAGS_FILTER( filter2 ) ), WITH_IMPS_FLAGS( FLAGS_FILTER( filter1 ) ) );
+    return IS_SUBSET_FLAGS( WITH_IMPS_FLAGS( FLAGS_FILTER( filter_2 ) ), WITH_IMPS_FLAGS( FLAGS_FILTER( filter_1 ) ) );
     
 end );
 
@@ -1396,6 +1358,16 @@ InstallMethod( @__MODULE__,  Iterated,
   function( list, func, initial_value )
     
     return Iterated( @Concatenation( [ initial_value ], list ), func );
+    
+end );
+
+##
+InstallMethod( @__MODULE__,  Iterated,
+               [ IsList, IsFunction, IsObject, IsObject ],
+               
+  function( list, func, initial_value, terminal_value )
+    
+    return Iterated( @Concatenation( [ initial_value ], list, [ terminal_value ] ), func );
     
 end );
 

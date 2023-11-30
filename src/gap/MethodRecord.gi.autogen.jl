@@ -62,23 +62,6 @@
     ]
 );
 
-##
-@InstallGlobalFunction( CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
-  function( args... )
-    local list;
-      
-    list = CAP_INTERNAL_OPPOSITE_RECURSIVE( args );
-      
-    return List( list, function( l )
-        if (IsList( l ))
-            return Reversed( l );
-        else
-            return l;
-        end;
-    end );
-
-end );
-
 @InstallValueConst( CAP_INTERNAL_METHOD_NAME_RECORD, @rec(
 ObjectConstructor = @rec(
   filter_list = [ "category", "object_datum" ],
@@ -614,14 +597,30 @@ LinearCombinationOfMorphisms = @rec(
 ),
 
 PreComposeList = @rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  input_arguments_names = [ "cat", "list_of_morphisms" ],
-  pre_function = function( cat, list_of_morphisms )
+  filter_list = [ "category", "object", "list_of_morphisms", "object" ],
+  input_arguments_names = [ "cat", "source", "list_of_morphisms", "range" ],
+  pre_function = function( cat, source, list_of_morphisms, range )
     local i;
     
     if (IsEmpty( list_of_morphisms ))
         
-        return [ false, "the list of morphisms must not be empty" ];
+        if (@not IsEqualForObjects( cat, source, range ))
+            
+            return [ false, "the given source and range are not equal while the given list of morphisms to compose is empty" ];
+            
+        end;
+        
+    else
+        
+        if (@not IsEqualForObjects( cat, source, Source( First( list_of_morphisms ) ) ))
+            
+            return [ false, "the given source is not equal to the source of the first morphism" ];
+            
+        elseif (@not IsEqualForObjects( cat, range, Range( Last( list_of_morphisms ) ) ))
+            
+            return [ false, "the given range is not equal to the range of the last morphism" ];
+            
+        end;
         
     end;
     
@@ -639,11 +638,10 @@ PreComposeList = @rec(
     
   end,
   return_type = "morphism",
-  output_source_getter_string = "Source( list_of_morphisms[1] )",
-  output_source_getter_preconditions = [ ],
-  output_range_getter_string = "Range( Last( list_of_morphisms ) )",
-  output_range_getter_preconditions = [ ],
+  output_source_getter_string = "source",
+  output_range_getter_string = "range",
   dual_operation = "PostComposeList",
+  dual_arguments_reversed = true,
   compatible_with_congruence_of_morphisms = true,
 ),
 
@@ -672,14 +670,30 @@ PostCompose = @rec(
 ),
 
 PostComposeList = @rec(
-  filter_list = [ "category", "list_of_morphisms" ],
-  input_arguments_names = [ "cat", "list_of_morphisms" ],
-  pre_function = function( cat, list_of_morphisms )
+  filter_list = [ "category", "object", "list_of_morphisms", "object" ],
+  input_arguments_names = [ "cat", "source", "list_of_morphisms", "range" ],
+  pre_function = function( cat, source, list_of_morphisms, range )
     local i;
     
     if (IsEmpty( list_of_morphisms ))
         
-        return [ false, "the list of morphisms must not be empty" ];
+        if (@not IsEqualForObjects( cat, source, range ))
+            
+            return [ false, "the given source and range are not equal while the given list of morphisms to compose is empty" ];
+            
+        end;
+        
+    else
+        
+        if (@not IsEqualForObjects( cat, source, Source( Last( list_of_morphisms ) ) ))
+            
+            return [ false, "the given source is not equal to the source of the last morphism" ];
+            
+        elseif (@not IsEqualForObjects( cat, range, Range( First( list_of_morphisms ) ) ))
+            
+            return [ false, "the given range is not equal to the range of the first morphism" ];
+            
+        end;
         
     end;
     
@@ -697,11 +711,10 @@ PostComposeList = @rec(
     
   end,
   return_type = "morphism",
-  output_source_getter_string = "Source( Last( list_of_morphisms ) )",
-  output_source_getter_preconditions = [ ],
-  output_range_getter_string = "Range( list_of_morphisms[1] )",
-  output_range_getter_preconditions = [ ],
+  output_source_getter_string = "source",
+  output_range_getter_string = "range",
   dual_operation = "PreComposeList",
+  dual_arguments_reversed = true,
   compatible_with_congruence_of_morphisms = true,
 ),
 
@@ -2474,7 +2487,9 @@ UniversalMorphismIntoCoimage = @rec(
   output_source_getter_string = "Range( tau[1] )",
   output_source_getter_preconditions = [ ],
   with_given_object_position = "Range",
-  dual_preprocessor_func = CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
+  dual_preprocessor_func = function( cat, alpha, tau )
+    return Triple( OppositeCategory( cat ), Opposite( alpha ), PairGAP( Opposite( tau[2] ), Opposite( tau[1] ) ) );
+  end,
   pre_function = function( cat, morphism, test_factorization )
     
     if (@not IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) ))
@@ -2501,7 +2516,9 @@ UniversalMorphismIntoCoimageWithGivenCoimageObject = @rec(
   output_source_getter_preconditions = [ ],
   output_range_getter_string = "C",
   output_range_getter_preconditions = [ ],
-  dual_preprocessor_func = CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
+  dual_preprocessor_func = function( cat, alpha, tau, C )
+    return NTupleGAP( 4, OppositeCategory( cat ), Opposite( alpha ), PairGAP( Opposite( tau[2] ), Opposite( tau[1] ) ), Opposite( C ) );
+  end,
   pre_function = function( cat, morphism, test_factorization, image )
     
     if (@not IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) ))
@@ -2521,6 +2538,17 @@ UniversalMorphismIntoCoimageWithGivenCoimageObject = @rec(
   return_type = "morphism",
   dual_operation = "UniversalMorphismFromImageWithGivenImageObject" ),
 
+MorphismFromCoimageToImage = @rec(
+  filter_list = [ "category", "morphism" ],
+  input_arguments_names = [ "cat", "alpha" ],
+  output_source_getter_string = "CoimageObject( cat, alpha )",
+  output_source_getter_preconditions = [ [ "CoimageObject", 1 ] ],
+  output_range_getter_string = "ImageObject( cat, alpha )",
+  output_range_getter_preconditions = [ [ "ImageObject", 1 ] ],
+  with_given_object_position = "both",
+  dual_operation = "MorphismFromCoimageToImage",
+  return_type = "morphism" ),
+
 MorphismFromCoimageToImageWithGivenObjects = @rec(
   filter_list = [ "category", "object", "morphism", "object" ],
   input_arguments_names = [ "cat", "C", "alpha", "I" ],
@@ -2532,14 +2560,25 @@ MorphismFromCoimageToImageWithGivenObjects = @rec(
   dual_arguments_reversed = true,
   return_type = "morphism" ),
 
-InverseMorphismFromCoimageToImageWithGivenObjects = @rec(
+InverseOfMorphismFromCoimageToImage = @rec(
+  filter_list = [ "category", "morphism" ],
+  input_arguments_names = [ "cat", "alpha" ],
+  output_source_getter_string = "ImageObject( cat, alpha )",
+  output_source_getter_preconditions = [ [ "ImageObject", 1 ] ],
+  output_range_getter_string = "CoimageObject( cat, alpha )",
+  output_range_getter_preconditions = [ [ "CoimageObject", 1 ] ],
+  with_given_object_position = "both",
+  dual_operation = "InverseOfMorphismFromCoimageToImage",
+  return_type = "morphism" ),
+
+InverseOfMorphismFromCoimageToImageWithGivenObjects = @rec(
   filter_list = [ "category", "object", "morphism", "object" ],
-  input_arguments_names = [ "cat", "C", "alpha", "I" ],
+  input_arguments_names = [ "cat", "I", "alpha", "C" ],
   output_source_getter_string = "I",
   output_source_getter_preconditions = [ ],
   output_range_getter_string = "C",
   output_range_getter_preconditions = [ ],
-  dual_operation = "InverseMorphismFromCoimageToImageWithGivenObjects",
+  dual_operation = "InverseOfMorphismFromCoimageToImageWithGivenObjects",
   dual_arguments_reversed = true,
   return_type = "morphism" ),
 
@@ -2726,7 +2765,9 @@ UniversalMorphismFromImage = @rec(
   output_range_getter_preconditions = [ ],
   with_given_object_position = "Source",
   dual_operation = "UniversalMorphismIntoCoimage",
-  dual_preprocessor_func = CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
+  dual_preprocessor_func = function( cat, alpha, tau )
+    return Triple( OppositeCategory( cat ), Opposite( alpha ), PairGAP( Opposite( tau[2] ), Opposite( tau[1] ) ) );
+  end,
   pre_function = function( cat, morphism, test_factorization )
     
     if (@not IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) ))
@@ -2753,7 +2794,9 @@ UniversalMorphismFromImageWithGivenImageObject = @rec(
   output_range_getter_string = "Range( tau[1] )",
   output_range_getter_preconditions = [ ],
   dual_operation = "UniversalMorphismIntoCoimageWithGivenCoimageObject",
-  dual_preprocessor_func = CAP_INTERNAL_REVERSE_LISTS_IN_ARGUMENTS_FOR_OPPOSITE,
+  dual_preprocessor_func = function( cat, alpha, tau, I )
+    return NTupleGAP( 4, OppositeCategory( cat ), Opposite( alpha ), PairGAP( Opposite( tau[2] ), Opposite( tau[1] ) ), Opposite( I ) );
+  end,
   pre_function = function( cat, morphism, test_factorization, image )
     
     if (@not IsEqualForObjects( cat, Source( morphism ), Source( test_factorization[ 1 ] ) ))
@@ -3257,20 +3300,6 @@ IsomorphismFromCokernelOfKernelToCoimage = @rec(
   input_arguments_names = [ "cat", "alpha" ],
   return_type = "morphism",
   dual_operation = "IsomorphismFromImageObjectToKernelOfCokernel",
-),
-
-CanonicalIdentificationFromImageObjectToCoimage = @rec(
-  filter_list = [ "category", "morphism" ],
-  input_arguments_names = [ "cat", "alpha" ],
-  return_type = "morphism",
-  dual_operation = "CanonicalIdentificationFromCoimageToImageObject",
-),
-
-CanonicalIdentificationFromCoimageToImageObject = @rec(
-  filter_list = [ "category", "morphism" ],
-  input_arguments_names = [ "cat", "alpha" ],
-  return_type = "morphism",
-  dual_operation = "CanonicalIdentificationFromImageObjectToCoimage",
 ),
 
 IsomorphismFromDirectSumToDirectProduct = @rec(
@@ -5103,19 +5132,9 @@ end );
             Error( "The return_type of <current_rec> does not appear in CAP_INTERNAL_VALID_RETURN_TYPES. Note that proper filters are not supported anymore." );
         end;
         
-        if (@IsBound( current_rec.argument_list ))
-            
-            Display( @Concatenation( 
-                "WARNING: the functionality previously provided by `argument_list` was removed. You will probably run into errors. ",
-                "Please use the category as the first argument instead of method selections objects/morphisms and adjust pre, post and redirect functions as well as derivations appropriately. ",
-                "Search for `category_as_first_argument` in the documentation for more details."
-            ) );
-            
-        end;
-        
         if (current_rec.filter_list[1] != "category")
             
-            Error( "The first entry of `filter_list` must be the string \"category\". Search for `category_as_first_argument` in the documentation for more details." );
+            Error( "The first entry of `filter_list` must be the string \"category\"." );
             
         end;
         

@@ -445,7 +445,7 @@ const IsOperation = IsFunction
 const IsChar = Filter("IsChar", Char)
 const IsInt = Filter("IsInt", Int)
 const IsBigInt = Filter("IsBigInt", BigInt)
-const IsRat = Filter("IsRat", Rational)
+const IsRat = Filter("IsRat", Rational{BigInt})
 const IsBool = Filter("IsBool", Bool)
 const IsPosInt = Filter("IsPosInt", Int) # TODO
 const IsRecord = Filter("IsRecord", CAPRecord)
@@ -466,6 +466,40 @@ end
 
 Integers = ZZ
 Rationals = QQ
+
+const IsIntegers = Filter("IsIntegers", AbstractAlgebra.Integers{BigInt})
+
+function HasRingFilter(R::Ring)
+	if R === ZZ
+		return true
+	else
+		return false
+	end
+end
+
+function RingFilter(R::Ring)
+	if R === ZZ
+		return IsIntegers
+	else
+		throw("ring has no ring filter")
+	end
+end
+
+function HasRingElementFilter(R::Ring)
+	if R === ZZ
+		return true
+	else
+		return false
+	end
+end
+
+function RingElementFilter(R::Ring)
+	if R === ZZ
+		return IsBigInt
+	else
+		throw("ring has no ring element filter")
+	end
+end
 
 # Objectify
 function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_and_values... )
