@@ -420,9 +420,13 @@ InstallMethod( @__MODULE__,  IsEqualForMorphisms,
         
     end;
     
-    if (@not IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) ))
+    if (@not IsIdenticalObj( CapCategory( morphism_1 ), cat ))
         
-        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" does not belong to the CAP category <cat>" ) );
+        
+    elseif (@not IsIdenticalObj( CapCategory( morphism_2 ), cat ))
+        
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" does not belong to the CAP category <cat>" ) );
         
     else
         
@@ -459,9 +463,13 @@ InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
         
     end;
     
-    if (@not IsIdenticalObj( CapCategory( morphism_1 ), CapCategory( morphism_2 ) ))
+    if (@not IsIdenticalObj( CapCategory( morphism_1 ), cat ))
         
-        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" and the morphism \"", StringGAP( morphism_2 ), "\" do not belong to the same CAP category" ) );
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_1 ), "\" does not belong to the CAP category <cat>" ) );
+        
+    elseif (@not IsIdenticalObj( CapCategory( morphism_2 ), cat ))
+        
+        Error( @Concatenation( "the morphism \"", StringGAP( morphism_2 ), "\" does not belong to the CAP category <cat>" ) );
         
     else
         

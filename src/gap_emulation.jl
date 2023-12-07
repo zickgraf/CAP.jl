@@ -1070,8 +1070,6 @@ ValueGlobal = function(name)
 	getglobal(CAP, Symbol(name))
 end
 
-IdFunc = identity
-
 function List(tuple::Tuple)
 	collect(tuple)
 end
@@ -1261,6 +1259,12 @@ end
 function ReturnFail( args... )
 	fail
 end
+
+function ReturnFirst( arg1, args... )
+	arg1
+end
+
+IdFunc = identity
 
 Append = append!
 

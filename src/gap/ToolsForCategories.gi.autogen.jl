@@ -1334,6 +1334,9 @@ end );
 end );
 
 ##
+@InstallGlobalFunction( CapJitTypedExpression, ReturnFirst );
+
+##
 @InstallGlobalFunction( CapFixpoint, function ( predicate, func, initial_value )
   local x, y;
     
@@ -1631,6 +1634,7 @@ end );
 end );
 
 @InstallGlobalFunction( CAP_JIT_INCOMPLETE_LOGIC, IdFunc );
+@InstallGlobalFunction( CAP_JIT_EXPR_CASE_WRAPPER, IdFunc );
 
 ##
 #= comment for Julia

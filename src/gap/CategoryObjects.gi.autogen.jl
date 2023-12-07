@@ -53,9 +53,13 @@ InstallMethod( @__MODULE__,  IsEqualForObjects,
         
     end;
     
-    if (@not IsIdenticalObj( CapCategory( object_1 ), CapCategory( object_2 ) ))
+    if (@not IsIdenticalObj( CapCategory( object_1 ), cat ))
         
-        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" and the object \"", StringGAP( object_2 ), "\" do not belong to the same CAP category" ) );
+        Error( @Concatenation( "the object \"", StringGAP( object_1 ), "\" does not belong to the CAP category <cat>" ) );
+        
+    elseif (@not IsIdenticalObj( CapCategory( object_2 ), cat ))
+        
+        Error( @Concatenation( "the object \"", StringGAP( object_2 ), "\" does not belong to the CAP category <cat>" ) );
         
     else
         
