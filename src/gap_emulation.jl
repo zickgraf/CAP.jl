@@ -1006,6 +1006,7 @@ function IntGAP_OPERATION(float::Float64)
 end
 
 @DeclareAttribute("StringGAP", IsAttributeStoringRep)
+StringMutable = StringGAP
 
 function Add( list::Vector, element::Any )
 	push!(list, element)
