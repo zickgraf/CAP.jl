@@ -298,20 +298,20 @@
 #!   Returns <A>args</A> while asserting that its length is <A>n</A>.
 #! @Arguments n, args...
 #! @Returns a list
-@DeclareGlobalFunction( "NTupleGAP" );
+@DeclareGlobalFunction( "@NTupleGAP" );
 
 # This filter is only used for the type system in CompilerForCAP.
 # It deliberately does not imply `IsList` because we want to treat tuples and lists in different ways in CompilerForCAP.
 @DeclareFilter( "IsNTuple" );
 
 #! @Description
-#!   Alias for `NTupleGAP( 2, <A>first</A>, <A>second</A> )`.
+#!   Alias for `@NTupleGAP( 2, <A>first</A>, <A>second</A> )`.
 #! @Arguments first, second
 #! @Returns a list
 @DeclareGlobalFunction( "PairGAP" );
 
 #! @Description
-#!   Alias for `NTupleGAP( 3, <A>first</A>, <A>second</A>, <A>third</A> )`.
+#!   Alias for `@NTupleGAP( 3, <A>first</A>, <A>second</A>, <A>third</A> )`.
 #! @Arguments first, second, third
 #! @Returns a list
 @DeclareGlobalFunction( "Triple" );

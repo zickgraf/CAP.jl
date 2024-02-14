@@ -591,7 +591,7 @@ LinearCombinationOfMorphisms = @rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return NTupleGAP( 5, list[1], list[5], list[3], list[4], list[2] );
+      return @NTupleGAP( 5, list[1], list[5], list[3], list[4], list[2] );
   end,
   compatible_with_congruence_of_morphisms = true,
 ),
@@ -2517,7 +2517,7 @@ UniversalMorphismIntoCoimageWithGivenCoimageObject = @rec(
   output_range_getter_string = "C",
   output_range_getter_preconditions = [ ],
   dual_preprocessor_func = function( cat, alpha, tau, C )
-    return NTupleGAP( 4, OppositeCategory( cat ), Opposite( alpha ), PairGAP( Opposite( tau[2] ), Opposite( tau[1] ) ), Opposite( C ) );
+    return @NTupleGAP( 4, OppositeCategory( cat ), Opposite( alpha ), PairGAP( Opposite( tau[2] ), Opposite( tau[1] ) ), Opposite( C ) );
   end,
   pre_function = function( cat, morphism, test_factorization, image )
     
@@ -2804,7 +2804,7 @@ UniversalMorphismFromImageWithGivenImageObject = @rec(
   output_range_getter_preconditions = [ ],
   dual_operation = "UniversalMorphismIntoCoimageWithGivenCoimageObject",
   dual_preprocessor_func = function( cat, alpha, tau, I )
-    return NTupleGAP( 4, OppositeCategory( cat ), Opposite( alpha ), PairGAP( Opposite( tau[2] ), Opposite( tau[1] ) ), Opposite( I ) );
+    return @NTupleGAP( 4, OppositeCategory( cat ), Opposite( alpha ), PairGAP( Opposite( tau[2] ), Opposite( tau[1] ) ), Opposite( I ) );
   end,
   pre_function = function( cat, morphism, test_factorization, image )
     
@@ -3474,7 +3474,7 @@ MorphismBetweenDirectSums = @rec(
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
       
-      return NTupleGAP( 4, list[1], list[4], TransposedMatWithGivenDimensions( Length( list[2] ), Length( list[4] ), list[3] ), list[2] );
+      return @NTupleGAP( 4, list[1], list[4], TransposedMatWithGivenDimensions( Length( list[2] ), Length( list[4] ), list[3] ), list[2] );
   end
 ),
 
@@ -3490,7 +3490,7 @@ MorphismBetweenDirectSumsWithGivenDirectSums = @rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return NTupleGAP( 6, list[1], list[6], list[5], TransposedMatWithGivenDimensions( Length( list[3] ), Length( list[5] ), list[4] ), list[3], list[2] );
+      return @NTupleGAP( 6, list[1], list[6], list[5], TransposedMatWithGivenDimensions( Length( list[3] ), Length( list[5] ), list[4] ), list[3], list[2] );
   end
 ),
 
@@ -3533,7 +3533,7 @@ HomomorphismStructureOnMorphismsWithGivenObjects = @rec(
   return_type = "morphism_in_range_category_of_homomorphism_structure",
   dual_operation = "HomomorphismStructureOnMorphismsWithGivenObjects",
   dual_preprocessor_func = function( cat, source, alpha, beta, range )
-    return NTupleGAP( 5, OppositeCategory( cat ), source, Opposite( beta ), Opposite( alpha ), range );
+    return @NTupleGAP( 5, OppositeCategory( cat ), source, Opposite( beta ), Opposite( alpha ), range );
   end,
   dual_postprocessor_func = IdFunc,
 ),
@@ -3565,7 +3565,7 @@ InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGiv
   output_range_getter_string = "range",
   dual_operation = "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
   dual_preprocessor_func = function( cat, distinguished_object, alpha, hom_source_range )
-    return NTupleGAP( 4, OppositeCategory( cat ), distinguished_object, Opposite( alpha ), hom_source_range );
+    return @NTupleGAP( 4, OppositeCategory( cat ), distinguished_object, Opposite( alpha ), hom_source_range );
   end,
   dual_postprocessor_func = IdFunc
 ),
@@ -3578,7 +3578,7 @@ InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism = @rec
   output_range_getter_string = "range",
   dual_operation = "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
   dual_preprocessor_func = function( cat, A, B, morphism )
-    return NTupleGAP( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), morphism );
+    return @NTupleGAP( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), morphism );
   end
 ),
 
@@ -3711,7 +3711,7 @@ RandomMorphismWithFixedSourceAndRangeByInteger = @rec(
   return_type = "morphism",
   dual_operation = "RandomMorphismWithFixedSourceAndRangeByInteger",
   dual_preprocessor_func = function( cat, A, B, n )
-      return NTupleGAP( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), n );
+      return @NTupleGAP( 4, OppositeCategory( cat ), Opposite( B ), Opposite( A ), n );
   end
 ),
 
@@ -3819,7 +3819,7 @@ HomologyObjectFunctorialWithGivenHomologyObjects = @rec(
   dual_preprocessor_func = function( arg... )
       local list;
       list = CAP_INTERNAL_OPPOSITE_RECURSIVE( arg );
-      return NTupleGAP( 4, list[1], list[4], Reversed( list[3] ), list[2] );
+      return @NTupleGAP( 4, list[1], list[4], Reversed( list[3] ), list[2] );
   end
 ),
 

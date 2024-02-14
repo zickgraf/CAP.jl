@@ -118,9 +118,17 @@ function FilteredWithKeys(list, func)
 	map(p -> p[2], filter(p -> func(p...), collect(enumerate(list))))
 end
 
+macro NTupleGAP(n, args...)
+	@assert n isa Int
+	@assert n == length(args)
+	esc(:([$(args...)]))
+end
+
+export @NTupleGAP
+
 function NTupleGAP(n, args...)
 	@assert n == length(args)
-	collect(args)
+	[args...]
 end
 
 Iterator = iterate

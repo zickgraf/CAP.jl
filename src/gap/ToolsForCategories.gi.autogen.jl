@@ -1500,7 +1500,7 @@ end );
 ##
 #= comment for Julia
 # We want `args` to be a list but in Julia it's a tuple -> we need a separate implementation for Julia
-@InstallGlobalFunction( NTupleGAP, function ( n, args... )
+@InstallGlobalFunction( @NTupleGAP, function ( n, args... )
     
     @Assert( 0, Length( args ) == n );
     
@@ -1513,7 +1513,7 @@ end );
 @InstallGlobalFunction( PairGAP, function ( first, second )
     #% CAP_JIT_RESOLVE_FUNCTION
     
-    return NTupleGAP( 2, first, second );
+    return @NTupleGAP( 2, first, second );
     
 end );
 
@@ -1521,7 +1521,7 @@ end );
 @InstallGlobalFunction( Triple, function ( first, second, third )
     #% CAP_JIT_RESOLVE_FUNCTION
     
-    return NTupleGAP( 3, first, second, third );
+    return @NTupleGAP( 3, first, second, third );
     
 end );
 
