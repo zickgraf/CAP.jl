@@ -26,6 +26,20 @@ end
 
 export @not
 
+macro FunctionWithNamedArguments(specification, func)
+	@assert specification.head === :vect
+	@assert func.head === :function
+	@assert all(a -> a.head === :vect && length(a.args) == 2 && a.args[1] isa String, specification.args)
+	@assert length(func.args[1].args) > 0
+	@assert func.args[1].args[1] === :CAP_NAMED_ARGUMENTS
+	
+	options = map(s -> Expr(:kw, Symbol(s.args[1]), s.args[2]), specification.args)
+	func.args[1].args[1] = Expr(:parameters, options...)
+	esc(func)
+end
+
+export @FunctionWithNamedArguments
+
 function PrintString end
 function DirectSum end
 DirectSumOp = DirectSum
@@ -742,14 +756,7 @@ function InstallMethod(mod::Module, operation, filter_list, func::Function)
 	
 	Base.eval(mod, :(
 		function $funcref($(vars_with_types...); kwargs...)
-			if length(kwargs) > 0
-				PushOptions(CAPRecord(Dict(kwargs)))
-			end
-			result = $func($(vars...))
-			if length(kwargs) > 0
-				PopOptions()
-			end
-			result
+			$func($(vars...); kwargs...)
 		end
 	))
 	if funcref isa Symbol
@@ -1307,6 +1314,11 @@ IsIdenticalObj = ===
 function Immutable(L::Vector)
 	# Julia has no immutable lists
 	L
+end
+
+function Immutable(R::CAPRecord)
+	# TODO: mark record as immutable?
+	R
 end
 
 function First(list)
