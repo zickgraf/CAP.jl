@@ -29,6 +29,8 @@ InstallTrueMethod( IsEnrichedOverCommutativeRegularSemigroup, IsAbCategory );
 
 InstallTrueMethod( IsAbCategory, IsLinearCategoryOverCommutativeRing );
 
+InstallTrueMethod( IsLinearCategoryOverCommutativeRing, IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms );
+
 InstallTrueMethod( IsAbCategory, IsAdditiveCategory );
 
 InstallTrueMethod( IsAdditiveCategory, IsPreAbelianCategory );
@@ -164,7 +166,29 @@ end );
 ##
 @InstallGlobalFunction( "CreateCapCategoryWithDataTypes",
   function( name, category_filter, object_filter, morphism_filter, two_cell_filter, object_datum_type, morphism_datum_type, two_cell_datum_type )
-    local filter, obj, operation_name;
+    local get_attribute_name_for_data_type, filter, obj, operation_name;
+    
+    get_attribute_name_for_data_type = function ( data_type )
+        
+        if (data_type == fail)
+            
+            return "AsPrimitiveValue";
+            
+        elseif (data_type.filter == IsInt)
+            
+            return "AsInteger";
+            
+        elseif (IsBoundGlobal( "IsHomalgMatrix" ) && data_type.filter == ValueGlobal( "IsHomalgMatrix" ))
+            
+            return "AsHomalgMatrix";
+            
+        else
+            
+            return "AsPrimitiveValue";
+            
+        end;
+        
+    end;
     
     ## plausibility checks
     if (@not IsSpecializationOfFilter( IsCapCategory, category_filter ))
@@ -224,6 +248,9 @@ end );
     
     obj.object_type = NewType( TheFamilyOfCapCategoryObjects, filter );
     
+    obj.object_attribute_name = get_attribute_name_for_data_type( object_datum_type );
+    obj.object_attribute = ValueGlobal( obj.object_attribute_name );
+    
     # morphism filter
     filter = NewCategory( @Concatenation( name, "InstanceMorphismFilter" ), morphism_filter );
     
@@ -231,6 +258,9 @@ end );
     SetMorphismDatumType( obj, morphism_datum_type );
     
     obj.morphism_type = NewType( TheFamilyOfCapCategoryMorphisms, filter );
+    
+    obj.morphism_attribute_name = get_attribute_name_for_data_type( morphism_datum_type );
+    obj.morphism_attribute = ValueGlobal( obj.morphism_attribute_name );
     
     # two cell filter
     filter = NewCategory( @Concatenation( name, "InstanceTwoCellFilter" ), two_cell_filter );
@@ -580,7 +610,7 @@ InstallMethod( @__MODULE__,  CanCompute,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CheckConstructivenessOfCategory,
+InstallMethod( @__MODULE__,  MissingOperationsForConstructivenessOfCategory,
                [ IsCapCategory, IsString ],
                
   function( category, string )
@@ -607,6 +637,8 @@ InstallMethod( @__MODULE__,  CheckConstructivenessOfCategory,
     return result_list;
     
 end );
+
+InstallDeprecatedAlias( "CheckConstructivenessOfCategory", "MissingOperationsForConstructivenessOfCategory", "2024.12.18" );
 
 ####################################
 ##

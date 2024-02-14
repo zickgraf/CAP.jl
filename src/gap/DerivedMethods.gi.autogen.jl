@@ -751,9 +751,13 @@ AddDerivationToCAP( IsWellDefinedForMorphismsWithGivenSourceAndRange,
                     
   function( cat, source, morphism, range )
     
-    return IsEqualForObjects( cat, Source( morphism ), source ) &&
-           IsEqualForObjects( cat, Range( morphism ), range ) &&
-           IsWellDefinedForMorphisms( cat, morphism );
+    # Mathematically, we would first like to check if `morphism` has the expected source and range.
+    # However, `IsEqualForObjects` expects well-defined objects, so we first have to check if source and range
+    # of `morphism` are well-defined. We do this via `IsWellDefinedForMorphisms`, which checks well-definedness of
+    # source and range via a redirect function.
+    return IsWellDefinedForMorphisms( cat, morphism ) &&
+           IsEqualForObjects( cat, Source( morphism ), source ) &&
+           IsEqualForObjects( cat, Range( morphism ), range );
     
 end );
 
@@ -3290,6 +3294,36 @@ AddFinalDerivation( IsEqualForMorphisms,
                     
   ( cat, mor1, mor2 ) -> IsCongruentForMorphisms( cat, mor1, mor2 ) );
 
+##
+AddDerivationToCAP( MorphismsOfExternalHom,
+        "MorphismsOfExternalHom using MorphismsOfExternalHom in RangeCategoryOfHomomorphismStructure",
+        [ [ HomomorphismStructureOnObjects, 1 ],
+          [ DistinguishedObjectOfHomomorphismStructure, 1 ],
+          [ InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism, 2 ],
+          [ MorphismsOfExternalHom, 1, RangeCategoryOfHomomorphismStructure ] ],
+        
+  function( cat, A, B )
+    local range_cat, hom_A_B, D, morphisms;
+    
+    range_cat = RangeCategoryOfHomomorphismStructure( cat );
+    
+    hom_A_B = HomomorphismStructureOnObjects( cat, A, B );
+    
+    D = DistinguishedObjectOfHomomorphismStructure( cat );
+    
+    morphisms = MorphismsOfExternalHom( range_cat,
+                         D, hom_A_B );
+    
+    return List( morphisms,
+                 phi -> InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism( cat,
+                         A,
+                         B,
+                         phi ) );
+    
+end,
+  CategoryGetters = @rec( range_cat = RangeCategoryOfHomomorphismStructure ),
+  CategoryFilter = HasRangeCategoryOfHomomorphismStructure );
+
 ## Final methods for BasisOfExternalHom & CoefficientsOfMorphism
 
 ##
@@ -3347,7 +3381,7 @@ AddFinalDerivationBundle( "Adding BasisOfExternalHom and CoefficientsOfMorphism 
     function( cat )
       local range_cat, required_methods;
       
-      if (!( HasIsLinearCategoryOverCommutativeRing( cat ) && IsLinearCategoryOverCommutativeRing( cat ) ))
+      if (!( HasIsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( cat ) && IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( cat ) ))
         
         return false;
         
@@ -3367,7 +3401,7 @@ AddFinalDerivationBundle( "Adding BasisOfExternalHom and CoefficientsOfMorphism 
         
       end;
       
-      if (!( HasIsLinearCategoryOverCommutativeRing( range_cat ) && IsLinearCategoryOverCommutativeRing( range_cat ) ))
+      if (!( HasIsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( range_cat ) && IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms( range_cat ) ))
         
         return false;
         

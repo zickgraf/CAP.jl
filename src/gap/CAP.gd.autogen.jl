@@ -216,6 +216,14 @@ AddCategoricalProperty( [ "IsAbCategory", "IsAbCategory" ] );
 AddCategoricalProperty( [ "IsLinearCategoryOverCommutativeRing", "IsLinearCategoryOverCommutativeRing" ] );
 
 #! @Description
+#!  The property of the category <A>C</A> being linear over a commutative ring $k$
+#!  such that all external homs are finitely generated free $k$-modules.
+#! @Arguments C
+@DeclareProperty( "IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms", IsCapCategory );
+
+AddCategoricalProperty( [ "IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms", "IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms" ] );
+
+#! @Description
 #!  The property of the category <A>C</A> being additive.
 #! @Arguments C
 @DeclareProperty( "IsAdditiveCategory", IsCapCategory );
@@ -569,7 +577,7 @@ end );
 #! If $s$ is not a categorical property, an error is raised.
 #! @Returns a list
 #! @Arguments C,s
-@DeclareOperation( "CheckConstructivenessOfCategory",
+@DeclareOperation( "MissingOperationsForConstructivenessOfCategory",
                   [ IsCapCategory, IsString ] );
 
 #############################################

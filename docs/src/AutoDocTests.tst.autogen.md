@@ -79,15 +79,19 @@ TerminalCategoryWithMultipleObjects( )
 julia> Display( T )
 A CAP category with name TerminalCategoryWithMultipleObjects( ):
 
-65 primitive operations were used to derive 312 operations for this category which algorithmically
+82 primitive operations were used to derive 383 operations for this category which algorithmically
 * IsCategoryWithDecidableColifts
 * IsCategoryWithDecidableLifts
 * IsEquippedWithHomomorphismStructure
 * IsLinearCategoryOverCommutativeRing
+* IsLeftClosedMonoidalCategory
+* IsLeftCoclosedMonoidalCategory
 * IsAbelianCategoryWithEnoughInjectives
 * IsAbelianCategoryWithEnoughProjectives
 * IsRigidSymmetricClosedMonoidalCategory
 * IsRigidSymmetricCoclosedMonoidalCategory
+and not yet algorithmically
+* IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms
 and furthermore mathematically
 * IsLocallyOfFiniteInjectiveDimension
 * IsLocallyOfFiniteProjectiveDimension
@@ -165,8 +169,39 @@ false
 julia> IsIsomorphicForObjects( a, b )
 true
 
-julia> IsIsomorphism( SomeIsomorphismBetweenObjects( a, b ) )
+julia> mor_ab = SomeIsomorphismBetweenObjects( a, b )
+<A morphism in TerminalCategoryWithMultipleObjects( )>
+
+julia> IsIsomorphism( mor_ab )
 true
+
+julia> Display( mor_ab )
+a
+|
+| SomeIsomorphismBetweenObjects
+v
+b
+
+julia> Hom_ab = MorphismsOfExternalHom( a, b );
+
+julia> Length( Hom_ab )
+1
+
+julia> Hom_ab[1]
+<A morphism in TerminalCategoryWithMultipleObjects( )>
+
+julia> Display( Hom_ab[1] )
+a
+|
+| InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism
+v
+b
+
+julia> Hom_ab[1] == mor_ab
+true
+
+julia> HomStructure( mor_ab )
+<A morphism in TerminalCategoryWithSingleObject( )>
 
 julia> t = TensorProduct( a, b )
 <An object in TerminalCategoryWithMultipleObjects( )>
@@ -211,6 +246,9 @@ true
 
 julia> m == n
 true
+
+julia> hom_mn = HomStructure( m, n )
+<A morphism in TerminalCategoryWithSingleObject( )>
 
 julia> id = IdentityMorphism( a )
 <A morphism in TerminalCategoryWithMultipleObjects( )>
@@ -293,15 +331,19 @@ TerminalCategoryWithSingleObject( )
 julia> Display( T )
 A CAP category with name TerminalCategoryWithSingleObject( ):
 
-63 primitive operations were used to derive 312 operations for this category which algorithmically
+76 primitive operations were used to derive 383 operations for this category which algorithmically
 * IsCategoryWithDecidableColifts
 * IsCategoryWithDecidableLifts
 * IsEquippedWithHomomorphismStructure
 * IsLinearCategoryOverCommutativeRing
+* IsLeftClosedMonoidalCategory
+* IsLeftCoclosedMonoidalCategory
 * IsAbelianCategoryWithEnoughInjectives
 * IsAbelianCategoryWithEnoughProjectives
 * IsRigidSymmetricClosedMonoidalCategory
 * IsRigidSymmetricCoclosedMonoidalCategory
+and not yet algorithmically
+* IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms
 and furthermore mathematically
 * IsLocallyOfFiniteInjectiveDimension
 * IsLocallyOfFiniteProjectiveDimension

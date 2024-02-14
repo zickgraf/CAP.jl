@@ -362,6 +362,36 @@ end );
     
 end );
 
+##
+@InstallGlobalFunction( AsCapCategoryMorphism,
+                       
+  function( category, source, morphism_datum, range )
+    local morphism_datum_type, mor;
+    
+    morphism_datum_type = CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( "morphism_datum", category );
+    
+    if (morphism_datum_type != fail)
+        
+        CAP_INTERNAL_ASSERT_VALUE_IS_OF_TYPE_GETTER( morphism_datum_type, [ "the third argument of `AsCapCategoryMorphism`" ] )( morphism_datum );
+        
+    end;
+    
+    mor = ObjectifyWithAttributes( @rec( ), category.morphism_type, CapCategory, category, Source, source, Range, range, category.morphism_attribute, morphism_datum );
+    
+    if (@not IsIdenticalObj( category.morphism_attribute( mor ), morphism_datum ))
+        
+        Print( "WARNING: <morphism_datum> is not identical to `", category.morphism_attribute_name, "( <mor> )`. You might want to make <morphism_datum> immutable.\n" );
+        
+    end;
+    
+    if (category.predicate_logic)
+        INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Source", [ mor ], source, category );
+        INSTALL_TODO_FOR_LOGICAL_THEOREMS( "Range", [ mor ], range, category );
+    end;
+    
+    return mor;
+    
+end );
 
 ##
 InstallMethod( @__MODULE__,  Simplify,
