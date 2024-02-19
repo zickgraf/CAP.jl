@@ -824,10 +824,10 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 		return nothing
 	end
 	symbol = Symbol(name)
-	symbol_op = Symbol(name * "_OPERATION")
-	symbol_tester = Symbol("Has" * name)
-	symbol_getter = Symbol("Get" * name)
-	symbol_setter = Symbol("Set" * name)
+	symbol_op = Symbol(name, "_OPERATION")
+	symbol_tester = Symbol("Has", name)
+	symbol_getter = Symbol("Get", name)
+	symbol_setter = Symbol("Set", name)
 	esc(quote
 		function $symbol_op end
 		function $symbol_tester(obj::CAPDict)
