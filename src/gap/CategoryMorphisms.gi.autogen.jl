@@ -408,24 +408,6 @@ InstallMethod( @__MODULE__,  Simplify,
     
 end );
 
-##
-InstallMethod( @__MODULE__,  CoefficientsOfMorphismWithGivenBasisOfExternalHom,
-          [ IsCapCategory, IsCapCategoryMorphism, IsList ],
-
-  function( cat, morphism, basis )
-    
-    Display( "WARNING: CoefficientsOfMorphismWithGivenBasisOfExternalHom is deprecated and will not be supported after 2023.10.30. Please use CoefficientsOfMorphism instead!\n" );
-    
-    return CoefficientsOfMorphism( cat, morphism );
-    
-end );
-
-##
-InstallMethod( @__MODULE__,  CoefficientsOfMorphismWithGivenBasisOfExternalHom,
-          [ IsCapCategoryMorphism, IsList ],
-
-  ( morphism, basis ) -> CoefficientsOfMorphismWithGivenBasisOfExternalHom( CapCategory( morphism ), morphism, basis ) );
-
 ######################################
 ##
 ## Morphism equality functions

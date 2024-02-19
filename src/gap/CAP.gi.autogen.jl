@@ -164,8 +164,12 @@ end );
 #####################################
 
 ##
-@InstallGlobalFunction( "CreateCapCategoryWithDataTypes",
-  function( name, category_filter, object_filter, morphism_filter, two_cell_filter, object_datum_type, morphism_datum_type, two_cell_datum_type )
+@InstallGlobalFunction( "CreateCapCategoryWithDataTypes", @FunctionWithNamedArguments(
+  [
+    [ "is_computable", true ],
+    [ "overhead", true ],
+  ],
+  function( CAP_NAMED_ARGUMENTS, name, category_filter, object_filter, morphism_filter, two_cell_filter, object_datum_type, morphism_datum_type, two_cell_datum_type )
     local get_attribute_name_for_data_type, filter, obj, operation_name;
     
     get_attribute_name_for_data_type = function ( data_type )
@@ -271,18 +275,29 @@ end );
     ## misc
     SetIsFinalized( obj, false );
     
-    obj.is_computable = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "is_computable", true );
+    # this does not happen in GAP but can happen in Julia
+    if (is_computable == fail)
+        
+        is_computable = true;
+        
+    end;
     
+    obj.is_computable = is_computable;
+    
+    #= comment for Julia
     if (ValueOption( "disable_derivations" ) == true)
         
         # use an empty derivation graph
         obj.derivations_weight_list = MakeOperationWeightList( obj, MakeDerivationGraph( Operations( CAP_INTERNAL_DERIVATION_GRAPH ) ) );
         
     else
+        # =#
         
         obj.derivations_weight_list = MakeOperationWeightList( obj, CAP_INTERNAL_DERIVATION_GRAPH );
         
+        #= comment for Julia
     end;
+    # =#
     
     obj.caches = @rec( );
     
@@ -309,7 +324,7 @@ end );
     
     obj.logical_implication_files = StructuralCopy( CATEGORIES_LOGIC_FILES );
     
-    obj.overhead = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "overhead", true );
+    obj.overhead = overhead;
     
     if (obj.overhead)
         
@@ -365,7 +380,7 @@ end );
     
     return obj;
     
-end );
+end ) );
 
 InstallMethod( @__MODULE__,  TheoremRecord,
                [ IsCapCategory ],

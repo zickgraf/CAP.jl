@@ -4447,12 +4447,14 @@ end );
 CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS );
 
 
-@BindGlobal( "CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES", function ( method_record, entry_name, generated_entry )
-  local excluded_names, subset_only, method_record_entry, name;
+@BindGlobal( "CAP_INTERNAL_IS_EQUAL_FOR_METHOD_RECORD_ENTRIES", @FunctionWithNamedArguments(
+  [
+    [ "subset_only", false ],
+  ],
+  function ( CAP_NAMED_ARGUMENTS, method_record, entry_name, generated_entry )
+  local excluded_names, method_record_entry, name;
     
     excluded_names = [ "function_name", "pre_function", "pre_function_full", "post_function" ];
-    
-    subset_only = ValueOption( "subset_only" ) == true;
     
     if (@not @IsBound( method_record[entry_name] ))
         Display( @Concatenation( "WARNING: The method record is missing a component named \"", entry_name, "\" which is expected by the validator.\n" ) );
@@ -4483,7 +4485,7 @@ CAP_INTERNAL_ENHANCE_NAME_RECORD_LIMITS( CAP_INTERNAL_METHOD_NAME_RECORD_LIMITS 
             Display( @Concatenation( "WARNING: The entry \"", entry_name, "\" in the method record is missing a component named \"", name, "\" which is expected by the validator.\n" ) );
         end;
     end;
-end );
+end ) );
 
 @InstallGlobalFunction( CAP_INTERNAL_VALIDATE_LIMITS_IN_NAME_RECORD,
   function ( method_name_record, limits )

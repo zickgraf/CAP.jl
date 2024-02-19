@@ -54,7 +54,12 @@
         if (info.return_type == "bool")
             Add( skip, operation_name );
         end;
-      
+        
+        # Do not install operations returning a list of objects since the length of the list is unknown to us
+        if (info.return_type == "list_of_objects")
+            Add( skip, operation_name );
+        end;
+        
     end;
     
     list_of_operations_to_install = Difference( list_of_operations_to_install, skip );

@@ -55,75 +55,41 @@
     
 end );
 
-@InstallGlobalFunction( AddFinalDerivation,
-               
-  function( target_op, args... )
-    local description, can_compute, cannot_compute, func, additional_functions;
+@InstallGlobalFunction( AddFinalDerivation, @FunctionWithNamedArguments(
+  [
+    # When compiling categories, a derivation does not cause overhead anymore, so we would like to simply set `Weight` to 0.
+    # However, the weight 1 is currently needed to prevent the installation of cyclic derivations.
+    [ "Weight", 1 ],
+    [ "CategoryFilter", IsCapCategory ],
+    [ "WeightLoopMultiple", 2 ],
+    [ "CategoryGetters", Immutable( @rec( ) ) ],
+    [ "FunctionCalledBeforeInstallation", false ],
+  ],
+  function( CAP_NAMED_ARGUMENTS, target_op, description, can_compute, cannot_compute, func )
     
-    if (IsString( args[1] ))
-        
-        if (ValueOption( "Description" ) != fail)
-            
-            Error( "passing the description both as an argument and as an option at the same time is not supported" );
-            
-        end;
-        
-        description = args[1];
-        can_compute = args[2];
-        cannot_compute = args[3];
-        func = args[4];
-        additional_functions = args[(5):(Length( args ))];
-        
-    else
-        
-        Print( "WARNING: Calling AddFinalDerivation without a description as the second argument is deprecated and will not be supported after 2024.03.31.\n" );
-        
-        description = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" );
-        can_compute = args[1];
-        cannot_compute = args[2];
-        func = args[3];
-        additional_functions = args[(4):(Length( args ))];
-        
-    end;
+    AddFinalDerivationBundle(
+        description, can_compute, cannot_compute, [ target_op, can_compute, func ],
+        Weight = Weight,
+        CategoryFilter = CategoryFilter,
+        WeightLoopMultiple = WeightLoopMultiple,
+        CategoryGetters = CategoryGetters,
+        FunctionCalledBeforeInstallation = FunctionCalledBeforeInstallation
+    );
     
-    if (@not IsEmpty( additional_functions ))
-        
-        Display( "WARNING: AddFinalDerivation with additional functions is deprecated and will not be supported after 2023.10.28. Please use AddFinalDerivationBundle instead." );
-        
-    end;
-    
-    CallFuncList( AddFinalDerivationBundle, @Concatenation( [ description, can_compute, cannot_compute, [ target_op, can_compute, func ] ], additional_functions ); Description = fail );
-    
-end );
+end ) );
 
-@InstallGlobalFunction( AddFinalDerivationBundle,
-               
-  function( args... )
-    local description, can_compute, cannot_compute, additional_functions, weight, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, operations_to_install, union_of_collected_lists, derivations, used_op_names_with_multiples_and_category_getters, collected_list, dummy_func, dummy_derivation, final_derivation, i, current_additional_func, x;
-    
-    if (IsString( args[1] ))
-        
-        if (ValueOption( "Description" ) != fail)
-            
-            Error( "passing the description both as an argument and as an option at the same time is not supported" );
-            
-        end;
-        
-        description = args[1];
-        can_compute = args[2];
-        cannot_compute = args[3];
-        additional_functions = args[(4):(Length( args ))];
-        
-    else
-        
-        Print( "WARNING: Calling AddFinalDerivationBundle without a description as the first argument is deprecated and will not be supported after 2024.03.31.\n" );
-        
-        description = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Description", "" );
-        can_compute = args[1];
-        cannot_compute = args[2];
-        additional_functions = args[(3):(Length( args ))];
-        
-    end;
+@InstallGlobalFunction( AddFinalDerivationBundle, @FunctionWithNamedArguments(
+  [
+    # When compiling categories, a derivation does not cause overhead anymore, so we would like to simply set `Weight` to 0.
+    # However, the weight 1 is currently needed to prevent the installation of cyclic derivations.
+    [ "Weight", 1 ],
+    [ "CategoryFilter", IsCapCategory ],
+    [ "WeightLoopMultiple", 2 ],
+    [ "CategoryGetters", Immutable( @rec( ) ) ],
+    [ "FunctionCalledBeforeInstallation", false ],
+  ],
+  function( CAP_NAMED_ARGUMENTS, description, can_compute, cannot_compute, additional_functions... )
+    local weight, category_filter, loop_multiplier, category_getters, function_called_before_installation, operations_in_graph, operations_to_install, union_of_collected_lists, derivations, used_op_names_with_multiples_and_category_getters, collected_list, dummy_derivation, final_derivation, i, current_additional_func, x;
     
     if (IsEmpty( additional_functions ))
         
@@ -131,11 +97,11 @@ end );
         
     end;
     
-    weight = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "Weight", 1 );
-    category_filter = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryFilter", IsCapCategory );
-    loop_multiplier = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "WeightLoopMultiple", 2 );
-    category_getters = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "CategoryGetters", @rec( ) );
-    function_called_before_installation = CAP_INTERNAL_RETURN_OPTION_OR_DEFAULT( "FunctionCalledBeforeInstallation", false );
+    weight = Weight;
+    category_filter = CategoryFilter;
+    loop_multiplier = WeightLoopMultiple;
+    category_getters = CategoryGetters;
+    function_called_before_installation = FunctionCalledBeforeInstallation;
     
     for i in (1):(Length( additional_functions ))
         
@@ -236,7 +202,7 @@ end );
         
         Add( derivations, MakeDerivation(
             @Concatenation( description, " (final derivation)" ),
-            current_additional_func[1],
+            NameFunction( current_additional_func[1] ),
             used_op_names_with_multiples_and_category_getters,
             weight,
             current_additional_func[3],
@@ -306,13 +272,10 @@ end );
         
     end;
     
-    dummy_func = x -> x;
-    SetNameFunction( dummy_func, "internal dummy function of a final derivation" );
-    
     # only used to check if we can install all the derivations in `derivations`
     dummy_derivation = MakeDerivation(
         "dummy derivation",
-        dummy_func,
+        "internal dummy function of a final derivation",
         used_op_names_with_multiples_and_category_getters,
         1,
         ReturnTrue,
@@ -330,12 +293,16 @@ end );
     
     Add( CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list, final_derivation );
     
-end );
+end ) );
 
 InstallMethod( @__MODULE__,  Finalize,
                [ IsCapCategory ],
-  
-  function( category )
+ 
+ @FunctionWithNamedArguments(
+  [
+    [ "FinalizeCategory", true ],
+  ],
+  function( CAP_NAMED_ARGUMENTS, category )
     local derivation_list, weight_list, current_install, current_final_derivation, weight, old_weights, categorical_properties, diff, properties_with_logic, property, i, derivation, property_name;
     
     if (IsFinalized( category ))
@@ -344,7 +311,7 @@ InstallMethod( @__MODULE__,  Finalize,
         
     end;
     
-    if (ValueOption( "FinalizeCategory" ) == false)
+    if (@not FinalizeCategory)
         
         return false;
         
@@ -367,15 +334,19 @@ InstallMethod( @__MODULE__,  Finalize,
         
     end;
     
+    #= comment for Julia
     if (ValueOption( "disable_derivations" ) == true)
         
         derivation_list = [ ];
         
     else
+        # =#
         
         derivation_list = ShallowCopy( CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list );
         
+        #= comment for Julia
     end;
+    # =#
     
     weight_list = category.derivations_weight_list;
     
@@ -525,4 +496,4 @@ InstallMethod( @__MODULE__,  Finalize,
     
     return true;
     
-end );
+end ) );

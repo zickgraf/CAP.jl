@@ -4,6 +4,59 @@
 # Implementations
 #
 
+##
+@InstallGlobalFunction( "@FunctionWithNamedArguments", function ( specification, func )
+    
+    @Assert( 0, IsList( specification ) );
+    @Assert( 0, IsFunction( func ) );
+    @Assert( 0, ForAll( specification, x -> IsList( x ) && Length( x ) == 2 && IsString( x[1] ) && @not IsMutable( x[2] ) ) );
+    @Assert( 0, NumberArgumentsFunction( func ) >= 1 || NumberArgumentsFunction( func ) <= -2 );
+    @Assert( 0, NamesLocalVariablesFunction( func )[1] == "CAP_NAMED_ARGUMENTS" );
+    
+    return function ( args... )
+      local CAP_NAMED_ARGUMENTS, current_options, result, s;
+        
+        CAP_NAMED_ARGUMENTS = @rec( );
+        
+        if (IsEmpty( OptionsStack ))
+            
+            current_options = @rec( );
+            
+        else
+            
+            current_options = Last( OptionsStack );
+            
+        end;
+        
+        for s in specification
+            
+            if (@IsBound( current_options[s[1]] ))
+                
+                CAP_NAMED_ARGUMENTS[s[1]] = current_options[s[1]];
+                @Unbind( current_options[s[1]] );
+                
+            else
+                
+                CAP_NAMED_ARGUMENTS[s[1]] = s[2];
+                
+            end;
+            
+        end;
+        
+        result = CallFuncListWrap( func, @Concatenation( [ CAP_NAMED_ARGUMENTS ], args ) );
+        
+        if (Length( result ) == 1)
+            
+            return result[1];
+            
+        end;
+        
+        @Assert( 0, Length( result ) == 0 );
+        
+    end;
+    
+end );
+
 #####################################
 ##
 ## Install add
@@ -1541,8 +1594,12 @@ end );
 end );
 
 ##
-@InstallGlobalFunction( HandlePrecompiledTowers, function ( category, underlying_category, constructor_name )
-  local precompiled_towers, remaining_constructors_in_tower, precompiled_functions_adder, info;
+@InstallGlobalFunction( HandlePrecompiledTowers, @FunctionWithNamedArguments(
+  [
+    [ "no_precompiled_code", false ],
+  ],
+  function ( CAP_NAMED_ARGUMENTS, category, underlying_category, constructor_name )
+    local precompiled_towers, remaining_constructors_in_tower, precompiled_functions_adder, info;
     
     if (!(@IsBound( underlying_category.compiler_hints )) || @not @IsBound( underlying_category.compiler_hints.precompiled_towers ))
         
@@ -1589,7 +1646,7 @@ end );
             
             if (Length( remaining_constructors_in_tower ) == 1)
                 
-                if (ValueOption( "no_precompiled_code" ) != true)
+                if (@not no_precompiled_code)
                     
                     # add precompiled functions
                     CallFuncList( precompiled_functions_adder, [ category ] );
@@ -1631,7 +1688,7 @@ end );
     # return void for Julia
     return;
     
-end );
+end ) );
 
 @InstallGlobalFunction( CAP_JIT_INCOMPLETE_LOGIC, IdFunc );
 @InstallGlobalFunction( CAP_JIT_EXPR_CASE_WRAPPER, IdFunc );
