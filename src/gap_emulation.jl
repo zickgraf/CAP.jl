@@ -43,7 +43,7 @@ export @FunctionWithNamedArguments
 
 function PrintString end
 function DirectSum end
-DirectSumOp = DirectSum
+global const DirectSumOp = DirectSum
 function DirectProduct(arg...)
 	
     if IsCapCategory( arg[1] ) then
@@ -63,15 +63,15 @@ function DirectProduct(arg...)
     return DirectProduct( CapCategory( arg[1] ), arg );
 	
 end
-DirectProductOp = DirectProduct
+global const DirectProductOp = DirectProduct
 function IsEqualForCache end
 function Inverse end
 function Equalizer end
-EqualizerOp = Equalizer
+global const EqualizerOp = Equalizer
 function Coequalizer end
-CoequalizerOp = Coequalizer
+global const CoequalizerOp = Coequalizer
 function FiberProduct end
-FiberProductOp = FiberProduct
+global const FiberProductOp = FiberProduct
 
 function TensorProductOp end
 function TensorProduct(arg...)
