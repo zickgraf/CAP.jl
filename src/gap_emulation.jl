@@ -14,6 +14,7 @@ import Base.in
 # `a and not b or c`, `@not` would capture `c` and we would get
 # `a and (! b or c)` instead of `(a and ! b) or c`. Thus, we display
 # an error if we encounter an `||` in `@not`.
+# TODO: `[ a, not b, c ]` and `func( a : optionA := not b, optionB := not c )` also cause problems
 macro not(expr)
 	if expr isa Expr && expr.head === :||
 		throw("Found expression of the form `not ... or ...`. This is not supported because `not` in GAP has a different precedence than `!` in Julia. Please use parenthesis, i.e. write `not (...) or ...`.")
