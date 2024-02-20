@@ -5,7 +5,7 @@
 #
 
 ##
-InstallMethod( @__MODULE__,  CategoryConstructor,
+@InstallMethod( CategoryConstructor,
                [ IsRecord ],
                
   function( options )

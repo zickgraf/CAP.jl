@@ -1408,7 +1408,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  Iterated,
+@InstallMethod( Iterated,
                [ IsList, IsFunction, IsObject ],
                
   function( list, func, initial_value )
@@ -1418,7 +1418,7 @@ InstallMethod( @__MODULE__,  Iterated,
 end );
 
 ##
-InstallMethod( @__MODULE__,  Iterated,
+@InstallMethod( Iterated,
                [ IsList, IsFunction, IsObject, IsObject ],
                
   function( list, func, initial_value, terminal_value )
@@ -1461,7 +1461,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  SafePosition,
+@InstallMethod( SafePosition,
                [ IsList, IsObject ],
                
   function( list, obj )
@@ -1476,7 +1476,7 @@ InstallMethod( @__MODULE__,  SafePosition,
 end );
 
 ##
-InstallMethod( @__MODULE__,  SafeUniquePosition,
+@InstallMethod( SafeUniquePosition,
                [ IsList, IsObject ],
                
   function( list, obj )
@@ -1491,7 +1491,7 @@ InstallMethod( @__MODULE__,  SafeUniquePosition,
 end );
 
 ##
-InstallMethod( @__MODULE__,  SafePositionProperty,
+@InstallMethod( SafePositionProperty,
                [ IsList, IsFunction ],
                
   function( list, func )
@@ -1506,7 +1506,7 @@ InstallMethod( @__MODULE__,  SafePositionProperty,
 end );
 
 ##
-InstallMethod( @__MODULE__,  SafeUniquePositionProperty,
+@InstallMethod( SafeUniquePositionProperty,
                [ IsList, IsFunction ],
                
   function( list, func )
@@ -1521,7 +1521,7 @@ InstallMethod( @__MODULE__,  SafeUniquePositionProperty,
 end );
 
 ##
-InstallMethod( @__MODULE__,  SafeFirst,
+@InstallMethod( SafeFirst,
                [ IsList, IsFunction ],
                
   function( list, func )
@@ -1536,7 +1536,7 @@ InstallMethod( @__MODULE__,  SafeFirst,
 end );
 
 ##
-InstallMethod( @__MODULE__,  SafeUniqueEntry,
+@InstallMethod( SafeUniqueEntry,
                [ IsList, IsFunction ],
                
   function( list, func )

@@ -415,7 +415,7 @@ AddCategoricalProperty( [ "IsLocallyOfFiniteInjectiveDimension", "IsLocallyOfFin
 
 # display a warning when trying to overwrite an existing CommutativeRingOfLinearCategory with a different one
 #= comment for Julia, which does not have "TryNextMethod"
-InstallMethod( @__MODULE__,  SetCommutativeRingOfLinearCategory,
+@InstallMethod( SetCommutativeRingOfLinearCategory,
                [ IsCapCategory, IsObject ],
                
   function( category, ring )
@@ -450,7 +450,7 @@ end );
 
 # display a warning when trying to overwrite an existing RangeCategoryOfHomomorphismStructure with a different one
 #= comment for Julia, which does not have "TryNextMethod"
-InstallMethod( @__MODULE__,  SetRangeCategoryOfHomomorphismStructure,
+@InstallMethod( SetRangeCategoryOfHomomorphismStructure,
                [ IsCapCategory, IsObject ],
                
   function( category, range_category )

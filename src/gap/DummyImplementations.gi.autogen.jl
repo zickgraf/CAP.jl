@@ -111,7 +111,7 @@ end );
 ## dummy categories
 
 ##
-InstallMethod( @__MODULE__,  DummyCategory,
+@InstallMethod( DummyCategory,
         "for a record of options",
         [ IsRecord ],
         

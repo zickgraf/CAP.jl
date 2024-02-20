@@ -246,7 +246,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  UniqueObject,
+@InstallMethod( UniqueObject,
                [ IsCapTerminalCategoryWithSingleObject ],
                
   function( category )
@@ -259,7 +259,7 @@ InstallMethod( @__MODULE__,  UniqueObject,
 end );
 
 ##
-InstallMethod( @__MODULE__,  UniqueMorphism,
+@InstallMethod( UniqueMorphism,
                [ IsCapTerminalCategoryWithSingleObject ],
                
   function( category )
@@ -478,7 +478,7 @@ end );
 ################################
 
 ##
-InstallMethod( @__MODULE__,  FunctorFromTerminalCategory,
+@InstallMethod( FunctorFromTerminalCategory,
                [ IsCapCategoryObject ],
                
   function( object )
@@ -510,7 +510,7 @@ end );
 
 ##
 #= comment for Julia
-InstallMethod( @__MODULE__,  FunctorFromTerminalCategory,
+@InstallMethod( FunctorFromTerminalCategory,
                     [ IsCapCategoryMorphism && IsOne ],
                
   morphism -> FunctorFromTerminalCategory( Source( morphism ) )
@@ -525,7 +525,7 @@ InstallMethod( @__MODULE__,  FunctorFromTerminalCategory,
 #################################
 
 ##
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
         [ IsObjectInCapTerminalCategoryWithMultipleObjects ],
 
   function( o )
@@ -537,7 +537,7 @@ InstallMethod( @__MODULE__,  DisplayString,
 end );
 
 ##
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
         [ IsMorphismInCapTerminalCategoryWithMultipleObjects ],
 
   function( m )

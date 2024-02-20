@@ -19,7 +19,7 @@
 ##################################
 
 ##
-InstallMethod( @__MODULE__,  Opposite,
+@InstallMethod( Opposite,
                [ IsCapCategoryObject ],
                
   function( object )
@@ -29,7 +29,7 @@ InstallMethod( @__MODULE__,  Opposite,
 end );
 
 ##
-InstallMethod( @__MODULE__,  Opposite,
+@InstallMethod( Opposite,
                     [ IsCapCategory, IsCapCategoryObject ],
                     
   function( opposite_cat, object )
@@ -39,7 +39,7 @@ InstallMethod( @__MODULE__,  Opposite,
 end );
 
 ##
-InstallMethod( @__MODULE__,  Opposite,
+@InstallMethod( Opposite,
                [ IsCapCategoryMorphism ],
                
   function( morphism )
@@ -49,7 +49,7 @@ InstallMethod( @__MODULE__,  Opposite,
 end );
 
 ##
-InstallMethod( @__MODULE__,  Opposite,
+@InstallMethod( Opposite,
                     [ IsCapCategory, IsCapCategoryMorphism ],
                     
   function( opposite_cat, morphism )
@@ -376,7 +376,7 @@ end );
 
 
 ##
-InstallMethod( @__MODULE__,  Opposite,
+@InstallMethod( Opposite,
                [ IsCapCategory, IsString ],
                
  @FunctionWithNamedArguments(
@@ -563,7 +563,7 @@ InstallMethod( @__MODULE__,  Opposite,
 end ) );
 
 ##
-InstallMethod( @__MODULE__,  Opposite,
+@InstallMethod( Opposite,
                [ IsCapCategory ],
                
   function( category )
@@ -644,7 +644,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
         [ IsCapCategoryOppositeObject ],
         
   function( object )
@@ -654,7 +654,7 @@ InstallMethod( @__MODULE__,  DisplayString,
 end );
 
 ##
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
         [ IsCapCategoryOppositeMorphism ],
         
   function( morphism )

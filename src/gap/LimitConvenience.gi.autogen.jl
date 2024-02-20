@@ -121,7 +121,7 @@
             end;
             
             current_string = ReplacedStringViaRecord( """
-InstallMethod( @__MODULE__,  without_given_universal_morphism,
+@InstallMethod( without_given_universal_morphism,
                     [ diagram_filter_list..., tau_filter ],
                     
     function( diagram_arguments..., tau )
@@ -131,7 +131,7 @@ InstallMethod( @__MODULE__,  without_given_universal_morphism,
         
 end );
 
-InstallMethod( @__MODULE__,  without_given_universal_morphism,
+@InstallMethod( without_given_universal_morphism,
                     [ IsCapCategory, diagram_filter_list..., tau_filter ],
                     
     function( cat, diagram_arguments..., tau )
@@ -141,7 +141,7 @@ InstallMethod( @__MODULE__,  without_given_universal_morphism,
         
 end );
 
-InstallMethod( @__MODULE__,  with_given_universal_morphism,
+@InstallMethod( with_given_universal_morphism,
                     [ diagram_filter_list..., tau_filter, IsCapCategoryObject ],
                     
     function( diagram_arguments..., tau, P )
@@ -151,7 +151,7 @@ InstallMethod( @__MODULE__,  with_given_universal_morphism,
         
 end );
 
-InstallMethod( @__MODULE__,  with_given_universal_morphism,
+@InstallMethod( with_given_universal_morphism,
                     [ IsCapCategory, diagram_filter_list..., tau_filter, IsCapCategoryObject ],
                     
     function( cat, diagram_arguments..., tau, P )
@@ -208,7 +208,7 @@ end );
             
             current_string = ReplacedStringViaRecord( """
 ##
-InstallMethod( @__MODULE__,  functorial_name,
+@InstallMethod( functorial_name,
                     [ filter_list... ],
                
   function( input_arguments... )
@@ -231,7 +231,7 @@ end );
             # it is safe to use InstallOtherMethodForCompilerForCAP because there is no other two-argument convenience method for functorials
             current_string = ReplacedStringViaRecord( """
 ##
-InstallMethod( @__MODULE__,  functorial_name,
+@InstallMethod( functorial_name,
                                      [ IsCapCategory, filter_list... ],
                     
   function( cat, input_arguments... )
@@ -253,7 +253,7 @@ end );
             
             current_string = ReplacedStringViaRecord( """
 ##
-InstallMethod( @__MODULE__,  functorial_with_given_name,
+@InstallMethod( functorial_with_given_name,
                [ IsCapCategoryObject, filter_list..., IsCapCategoryObject ],
                
   function( source, input_arguments..., range )
@@ -276,7 +276,7 @@ end );
             # it is safe to use InstallOtherMethodForCompilerForCAP because there is no other four-argument convenience method for with given functorials
             current_string = ReplacedStringViaRecord( """
 ##
-InstallMethod( @__MODULE__,  functorial_with_given_name,
+@InstallMethod( functorial_with_given_name,
                                      [ IsCapCategory, IsCapCategoryObject, filter_list..., IsCapCategoryObject ],
                
   function( cat, source, input_arguments..., range )

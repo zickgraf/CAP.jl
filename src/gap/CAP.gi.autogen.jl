@@ -382,7 +382,7 @@ end );
     
 end ) );
 
-InstallMethod( @__MODULE__,  TheoremRecord,
+@InstallMethod( TheoremRecord,
                [ IsCapCategory ],
                
   function( category )
@@ -398,7 +398,7 @@ end );
 #######################################
 
 ##
-InstallMethod( @__MODULE__,  SetCaching,
+@InstallMethod( SetCaching,
                [ IsCapCategory, IsString, IsString ],
                
   function( category, function_name, caching_info )
@@ -431,7 +431,7 @@ InstallMethod( @__MODULE__,  SetCaching,
 end );
 
 ##
-InstallMethod( @__MODULE__,  SetCachingToWeak,
+@InstallMethod( SetCachingToWeak,
                [ IsCapCategory, IsString ],
                
   function( category, function_name )
@@ -441,7 +441,7 @@ InstallMethod( @__MODULE__,  SetCachingToWeak,
 end );
 
 ##
-InstallMethod( @__MODULE__,  SetCachingToCrisp,
+@InstallMethod( SetCachingToCrisp,
                [ IsCapCategory, IsString ],
                
   function( category, function_name )
@@ -451,7 +451,7 @@ InstallMethod( @__MODULE__,  SetCachingToCrisp,
 end );
 
 ##
-InstallMethod( @__MODULE__,  DeactivateCaching,
+@InstallMethod( DeactivateCaching,
                [ IsCapCategory, IsString ],
                
   function( category, function_name )
@@ -462,7 +462,7 @@ end );
 
 #= comment for Julia
 ##
-InstallMethod( @__MODULE__,  CachingObject,
+@InstallMethod( CachingObject,
                [ IsCapCategoryCell, IsString, IsInt ],
                
   function( cell, name, number )
@@ -472,7 +472,7 @@ InstallMethod( @__MODULE__,  CachingObject,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CachingObject,
+@InstallMethod( CachingObject,
                [ IsCapCategory, IsString, IsInt ],
                
   GET_METHOD_CACHE );
@@ -561,7 +561,7 @@ end );
 #######################################
 
 ##
-InstallMethod( @__MODULE__,  CreateCapCategory,
+@InstallMethod( CreateCapCategory,
                [ ],
                
   function( )
@@ -574,7 +574,7 @@ InstallMethod( @__MODULE__,  CreateCapCategory,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CreateCapCategory,
+@InstallMethod( CreateCapCategory,
                [ IsString ],
                
   function( name )
@@ -584,7 +584,7 @@ InstallMethod( @__MODULE__,  CreateCapCategory,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CreateCapCategory,
+@InstallMethod( CreateCapCategory,
                [ IsString, IsFunction, IsFunction, IsFunction, IsFunction ],
                
   function( name, category_filter, object_filter, morphism_filter, two_cell_filter )
@@ -594,7 +594,7 @@ InstallMethod( @__MODULE__,  CreateCapCategory,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CanCompute,
+@InstallMethod( CanCompute,
                [ IsCapCategory, IsString ],
                
   function( category, string )
@@ -613,7 +613,7 @@ InstallMethod( @__MODULE__,  CanCompute,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CanCompute,
+@InstallMethod( CanCompute,
                [ IsCapCategory, IsFunction ],
                
   function( category, operation )
@@ -625,7 +625,7 @@ InstallMethod( @__MODULE__,  CanCompute,
 end );
 
 ##
-InstallMethod( @__MODULE__,  MissingOperationsForConstructivenessOfCategory,
+@InstallMethod( MissingOperationsForConstructivenessOfCategory,
                [ IsCapCategory, IsString ],
                
   function( category, string )
@@ -1008,22 +1008,22 @@ end );
 #######################################
 
 ##
-InstallMethod( @__MODULE__,  Down, [ IsObject ], IdFunc );
+@InstallMethod( Down, [ IsObject ], IdFunc );
 
 ##
-InstallMethod( @__MODULE__,  Down, [ IsCapCategoryObject ], x -> "unknown object data" );
+@InstallMethod( Down, [ IsCapCategoryObject ], x -> "unknown object data" );
 
 ##
-InstallMethod( @__MODULE__,  Down2, [ IsObject ], x -> Down( Down( x ) ) );
+@InstallMethod( Down2, [ IsObject ], x -> Down( Down( x ) ) );
 
 ##
-InstallMethod( @__MODULE__,  Down3, [ IsObject ], x -> Down( Down( Down( x ) ) ) );
+@InstallMethod( Down3, [ IsObject ], x -> Down( Down( Down( x ) ) ) );
 
 ##
-InstallMethod( @__MODULE__,  DownOnlyMorphismData, [ IsCapCategoryMorphism ], x -> "unknown morphism data" );
+@InstallMethod( DownOnlyMorphismData, [ IsCapCategoryMorphism ], x -> "unknown morphism data" );
 
 ##
-InstallMethod( @__MODULE__,  Down,
+@InstallMethod( Down,
                [ IsCapCategoryMorphism ],
   function( mor )
     
@@ -1032,7 +1032,7 @@ InstallMethod( @__MODULE__,  Down,
 end );
 
 ##
-InstallMethod( @__MODULE__,  Down,
+@InstallMethod( Down,
                [ IsList ],
                
   function( obj )
@@ -1042,7 +1042,7 @@ InstallMethod( @__MODULE__,  Down,
 end );
 
 ##
-InstallMethod( @__MODULE__,  DownToBottom,
+@InstallMethod( DownToBottom,
                [ IsObject ],
                
   function( obj )
@@ -1080,15 +1080,15 @@ end );
 ##
 #######################################
 
-InstallMethod( @__MODULE__,  StringGAP,
+@InstallMethod( StringGAP,
                [ IsCapCategory ],
     Name );
 
-InstallMethod( @__MODULE__,  ViewString,
+@InstallMethod( ViewString,
                [ IsCapCategory ],
     Name );
 
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
                [ IsCapCategory ],
                
   function ( category )
@@ -1121,7 +1121,7 @@ end );
     
 end );
 
-InstallMethod( @__MODULE__,  CellFilter,
+@InstallMethod( CellFilter,
                [ IsCapCategory ],
 
   function ( category )

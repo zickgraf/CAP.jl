@@ -146,8 +146,6 @@ function NTupleGAP(n, args...)
 	[args...]
 end
 
-Iterator = iterate
-
 struct Fail end
 
 fail = Fail()
@@ -585,7 +583,7 @@ macro InstallGlobalFunction(name::String, func)
 end
 
 macro InstallGlobalFunction(name::Symbol, func)
-	esc(:(InstallMethod($name, nothing, $func)))
+	esc(:(@InstallMethod($name, nothing, $func)))
 end
 
 export @InstallGlobalFunction
@@ -668,6 +666,7 @@ macro KeyDependentOperation(name::String, filter1, filter2, func)
 	esc(quote
 		@DeclareOperation($name)
 		global const $symbol_op = $symbol
+		setglobal!(CAP, $(Meta.quot(symbol_op)), $symbol_op)
 	end)
 end
 
@@ -676,6 +675,77 @@ export @KeyDependentOperation
 function with_additional_dropped_first_argument(f)
 	(arg1, args...) -> f(args...)
 end
+
+macro InstallMethod(operation::Symbol, description::String, filter_list, func)
+	esc(:(@InstallMethod($operation, $filter_list, $func)))
+end
+
+macro InstallMethod(operation::Symbol, filter_list, func)
+	if operation === :ViewObj
+		println("ignoring installation for ViewObj, use ViewString instead")
+		return
+	elseif operation === :Display
+		println("ignoring installation for Display, use DisplayString instead")
+		return
+	elseif operation === :Iterator
+		println("ignoring installation for Iterator, install iterator in Julia instead")
+		return
+	end
+	
+	@assert filter_list === :nothing || (filter_list isa Expr && filter_list.head === :vect)
+	
+	if !(func isa Expr)
+		if filter_list === :nothing
+			func = :((args...) -> $func(args...))
+		else
+			vars = Vector{Any}(map(i -> Symbol("arg" * string(i)), 1:length(filter_list.args)))
+			func = :(($(vars...),) -> $func($(vars...),))
+		end
+	end
+	
+	if func.head === :macrocall
+		func = macroexpand(__module__, func; recursive = false)
+	end
+	
+	if func.head === :->
+		func.head = :function
+		if func.args[1] isa Symbol
+			func.args[1] = Expr(:tuple, func.args[1])
+		end
+	end
+	
+	@assert func.head === :function
+	
+	if filter_list !== :nothing && IsAttribute( ValueGlobal( string(operation) ) )
+		operation = Symbol(ValueGlobal( string(operation) ).operation)
+	end
+	
+	if func.args[1].head === :tuple
+		func.args[1] = Expr(:call, operation, func.args[1].args...)
+	elseif func.args[1].head === :...
+		@assert filter_list === :nothing # InstallMethod in GAP cannot be used for functions with varargs
+		func.args[1] = Expr(:call, operation, func.args[1])
+	else
+		error("unsupported head: ", func.args[1].head)
+	end
+	
+	if filter_list !== :nothing
+		if length(func.args[1].args) >= 2 && func.args[1].args[2] isa Expr && func.args[1].args[2].head === :parameters
+			offset = 2
+		else
+			offset = 1
+		end
+		
+		@assert length(filter_list.args) == length(func.args[1].args) - offset
+		for i in 1:length(filter_list.args)
+			func.args[1].args[i + offset] = Expr(:(::), func.args[1].args[i + offset], Expr(:., filter_list.args[i], :(:abstract_type)))
+		end
+	end
+	
+	esc(func)
+end
+
+export @InstallMethod
 
 function InstallMethod(operation, filter_list, func)
 	if IsAttribute( operation )
@@ -693,55 +763,28 @@ function InstallMethod(operation, filter_list, func)
 	InstallMethod(mod, operation, filter_list, func)
 end
 
-function InstallMethod(mod::Module, operation, filter_list, func::Function)
-	if operation == ViewObj
+function InstallMethod(mod::Module, operation::Function, filter_list, func::Function)
+	if Symbol(operation) === :ViewObj
 		println("ignoring installation for ViewObj, use ViewString instead")
 		return
-	elseif operation == Display
+	elseif Symbol(operation) === :Display
 		println("ignoring installation for Display, use DisplayString instead")
+		return
+	elseif Symbol(operation) === :Iterator
+		println("ignoring installation for Iterator, install iterate in Julia instead")
 		return
 	end
 	
-	if !isa(operation, Function)
-		display(operation)
-	end
-	
-	if operation === Iterator
-		@assert length(filter_list) == 1
-		filter_list = [ filter_list[1], IsObject ];
-		nargs = 2
-		isva = true
-	elseif !isnothing(filter_list)
-		nargs = length(filter_list)
-		isva = false
-	elseif length(methods(func)) == 1
-		nargs = methods(func)[1].nargs - 1
-		isva = methods(func)[1].isva
-	else
-		println("Cannot determine number of arguments for the following operation:")
-		display(operation)
-		nargs = 1
-		isva = true
-	end
-	
+	nargs = length(filter_list)
 	vars = Vector{Any}(map(i -> Symbol("arg" * string(i)), 1:nargs))
-	if isnothing(filter_list)
-		vars_with_types = copy(vars)
-	else
-		vars_with_types = map(function(i)
-			arg_symbol = vars[i]
-			type = filter_list[i].abstract_type
-			:($arg_symbol::$type)
-		end, 1:length(filter_list))
-	end
+	types = map(filter -> filter.abstract_type, filter_list)
+	vars_with_types = map(function(i)
+		arg_symbol = vars[i]
+		type = types[i]
+		:($arg_symbol::$type)
+	end, 1:length(filter_list))
 	if IsAttribute( operation )
 		funcref = Symbol(operation.operation)
-	elseif operation === CallFuncList
-		@assert !isva
-		@assert length(vars_with_types) === 2
-		@assert filter_list[2] === IsList
-		funcref = popfirst!(vars_with_types)
-		vars_with_types[1] = Expr(:..., vars[nargs])
 	else
 		funcref = Symbol(operation)
 	end
@@ -750,16 +793,20 @@ function InstallMethod(mod::Module, operation, filter_list, func::Function)
 		print("WARNING: installing method in module ", mod, " for undefined symbol ", funcref, "\n")
 	end
 	
-	if isva
-		vars[nargs] = Expr(:..., vars[nargs])
-		vars_with_types[nargs] = Expr(:..., vars_with_types[nargs])
+	if any(m -> !isempty(Base.kwarg_decl(m)), methods(func))
+		Base.eval(mod, :(
+			function $funcref($(vars_with_types...); kwargs...)
+				$func($(vars...); kwargs...)
+			end
+		))
+	else
+		Base.eval(mod, :(
+			function $funcref($(vars_with_types...))
+				$func($(vars...))
+			end
+		))
 	end
 	
-	Base.eval(mod, :(
-		function $funcref($(vars_with_types...); kwargs...)
-			$func($(vars...); kwargs...)
-		end
-	))
 	if funcref isa Symbol
 		Base.eval(mod, :(export $funcref))
 	end
@@ -1083,7 +1130,7 @@ function IsBoundGlobal( name )
 end
 
 ValueGlobal = function(name)
-	@assert IsBoundGlobal(name)
+	@assert IsBoundGlobal(name) string(name, " is not bound")
 	getglobal(CAP, Symbol(name))
 end
 
@@ -1285,15 +1332,8 @@ IdFunc = identity
 
 Append = append!
 
-function CallFuncList( func, list; kwargs...)
-	if length(kwargs) > 0
-		PushOptions(CAPRecord(Dict(kwargs)))
-	end
-	result = func(list...)
-	if length(kwargs) > 0
-		PopOptions()
-	end
-	result
+function CallFuncList( func::Function, list )
+	func(list...)
 end
 
 IsEmpty = isempty

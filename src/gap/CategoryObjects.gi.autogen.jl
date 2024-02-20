@@ -36,7 +36,7 @@
 ###################################
 
 # This method should not be selected when the two objects belong to the same category and the category can compute IsEqualForObjects.
-InstallMethod( @__MODULE__,  IsEqualForObjects,
+@InstallMethod( IsEqualForObjects,
                     [ IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ],
 
   function( cat, object_1, object_2 )
@@ -79,7 +79,7 @@ InstallMethod( @__MODULE__,  IsEqualForObjects,
 end );
 
 ##
-InstallMethod( @__MODULE__,  ==,
+@InstallMethod( ==,
                [ IsCapCategoryObject, IsCapCategoryObject ],
   function( object_1, object_2 )
 
@@ -119,7 +119,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddPropertyToMatchAtIsEqualForObjects,
+@InstallMethod( AddPropertyToMatchAtIsEqualForObjects,
                [ IsCapCategory, IsString ],
                
   function( category, name )
@@ -144,7 +144,7 @@ end );
 ##
 #######################################
 
-InstallMethod( @__MODULE__,  Add,
+@InstallMethod( Add,
                [ IsCapCategory, IsCapCategoryObject ],
                
   function( category, object )
@@ -185,7 +185,7 @@ InstallMethod( @__MODULE__,  Add,
     
 end );
 
-InstallMethod( @__MODULE__,  AddObject,
+@InstallMethod( AddObject,
                [ IsCapCategory, IsCapCategoryObject ],
                
   function( category, object )
@@ -194,7 +194,7 @@ InstallMethod( @__MODULE__,  AddObject,
     
 end );
 
-InstallMethod( @__MODULE__,  AddObject,
+@InstallMethod( AddObject,
                [ IsCapCategory, IsAttributeStoringRep ],
                
   function( category, object )
@@ -206,7 +206,7 @@ InstallMethod( @__MODULE__,  AddObject,
 end );
 
 ##
-InstallMethod( @__MODULE__,  /,
+@InstallMethod( /,
                [ IsObject, IsCapCategory ],
                
   function( object_datum, cat )
@@ -222,32 +222,32 @@ InstallMethod( @__MODULE__,  /,
 end );
 
 ##
-InstallMethod( @__MODULE__,  IsWellDefined,
+@InstallMethod( IsWellDefined,
                [ IsCapCategoryObject ],
   IsWellDefinedForObjects
 );
 
 ##
-InstallMethod( @__MODULE__,  IsZero,
+@InstallMethod( IsZero,
                [ IsCapCategoryObject ],
                   
 IsZeroForObjects );
 
 ##
-InstallMethod( @__MODULE__,  IsEqualForCache,
+@InstallMethod( IsEqualForCache,
                [ IsCapCategoryObject, IsCapCategoryObject ],
                
   ( obj1, obj2 ) -> IsEqualForCacheForObjects( CapCategory( obj1 ), obj1, obj2 ) );
 
 ##
 # generic fallback to IsIdenticalObj
-InstallMethod( @__MODULE__,  IsEqualForCacheForObjects,
+@InstallMethod( IsEqualForCacheForObjects,
                [ IsCapCategory, IsCapCategoryObject, IsCapCategoryObject ],
                
   ( cat, obj1, obj2 ) -> IsIdenticalObj( obj1, obj2 ) );
 
 ##
-InstallMethod( @__MODULE__,  AddObjectRepresentation,
+@InstallMethod( AddObjectRepresentation,
                [ IsCapCategory, IsObject ],
                
   function( category, representation )
@@ -271,10 +271,10 @@ InstallMethod( @__MODULE__,  AddObjectRepresentation,
 end );
 
 ##
-InstallMethod( @__MODULE__,  RandomObject, [ IsCapCategory, IsInt ], RandomObjectByInteger );
+@InstallMethod( RandomObject, [ IsCapCategory, IsInt ], RandomObjectByInteger );
 
 ##
-InstallMethod( @__MODULE__,  RandomObject, [ IsCapCategory, IsList ], RandomObjectByList );
+@InstallMethod( RandomObject, [ IsCapCategory, IsList ], RandomObjectByList );
 
 ##
 @InstallGlobalFunction( ObjectifyObjectForCAPWithAttributes,
@@ -353,7 +353,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  Simplify,
+@InstallMethod( Simplify,
                [ IsCapCategoryObject ],
   function( object )
     
@@ -367,7 +367,7 @@ end );
 ##
 ###########################
 
-InstallMethod( @__MODULE__,  StringGAP,
+@InstallMethod( StringGAP,
                [ IsCapCategoryObject ],
                
   function( object )
@@ -377,7 +377,7 @@ InstallMethod( @__MODULE__,  StringGAP,
 end );
 
 # fallback methods for Julia
-InstallMethod( @__MODULE__,  ViewString,
+@InstallMethod( ViewString,
                [ IsCapCategoryObject ],
                
   function ( object )
@@ -387,7 +387,7 @@ InstallMethod( @__MODULE__,  ViewString,
     
 end );
 
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
                [ IsCapCategoryObject ],
                
   function ( object )

@@ -5,7 +5,7 @@
 #
 
 ##
-InstallMethod( @__MODULE__,  AsObjectInWrapperCategory,
+@InstallMethod( AsObjectInWrapperCategory,
         "for a wrapper CAP category and a CAP object",
         [ IsWrapperCapCategory, IsCapCategoryObject ],
         
@@ -20,7 +20,7 @@ InstallMethod( @__MODULE__,  AsObjectInWrapperCategory,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AsMorphismInWrapperCategory,
+@InstallMethod( AsMorphismInWrapperCategory,
         "for two CAP objects in a wrapper category and a CAP morphism",
         [ IsWrapperCapCategoryObject, IsCapCategoryMorphism, IsWrapperCapCategoryObject ],
         
@@ -31,7 +31,7 @@ InstallMethod( @__MODULE__,  AsMorphismInWrapperCategory,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AsMorphismInWrapperCategory,
+@InstallMethod( AsMorphismInWrapperCategory,
         "for two CAP objects in a wrapper category and a CAP morphism",
         [ IsWrapperCapCategory, IsWrapperCapCategoryObject, IsCapCategoryMorphism, IsWrapperCapCategoryObject ],
         
@@ -71,7 +71,7 @@ InstallMethodWithCache( AsMorphismInWrapperCategory,
 end );
 
 ##
-InstallMethod( @__MODULE__,  /,
+@InstallMethod( /,
         "for an object and a wrapper CAP category",
         [ IsObject, IsWrapperCapCategory ],
         
@@ -82,7 +82,7 @@ InstallMethod( @__MODULE__,  /,
 end );
 
 ##
-InstallMethod( @__MODULE__,  /,
+@InstallMethod( /,
         "for a CAP category object and a wrapper CAP category",
          [ IsCapCategoryObject, IsWrapperCapCategory ],
         
@@ -97,7 +97,7 @@ InstallMethod( @__MODULE__,  /,
 end );
 
 ##
-InstallMethod( @__MODULE__,  /,
+@InstallMethod( /,
         "for a CAP category morphism and a wrapper CAP category",
         [ IsCapCategoryMorphism, IsWrapperCapCategory ],
         
@@ -112,7 +112,7 @@ InstallMethod( @__MODULE__,  /,
 end );
 
 ##
-InstallMethod( @__MODULE__,  WrapperCategory,
+@InstallMethod( WrapperCategory,
         "for a CAP category and a record of options",
         [ IsCapCategory, IsRecord ],
         
@@ -280,7 +280,7 @@ InstallMethod( @__MODULE__,  WrapperCategory,
 end );
 
 ##
-InstallMethod( @__MODULE__,  WrappingFunctor,
+@InstallMethod( WrappingFunctor,
         "for a wrapper category",
         [ IsWrapperCapCategory ],
         
@@ -297,7 +297,7 @@ end );
 ##################################
 
 ##
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
         "for an object in a wrapper CAP category",
         [ IsWrapperCapCategoryObject ],
         
@@ -308,7 +308,7 @@ InstallMethod( @__MODULE__,  DisplayString,
 end );
 
 ##
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
         "for a morphism in a wrapper CAP category",
         [ IsWrapperCapCategoryMorphism ],
         

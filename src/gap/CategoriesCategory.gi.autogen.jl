@@ -36,7 +36,7 @@
 end );
 
 ##
-InstallMethod( @__MODULE__,  AsCatObject,
+@InstallMethod( AsCatObject,
                [ IsCapCategory ],
   
   function( category )
@@ -95,7 +95,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  CapFunctor,
+@InstallMethod( CapFunctor,
                [ IsString, IsList, IsCapCategory ],
                
   function( name, source_list, range )
@@ -120,7 +120,7 @@ InstallMethod( @__MODULE__,  CapFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CapFunctor,
+@InstallMethod( CapFunctor,
                [ IsString, IsList, IsCapCategoryAsCatObject ],
                
   function( name, source_list, range )
@@ -130,7 +130,7 @@ InstallMethod( @__MODULE__,  CapFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CapFunctor,
+@InstallMethod( CapFunctor,
                [ IsString, IsCapCategory, IsCapCategory ],
                
   function( name, source, range )
@@ -140,7 +140,7 @@ InstallMethod( @__MODULE__,  CapFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CapFunctor,
+@InstallMethod( CapFunctor,
                [ IsString, IsCapCategoryAsCatObject, IsCapCategory ],
                
   function( name, source, range )
@@ -150,7 +150,7 @@ InstallMethod( @__MODULE__,  CapFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CapFunctor,
+@InstallMethod( CapFunctor,
                [ IsString, IsCapCategory, IsCapCategoryAsCatObject ],
                
   function( name, source, range )
@@ -160,7 +160,7 @@ InstallMethod( @__MODULE__,  CapFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  CapFunctor,
+@InstallMethod( CapFunctor,
                [ IsString, IsCapCategoryAsCatObject, IsCapCategoryAsCatObject ],
                
   function( name, source, range )
@@ -170,14 +170,14 @@ InstallMethod( @__MODULE__,  CapFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  SourceOfFunctor,
+@InstallMethod( SourceOfFunctor,
           [ IsCapFunctor ],
   
   F -> AsCapCategory( Source( F ) )
 );
 
 ##
-InstallMethod( @__MODULE__,  RangeOfFunctor,
+@InstallMethod( RangeOfFunctor,
           [ IsCapFunctor ],
   
   F -> AsCapCategory( Range( F ) )
@@ -261,7 +261,7 @@ end );
     
 end );
 
-InstallMethod( @__MODULE__,  FunctorObjectOperation,
+@InstallMethod( FunctorObjectOperation,
                [ IsCapFunctor ],
                
   function( functor )
@@ -273,7 +273,7 @@ InstallMethod( @__MODULE__,  FunctorObjectOperation,
     
 end );
 
-InstallMethod( @__MODULE__,  FunctorMorphismOperation,
+@InstallMethod( FunctorMorphismOperation,
                [ IsCapFunctor ],
                
   function( functor )
@@ -290,7 +290,7 @@ InstallMethod( @__MODULE__,  FunctorMorphismOperation,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddObjectFunction,
+@InstallMethod( AddObjectFunction,
                [ IsCapFunctor, IsList ],
                
   function( functor, func_list )
@@ -317,7 +317,7 @@ InstallMethod( @__MODULE__,  AddObjectFunction,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddObjectFunction,
+@InstallMethod( AddObjectFunction,
                [ IsCapFunctor, IsFunction ],
                
   function( functor, func )
@@ -327,7 +327,7 @@ InstallMethod( @__MODULE__,  AddObjectFunction,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddMorphismFunction,
+@InstallMethod( AddMorphismFunction,
                [ IsCapFunctor, IsList ],
                
   function( functor, func_list )
@@ -358,7 +358,7 @@ InstallMethod( @__MODULE__,  AddMorphismFunction,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddMorphismFunction,
+@InstallMethod( AddMorphismFunction,
                [ IsCapFunctor, IsFunction ],
                
   function( functor, func )
@@ -368,7 +368,7 @@ InstallMethod( @__MODULE__,  AddMorphismFunction,
 end );
 
 ##
-InstallMethod( @__MODULE__,  ObjectCache,
+@InstallMethod( ObjectCache,
                [ IsCapFunctor ],
                
   function( functor )
@@ -378,7 +378,7 @@ InstallMethod( @__MODULE__,  ObjectCache,
 end );
 
 ##
-InstallMethod( @__MODULE__,  MorphismCache,
+@InstallMethod( MorphismCache,
                [ IsCapFunctor ],
                
   function( functor )
@@ -725,7 +725,7 @@ end );
 ##
 ####################################
 
-InstallMethod( @__MODULE__,  InstallFunctor,
+@InstallMethod( InstallFunctor,
                [ IsCapFunctor, IsString ],
                
   function( functor, install_name )
@@ -821,7 +821,7 @@ InstallMethod( @__MODULE__,  InstallFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  IdentityFunctor,
+@InstallMethod( IdentityFunctor,
                [ IsCapCategory ],
                
   function( category )
@@ -831,7 +831,7 @@ InstallMethod( @__MODULE__,  IdentityFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroObjects,
+@InstallMethod( FunctorCanonicalizeZeroObjects,
                [ IsCapCategory ],
                
   function( category )
@@ -873,7 +873,7 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroObjects,
 end );
 
 ##
-InstallMethod( @__MODULE__,  NaturalIsomorphismFromIdentityToCanonicalizeZeroObjects,
+@InstallMethod( NaturalIsomorphismFromIdentityToCanonicalizeZeroObjects,
                [ IsCapCategory ],
                
   function( category )
@@ -906,7 +906,7 @@ InstallMethod( @__MODULE__,  NaturalIsomorphismFromIdentityToCanonicalizeZeroObj
 end );
 
 ##
-InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroMorphisms,
+@InstallMethod( FunctorCanonicalizeZeroMorphisms,
                [ IsCapCategory ],
                
   function( category )
@@ -936,7 +936,7 @@ InstallMethod( @__MODULE__,  FunctorCanonicalizeZeroMorphisms,
 end );
 
 ##
-InstallMethod( @__MODULE__,  NaturalIsomorphismFromIdentityToCanonicalizeZeroMorphisms,
+@InstallMethod( NaturalIsomorphismFromIdentityToCanonicalizeZeroMorphisms,
                [ IsCapCategory ],
                
   function( category )
@@ -971,7 +971,7 @@ end );
 ###################################
 
 ##
-InstallMethod( @__MODULE__,  NaturalTransformation,
+@InstallMethod( NaturalTransformation,
                [ IsCapFunctor, IsCapFunctor ],
                
   function( source, range )
@@ -981,7 +981,7 @@ InstallMethod( @__MODULE__,  NaturalTransformation,
 end );
 
 ##
-InstallMethod( @__MODULE__,  NaturalTransformation,
+@InstallMethod( NaturalTransformation,
                [ IsString, IsCapFunctor, IsCapFunctor ],
                
   function( name, source, range )
@@ -1007,7 +1007,7 @@ InstallMethod( @__MODULE__,  NaturalTransformation,
 end );
 
 ##
-InstallMethod( @__MODULE__,  NaturalTransformationCache,
+@InstallMethod( NaturalTransformationCache,
                [ IsCapNaturalTransformation ],
                
   function( natural_trafo )
@@ -1017,7 +1017,7 @@ InstallMethod( @__MODULE__,  NaturalTransformationCache,
 end );
 
 ##
-InstallMethod( @__MODULE__,  NaturalTransformationOperation,
+@InstallMethod( NaturalTransformationOperation,
                [ IsCapNaturalTransformation ],
                
   function( trafo )
@@ -1032,7 +1032,7 @@ InstallMethod( @__MODULE__,  NaturalTransformationOperation,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddNaturalTransformationFunction,
+@InstallMethod( AddNaturalTransformationFunction,
                [ IsCapNaturalTransformation, IsList ],
                
   function( trafo, func_list )
@@ -1061,7 +1061,7 @@ InstallMethod( @__MODULE__,  AddNaturalTransformationFunction,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddNaturalTransformationFunction,
+@InstallMethod( AddNaturalTransformationFunction,
                [ IsCapNaturalTransformation, IsFunction ],
                
   function( trafo, func )
@@ -1113,7 +1113,7 @@ end );
     
 end );
 
-InstallMethod( @__MODULE__,  InstallNaturalTransformation,
+@InstallMethod( InstallNaturalTransformation,
                [ IsCapNaturalTransformation, IsString ],
                
   function( trafo, install_name )

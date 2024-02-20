@@ -58,12 +58,12 @@
 ##
 ######################################
 
-InstallMethod( @__MODULE__,  Target,
+@InstallMethod( Target,
                [ IsCapCategoryMorphism ],
                
   Range );
 
-InstallMethod( @__MODULE__,  Add,
+@InstallMethod( Add,
                [ IsCapCategory, IsCapCategoryMorphism ],
                
   function( category, morphism )
@@ -116,7 +116,7 @@ InstallMethod( @__MODULE__,  Add,
     
 end );
 
-InstallMethod( @__MODULE__,  AddMorphism,
+@InstallMethod( AddMorphism,
                [ IsCapCategory, IsCapCategoryMorphism ],
                
   function( category, morphism )
@@ -125,7 +125,7 @@ InstallMethod( @__MODULE__,  AddMorphism,
     
 end );
 
-InstallMethod( @__MODULE__,  AddMorphism,
+@InstallMethod( AddMorphism,
                [ IsCapCategory, IsAttributeStoringRep ],
                
   function( category, morphism )
@@ -137,25 +137,25 @@ InstallMethod( @__MODULE__,  AddMorphism,
 end );
 
 ##
-InstallMethod( @__MODULE__,  IsZero,
+@InstallMethod( IsZero,
                [ IsCapCategoryMorphism ],
                   
 IsZeroForMorphisms );
 
 ##
-InstallMethod( @__MODULE__,  +,
+@InstallMethod( +,
                [ IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
 AdditionForMorphisms );
 
 ##
-InstallMethod( @__MODULE__,  -,
+@InstallMethod( -,
                [ IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
 SubtractionForMorphisms );
 
 ##
-InstallMethod( @__MODULE__,  AdditiveInverse,
+@InstallMethod( AdditiveInverse,
                   [ IsCapCategoryMorphism ],
                   
 AdditiveInverseForMorphisms );
@@ -168,7 +168,7 @@ CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
  );
 
 ##
-InstallMethod( @__MODULE__,  Inverse,
+@InstallMethod( Inverse,
                   [ IsCapCategoryMorphism ],
                   
 InverseForMorphisms );
@@ -181,13 +181,13 @@ CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD(
  );
 
 ##
-InstallMethod( @__MODULE__,  *,
+@InstallMethod( *,
                [ IsRingElement, IsCapCategoryMorphism ],
                
 MultiplyWithElementOfCommutativeRingForMorphisms );
 
 ##
-InstallMethod( @__MODULE__,  *,
+@InstallMethod( *,
                [ IsCapCategoryMorphism, IsRingElement ],
                
   function( mor, r )
@@ -197,7 +197,7 @@ InstallMethod( @__MODULE__,  *,
 end );
 
 ##
-InstallMethod( @__MODULE__,  *,
+@InstallMethod( *,
                [ IsRat, IsCapCategoryMorphism ],
                
 function( q, mor )
@@ -236,20 +236,20 @@ function( q, mor )
 end );
 
 ##
-InstallMethod( @__MODULE__,  IsEqualForCache,
+@InstallMethod( IsEqualForCache,
                [ IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
   ( mor1, mor2 ) -> IsEqualForCacheForMorphisms( CapCategory( mor1 ), mor1, mor2 ) );
 
 ##
 # generic fallback to IsIdenticalObj
-InstallMethod( @__MODULE__,  IsEqualForCacheForMorphisms,
+@InstallMethod( IsEqualForCacheForMorphisms,
                [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
   ( cat, mor1, mor2 ) -> IsIdenticalObj( mor1, mor2 ) );
 
 ##
-InstallMethod( @__MODULE__,  AddMorphismRepresentation,
+@InstallMethod( AddMorphismRepresentation,
                [ IsCapCategory, IsObject ],
                
   function( category, representation )
@@ -272,34 +272,34 @@ InstallMethod( @__MODULE__,  AddMorphismRepresentation,
     
 end );
 
-InstallMethod( @__MODULE__,  RandomMorphismWithFixedSourceAndRange,
+@InstallMethod( RandomMorphismWithFixedSourceAndRange,
     [ IsCapCategoryObject, IsCapCategoryObject, IsInt ], RandomMorphismWithFixedSourceAndRangeByInteger );
 
-InstallMethod( @__MODULE__,  RandomMorphismWithFixedSourceAndRange,
+@InstallMethod( RandomMorphismWithFixedSourceAndRange,
     [ IsCapCategoryObject, IsCapCategoryObject, IsList ], RandomMorphismWithFixedSourceAndRangeByList );
 
-InstallMethod( @__MODULE__,  RandomMorphismWithFixedSource,
+@InstallMethod( RandomMorphismWithFixedSource,
     [ IsCapCategoryObject, IsInt ], RandomMorphismWithFixedSourceByInteger );
 
-InstallMethod( @__MODULE__,  RandomMorphismWithFixedSource,
+@InstallMethod( RandomMorphismWithFixedSource,
     [ IsCapCategoryObject, IsList ], RandomMorphismWithFixedSourceByList );
 
-InstallMethod( @__MODULE__,  RandomMorphismWithFixedRange,
+@InstallMethod( RandomMorphismWithFixedRange,
     [ IsCapCategoryObject, IsInt ], RandomMorphismWithFixedRangeByInteger );
 
-InstallMethod( @__MODULE__,  RandomMorphismWithFixedRange,
+@InstallMethod( RandomMorphismWithFixedRange,
     [ IsCapCategoryObject, IsList ], RandomMorphismWithFixedRangeByList );
 
-InstallMethod( @__MODULE__,  RandomMorphism,
+@InstallMethod( RandomMorphism,
     [ IsCapCategory, IsInt ], RandomMorphismByInteger );
 
-InstallMethod( @__MODULE__,  RandomMorphism,
+@InstallMethod( RandomMorphism,
     [ IsCapCategory, IsList ], RandomMorphismByList );
 
-InstallMethod( @__MODULE__,  RandomMorphism,
+@InstallMethod( RandomMorphism,
     [ IsCapCategoryObject, IsCapCategoryObject, IsList ], RandomMorphismWithFixedSourceAndRangeByList );
 
-InstallMethod( @__MODULE__,  RandomMorphism,
+@InstallMethod( RandomMorphism,
     [ IsCapCategoryObject, IsCapCategoryObject, IsInt ], RandomMorphismWithFixedSourceAndRangeByInteger );
 
 ##
@@ -394,7 +394,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  Simplify,
+@InstallMethod( Simplify,
                [ IsCapCategoryMorphism ],
                
   function( morphism )
@@ -415,7 +415,7 @@ end );
 ######################################
 
 # This method should usually not be selected when the two morphisms belong to the same category and the category can compute IsEqualForMorphisms.
-InstallMethod( @__MODULE__,  IsEqualForMorphisms,
+@InstallMethod( IsEqualForMorphisms,
                     [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
 
   function( cat, morphism_1, morphism_2 )
@@ -458,7 +458,7 @@ InstallMethod( @__MODULE__,  IsEqualForMorphisms,
 end );
 
 # This method should usually not be selected when the two morphisms belong to the same category and the category can compute IsCongruentForMorphisms.
-InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
+@InstallMethod( IsCongruentForMorphisms,
                     [ IsCapCategory, IsCapCategoryMorphism, IsCapCategoryMorphism ],
 
   function( cat, morphism_1, morphism_2 )
@@ -509,7 +509,7 @@ InstallMethod( @__MODULE__,  IsCongruentForMorphisms,
 end );
 
 ##
-InstallMethod( @__MODULE__,  ==,
+@InstallMethod( ==,
                [ IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
   function( morphism_1, morphism_2 )
@@ -556,7 +556,7 @@ end );
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddPropertyToMatchAtIsCongruentForMorphisms,
+@InstallMethod( AddPropertyToMatchAtIsCongruentForMorphisms,
                [ IsCapCategory, IsString ],
                
   function( category, name )
@@ -593,7 +593,7 @@ end );
 # end );
 
 ##
-InstallMethod( @__MODULE__,  PreComposeList,
+@InstallMethod( PreComposeList,
                [ IsCapCategory, IsList ],
                
   function( cat, morphism_list )
@@ -607,7 +607,7 @@ InstallMethod( @__MODULE__,  PreComposeList,
 end );
 
 ##
-InstallMethod( @__MODULE__,  PostComposeList,
+@InstallMethod( PostComposeList,
                [ IsCapCategory, IsList ],
                
   function( cat, morphism_list )
@@ -621,7 +621,7 @@ InstallMethod( @__MODULE__,  PostComposeList,
 end );
 
 ##
-InstallMethod( @__MODULE__,  PreComposeList,
+@InstallMethod( PreComposeList,
                [ IsList ],
                
   function( morphism_list )
@@ -635,7 +635,7 @@ InstallMethod( @__MODULE__,  PreComposeList,
 end );
 
 ##
-InstallMethod( @__MODULE__,  PostComposeList,
+@InstallMethod( PostComposeList,
                [ IsList ],
                
   function( morphism_list )
@@ -649,7 +649,7 @@ InstallMethod( @__MODULE__,  PostComposeList,
 end );
 
 ##
-InstallMethod( @__MODULE__,  PreCompose,
+@InstallMethod( PreCompose,
                [ IsList ],
                
   function( morphism_list )
@@ -659,7 +659,7 @@ InstallMethod( @__MODULE__,  PreCompose,
 end );
 
 ##
-InstallMethod( @__MODULE__,  PostCompose,
+@InstallMethod( PostCompose,
                [ IsList ],
                
   function( morphism_list )
@@ -669,7 +669,7 @@ InstallMethod( @__MODULE__,  PostCompose,
 end );
 
 ##
-InstallMethod( @__MODULE__,  HomStructure,
+@InstallMethod( HomStructure,
                [ IsCapCategoryMorphism, IsCapCategoryMorphism ],
                
   function( alpha, beta )
@@ -679,7 +679,7 @@ InstallMethod( @__MODULE__,  HomStructure,
 end );
 
 ##
-InstallMethod( @__MODULE__,  HomStructure,
+@InstallMethod( HomStructure,
                [ IsCapCategoryObject, IsCapCategoryMorphism ],
                
   function( a, beta )
@@ -689,7 +689,7 @@ InstallMethod( @__MODULE__,  HomStructure,
 end );
 
 ##
-InstallMethod( @__MODULE__,  HomStructure,
+@InstallMethod( HomStructure,
                [ IsCapCategoryMorphism, IsCapCategoryObject ],
                
   function( alpha, b )
@@ -699,7 +699,7 @@ InstallMethod( @__MODULE__,  HomStructure,
 end );
 
 ##
-InstallMethod( @__MODULE__,  HomStructure,
+@InstallMethod( HomStructure,
                [ IsCapCategoryObject, IsCapCategoryObject ],
                
   function( a, b )
@@ -709,19 +709,19 @@ InstallMethod( @__MODULE__,  HomStructure,
 end );
 
 ##
-InstallMethod( @__MODULE__,  HomStructure,
+@InstallMethod( HomStructure,
                [ IsCapCategoryMorphism ],
     InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure
 );
 
 ##
-InstallMethod( @__MODULE__,  HomStructure,
+@InstallMethod( HomStructure,
                [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism ],
     InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism
 );
 
 ##
-InstallMethod( @__MODULE__,  HomStructure,
+@InstallMethod( HomStructure,
                [ IsCapCategory ],
     DistinguishedObjectOfHomomorphismStructure
 );
@@ -772,7 +772,7 @@ CapJitAddTypeSignature( "InterpretMorphismFromDistinguishedObjectToHomomorphismS
     
 end );
 
-InstallMethod( @__MODULE__,  ExtendRangeOfHomomorphismStructureByFullEmbedding,
+@InstallMethod( ExtendRangeOfHomomorphismStructureByFullEmbedding,
                [ IsCapCategory, IsCapCategory, IsFunction, IsFunction, IsFunction, IsFunction ],
   function ( C, E, object_function, morphism_function, object_function_inverse, morphism_function_inverse )
     
@@ -851,7 +851,7 @@ InstallMethod( @__MODULE__,  ExtendRangeOfHomomorphismStructureByFullEmbedding,
 end );
 
 ##
-InstallMethod( @__MODULE__,  ExtendRangeOfHomomorphismStructureByIdentityAsFullEmbedding,
+@InstallMethod( ExtendRangeOfHomomorphismStructureByIdentityAsFullEmbedding,
                [ IsCapCategory ],
   function ( C )
     local object_function, morphism_function, object_function_inverse, morphism_function_inverse;
@@ -925,7 +925,7 @@ end );
 ###########################
 
 ##
-InstallMethod( @__MODULE__,  IsWellDefined,
+@InstallMethod( IsWellDefined,
                [ IsCapCategoryMorphism ],
                
   IsWellDefinedForMorphisms
@@ -937,7 +937,7 @@ InstallMethod( @__MODULE__,  IsWellDefined,
 ##
 ###########################
 
-InstallMethod( @__MODULE__,  StringGAP,
+@InstallMethod( StringGAP,
                [ IsCapCategoryMorphism ],
                
   function( morphism )
@@ -947,7 +947,7 @@ InstallMethod( @__MODULE__,  StringGAP,
 end );
 
 # fallback methods for Julia
-InstallMethod( @__MODULE__,  ViewString,
+@InstallMethod( ViewString,
                [ IsCapCategoryMorphism ],
                
   function ( morphism )
@@ -957,7 +957,7 @@ InstallMethod( @__MODULE__,  ViewString,
     
 end );
 
-InstallMethod( @__MODULE__,  DisplayString,
+@InstallMethod( DisplayString,
                [ IsCapCategoryMorphism ],
                
   function ( morphism )

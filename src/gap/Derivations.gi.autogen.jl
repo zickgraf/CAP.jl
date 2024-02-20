@@ -29,7 +29,7 @@ end );
     SetInfoLevel( DerivationInfo, 0 );
 end );
 
-InstallMethod( @__MODULE__,  MakeDerivation,
+@InstallMethod( MakeDerivation,
                [ IsString, IsString, IsDenseList, IsPosInt, IsFunction, IsFunction ],
                
 function( name, target_op_name, used_op_names_with_multiples_and_category_getters, weight, func, category_filter )
@@ -84,26 +84,26 @@ function( name, target_op_name, used_op_names_with_multiples_and_category_getter
     
 end );
 
-InstallMethod( @__MODULE__,  StringGAP,
+@InstallMethod( StringGAP,
                [ IsDerivedMethod ],
 function( d )
   return @Concatenation( "derivation ", DerivationName( d ),
                         " of operation ", TargetOperation( d ) );
 end );
 
-InstallMethod( @__MODULE__,  ViewString,
+@InstallMethod( ViewString,
                [ IsDerivedMethod ],
 function( d )
   return @Concatenation( "<", StringGAP( d ), ">" );
 end );
 
-InstallMethod( @__MODULE__,  IsApplicableToCategory,
+@InstallMethod( IsApplicableToCategory,
                [ IsDerivedMethod, IsCapCategory ],
 function( d, C )
   return CategoryFilter( d )( C );
 end );
 
-InstallMethod( @__MODULE__,  InstallDerivationForCategory,
+@InstallMethod( InstallDerivationForCategory,
                [ IsDerivedMethod, IsPosInt, IsCapCategory ],
 @FunctionWithNamedArguments(
   [
@@ -138,7 +138,7 @@ InstallMethod( @__MODULE__,  InstallDerivationForCategory,
     
 end ) );
 
-InstallMethod( @__MODULE__,  MakeDerivationGraph,
+@InstallMethod( MakeDerivationGraph,
                [ IsDenseList ],
 function( operations )
   local G, op_name;
@@ -159,7 +159,7 @@ function( operations )
   return G;
 end );
 
-InstallMethod( @__MODULE__,  AddOperationsToDerivationGraph,
+@InstallMethod( AddOperationsToDerivationGraph,
                [ IsDerivedMethodGraph, IsDenseList ],
                
   function( graph, operations )
@@ -176,13 +176,13 @@ InstallMethod( @__MODULE__,  AddOperationsToDerivationGraph,
     
 end );
 
-InstallMethod( @__MODULE__,  StringGAP,
+@InstallMethod( StringGAP,
                [ IsDerivedMethodGraph ],
 function( G )
   return "derivation graph";
 end );
 
-InstallMethod( @__MODULE__,  ViewString,
+@InstallMethod( ViewString,
                [ IsDerivedMethodGraph ],
 function( G )
   return @Concatenation( "<", StringGAP( G ), ">" );
@@ -337,19 +337,19 @@ end );
     
 end ) );
 
-InstallMethod( @__MODULE__,  DerivationsUsingOperation,
+@InstallMethod( DerivationsUsingOperation,
                [ IsDerivedMethodGraph, IsString ],
 function( G, op_name )
   return G.derivations_by_used_ops[op_name];
 end );
 
-InstallMethod( @__MODULE__,  DerivationsOfOperation,
+@InstallMethod( DerivationsOfOperation,
                [ IsDerivedMethodGraph, IsString ],
 function( G, op_name )
   return G.derivations_by_target[op_name];
 end );
 
-InstallMethod( @__MODULE__,  MakeOperationWeightList,
+@InstallMethod( MakeOperationWeightList,
                [ IsCapCategory, IsDerivedMethodGraph ],
 function( C, G )
   local operation_weights, operation_derivations, owl, op_name;
@@ -372,20 +372,20 @@ function( C, G )
     
 end );
 
-InstallMethod( @__MODULE__,  StringGAP,
+@InstallMethod( StringGAP,
                [ IsOperationWeightList ],
 function( owl )
   return @Concatenation( "operation weight list for ",
                         StringGAP( CategoryOfOperationWeightList( owl ) ) );
 end );
 
-InstallMethod( @__MODULE__,  ViewString,
+@InstallMethod( ViewString,
                [ IsOperationWeightList ],
 function( owl )
   return @Concatenation( "<", StringGAP( owl ), ">" );
 end );
 
-InstallMethod( @__MODULE__,  CurrentOperationWeight,
+@InstallMethod( CurrentOperationWeight,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
   if (@IsBound( owl.operation_weights[op_name] ))
@@ -394,7 +394,7 @@ function( owl, op_name )
   return infinity;
 end );
 
-InstallMethod( @__MODULE__,  OperationWeightUsingDerivation,
+@InstallMethod( OperationWeightUsingDerivation,
                [ IsOperationWeightList, IsDerivedMethod ],
 function( owl, d )
   local category, category_operation_weights, weight, operation_weights, operation_name, operation_weight, x;
@@ -440,7 +440,7 @@ function( owl, d )
     
 end );
 
-InstallMethod( @__MODULE__,  DerivationOfOperation,
+@InstallMethod( DerivationOfOperation,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
   return owl.operation_derivations[op_name];
@@ -497,7 +497,7 @@ end );
     
 end );
 
-InstallMethod( @__MODULE__,  InstallDerivationsUsingOperation,
+@InstallMethod( InstallDerivationsUsingOperation,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
   local Q, derivations_to_install, node, new_weight, target, d;
@@ -537,7 +537,7 @@ function( owl, op_name )
     
 end );  
 
-InstallMethod( @__MODULE__,  Reevaluate,
+@InstallMethod( Reevaluate,
                [ IsOperationWeightList ],
 function( owl )
   local new_weight, op_name, d;
@@ -560,7 +560,7 @@ function( owl )
     
 end );
 
-InstallMethod( @__MODULE__,  Saturate,
+@InstallMethod( Saturate,
                [ IsOperationWeightList ],
   function( owl )
     local current_weight_list;
@@ -575,7 +575,7 @@ InstallMethod( @__MODULE__,  Saturate,
 
 end );
 
-InstallMethod( @__MODULE__,  AddPrimitiveOperation,
+@InstallMethod( AddPrimitiveOperation,
                [ IsOperationWeightList, IsString, IsInt ],
 function( owl, op_name, weight )
     
@@ -592,7 +592,7 @@ function( owl, op_name, weight )
     
 end );
 
-InstallMethod( @__MODULE__,  PrintDerivationTree,
+@InstallMethod( PrintDerivationTree,
                [ IsOperationWeightList, IsString ],
 function( owl, op_name )
   local print_node, get_children;
@@ -653,26 +653,26 @@ function()
                          node_indices = @rec() ) );
 end );
 
-InstallMethod( @__MODULE__,  StringGAP,
+@InstallMethod( StringGAP,
                [ IsStringMinHeap ],
 function( H )
   return @Concatenation( "min heap for strings, with size ",
                         StringGAP( HeapSize( H ) ) );
 end );
 
-InstallMethod( @__MODULE__,  ViewString,
+@InstallMethod( ViewString,
                [ IsStringMinHeap ],
 function( H )
   return @Concatenation( "<", StringGAP( H ), ">" );
 end );
 
-InstallMethod( @__MODULE__,  HeapSize,
+@InstallMethod( HeapSize,
                [ IsStringMinHeap ],
 function( H )
   return Length( H.array );
 end );
 
-InstallMethod( @__MODULE__,  Add,
+@InstallMethod( Add,
                [ IsStringMinHeap, IsString, IsInt ],
 function( H, string, key )
   local array;
@@ -682,13 +682,13 @@ function( H, string, key )
   DecreaseKey( H, string, key );
 end );
 
-InstallMethod( @__MODULE__,  IsEmptyHeap,
+@InstallMethod( IsEmptyHeap,
                [ IsStringMinHeap ],
 function( H )
   return IsEmpty( H.array );
 end );
 
-InstallMethod( @__MODULE__,  ExtractMin,
+@InstallMethod( ExtractMin,
                [ IsStringMinHeap ],
 function( H )
   local array, node, key;
@@ -704,7 +704,7 @@ function( H )
   return node;
 end );
 
-InstallMethod( @__MODULE__,  DecreaseKey,
+@InstallMethod( DecreaseKey,
                [ IsStringMinHeap, IsString, IsInt ],
 function( H, string, key )
   local array, i, parent;
@@ -719,7 +719,7 @@ function( H, string, key )
   end;
 end );
 
-InstallMethod( @__MODULE__,  Swap,
+@InstallMethod( Swap,
                [ IsStringMinHeap, IsPosInt, IsPosInt ],
 function( H, i, j )
   local array, node_indices, str, tmp, key;
@@ -735,13 +735,13 @@ function( H, i, j )
   node_indices[key] = j;
 end );
 
-InstallMethod( @__MODULE__,  Contains,
+@InstallMethod( Contains,
                [ IsStringMinHeap, IsString ],
 function( H, string )
   return @IsBound( H.node_indices[string] );
 end );
 
-InstallMethod( @__MODULE__,  Heapify,
+@InstallMethod( Heapify,
                [ IsStringMinHeap, IsPosInt ],
 function( H, i )
   local key, array, left, right, smallest;
@@ -763,13 +763,13 @@ function( H, i )
 end );
 
 
-InstallMethod( @__MODULE__,  PrintTree,
+@InstallMethod( PrintTree,
                [ IsObject, IsFunction, IsFunction ],
 function( root, print_node, get_children )
   PrintTreeRec( root, print_node, get_children, 0 );
 end );
 
-InstallMethod( @__MODULE__,  PrintTreeRec,
+@InstallMethod( PrintTreeRec,
                [ IsObject, IsFunction, IsFunction, IsInt ],
 function( node, print_node, get_children, level )
   local i, child;

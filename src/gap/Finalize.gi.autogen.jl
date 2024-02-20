@@ -295,7 +295,7 @@ end ) );
     
 end ) );
 
-InstallMethod( @__MODULE__,  Finalize,
+@InstallMethod( Finalize,
                [ IsCapCategory ],
  
  @FunctionWithNamedArguments(

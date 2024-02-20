@@ -12,13 +12,13 @@
 ##
 ####################################
 
-InstallMethod( @__MODULE__,  Target,
+@InstallMethod( Target,
                [ IsCapCategoryTwoCell ],
                
   Range );
 
 ##
-InstallMethod( @__MODULE__,  Add,
+@InstallMethod( Add,
                [ IsCapCategory, IsCapCategoryTwoCell ],
                
   function( category, twocell )
@@ -51,7 +51,7 @@ InstallMethod( @__MODULE__,  Add,
 end );
 
 ##
-InstallMethod( @__MODULE__,  AddTwoCell,
+@InstallMethod( AddTwoCell,
                [ IsCapCategory, IsObject ],
                
   function( category, twocell )
@@ -69,7 +69,7 @@ end );
 ###########################
 
 ##
-InstallMethod( @__MODULE__,  IsWellDefined,
+@InstallMethod( IsWellDefined,
                [ IsCapCategoryTwoCell ],
                
   IsWellDefinedForTwoCells

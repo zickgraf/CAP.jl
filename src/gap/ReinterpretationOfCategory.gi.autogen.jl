@@ -5,7 +5,7 @@
 #
 
 ##
-InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
+@InstallMethod( ReinterpretationOfCategory,
         "for a CAP category and a record of options",
         [ IsCapCategory, IsRecord ],
         
@@ -386,7 +386,7 @@ InstallMethod( @__MODULE__,  ReinterpretationOfCategory,
 end );
 
 ##
-InstallMethod( @__MODULE__,  ReinterpretationFunctor,
+@InstallMethod( ReinterpretationFunctor,
         "for a reinterpretaton of a category",
         [ IsCapCategory ],
         
@@ -418,7 +418,7 @@ InstallMethod( @__MODULE__,  ReinterpretationFunctor,
 end );
 
 ##
-InstallMethod( @__MODULE__,  ModelingObject,
+@InstallMethod( ModelingObject,
         "for a CAP object",
         [ IsCapCategoryObject ],
         
@@ -431,7 +431,7 @@ InstallMethod( @__MODULE__,  ModelingObject,
 end );
 
 ##
-InstallMethod( @__MODULE__,  ModelingMorphism,
+@InstallMethod( ModelingMorphism,
         "for a CAP morphism",
         [ IsCapCategoryMorphism ],
         
