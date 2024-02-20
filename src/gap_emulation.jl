@@ -620,23 +620,9 @@ export @BindGlobal
 
 # options
 
-options_stack = []
-
-function PushOptions(options::CAPRecord)
-	push!(options_stack, options)
-end
-
-function PopOptions()
-	pop!(options_stack)
-end
-
 function ValueOption( name )
-	for options in reverse(options_stack)
-		if @IsBound( options[name] )
-			return options[name]
-		end
-	end
-	return fail
+	# we can safely return fail since there is no way to set an option anyway
+	fail
 end
 
 # operations
