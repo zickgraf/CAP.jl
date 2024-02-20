@@ -432,9 +432,6 @@ macro DeclareFilter(name::String, parent_filter::Union{Symbol,Expr} = :IsObject)
 			dict::Dict
 		end
 		global const $filter_symbol = Filter($name, $abstract_type_symbol, $concrete_type_symbol, true)
-		if !isdefined(CAP, $(Meta.quot(filter_symbol)))
-			setglobal!(CAP, $(Meta.quot(filter_symbol)), $filter_symbol)
-		end
 	end)
 end
 
@@ -652,9 +649,6 @@ macro DeclareOperation(name::String, filter_list = [])
 	symbol = Symbol(name)
 	esc(quote
 		function $symbol end
-		if !isdefined(CAP, $(Meta.quot(symbol)))
-			setglobal!(CAP, $(Meta.quot(symbol)), $symbol)
-		end
 	end)
 end
 
@@ -666,7 +660,6 @@ macro KeyDependentOperation(name::String, filter1, filter2, func)
 	esc(quote
 		@DeclareOperation($name)
 		global const $symbol_op = $symbol
-		setglobal!(CAP, $(Meta.quot(symbol_op)), $symbol_op)
 	end)
 end
 
@@ -895,9 +888,6 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 			end
 		end
 		$symbol = Attribute($name, $symbol_op, $symbol_tester, $symbol_getter, $symbol_setter, $is_property, [])
-		if !isdefined(CAP, $(Meta.quot(symbol)))
-			setglobal!(CAP, $(Meta.quot(symbol)), $symbol)
-		end
 	end)
 end
 
@@ -1126,12 +1116,16 @@ function JoinStringsWithSeparator( strings, sep )
 end
 
 function IsBoundGlobal( name )
-	isdefined(CAP, Symbol(name))
+	any(m -> isdefined(m, Symbol(name)), ModulesForEvaluationStack)
 end
 
 ValueGlobal = function(name)
-	@assert IsBoundGlobal(name) string(name, " is not bound")
-	getglobal(CAP, Symbol(name))
+	for m in ModulesForEvaluationStack
+		if isdefined(m, Symbol(name))
+			return getglobal(m, Symbol(name))
+		end
+	end
+	error(name, " is not bound in any module of the stack")
 end
 
 function List(tuple::Tuple)
