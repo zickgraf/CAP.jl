@@ -551,9 +551,9 @@ function Objectify(type, record)
 end
 
 # global variables
-DeclareGlobalVariable = function( name )
+function DeclareGlobalVariable( name )
 	# noop
-end;
+end
 
 macro InstallValueConst(name::Symbol, value)
 	esc(:(global const $name = $value))
@@ -586,7 +586,7 @@ end
 export @InstallGlobalFunction
 
 # global names
-DeclareGlobalName = function( name )
+function DeclareGlobalName( name )
 	# noop
 end
 
@@ -883,7 +883,7 @@ end
 
 export @DeclareAttribute
 
-IsAttribute = function( obj )
+function IsAttribute( obj )
 	obj isa Attribute
 end
 
@@ -906,7 +906,7 @@ end
 
 export @DeclareProperty
 
-IsProperty = function( obj )
+function IsProperty( obj )
 	obj isa Attribute && obj.is_property
 end
 
@@ -978,7 +978,7 @@ function ListWithIdenticalEntries(n, obj)
 	end
 end
 
-Perform = function( list, func )
+function Perform( list, func )
 	for elm in list
 		func(elm)
 	end
@@ -1105,7 +1105,7 @@ function IsBoundGlobal( name )
 	any(m -> isdefined(m, Symbol(name)), ModulesForEvaluationStack)
 end
 
-ValueGlobal = function(name)
+function ValueGlobal(name)
 	for m in ModulesForEvaluationStack
 		if isdefined(m, Symbol(name))
 			return getglobal(m, Symbol(name))
@@ -1423,7 +1423,7 @@ function IS_SUBSET_FLAGS( filter1, filter2 )
 	filter1.abstract_type <: filter2.abstract_type
 end
 
-StableSortBy = function( list, func )
+function StableSortBy( list, func )
 	sort!(list, alg=Base.Sort.MergeSort, by=func)
 end
 
