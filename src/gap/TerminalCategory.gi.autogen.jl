@@ -113,8 +113,11 @@ end );
 #########################################
 
 ##
-@InstallGlobalFunction( TerminalCategoryWithSingleObject,
-  function( )
+@InstallGlobalFunction( TerminalCategoryWithSingleObject, @FunctionWithNamedArguments(
+  [
+    [ "FinalizeCategory", true ],
+  ],
+  function( CAP_NAMED_ARGUMENTS )
     local name, category_filter, category_object_filter, category_morphism_filter,
           create_func_object, create_func_morphism,
           object_constructor, object_datum, morphism_constructor, morphism_datum,
@@ -239,11 +242,15 @@ end );
         
     end );
     
-    Finalize( T );
+    if (FinalizeCategory)
+        
+        Finalize( T );
+        
+    end;
     
     return T;
     
-end );
+end ) );
 
 ##
 @InstallMethod( UniqueObject,
@@ -280,8 +287,11 @@ end );
 #########################################
 
 ##
-@InstallGlobalFunction( TerminalCategoryWithMultipleObjects,
-  function( )
+@InstallGlobalFunction( TerminalCategoryWithMultipleObjects, @FunctionWithNamedArguments(
+  [
+    [ "FinalizeCategory", true ],
+  ],
+  function( CAP_NAMED_ARGUMENTS )
     local name, category_filter, category_object_filter, category_morphism_filter,
           create_func_object, create_func_morphism,
           object_constructor, object_datum, morphism_constructor, morphism_datum,
@@ -362,7 +372,7 @@ end );
     
     excluded_properties = @Concatenation( excluded_strict_properties, excluded_skeletal_properties );
     
-    range_cat = TerminalCategoryWithSingleObject( );
+    range_cat = TerminalCategoryWithSingleObject(; FinalizeCategory = true );
     
     T = CAP_INTERNAL_CONSTRUCTOR_FOR_TERMINAL_CATEGORY( @rec(
                  name = name,
@@ -465,11 +475,15 @@ end );
         
     end );
     
-    Finalize( T );
+    if (FinalizeCategory)
+        
+        Finalize( T );
+        
+    end;
     
     return T;
     
-end );
+end ) );
 
 ################################
 ##

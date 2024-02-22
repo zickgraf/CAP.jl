@@ -3,8 +3,7 @@
 #
 # Implementations
 #
-@InstallValueConst( CAP_INTERNAL_FINAL_DERIVATION_LIST,
-              @rec( final_derivation_list = [ ] ) );
+@InstallValueConst( CAP_INTERNAL_FINAL_DERIVATION_LIST, [ ] );
 
 @BindGlobal( "CAP_INTERNAL_FINAL_DERIVATION_SANITY_CHECK",
   
@@ -291,7 +290,7 @@ end ) );
     
     CAP_INTERNAL_FINAL_DERIVATION_SANITY_CHECK( final_derivation );
     
-    Add( CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list, final_derivation );
+    Add( CAP_INTERNAL_FINAL_DERIVATION_LIST, final_derivation );
     
 end ) );
 
@@ -342,7 +341,7 @@ end ) );
     else
         # =#
         
-        derivation_list = ShallowCopy( CAP_INTERNAL_FINAL_DERIVATION_LIST.final_derivation_list );
+        derivation_list = ShallowCopy( CAP_INTERNAL_FINAL_DERIVATION_LIST );
         
         #= comment for Julia
     end;

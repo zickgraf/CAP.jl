@@ -7,6 +7,14 @@ import Base.getindex
 import Base.copy
 import Base.in
 
+IS_PRECOMPILING = true
+
+function CAP_precompile(args...)
+	if IS_PRECOMPILING
+		precompile(args...)
+	end
+end
+
 # In GAP, `not` binds loser than anything except `and` and `or`.
 # We emulate this behaviour via a macro. However, a macro binds loser
 # than `&&` or `||`, so we have to manually terminate the macro
@@ -715,13 +723,22 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 			offset = 1
 		end
 		
+		types = map(x -> Expr(:., x, :(:abstract_type)), filter_list.args)
+		
 		@assert length(filter_list.args) == length(func.args[1].args) - offset
 		for i in 1:length(filter_list.args)
-			func.args[1].args[i + offset] = Expr(:(::), func.args[1].args[i + offset], Expr(:., filter_list.args[i], :(:abstract_type)))
+			func.args[1].args[i + offset] = Expr(:(::), func.args[1].args[i + offset], types[i])
 		end
 	end
 	
-	esc(func)
+	if filter_list !== :nothing
+		esc(quote
+			$func
+			CAP_precompile($operation, ($(types...),))
+		end)
+	else
+		esc(func)
+	end
 end
 
 export @InstallMethod
@@ -789,6 +806,8 @@ function InstallMethod(mod::Module, operation::Function, filter_list, func::Func
 	if funcref isa Symbol
 		Base.eval(mod, :(export $funcref))
 	end
+	
+	Base.eval(mod, :(CAP_precompile($funcref,($(types...),))))
 end
 
 function InstallMethod(operation, description::String, filter_list, func)
@@ -860,10 +879,12 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 			dict = getfield(obj, :dict)
 			haskey(dict, Symbol($name))
 		end
+		CAP_precompile($symbol_tester, (CAPDict, ))
 		function $symbol_getter(obj::CAPDict)
 			dict = getfield(obj, :dict)
 			dict[Symbol($name)]
 		end
+		CAP_precompile($symbol_getter, (CAPDict, ))
 		function $symbol_setter(obj::CAPDict, value)
 			dict = getfield(obj, :dict)
 			dict[Symbol($name)] = value
@@ -873,6 +894,7 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 				end
 			end
 		end
+		CAP_precompile($symbol_setter, (CAPDict, Any))
 		$symbol = Attribute($name, $symbol_op, $symbol_tester, $symbol_getter, $symbol_setter, $is_property, [])
 	end)
 end
@@ -1531,3 +1553,130 @@ macro init_CAP_package()
 end
 
 export @init_CAP_package
+
+# CAP state
+
+function SAVE_CAP_STATE()
+	derivations_by_target = @rec()
+	for recname in RecNames( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_target )
+		derivations_by_target[recname] = ShallowCopy( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_target[recname] )
+	end
+	
+	derivations_by_used_ops = @rec()
+	for recname in RecNames( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_used_ops )
+		derivations_by_used_ops[recname] = ShallowCopy( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_used_ops[recname] )
+	end
+	
+	state = (
+		CAP_INTERNAL_METHOD_NAME_RECORD = ShallowCopy( CAP_INTERNAL_METHOD_NAME_RECORD ),
+		CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST = ShallowCopy( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST ),
+		CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD = ShallowCopy( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD ),
+		CAP_INTERNAL_DERIVATION_GRAPH_operations = ShallowCopy( Operations( CAP_INTERNAL_DERIVATION_GRAPH ) ),
+		CAP_INTERNAL_DERIVATION_GRAPH_derivations_by_target = derivations_by_target,
+		CAP_INTERNAL_DERIVATION_GRAPH_derivations_by_used_ops = derivations_by_used_ops,
+		CAP_INTERNAL_FINAL_DERIVATION_LIST = ShallowCopy( CAP_INTERNAL_FINAL_DERIVATION_LIST )
+	)
+end
+
+function RESTORE_CAP_STATE(state)
+	##
+	for recname in RecNames( state.CAP_INTERNAL_METHOD_NAME_RECORD )
+		
+		if !(@IsBound( CAP_INTERNAL_METHOD_NAME_RECORD[recname] ))
+			
+			CAP_INTERNAL_METHOD_NAME_RECORD[recname] = state.CAP_INTERNAL_METHOD_NAME_RECORD[recname];
+			
+		end
+		
+	end
+	
+	##
+	for pair in state.CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST
+		
+		if !(pair in CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST )
+			
+			Add( CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST, pair );
+			
+		end
+		
+	end
+	
+	##
+	for recname in RecNames( state.CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD )
+		
+		if !(@IsBound( CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[recname] ))
+			
+			CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[recname] = state.CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD[recname];
+			
+		end
+		
+	end
+	
+	##
+	for operation in state.CAP_INTERNAL_DERIVATION_GRAPH_operations
+		
+		if !(operation in Operations( CAP_INTERNAL_DERIVATION_GRAPH ) )
+			
+			Add( Operations( CAP_INTERNAL_DERIVATION_GRAPH ), operation );
+			
+		end
+		
+	end
+	
+	##
+	for recname in RecNames( state.CAP_INTERNAL_DERIVATION_GRAPH_derivations_by_target )
+		
+		if @IsBound( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_target[recname] )
+			
+			for derivation in state.CAP_INTERNAL_DERIVATION_GRAPH_derivations_by_target[recname]
+				
+				if !ForAny( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_target[recname], x -> x === derivation )
+					
+					Add( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_target[recname], derivation );
+					
+				end
+				
+			end
+			
+		else
+			
+			CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_target[recname] = ShallowCopy( state.CAP_INTERNAL_DERIVATION_GRAPH_derivations_by_target[recname] )
+			
+		end
+		
+	end
+	
+	##
+	for recname in RecNames( state.CAP_INTERNAL_DERIVATION_GRAPH_derivations_by_used_ops )
+		
+		if @IsBound( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_used_ops[recname] )
+			
+			for derivation in state.CAP_INTERNAL_DERIVATION_GRAPH_derivations_by_used_ops[recname]
+				
+				if !ForAny( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_used_ops[recname], x -> x === derivation )
+					
+					Add( CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_used_ops[recname], derivation );
+					
+				end
+				
+			end
+			
+		else
+			
+			CAP_INTERNAL_DERIVATION_GRAPH.derivations_by_used_ops[recname] = ShallowCopy( state.CAP_INTERNAL_DERIVATION_GRAPH_derivations_by_used_ops[recname] )
+			
+		end
+		
+	end
+	
+	##
+	for derivation in state.CAP_INTERNAL_FINAL_DERIVATION_LIST
+		
+		if !ForAny( CAP_INTERNAL_FINAL_DERIVATION_LIST, x -> x === derivation )
+			
+			Add( CAP_INTERNAL_FINAL_DERIVATION_LIST, derivation );
+			
+		end
+		
+	end
+end
