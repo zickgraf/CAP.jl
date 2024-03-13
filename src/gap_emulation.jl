@@ -744,19 +744,7 @@ end
 export @InstallMethod
 
 function InstallMethod(operation, filter_list, func)
-	if IsAttribute( operation )
-		mod = parentmodule(operation.operation)
-	elseif isa(operation, Function)
-		mod = parentmodule(operation)
-	else
-		mod = CAP
-	end
-	
-	if mod === Base
-		mod = CAP
-	end
-	
-	InstallMethod(mod, operation, filter_list, func)
+	InstallMethod(last(ModulesForEvaluationStack), operation, filter_list, func)
 end
 
 function InstallMethod(mod::Module, operation::Function, filter_list, func::Function)
@@ -1692,3 +1680,49 @@ function RESTORE_CAP_STATE(state)
 		
 	end
 end
+
+macro IMPORT_CAP_OPERATIONS()
+	if !IsBoundGlobal( "CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE" )
+		return nothing
+	end
+	
+	imports = Concatenation( List(
+		RecNames( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE ),
+		function ( package )
+			
+			if isdefined(__module__, Symbol(package))
+				
+				return List(
+					RecNames( CAP_INTERNAL_METHOD_NAME_RECORDS_BY_PACKAGE[package] ),
+					function ( recname )
+						
+						operation = ValueGlobal( CAP_INTERNAL_METHOD_NAME_RECORD[recname].installation_name )
+						
+						if IsAttribute( operation )
+							
+							:(import $(Symbol(package)).$(Symbol(CAP_INTERNAL_METHOD_NAME_RECORD[recname].installation_name, "_OPERATION")))
+							
+						else
+							
+							:(import $(Symbol(package)).$(Symbol(CAP_INTERNAL_METHOD_NAME_RECORD[recname].installation_name)))
+						
+						end
+						
+					end
+				);
+				
+			else
+				
+				return [ ];
+				
+			end
+			
+		end
+	) )
+	
+	esc(quote
+		$(imports...)
+	end)
+end
+
+export @IMPORT_CAP_OPERATIONS
