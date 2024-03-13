@@ -478,11 +478,9 @@ end );
 
     if (new_weight < current_weight || (new_weight == current_weight && current_derivation != fail && new_pos < current_pos))
         
-        if (@not IsIdenticalObj( current_derivation, d ))
-            
-            InstallDerivationForCategory( d, new_weight, CategoryOfOperationWeightList( owl ) );
-            
-        end;
+        # Previously, `InstallDerivationForCategory` was called at this point.
+        # However, this could lead to methods being overwritten if cheaper derivations become available while adding primitive installations to a category.
+        # Hence, we now install the derivations in `Finalize`.
         
         owl.operation_weights[target] = new_weight;
         owl.operation_derivations[target] = d;

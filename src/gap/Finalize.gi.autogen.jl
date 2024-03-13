@@ -302,7 +302,7 @@ end ) );
     [ "FinalizeCategory", true ],
   ],
   function( CAP_NAMED_ARGUMENTS, category )
-    local derivation_list, weight_list, current_install, current_final_derivation, weight, old_weights, categorical_properties, diff, properties_with_logic, property, i, derivation, property_name;
+    local derivation_list, weight_list, current_install, current_final_derivation, weight, old_weights, categorical_properties, diff, properties_with_logic, property, i, derivation, operation, property_name;
     
     if (IsFinalized( category ))
         
@@ -457,6 +457,17 @@ end ) );
             end;
             
             Print( "For debugging, call `ActivateDerivationInfo( )`, retry, and look at the derivations between \"Starting reevaluation of ...\" and \"Finished reevaluation of ...\".\n" );
+            
+        end;
+        
+    end;
+    
+    # actually install normal derivations
+    for operation in Operations( DerivationGraph( weight_list ) )
+        
+        if (DerivationOfOperation( weight_list, operation ) != fail)
+            
+            InstallDerivationForCategory( DerivationOfOperation( weight_list, operation ), CurrentOperationWeight( weight_list, operation ), category );
             
         end;
         
