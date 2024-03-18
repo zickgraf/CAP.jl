@@ -118,7 +118,7 @@ function SSortedList(list::Union{Vector, UnitRange, StepRange})
 	unique(sort(list))
 end
 
-SetGAP = SSortedList
+global const SetGAP = SSortedList
 
 function UnionGAP(args...)
 	if length(args) == 1
@@ -156,7 +156,7 @@ end
 
 struct Fail end
 
-fail = Fail()
+global const fail = Fail()
 
 function Base.show(io::IO, fail::Fail)
 	print(io, "fail")
@@ -454,33 +454,33 @@ function NewFilter( name, parent_filter )
 	Filter(name, concrete_type, concrete_type, false)
 end
 
-const NewCategory = NewFilter
+global const NewCategory = NewFilter
 
 # GAP filters
 abstract type AttributeStoringRep <: CAPDict end
-const IsAttributeStoringRep = Filter("IsAttributeStoringRep", AttributeStoringRep)
+global const IsAttributeStoringRep = Filter("IsAttributeStoringRep", AttributeStoringRep)
 
-const IsIO = Filter("IsIO", IO)
-const IsObject = Filter("IsObject", Any)
-const IsString = Filter("IsString", AbstractString)
-const IsStringRep = IsString
-const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Tuple})
-const IsDenseList = IsList
-const IsFunction = Filter("IsFunction", Function)
-const IsOperation = IsFunction
-const IsChar = Filter("IsChar", Char)
-const IsInt = Filter("IsInt", Int)
-const IsBigInt = Filter("IsBigInt", BigInt)
-const IsRat = Filter("IsRat", Rational{BigInt})
-const IsBool = Filter("IsBool", Bool)
-const IsPosInt = Filter("IsPosInt", Int) # TODO
-const IsRecord = Filter("IsRecord", CAPRecord)
+global const IsIO = Filter("IsIO", IO)
+global const IsObject = Filter("IsObject", Any)
+global const IsString = Filter("IsString", AbstractString)
+global const IsStringRep = IsString
+global const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Tuple})
+global const IsDenseList = IsList
+global const IsFunction = Filter("IsFunction", Function)
+global const IsOperation = IsFunction
+global const IsChar = Filter("IsChar", Char)
+global const IsInt = Filter("IsInt", Int)
+global const IsBigInt = Filter("IsBigInt", BigInt)
+global const IsRat = Filter("IsRat", Rational{BigInt})
+global const IsBool = Filter("IsBool", Bool)
+global const IsPosInt = Filter("IsPosInt", Int) # TODO
+global const IsRecord = Filter("IsRecord", CAPRecord)
 # integer or infinity (a float)
-const IsCyclotomic = Filter("IsCyclotomic", Union{Int,Float64}) # TODO
+global const IsCyclotomic = Filter("IsCyclotomic", Union{Int,Float64}) # TODO
 
 # AbstractAlgebra
-const IsRing = Filter("IsRing", Ring)
-const IsRingElement = Filter("IsRingElement", AbstractAlgebra.NCRingElement)
+global const IsRing = Filter("IsRing", Ring)
+global const IsRingElement = Filter("IsRingElement", AbstractAlgebra.NCRingElement)
 
 function HasIsCommutative(R::AbstractAlgebra.NCRing)
 	R isa Ring
@@ -490,10 +490,10 @@ function IsCommutative(R::AbstractAlgebra.NCRing)
 	R isa Ring
 end
 
-Integers = ZZ
-Rationals = QQ
+global const Integers = ZZ
+global const Rationals = QQ
 
-const IsIntegers = Filter("IsIntegers", AbstractAlgebra.Integers{BigInt})
+global const IsIntegers = Filter("IsIntegers", AbstractAlgebra.Integers{BigInt})
 
 function HasRingFilter(R::Ring)
 	if R === ZZ
@@ -806,7 +806,7 @@ function InstallMethod(mod, operation, description::String, filter_list, func)
 	InstallMethod(mod, operation, filter_list, func)
 end
 
-InstallOtherMethod = InstallMethod
+global const InstallOtherMethod = InstallMethod
 function InstallMethodWithCacheFromObject( operation, filter_list, func; ArgumentNumber = 1 )
 	InstallMethod( operation, filter_list, func )
 end
@@ -816,7 +816,7 @@ end
 function InstallMethodWithCache( operation, description, filter_list, func; InstallMethod = InstallMethod, Cache = "cache" )
 	InstallMethod( operation, filter_list, func )
 end
-InstallMethodWithCrispCache = InstallMethod
+global const InstallMethodWithCrispCache = InstallMethod
 
 # attributes
 
@@ -1055,7 +1055,7 @@ function IntGAP_OPERATION(float::Float64)
 end
 
 @DeclareAttribute("StringGAP", IsAttributeStoringRep)
-StringMutable = StringGAP
+global const StringMutable = StringGAP
 
 function Add( list::Vector, element::Any )
 	push!(list, element)
@@ -1187,8 +1187,8 @@ end
 
 export @Assert
 
-ShallowCopy = copy
-StructuralCopy = deepcopy
+global const ShallowCopy = copy
+global const StructuralCopy = deepcopy
 
 function Display(string::String)
 	print(string, "\n")
@@ -1200,7 +1200,7 @@ end
 
 Print = print
 
-Reversed = reverse
+global const Reversed = reverse
 
 function NumberArgumentsFunction(attr::Attribute)
 	1
@@ -1265,7 +1265,7 @@ function Error(args...)
 	error(string(args...))
 end
 
-LowercaseString = lowercase
+global const LowercaseString = lowercase
 
 function StartsWith(string::String, substring::String)
 	startswith(string, substring)
@@ -1279,7 +1279,7 @@ function EndsWith(string::String, substring::String)
 	endswith(string, substring)
 end
 
-ModulesForEvaluationStack = [ CAP ]
+global const ModulesForEvaluationStack = [ CAP ]
 
 function EvalString(string::String)
 	if string[1] == '['
@@ -1291,8 +1291,8 @@ function EvalString(string::String)
 	Base.eval(last(ModulesForEvaluationStack), Meta.parse(string))
 end
 
-SortedList = sort
-AsSortedList = sort
+global const SortedList = sort
+global const AsSortedList = sort
 
 function IsPackageMarkedForLoading( name, version )
 	if name == "JuliaInterface"
@@ -1318,15 +1318,15 @@ function ReturnFirst( arg1, args... )
 	arg1
 end
 
-IdFunc = identity
+global const IdFunc = identity
 
-Append = append!
+global const Append = append!
 
 function CallFuncList( func::Function, list )
 	func(list...)
 end
 
-IsEmpty = isempty
+global const IsEmpty = isempty
 
 function NameFunction(attr::Attribute)
 	attr.name
@@ -1340,7 +1340,7 @@ function SetNameFunction(f, name)
 	# noop
 end
 
-IsIdenticalObj = ===
+global const IsIdenticalObj = ===
 
 function Immutable(L::Vector)
 	# Julia has no immutable lists
@@ -1419,7 +1419,7 @@ function NamesFilter(filter)
 	[string(filter)]
 end
 
-TextAttr = rec(; f0 = "\033[30m", f1 = "\033[31m", f2 = "\033[32m", f3 = "\033[33m", f4 = "\033[34m", f5 = "\033[35m", f6 = "\033[36m", f7 = "\033[37m", CSI = "\033[", b0 = "\033[40m", b1 = "\033[41m", b2 = "\033[42m", b3 = "\033[43m", b4 = "\033[44m", b5 = "\033[45m", b6 = "\033[46m", b7 = "\033[47m", blink = "\033[5m", bold = "\033[1m", delline = "\033[2K", home = "\033[1G", normal = "\033[22m", reset = "\033[0m", reverse = "\033[7m", underscore = "\033[4m" )
+global const TextAttr = rec(; f0 = "\033[30m", f1 = "\033[31m", f2 = "\033[32m", f3 = "\033[33m", f4 = "\033[34m", f5 = "\033[35m", f6 = "\033[36m", f7 = "\033[37m", CSI = "\033[", b0 = "\033[40m", b1 = "\033[41m", b2 = "\033[42m", b3 = "\033[43m", b4 = "\033[44m", b5 = "\033[45m", b6 = "\033[46m", b7 = "\033[47m", blink = "\033[5m", bold = "\033[1m", delline = "\033[2K", home = "\033[1G", normal = "\033[22m", reset = "\033[0m", reverse = "\033[7m", underscore = "\033[4m" )
 
 function FLAGS_FILTER(filter)
 	filter
@@ -1441,7 +1441,7 @@ function Maximum(int1::Union{Int, BigInt}, int2::Union{Int, BigInt})
 	max(int1, int2)
 end
 
-infinity = Inf
+global const infinity = Inf
 
 # manually imported from ToolsForHomalg
 function ReplacedStringViaRecord( string, record )
