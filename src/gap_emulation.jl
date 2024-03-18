@@ -475,8 +475,8 @@ end
 
 macro DeclareFilter(name::String, parent_filter::Union{Symbol,Expr} = :IsObject)
 	filter_symbol = Symbol(name)
-	abstract_type_symbol = Symbol("TheJuliaAbstractType" * name)
-	concrete_type_symbol = Symbol("TheJuliaConcreteType" * name)
+	abstract_type_symbol = Symbol("TheJuliaAbstractType", name)
+	concrete_type_symbol = Symbol("TheJuliaConcreteType", name)
 	# all our macros are meant to fully execute in the context where the macro is called -> always fully escape them
 	esc(quote
 		@assert $parent_filter.subtypable
@@ -730,7 +730,7 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 		if filter_list === :nothing
 			func = :((args...) -> $func(args...))
 		else
-			vars = Vector{Any}(map(i -> Symbol("arg" * string(i)), 1:length(filter_list.args)))
+			vars = Vector{Any}(map(i -> Symbol("arg", i), 1:length(filter_list.args)))
 			func = :(($(vars...),) -> $func($(vars...),))
 		end
 	end
@@ -805,7 +805,7 @@ function InstallMethod(mod::Module, operation::Function, filter_list, func::Func
 	end
 	
 	nargs = length(filter_list)
-	vars = Vector{Any}(map(i -> Symbol("arg" * string(i)), 1:nargs))
+	vars = Vector{Any}(map(i -> Symbol("arg", i), 1:nargs))
 	types = map(filter -> filter.abstract_type, filter_list)
 	vars_with_types = map(function(i)
 		arg_symbol = vars[i]
@@ -1567,7 +1567,7 @@ end
 # Julia macros
 
 macro init_CAP_package()
-	symbol = Symbol("init_" * string(__module__))
+	symbol = Symbol("init_", string(__module__))
 	if isdefined(__module__, symbol)
 		esc(:($symbol()))
 	else
