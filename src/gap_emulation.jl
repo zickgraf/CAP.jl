@@ -49,7 +49,6 @@ end
 
 export @FunctionWithNamedArguments
 
-function PrintString end
 function DirectSum end
 global const DirectSumOp = DirectSum
 function DirectProduct(arg...)
@@ -277,102 +276,144 @@ function copy(record::CAPRecord)
 	CAPRecord(copy(getfield(record, :dict)))
 end
 
-# GAP String, Print, View, Display
-const DEFAULTDISPLAYSTRING = "<object>\n"
-const DEFAULTVIEWSTRING = "<object>"
+## GAP String, Print, View, Display
 
-function DisplayString(obj::CAPDict)
+function Base.show(io::IO, obj::CAPDict)
+	print(io, ViewString(obj))
+end
+
+function Print(args...)
+	for obj in args
+		if obj isa String
+			print(obj)
+		else
+			PrintObj(obj)
+		end
+	end
+end
+
+function View(args...)
+	for obj in args
+		ViewObj(obj)
+	end
+end
+
+# fallback
+global const DEFAULTDISPLAYSTRING = "<object>\n"
+global const DEFAULTVIEWSTRING = "<object>"
+
+function Display(obj)
+	string = DisplayString(obj)
+	if string === DEFAULTDISPLAYSTRING
+		Print(obj, "\n")
+	else
+		print(string)
+	end
+end
+
+function DisplayString(obj)
 	DEFAULTDISPLAYSTRING
 end
 
-function ViewString(obj::CAPDict)
+function ViewObj(obj)
+	string = ViewString(obj)
+	if string !== DEFAULTVIEWSTRING
+		print(string)
+	else
+		PrintObj(obj)
+	end
+end
+
+function ViewString(obj)
 	DEFAULTVIEWSTRING
 end
 
-function Display(obj::CAPDict)
-	string = DisplayString(obj)
-	if string == DEFAULTDISPLAYSTRING
-		PrintObj(obj)
-		println()
-	else
-		print(string)
-	end
-end
-
-function ViewObj(obj::CAPDict)
-	string = ViewString(obj)
-	if string == DEFAULTVIEWSTRING
-		PrintObj(obj)
-	else
-		print(string)
-	end
-end
-
-function PrintObj(obj::CAPDict)
+function PrintObj(obj)
 	print(PrintString(obj))
 end
 
-function PrintString(obj::CAPDict)
+function PrintString(obj)
 	StringGAP_OPERATION(obj)
 end
 
-function StringGAP_OPERATION(obj::CAPDict)
+function StringGAP_OPERATION(obj)
 	"<object>"
 end
 
-# String, Print, View, Display for native types
-function Display(list::Union{Vector, UnitRange, StepRange})
-	print(DisplayString(list))
+# booleans
+function StringGAP_OPERATION(bool::Bool)
+	string(bool)
 end
 
-function DisplayString(int::Union{Int, BigInt})
-	string(int, "\n")
+# integers
+function ViewString(n::Union{Int, BigInt})
+	StringGAP(n)
 end
 
-# DisplayString of a non-empty list in GAP returns "<object>"
-# This is obviously not what we want.
-function DisplayString(list::Union{Vector, UnitRange, StepRange})
-	# https://github.com/gap-system/gap/pull/5418
-	if length(list) == 0
-		"[  ]"
-	else
-		string(PrintString(list), "\n")
-	end
+function StringGAP_OPERATION(n::Union{Int, BigInt})
+	string(n)
 end
 
-function PrintString(int::Union{Int, BigInt})
-	string(int)
-end
-
-function PrintString(c::Char)
+# characters
+function ViewString(c::Char)
 	string("'", c, "'")
 end
 
-function QuotedPrintString(x::Any)
-	PrintString(x)
+function StringGAP_OPERATION(c::Char)
+	string("'", c, "'")
 end
 
-function QuotedPrintString(x::String)
-	string("\"", x, "\"")
+# strings
+function Display(s::String)
+	print(s, "\n")
 end
 
-# PrintString for lists in GAP simply returns String.
-# Here, we want to actually simulate the output of PrintObj.
-function PrintString(list::Vector)
-	# https://github.com/gap-system/gap/pull/5418
-	if length(list) == 0
-		"[ ]"
-	else
-		string("[ ", join(map(x -> QuotedPrintString(x), list), ", "), " ]")
+function DisplayString(s::String)
+	string(s, "\n")
+end
+
+function ViewObj(s::String)
+	print("\"", s, "\"")
+end
+
+function ViewString(s::String)
+	string("\"", s, "\"")
+end
+
+function PrintObj(s::String)
+	print("\"", s, "\"")
+end
+
+function StringGAP_OPERATION(s::String)
+	s
+end
+
+# lists
+function ViewObj(list::Vector)
+	print("[ ")
+	for i in 1:length(list)
+		ViewObj(list[i])
+		if i < length(list)
+			print(", ")
+		end
 	end
+	ViewObj(last(list))
+	print(" ]")
 end
 
-function PrintString(list::UnitRange)
-	StringGAP_OPERATION(list)
+function ViewString(list::Vector)
+	string("[ ", join(map(x -> ViewString(x), list), ", "), " ]")
 end
 
-function StringGAP_OPERATION(x::Union{Int, BigInt})
-	string(x)
+function PrintObj(list::Vector)
+	print("[ ")
+	for i in 1:length(list)
+		PrintObj(list[i])
+		if i < length(list)
+			print(", ")
+		end
+	end
+	print(" ]")
 end
 
 function QuotedStringGAP_OPERATION(x::Any)
@@ -384,18 +425,21 @@ function QuotedStringGAP_OPERATION(x::String)
 end
 
 function StringGAP_OPERATION(list::Vector)
-	# https://github.com/gap-system/gap/pull/5418
-	if length(list) == 0
-		"[ ]"
-	else
-		string("[ ", join(map(x -> QuotedStringGAP_OPERATION(x), list), ", "), " ]")
-	end
+	string("[ ", join(map(x -> QuotedStringGAP_OPERATION(x), list), ", "), " ]")
+end
+
+# ranges
+function DisplayString(range::UnitRange)
+	StringGAP_OPERATION(range)
+end
+
+function ViewString(range::UnitRange)
+	StringGAP_OPERATION(range)
 end
 
 function StringGAP_OPERATION(range::UnitRange)
 	if range.stop < range.start
-		# https://github.com/gap-system/gap/pull/5418
-		string("[ ]")
+		string("[  ]")
 	elseif range.stop == range.start
 		string("[ ", range.stop, " ]")
 	else
@@ -403,8 +447,9 @@ function StringGAP_OPERATION(range::UnitRange)
 	end
 end
 
-function Base.show(io::IO, obj::CAPDict)
-	print(io, ViewString(obj))
+# functions (incomplete)
+function Display(func::Function)
+	display(func)
 end
 
 # filters
@@ -962,7 +1007,7 @@ end
 macro Info(infoclass, required_level, args...)
 	esc(quote
 		if InfoLevel( $infoclass ) >= $required_level
-			Print("#I  ", $(args...), "\n")
+			print("#I  ", $(args...), "\n")
 		end
 	end)
 end
@@ -1189,16 +1234,6 @@ export @Assert
 
 global const ShallowCopy = copy
 global const StructuralCopy = deepcopy
-
-function Display(string::String)
-	print(string, "\n")
-end
-
-function Display(func::Function)
-	display(func)
-end
-
-Print = print
 
 global const Reversed = reverse
 
