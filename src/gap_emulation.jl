@@ -803,14 +803,15 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 		end
 	end
 	
-	if filter_list !== :nothing
-		esc(quote
-			$func
-			CAP_precompile($operation, ($(types...),))
-		end)
-	else
-		esc(func)
+	block = quote
+		$func
 	end
+	
+	if filter_list !== :nothing
+		push!(block.args, :(CAP_precompile($operation, ($(types...),))))
+	end
+	
+	esc(block)
 end
 
 export @InstallMethod
