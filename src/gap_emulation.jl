@@ -773,15 +773,31 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 	
 	@assert func.head === :function
 	
-	if filter_list !== :nothing && IsAttribute( ValueGlobal( string(operation) ) )
-		operation = Symbol(ValueGlobal( string(operation) ).operation)
+	is_attribute = IsBoundGlobal( string(operation) ) && IsAttribute( ValueGlobal( string(operation) ) )
+	
+	if is_attribute
+		@assert filter_list !== :nothing
+		@assert isempty(filter_list.args) || filter_list.args[1] isa Symbol
+		
+		attr = ValueGlobal( string(operation) )
+		
+		if length(filter_list.args) === 1 && ValueGlobal( string(filter_list.args[1]) ).abstract_type <: IsAttributeStoringRep.abstract_type
+			callable = Symbol(attr.operation)
+			operation_to_precompile = callable
+		else
+			callable = :(::typeof($operation))
+			operation_to_precompile = operation
+		end
+	else
+		callable = operation
+		operation_to_precompile = callable
 	end
 	
 	if func.args[1].head === :tuple
-		func.args[1] = Expr(:call, operation, func.args[1].args...)
+		func.args[1] = Expr(:call, callable, func.args[1].args...)
 	elseif func.args[1].head === :...
 		@assert filter_list === :nothing # InstallMethod in GAP cannot be used for functions with varargs
-		func.args[1] = Expr(:call, operation, func.args[1])
+		func.args[1] = Expr(:call, callable, func.args[1])
 	else
 		error("unsupported head: ", func.args[1].head)
 	end
@@ -808,7 +824,7 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 	end
 	
 	if filter_list !== :nothing
-		push!(block.args, :(CAP_precompile($operation, ($(types...),))))
+		push!(block.args, :(CAP_precompile($operation_to_precompile, ($(types...),))))
 	end
 	
 	esc(block)
@@ -841,9 +857,16 @@ function InstallMethod(mod::Module, operation::Function, filter_list, func::Func
 		:($arg_symbol::$type)
 	end, 1:length(filter_list))
 	if IsAttribute( operation )
-		funcref = Symbol(operation.operation)
+		if length(filter_list) === 1 && filter_list[1].abstract_type <: IsAttributeStoringRep.abstract_type
+			funcref = Symbol(operation.operation)
+			operation_to_precompile = funcref
+		else
+			funcref = :(::typeof($(Symbol(operation.name))))
+			operation_to_precompile = Symbol(operation.name)
+		end
 	else
 		funcref = Symbol(operation)
+		operation_to_precompile = funcref
 	end
 	
 	if funcref isa Symbol && !isdefined(mod, funcref)
@@ -870,7 +893,7 @@ function InstallMethod(mod::Module, operation::Function, filter_list, func::Func
 		Base.eval(mod, :(export $funcref))
 	end
 	
-	Base.eval(mod, :(CAP_precompile($funcref,($(types...),))))
+	Base.eval(mod, :(CAP_precompile($operation_to_precompile,($(types...),))))
 end
 
 function InstallMethod(operation, description::String, filter_list, func)
@@ -895,27 +918,13 @@ global const InstallMethodWithCrispCache = InstallMethod
 
 # attributes
 
-mutable struct Attribute <: Function
-	name::String
-	operation::Function
-	tester::Function
-	getter::Function
-	setter::Function
-	is_property::Bool
-	implied_properties::Vector{Attribute}
-end
+abstract type Attribute <: Function end
 
 function ==(attr1::Attribute, attr2::Attribute)
 	isequal(attr1.name, attr2.name)
 end
 
-function (attr::Attribute)(obj::CAPDict; kwargs...)
-	if !Tester(attr)(obj)
-		Setter(attr)(obj, attr.operation(obj; kwargs...))
-	end
-	attr.getter(obj)
-end
-
+# FIXME: avoid this installation
 function (attr::Attribute)(args...; kwargs...)
 	attr.operation(args...; kwargs...)
 end
@@ -934,20 +943,17 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 	symbol = Symbol(name)
 	symbol_op = Symbol(name, "_OPERATION")
 	symbol_tester = Symbol("Has", name)
-	symbol_getter = Symbol("Get", name)
 	symbol_setter = Symbol("Set", name)
+	type_symbol = Symbol("TheJuliaAttributeType", name)
 	esc(quote
 		function $symbol_op end
+		
 		function $symbol_tester(obj::CAPDict)
 			dict = getfield(obj, :dict)
 			haskey(dict, Symbol($name))
 		end
 		CAP_precompile($symbol_tester, (CAPDict, ))
-		function $symbol_getter(obj::CAPDict)
-			dict = getfield(obj, :dict)
-			dict[Symbol($name)]
-		end
-		CAP_precompile($symbol_getter, (CAPDict, ))
+		
 		function $symbol_setter(obj::CAPDict, value)
 			dict = getfield(obj, :dict)
 			dict[Symbol($name)] = value
@@ -958,7 +964,25 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 			end
 		end
 		CAP_precompile($symbol_setter, (CAPDict, Any))
-		$symbol = Attribute($name, $symbol_op, $symbol_tester, $symbol_getter, $symbol_setter, $is_property, [])
+		
+		mutable struct $type_symbol <: Attribute
+			name::String
+			operation::Function
+			tester::Function
+			setter::Function
+			is_property::Bool
+			implied_properties::Vector{Attribute}
+		end
+		
+		global const $symbol = $type_symbol($name, $symbol_op, $symbol_tester, $symbol_setter, $is_property, [])
+		
+		function (::$type_symbol)(obj::IsAttributeStoringRep.abstract_type; kwargs...)
+			if !$symbol_tester(obj)
+				$symbol_setter(obj, $symbol_op(obj; kwargs...))
+			end
+			dict = getfield(obj, :dict)
+			dict[Symbol($name)]
+		end
 	end)
 end
 
@@ -1113,11 +1137,10 @@ function Cartesian(args...)
 	map(collect,vec(permutedims(collect(Iterators.product(args...)), reverse(1:length(args)))))
 end
 
-@DeclareAttribute("Length", IsAttributeStoringRep)
+@DeclareAttribute( "Length", IsAttributeStoringRep )
 
-function Length_OPERATION(x::Union{Vector, UnitRange, StepRange, Tuple, String})
-	length(x)
-end
+@InstallMethod( Length, [ IsList ], length );
+@InstallMethod( Length, [ IsString ], length );
 
 @DeclareAttribute("IntGAP", IsAttributeStoringRep)
 
