@@ -786,8 +786,10 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 		error("unsupported head: ", func.args[1].head)
 	end
 	
+	is_kwarg = length(func.args[1].args) >= 2 && func.args[1].args[2] isa Expr && func.args[1].args[2].head === :parameters
+	
 	if filter_list !== :nothing
-		if length(func.args[1].args) >= 2 && func.args[1].args[2] isa Expr && func.args[1].args[2].head === :parameters
+		if is_kwarg
 			offset = 2
 		else
 			offset = 1
@@ -847,7 +849,9 @@ function InstallMethod(mod::Module, operation::Function, filter_list, func::Func
 		print("WARNING: installing method in module ", mod, " for undefined symbol ", funcref, "\n")
 	end
 	
-	if any(m -> !isempty(Base.kwarg_decl(m)), methods(func))
+	is_kwarg = any(m -> !isempty(Base.kwarg_decl(m)), methods(func))
+	
+	if is_kwarg
 		Base.eval(mod, :(
 			function $funcref($(vars_with_types...); kwargs...)
 				$func($(vars...); kwargs...)
