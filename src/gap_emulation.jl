@@ -15,6 +15,31 @@ function CAP_precompile(args...)
 	end
 end
 
+global const ModulesForEvaluationStack = [ CAP ]
+
+function IsBoundGlobal( name )
+	any(m -> isdefined(m, Symbol(name)), ModulesForEvaluationStack)
+end
+
+function ValueGlobal(name)
+	for m in ModulesForEvaluationStack
+		if isdefined(m, Symbol(name))
+			return getglobal(m, Symbol(name))
+		end
+	end
+	error(name, " is not bound in any module of the stack")
+end
+
+function EvalString(string::String)
+	if string[1] == '['
+		pos = PositionSublist(string, "] -> ")
+		if pos != fail
+			string = "(" * string[2:pos-1] * ")" * string[pos+1:end]
+		end
+	end
+	Base.eval(last(ModulesForEvaluationStack), Meta.parse(string))
+end
+
 # In GAP, `not` binds loser than anything except `and` and `or`.
 # We emulate this behaviour via a macro. However, a macro binds loser
 # than `&&` or `||`, so we have to manually terminate the macro
@@ -1156,19 +1181,6 @@ function JoinStringsWithSeparator( strings, sep )
 	join(strings, sep)
 end
 
-function IsBoundGlobal( name )
-	any(m -> isdefined(m, Symbol(name)), ModulesForEvaluationStack)
-end
-
-function ValueGlobal(name)
-	for m in ModulesForEvaluationStack
-		if isdefined(m, Symbol(name))
-			return getglobal(m, Symbol(name))
-		end
-	end
-	error(name, " is not bound in any module of the stack")
-end
-
 function List(tuple::Tuple)
 	collect(tuple)
 end
@@ -1312,18 +1324,6 @@ end
 
 function EndsWith(string::String, substring::String)
 	endswith(string, substring)
-end
-
-global const ModulesForEvaluationStack = [ CAP ]
-
-function EvalString(string::String)
-	if string[1] == '['
-		pos = PositionSublist(string, "] -> ")
-		if pos != fail
-		string = "(" * string[2:pos-1] * ")" * string[pos+1:end]
-		end
-	end
-	Base.eval(last(ModulesForEvaluationStack), Meta.parse(string))
 end
 
 global const SortedList = sort
