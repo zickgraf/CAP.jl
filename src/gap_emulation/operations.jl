@@ -42,7 +42,7 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 		return
 	end
 	
-	@assert filter_list === :nothing || (filter_list isa Expr && filter_list.head === :vect)
+	@assert filter_list === :nothing || (filter_list isa Expr && filter_list.head === :vect && all(f -> f isa Symbol, filter_list.args))
 	
 	if !(func isa Expr)
 		if filter_list === :nothing
@@ -70,7 +70,6 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 	
 	if is_attribute
 		@assert filter_list !== :nothing
-		@assert isempty(filter_list.args) || filter_list.args[1] isa Symbol
 		
 		attr = ValueGlobal( string(operation) )
 		
@@ -109,6 +108,10 @@ macro InstallMethod(operation::Symbol, filter_list, func)
 		@assert length(filter_list.args) == length(func.args[1].args) - offset
 		for i in 1:length(filter_list.args)
 			func.args[1].args[i + offset] = Expr(:(::), func.args[1].args[i + offset], types[i])
+			# specialize native types (e.g. vectors) for performance
+			if !(ValueGlobal( string(filter_list.args[i]) ).abstract_type <: IsAttributeStoringRep.abstract_type)
+				func.args[1].args[i + offset] = Expr(:macrocall, Symbol("@specialize"), __source__, func.args[1].args[i + offset])
+			end
 		end
 	end
 	
@@ -164,6 +167,13 @@ function InstallMethod(mod::Module, operation::Function, filter_list, func::Func
 	
 	if funcref isa Symbol && !isdefined(mod, funcref)
 		print("WARNING: installing method in module ", mod, " for undefined symbol ", funcref, "\n")
+	end
+	
+	for i in 1:length(types)
+		# specialize native types (e.g. vectors) for performance
+		if !(types[i] <: IsAttributeStoringRep.abstract_type)
+			vars_with_types[i] = Expr(:macrocall, Symbol("@specialize"), LineNumberNode(@__LINE__, @__FILE__), vars_with_types[i])
+		end
 	end
 	
 	is_kwarg = any(m -> !isempty(Base.kwarg_decl(m)), methods(func))
