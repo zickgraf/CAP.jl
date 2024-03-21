@@ -22,13 +22,13 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 	esc(quote
 		function $symbol_op end
 		
-		function $symbol_tester(obj::CAPDict)
+		function $symbol_tester(obj::AttributeStoringRep)
 			dict = getfield(obj, :dict)
 			haskey(dict, Symbol($name))
 		end
-		CAP_precompile($symbol_tester, (CAPDict, ))
+		CAP_precompile($symbol_tester, (AttributeStoringRep, ))
 		
-		function $symbol_setter(obj::CAPDict, value)
+		function $symbol_setter(obj::AttributeStoringRep, value)
 			dict = getfield(obj, :dict)
 			dict[Symbol($name)] = value
 			if IsProperty( $symbol ) && value === true
@@ -37,7 +37,7 @@ function declare_attribute_or_property(mod, name::String, is_property::Bool)
 				end
 			end
 		end
-		CAP_precompile($symbol_setter, (CAPDict, Any))
+		CAP_precompile($symbol_setter, (AttributeStoringRep, Any))
 		
 		mutable struct $type_symbol <: Attribute
 			name::String
