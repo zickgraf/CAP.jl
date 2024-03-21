@@ -1,16 +1,10 @@
+abstract type AttributeStoringRep <: CAPDict end
+global const IsAttributeStoringRep = Filter("IsAttributeStoringRep", AttributeStoringRep)
+
 abstract type Attribute <: Function end
 
 function ==(attr1::Attribute, attr2::Attribute)
 	isequal(attr1.name, attr2.name)
-end
-
-# FIXME: avoid this installation
-function (attr::Attribute)(args...; kwargs...)
-	attr.operation(args...; kwargs...)
-end
-
-function StringGAP_OPERATION(attr::Attribute)
-	string("<Attribute \"", attr.name, "\">")
 end
 
 function declare_attribute_or_property(mod, name::String, is_property::Bool)
@@ -111,3 +105,9 @@ function ListImpliedFilters(prop)
 	sort(map(attr -> attr.name, flatten(prop)))
 end
 
+@DeclareAttribute( "StringGAP", IsObject );
+global const StringMutable = StringGAP
+
+function (::typeof(StringGAP))(attr::Attribute)
+	string("<Attribute \"", attr.name, "\">")
+end

@@ -311,9 +311,6 @@ include("gap_emulation/operations.jl")
 include("gap_emulation/attributes.jl")
 
 # GAP filters
-abstract type AttributeStoringRep <: CAPDict end
-global const IsAttributeStoringRep = Filter("IsAttributeStoringRep", AttributeStoringRep)
-
 global const IsIO = Filter("IsIO", IO)
 global const IsObject = Filter("IsObject", Any)
 global const IsString = Filter("IsString", AbstractString)
@@ -438,35 +435,27 @@ function PrintObj(obj)
 end
 
 function PrintString(obj)
-	StringGAP_OPERATION(obj)
+	StringGAP(obj)
 end
 
-function StringGAP_OPERATION(obj)
-	"<object>"
-end
+@InstallMethod( StringGAP, [ IsObject ], obj -> "<object>" );
 
 # booleans
-function StringGAP_OPERATION(bool::Bool)
-	string(bool)
-end
+@InstallMethod( StringGAP, [ IsBool ], bool -> string(bool) );
 
 # integers
-function ViewString(n::Union{Int, BigInt})
-	StringGAP(n)
-end
+@InstallMethod( ViewString, [ IsInt ], n -> StringGAP( n ) );
 
-function StringGAP_OPERATION(n::Union{Int, BigInt})
-	string(n)
-end
+@InstallMethod( ViewString, [ IsBigInt ], n -> StringGAP( n ) );
+
+@InstallMethod( StringGAP, [ IsInt ], n -> string(n) );
+
+@InstallMethod( StringGAP, [ IsBigInt ], n -> string(n) );
 
 # characters
-function ViewString(c::Char)
-	string("'", c, "'")
-end
+@InstallMethod( ViewString, [ IsChar ], c -> string("'", c, "'") );
 
-function StringGAP_OPERATION(c::Char)
-	string("'", c, "'")
-end
+@InstallMethod( StringGAP, [ IsChar ], c -> string("'", c, "'") );
 
 # strings
 function Display(s::String)
@@ -489,9 +478,7 @@ function PrintObj(s::String)
 	print("\"", s, "\"")
 end
 
-function StringGAP_OPERATION(s::String)
-	s
-end
+@InstallMethod( StringGAP, [ IsString ], s -> s );
 
 # lists
 function ViewObj(list::Vector)
@@ -521,28 +508,30 @@ function PrintObj(list::Vector)
 	print(" ]")
 end
 
-function QuotedStringGAP_OPERATION(x::Any)
-	StringGAP_OPERATION(x)
+function QuotedStringGAP(x::Any)
+	StringGAP(x)
 end
 
-function QuotedStringGAP_OPERATION(x::String)
+function QuotedStringGAP(x::String)
 	string("\"", x, "\"")
 end
 
-function StringGAP_OPERATION(list::Vector)
-	string("[ ", join(map(x -> QuotedStringGAP_OPERATION(x), list), ", "), " ]")
+# we cannot use @InstallMethod because we distinguish between vectors and ranges
+function (::typeof(StringGAP))(list::Vector)
+	string("[ ", join(map(x -> QuotedStringGAP(x), list), ", "), " ]")
 end
 
 # ranges
 function DisplayString(range::UnitRange)
-	StringGAP_OPERATION(range)
+	StringGAP(range)
 end
 
 function ViewString(range::UnitRange)
-	StringGAP_OPERATION(range)
+	StringGAP(range)
 end
 
-function StringGAP_OPERATION(range::UnitRange)
+# we cannot use @InstallMethod because we distinguish between vectors and ranges
+function (::typeof(StringGAP))(range::UnitRange)
 	if range.stop < range.start
 		string("[  ]")
 	elseif range.stop == range.start
@@ -776,16 +765,13 @@ end
 
 @DeclareAttribute("IntGAP", IsAttributeStoringRep)
 
-function IntGAP_OPERATION(string::String)
+function (::typeof(IntGAP))(string::String)
 	parse(Int, string)
 end
 
-function IntGAP_OPERATION(float::Float64)
+function (::typeof(IntGAP))(float::Float64)
 	Int(floor(float))
 end
-
-@DeclareAttribute("StringGAP", IsAttributeStoringRep)
-global const StringMutable = StringGAP
 
 function Add( list::Vector, element::Any )
 	push!(list, element)
