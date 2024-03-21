@@ -301,6 +301,86 @@ function copy(record::CAPRecord)
 	CAPRecord(copy(getfield(record, :dict)))
 end
 
+# filters
+include("gap_emulation/filters.jl")
+
+# attributes
+include("gap_emulation/operations.jl")
+
+# attributes
+include("gap_emulation/attributes.jl")
+
+# GAP filters
+abstract type AttributeStoringRep <: CAPDict end
+global const IsAttributeStoringRep = Filter("IsAttributeStoringRep", AttributeStoringRep)
+
+global const IsIO = Filter("IsIO", IO)
+global const IsObject = Filter("IsObject", Any)
+global const IsString = Filter("IsString", AbstractString)
+global const IsStringRep = IsString
+global const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Tuple})
+global const IsDenseList = IsList
+global const IsFunction = Filter("IsFunction", Function)
+global const IsOperation = IsFunction
+global const IsChar = Filter("IsChar", Char)
+global const IsInt = Filter("IsInt", Int)
+global const IsBigInt = Filter("IsBigInt", BigInt)
+global const IsRat = Filter("IsRat", Rational{BigInt})
+global const IsBool = Filter("IsBool", Bool)
+global const IsPosInt = Filter("IsPosInt", Int) # TODO
+global const IsRecord = Filter("IsRecord", CAPRecord)
+# integer or infinity (a float)
+global const IsCyclotomic = Filter("IsCyclotomic", Union{Int,Float64}) # TODO
+
+# AbstractAlgebra
+global const IsRing = Filter("IsRing", Ring)
+global const IsRingElement = Filter("IsRingElement", AbstractAlgebra.NCRingElement)
+
+function HasIsCommutative(R::AbstractAlgebra.NCRing)
+	R isa Ring
+end
+
+function IsCommutative(R::AbstractAlgebra.NCRing)
+	R isa Ring
+end
+
+global const Integers = ZZ
+global const Rationals = QQ
+
+global const IsIntegers = Filter("IsIntegers", AbstractAlgebra.Integers{BigInt})
+
+function HasRingFilter(R::Ring)
+	if R === ZZ
+		return true
+	else
+		return false
+	end
+end
+
+function RingFilter(R::Ring)
+	if R === ZZ
+		return IsIntegers
+	else
+		throw("ring has no ring filter")
+	end
+end
+
+function HasRingElementFilter(R::Ring)
+	if R === ZZ
+		return true
+	else
+		return false
+	end
+end
+
+function RingElementFilter(R::Ring)
+	if R === ZZ
+		return IsBigInt
+	else
+		throw("ring has no ring element filter")
+	end
+end
+
 ## GAP String, Print, View, Display
 
 function Base.show(io::IO, obj::CAPDict)
@@ -477,126 +557,6 @@ function Display(func::Function)
 	display(func)
 end
 
-# filters
-
-struct Filter <: Function
-	name::String
-	abstract_type::Type
-	concrete_type::Type
-	subtypable::Bool
-end
-
-function Filter(name::String, abstract_type::Type)
-	Filter(name, abstract_type, Any, true)
-end
-
-function (filter::Filter)(obj)
-	isa(obj, filter.abstract_type)
-end
-
-function IsFilter( obj )
-	obj isa Filter
-end
-
-macro DeclareFilter(name::String, parent_filter::Union{Symbol,Expr} = :IsObject)
-	filter_symbol = Symbol(name)
-	abstract_type_symbol = Symbol("TheJuliaAbstractType", name)
-	concrete_type_symbol = Symbol("TheJuliaConcreteType", name)
-	# all our macros are meant to fully execute in the context where the macro is called -> always fully escape them
-	esc(quote
-		@assert $parent_filter.subtypable
-		abstract type $abstract_type_symbol <: $parent_filter.abstract_type end
-		struct $concrete_type_symbol{T} <: $abstract_type_symbol
-			dict::Dict
-		end
-		global const $filter_symbol = Filter($name, $abstract_type_symbol, $concrete_type_symbol, true)
-	end)
-end
-
-export @DeclareFilter
-
-function NewFilter( name, parent_filter )
-	if !parent_filter.subtypable
-		throw("cannot create NewFilter with a parent filter which was itself created by NewFilter")
-	end
-	type_symbol = Symbol(name, gensym())
-	concrete_type = parent_filter.concrete_type{type_symbol}
-	Filter(name, concrete_type, concrete_type, false)
-end
-
-global const NewCategory = NewFilter
-
-# GAP filters
-abstract type AttributeStoringRep <: CAPDict end
-global const IsAttributeStoringRep = Filter("IsAttributeStoringRep", AttributeStoringRep)
-
-global const IsIO = Filter("IsIO", IO)
-global const IsObject = Filter("IsObject", Any)
-global const IsString = Filter("IsString", AbstractString)
-global const IsStringRep = IsString
-global const IsList = Filter("IsList", Union{Vector, UnitRange, StepRange, Tuple})
-global const IsDenseList = IsList
-global const IsFunction = Filter("IsFunction", Function)
-global const IsOperation = IsFunction
-global const IsChar = Filter("IsChar", Char)
-global const IsInt = Filter("IsInt", Int)
-global const IsBigInt = Filter("IsBigInt", BigInt)
-global const IsRat = Filter("IsRat", Rational{BigInt})
-global const IsBool = Filter("IsBool", Bool)
-global const IsPosInt = Filter("IsPosInt", Int) # TODO
-global const IsRecord = Filter("IsRecord", CAPRecord)
-# integer or infinity (a float)
-global const IsCyclotomic = Filter("IsCyclotomic", Union{Int,Float64}) # TODO
-
-# AbstractAlgebra
-global const IsRing = Filter("IsRing", Ring)
-global const IsRingElement = Filter("IsRingElement", AbstractAlgebra.NCRingElement)
-
-function HasIsCommutative(R::AbstractAlgebra.NCRing)
-	R isa Ring
-end
-
-function IsCommutative(R::AbstractAlgebra.NCRing)
-	R isa Ring
-end
-
-global const Integers = ZZ
-global const Rationals = QQ
-
-global const IsIntegers = Filter("IsIntegers", AbstractAlgebra.Integers{BigInt})
-
-function HasRingFilter(R::Ring)
-	if R === ZZ
-		return true
-	else
-		return false
-	end
-end
-
-function RingFilter(R::Ring)
-	if R === ZZ
-		return IsIntegers
-	else
-		throw("ring has no ring filter")
-	end
-end
-
-function HasRingElementFilter(R::Ring)
-	if R === ZZ
-		return true
-	else
-		return false
-	end
-end
-
-function RingElementFilter(R::Ring)
-	if R === ZZ
-		return IsBigInt
-	else
-		throw("ring has no ring element filter")
-	end
-end
-
 # Objectify
 function ObjectifyWithAttributes( record::CAPRecord, type::DataType, attributes_and_values... )
 	if !iseven(length(attributes_and_values))
@@ -701,334 +661,6 @@ export @BindGlobal
 function ValueOption( name )
 	# we can safely return fail since there is no way to set an option anyway
 	fail
-end
-
-# operations
-
-macro DeclareOperation(name::String, filter_list = [])
-	# prevent attributes from being redefined as operations
-	if isdefined(__module__, Symbol(name))
-		return nothing
-	end
-	symbol = Symbol(name)
-	esc(quote
-		function $symbol end
-	end)
-end
-
-export @DeclareOperation
-
-macro KeyDependentOperation(name::String, filter1, filter2, func)
-	symbol = Symbol(name)
-	symbol_op = Symbol(name * "Op")
-	esc(quote
-		@DeclareOperation($name)
-		global const $symbol_op = $symbol
-	end)
-end
-
-export @KeyDependentOperation
-
-function with_additional_dropped_first_argument(f)
-	(arg1, args...) -> f(args...)
-end
-
-macro InstallMethod(operation::Symbol, description::String, filter_list, func)
-	esc(:(@InstallMethod($operation, $filter_list, $func)))
-end
-
-macro InstallMethod(operation::Symbol, filter_list, func)
-	if operation === :ViewObj
-		println("ignoring installation for ViewObj, use ViewString instead")
-		return
-	elseif operation === :Display
-		println("ignoring installation for Display, use DisplayString instead")
-		return
-	elseif operation === :Iterator
-		println("ignoring installation for Iterator, install iterator in Julia instead")
-		return
-	end
-	
-	@assert filter_list === :nothing || (filter_list isa Expr && filter_list.head === :vect)
-	
-	if !(func isa Expr)
-		if filter_list === :nothing
-			func = :((args...) -> $func(args...))
-		else
-			vars = Vector{Any}(map(i -> Symbol("arg", i), 1:length(filter_list.args)))
-			func = :(($(vars...),) -> $func($(vars...),))
-		end
-	end
-	
-	if func.head === :macrocall
-		func = macroexpand(__module__, func; recursive = false)
-	end
-	
-	if func.head === :->
-		func.head = :function
-		if func.args[1] isa Symbol
-			func.args[1] = Expr(:tuple, func.args[1])
-		end
-	end
-	
-	@assert func.head === :function
-	
-	is_attribute = IsBoundGlobal( string(operation) ) && IsAttribute( ValueGlobal( string(operation) ) )
-	
-	if is_attribute
-		@assert filter_list !== :nothing
-		@assert isempty(filter_list.args) || filter_list.args[1] isa Symbol
-		
-		attr = ValueGlobal( string(operation) )
-		
-		if length(filter_list.args) === 1 && ValueGlobal( string(filter_list.args[1]) ).abstract_type <: IsAttributeStoringRep.abstract_type
-			callable = Symbol(attr.operation)
-			operation_to_precompile = callable
-		else
-			callable = :(::typeof($operation))
-			operation_to_precompile = operation
-		end
-	else
-		callable = operation
-		operation_to_precompile = callable
-	end
-	
-	if func.args[1].head === :tuple
-		func.args[1] = Expr(:call, callable, func.args[1].args...)
-	elseif func.args[1].head === :...
-		@assert filter_list === :nothing # InstallMethod in GAP cannot be used for functions with varargs
-		func.args[1] = Expr(:call, callable, func.args[1])
-	else
-		error("unsupported head: ", func.args[1].head)
-	end
-	
-	is_kwarg = length(func.args[1].args) >= 2 && func.args[1].args[2] isa Expr && func.args[1].args[2].head === :parameters
-	
-	if filter_list !== :nothing
-		if is_kwarg
-			offset = 2
-		else
-			offset = 1
-		end
-		
-		types = map(x -> Expr(:., x, :(:abstract_type)), filter_list.args)
-		
-		@assert length(filter_list.args) == length(func.args[1].args) - offset
-		for i in 1:length(filter_list.args)
-			func.args[1].args[i + offset] = Expr(:(::), func.args[1].args[i + offset], types[i])
-		end
-	end
-	
-	block = quote
-		$func
-	end
-	
-	if filter_list !== :nothing
-		push!(block.args, :(CAP_precompile($operation_to_precompile, ($(types...),))))
-	end
-	
-	esc(block)
-end
-
-export @InstallMethod
-
-function InstallMethod(operation, filter_list, func)
-	InstallMethod(last(ModulesForEvaluationStack), operation, filter_list, func)
-end
-
-function InstallMethod(mod::Module, operation::Function, filter_list, func::Function)
-	if Symbol(operation) === :ViewObj
-		println("ignoring installation for ViewObj, use ViewString instead")
-		return
-	elseif Symbol(operation) === :Display
-		println("ignoring installation for Display, use DisplayString instead")
-		return
-	elseif Symbol(operation) === :Iterator
-		println("ignoring installation for Iterator, install iterate in Julia instead")
-		return
-	end
-	
-	nargs = length(filter_list)
-	vars = Vector{Any}(map(i -> Symbol("arg", i), 1:nargs))
-	types = map(filter -> filter.abstract_type, filter_list)
-	vars_with_types = map(function(i)
-		arg_symbol = vars[i]
-		type = types[i]
-		:($arg_symbol::$type)
-	end, 1:length(filter_list))
-	if IsAttribute( operation )
-		if length(filter_list) === 1 && filter_list[1].abstract_type <: IsAttributeStoringRep.abstract_type
-			funcref = Symbol(operation.operation)
-			operation_to_precompile = funcref
-		else
-			funcref = :(::typeof($(Symbol(operation.name))))
-			operation_to_precompile = Symbol(operation.name)
-		end
-	else
-		funcref = Symbol(operation)
-		operation_to_precompile = funcref
-	end
-	
-	if funcref isa Symbol && !isdefined(mod, funcref)
-		print("WARNING: installing method in module ", mod, " for undefined symbol ", funcref, "\n")
-	end
-	
-	is_kwarg = any(m -> !isempty(Base.kwarg_decl(m)), methods(func))
-	
-	if is_kwarg
-		Base.eval(mod, :(
-			function $funcref($(vars_with_types...); kwargs...)
-				$func($(vars...); kwargs...)
-			end
-		))
-	else
-		Base.eval(mod, :(
-			function $funcref($(vars_with_types...))
-				$func($(vars...))
-			end
-		))
-	end
-	
-	if funcref isa Symbol
-		Base.eval(mod, :(export $funcref))
-	end
-	
-	Base.eval(mod, :(CAP_precompile($operation_to_precompile,($(types...),))))
-end
-
-function InstallMethod(operation, description::String, filter_list, func)
-	InstallMethod(operation, filter_list, func)
-end
-
-function InstallMethod(mod, operation, description::String, filter_list, func)
-	InstallMethod(mod, operation, filter_list, func)
-end
-
-global const InstallOtherMethod = InstallMethod
-function InstallMethodWithCacheFromObject( operation, filter_list, func; ArgumentNumber = 1 )
-	InstallMethod( operation, filter_list, func )
-end
-function InstallMethodWithCache( operation, filter_list, func; InstallMethod = InstallMethod, Cache = "cache" )
-	InstallMethod( operation, filter_list, func )
-end
-function InstallMethodWithCache( operation, description, filter_list, func; InstallMethod = InstallMethod, Cache = "cache" )
-	InstallMethod( operation, filter_list, func )
-end
-global const InstallMethodWithCrispCache = InstallMethod
-
-# attributes
-
-abstract type Attribute <: Function end
-
-function ==(attr1::Attribute, attr2::Attribute)
-	isequal(attr1.name, attr2.name)
-end
-
-# FIXME: avoid this installation
-function (attr::Attribute)(args...; kwargs...)
-	attr.operation(args...; kwargs...)
-end
-
-function StringGAP_OPERATION(attr::Attribute)
-	string("<Attribute \"", attr.name, "\">")
-end
-
-function declare_attribute_or_property(mod, name::String, is_property::Bool)
-	# attributes and properties might be installed for different parent filters
-	# since we do not take the parent filter into account here, we only have to install
-	# the attribute or property once
-	if isdefined(mod, Symbol(name))
-		return nothing
-	end
-	symbol = Symbol(name)
-	symbol_op = Symbol(name, "_OPERATION")
-	symbol_tester = Symbol("Has", name)
-	symbol_setter = Symbol("Set", name)
-	type_symbol = Symbol("TheJuliaAttributeType", name)
-	esc(quote
-		function $symbol_op end
-		
-		function $symbol_tester(obj::CAPDict)
-			dict = getfield(obj, :dict)
-			haskey(dict, Symbol($name))
-		end
-		CAP_precompile($symbol_tester, (CAPDict, ))
-		
-		function $symbol_setter(obj::CAPDict, value)
-			dict = getfield(obj, :dict)
-			dict[Symbol($name)] = value
-			if IsProperty( $symbol ) && value === true
-				for implied_property in $symbol.implied_properties
-					Setter(implied_property)(obj, true)
-				end
-			end
-		end
-		CAP_precompile($symbol_setter, (CAPDict, Any))
-		
-		mutable struct $type_symbol <: Attribute
-			name::String
-			operation::Function
-			tester::Function
-			setter::Function
-			is_property::Bool
-			implied_properties::Vector{Attribute}
-		end
-		
-		global const $symbol = $type_symbol($name, $symbol_op, $symbol_tester, $symbol_setter, $is_property, [])
-		
-		function (::$type_symbol)(obj::IsAttributeStoringRep.abstract_type; kwargs...)
-			if !$symbol_tester(obj)
-				$symbol_setter(obj, $symbol_op(obj; kwargs...))
-			end
-			dict = getfield(obj, :dict)
-			dict[Symbol($name)]
-		end
-	end)
-end
-
-macro DeclareAttribute(name::String, parent_filter, mutability = missing)
-	declare_attribute_or_property(__module__, name, false)
-end
-
-export @DeclareAttribute
-
-function IsAttribute( obj )
-	obj isa Attribute
-end
-
-function Tester( attribute::Attribute )
-	attribute.tester
-end
-
-function Setter(attribute::Attribute)
-	attribute.setter
-end
-
-macro DeclareSynonymAttr(name::String, attr)
-	symbol = Symbol(name)
-	esc(:(global const $symbol = $attr))
-end
-
-macro DeclareProperty(name::String, parent_filter)
-	declare_attribute_or_property(__module__, name, true)
-end
-
-export @DeclareProperty
-
-function IsProperty( obj )
-	obj isa Attribute && obj.is_property
-end
-
-function InstallTrueMethod(prop1, prop2)
-	@assert IsProperty( prop1 ) && IsProperty( prop2 )
-	push!(prop2.implied_properties, prop1)
-end
-
-function ListImpliedFilters(prop)
-	@assert IsProperty( prop )
-	
-	flatten = prop -> union([prop], map(flatten, prop.implied_properties)...)
-	sort(map(attr -> attr.name, flatten(prop)))
 end
 
 # families
