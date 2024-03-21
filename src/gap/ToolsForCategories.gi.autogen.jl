@@ -5,6 +5,9 @@
 #
 
 ##
+# some options should affect the whole function stack and should hence not be consumed by @FunctionWithNamedArguments
+@BindGlobal( "CAP_INTERNAL_GLOBAL_OPTIONS", [ "no_precompiled_code" ] );
+
 @InstallGlobalFunction( "@FunctionWithNamedArguments", function ( specification, func )
     
     @Assert( 0, IsList( specification ) );
@@ -33,7 +36,12 @@
             if (@IsBound( current_options[s[1]] ))
                 
                 CAP_NAMED_ARGUMENTS[s[1]] = current_options[s[1]];
-                @Unbind( current_options[s[1]] );
+                
+                if (@not s[1] in CAP_INTERNAL_GLOBAL_OPTIONS)
+                    
+                    @Unbind( current_options[s[1]] );
+                    
+                end;
                 
             else
                 
