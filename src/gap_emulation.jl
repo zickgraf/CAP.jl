@@ -105,6 +105,8 @@ global const CoequalizerOp = Coequalizer
 function FiberProduct end
 global const FiberProductOp = FiberProduct
 
+global const Log10 = log10
+
 function TensorProductOp end
 function TensorProduct(arg...)
     if Length(arg) == 0
@@ -155,6 +157,10 @@ function UnionGAP(args...)
 	else
 		sort(union(args...))
 	end
+end
+
+function NumberGAP(list, func)
+	count(func, list)
 end
 
 function ListWithKeys(list, func)
@@ -331,6 +337,8 @@ global const IsPosInt = Filter("IsPosInt", Int) # TODO
 global const IsRecord = Filter("IsRecord", CAPRecord)
 # integer or infinity (a float)
 global const IsCyclotomic = Filter("IsCyclotomic", Union{Int,Float64}) # TODO
+
+global const Float = Float64
 
 # AbstractAlgebra
 global const IsRing = Filter("IsRing", Ring)
@@ -695,6 +703,14 @@ export @Info
 # GAP functions
 function IsDigitChar(x::Char)
 	x in "0123456789"
+end
+
+function (::typeof(StringGAP))(obj, length)
+	if length >= 0
+		lpad(StringGAP(obj), length)
+	else
+		rpad(StringGAP(obj), -length)
+	end
 end
 
 function SizeScreen()
