@@ -304,7 +304,7 @@ end
 # filters
 include("gap_emulation/filters.jl")
 
-# attributes
+# operations
 include("gap_emulation/operations.jl")
 
 # attributes
