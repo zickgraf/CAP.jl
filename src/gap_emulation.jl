@@ -200,7 +200,7 @@ struct CAPRecord <: CAPDict
 	dict::Dict
 end
 
-function Base.getindex(obj::CAPDict, key::String)
+function Base.getindex(obj::CAPDict, key::Union{String, Int64})
 	getproperty(obj, Symbol(key))
 end
 
@@ -209,7 +209,7 @@ function Base.getproperty(obj::CAPDict, key::Symbol)
 	dict[key]
 end
 
-function Base.setindex!(obj::CAPDict, value, key::String)
+function Base.setindex!(obj::CAPDict, value, key::Union{String, Int64})
 	setproperty!(obj, Symbol(key), value)
 end
 
