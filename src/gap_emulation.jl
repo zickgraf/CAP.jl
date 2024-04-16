@@ -301,6 +301,9 @@ function copy(record::CAPRecord)
 	CAPRecord(copy(getfield(record, :dict)))
 end
 
+# json
+include("gap_emulation/json.jl")
+
 # filters
 include("gap_emulation/filters.jl")
 
@@ -978,6 +981,9 @@ global const AsSortedList = sort
 function IsPackageMarkedForLoading( name, version )
 	if name == "JuliaInterface"
 		return false
+	end
+	if name == "json"
+		return true
 	end
 	# TODO
 	false
