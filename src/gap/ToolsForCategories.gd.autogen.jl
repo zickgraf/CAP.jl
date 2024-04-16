@@ -391,7 +391,7 @@
 @DeclareGlobalFunction( "ForAnyWithKeys" );
 
 #! @Description
-#!   Same as `Number( <A>list</A>, <A>func</A> )` but <A>func</A> gets both the key `i` and `<A>list</A>[i]` as arguments.
+#!   Same as `NumberGAP( <A>list</A>, <A>func</A> )` but <A>func</A> gets both the key `i` and `<A>list</A>[i]` as arguments.
 #! @Arguments list, func
 #! @Returns a list
 @DeclareGlobalFunction( "NumberWithKeys" );

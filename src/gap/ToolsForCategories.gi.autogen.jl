@@ -1825,7 +1825,7 @@ end );
 @InstallGlobalFunction( NumberWithKeys, function ( list, func )
   local nr, i;
     
-    # adapted implementation of `Number`
+    # adapted implementation of `NumberGAP`
     
     nr = 0;
     
