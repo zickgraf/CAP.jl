@@ -319,6 +319,9 @@ include("gap_emulation/operations.jl")
 # attributes
 include("gap_emulation/attributes.jl")
 
+# files
+include("gap_emulation/files.jl")
+
 # GAP filters
 global const IsIO = Filter("IsIO", IO)
 global const IsObject = Filter("IsObject", Any)
