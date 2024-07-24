@@ -1235,6 +1235,17 @@ function Iterated( list, f )
 	foldl(f, list)
 end
 
+# Base64
+using Base64
+
+function Base64String( str )
+	base64encode( str )
+end
+
+function StringBase64( bstr )
+	String( base64decode( bstr ) )
+end
+
 # Julia macros
 
 macro init_CAP_package()
