@@ -302,7 +302,7 @@ end ) );
     [ "FinalizeCategory", true ],
   ],
   function( CAP_NAMED_ARGUMENTS, category )
-    local derivation_list, weight_list, current_install, current_final_derivation, weight, old_weights, categorical_properties, diff, properties_with_logic, property, i, derivation, operation, property_name;
+    local derivation_list, weight_list, current_install, current_final_derivation, weight, old_weights, categorical_properties, diff, properties_with_logic, property, i, derivation, operation, property_name, installed_operations_of_homomorphism_structure;
     
     if (IsFinalized( category ))
         
@@ -459,6 +459,24 @@ end ) );
             Print( "For debugging, call `ActivateDerivationInfo( )`, retry, and look at the derivations between \"Starting reevaluation of ...\" and \"Finished reevaluation of ...\".\n" );
             
         end;
+        
+    end;
+    
+    installed_operations_of_homomorphism_structure =
+      Intersection( ListInstalledOperationsOfCategory( category ),
+              [ "DistinguishedObjectOfHomomorphismStructure",
+                "HomomorphismStructureOnObjects",
+                "HomomorphismStructureOnMorphisms",
+                "HomomorphismStructureOnMorphismsWithGivenObjects",
+                "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+                "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+                "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+                ] );
+    
+    if (@not IsEmpty( installed_operations_of_homomorphism_structure ) &&
+       @not HasRangeCategoryOfHomomorphismStructure( category ))
+        
+        Error( "<category> has operations related to the homomorphism structure but no range category is set. This is not supported." );
         
     end;
     

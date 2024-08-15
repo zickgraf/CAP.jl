@@ -221,57 +221,15 @@ end );
         
         if (category == false || @not HasCommutativeRingOfLinearCategory( category ))
             
-            is_ring_element = IsRingElement;
-            
-        else
-            
-            ring = CommutativeRingOfLinearCategory( category );
-            
-            if (HasRingElementFilter( ring ))
-                
-                is_ring_element = RingElementFilter( ring );
-                
-            else
-                
-                is_ring_element = IsRingElement;
-                
-            end;
+            return CapJitDataTypeOfElementOfRing( false );
             
         end;
         
-        return @rec(
-            filter = is_ring_element,
-        );
+        return CapJitDataTypeOfElementOfRing( CommutativeRingOfLinearCategory( category ) );
         
     elseif (string == "list_of_elements_of_commutative_ring_of_linear_structure")
         
-        if (category != false && @not HasCommutativeRingOfLinearCategory( category ))
-            
-            Print( "WARNING: You are calling an Add function for a CAP operation for \"", Name( category ), "\" which is part of the linear structure over a commutative ring but the category has no CommutativeRingOfLinearCategory (yet).\n" );
-            
-        end;
-        
-        if (category == false || @not HasCommutativeRingOfLinearCategory( category ))
-            
-            is_ring_element = IsRingElement;
-            
-        else
-            
-            ring = CommutativeRingOfLinearCategory( category );
-            
-            if (HasRingElementFilter( ring ))
-                
-                is_ring_element = RingElementFilter( ring );
-                
-            else
-                
-                is_ring_element = IsRingElement;
-                
-            end;
-            
-        end;
-        
-        return CapJitDataTypeOfListOf( is_ring_element );
+        return CapJitDataTypeOfListOf( CAP_INTERNAL_GET_DATA_TYPE_FROM_STRING( "element_of_commutative_ring_of_linear_structure", category ) );
         
     elseif (string == "list_of_integers_and_list_of_morphisms")
         
@@ -1213,46 +1171,6 @@ end );
 end );
 
 ##
-@BindGlobal( "CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED", @rec( ) );
-
-@InstallGlobalFunction( "CapJitAddTypeSignatureDeferred", function ( package_name, name, input_filters, output_data_type )
-    
-    if (input_filters != "any")
-        
-        if (@not IsList( input_filters ))
-            
-            # COVERAGE_IGNORE_NEXT_LINE
-            Error( "<input_filters> must be a list or the string \"any\"" );
-            
-        end;
-        
-        if (@not ForAll( input_filters, filter -> IsString( filter ) ))
-            
-            # COVERAGE_IGNORE_NEXT_LINE
-            Error( "<input_filters> must be a list of strings or the string \"any\"" );
-            
-        end;
-        
-    end;
-    
-    if (@not IsString( output_data_type ))
-        
-        # COVERAGE_IGNORE_NEXT_LINE
-        Error( "<output_data_type> must be a string" );
-        
-    end;
-    
-    if (@not @IsBound( CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name] ))
-        
-        CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name] = [ ];
-        
-    end;
-    
-    Add( CAP_JIT_INTERNAL_TYPE_SIGNATURES_DEFERRED[package_name], [ name, input_filters, output_data_type ] );
-    
-end );
-
-##
 @InstallGlobalFunction( CapJitDataTypeOfListOf, function ( element_type )
     
     if (IsFilter( element_type ))
@@ -1302,6 +1220,51 @@ end );
     
 end );
 
+##
+@InstallGlobalFunction( CapJitDataTypeOfRing, function ( ring )
+  local type;
+    
+    if (ring == false)
+        
+        type = @rec(
+            filter = IsRing,
+        );
+        
+    else
+        
+        type = @rec(
+            filter = RingFilter( ring ),
+            ring = ring,
+        );
+        
+    end;
+    
+    return type;
+    
+end );
+
+##
+@InstallGlobalFunction( CapJitDataTypeOfElementOfRing, function ( ring )
+  local type;
+    
+    if (ring == false)
+        
+        type = @rec(
+            filter = IsRingElement,
+        );
+        
+    else
+        
+        type = @rec(
+            filter = RingElementFilter( ring ),
+            ring = ring,
+        );
+        
+    end;
+    
+    return type;
+    
+end );
 ##
 @InstallGlobalFunction( CapJitDataTypeOfCategory, function ( cat )
   local type;
@@ -1395,7 +1358,62 @@ end );
 end );
 
 ##
-@InstallGlobalFunction( CapJitTypedExpression, ReturnFirst );
+@InstallGlobalFunction( CapJitTypedExpression, function ( value, data_type_getter )
+    
+    # We try to execute data_type_getter to increase the code coverage.
+    # This approach has some downsides:
+    # * Previously, the implementation of `CapJitTypedExpression` was simply `ReturnFirst`, which should be faster.
+    # * To avoid runtime overhead, we only execute the code below for assertion level >= 2 (which is used in the tests).
+    #   However, this leads to a possibly unexpected difference when executing code in tests and by hand.
+    # * We can only execute data_type_getter if it has 0 arguments.
+    
+    @Assert( 2, (function ( )
+      local data_type;
+        
+        if (NumberArgumentsFunction( data_type_getter ) == 0)
+            
+            data_type = data_type_getter( );
+            
+        elseif (NumberArgumentsFunction( data_type_getter ) == 1)
+            
+            # we do not have access to the category and hence cannot check anything
+            return true;
+            
+        else
+            
+            # COVERAGE_IGNORE_NEXT_LINE
+            Error( "the data type getter of CapJitTypedExpression must be a function accepting either no argument or a single argument" );
+            
+        end;
+        
+        if (IsFilter( data_type ))
+            
+            data_type = @rec( filter = data_type );
+            
+        end;
+        
+        if (!(IsRecord( data_type )) || @not @IsBound( data_type.filter ))
+            
+            # COVERAGE_IGNORE_NEXT_LINE
+            Error( "CapJitTypedExpression has returned ", data_type, " which is not a valid data type" );
+            
+        end;
+        
+        # simple plausibility check
+        if (@not data_type.filter( value ))
+            
+            # COVERAGE_IGNORE_NEXT_LINE
+            Error( "<value> does not lie in <data_type.filter>" );
+            
+        end;
+        
+        return true;
+        
+    end)( ) );
+    
+    return value;
+    
+end );
 
 ##
 @InstallGlobalFunction( CapFixpoint, function ( predicate, func, initial_value )

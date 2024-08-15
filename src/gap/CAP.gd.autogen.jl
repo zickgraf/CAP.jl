@@ -117,9 +117,6 @@ DeclareGlobalVariable( "CAP_INTERNAL_CATEGORICAL_PROPERTIES_LIST" );
 @DeclareFilter( "IsCapCategoryTwoCell",
                  IsCapCategoryCell );
 
-@DeclareFilter( "IsCellOfSkeletalCategory",
-                 IsCapCategoryCell );
-
 ###################################
 ##
 #! @Section Categorical properties
@@ -186,6 +183,27 @@ AddCategoricalProperty( [ "IsCategoryWithDecidableLifts", "IsCategoryWithDecidab
 @DeclareProperty( "IsCategoryWithDecidableColifts", IsCapCategory );
 
 AddCategoricalProperty( [ "IsCategoryWithDecidableColifts", "IsCategoryWithDecidableLifts" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> having an initial object.
+#! @Arguments C
+@DeclareProperty( "IsCategoryWithInitialObject", IsCapCategory );
+
+AddCategoricalProperty( [ "IsCategoryWithInitialObject", "IsCategoryWithTerminalObject" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> having a terminal object.
+#! @Arguments C
+@DeclareProperty( "IsCategoryWithTerminalObject", IsCapCategory );
+
+AddCategoricalProperty( [ "IsCategoryWithTerminalObject", "IsCategoryWithInitialObject" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> having a zero object.
+#! @Arguments C
+@DeclareProperty( "IsCategoryWithZeroObject", IsCapCategory );
+
+AddCategoricalProperty( [ "IsCategoryWithZeroObject", "IsCategoryWithZeroObject" ] );
 
 #! @Description
 #!  The property of the category <A>C</A> being enriched over a commutative regular semigroup.

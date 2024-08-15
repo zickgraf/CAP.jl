@@ -52,7 +52,7 @@
         IsDummyCommutativeRing );
 
 #! @Description
-#!  The &GAP; filter of elements of a dummy commutative ring.
+#!  The &GAP; filter of elements of a dummy field.
 @DeclareFilter( "IsDummyFieldElement",
         IsDummyCommutativeRingElement );
 # =#
@@ -64,14 +64,17 @@
 ####################################
 
 #! @Description
+#! @Arguments
 #! @Returns a dummy ring
 @DeclareGlobalFunction( "DummyRing" );
 
 #! @Description
+#! @Arguments
 #! @Returns a dummy commutative ring
 @DeclareGlobalFunction( "DummyCommutativeRing" );
 
 #! @Description
+#! @Arguments
 #! @Returns a dummy field
 @DeclareGlobalFunction( "DummyField" );
 

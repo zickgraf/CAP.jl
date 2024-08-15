@@ -79,17 +79,17 @@ TerminalCategoryWithMultipleObjects( )
 julia> Display( T )
 A CAP category with name TerminalCategoryWithMultipleObjects( ):
 
-82 primitive operations were used to derive 383 operations for this category which algorithmically
+86 primitive operations were used to derive 391 operations for this category which algorithmically
 * IsCategoryWithDecidableColifts
 * IsCategoryWithDecidableLifts
 * IsEquippedWithHomomorphismStructure
 * IsLinearCategoryOverCommutativeRing
 * IsLeftClosedMonoidalCategory
 * IsLeftCoclosedMonoidalCategory
-* IsAbelianCategoryWithEnoughInjectives
-* IsAbelianCategoryWithEnoughProjectives
 * IsRigidSymmetricClosedMonoidalCategory
 * IsRigidSymmetricCoclosedMonoidalCategory
+* IsAbelianCategoryWithEnoughInjectives
+* IsAbelianCategoryWithEnoughProjectives
 and not yet algorithmically
 * IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms
 and furthermore mathematically
@@ -107,19 +107,19 @@ julia> z = ZeroObject( T )
 <An object in TerminalCategoryWithMultipleObjects( )>
 
 julia> Display( i )
-ZeroObject
+InitialObject
 
 julia> Display( t )
-ZeroObject
+TerminalObject
 
 julia> Display( z )
 ZeroObject
 
 julia> IsIdenticalObj( i, z )
-true
+false
 
 julia> IsIdenticalObj( t, z )
-true
+false
 
 julia> id_z = IdentityMorphism( z )
 <A morphism in TerminalCategoryWithMultipleObjects( )>
@@ -331,17 +331,17 @@ TerminalCategoryWithSingleObject( )
 julia> Display( T )
 A CAP category with name TerminalCategoryWithSingleObject( ):
 
-76 primitive operations were used to derive 383 operations for this category which algorithmically
+80 primitive operations were used to derive 391 operations for this category which algorithmically
 * IsCategoryWithDecidableColifts
 * IsCategoryWithDecidableLifts
 * IsEquippedWithHomomorphismStructure
 * IsLinearCategoryOverCommutativeRing
 * IsLeftClosedMonoidalCategory
 * IsLeftCoclosedMonoidalCategory
-* IsAbelianCategoryWithEnoughInjectives
-* IsAbelianCategoryWithEnoughProjectives
 * IsRigidSymmetricClosedMonoidalCategory
 * IsRigidSymmetricCoclosedMonoidalCategory
+* IsAbelianCategoryWithEnoughInjectives
+* IsAbelianCategoryWithEnoughProjectives
 and not yet algorithmically
 * IsLinearCategoryOverCommutativeRingWithFinitelyGeneratedFreeExternalHoms
 and furthermore mathematically
@@ -370,10 +370,10 @@ julia> Display( z )
 An object in TerminalCategoryWithSingleObject( ).
 
 julia> IsIdenticalObj( i, z )
-true
+false
 
 julia> IsIdenticalObj( t, z )
-true
+false
 
 julia> IsWellDefined( z )
 true

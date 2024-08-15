@@ -83,9 +83,9 @@ end );
 
 @BindGlobal( "CAP_INTERNAL_INSTALL_OPPOSITE_ADDS_FROM_CATEGORY",
   
-  function( opposite_category, category, only_primitive_operations )
-    local recnames, list_of_underlying_operations,
-          operations_of_homomorphism_structure, operations_of_external_hom,
+  function( opposite_category, category, only_primitive_operations, only_primitive_operations_and_hom_structure )
+    local recnames, list_of_underlying_operations, operations_of_homomorphism_structure,
+          installed_operations_of_homomorphism_structure_and_external_hom, H,
           current_recname, current_entry, dual_operation_name, filter_list, input_arguments_names, return_type, func_string,
           preprocessor_string, dual_arguments, tmp,
           postprocessor_string, output_source_getter_string, output_range_getter_string, return_statement,
@@ -119,7 +119,7 @@ end );
                           "VerticalPostCompose",
                           "IdenticalTwoCell" ] );
     
-    if (only_primitive_operations)
+    if (only_primitive_operations || only_primitive_operations_and_hom_structure)
         list_of_underlying_operations = ListPrimitivelyInstalledOperationsOfCategory( category );
     else
         list_of_underlying_operations = ListInstalledOperationsOfCategory( category );
@@ -137,14 +137,41 @@ end );
     
     if (@not IsEmpty( Intersection( list_of_underlying_operations, operations_of_homomorphism_structure ) ))
         
-        if (@not HasRangeCategoryOfHomomorphismStructure( category ))
+        SetRangeCategoryOfHomomorphismStructure( opposite_category, RangeCategoryOfHomomorphismStructure( category ) );
+        
+    end;
+    
+    if (only_primitive_operations_and_hom_structure)
+        
+        installed_operations_of_homomorphism_structure_and_external_hom =
+          Intersection( ListInstalledOperationsOfCategory( category ),
+                  [ "DistinguishedObjectOfHomomorphismStructure",
+                    "HomomorphismStructureOnObjects",
+                    "HomomorphismStructureOnMorphisms",
+                    "HomomorphismStructureOnMorphismsWithGivenObjects",
+                    "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructure",
+                    "InterpretMorphismAsMorphismFromDistinguishedObjectToHomomorphismStructureWithGivenObjects",
+                    "InterpretMorphismFromDistinguishedObjectToHomomorphismStructureAsMorphism",
+                    "MorphismsOfExternalHom",
+                    "BasisOfExternalHom",
+                    "CoefficientsOfMorphism",
+                    ] );
+        
+        ## the opposite category has the same enrichment as the original category:
+        if (HasRangeCategoryOfHomomorphismStructure( category ))
             
-            Error( "<category> has operations related to the homomorphism structure but no range category is set. This is not supported." );
+            H = RangeCategoryOfHomomorphismStructure( category );
+            
+            SetRangeCategoryOfHomomorphismStructure( opposite_category, H );
+            
+            ## be sure the above assignment succeeded:
+            @Assert( 0, IsIdenticalObj( H, RangeCategoryOfHomomorphismStructure( opposite_category ) ) );
+            
+            list_of_underlying_operations = @Concatenation( list_of_underlying_operations, installed_operations_of_homomorphism_structure_and_external_hom );
+            
+            list_of_underlying_operations = SetGAP( list_of_underlying_operations );
             
         end;
-        
-        SetRangeCategoryOfHomomorphismStructure( opposite_category, RangeCategoryOfHomomorphismStructure( category ) );
-        SetIsEquippedWithHomomorphismStructure( opposite_category, true );
         
     end;
     
@@ -382,6 +409,7 @@ end );
  @FunctionWithNamedArguments(
   [
     [ "only_primitive_operations", false ],
+    [ "only_primitive_operations_and_hom_structure", false ],
   ],
   function( CAP_NAMED_ARGUMENTS, category, name )
     local opposite_category, known_properties, opposite_property_pairs, pair;
@@ -546,7 +574,7 @@ end );
         
     end );
     
-    CAP_INTERNAL_INSTALL_OPPOSITE_ADDS_FROM_CATEGORY( opposite_category, category, only_primitive_operations );
+    CAP_INTERNAL_INSTALL_OPPOSITE_ADDS_FROM_CATEGORY( opposite_category, category, only_primitive_operations, only_primitive_operations_and_hom_structure );
     
     Finalize( opposite_category );
     
