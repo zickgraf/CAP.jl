@@ -1158,6 +1158,28 @@ end
 
 global const infinity = Inf
 
+function IdentityMat(m::Int)
+	row = ListWithIdenticalEntries( m, 0 );
+    id = [];
+    for i in 1:m
+        push!(id, ShallowCopy( row ) );
+        id[i][i] = 1;
+    end;
+    return id;
+end
+
+struct PermList
+	list::Vector{Int}
+end
+
+function PermutationMat(perm::PermList, dim::Int)
+	if length(perm.list) !== dim then
+		Error("this case is not implemented yet");
+	end
+	id = IdentityMat(dim);
+	permute!(id, perm.list)
+end
+
 # manually imported from ToolsForHomalg
 function ReplacedStringViaRecord( string, record )
   local name;
