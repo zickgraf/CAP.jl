@@ -359,9 +359,12 @@ global const Integers = ZZ
 global const Rationals = QQ
 
 global const IsIntegers = Filter("IsIntegers", AbstractAlgebra.Integers{BigInt})
+global const IsRationals = Filter("IsRationals", AbstractAlgebra.Rationals{BigInt})
 
 function HasRingFilter(R::Ring)
-	if R === ZZ
+	if R === Integers
+		return true
+	elseif R === Rationals
 		return true
 	else
 		return false
@@ -369,15 +372,19 @@ function HasRingFilter(R::Ring)
 end
 
 function RingFilter(R::Ring)
-	if R === ZZ
+	if R === Integers
 		return IsIntegers
+	elseif R === Rationals
+		return IsRationals
 	else
 		throw("ring has no ring filter")
 	end
 end
 
 function HasRingElementFilter(R::Ring)
-	if R === ZZ
+	if R === Integers
+		return true
+	elseif R === Rationals
 		return true
 	else
 		return false
@@ -385,8 +392,10 @@ function HasRingElementFilter(R::Ring)
 end
 
 function RingElementFilter(R::Ring)
-	if R === ZZ
+	if R === Integers
 		return IsBigInt
+	elseif R === Rationals
+		return IsRat
 	else
 		throw("ring has no ring element filter")
 	end
